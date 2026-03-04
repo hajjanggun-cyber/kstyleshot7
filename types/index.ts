@@ -1,0 +1,116 @@
+export type Locale = "en" | "ko";
+
+export type JobStatus =
+  | "payment_pending"
+  | "payment_confirmed"
+  | "upload_pending"
+  | "hair_selecting"
+  | "hair_processing"
+  | "hair_completed"
+  | "outfit_selecting"
+  | "outfit_processing"
+  | "outfit_completed"
+  | "cutout_processing"
+  | "cutout_completed"
+  | "location_selecting"
+  | "composite_completed"
+  | "completed"
+  | "failed"
+  | "refunded";
+
+export type Step = "hair" | "outfit" | "cutout" | "location";
+
+export type StepResult = {
+  id: string;
+  blobUrl: string;
+  downloaded: boolean;
+  selected: boolean;
+};
+
+export type SelectionState = {
+  chosen: string[];
+  results: StepResult[];
+  picked: string | null;
+};
+
+export type CreateSessionState = {
+  orderId: string;
+  checkoutId: string;
+  sessionToken: string;
+  status: JobStatus;
+  photoBlobUrl: string | null;
+  hair: SelectionState;
+  outfit: SelectionState;
+  location: SelectionState;
+};
+
+export type HairStyle = {
+  id: string;
+  name: string;
+  thumbnail: string;
+  prompt: string;
+  tags: string[];
+};
+
+export type Outfit = {
+  id: string;
+  name: string;
+  thumbnail: string;
+  garmentImage: string;
+  description: string;
+  tags: string[];
+};
+
+export type Background = {
+  id: string;
+  name: string;
+  thumbUrl: string;
+  fullUrl: string;
+  mood: string;
+};
+
+export type KVJob = {
+  orderId: string;
+  checkoutId: string;
+  sessionToken: string;
+  status: JobStatus;
+  currentStep: Step | null;
+  selectedStyles: {
+    hair: string[];
+    outfit: string[];
+    location: string[];
+  };
+  pickedStyles: {
+    hair: string | null;
+    outfit: string | null;
+    location: string | null;
+  };
+  predictionIds: {
+    hair: string[];
+    outfit: string[];
+    cutout: string[];
+  };
+  attempts: {
+    hair: number;
+    outfit: number;
+    cutout: number;
+  };
+  failReason: string | null;
+  refundRequested: boolean;
+  createdAt: string;
+  updatedAt: string;
+  expiresAt: string;
+};
+
+export type SessionStatusResponse =
+  | {
+      ready: false;
+      status: "pending";
+    }
+  | {
+      ready: true;
+      status: JobStatus;
+      orderId: string;
+      sessionToken: string;
+    };
+
