@@ -4,6 +4,24 @@
 기록 시각: 2026-03-04 21:32:28 +09:00 (Asia/Seoul)
 기준 문서: `plan.md`
 
+## 다음 세션 즉시 시작 (추가 기록)
+
+추가 기록 시각: 2026-03-04 22:04:15 +09:00 (Asia/Seoul)
+
+퇴근 후 집에서 바로 이어서 할 첫 작업:
+
+1. `post.md`의 1차 발행 20개 기준으로, 샘플 2개를 제외한 나머지 `.mdx` 초안 파일들을 `content/blog/en`, `content/blog/ko`에 일괄 생성
+2. 현재의 단순 본문 렌더러(`SimpleMdx`)를 실제 MDX 컴파일/렌더링 구조로 교체해서, 서식과 JSX 확장성을 제대로 지원
+
+바로 시작할 때 볼 파일:
+
+1. `post.md`
+2. `content/blog/en/`
+3. `content/blog/ko/`
+4. `lib/blog.ts`
+5. `components/common/SimpleMdx.tsx`
+6. `app/blog/[lang]/[slug]/page.tsx`
+
 이 문서는 지금까지 작업한 범위와, 다음에 어디서부터 이어서 해야 하는지를 정리한 인계 문서다.
 
 ---
