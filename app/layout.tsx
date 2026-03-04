@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
-  title: "K-Style Photo Generator",
-  description: "Execution scaffold for the K-style photo generator."
+  title: "kstyleshot",
+  description: "Execution scaffold for kstyleshot."
 };
 
 type RootLayoutProps = {
@@ -19,4 +19,3 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
-

@@ -1,4 +1,4 @@
-# K-Style Photo Generator - Implementation Plan
+# kstyleshot - Implementation Plan
 
 작성: Codex (GPT-5)
 작성 시각: 2026-03-04 21:00:04 +09:00 (Asia/Seoul)

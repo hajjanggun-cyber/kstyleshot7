@@ -1,4 +1,4 @@
-# K-Style Photo Generator - TODO Handoff
+# kstyleshot - TODO Handoff
 
 작성: Codex (GPT-5)
 기록 시각: 2026-03-04 21:32:28 +09:00 (Asia/Seoul)
