@@ -334,3 +334,370 @@
 `todo.md 보고 1순위부터 진행해. Polar checkout + webhook + session status 실제 구현부터 해`
 
 이렇게 하면 지금 상태를 바로 이어받을 수 있다.
+
+---
+
+## 추가 기록 (2026-03-04 23:54:12 +09:00)
+
+이 아래 내용이 현재 최신 상태다. 위쪽 문서에는 "미구현"으로 적혀 있는 부분이 일부 이미 진행됐다.
+
+### 1. 이번 세션에서 실제로 끝낸 것
+
+#### 1.1 블로그 1차 발행분 초안 채움
+
+완료:
+
+1. `post.md`의 1차 발행 20개 기준으로, 기존 샘플 2개를 제외한 나머지 18개 `.mdx` 초안 생성 완료
+2. 현재 `content/blog/en`, `content/blog/ko`에는 1차 발행 20개가 모두 채워진 상태
+
+관련 파일:
+
+- `content/blog/en/*.mdx`
+- `content/blog/ko/*.mdx`
+
+#### 1.2 블로그 본문 렌더러를 실제 MDX로 교체
+
+완료:
+
+1. 기존 줄 단위 파서(`SimpleMdx`) 제거
+2. `next-mdx-remote` 기반으로 실제 MDX 컴파일/렌더링 구조로 교체
+3. 링크와 리스트가 MDX 기준으로 렌더링되도록 정리
+4. `package.json`, `package-lock.json`에 MDX 의존성 반영
+
+관련 파일:
+
+- `components/common/SimpleMdx.tsx`
+- `package.json`
+- `package-lock.json`
+
+주의:
+
+- 현재 frontmatter 파싱은 여전히 `lib/blog.ts`의 경량 파서를 사용
+- 본문 렌더링만 실제 MDX로 바뀐 상태
+
+#### 1.3 결제 -> 세션 handshake 백엔드 실구현
+
+완료:
+
+1. `POST /api/checkout/create`에서 실제 Polar checkout 생성 요청
+2. 성공 시 `checkoutId`, `checkoutUrl` 반환
+3. `POST /api/webhooks/polar`에서 Polar 웹훅 서명 검증 로직 추가
+4. `order.paid`만 처리하도록 제한
+5. 웹훅 처리 시 아래 Redis 키 생성
+
+- `webhook:event:{eventId}`
+- `checkout:{checkoutId} -> orderId`
+- `session:{sessionToken} -> orderId`
+- `job:{orderId}`
+
+6. `GET /api/session/status`는 기존 조회 구조를 유지하면서 오류 처리 보강
+
+관련 파일:
+
+- `app/api/checkout/create/route.ts`
+- `app/api/webhooks/polar/route.ts`
+- `app/api/session/status/route.ts`
+- `lib/polar.ts`
+- `lib/redis.ts`
+
+주의:
+
+1. 실제 외부 검증은 아직 `.env.local` 실값이 없어서 미실행
+2. 웹훅은 `webhook-id`, `webhook-signature`, `webhook-timestamp` 헤더 기준으로 검증 구현
+
+#### 1.4 프론트에서 실제 세션 폴링 연결
+
+완료:
+
+1. `/[lang]/create`에서 `Start Polar checkout` 버튼 추가
+2. 버튼 클릭 시 `/api/checkout/create` 호출 후 `checkoutUrl`로 이동
+3. `/[lang]/create/upload`에서 `checkout_id`가 있으면 `/api/session/status` 폴링
+4. 세션 준비 완료 시 `sessionStorage`에 아래 값 저장
+
+- `checkoutId`
+- `orderId`
+- `sessionToken`
+- `status`
+
+5. 폴링 완료 후 URL에서 `checkout_id` 제거
+6. `checkout_id`가 없으면 기존 로컬 데모 플로우 유지
+
+관련 파일:
+
+- `app/[lang]/create/page.tsx`
+- `components/create/CreateCheckoutActions.tsx`
+- `app/[lang]/create/upload/page.tsx`
+- `components/create/PhotoUpload.tsx`
+
+#### 1.5 로컬 테스트용 템플릿 추가
+
+완료:
+
+1. `.env.local.example` 추가
+2. 로컬 체크아웃 handshake 테스트 순서를 별도 문서로 정리
+
+관련 파일:
+
+- `.env.local.example`
+- `md-doc/local-dev-checkout.md`
+
+---
+
+### 2. 지금 기준으로 바뀐 상태 요약
+
+이제 create 플로우는 아래처럼 바뀌었다:
+
+1. `/[lang]/create`에서 실제 checkout 시작 가능
+2. 결제 성공 후 `checkout_id`로 `/[lang]/create/upload` 복귀 가능
+3. upload 단계에서 실제 세션 폴링 가능
+4. 세션이 준비되면 hair 단계로 넘어갈 수 있음
+5. hair/outfit/location 자체는 아직 mock 생성 UX
+
+즉:
+
+- 결제/세션 handshake는 "실구현됨"
+- 실제 AI 생성 파이프라인은 아직 미구현
+
+---
+
+### 3. 지금 바로 다음 우선순위
+
+이제 다음 시작점은 이전 문서의 1순위가 아니라, 아래가 맞다:
+
+#### 새 1순위: 로컬 실연동 확인
+
+먼저 해야 할 것:
+
+1. `.env.local.example`를 복사해 `.env.local` 생성
+2. `POLAR_*`, `UPSTASH_*`, `NEXT_PUBLIC_APP_URL` 실값 입력
+3. `npm.cmd run dev`
+4. `/en/create`에서 실제 checkout -> webhook -> upload polling 흐름 끝까지 확인
+
+이걸 먼저 해야 하는 이유:
+
+- 코드 구조는 붙었지만, 실환경 값으로 아직 end-to-end 검증을 안 했다
+
+#### 새 2순위: 헤어 단계 실연동
+
+그 다음 파일:
+
+1. `lib/replicate.ts`
+2. `app/api/jobs/start/route.ts`
+3. `app/api/jobs/status/route.ts`
+4. `app/api/jobs/select/route.ts`
+5. `app/[lang]/create/hair/page.tsx`
+
+목표:
+
+1. mock hair 결과 대신 실제 provider 호출
+2. polling으로 실제 job 상태 반영
+3. 선택 결과를 `job:{orderId}` 기준으로 저장
+
+#### 새 3순위: upload 단계 로컬 데모 fallback 축소
+
+지금은 유지 중:
+
+1. `checkout_id`가 없으면 로컬 데모 세션 허용
+2. 이 fallback은 개발용으로는 유용하지만, 실제 서비스 직전에는 제거 또는 개발 모드 전용 분기 필요
+
+---
+
+### 4. 지금 기준 검증 상태
+
+이번 세션에서 확인 완료:
+
+1. `npm.cmd run typecheck` 통과
+2. `npm.cmd run build` 통과
+
+주의:
+
+- `next build`는 기본 샌드박스에서 `spawn EPERM`이 날 수 있으므로, 이번에도 권한 상승으로 최종 확인함
+
+---
+
+### 5. 다음 세션에서 이렇게 시작하면 됨
+
+다음 요청 추천:
+
+`todo.md 최신 기록 기준으로 진행해. 먼저 .env.local 세팅 기준으로 checkout -> webhook -> upload polling 실검증부터 보자`
+
+그 다음:
+
+`실검증 끝나면 hair 단계 실제 생성 연결로 넘어가`
+
+---
+
+## 추가 기록 (2026-03-05 00:12:43 +09:00)
+
+이 아래 내용이 현재 최신 상태다. 이번 기록은 블로그 대량 운영 준비 작업까지 반영한다.
+
+### 1. 이번 세션에서 추가로 끝낸 것
+
+#### 1.1 7개 카테고리 기준 420개 운영 구조 문서화
+
+완료:
+
+1. 블로그 카테고리를 7개로 고정
+2. `EN 210 + KO 210` 기준 배분표 정리
+3. 각 카테고리별 서브토픽 클러스터 구조 정리
+4. Tier 1 / Tier 2 / Tier 3 기준으로 중요도와 시간 배분 기준 정리
+
+확정 카테고리:
+
+1. `Product / FAQ`
+2. `Hair`
+3. `Photo Technique`
+4. `Beauty Prep`
+5. `Outfit / Styling`
+6. `Backdrop / Mood`
+7. `Seasonal / Trend`
+
+관련 파일:
+
+- `md-doc/post-scale-400.md`
+
+#### 1.2 추가 후보 280개 백로그 생성
+
+완료:
+
+1. 7개 카테고리 기준으로 `EN 140 + KO 140` 추가 후보 작성
+2. 각 후보에 제목 + slug 조합까지 정리
+3. 기존 초기 20개와 겹치지 않는 방향으로 확장 후보 확보
+
+관련 파일:
+
+- `md-doc/post-candidate-backlog-280.md`
+
+#### 1.3 Tier 1 허브 40개 목록 확정
+
+완료:
+
+1. 현재 가장 먼저 품질 높게 쌓아야 하는 허브 글 40개를 따로 분리
+2. 기존 작성분과 신규 작성분을 `Existing`, `New`로 구분
+3. 기준은 `Product / FAQ`, `Hair`, `Photo Technique`만 사용
+
+구성:
+
+1. EN 20개
+2. KO 20개
+
+관련 파일:
+
+- `md-doc/tier1-hub-40.md`
+
+#### 1.4 Tier 1 신규 MDX 초안 20개 추가 작성
+
+완료:
+
+1. EN 신규 허브 초안 10개 작성
+2. KO 신규 허브 초안 10개 작성
+3. 결과적으로 현재 블로그 초안 수는 아래 상태
+
+- `content/blog/en`: 20개
+- `content/blog/ko`: 20개
+
+이번에 추가된 핵심 파일 예시:
+
+- `content/blog/en/why-pick-hair-before-outfit.mdx`
+- `content/blog/en/what-to-expect-from-background-compositing.mdx`
+- `content/blog/en/best-wispy-bang-looks-for-front-facing-photos.mdx`
+- `content/blog/en/easiest-pose-fixes-for-better-9x16-portraits.mdx`
+- `content/blog/ko/why-hair-comes-before-outfit-in-the-flow-ko.mdx`
+- `content/blog/ko/what-to-expect-from-background-compositing-ko.mdx`
+- `content/blog/ko/k-style-bangs-by-face-shape-ko.mdx`
+- `content/blog/ko/selfie-framing-in-small-rooms-ko.mdx`
+
+---
+
+### 2. 지금 기준 블로그 상태 요약
+
+현재 블로그는 아래 단계까지 와 있다:
+
+1. 실제 MDX 렌더링 구조 적용 완료
+2. EN 20개 초안 확보
+3. KO 20개 초안 확보
+4. 420개 규모 운영 구조 문서 완료
+5. 추가 후보 280개 백로그 완료
+6. Tier 1 허브 40개 우선순위 목록 완료
+
+즉:
+
+- "무엇을 써야 하는지" 구조는 잡힘
+- "가장 먼저 써야 할 허브 글"도 정리됨
+- 실제 대량 초안 생성 배치로 바로 이어갈 수 있음
+
+---
+
+### 3. 지금 바로 다음 우선순위
+
+#### 새 1순위: checkout -> webhook -> upload polling 실환경 검증
+
+먼저 해야 할 것:
+
+1. `.env.local.example` 기준으로 `.env.local` 생성
+2. `POLAR_*`, `UPSTASH_*`, `NEXT_PUBLIC_APP_URL` 실값 입력
+3. `npm.cmd run dev`
+4. `/en/create`에서 실제 checkout 시작
+5. 결제 후 `/[lang]/create/upload?checkout_id=...` 복귀
+6. `/api/session/status` 폴링으로 세션이 실제로 붙는지 확인
+7. URL에서 `checkout_id`가 제거되는지 확인
+
+이게 먼저인 이유:
+
+- 결제/세션 코드는 붙었지만, 아직 실환경 end-to-end 확인이 남아 있다
+
+#### 새 2순위: hair 단계 실연동
+
+다음으로 바로 갈 파일:
+
+1. `lib/replicate.ts`
+2. `app/api/jobs/start/route.ts`
+3. `app/api/jobs/status/route.ts`
+4. `app/api/jobs/select/route.ts`
+5. `app/[lang]/create/hair/page.tsx`
+
+목표:
+
+1. mock hair 결과 제거
+2. 실제 provider 호출 연결
+3. polling으로 실제 job 상태 반영
+4. `job:{orderId}` 기준으로 선택 상태 저장
+
+#### 새 3순위: Tier 2 블로그 배치 작성
+
+블로그 기준 다음 단계:
+
+1. `md-doc/post-candidate-backlog-280.md`에서 다음 40개 선별
+2. Tier 2 묶음 문서 따로 생성
+3. 같은 방식으로 EN/KO `.mdx` 초안 배치 생성
+
+이 순서가 좋은 이유:
+
+1. Tier 1 허브 40개를 기준으로 내부 링크 구조가 잡힌다
+2. 그 다음 Tier 2는 연결형 글로 빠르게 확장 가능하다
+
+---
+
+### 4. 지금 기준 검증 상태
+
+이번 세션에서 확인 완료:
+
+1. 블로그 추가 초안 20개 생성 후 `npm.cmd run build` 통과
+2. `/blog/[lang]/[slug]` 정적 페이지 수 증가 확인
+
+주의:
+
+- 실환경 Polar/Upstash 연동 검증은 아직 미완료
+- 블로그 문서는 구조와 초안은 충분하지만, 고품질 다듬기 작업은 아직 남아 있음
+
+---
+
+### 5. 다음 세션에서 이렇게 시작하면 됨
+
+실연동부터 볼 때:
+
+`todo.md 최신 기록 기준으로 진행해. 먼저 .env.local 세팅하고 checkout -> webhook -> upload polling 실환경 검증부터 하자`
+
+블로그부터 더 밀 때:
+
+`todo.md 최신 기록 기준으로 진행해. tier1-hub-40 다음으로 Tier 2 블로그 40개 선별하고 초안 배치 생성하자`

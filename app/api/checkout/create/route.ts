@@ -1,32 +1,35 @@
 import { NextResponse } from "next/server";
 
 import {
-  assertPolarEnv,
-  buildCheckoutCancelUrl,
-  buildCheckoutSuccessUrl
+  PolarApiError,
+  createPolarCheckout,
+  normalizeLocale
 } from "@/lib/polar";
-import { jsonNotImplemented } from "@/lib/jobs";
 
 export async function POST(request: Request) {
   const payload = (await request.json().catch(() => ({}))) as { locale?: string };
-  const locale = payload.locale ?? "en";
-
-  try {
-    assertPolarEnv();
-  } catch (error) {
-    return NextResponse.json(
-      { ok: false, message: (error as Error).message },
-      { status: 500 }
-    );
-  }
+  const locale = normalizeLocale(payload.locale);
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
-  return jsonNotImplemented(
-    `Create a Polar checkout here. successUrl=${buildCheckoutSuccessUrl(
+  try {
+    const checkout = await createPolarCheckout({
       appUrl,
       locale
-    )} cancelUrl=${buildCheckoutCancelUrl(appUrl, locale)}`
-  );
+    });
+
+    return NextResponse.json({
+      ok: true,
+      checkoutId: checkout.checkoutId,
+      checkoutUrl: checkout.checkoutUrl
+    });
+  } catch (error) {
+    const status =
+      error instanceof PolarApiError ? error.status : error instanceof Error ? 500 : 500;
+    const message =
+      error instanceof Error ? error.message : "Unable to create a Polar checkout right now.";
+
+    return NextResponse.json({ ok: false, message }, { status });
+  }
 }
 

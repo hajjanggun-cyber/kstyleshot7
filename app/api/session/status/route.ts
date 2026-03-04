@@ -14,32 +14,39 @@ export async function GET(request: Request) {
     );
   }
 
-  const redis = getRedis();
-  const orderId = await redis.get<string>(`checkout:${checkoutId}`);
+  try {
+    const redis = getRedis();
+    const orderId = await redis.get<string>(`checkout:${checkoutId}`);
 
-  if (!orderId) {
+    if (!orderId) {
+      const response: SessionStatusResponse = {
+        ready: false,
+        status: "pending"
+      };
+      return NextResponse.json(response, { status: 202 });
+    }
+
+    const job = await redis.get<KVJob>(`job:${orderId}`);
+    if (!job) {
+      const response: SessionStatusResponse = {
+        ready: false,
+        status: "pending"
+      };
+      return NextResponse.json(response, { status: 202 });
+    }
+
     const response: SessionStatusResponse = {
-      ready: false,
-      status: "pending"
+      ready: true,
+      orderId: job.orderId,
+      sessionToken: job.sessionToken,
+      status: job.status
     };
-    return NextResponse.json(response, { status: 202 });
+
+    return NextResponse.json(response);
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Unable to read the current session state.";
+
+    return NextResponse.json({ ok: false, message }, { status: 500 });
   }
-
-  const job = await redis.get<KVJob>(`job:${orderId}`);
-  if (!job) {
-    const response: SessionStatusResponse = {
-      ready: false,
-      status: "pending"
-    };
-    return NextResponse.json(response, { status: 202 });
-  }
-
-  const response: SessionStatusResponse = {
-    ready: true,
-    orderId: job.orderId,
-    sessionToken: job.sessionToken,
-    status: job.status
-  };
-
-  return NextResponse.json(response);
 }

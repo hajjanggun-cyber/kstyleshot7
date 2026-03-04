@@ -17,8 +17,8 @@ export default async function UploadPage({ searchParams }: UploadPageProps) {
         <p className="muted">Step 2</p>
         <h1>Upload your selfie</h1>
         <p className="muted">
-          This step already works as a local UX demo. The real session handshake will replace the
-          local fallback once `GET /api/session/status` is wired.
+          If `checkout_id` is present, this page polls `GET /api/session/status` until the paid
+          session is ready, then clears the query string and continues with the same flow.
         </p>
         <PhotoUpload checkoutIdFromUrl={checkoutId} />
       </section>

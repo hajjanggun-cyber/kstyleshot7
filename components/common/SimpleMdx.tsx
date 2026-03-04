@@ -1,63 +1,37 @@
-import type { ReactNode } from "react";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import type { ComponentPropsWithoutRef } from "react";
 
 type SimpleMdxProps = {
   body: string;
 };
 
-function renderLine(line: string, index: number) {
-  if (!line.trim()) {
-    return null;
-  }
-
-  if (line.startsWith("### ")) {
-    return <h3 key={index}>{line.slice(4)}</h3>;
-  }
-
-  if (line.startsWith("## ")) {
-    return <h2 key={index}>{line.slice(3)}</h2>;
-  }
-
-  if (line.startsWith("- ")) {
-    return (
-      <li key={index}>
-        {line.slice(2)}
-      </li>
-    );
-  }
-
-  return <p key={index}>{line}</p>;
+function mergeClassName(baseClassName: string, nextClassName?: string) {
+  return nextClassName ? `${baseClassName} ${nextClassName}` : baseClassName;
 }
 
-export function SimpleMdx({ body }: SimpleMdxProps) {
-  const lines = body.split("\n");
-  const nodes: ReactNode[] = [];
-  let listItems: ReactNode[] = [];
+function ArticleLink({ href = "", ...props }: ComponentPropsWithoutRef<"a">) {
+  const className = mergeClassName("article-link", props.className);
 
-  function flushList() {
-    if (listItems.length > 0) {
-      nodes.push(
-        <ul key={`list-${nodes.length}`} className="article-list">
-          {listItems}
-        </ul>
-      );
-      listItems = [];
-    }
-  }
+  return <a {...props} className={className} href={href} />;
+}
 
-  lines.forEach((line, index) => {
-    if (line.startsWith("- ")) {
-      listItems.push(renderLine(line, index));
-      return;
-    }
+const mdxComponents = {
+  a: ArticleLink,
+  h2: (props: ComponentPropsWithoutRef<"h2">) => <h2 {...props} />,
+  h3: (props: ComponentPropsWithoutRef<"h3">) => <h3 {...props} />,
+  p: (props: ComponentPropsWithoutRef<"p">) => <p {...props} />,
+  ul: (props: ComponentPropsWithoutRef<"ul">) => (
+    <ul {...props} className={mergeClassName("article-list", props.className)} />
+  ),
+  li: (props: ComponentPropsWithoutRef<"li">) => <li {...props} />,
+  strong: (props: ComponentPropsWithoutRef<"strong">) => <strong {...props} />,
+  code: (props: ComponentPropsWithoutRef<"code">) => <code {...props} />
+};
 
-    flushList();
-    const rendered = renderLine(line, index);
-    if (rendered) {
-      nodes.push(rendered);
-    }
-  });
-
-  flushList();
-
-  return <div className="article-body">{nodes}</div>;
+export async function SimpleMdx({ body }: SimpleMdxProps) {
+  return (
+    <div className="article-body">
+      <MDXRemote components={mdxComponents} source={body} />
+    </div>
+  );
 }
