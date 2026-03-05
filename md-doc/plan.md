@@ -1,290 +1,321 @@
-# kstyleshot - Implementation Plan
+﻿# kstyleshot - Implementation Plan
 
-작성: Codex (GPT-5)
-작성 시각: 2026-03-04 21:00:04 +09:00 (Asia/Seoul)
-문서 상태: 기존 `plan.md` 전체 대체
+## 0. Quick Integration Guide (Replicate Hair API)
 
-이 문서는 기존 초안을 전면 폐기하고, 실제 구현과 배포를 기준으로 다시 정리한 실행용 명세서다.
-목표는 "지금 바로 코딩 가능한 구조"를 만드는 것이며, 확인되지 않은 가정이나 문서상 오류는 제거했다.
+Updated At (KST): 2026-03-05 18:56:08 +09:00
+
+Target model:
+- `flux-kontext-apps/change-haircut`
+
+Environment variables:
+- `REPLICATE_API_TOKEN=r8_xxx` (required)
+- `REPLICATE_DEFAULT_HAIR_COLOR=Random` (optional)
+
+Where to set:
+- `.env.local` (project root)
+
+Current server mapping:
+- Hair step start endpoint: `POST /api/jobs/start` with `step="hair"`
+- Internal Replicate input shape:
+  - `haircut`: selected style name
+  - `hair_color`: default `"Random"` (or `REPLICATE_DEFAULT_HAIR_COLOR`)
+  - `input_image`: uploaded image data URL
+- Status polling endpoint: `GET /api/jobs/status?step=hair`
+
+Auth header format:
+- `Authorization: Bearer $REPLICATE_API_TOKEN`
+
+Operational notes:
+- After `.env.local` change, restart dev server.
+- Do not commit `.env.local` or tokens.
+- This project uses async start + polling flow (no `Prefer: wait` required).
+
+---
+?묒꽦: Codex (GPT-5)
+?묒꽦 ?쒓컖: 2026-03-04 21:00:04 +09:00 (Asia/Seoul)
+臾몄꽌 ?곹깭: 湲곗〈 `plan.md` ?꾩껜 ?泥?
+
+??臾몄꽌??湲곗〈 珥덉븞???꾨㈃ ?먭린?섍퀬, ?ㅼ젣 援ы쁽怨?諛고룷瑜?湲곗??쇰줈 ?ㅼ떆 ?뺣━???ㅽ뻾??紐낆꽭?쒕떎.
+紐⑺몴??"吏湲?諛붾줈 肄붾뵫 媛?ν븳 援ъ“"瑜?留뚮뱶??寃껋씠硫? ?뺤씤?섏? ?딆? 媛?뺤씠??臾몄꽌???ㅻ쪟???쒓굅?덈떎.
 
 ---
 
-## 1. 제품 정의
+## 1. ?쒗뭹 ?뺤쓽
 
-사용자가 본인 셀카 1장을 업로드하면:
+?ъ슜?먭? 蹂몄씤 ?移?1?μ쓣 ?낅줈?쒗븯硫?
 
-1. 헤어 스타일 2개를 생성한다.
-2. 2개 중 1개를 사용자가 고른다.
-3. 선택된 결과를 기반으로 의상 스타일 2개를 생성한다.
-4. 2개 중 1개를 사용자가 고른다.
-5. 선택된 결과에서 인물 배경을 제거한다.
-6. 서울 배경 2개에 합성한다.
-7. 2개 중 1개를 사용자가 고르고 다운로드한다.
+1. ?ㅼ뼱 ?ㅽ???2媛쒕? ?앹꽦?쒕떎.
+2. 2媛?以?1媛쒕? ?ъ슜?먭? 怨좊Ⅸ??
+3. ?좏깮??寃곌낵瑜?湲곕컲?쇰줈 ?섏긽 ?ㅽ???2媛쒕? ?앹꽦?쒕떎.
+4. 2媛?以?1媛쒕? ?ъ슜?먭? 怨좊Ⅸ??
+5. ?좏깮??寃곌낵?먯꽌 ?몃Ъ 諛곌꼍???쒓굅?쒕떎.
+6. ?쒖슱 諛곌꼍 2媛쒖뿉 ?⑹꽦?쒕떎.
+7. 2媛?以?1媛쒕? ?ъ슜?먭? 怨좊Ⅴ怨??ㅼ슫濡쒕뱶?쒕떎.
 
-결제는 1회성 유료다.
-
----
-
-## 2. 핵심 원칙
-
-1. 이메일, 전화번호, 실명 등 직접 식별 개인정보는 수집하지 않는다.
-2. 사용자 원본 이미지는 서버에 영구 저장하지 않는다.
-3. 브라우저 메모리와 일시 처리만 사용하고, 결과 이미지는 즉시 다운로드 방식으로 제공한다.
-4. 결제 완료와 AI 생성은 반드시 비동기 job/poll 구조로 처리한다.
-5. 모든 최종 결과물에는 워터마크를 삽입한다.
-6. 특정 아이돌, 그룹, 기획사, 브랜드와의 제휴 또는 동일성 보장을 절대 약속하지 않는다.
-7. 상용 라이선스가 불명확한 모델은 유료 서비스에 사용하지 않는다.
-8. 블로그 포스팅은 create 단계 화면에 강제 삽입하지 않고 `/blog` 독립 허브로 운영한다.
-9. 제품 공식 플로우는 `헤어 -> 의상 -> 배경`으로 고정한다.
-10. 포스팅은 유입/설명 역할을 맡고, 실제 선택/생성 인터랙션은 create 플로우에서만 수행한다.
-11. 문서 역할은 `plan.md(제품/기술/플로우)`와 `post.md(포스팅 기획/발행)`로 분리 관리한다.
+寃곗젣??1?뚯꽦 ?좊즺??
 
 ---
 
-## 3. 반드시 반영해야 하는 현실 제약
+## 2. ?듭떖 ?먯튃
 
-### 3.1 결제 후 `sessionToken`을 바로 URL에 넣을 수 없다
-
-Polar 성공 리다이렉트 시점에는 서버 웹훅이 아직 처리 중일 수 있다.
-따라서 결제 직후 URL에 `sessionToken`을 직접 넣는 설계는 폐기한다.
-
-정상 흐름:
-
-1. Polar checkout 생성 시 `successUrl`에 `?checkout_id={CHECKOUT_ID}`를 포함한다.
-2. 사용자는 `/[lang]/create/upload?checkout_id=...`로 돌아온다.
-3. 클라이언트가 `/api/session/status?checkoutId=...`를 폴링한다.
-4. 서버는 웹훅에서 주문 결제 확인 후 세션을 생성한다.
-5. 준비되면 `sessionToken`을 응답한다.
-6. 클라이언트는 `sessionStorage`에 저장하고 URL 쿼리를 즉시 제거한다.
-
-### 3.2 배경 합성 전에 인물 배경 제거가 필요하다
-
-의상 생성 결과는 일반적으로 배경이 포함된 사각형 이미지다.
-이를 그대로 Canvas에 올리면 합성이 아니라 단순 덮어쓰기 결과가 된다.
-
-정상 흐름:
-
-1. 의상 결과 2개 중 1개를 선택한다.
-2. 선택된 1장에만 배경 제거 job을 1회 수행한다.
-3. 투명 배경 PNG를 얻는다.
-4. 이 PNG를 Canvas로 배경 이미지 위에 합성한다.
-
-배경 제거 단계가 없으면 배경 기능은 품질상 판매 불가다.
-
-### 3.3 현재 문서의 `cuuupid/idm-vton`은 상용 사용 금지
-
-이 모델은 상용 유료 서비스에 바로 사용할 수 없다.
-따라서 의상 단계는 아래 둘 중 하나가 선행되어야 한다.
-
-1. 상용 사용 가능한 대체 모델을 확보한다.
-2. MVP에서 의상 단계를 비활성화하고 헤어 + 배경만 먼저 출시한다.
-
-상용 사용 가능 여부가 확인되기 전까지 `idm-vton` 기준 구현을 확정하지 않는다.
+1. ?대찓?? ?꾪솕踰덊샇, ?ㅻ챸 ??吏곸젒 ?앸퀎 媛쒖씤?뺣낫???섏쭛?섏? ?딅뒗??
+2. ?ъ슜???먮낯 ?대?吏???쒕쾭???곴뎄 ??ν븯吏 ?딅뒗??
+3. 釉뚮씪?곗? 硫붾え由ъ? ?쇱떆 泥섎━留??ъ슜?섍퀬, 寃곌낵 ?대?吏??利됱떆 ?ㅼ슫濡쒕뱶 諛⑹떇?쇰줈 ?쒓났?쒕떎.
+4. 寃곗젣 ?꾨즺? AI ?앹꽦? 諛섎뱶??鍮꾨룞湲?job/poll 援ъ“濡?泥섎━?쒕떎.
+5. 紐⑤뱺 理쒖쥌 寃곌낵臾쇱뿉???뚰꽣留덊겕瑜??쎌엯?쒕떎.
+6. ?뱀젙 ?꾩씠?? 洹몃９, 湲고쉷?? 釉뚮옖?쒖????쒗쑕 ?먮뒗 ?숈씪??蹂댁옣???덈? ?쎌냽?섏? ?딅뒗??
+7. ?곸슜 ?쇱씠?좎뒪媛 遺덈챸?뺥븳 紐⑤뜽? ?좊즺 ?쒕퉬?ㅼ뿉 ?ъ슜?섏? ?딅뒗??
+8. 釉붾줈洹??ъ뒪?낆? create ?④퀎 ?붾㈃??媛뺤젣 ?쎌엯?섏? ?딄퀬 `/blog` ?낅┰ ?덈툕濡??댁쁺?쒕떎.
+9. ?쒗뭹 怨듭떇 ?뚮줈?곕뒗 `?ㅼ뼱 -> ?섏긽 -> 諛곌꼍`?쇰줈 怨좎젙?쒕떎.
+10. ?ъ뒪?낆? ?좎엯/?ㅻ챸 ??븷??留↔퀬, ?ㅼ젣 ?좏깮/?앹꽦 ?명꽣?숈뀡? create ?뚮줈?곗뿉?쒕쭔 ?섑뻾?쒕떎.
+11. 臾몄꽌 ??븷? `plan.md(?쒗뭹/湲곗닠/?뚮줈??`? `post.md(?ъ뒪??湲고쉷/諛쒗뻾)`濡?遺꾨━ 愿由ы븳??
 
 ---
 
-## 4. 권장 기술 스택
+## 3. 諛섎뱶??諛섏쁺?댁빞 ?섎뒗 ?꾩떎 ?쒖빟
 
-### 4.1 런타임 및 프레임워크
+### 3.1 寃곗젣 ??`sessionToken`??諛붾줈 URL???ｌ쓣 ???녿떎
+
+Polar ?깃났 由щ떎?대젆???쒖젏?먮뒗 ?쒕쾭 ?뱁썒???꾩쭅 泥섎━ 以묒씪 ???덈떎.
+?곕씪??寃곗젣 吏곹썑 URL??`sessionToken`??吏곸젒 ?ｋ뒗 ?ㅺ퀎???먭린?쒕떎.
+
+?뺤긽 ?먮쫫:
+
+1. Polar checkout ?앹꽦 ??`successUrl`??`?checkout_id={CHECKOUT_ID}`瑜??ы븿?쒕떎.
+2. ?ъ슜?먮뒗 `/[lang]/create/upload?checkout_id=...`濡??뚯븘?⑤떎.
+3. ?대씪?댁뼵?멸? `/api/session/status?checkoutId=...`瑜??대쭅?쒕떎.
+4. ?쒕쾭???뱁썒?먯꽌 二쇰Ц 寃곗젣 ?뺤씤 ???몄뀡???앹꽦?쒕떎.
+5. 以鍮꾨릺硫?`sessionToken`???묐떟?쒕떎.
+6. ?대씪?댁뼵?몃뒗 `sessionStorage`????ν븯怨?URL 荑쇰━瑜?利됱떆 ?쒓굅?쒕떎.
+
+### 3.2 諛곌꼍 ?⑹꽦 ?꾩뿉 ?몃Ъ 諛곌꼍 ?쒓굅媛 ?꾩슂?섎떎
+
+?섏긽 ?앹꽦 寃곌낵???쇰컲?곸쑝濡?諛곌꼍???ы븿???ш컖???대?吏??
+?대? 洹몃?濡?Canvas???щ━硫??⑹꽦???꾨땲???⑥닚 ??뼱?곌린 寃곌낵媛 ?쒕떎.
+
+?뺤긽 ?먮쫫:
+
+1. ?섏긽 寃곌낵 2媛?以?1媛쒕? ?좏깮?쒕떎.
+2. ?좏깮??1?μ뿉留?諛곌꼍 ?쒓굅 job??1???섑뻾?쒕떎.
+3. ?щ챸 諛곌꼍 PNG瑜??삳뒗??
+4. ??PNG瑜?Canvas濡?諛곌꼍 ?대?吏 ?꾩뿉 ?⑹꽦?쒕떎.
+
+諛곌꼍 ?쒓굅 ?④퀎媛 ?놁쑝硫?諛곌꼍 湲곕뒫? ?덉쭏???먮ℓ 遺덇???
+
+### 3.3 ?꾩옱 臾몄꽌??`cuuupid/idm-vton`? ?곸슜 ?ъ슜 湲덉?
+
+??紐⑤뜽? ?곸슜 ?좊즺 ?쒕퉬?ㅼ뿉 諛붾줈 ?ъ슜?????녿떎.
+?곕씪???섏긽 ?④퀎???꾨옒 ??以??섎굹媛 ?좏뻾?섏뼱???쒕떎.
+
+1. ?곸슜 ?ъ슜 媛?ν븳 ?泥?紐⑤뜽???뺣낫?쒕떎.
+2. MVP?먯꽌 ?섏긽 ?④퀎瑜?鍮꾪솢?깊솕?섍퀬 ?ㅼ뼱 + 諛곌꼍留?癒쇱? 異쒖떆?쒕떎.
+
+?곸슜 ?ъ슜 媛???щ?媛 ?뺤씤?섍린 ?꾧퉴吏 `idm-vton` 湲곗? 援ы쁽???뺤젙?섏? ?딅뒗??
+
+---
+
+## 4. 沅뚯옣 湲곗닠 ?ㅽ깮
+
+### 4.1 ?고???諛??꾨젅?꾩썙??
 
 - Next.js 16 (App Router)
-- React 19 계열
+- React 19 怨꾩뿴
 - TypeScript
 - Tailwind CSS
 
-### 4.2 상태 및 국제화
+### 4.2 ?곹깭 諛?援?젣??
 
 - Zustand
 - next-intl
 
-구조:
+援ъ“:
 
 - `i18n/request.ts`
-- `next.config.mjs`에서 next-intl plugin 적용
-- 라우팅 엔트리 파일은 Next.js 16 기준 `proxy.ts` 사용
+- `next.config.mjs`?먯꽌 next-intl plugin ?곸슜
+- ?쇱슦???뷀듃由??뚯씪? Next.js 16 湲곗? `proxy.ts` ?ъ슜
 
-### 4.3 결제 및 백엔드 연동
+### 4.3 寃곗젣 諛?諛깆뿏???곕룞
 
 - Polar
-- Polar webhook은 SDK 기반 검증 사용
-- 결제 완료 이벤트 기준은 `order.paid`
-- 환불은 `POST /v1/refunds`
+- Polar webhook? SDK 湲곕컲 寃利??ъ슜
+- 寃곗젣 ?꾨즺 ?대깽??湲곗?? `order.paid`
+- ?섎텋? `POST /v1/refunds`
 
-### 4.4 상태 저장소
+### 4.4 ?곹깭 ??μ냼
 
-- Upstash Redis 사용
-- 기존 "Vercel KV" 표현은 사용하지 않는다
+- Upstash Redis ?ъ슜
+- 湲곗〈 "Vercel KV" ?쒗쁽? ?ъ슜?섏? ?딅뒗??
 
-이 문서에서는 Redis를 전제로 설계한다.
+??臾몄꽌?먯꽌??Redis瑜??꾩젣濡??ㅺ퀎?쒕떎.
 
-### 4.5 이미지 생성
+### 4.5 ?대?吏 ?앹꽦
 
-- 헤어: `black-forest-labs/flux-kontext-pro`
-- 의상: 상용 사용 허용 모델로 교체 필요
-- 배경 제거: 상용 사용 가능한 배경 제거 모델 또는 서비스 필요
-- 배경 합성: 브라우저 Canvas API
+- ?ㅼ뼱: `black-forest-labs/flux-kontext-pro`
+- ?섏긽: ?곸슜 ?ъ슜 ?덉슜 紐⑤뜽濡?援먯껜 ?꾩슂
+- 諛곌꼍 ?쒓굅: ?곸슜 ?ъ슜 媛?ν븳 諛곌꼍 ?쒓굅 紐⑤뜽 ?먮뒗 ?쒕퉬???꾩슂
+- 諛곌꼍 ?⑹꽦: 釉뚮씪?곗? Canvas API
 
 ---
 
-## 5. 폴더 구조
+## 5. ?대뜑 援ъ“
 
 ```text
 /
-├── app/
-│   ├── [lang]/
-│   │   ├── layout.tsx
-│   │   ├── page.tsx
-│   │   ├── create/
-│   │   │   ├── page.tsx
-│   │   │   ├── upload/page.tsx
-│   │   │   ├── hair/page.tsx
-│   │   │   ├── outfit/page.tsx
-│   │   │   ├── location/page.tsx
-│   │   │   └── done/page.tsx
-│   │   ├── terms/page.tsx
-│   │   ├── privacy/page.tsx
-│   │   ├── refund-policy/page.tsx
-│   │   └── cookie-policy/page.tsx
-│   └── api/
-│       ├── webhooks/
-│       │   └── polar/route.ts
-│       ├── checkout/
-│       │   └── create/route.ts
-│       ├── session/
-│       │   └── status/route.ts
-│       ├── jobs/
-│       │   ├── start/route.ts
-│       │   ├── status/route.ts
-│       │   └── select/route.ts
-│       └── data/
-│           └── delete/route.ts
-├── components/
-│   ├── landing/
-│   ├── create/
-│   └── common/
-├── content/
-│   └── blog/
-│       ├── en/
-│       └── ko/
-├── data/
-│   ├── hairStyles.ts
-│   ├── outfits.ts
-│   └── backgrounds.ts
-├── lib/
-│   ├── polar.ts
-│   ├── redis.ts
-│   ├── jobs.ts
-│   ├── replicate.ts
-│   ├── images.ts
-│   ├── canvas.ts
-│   └── refund.ts
-├── store/
-│   └── createStore.ts
-├── types/
-│   └── index.ts
-├── messages/
-│   ├── en.json
-│   └── ko.json
-├── public/
-│   ├── backgrounds/
-│   ├── samples/
-│   └── favicon.ico
-├── next.config.mjs
-├── proxy.ts
-└── .env.local
+?쒋?? app/
+??  ?쒋?? [lang]/
+??  ??  ?쒋?? layout.tsx
+??  ??  ?쒋?? page.tsx
+??  ??  ?쒋?? create/
+??  ??  ??  ?쒋?? page.tsx
+??  ??  ??  ?쒋?? upload/page.tsx
+??  ??  ??  ?쒋?? hair/page.tsx
+??  ??  ??  ?쒋?? outfit/page.tsx
+??  ??  ??  ?쒋?? location/page.tsx
+??  ??  ??  ?붴?? done/page.tsx
+??  ??  ?쒋?? terms/page.tsx
+??  ??  ?쒋?? privacy/page.tsx
+??  ??  ?쒋?? refund-policy/page.tsx
+??  ??  ?붴?? cookie-policy/page.tsx
+??  ?붴?? api/
+??      ?쒋?? webhooks/
+??      ??  ?붴?? polar/route.ts
+??      ?쒋?? checkout/
+??      ??  ?붴?? create/route.ts
+??      ?쒋?? session/
+??      ??  ?붴?? status/route.ts
+??      ?쒋?? jobs/
+??      ??  ?쒋?? start/route.ts
+??      ??  ?쒋?? status/route.ts
+??      ??  ?붴?? select/route.ts
+??      ?붴?? data/
+??          ?붴?? delete/route.ts
+?쒋?? components/
+??  ?쒋?? landing/
+??  ?쒋?? create/
+??  ?붴?? common/
+?쒋?? content/
+??  ?붴?? blog/
+??      ?쒋?? en/
+??      ?붴?? ko/
+?쒋?? data/
+??  ?쒋?? hairStyles.ts
+??  ?쒋?? outfits.ts
+??  ?붴?? backgrounds.ts
+?쒋?? lib/
+??  ?쒋?? polar.ts
+??  ?쒋?? redis.ts
+??  ?쒋?? jobs.ts
+??  ?쒋?? replicate.ts
+??  ?쒋?? images.ts
+??  ?쒋?? canvas.ts
+??  ?붴?? refund.ts
+?쒋?? store/
+??  ?붴?? createStore.ts
+?쒋?? types/
+??  ?붴?? index.ts
+?쒋?? messages/
+??  ?쒋?? en.json
+??  ?붴?? ko.json
+?쒋?? public/
+??  ?쒋?? backgrounds/
+??  ?쒋?? samples/
+??  ?붴?? favicon.ico
+?쒋?? next.config.mjs
+?쒋?? proxy.ts
+?붴?? .env.local
 ```
 
-제거:
+?쒓굅:
 
 - `api/composite/route.ts`
 - `locations.ts`
-- 의미 없는 `api/jobs/[jobId]`
+- ?섎? ?녿뒗 `api/jobs/[jobId]`
 
-`locations.ts`는 `backgrounds.ts`와 중복되므로 유지하지 않는다.
+`locations.ts`??`backgrounds.ts`? 以묐났?섎?濡??좎??섏? ?딅뒗??
 
 ---
 
-## 6. 결제 및 세션 설계
+## 6. 寃곗젣 諛??몄뀡 ?ㅺ퀎
 
-### 6.1 체크아웃 생성
+### 6.1 泥댄겕?꾩썐 ?앹꽦
 
 `POST /api/checkout/create`
 
-역할:
+??븷:
 
-1. Polar checkout session 생성
-2. 성공 URL에 `checkout_id` 템플릿 포함
-3. locale 기준으로 리다이렉트 경로 지정
+1. Polar checkout session ?앹꽦
+2. ?깃났 URL??`checkout_id` ?쒗뵆由??ы븿
+3. locale 湲곗??쇰줈 由щ떎?대젆??寃쎈줈 吏??
 
-성공 URL 예시:
+?깃났 URL ?덉떆:
 
 ```text
 https://{APP_DOMAIN}/{lang}/create/upload?checkout_id={CHECKOUT_ID}
 ```
 
-### 6.2 웹훅 처리
+### 6.2 ?뱁썒 泥섎━
 
 `POST /api/webhooks/polar`
 
-처리 기준:
+泥섎━ 湲곗?:
 
-1. Polar SDK로 서명 검증
-2. `order.paid` 이벤트만 처리
-3. 멱등성 키로 중복 수신 차단
-4. `checkout_id` 기준 세션 생성
+1. Polar SDK濡??쒕챸 寃利?
+2. `order.paid` ?대깽?몃쭔 泥섎━
+3. 硫깅벑???ㅻ줈 以묐났 ?섏떊 李⑤떒
+4. `checkout_id` 湲곗? ?몄뀡 ?앹꽦
 
-웹훅 완료 시 저장:
+?뱁썒 ?꾨즺 ?????
 
 - `job:{orderId}`
 - `checkout:{checkoutId} -> orderId`
 - `session:{sessionToken} -> orderId`
 
-### 6.3 세션 조회
+### 6.3 ?몄뀡 議고쉶
 
 `GET /api/session/status?checkoutId=...`
 
-응답 규칙:
+?묐떟 洹쒖튃:
 
-- 웹훅 미처리: `202` 또는 `pending`
-- 처리 완료: `sessionToken`, `orderId`, `status`
+- ?뱁썒 誘몄쿂由? `202` ?먮뒗 `pending`
+- 泥섎━ ?꾨즺: `sessionToken`, `orderId`, `status`
 
-클라이언트 동작:
+?대씪?댁뼵???숈옉:
 
-1. `sessionToken`을 `sessionStorage`에 저장
-2. `history.replaceState`로 `checkout_id` 제거
-3. 이후 API 요청은 `Authorization: Bearer {sessionToken}` 사용
+1. `sessionToken`??`sessionStorage`?????
+2. `history.replaceState`濡?`checkout_id` ?쒓굅
+3. ?댄썑 API ?붿껌? `Authorization: Bearer {sessionToken}` ?ъ슜
 
-URL에 토큰을 계속 들고 다니지 않는다.
+URL???좏겙??怨꾩냽 ?ㅺ퀬 ?ㅻ땲吏 ?딅뒗??
 
 ---
 
-## 7. Redis 키 설계
+## 7. Redis ???ㅺ퀎
 
-### 7.1 단일 진실 원본
+### 7.1 ?⑥씪 吏꾩떎 ?먮낯
 
-주요 상태는 항상 `job:{orderId}` 단일 객체에 저장한다.
-분리 상태 키를 남발하지 않는다.
+二쇱슂 ?곹깭????긽 `job:{orderId}` ?⑥씪 媛앹껜????ν븳??
+遺꾨━ ?곹깭 ?ㅻ? ?⑤컻?섏? ?딅뒗??
 
-### 7.2 키 목록
+### 7.2 ??紐⑸줉
 
-- `job:{orderId}` -> 전체 job 객체
+- `job:{orderId}` -> ?꾩껜 job 媛앹껜
 - `checkout:{checkoutId}` -> orderId
 - `session:{sessionToken}` -> orderId
-- `webhook:event:{eventId}` -> 처리 여부
-- `refund:{orderId}` -> 환불 멱등성 키
-- `rate:{sessionToken}:{step}` -> 요청 제한 카운터
+- `webhook:event:{eventId}` -> 泥섎━ ?щ?
+- `refund:{orderId}` -> ?섎텋 硫깅벑????
+- `rate:{sessionToken}:{step}` -> ?붿껌 ?쒗븳 移댁슫??
 
 ### 7.3 TTL
 
-- 세션 관련 키: 24시간
-- 웹훅 멱등성 키: 7일
-- 환불 멱등성 키: 30일
+- ?몄뀡 愿???? 24?쒓컙
+- ?뱁썒 硫깅벑???? 7??
+- ?섎텋 硫깅벑???? 30??
 
 ---
 
-## 8. 상태 모델
+## 8. ?곹깭 紐⑤뜽
 
-상태는 "UI 단계"와 "백엔드 작업 상태"가 섞이지 않게 분리한다.
+?곹깭??"UI ?④퀎"? "諛깆뿏???묒뾽 ?곹깭"媛 ?욎씠吏 ?딄쾶 遺꾨━?쒕떎.
 
 ```ts
 export type JobStatus =
@@ -306,31 +337,31 @@ export type JobStatus =
   | 'refunded'
 ```
 
-중요:
+以묒슂:
 
-- `pickHair`는 `outfit_processing`으로 바꾸지 않는다.
-- `pickHair` 후 상태는 `hair_completed` 유지 또는 `outfit_selecting`
-- `pickOutfit` 후 바로 배경 제거를 시작할 때만 `cutout_processing`
+- `pickHair`??`outfit_processing`?쇰줈 諛붽씀吏 ?딅뒗??
+- `pickHair` ???곹깭??`hair_completed` ?좎? ?먮뒗 `outfit_selecting`
+- `pickOutfit` ??諛붾줈 諛곌꼍 ?쒓굅瑜??쒖옉???뚮쭔 `cutout_processing`
 
 ---
 
-## 9. 이미지 파이프라인
+## 9. ?대?吏 ?뚯씠?꾨씪??
 
-### 9.1 업로드
+### 9.1 ?낅줈??
 
-브라우저에서만 원본 파일을 들고 있다.
+釉뚮씪?곗??먯꽌留??먮낯 ?뚯씪???ㅺ퀬 ?덈떎.
 
-전처리:
+?꾩쿂由?
 
-1. Canvas로 긴 변 기준 1280px 이하 리사이즈
-2. JPEG 품질 0.85 수준으로 압축
-3. `data:image/jpeg;base64,...` 형식으로 변환
+1. Canvas濡?湲?蹂 湲곗? 1280px ?댄븯 由ъ궗?댁쫰
+2. JPEG ?덉쭏 0.85 ?섏??쇰줈 ?뺤텞
+3. `data:image/jpeg;base64,...` ?뺤떇?쇰줈 蹂??
 
-원본 대용량 이미지를 그대로 서버로 보내지 않는다.
+?먮낯 ??⑸웾 ?대?吏瑜?洹몃?濡??쒕쾭濡?蹂대궡吏 ?딅뒗??
 
-### 9.2 헤어 생성
+### 9.2 ?ㅼ뼱 ?앹꽦
 
-헤어 생성 API 입력:
+?ㅼ뼱 ?앹꽦 API ?낅젰:
 
 ```ts
 {
@@ -340,12 +371,12 @@ export type JobStatus =
 }
 ```
 
-`flux-kontext-pro` 사용 시 핵심:
+`flux-kontext-pro` ?ъ슜 ???듭떖:
 
-- `input_image` 사용
-- `image` 사용 금지
+- `input_image` ?ъ슜
+- `image` ?ъ슜 湲덉?
 
-예시:
+?덉떆:
 
 ```ts
 input: {
@@ -355,11 +386,11 @@ input: {
 }
 ```
 
-### 9.3 의상 생성
+### 9.3 ?섏긽 ?앹꽦
 
-의상 단계는 "상용 사용 허용 모델"이 확정된 뒤 연결한다.
+?섏긽 ?④퀎??"?곸슜 ?ъ슜 ?덉슜 紐⑤뜽"???뺤젙?????곌껐?쒕떎.
 
-추상 인터페이스만 먼저 정의:
+異붿긽 ?명꽣?섏씠?ㅻ쭔 癒쇱? ?뺤쓽:
 
 ```ts
 generateOutfitVariants({
@@ -369,229 +400,229 @@ generateOutfitVariants({
 })
 ```
 
-원칙:
+?먯튃:
 
-- 모델 이름은 코드에 하드코딩하지 않는다.
-- 라이선스 검토 전까지 provider adapter만 만든다.
+- 紐⑤뜽 ?대쫫? 肄붾뱶???섎뱶肄붾뵫?섏? ?딅뒗??
+- ?쇱씠?좎뒪 寃???꾧퉴吏 provider adapter留?留뚮뱺??
 
-### 9.4 배경 제거
+### 9.4 諛곌꼍 ?쒓굅
 
-의상 결과 선택 후 1장만 처리한다.
+?섏긽 寃곌낵 ?좏깮 ??1?λ쭔 泥섎━?쒕떎.
 
-입력:
+?낅젰:
 
-- 선택된 의상 결과 이미지 URL 또는 data URL
+- ?좏깮???섏긽 寃곌낵 ?대?吏 URL ?먮뒗 data URL
 
-출력:
+異쒕젰:
 
-- 투명 PNG URL 또는 data URL
+- ?щ챸 PNG URL ?먮뒗 data URL
 
-### 9.5 배경 합성
+### 9.5 諛곌꼍 ?⑹꽦
 
-브라우저 Canvas에서 처리한다.
+釉뚮씪?곗? Canvas?먯꽌 泥섎━?쒕떎.
 
-순서:
+?쒖꽌:
 
-1. `full.webp` 배경 로드
-2. 투명 PNG 인물 로드
-3. 중앙 하단 정렬
-4. 워터마크 삽입
-5. Blob URL 생성
+1. `full.webp` 諛곌꼍 濡쒕뱶
+2. ?щ챸 PNG ?몃Ъ 濡쒕뱶
+3. 以묒븰 ?섎떒 ?뺣젹
+4. ?뚰꽣留덊겕 ?쎌엯
+5. Blob URL ?앹꽦
 
-이 단계는 서버 API가 필요 없다.
+???④퀎???쒕쾭 API媛 ?꾩슂 ?녿떎.
 
 ---
 
-## 10. API 계약
+## 10. API 怨꾩빟
 
 ### 10.1 `POST /api/jobs/start`
 
-용도:
+?⑸룄:
 
 - `hair`
 - `outfit`
 - `cutout`
 
-금지:
+湲덉?:
 
-- `location`은 서버 job으로 만들지 않는다
+- `location`? ?쒕쾭 job?쇰줈 留뚮뱾吏 ?딅뒗??
 
-인증:
+?몄쬆:
 
 - `Authorization: Bearer {sessionToken}`
 
-서버 처리:
+?쒕쾭 泥섎━:
 
-1. 토큰으로 `session:{token}` 조회
-2. `orderId` 획득
-3. `job:{orderId}` 로드
-4. 현재 단계 검증
-5. 외부 AI job 시작
-6. prediction id 저장
+1. ?좏겙?쇰줈 `session:{token}` 議고쉶
+2. `orderId` ?띾뱷
+3. `job:{orderId}` 濡쒕뱶
+4. ?꾩옱 ?④퀎 寃利?
+5. ?몃? AI job ?쒖옉
+6. prediction id ???
 
 ### 10.2 `GET /api/jobs/status`
 
-기존 `[jobId]` 라우트는 삭제한다.
+湲곗〈 `[jobId]` ?쇱슦?몃뒗 ??젣?쒕떎.
 
-입력:
+?낅젰:
 
-- 헤더의 `sessionToken`
+- ?ㅻ뜑??`sessionToken`
 
-역할:
+??븷:
 
-1. 세션으로 order 조회
-2. 현재 job 로드
-3. prediction 상태 폴링
-4. 완료 시 `job.status` 갱신
-5. 결과 URL 목록 반환
+1. ?몄뀡?쇰줈 order 議고쉶
+2. ?꾩옱 job 濡쒕뱶
+3. prediction ?곹깭 ?대쭅
+4. ?꾨즺 ??`job.status` 媛깆떊
+5. 寃곌낵 URL 紐⑸줉 諛섑솚
 
 ### 10.3 `POST /api/jobs/select`
 
-용도:
+?⑸룄:
 
-- 헤어 결과 2개 중 1개 선택 확정
-- 의상 결과 2개 중 1개 선택 확정
-- 배경 결과 2개 중 1개 선택 확정
+- ?ㅼ뼱 寃곌낵 2媛?以?1媛??좏깮 ?뺤젙
+- ?섏긽 寃곌낵 2媛?以?1媛??좏깮 ?뺤젙
+- 諛곌꼍 寃곌낵 2媛?以?1媛??좏깮 ?뺤젙
 
-선택 확정 시:
+?좏깮 ?뺤젙 ??
 
 - `pickedStyles`
-- 다음 단계 진입 상태
+- ?ㅼ쓬 ?④퀎 吏꾩엯 ?곹깭
 
 ### 10.4 `POST /api/data/delete`
 
-삭제 대상:
+??젣 ???
 
 - `job:{orderId}`
 - `session:{sessionToken}`
-- `checkout:{checkoutId}` (존재 시)
-- 관련 rate key
+- `checkout:{checkoutId}` (議댁옱 ??
+- 愿??rate key
 
-클라이언트도 동시에:
+?대씪?댁뼵?몃룄 ?숈떆??
 
 - `URL.revokeObjectURL()`
-- `sessionStorage` 정리
+- `sessionStorage` ?뺣━
 
 ---
 
-## 11. 환불 정책과 구현
+## 11. ?섎텋 ?뺤콉怨?援ы쁽
 
-### 11.1 자동 환불 조건
+### 11.1 ?먮룞 ?섎텋 議곌굔
 
-- 외부 모델 호출 실패
-- 설정된 타임아웃 초과
-- 최종 다운로드 이전에 시스템 오류로 복구 불가
+- ?몃? 紐⑤뜽 ?몄텧 ?ㅽ뙣
+- ?ㅼ젙????꾩븘??珥덇낵
+- 理쒖쥌 ?ㅼ슫濡쒕뱶 ?댁쟾???쒖뒪???ㅻ쪟濡?蹂듦뎄 遺덇?
 
-### 11.2 구현 규칙
+### 11.2 援ы쁽 洹쒖튃
 
-1. 즉시 환불 전에 1회 재시도 가능
-2. 재시도 후에도 실패하면 환불
-3. `refund:{orderId}` 멱등성 키로 중복 환불 방지
+1. 利됱떆 ?섎텋 ?꾩뿉 1???ъ떆??媛??
+2. ?ъ떆???꾩뿉???ㅽ뙣?섎㈃ ?섎텋
+3. `refund:{orderId}` 硫깅벑???ㅻ줈 以묐났 ?섎텋 諛⑹?
 
-### 11.3 Polar 환불 호출
+### 11.3 Polar ?섎텋 ?몄텧
 
-환불은 `POST /v1/refunds` 사용을 전제로 구현한다.
+?섎텋? `POST /v1/refunds` ?ъ슜???꾩젣濡?援ы쁽?쒕떎.
 
-주의:
+二쇱쓽:
 
-- 액세스 토큰에 환불 권한 스코프 필요
-- 실제 요청 바디는 Polar 최신 스키마 기준으로 작성
-- 하드코딩된 reason 문자열을 임의로 쓰지 않는다
+- ?≪꽭???좏겙???섎텋 沅뚰븳 ?ㅼ퐫???꾩슂
+- ?ㅼ젣 ?붿껌 諛붾뵒??Polar 理쒖떊 ?ㅽ궎留?湲곗??쇰줈 ?묒꽦
+- ?섎뱶肄붾뵫??reason 臾몄옄?댁쓣 ?꾩쓽濡??곗? ?딅뒗??
 
-이 문서 단계에서는 "엔드포인트와 멱등성"만 고정하고, 세부 body는 구현 시 공식 스키마로 맞춘다.
+??臾몄꽌 ?④퀎?먯꽌??"?붾뱶?ъ씤?몄? 硫깅벑??留?怨좎젙?섍퀬, ?몃? body??援ы쁽 ??怨듭떇 ?ㅽ궎留덈줈 留욎텣??
 
 ---
 
-## 12. 프론트엔드 상태 관리
+## 12. ?꾨줎?몄뿏???곹깭 愿由?
 
-Zustand는 "브라우저 메모리 전용 임시 상태"만 가진다.
-진실 원본은 서버 Redis 상태다.
+Zustand??"釉뚮씪?곗? 硫붾え由??꾩슜 ?꾩떆 ?곹깭"留?媛吏꾨떎.
+吏꾩떎 ?먮낯? ?쒕쾭 Redis ?곹깭??
 
-브라우저 스토어에 두는 것:
+釉뚮씪?곗? ?ㅽ넗?댁뿉 ?먮뒗 寃?
 
 - `sessionToken`
-- 업로드 이미지 Blob
-- 각 단계 결과의 Blob URL
-- 선택한 결과 ID
+- ?낅줈???대?吏 Blob
+- 媛??④퀎 寃곌낵??Blob URL
+- ?좏깮??寃곌낵 ID
 
-브라우저 스토어에 두지 않는 것:
+釉뚮씪?곗? ?ㅽ넗?댁뿉 ?먯? ?딅뒗 寃?
 
-- 결제 진실 상태
-- 환불 여부
-- 외부 prediction id 진실 값
+- 寃곗젣 吏꾩떎 ?곹깭
+- ?섎텋 ?щ?
+- ?몃? prediction id 吏꾩떎 媛?
 
-페이지 새로고침 시:
+?섏씠吏 ?덈줈怨좎묠 ??
 
-- Blob은 사라질 수 있다
-- 서버 상태는 남아 있다
-- 따라서 문구로 "새로고침/이탈 시 일부 결과를 다시 받아야 할 수 있음"을 명시한다
+- Blob? ?щ씪吏????덈떎
+- ?쒕쾭 ?곹깭???⑥븘 ?덈떎
+- ?곕씪??臾멸뎄濡?"?덈줈怨좎묠/?댄깉 ???쇰? 寃곌낵瑜??ㅼ떆 諛쏆븘???????덉쓬"??紐낆떆?쒕떎
 
 ---
 
-## 13. 다국어
+## 13. ?ㅺ뎅??
 
-최소 지원:
+理쒖냼 吏??
 
 - `en`
 - `ko`
 
-초기 MVP에서는 `ja`를 제외해도 된다.
+珥덇린 MVP?먯꽌??`ja`瑜??쒖쇅?대룄 ?쒕떎.
 
-필수 페이지:
+?꾩닔 ?섏씠吏:
 
-- 랜딩
-- 생성 플로우
-- 법무 4종
-- 공통 고지 문구
+- ?쒕뵫
+- ?앹꽦 ?뚮줈??
+- 踰뺣Т 4醫?
+- 怨듯넻 怨좎? 臾멸뎄
 
-영문 문구 기준으로 먼저 완성하고, 한글은 별도 메시지 파일로 관리한다.
+?곷Ц 臾멸뎄 湲곗??쇰줈 癒쇱? ?꾩꽦?섍퀬, ?쒓?? 蹂꾨룄 硫붿떆吏 ?뚯씪濡?愿由ы븳??
 
 ---
 
-## 14. 법무 및 금지 규칙
+## 14. 踰뺣Т 諛?湲덉? 洹쒖튃
 
-### 14.1 절대 금지
+### 14.1 ?덈? 湲덉?
 
-- 특정 아이돌 이름 노출
-- 특정 그룹명 노출
-- 특정 기획사명 노출
-- "look like [실존 인물]" 약속
-- 실제 연예인 전후 비교 이미지 사용
-- 로고, 상표, 소속사 마크 사용
-- 이메일 수집
-- 사용자 이미지를 `/public` 또는 영구 스토리지에 저장
+- ?뱀젙 ?꾩씠???대쫫 ?몄텧
+- ?뱀젙 洹몃９紐??몄텧
+- ?뱀젙 湲고쉷?щ챸 ?몄텧
+- "look like [?ㅼ〈 ?몃Ъ]" ?쎌냽
+- ?ㅼ젣 ?곗삁???꾪썑 鍮꾧탳 ?대?吏 ?ъ슜
+- 濡쒓퀬, ?곹몴, ?뚯냽??留덊겕 ?ъ슜
+- ?대찓???섏쭛
+- ?ъ슜???대?吏瑜?`/public` ?먮뒗 ?곴뎄 ?ㅽ넗由ъ??????
 
-### 14.2 필수 고지
+### 14.2 ?꾩닔 怨좎?
 
-모든 페이지 푸터:
+紐⑤뱺 ?섏씠吏 ?명꽣:
 
 1. This service is not affiliated with any artists, labels, or brands.
 2. All results are AI-generated style images; exact likeness is not guaranteed.
 
-결제 직전:
+寃곗젣 吏곸쟾:
 
 1. Refund is issued automatically if generation fails or times out.
 2. No refund for dissatisfaction with style preference alone.
 
-업로드 페이지:
+?낅줈???섏씠吏:
 
 1. Your photo is used only for generation and is deleted after processing.
 
 ---
 
-## 15. 자산 준비물
+## 15. ?먯궛 以鍮꾨Ъ
 
-코드 작성 전에 아래가 준비되어야 한다.
+肄붾뱶 ?묒꽦 ?꾩뿉 ?꾨옒媛 以鍮꾨릺?댁빞 ?쒕떎.
 
-### 15.1 필수 이미지 자산
+### 15.1 ?꾩닔 ?대?吏 ?먯궛
 
-- 배경 썸네일 10장
-- 배경 원본 10장
-- 헤어 샘플 썸네일 10장
-- 의상 샘플 썸네일 10장
-- 의상 생성용 garment image 세트
+- 諛곌꼍 ?몃꽕??10??
+- 諛곌꼍 ?먮낯 10??
+- ?ㅼ뼱 ?섑뵆 ?몃꽕??10??
+- ?섏긽 ?섑뵆 ?몃꽕??10??
+- ?섏긽 ?앹꽦??garment image ?명듃
 
-### 15.2 환경변수
+### 15.2 ?섍꼍蹂??
 
 ```bash
 POLAR_ACCESS_TOKEN=
@@ -607,99 +638,99 @@ NEXT_PUBLIC_APP_URL=
 NEXT_PUBLIC_PRICE=3.99
 ```
 
-### 15.3 배포 전 검증
+### 15.3 諛고룷 ??寃利?
 
-1. Polar sandbox 결제 성공
-2. 웹훅 서명 검증 성공
-3. Redis 세션 생성 확인
-4. 헤어 생성 완료
-5. 환불 멱등성 확인
-6. 삭제 API 동작 확인
+1. Polar sandbox 寃곗젣 ?깃났
+2. ?뱁썒 ?쒕챸 寃利??깃났
+3. Redis ?몄뀡 ?앹꽦 ?뺤씤
+4. ?ㅼ뼱 ?앹꽦 ?꾨즺
+5. ?섎텋 硫깅벑???뺤씤
+6. ??젣 API ?숈옉 ?뺤씤
 
 ---
 
-## 16. 블로그(선택, SEO 확장)
+## 16. 釉붾줈洹??좏깮, SEO ?뺤옣)
 
-블로그는 MVP 범위 밖이다.
-필요하면 아래 구조만 유지한다.
+釉붾줈洹몃뒗 MVP 踰붿쐞 諛뽰씠??
+?꾩슂?섎㈃ ?꾨옒 援ъ“留??좎??쒕떎.
 
 - `content/blog/en/*.mdx`
 - `content/blog/ko/*.mdx`
-- 정적 생성
-- `pairSlug`로 번역 글 연결
-- 고정 disclaimer 삽입
+- ?뺤쟻 ?앹꽦
+- `pairSlug`濡?踰덉뿭 湲 ?곌껐
+- 怨좎젙 disclaimer ?쎌엯
 
-금칙어 검사를 CI에서 수행한다.
+湲덉튃??寃?щ? CI?먯꽌 ?섑뻾?쒕떎.
 
 ---
 
-## 17. 구현 우선순위
+## 17. 援ы쁽 ?곗꽑?쒖쐞
 
-### Phase 0 - 선행 확정
+### Phase 0 - ?좏뻾 ?뺤젙
 
-1. 의상 생성에 쓸 상용 가능 모델 확정
-2. 배경 제거 수단 확정
-3. Polar checkout + webhook + refund 계약 확정
+1. ?섏긽 ?앹꽦?????곸슜 媛??紐⑤뜽 ?뺤젙
+2. 諛곌꼍 ?쒓굅 ?섎떒 ?뺤젙
+3. Polar checkout + webhook + refund 怨꾩빟 ?뺤젙
 
-이 3개가 확정되지 않으면 전체 구현 시작 금지.
+??3媛쒓? ?뺤젙?섏? ?딆쑝硫??꾩껜 援ы쁽 ?쒖옉 湲덉?.
 
-### Phase 1 - 출시 가능한 최소 기능
+### Phase 1 - 異쒖떆 媛?ν븳 理쒖냼 湲곕뒫
 
-1. Next.js 기본 골격
-2. next-intl 설정
-3. Polar checkout 생성
-4. Polar webhook 수신 및 세션 생성
-5. Redis 키 설계 반영
-6. 업로드 페이지
-7. 헤어 2개 생성 및 1개 선택
-8. 배경 제거
-9. 배경 2개 합성 및 1개 선택
-10. 다운로드 + 데이터 삭제
-11. 법무 페이지
+1. Next.js 湲곕낯 怨④꺽
+2. next-intl ?ㅼ젙
+3. Polar checkout ?앹꽦
+4. Polar webhook ?섏떊 諛??몄뀡 ?앹꽦
+5. Redis ???ㅺ퀎 諛섏쁺
+6. ?낅줈???섏씠吏
+7. ?ㅼ뼱 2媛??앹꽦 諛?1媛??좏깮
+8. 諛곌꼍 ?쒓굅
+9. 諛곌꼍 2媛??⑹꽦 諛?1媛??좏깮
+10. ?ㅼ슫濡쒕뱶 + ?곗씠????젣
+11. 踰뺣Т ?섏씠吏
 
-### Phase 2 - 의상 기능 복원
+### Phase 2 - ?섏긽 湲곕뒫 蹂듭썝
 
-1. 상용 허용 의상 모델 연결
-2. garment 이미지 운영 체계 추가
-3. 의상 단계 UI/백엔드 연결
+1. ?곸슜 ?덉슜 ?섏긽 紐⑤뜽 ?곌껐
+2. garment ?대?吏 ?댁쁺 泥닿퀎 異붽?
+3. ?섏긽 ?④퀎 UI/諛깆뿏???곌껐
 
-### Phase 3 - 운영 안정화
+### Phase 3 - ?댁쁺 ?덉젙??
 
-1. 재시도 정책
+1. ?ъ떆???뺤콉
 2. Rate limiting
-3. 에러 화면 정리
-4. 로그/모니터링
+3. ?먮윭 ?붾㈃ ?뺣━
+4. 濡쒓렇/紐⑤땲?곕쭅
 
 ---
 
-## 18. 최종 체크리스트
+## 18. 理쒖쥌 泥댄겕由ъ뒪??
 
-- 결제 성공 후 `checkout_id` 기반 세션 폴링 구조인가
-- `sessionToken`을 URL이 아니라 `sessionStorage + Authorization`으로 쓰는가
-- Redis를 쓰고 있는가
-- `job:{orderId}` 단일 객체를 진실 원본으로 유지하는가
-- `GET /api/jobs/status`로 라우트 의미를 정리했는가
-- 헤어 생성 시 `input_image`를 쓰는가
-- 상용 사용 불가 모델을 코드에 넣지 않았는가
-- 배경 제거 후 Canvas 합성을 하는가
-- `pickHair`가 잘못된 processing 상태를 만들지 않는가
-- 환불 멱등성 키가 있는가
-- 삭제 API가 서버 키와 브라우저 메모리를 함께 정리하는가
+- 寃곗젣 ?깃났 ??`checkout_id` 湲곕컲 ?몄뀡 ?대쭅 援ъ“?멸?
+- `sessionToken`??URL???꾨땲??`sessionStorage + Authorization`?쇰줈 ?곕뒗媛
+- Redis瑜??곌퀬 ?덈뒗媛
+- `job:{orderId}` ?⑥씪 媛앹껜瑜?吏꾩떎 ?먮낯?쇰줈 ?좎??섎뒗媛
+- `GET /api/jobs/status`濡??쇱슦???섎?瑜??뺣━?덈뒗媛
+- ?ㅼ뼱 ?앹꽦 ??`input_image`瑜??곕뒗媛
+- ?곸슜 ?ъ슜 遺덇? 紐⑤뜽??肄붾뱶???ｌ? ?딆븯?붽?
+- 諛곌꼍 ?쒓굅 ??Canvas ?⑹꽦???섎뒗媛
+- `pickHair`媛 ?섎せ??processing ?곹깭瑜?留뚮뱾吏 ?딅뒗媛
+- ?섎텋 硫깅벑???ㅺ? ?덈뒗媛
+- ??젣 API媛 ?쒕쾭 ?ㅼ? 釉뚮씪?곗? 硫붾え由щ? ?④퍡 ?뺣━?섎뒗媛
 
 ---
 
-## 19. 문서 메모
+## 19. 臾몄꽌 硫붾え
 
-이 문서는 이전 `plan.md`의 잘못된 가정들을 제거한 버전이다.
-특히 아래 항목은 더 이상 사용하지 않는다.
+??臾몄꽌???댁쟾 `plan.md`???섎せ??媛?뺣뱾???쒓굅??踰꾩쟾?대떎.
+?뱁엳 ?꾨옒 ??ぉ? ???댁긽 ?ъ슜?섏? ?딅뒗??
 
-- `session` 쿼리에 토큰 직접 전달
+- `session` 荑쇰━???좏겙 吏곸젒 ?꾨떖
 - `api/jobs/[jobId]`
 - `api/composite/route.ts`
-- `job:{orderId}:status` 같은 분리 상태 키
-- 상용 검토 없는 `cuuupid/idm-vton` 직접 사용
+- `job:{orderId}:status` 媛숈? 遺꾨━ ?곹깭 ??
+- ?곸슜 寃???녿뒗 `cuuupid/idm-vton` 吏곸젒 ?ъ슜
 
-이 문서를 기준으로 구현을 시작한다.
+??臾몄꽌瑜?湲곗??쇰줈 援ы쁽???쒖옉?쒕떎.
 
 ---
 
@@ -716,3 +747,4 @@ Cluster scope:
 - Formats per location: 5
 - Languages: KO + EN
 - Total: 100 posts
+

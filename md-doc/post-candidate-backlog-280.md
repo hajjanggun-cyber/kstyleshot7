@@ -329,3 +329,15 @@
 18. 계절이 바뀌어도 항상 무난한 케이스타일 기본형 | safest-year-round-k-style-basics-ko
 19. 연말 시즌 사진이 과하게 복잡해지지 않게 만드는 법 | keep-year-end-portraits-from-looking-too-busy-ko
 20. 트렌드가 빨리 바뀔 때도 유지해도 되는 안전한 무드 | safe-moods-to-keep-even-when-trends-change-fast-ko
+
+---
+
+## Sync Update (2026-03-05)
+
+Updated at: 2026-03-05 18:58:40 +09:00 (A40ia-Seoul)
+
+- Seoul background cluster 100 posts is now fully generated (EN 50 + KO 50).
+- This file should now be treated as candidate reserve, not active Tier queue.
+- Any candidate that duplicates generated Seoul slugs should be marked as consumed.
+- Priority moved to non-Seoul evergreen topics and conversion-adjacent FAQ posts.
+

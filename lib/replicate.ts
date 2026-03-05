@@ -1,5 +1,6 @@
-export const HAIR_MODEL = "black-forest-labs/flux-kontext-pro";
+export const HAIR_MODEL = "flux-kontext-apps/change-haircut";
 const REPLICATE_API_BASE_URL = process.env.REPLICATE_API_BASE_URL ?? "https://api.replicate.com";
+const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "Random";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -66,6 +67,18 @@ function assertReplicateEnv(): void {
   }
 }
 
+function getReplicateAuthHeader(): string {
+  const token = process.env.REPLICATE_API_TOKEN?.trim();
+  if (!token) {
+    throw new ReplicateApiError(
+      "Missing required Replicate environment variable: REPLICATE_API_TOKEN.",
+      500
+    );
+  }
+
+  return `Bearer ${token}`;
+}
+
 function extractApiErrorMessage(payload: unknown, fallback: string): string {
   const direct = pickString(payload, ["detail", "error", "message", "title"]);
   if (direct) {
@@ -107,17 +120,22 @@ function getHairPredictionEndpoint(): string {
   return `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/${owner}/${model}/predictions`;
 }
 
-async function startPrediction(input: { photoDataUrl: string; prompt: string }): Promise<string> {
+async function startPrediction(input: {
+  photoDataUrl: string;
+  haircut: string;
+  hairColor: string;
+}): Promise<string> {
   const endpoint = getHairPredictionEndpoint();
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {
-      Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+      Authorization: getReplicateAuthHeader(),
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
       input: {
-        prompt: input.prompt,
+        haircut: input.haircut,
+        hair_color: input.hairColor,
         input_image: input.photoDataUrl
       }
     }),
@@ -150,7 +168,7 @@ async function getPrediction(predictionId: string): Promise<ReplicatePrediction>
   const response = await fetch(endpoint, {
     method: "GET",
     headers: {
-      Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`
+      Authorization: getReplicateAuthHeader()
     },
     cache: "no-store"
   }).catch(() => {
@@ -188,7 +206,8 @@ export class ReplicateApiError extends Error {
 
 export type HairVariantInput = {
   id: string;
-  prompt: string;
+  haircut: string;
+  hairColor?: string;
 };
 
 export type StartHairJobInput = {
@@ -217,11 +236,16 @@ export async function startHairVariantJobs(input: StartHairJobInput): Promise<st
     throw new ReplicateApiError("Exactly two hair variants are required.", 400);
   }
 
+  if (input.variants.some((variant) => !variant.haircut.trim())) {
+    throw new ReplicateApiError("Each hair variant must include a non-empty haircut.", 400);
+  }
+
   return Promise.all(
     input.variants.map((variant) =>
       startPrediction({
         photoDataUrl: input.photoDataUrl,
-        prompt: variant.prompt
+        haircut: variant.haircut.trim(),
+        hairColor: variant.hairColor?.trim() || DEFAULT_HAIR_COLOR
       })
     )
   );

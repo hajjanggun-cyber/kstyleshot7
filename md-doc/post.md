@@ -468,3 +468,88 @@ Rule:
 - Keep KO and EN as independent editorial tracks.
 - Use fixed URLs and stable slugs for SEO.
 - Keep create flow unchanged (`Hair -> Outfit -> Background`).
+
+---
+
+## 4-Week Publishing Calendar (SEO Split Upload)
+
+기준:
+- 기간: 2026-03-09 ~ 2026-04-03 (KST)
+- 업로드: 평일 하루 2개 (EN 1 + KO 1, 같은 주제 페어)
+- 순서: Tier 1 Mood 20개 먼저 소화 후, Tier 2 Hair 20개 진행
+
+| Week | Date (KST) | Theme | EN URL | KO URL |
+|---|---|---|---|---|
+| 1 | 2026-03-09 | Gyeongbokgung Mood | `/blog/en/gyeongbokgung-mood-guide` | `/blog/ko/gyeongbokgung-mood-guide-ko` |
+| 1 | 2026-03-10 | N Seoul Tower Mood | `/blog/en/n-seoul-tower-mood-guide` | `/blog/ko/n-seoul-tower-mood-guide-ko` |
+| 1 | 2026-03-11 | Garosu-gil Mood | `/blog/en/garosu-gil-mood-guide` | `/blog/ko/garosu-gil-mood-guide-ko` |
+| 1 | 2026-03-12 | Hongdae Mood | `/blog/en/hongdae-mood-guide` | `/blog/ko/hongdae-mood-guide-ko` |
+| 1 | 2026-03-13 | Hangang Park Mood | `/blog/en/hangang-park-mood-guide` | `/blog/ko/hangang-park-mood-guide-ko` |
+| 2 | 2026-03-16 | Myeongdong Mood | `/blog/en/myeongdong-mood-guide` | `/blog/ko/myeongdong-mood-guide-ko` |
+| 2 | 2026-03-17 | Insadong Mood | `/blog/en/insadong-mood-guide` | `/blog/ko/insadong-mood-guide-ko` |
+| 2 | 2026-03-18 | Itaewon & Gyeongnidan Mood | `/blog/en/itaewon-gyeongnidan-mood-guide` | `/blog/ko/itaewon-gyeongnidan-mood-guide-ko` |
+| 2 | 2026-03-19 | Jamsil Lotte World Mood | `/blog/en/jamsil-lotte-world-mood-guide` | `/blog/ko/jamsil-lotte-world-mood-guide-ko` |
+| 2 | 2026-03-20 | Label HQ Area Mood | `/blog/en/kpop-label-hq-area-mood-guide` | `/blog/ko/kpop-label-hq-area-mood-guide-ko` |
+| 3 | 2026-03-23 | Gyeongbokgung Hair | `/blog/en/gyeongbokgung-hair-trends-2026` | `/blog/ko/gyeongbokgung-hair-trends-2026-ko` |
+| 3 | 2026-03-24 | N Seoul Tower Hair | `/blog/en/n-seoul-tower-hair-trends-2026` | `/blog/ko/n-seoul-tower-hair-trends-2026-ko` |
+| 3 | 2026-03-25 | Garosu-gil Hair | `/blog/en/garosu-gil-hair-trends-2026` | `/blog/ko/garosu-gil-hair-trends-2026-ko` |
+| 3 | 2026-03-26 | Hongdae Hair | `/blog/en/hongdae-hair-trends-2026` | `/blog/ko/hongdae-hair-trends-2026-ko` |
+| 3 | 2026-03-27 | Hangang Park Hair | `/blog/en/hangang-park-hair-trends-2026` | `/blog/ko/hangang-park-hair-trends-2026-ko` |
+| 4 | 2026-03-30 | Myeongdong Hair | `/blog/en/myeongdong-hair-trends-2026` | `/blog/ko/myeongdong-hair-trends-2026-ko` |
+| 4 | 2026-03-31 | Insadong Hair | `/blog/en/insadong-hair-trends-2026` | `/blog/ko/insadong-hair-trends-2026-ko` |
+| 4 | 2026-04-01 | Itaewon & Gyeongnidan Hair | `/blog/en/itaewon-gyeongnidan-hair-trends-2026` | `/blog/ko/itaewon-gyeongnidan-hair-trends-2026-ko` |
+| 4 | 2026-04-02 | Jamsil Lotte World Hair | `/blog/en/jamsil-lotte-world-hair-trends-2026` | `/blog/ko/jamsil-lotte-world-hair-trends-2026-ko` |
+| 4 | 2026-04-03 | Label HQ Area Hair | `/blog/en/kpop-label-hq-area-hair-trends-2026` | `/blog/ko/kpop-label-hq-area-hair-trends-2026-ko` |
+
+운영 체크:
+- 발행 직후 `sitemap.xml` 반영 여부 확인
+- 발행 당일 Google Search Console 수동 색인 요청
+- 같은 주차 글끼리 내부 링크 2~3개 연결
+
+---
+
+## Posting Changes Log (2026-03-05 18:57:00 +09:00)
+
+Summary of completed posting updates:
+- Seoul background cluster planning document added:
+  - `md-doc/post-seoul-background-100.md`
+- Tier 1 generated (Mood): 20 posts
+  - EN 10: `content/blog/en/*-mood-guide.mdx`
+  - KO 10: `content/blog/ko/*-mood-guide-ko.mdx`
+- Tier 2 generated (Hair + Outfit): 40 posts
+  - EN 20: `content/blog/en/*-hair-trends-2026.mdx`, `content/blog/en/*-outfit-styles.mdx`
+  - KO 20: `content/blog/ko/*-hair-trends-2026-ko.mdx`, `content/blog/ko/*-outfit-styles-ko.mdx`
+- Tier 3 generated (Framing + Checklist): 40 posts
+  - EN 20: `content/blog/en/*-framing-tips.mdx`, `content/blog/en/*-backdrop-mistakes-checklist.mdx`
+  - KO 20: `content/blog/ko/*-framing-tips-ko.mdx`, `content/blog/ko/*-backdrop-mistakes-checklist-ko.mdx`
+
+Current post inventory:
+- EN: 110
+- KO: 110
+- TOTAL: 220
+- Seoul cluster: EN 50 + KO 50 = 100
+
+Publishing ops updates:
+- 4-week split calendar added (2026-03-09 ~ 2026-04-03, KST)
+- Daily pair publish rule: EN 1 + KO 1
+- Post-publish SEO routine:
+  - Check `sitemap.xml`
+  - Request indexing in Google Search Console
+  - Add 2-3 internal links within same cluster/week
+
+---
+
+## Cross-Doc Sync Note (2026-03-05)
+
+Updated at: 2026-03-05 18:58:40 +09:00 (Asia/Seoul)
+
+This file is the canonical posting operations document.
+Linked status docs updated together:
+- `md-doc/post-seoul-background-100.md`
+- `md-doc/post-scale-400.md`
+- `md-doc/post-candidate-backlog-280.md`
+- `md-doc/tier1-hub-40.md`
+- `md-doc/tier2-batch-40.md`
+- `md-doc/publish-ready-wave2-top10.md`
+- `md-doc/todo.md`
+

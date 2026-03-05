@@ -517,3 +517,24 @@
 다음 요청 추천:
 
 `post-scale-400.md 기준으로, 7개 카테고리 각각 EN/KO 추가 후보 제목을 20개씩 뽑아줘`
+
+---
+
+## Sync Update (2026-03-05)
+
+Updated at: 2026-03-05 18:58:40 +09:00 (A40ia-Seoul)
+
+Current baseline:
+- Published-ready/generated inventory: 220 posts total (EN 110 + KO 110).
+- Seoul cluster: 100 posts completed as a dedicated block.
+
+Scale target tracking:
+- Target: 400
+- Current: 220
+- Remaining: 180
+
+Next expansion recommendation:
+1. Product / FAQ long-tail expansion
+2. Photo Technique edge cases (indoor/night/device constraints)
+3. Seasonal evergreen refresh (quarterly)
+

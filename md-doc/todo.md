@@ -973,3 +973,17 @@ description 길이 결과:
 
 1. `npm.cmd run build` 통과
 2. `npm.cmd run typecheck` 통과
+
+---
+
+## Sync Update (2026-03-05)
+
+Updated at: 2026-03-05 18:58:40 +09:00 (A40ia-Seoul)
+
+New high-priority TODO after today:
+1. Execute split publishing calendar (EN/KO daily pair uploads)
+2. Run post-publish indexing routine (sitemap + GSC request)
+3. Validate internal links per published post (2-3 links)
+4. Verify Replicate token setup in local/prod env and run live hair generation smoke test
+5. Commit and push pending config/docs/code updates together
+

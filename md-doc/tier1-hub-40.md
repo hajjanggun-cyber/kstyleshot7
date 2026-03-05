@@ -87,3 +87,15 @@
 8. `parting-choice-for-selfie-mood-ko.mdx`
 9. `neat-short-to-midi-hair-combos-ko.mdx`
 10. `selfie-framing-in-small-rooms-ko.mdx`
+
+---
+
+## Sync Update (2026-03-05)
+
+Updated at: 2026-03-05 18:58:40 +09:00 (Asia/Seoul)
+
+Status:
+- Tier1 Hub40 list remains useful as a general hub content set.
+- Separate Seoul 100 cluster generation is completed and should not be mixed into this list retroactively.
+- Use this file for non-Seoul foundational hub posts and internal-link anchors.
+

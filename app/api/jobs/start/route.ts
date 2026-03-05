@@ -136,7 +136,8 @@ export async function POST(request: Request) {
           photoDataUrl,
           variants: styleIds.map((styleId) => ({
             id: styleId,
-            prompt: styleLookup[styleId].prompt
+            haircut: styleLookup[styleId].name,
+            hairColor: "Random"
           }))
         });
       } else {

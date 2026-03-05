@@ -143,3 +143,22 @@
 - KO and EN are independent planning tracks, not literal translations.
 - Keep `pairSlug` only when manual pairing is beneficial.
 - Preserve fixed URLs (`/en`, `/ko`) and canonical tags for SEO stability.
+
+---
+
+## Execution Status (2026-03-05)
+
+Updated at: 2026-03-05 18:58:40 +09:00 (A40ia-Seoul)
+
+Completion status:
+- Tier 1 (Mood): completed (20)
+- Tier 2 (Hair + Outfit): completed (40)
+- Tier 3 (Framing + Checklist): completed (40)
+
+Generated file patterns:
+- EN: content/blog/en/*-mood-guide.mdx, *-hair-trends-2026.mdx, *-outfit-styles.mdx, *-framing-tips.mdx, *-backdrop-mistakes-checklist.mdx
+- KO: content/blog/ko/*-mood-guide-ko.mdx, *-hair-trends-2026-ko.mdx, *-outfit-styles-ko.mdx, *-framing-tips-ko.mdx, *-backdrop-mistakes-checklist-ko.mdx
+
+Note:
+- Generation complete != publishing complete. Follow split calendar in md-doc/post.md.
+

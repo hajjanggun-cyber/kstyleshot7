@@ -66,3 +66,15 @@
 - EN: `content/blog/en/*.mdx` 20개
 - KO: `content/blog/ko/*.mdx` 20개
 - Pair 연결: 각 파일의 `pairSlug`
+
+---
+
+## Sync Update (2026-03-05)
+
+Updated at: 2026-03-05 18:58:40 +09:00 (A40ia-Seoul)
+
+Status:
+- Tier2 Batch40 legacy plan is retained as reference.
+- Dedicated Seoul Tier2 execution (Hair/Outfit in Seoul cluster) has already been completed.
+- Keep this document for additional non-Seoul batch production only.
+

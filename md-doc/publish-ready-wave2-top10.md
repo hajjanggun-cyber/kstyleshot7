@@ -59,3 +59,16 @@
 1. `/blog/[lang]/[slug]` 인덱싱 대상 노출 확인
 2. 카테고리 랜딩 추천 블록에서 해당 글 노출 확인
 3. 내부 링크 클릭 흐름(`Category -> Post -> Create`) 점검
+
+---
+
+## Sync Update (2026-03-05)
+
+Updated at: 2026-03-05 18:58:40 +09:00 (Asia/Seoul)
+
+- Wave2 Top10 remains valid as a fast publish pack.
+- Seoul 100 completion adds a larger publish queue that should run in parallel via weekly split.
+- Recommended usage now:
+1. Keep Top10 for immediate index velocity.
+2. Continue Seoul calendar sequence from md-doc/post.md.
+
