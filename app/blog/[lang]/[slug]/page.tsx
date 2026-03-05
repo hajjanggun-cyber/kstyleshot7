@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -283,7 +283,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="preview-frame blog-post-media">
           <img
             alt={post.heroAlt || post.title}
-            fetchPriority="high"
             loading="eager"
             src={post.heroImage || "/visuals/blog/post.svg"}
           />
@@ -312,7 +311,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {relatedPosts.length > 0 ? (
         <section className="card stack">
-          <h2>{lang === "en" ? "Related posts" : "연관 글"}</h2>
+          <h2>{lang === "en" ? "Related posts" : "관련 글"}</h2>
           <div className="grid two">
             {relatedPosts.map((entry) => (
               <article className="card stack" key={entry.slug}>
@@ -333,3 +332,4 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
+
