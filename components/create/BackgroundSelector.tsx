@@ -1,3 +1,7 @@
+﻿"use client";
+
+import { useTranslations } from "next-intl";
+
 import {
   StyleSelector,
   type StyleSelectorItem
@@ -22,16 +26,18 @@ export function BackgroundSelector({
   onSubmit,
   ctaDisabled
 }: BackgroundSelectorProps) {
+  const t = useTranslations("create.location");
+
   return (
     <StyleSelector
       ctaDisabled={ctaDisabled}
       ctaLabel={ctaLabel}
-      description="Pick two Seoul backdrops, then generate two composite previews and keep one."
+      description={t("selectorDescription")}
       items={items}
       onSubmit={onSubmit}
       onToggle={onToggle}
       selectedIds={selectedIds}
-      title="Choose 2 backdrops"
+      title={t("selectorTitle")}
     />
   );
 }

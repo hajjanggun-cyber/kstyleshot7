@@ -1,3 +1,7 @@
+﻿"use client";
+
+import { useTranslations } from "next-intl";
+
 export type StepKey = "create" | "upload" | "hair" | "outfit" | "location" | "done";
 
 type StepProgressProps = {
@@ -6,20 +10,21 @@ type StepProgressProps = {
   compact?: boolean;
 };
 
-const steps: Array<{ key: StepKey; label: string }> = [
-  { key: "create", label: "Create" },
-  { key: "upload", label: "Upload" },
-  { key: "hair", label: "Hair" },
-  { key: "outfit", label: "Outfit" },
-  { key: "location", label: "Background" },
-  { key: "done", label: "Done" }
+const steps: Array<{ key: StepKey }> = [
+  { key: "create" },
+  { key: "upload" },
+  { key: "hair" },
+  { key: "outfit" },
+  { key: "location" },
+  { key: "done" }
 ];
 
 export function StepProgress({ current, blockedSteps = [], compact = false }: StepProgressProps) {
+  const t = useTranslations("create.steps");
   const currentIndex = steps.findIndex((step) => step.key === current);
 
   return (
-    <nav className={compact ? "step-strip is-compact" : "step-strip"} aria-label="Create flow steps">
+    <nav className={compact ? "step-strip is-compact" : "step-strip"} aria-label={t("ariaLabel")}>
       <div className="step-row">
         {steps.map((step, index) => {
           const isBlocked = blockedSteps.includes(step.key);
@@ -34,7 +39,7 @@ export function StepProgress({ current, blockedSteps = [], compact = false }: St
           return (
             <div className={`step-pill ${stateClass}`} key={step.key}>
               <span className="step-number">{index + 1}</span>
-              <span>{step.label}</span>
+              <span>{t(step.key)}</span>
             </div>
           );
         })}

@@ -1,6 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export type StyleSelectorItem = {
   id: string;
@@ -55,21 +56,16 @@ export function StyleSelector({
   ctaDisabled = false,
   maxSelected = 2
 }: StyleSelectorProps) {
+  const t = useTranslations("create.styleSelector");
+
   return (
     <section className="card stack">
       <h2>{title}</h2>
       <p className="muted">{description}</p>
       <div className="actions">
-        <span className="count-badge">
-          {selectedIds.length}/{maxSelected} selected
-        </span>
+        <span className="count-badge">{t("selected", { count: selectedIds.length, max: maxSelected })}</span>
         {ctaLabel ? (
-          <button
-            className="button"
-            disabled={ctaDisabled}
-            onClick={onSubmit}
-            type="button"
-          >
+          <button className="button" disabled={ctaDisabled} onClick={onSubmit} type="button">
             {ctaLabel}
           </button>
         ) : null}
@@ -77,11 +73,7 @@ export function StyleSelector({
       <div className="selector-grid three">
         {items.map((item) => (
           <button
-            className={
-              selectedIds.includes(item.id)
-                ? "selector-card is-active"
-                : "selector-card"
-            }
+            className={selectedIds.includes(item.id) ? "selector-card is-active" : "selector-card"}
             key={item.id}
             onClick={() => onToggle(item.id)}
             type="button"

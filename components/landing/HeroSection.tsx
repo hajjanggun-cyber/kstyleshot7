@@ -1,31 +1,36 @@
+﻿"use client";
+
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export function HeroSection() {
+  const params = useParams<{ lang: string }>();
+  const lang = params.lang ?? "en";
+  const t = useTranslations("landing.hero");
+
   return (
     <section className="hero card">
       <div className="hero-overlay" />
       <div className="hero-content stack">
-        <p className="eyebrow">Next-gen AI transformation</p>
+        <p className="eyebrow">{t("eyebrow")}</p>
         <h1>
-          Transform into your favorite <span className="hot">K-POP</span> star.
+          {t("titlePrefix")} <span className="hot">K-POP</span> {t("titleSuffix")}
         </h1>
-        <p className="muted">
-          Upload one selfie, pick your style, and run a paid session flow built for reliable
-          checkout-to-generation handoff.
-        </p>
+        <p className="muted">{t("description")}</p>
         <div className="actions">
-          <Link className="button" href="/en/create">
-            Start experience
+          <Link className="button" href={`/${lang}/create`}>
+            {t("start")}
           </Link>
           <a className="button secondary" href="#trending">
-            View gallery
+            {t("gallery")}
           </a>
         </div>
       </div>
       <div className="hero-badges" aria-hidden>
-        <span>500+ styles</span>
-        <span>Real async jobs</span>
-        <span>Session-safe flow</span>
+        <span>{t("badge1")}</span>
+        <span>{t("badge2")}</span>
+        <span>{t("badge3")}</span>
       </div>
     </section>
   );

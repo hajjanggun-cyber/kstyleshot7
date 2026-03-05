@@ -1,11 +1,16 @@
+import { getTranslations } from "next-intl/server";
+
 import { CreateShell } from "@/components/create/CreateShell";
 import { PhotoUpload } from "@/components/create/PhotoUpload";
 
 type UploadPageProps = {
+  params: Promise<{ lang: string }>;
   searchParams: Promise<{ checkout_id?: string; checkoutId?: string }>;
 };
 
-export default async function UploadPage({ searchParams }: UploadPageProps) {
+export default async function UploadPage({ params, searchParams }: UploadPageProps) {
+  const { lang } = await params;
+  const t = await getTranslations({ locale: lang, namespace: "create.uploadPage" });
   const resolvedSearchParams = await searchParams;
   const checkoutId =
     resolvedSearchParams.checkout_id ?? resolvedSearchParams.checkoutId ?? "";
@@ -15,12 +20,8 @@ export default async function UploadPage({ searchParams }: UploadPageProps) {
   return (
     <CreateShell
       current="upload"
-      description={
-        allowDemoFlow
-          ? "When checkout_id exists this page polls real session status. Development demo is allowed without checkout_id."
-          : "This page polls real session status and unlocks only after paid session confirmation."
-      }
-      title="Upload your selfie"
+      description={allowDemoFlow ? t("descriptionDemo") : t("descriptionProd")}
+      title={t("title")}
     >
       <section className="card stack">
         <PhotoUpload allowDemoFlow={allowDemoFlow} checkoutIdFromUrl={checkoutId} />

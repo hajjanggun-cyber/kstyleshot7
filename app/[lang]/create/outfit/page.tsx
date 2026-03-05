@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { CreateShell } from "@/components/create/CreateShell";
 import { ResultGrid } from "@/components/create/ResultGrid";
@@ -12,6 +13,7 @@ import { createMockStepResults } from "@/lib/mockResults";
 import { useCreateStore } from "@/store/createStore";
 
 export default function OutfitPage() {
+  const t = useTranslations("create.outfit");
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
@@ -73,17 +75,15 @@ export default function OutfitPage() {
     return (
       <CreateShell
         current="outfit"
-        description="This stage requires a selected hair result from the previous step."
-        title="Choose 2 outfits"
+        description={t("missingHairDescription")}
+        title={t("shellTitle")}
       >
         <section className="card stack">
-          <h2>Hair step required</h2>
-          <p className="muted">
-            Finish the hair selection first so the outfit step has a selected base.
-          </p>
+          <h2>{t("missingHairTitle")}</h2>
+          <p className="muted">{t("missingHairBody")}</p>
           <div className="actions">
             <Link className="button" href={`/${lang}/create/hair`}>
-              Go to hair
+              {t("goHair")}
             </Link>
           </div>
         </section>
@@ -94,24 +94,21 @@ export default function OutfitPage() {
   return (
     <CreateShell
       current="outfit"
-      description="Outfit provider is still pending for commercial use, so this stage runs in mock mode."
-      title="Choose 2 outfits"
+      description={t("shellDescription")}
+      title={t("shellTitle")}
     >
       <section className="card stack mock-panel">
         <div className="section-head">
-          <h2>Provider status</h2>
-          <span className="mock-chip">MOCK ONLY</span>
+          <h2>{t("mockTitle")}</h2>
+          <span className="mock-chip">{t("mockBadge")}</span>
         </div>
-        <p className="muted">
-          Outfit generation is currently simulated for UX validation. Do not treat these results as
-          production output.
-        </p>
+        <p className="muted">{t("mockDescription")}</p>
       </section>
       <StyleSelector
         ctaDisabled={outfit.chosen.length !== 2 || isGenerating}
-        ctaLabel={isGenerating ? "Generating..." : "Generate outfit previews"}
-        title="Outfit options"
-        description="MVP mock stage: choose 2 outfits, generate 2 previews, then keep one."
+        ctaLabel={isGenerating ? t("generating") : t("generate")}
+        title={t("selectorTitle")}
+        description={t("selectorDescription")}
         items={outfits.map((item) => ({
           id: item.id,
           name: item.name,
@@ -125,32 +122,28 @@ export default function OutfitPage() {
       />
       {isGenerating ? (
         <section className="card stack">
-          <h2>Generating local outfit previews</h2>
-          <p className="muted">
-            This simulates the async generation stage while the commercial provider decision is still pending.
-          </p>
+          <h2>{t("processingTitle")}</h2>
+          <p className="muted">{t("processingDescription")}</p>
         </section>
       ) : null}
       {isPreparingCutout ? (
         <section className="card stack">
-          <h2>Preparing transparent cutout</h2>
-          <p className="muted">
-            Simulating the background removal step before moving into the composite stage.
-          </p>
+          <h2>{t("cutoutTitle")}</h2>
+          <p className="muted">{t("cutoutDescription")}</p>
         </section>
       ) : null}
       <ResultGrid
-        description="Download either preview, then choose the one that moves to the cutout step."
-        emptyMessage="Select two outfits and click generate to create previews."
+        description={t("resultDescription")}
+        emptyMessage={t("resultEmpty")}
         onSelect={setSelectedResultId}
         results={outfit.results.map((result) => ({
           id: result.id,
           name: itemLookup[result.id]?.name ?? result.id,
           blobUrl: result.blobUrl,
-          detail: "Mock outfit output"
+          detail: t("resultDetail")
         }))}
         selectedId={selectedResultId}
-        title="Outfit preview results"
+        title={t("resultTitle")}
       />
       <div className="actions">
         <button
@@ -159,7 +152,7 @@ export default function OutfitPage() {
           onClick={handleContinue}
           type="button"
         >
-          Continue to backgrounds
+          {t("continue")}
         </button>
       </div>
     </CreateShell>

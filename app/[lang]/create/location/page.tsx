@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { BackgroundSelector } from "@/components/create/BackgroundSelector";
 import { CreateShell } from "@/components/create/CreateShell";
@@ -12,6 +13,7 @@ import { createMockStepResults } from "@/lib/mockResults";
 import { useCreateStore } from "@/store/createStore";
 
 export default function LocationPage() {
+  const t = useTranslations("create.location");
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
@@ -69,17 +71,15 @@ export default function LocationPage() {
     return (
       <CreateShell
         current="location"
-        description="A selected outfit is required before background compositing."
-        title="Choose 2 backdrops"
+        description={t("missingOutfitDescription")}
+        title={t("shellTitle")}
       >
         <section className="card stack">
-          <h2>Outfit step required</h2>
-          <p className="muted">
-            Finish the outfit step first. This page expects a selected cutout-ready outfit.
-          </p>
+          <h2>{t("missingOutfitTitle")}</h2>
+          <p className="muted">{t("missingOutfitBody")}</p>
           <div className="actions">
             <Link className="button" href={`/${lang}/create/outfit`}>
-              Go to outfit
+              {t("goOutfit")}
             </Link>
           </div>
         </section>
@@ -90,22 +90,19 @@ export default function LocationPage() {
   return (
     <CreateShell
       current="location"
-      description="Pick two Seoul backdrops, generate composites, then select the final winner."
-      title="Choose 2 backdrops"
+      description={t("shellDescription")}
+      title={t("shellTitle")}
     >
       <section className="card stack mock-panel">
         <div className="section-head">
-          <h2>Cutout/composite status</h2>
-          <span className="mock-chip">SIMULATED</span>
+          <h2>{t("mockTitle")}</h2>
+          <span className="mock-chip">{t("mockBadge")}</span>
         </div>
-        <p className="muted">
-          Transparent cutout and final composite are currently mocked. Wire real cutout provider
-          before production release.
-        </p>
+        <p className="muted">{t("mockDescription")}</p>
       </section>
       <BackgroundSelector
         ctaDisabled={location.chosen.length !== 2 || isCompositing}
-        ctaLabel={isCompositing ? "Compositing..." : "Create composite previews"}
+        ctaLabel={isCompositing ? t("compositing") : t("generate")}
         items={backgrounds.map((item) => ({
           id: item.id,
           name: item.name,
@@ -119,24 +116,22 @@ export default function LocationPage() {
       />
       {isCompositing ? (
         <section className="card stack">
-          <h2>Compositing local previews</h2>
-          <p className="muted">
-            Simulating the final browser-side canvas composite stage.
-          </p>
+          <h2>{t("processingTitle")}</h2>
+          <p className="muted">{t("processingDescription")}</p>
         </section>
       ) : null}
       <ResultGrid
-        description="Choose the final background result before finishing the flow."
-        emptyMessage="Select two backgrounds and click create composite previews."
+        description={t("resultDescription")}
+        emptyMessage={t("resultEmpty")}
         onSelect={setSelectedResultId}
         results={location.results.map((result) => ({
           id: result.id,
           name: itemLookup[result.id]?.name ?? result.id,
           blobUrl: result.blobUrl,
-          detail: "Mock composite output"
+          detail: t("resultDetail")
         }))}
         selectedId={selectedResultId}
-        title="Composite preview results"
+        title={t("resultTitle")}
       />
       <div className="actions">
         <button
@@ -145,7 +140,7 @@ export default function LocationPage() {
           onClick={handleContinue}
           type="button"
         >
-          Finish and review
+          {t("continue")}
         </button>
       </div>
     </CreateShell>

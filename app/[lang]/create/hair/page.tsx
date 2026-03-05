@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { CreateShell } from "@/components/create/CreateShell";
 import { ResultGrid } from "@/components/create/ResultGrid";
@@ -62,19 +63,22 @@ function wait(ms: number): Promise<void> {
   });
 }
 
-async function blobToDataUrl(blobUrl: string): Promise<string> {
+async function blobToDataUrl(
+  blobUrl: string,
+  errors: { read: string; serialize: string }
+): Promise<string> {
   const response = await fetch(blobUrl);
   if (!response.ok) {
-    throw new Error("Unable to read the uploaded image for generation.");
+    throw new Error(errors.read);
   }
 
   const blob = await response.blob();
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onerror = () => reject(new Error("Unable to serialize the uploaded image."));
+    reader.onerror = () => reject(new Error(errors.serialize));
     reader.onload = () => {
       if (typeof reader.result !== "string") {
-        reject(new Error("Unable to serialize the uploaded image."));
+        reject(new Error(errors.serialize));
         return;
       }
 
@@ -122,6 +126,7 @@ function readErrorMessage(payload: unknown, fallback: string): string {
 }
 
 export default function HairPage() {
+  const t = useTranslations("create.hair");
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
@@ -154,12 +159,12 @@ export default function HairPage() {
       const payload = (await response.json().catch(() => null)) as HairStatusResponse | null;
 
       if (!response.ok && response.status !== 202) {
-        throw new Error(readErrorMessage(payload, "Unable to poll hair generation status."));
+        throw new Error(readErrorMessage(payload, t("errors.pollStatus")));
       }
 
       if (payload && payload.ok && payload.ready) {
         if (payload.results.length === 0) {
-          throw new Error("Hair generation completed but returned no results.");
+          throw new Error(t("errors.noResults"));
         }
 
         return toStepResults(payload.results);
@@ -168,7 +173,7 @@ export default function HairPage() {
       await wait(POLL_INTERVAL_MS);
     }
 
-    throw new Error("Timed out while waiting for hair generation results.");
+    throw new Error(t("errors.timeout"));
   }
 
   function toggleSelection(id: string) {
@@ -192,9 +197,7 @@ export default function HairPage() {
     }
 
     if (!sessionToken || sessionToken.startsWith("demo-session-")) {
-      setGenerationError(
-        "Real hair generation requires a paid session. Complete checkout first and return with checkout_id."
-      );
+      setGenerationError(t("errors.paidSessionRequired"));
       return;
     }
 
@@ -202,10 +205,13 @@ export default function HairPage() {
     setIsGenerating(true);
     setSelectedResultId(null);
     setGenerationError("");
-    setGenerationNotice("Starting hair generation...");
+    setGenerationNotice(t("notice.starting"));
 
     try {
-      const photoDataUrl = await blobToDataUrl(photoBlobUrl);
+      const photoDataUrl = await blobToDataUrl(photoBlobUrl, {
+        read: t("errors.readImage"),
+        serialize: t("errors.serializeImage")
+      });
       const startResponse = await fetch("/api/jobs/start", {
         method: "POST",
         headers: {
@@ -221,17 +227,15 @@ export default function HairPage() {
       const startPayload = (await startResponse.json().catch(() => null)) as HairStartResponse | null;
 
       if (!startResponse.ok || !startPayload || !startPayload.ok) {
-        throw new Error(readErrorMessage(startPayload, "Unable to start hair generation."));
+        throw new Error(readErrorMessage(startPayload, t("errors.start")));
       }
 
-      setGenerationNotice("Hair generation started. Polling prediction results...");
+      setGenerationNotice(t("notice.polling"));
       const nextResults = await pollHairResults(sessionToken);
       setHairResults(nextResults);
-      setGenerationNotice("Hair generation completed. Pick one result to continue.");
+      setGenerationNotice(t("notice.completed"));
     } catch (error) {
-      setGenerationError(
-        error instanceof Error ? error.message : "Unable to generate hair previews right now."
-      );
+      setGenerationError(error instanceof Error ? error.message : t("errors.generate"));
       setGenerationNotice("");
     } finally {
       setIsGenerating(false);
@@ -244,9 +248,7 @@ export default function HairPage() {
     }
 
     if (!sessionToken || sessionToken.startsWith("demo-session-")) {
-      setGenerationError(
-        "A verified session is required to continue. Return to upload and complete checkout."
-      );
+      setGenerationError(t("errors.verifiedSessionRequired"));
       return;
     }
 
@@ -267,13 +269,11 @@ export default function HairPage() {
       const payload = (await response.json().catch(() => null)) as HairSelectResponse | null;
 
       if (!response.ok || !payload || !payload.ok) {
-        throw new Error(readErrorMessage(payload, "Unable to persist the selected hair result."));
+        throw new Error(readErrorMessage(payload, t("errors.persist")));
       }
     } catch (error) {
       setGenerationError(
-        error instanceof Error
-          ? error.message
-          : "Unable to persist the selected hair result."
+        error instanceof Error ? error.message : t("errors.persist")
       );
       return;
     }
@@ -286,17 +286,15 @@ export default function HairPage() {
     return (
       <CreateShell
         current="hair"
-        description="Upload is required before hair generation can start."
-        title="Choose 2 hairstyles"
+        description={t("shellMissingDescription")}
+        title={t("shellTitle")}
       >
         <section className="card stack">
-          <h2>Upload required</h2>
-          <p className="muted">
-            Add a selfie first so the hair step has something to work from.
-          </p>
+          <h2>{t("missingUploadTitle")}</h2>
+          <p className="muted">{t("missingUploadDescription")}</p>
           <div className="actions">
             <Link className="button" href={`/${lang}/create/upload`}>
-              Go to upload
+              {t("goUpload")}
             </Link>
           </div>
         </section>
@@ -307,14 +305,14 @@ export default function HairPage() {
   return (
     <CreateShell
       current="hair"
-      description="Pick two hair concepts, run async generation, then choose one winning result."
-      title="Choose 2 hairstyles"
+      description={t("shellDescription")}
+      title={t("shellTitle")}
     >
       <StyleSelector
         ctaDisabled={hair.chosen.length !== 2 || isGenerating}
-        ctaLabel={isGenerating ? "Generating..." : "Generate hair previews"}
-        title="Hair style options"
-        description="Pick exactly 2 options. Results are generated through the live job pipeline."
+        ctaLabel={isGenerating ? t("generating") : t("generate")}
+        title={t("selectorTitle")}
+        description={t("selectorDescription")}
         items={hairStyles.map((item) => ({
           id: item.id,
           name: item.name,
@@ -328,26 +326,26 @@ export default function HairPage() {
       />
       {isGenerating ? (
         <section className="card stack">
-          <h2>Generating hair previews</h2>
+          <h2>{t("processingTitle")}</h2>
           <p className="muted">
-            Running real async prediction polling through `GET /api/jobs/status?step=hair`.
+            {t("processingDescription")}
           </p>
         </section>
       ) : null}
       {generationNotice ? <div className="notice">{generationNotice}</div> : null}
       {generationError ? <div className="notice">{generationError}</div> : null}
       <ResultGrid
-        description="Download either preview, then mark one as the winner for the next stage."
-        emptyMessage="Select two hairstyles and click generate to create previews."
+        description={t("resultDescription")}
+        emptyMessage={t("resultEmpty")}
         onSelect={setSelectedResultId}
         results={hair.results.map((result) => ({
           id: result.id,
           name: itemLookup[result.id]?.name ?? result.id,
           blobUrl: result.blobUrl,
-          detail: "Generated hair output"
+          detail: t("resultDetail")
         }))}
         selectedId={selectedResultId}
-        title="Hair preview results"
+        title={t("resultTitle")}
       />
       <div className="actions">
         <button
@@ -356,7 +354,7 @@ export default function HairPage() {
           onClick={handleContinue}
           type="button"
         >
-          Continue to outfit
+          {t("continue")}
         </button>
       </div>
     </CreateShell>

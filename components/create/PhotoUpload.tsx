@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, type ChangeEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import type { JobStatus, SessionStatusResponse } from "@/types";
 import { useCreateStore } from "@/store/createStore";
@@ -96,6 +97,7 @@ function readApiErrorMessage(payload: unknown, fallback: string): string {
 }
 
 export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: PhotoUploadProps) {
+  const t = useTranslations("create.photoUpload");
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const {
@@ -118,11 +120,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
   useEffect(() => {
     if (!checkoutIdFromUrl) {
       setPollError("");
-      setSessionNotice(
-        allowDemoFlow
-          ? "No checkout_id found. Demo flow is available in this environment."
-          : ""
-      );
+      setSessionNotice(allowDemoFlow ? t("notice.demoEnabled") : "");
       setIsPollingSession(false);
       setIsPaidSessionReady(false);
       return;
@@ -139,7 +137,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
         status: cachedSession.status
       });
       setIsPaidSessionReady(true);
-      setSessionNotice("Payment confirmed. Existing session restored from this browser.");
+      setSessionNotice(t("notice.restored"));
       removeCheckoutIdFromUrl();
       return;
     }
@@ -150,7 +148,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
     const pollSession = async () => {
       setIsPollingSession(true);
       setPollError("");
-      setSessionNotice("Waiting for payment confirmation. This page polls the real session handshake.");
+      setSessionNotice(t("notice.polling"));
 
       try {
         const response = await fetch(
@@ -163,7 +161,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
           | null;
 
         if (!response.ok && response.status !== 202) {
-          throw new Error(readApiErrorMessage(payload, "Unable to check the paid session yet."));
+          throw new Error(readApiErrorMessage(payload, t("errors.checkPaidSession")));
         }
 
         if (payload && "ready" in payload && payload.ready) {
@@ -184,7 +182,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
           });
           setIsPaidSessionReady(true);
           setIsPollingSession(false);
-          setSessionNotice("Payment confirmed. Your session is ready.");
+          setSessionNotice(t("notice.ready"));
           removeCheckoutIdFromUrl();
           return;
         }
@@ -200,7 +198,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
         setIsPollingSession(false);
         setIsPaidSessionReady(false);
         setPollError(
-          error instanceof Error ? error.message : "Unable to check the current paid session."
+          error instanceof Error ? error.message : t("errors.currentPaidSession")
         );
       }
     };
@@ -213,7 +211,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
         clearTimeout(timer);
       }
     };
-  }, [allowDemoFlow, checkoutIdFromUrl, setCheckout, setSession]);
+  }, [allowDemoFlow, checkoutIdFromUrl, setCheckout, setSession, t]);
 
   function ensureDemoSession() {
     if (!allowDemoFlow) {
@@ -256,13 +254,13 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
 
     if (!checkoutIdFromUrl) {
       if (!allowDemoFlow) {
-        setPollError("A paid checkout session is required. Start from Step 1 first.");
+        setPollError(t("errors.checkoutRequired"));
         return;
       }
 
       ensureDemoSession();
     } else if (!isPaidSessionReady || !sessionToken) {
-      setPollError("The paid session is still pending. Wait for the webhook to finish first.");
+      setPollError(t("errors.stillPending"));
       return;
     }
 
@@ -278,13 +276,13 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
       <div className="notice">
         {checkoutIdFromUrl ? (
           <span className="muted">
-            Checkout detected: <span className="inline-code">{checkoutIdFromUrl}</span>. Polling
-            session handshake before unlock.
+            {t("notice.detectedPrefix")} <span className="inline-code">{checkoutIdFromUrl}</span>. {" "}
+            {t("notice.detectedSuffix")}
           </span>
         ) : allowDemoFlow ? (
-          <span className="muted">No `checkout_id` found. Development demo path is enabled.</span>
+          <span className="muted">{t("notice.noCheckoutDemo")}</span>
         ) : (
-          <span className="muted">No `checkout_id` found. Start checkout on Step 1 first.</span>
+          <span className="muted">{t("notice.noCheckoutProd")}</span>
         )}
       </div>
       {sessionNotice ? <div className="notice">{sessionNotice}</div> : null}
@@ -294,10 +292,8 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
           <div className="upload-icon" aria-hidden>
             UP
           </div>
-          <strong>Upload your selfie</strong>
-          <span className="muted">
-            Use a clear front-facing image with good lighting for stable generation quality.
-          </span>
+          <strong>{t("title")}</strong>
+          <span className="muted">{t("description")}</span>
           <input
             accept="image/*"
             className="upload-input"
@@ -308,14 +304,14 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
         </label>
         <div className="card stack">
           <div className="actions">
-            <span className="count-badge">{photoBlobUrl ? "Photo ready" : "Awaiting upload"}</span>
-            <span className="muted">{fileName || "No file selected"}</span>
+            <span className="count-badge">{photoBlobUrl ? t("photoReady") : t("awaitingUpload")}</span>
+            <span className="muted">{fileName || t("noFile")}</span>
           </div>
           <div className="preview-frame">
             {photoBlobUrl ? (
-              <img alt="Uploaded preview" src={photoBlobUrl} />
+              <img alt={t("uploadedPreviewAlt")} src={photoBlobUrl} />
             ) : (
-              <div className="preview-fallback">Preview appears here</div>
+              <div className="preview-fallback">{t("previewPlaceholder")}</div>
             )}
           </div>
         </div>
@@ -323,10 +319,10 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
       <div className="actions">
         <button className="button" disabled={!canContinue} onClick={handleContinue} type="button">
           {checkoutIdFromUrl && isPollingSession
-            ? "Waiting for paid session..."
+            ? t("cta.waiting")
             : !checkoutIdFromUrl && !allowDemoFlow
-              ? "Checkout required"
-              : "Continue to hair"}
+              ? t("cta.checkoutRequired")
+              : t("cta.continue")}
         </button>
       </div>
     </div>

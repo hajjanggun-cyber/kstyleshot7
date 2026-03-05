@@ -1,10 +1,15 @@
+﻿"use client";
+
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type SiteHeaderProps = {
   lang: string;
 };
 
 export function SiteHeader({ lang }: SiteHeaderProps) {
+  const t = useTranslations("header");
+
   return (
     <header className="site-header">
       <div className="site-header-inner">
@@ -14,11 +19,11 @@ export function SiteHeader({ lang }: SiteHeaderProps) {
           </span>
           <strong>K-StyleMagic</strong>
         </Link>
-        <nav className="site-nav" aria-label="Primary">
-          <Link href={`/${lang}`}>Home</Link>
-          <Link href={`/${lang}/create`}>Create</Link>
-          <Link href={`/blog/${lang}`}>Blog</Link>
-          <Link href={`/${lang}/terms`}>Terms</Link>
+        <nav className="site-nav" aria-label={t("ariaLabel")}>
+          <Link href={`/${lang}`}>{t("home")}</Link>
+          <Link href={`/${lang}/create`}>{t("create")}</Link>
+          <Link href={`/blog/${lang}`}>{t("blog")}</Link>
+          <Link href={`/${lang}/terms`}>{t("terms")}</Link>
         </nav>
         <div className="site-actions" aria-hidden>
           <span className="icon-dot" />

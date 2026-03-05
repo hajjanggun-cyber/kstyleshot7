@@ -1,4 +1,6 @@
-"use client";
+﻿"use client";
+
+import { useTranslations } from "next-intl";
 
 import { DownloadButton } from "@/components/common/DownloadButton";
 
@@ -24,17 +26,20 @@ export function ResultGrid({
   results,
   selectedId,
   onSelect,
-  emptyMessage = "Results will appear here after generation."
+  emptyMessage
 }: ResultGridProps) {
+  const t = useTranslations("create.resultGrid");
+  const resolvedEmptyMessage = emptyMessage ?? t("empty");
+
   return (
     <section className="card stack">
       <div className="section-head">
         <h2>{title}</h2>
-        <span className="count-badge">{results.length} result(s)</span>
+        <span className="count-badge">{t("count", { count: results.length })}</span>
       </div>
       {description ? <p className="muted">{description}</p> : null}
       {results.length === 0 ? (
-        <div className="empty-state">{emptyMessage}</div>
+        <div className="empty-state">{resolvedEmptyMessage}</div>
       ) : (
         <div className="grid two">
           {results.map((result) => {
@@ -55,12 +60,12 @@ export function ResultGrid({
                     onClick={() => onSelect?.(result.id)}
                     type="button"
                   >
-                    {isSelected ? "Selected" : "Use this"}
+                    {isSelected ? t("selected") : t("useThis")}
                   </button>
                   <DownloadButton
                     filename={`${result.id}.jpg`}
                     href={result.blobUrl}
-                    label="Download"
+                    label={t("download")}
                     className="ghost"
                   />
                 </div>

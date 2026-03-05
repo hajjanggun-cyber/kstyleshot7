@@ -1,6 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type ReadinessStep = "checkout" | "session" | "hair" | "outfit" | "cutout";
 
@@ -33,6 +34,7 @@ function toErrorMessage(payload: unknown, fallback: string): string {
 }
 
 export function ApiReadinessPanel() {
+  const t = useTranslations("create.preflight");
   const [payload, setPayload] = useState<ReadinessPayload | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -52,19 +54,17 @@ export function ApiReadinessPanel() {
         | null;
 
       if (!response.ok || !json || !("ok" in json) || !json.ok) {
-        throw new Error(toErrorMessage(json, "Unable to load system readiness."));
+        throw new Error(toErrorMessage(json, t("errors.load")));
       }
 
       setPayload(json);
     } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "Unable to load system readiness."
-      );
+      setErrorMessage(error instanceof Error ? error.message : t("errors.load"));
       setPayload(null);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     void loadReadiness();
@@ -78,15 +78,15 @@ export function ApiReadinessPanel() {
   return (
     <section className="card stack">
       <div className="actions">
-        <strong>System preflight</strong>
+        <strong>{t("title")}</strong>
         <button className="button secondary" onClick={() => void loadReadiness()} type="button">
-          {isLoading ? "Refreshing..." : "Refresh"}
+          {isLoading ? t("refreshing") : t("refresh")}
         </button>
       </div>
 
       {payload ? (
         <p className="muted">
-          Environment: <span className="inline-code">{payload.environment}</span>. Last check:{" "}
+          {t("environment")}: <span className="inline-code">{payload.environment}</span>. {t("lastCheck")}:{" "}
           <span className="inline-code">{payload.generatedAt}</span>.
         </p>
       ) : null}
@@ -99,10 +99,10 @@ export function ApiReadinessPanel() {
             {payload.steps.map((step) => (
               <div className="status-row" key={step.step}>
                 <div className="stack">
-                  <strong>{step.step}</strong>
+                  <strong>{t(`steps.${step.step}`)}</strong>
                   <span className="muted">{step.note}</span>
                   {step.missingEnv.length > 0 ? (
-                    <span className="inline-code">Missing: {step.missingEnv.join(", ")}</span>
+                    <span className="inline-code">{t("missing")}: {step.missingEnv.join(", ")}</span>
                   ) : null}
                 </div>
                 <span
@@ -110,18 +110,16 @@ export function ApiReadinessPanel() {
                     step.blocked ? "is-blocked" : step.ready ? "is-ready" : "is-missing"
                   }`}
                 >
-                  {step.blocked ? "blocked" : step.ready ? "ready" : "missing"}
+                  {step.blocked ? t("status.blocked") : step.ready ? t("status.ready") : t("status.missing")}
                 </span>
               </div>
             ))}
           </div>
 
           {blockingSteps.length > 0 ? (
-            <div className="notice">
-              Complete the missing keys above before running full checkout-to-hair E2E.
-            </div>
+            <div className="notice">{t("notice.missing")}</div>
           ) : (
-            <div className="notice">Checkout, session, and hair prerequisites are ready.</div>
+            <div className="notice">{t("notice.ready")}</div>
           )}
         </>
       ) : null}

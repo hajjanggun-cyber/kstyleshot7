@@ -1,12 +1,17 @@
-export default function TermsPage() {
+import { getTranslations } from "next-intl/server";
+
+type TermsPageProps = {
+  params: Promise<{ lang: string }>;
+};
+
+export default async function TermsPage({ params }: TermsPageProps) {
+  const { lang } = await params;
+  const t = await getTranslations({ locale: lang, namespace: "legal.terms" });
+
   return (
     <section className="card stack">
-      <h1>Terms</h1>
-      <p className="muted">
-        Add the production legal copy here. Keep the no-affiliation and no exact
-        likeness terms explicit.
-      </p>
+      <h1>{t("title")}</h1>
+      <p className="muted">{t("description")}</p>
     </section>
   );
 }
-

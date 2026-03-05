@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { DownloadButton } from "@/components/common/DownloadButton";
 import { useCreateStore } from "@/store/createStore";
@@ -13,6 +14,7 @@ function revokeIfBlobUrl(url: string | null) {
 }
 
 export function FinalResult() {
+  const t = useTranslations("create.finalResult");
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const store = useCreateStore();
@@ -68,27 +70,27 @@ export function FinalResult() {
 
   async function handleShare() {
     const sharePayload = {
-      title: "K-StyleMagic result",
-      text: "I just completed my K-style transformation.",
+      title: t("sharePayloadTitle"),
+      text: t("sharePayloadText"),
       url: typeof window !== "undefined" ? window.location.href : ""
     };
 
     try {
       if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
         await navigator.share(sharePayload);
-        setShareNotice("Share sheet opened.");
+        setShareNotice(t("shareSheetOpened"));
         return;
       }
 
       if (typeof navigator !== "undefined" && navigator.clipboard) {
         await navigator.clipboard.writeText(sharePayload.url);
-        setShareNotice("Result link copied to clipboard.");
+        setShareNotice(t("linkCopied"));
         return;
       }
 
-      setShareNotice("Sharing is not available in this browser.");
+      setShareNotice(t("sharingUnavailable"));
     } catch {
-      setShareNotice("Share action was cancelled or blocked.");
+      setShareNotice(t("shareCancelled"));
     }
   }
 
@@ -96,62 +98,60 @@ export function FinalResult() {
     try {
       if (typeof navigator !== "undefined" && navigator.clipboard) {
         await navigator.clipboard.writeText("#KStyleMagic");
-        setShareNotice("Hashtag copied: #KStyleMagic");
+        setShareNotice(t("hashtagCopied"));
         return;
       }
     } catch {
-      setShareNotice("Unable to copy hashtag.");
+      setShareNotice(t("hashtagCopyFailed"));
       return;
     }
 
-    setShareNotice("Clipboard is unavailable in this browser.");
+    setShareNotice(t("clipboardUnavailable"));
   }
 
   return (
     <section className="card stack">
       <div className="section-head">
-        <h2>Final result</h2>
-        <span className="status-chip is-ready">Ready</span>
+        <h2>{t("title")}</h2>
+        <span className="status-chip is-ready">{t("ready")}</span>
       </div>
-      <p className="muted">
-        Review your selected result, download it, then clear local data before starting another run.
-      </p>
+      <p className="muted">{t("description")}</p>
       {finalResult ? (
         <div className="summary-grid">
           <div className="stack">
             <div className="preview-frame final-preview">
-              <img alt="Final selected result" src={finalResult.blobUrl} />
+              <img alt={t("previewAlt")} src={finalResult.blobUrl} />
             </div>
             <div className="actions quick-share-row">
               <button className="quick-action" onClick={handleShare} type="button">
-                Share
+                {t("share")}
               </button>
               <button className="quick-action" onClick={handleCopyTag} type="button">
-                Hashtag
+                {t("hashtag")}
               </button>
-              <span className="quick-hint">Tag your post with #KStyleMagic</span>
+              <span className="quick-hint">{t("quickHint")}</span>
             </div>
           </div>
           <div className="card stack">
             <div className="meta-list">
               <div className="meta-row">
-                <span className="muted">Order</span>
-                <strong>{store.orderId || "demo-order"}</strong>
+                <span className="muted">{t("meta.order")}</span>
+                <strong>{store.orderId || t("meta.demoOrder")}</strong>
               </div>
               <div className="meta-row">
-                <span className="muted">Session</span>
-                <strong>{store.sessionToken || "demo-session"}</strong>
+                <span className="muted">{t("meta.session")}</span>
+                <strong>{store.sessionToken || t("meta.demoSession")}</strong>
               </div>
               <div className="meta-row">
-                <span className="muted">Hair</span>
+                <span className="muted">{t("meta.hair")}</span>
                 <strong>{store.hair.picked || "-"}</strong>
               </div>
               <div className="meta-row">
-                <span className="muted">Outfit</span>
+                <span className="muted">{t("meta.outfit")}</span>
                 <strong>{store.outfit.picked || "-"}</strong>
               </div>
               <div className="meta-row">
-                <span className="muted">Background</span>
+                <span className="muted">{t("meta.background")}</span>
                 <strong>{store.location.picked || "-"}</strong>
               </div>
             </div>
@@ -159,25 +159,23 @@ export function FinalResult() {
               <DownloadButton
                 filename="final-preview.jpg"
                 href={finalResult.blobUrl}
-                label="Download final"
+                label={t("downloadFinal")}
               />
               <button className="button secondary" onClick={handleShare} type="button">
-                Share with friends
+                {t("shareWithFriends")}
               </button>
               <button className="button secondary" onClick={handleTryAnother} type="button">
-                Try another style
+                {t("tryAnother")}
               </button>
               <button className="button secondary" onClick={handleReset} type="button">
-                Delete local data
+                {t("deleteLocal")}
               </button>
             </div>
             {shareNotice ? <div className="notice">{shareNotice}</div> : null}
           </div>
         </div>
       ) : (
-        <div className="empty-state">
-          No final preview is available yet. Complete the flow before visiting this page.
-        </div>
+        <div className="empty-state">{t("empty")}</div>
       )}
     </section>
   );

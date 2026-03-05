@@ -1,7 +1,338 @@
 {
   "appName": "kstyleshot",
-  "landing.title": "Create a K-style editorial photo flow",
-  "landing.cta": "Start",
-  "create.title": "Create your session",
-  "legal.disclaimer": "This service is not affiliated with any artists, labels, or brands."
+  "header": {
+    "ariaLabel": "Primary",
+    "home": "Home",
+    "create": "Create",
+    "blog": "Blog",
+    "terms": "Terms"
+  },
+  "disclaimer": {
+    "title": "Important Notice",
+    "line1": "This service is not affiliated with any artists, labels, or brands.",
+    "line2": "All results are AI-generated style images; exact likeness is not guaranteed.",
+    "line3": "No refund is issued for style preference dissatisfaction alone."
+  },
+  "landing": {
+    "hero": {
+      "eyebrow": "Next-gen AI transformation",
+      "titlePrefix": "Transform into your favorite",
+      "titleSuffix": "star.",
+      "description": "Upload one selfie, pick your style, and run a paid session flow built for reliable checkout-to-generation handoff.",
+      "start": "Start experience",
+      "gallery": "View gallery",
+      "badge1": "500+ styles",
+      "badge2": "Real async jobs",
+      "badge3": "Session-safe flow"
+    },
+    "how": {
+      "title": "How the magic happens",
+      "description": "Three steps for users, with real payment/session safeguards under the hood.",
+      "step1": {
+        "title": "Checkout",
+        "body": "Start paid checkout, return with `checkout_id`, and wait for session handshake."
+      },
+      "step2": {
+        "title": "Upload + Hair",
+        "body": "Upload one selfie, pick two hairstyles, run async generation, then choose one."
+      },
+      "step3": {
+        "title": "Finish",
+        "body": "Continue through outfit/background stages and download your final selected result."
+      }
+    },
+    "trending": {
+      "title": "Trending this week",
+      "explore": "Explore all styles",
+      "item1": {
+        "name": "Cyber Idol",
+        "uses": "2.4k uses"
+      },
+      "item2": {
+        "name": "Soft Glam",
+        "uses": "1.8k uses"
+      },
+      "item3": {
+        "name": "Street Beat",
+        "uses": "4.1k uses"
+      },
+      "item4": {
+        "name": "Clean Royal",
+        "uses": "900 uses"
+      }
+    },
+    "pricing": {
+      "title": "Simple pricing",
+      "body": "Per completed generation flow.",
+      "note": "Automatic refund is triggered only after retry and confirmed pipeline failure."
+    }
+  },
+  "create": {
+    "steps": {
+      "ariaLabel": "Create flow steps",
+      "create": "Create",
+      "upload": "Upload",
+      "hair": "Hair",
+      "outfit": "Outfit",
+      "location": "Background",
+      "done": "Done"
+    },
+    "shell": {
+      "session": "Session",
+      "order": "Order",
+      "hair": "Hair",
+      "outfit": "Outfit",
+      "backdrop": "Backdrop",
+      "uploadedPreviewAlt": "Uploaded photo preview",
+      "uploadPrompt": "Upload a selfie to see a live preview.",
+      "restart": "Restart flow",
+      "flowEyebrow": "Create flow",
+      "status": {
+        "payment_pending": "Payment pending",
+        "payment_confirmed": "Payment confirmed",
+        "upload_pending": "Upload pending",
+        "hair_selecting": "Hair selecting",
+        "hair_processing": "Hair generating",
+        "hair_completed": "Hair ready",
+        "outfit_selecting": "Outfit selecting",
+        "outfit_processing": "Outfit generating",
+        "outfit_completed": "Outfit ready",
+        "cutout_processing": "Cutout processing",
+        "cutout_completed": "Cutout ready",
+        "location_selecting": "Background selecting",
+        "composite_completed": "Composite ready",
+        "completed": "Completed",
+        "failed": "Failed",
+        "refunded": "Refunded"
+      }
+    },
+    "consent": {
+      "age": "I am 13 years of age or older.",
+      "ownership": "I own the rights to this photo and consent to AI processing."
+    },
+    "preflight": {
+      "title": "System preflight",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing...",
+      "environment": "Environment",
+      "lastCheck": "Last check",
+      "missing": "Missing",
+      "steps": {
+        "checkout": "Checkout",
+        "session": "Session",
+        "hair": "Hair",
+        "outfit": "Outfit",
+        "cutout": "Cutout"
+      },
+      "status": {
+        "ready": "ready",
+        "missing": "missing",
+        "blocked": "blocked"
+      },
+      "notice": {
+        "missing": "Complete the missing keys above before running full checkout-to-hair E2E.",
+        "ready": "Checkout, session, and hair prerequisites are ready."
+      },
+      "errors": {
+        "load": "Unable to load system readiness."
+      }
+    },
+    "checkoutActions": {
+      "opening": "Opening checkout...",
+      "start": "Start Polar checkout",
+      "demo": "Open local demo flow",
+      "description": "Checkout creates a paid session and returns through `checkout_id` polling. Demo flow is development-only unless explicitly enabled.",
+      "errors": {
+        "create": "Unable to create a checkout session."
+      }
+    },
+    "page": {
+      "title": "Create session",
+      "descriptionDemo": "Start checkout for the real paid flow. Development-only demo path is still available.",
+      "descriptionProd": "Start checkout for the real paid flow. Production requires a verified paid session.",
+      "consentTitle": "Consent checkpoint",
+      "checkoutTitle": "Checkout"
+    },
+    "uploadPage": {
+      "title": "Upload your selfie",
+      "descriptionDemo": "When checkout_id exists this page polls real session status. Development demo is allowed without checkout_id.",
+      "descriptionProd": "This page polls real session status and unlocks only after paid session confirmation."
+    },
+    "photoUpload": {
+      "title": "Upload your selfie",
+      "description": "Use a clear front-facing image with good lighting for stable generation quality.",
+      "photoReady": "Photo ready",
+      "awaitingUpload": "Awaiting upload",
+      "noFile": "No file selected",
+      "uploadedPreviewAlt": "Uploaded preview",
+      "previewPlaceholder": "Preview appears here",
+      "notice": {
+        "demoEnabled": "No checkout_id found. Demo flow is available in this environment.",
+        "restored": "Payment confirmed. Existing session restored from this browser.",
+        "polling": "Waiting for payment confirmation. This page polls the real session handshake.",
+        "ready": "Payment confirmed. Your session is ready.",
+        "detectedPrefix": "Checkout detected:",
+        "detectedSuffix": "Polling session handshake before unlock.",
+        "noCheckoutDemo": "No `checkout_id` found. Development demo path is enabled.",
+        "noCheckoutProd": "No `checkout_id` found. Start checkout on Step 1 first."
+      },
+      "cta": {
+        "waiting": "Waiting for paid session...",
+        "checkoutRequired": "Checkout required",
+        "continue": "Continue to hair"
+      },
+      "errors": {
+        "checkPaidSession": "Unable to check the paid session yet.",
+        "currentPaidSession": "Unable to check the current paid session.",
+        "checkoutRequired": "A paid checkout session is required. Start from Step 1 first.",
+        "stillPending": "The paid session is still pending. Wait for the webhook to finish first."
+      }
+    },
+    "styleSelector": {
+      "selected": "{count}/{max} selected"
+    },
+    "resultGrid": {
+      "count": "{count} result(s)",
+      "empty": "Results will appear here after generation.",
+      "selected": "Selected",
+      "useThis": "Use this",
+      "download": "Download"
+    },
+    "hair": {
+      "shellTitle": "Choose 2 hairstyles",
+      "shellDescription": "Pick two hair concepts, run async generation, then choose one winning result.",
+      "shellMissingDescription": "Upload is required before hair generation can start.",
+      "missingUploadTitle": "Upload required",
+      "missingUploadDescription": "Add a selfie first so the hair step has something to work from.",
+      "goUpload": "Go to upload",
+      "selectorTitle": "Hair style options",
+      "selectorDescription": "Pick exactly 2 options. Results are generated through the live job pipeline.",
+      "generating": "Generating...",
+      "generate": "Generate hair previews",
+      "processingTitle": "Generating hair previews",
+      "processingDescription": "Running real async prediction polling through `GET /api/jobs/status?step=hair`.",
+      "resultTitle": "Hair preview results",
+      "resultDescription": "Download either preview, then mark one as the winner for the next stage.",
+      "resultEmpty": "Select two hairstyles and click generate to create previews.",
+      "resultDetail": "Generated hair output",
+      "continue": "Continue to outfit",
+      "notice": {
+        "starting": "Starting hair generation...",
+        "polling": "Hair generation started. Polling prediction results...",
+        "completed": "Hair generation completed. Pick one result to continue."
+      },
+      "errors": {
+        "pollStatus": "Unable to poll hair generation status.",
+        "noResults": "Hair generation completed but returned no results.",
+        "timeout": "Timed out while waiting for hair generation results.",
+        "paidSessionRequired": "Real hair generation requires a paid session. Complete checkout first and return with checkout_id.",
+        "start": "Unable to start hair generation.",
+        "generate": "Unable to generate hair previews right now.",
+        "verifiedSessionRequired": "A verified session is required to continue. Return to upload and complete checkout.",
+        "persist": "Unable to persist the selected hair result.",
+        "readImage": "Unable to read the uploaded image for generation.",
+        "serializeImage": "Unable to serialize the uploaded image."
+      }
+    },
+    "outfit": {
+      "shellTitle": "Choose 2 outfits",
+      "shellDescription": "Outfit provider is still pending for commercial use, so this stage runs in mock mode.",
+      "missingHairTitle": "Hair step required",
+      "missingHairDescription": "This stage requires a selected hair result from the previous step.",
+      "missingHairBody": "Finish the hair selection first so the outfit step has a selected base.",
+      "goHair": "Go to hair",
+      "mockTitle": "Provider status",
+      "mockBadge": "MOCK ONLY",
+      "mockDescription": "Outfit generation is currently simulated for UX validation. Do not treat these results as production output.",
+      "selectorTitle": "Outfit options",
+      "selectorDescription": "MVP mock stage: choose 2 outfits, generate 2 previews, then keep one.",
+      "generating": "Generating...",
+      "generate": "Generate outfit previews",
+      "processingTitle": "Generating local outfit previews",
+      "processingDescription": "This simulates the async generation stage while the commercial provider decision is still pending.",
+      "cutoutTitle": "Preparing transparent cutout",
+      "cutoutDescription": "Simulating the background removal step before moving into the composite stage.",
+      "resultTitle": "Outfit preview results",
+      "resultDescription": "Download either preview, then choose the one that moves to the cutout step.",
+      "resultEmpty": "Select two outfits and click generate to create previews.",
+      "resultDetail": "Mock outfit output",
+      "continue": "Continue to backgrounds"
+    },
+    "location": {
+      "shellTitle": "Choose 2 backdrops",
+      "shellDescription": "Pick two Seoul backdrops, generate composites, then select the final winner.",
+      "missingOutfitTitle": "Outfit step required",
+      "missingOutfitDescription": "A selected outfit is required before background compositing.",
+      "missingOutfitBody": "Finish the outfit step first. This page expects a selected cutout-ready outfit.",
+      "goOutfit": "Go to outfit",
+      "mockTitle": "Cutout/composite status",
+      "mockBadge": "SIMULATED",
+      "mockDescription": "Transparent cutout and final composite are currently mocked. Wire real cutout provider before production release.",
+      "selectorTitle": "Choose 2 backdrops",
+      "selectorDescription": "Pick two Seoul backdrops, then generate two composite previews and keep one.",
+      "compositing": "Compositing...",
+      "generate": "Create composite previews",
+      "processingTitle": "Compositing local previews",
+      "processingDescription": "Simulating the final browser-side canvas composite stage.",
+      "resultTitle": "Composite preview results",
+      "resultDescription": "Choose the final background result before finishing the flow.",
+      "resultEmpty": "Select two backgrounds and click create composite previews.",
+      "resultDetail": "Mock composite output",
+      "continue": "Finish and review"
+    },
+    "donePage": {
+      "title": "You look amazing",
+      "description": "Download your final image or clear local data to start a new session."
+    },
+    "finalResult": {
+      "title": "Final result",
+      "ready": "Ready",
+      "description": "Review your selected result, download it, then clear local data before starting another run.",
+      "previewAlt": "Final selected result",
+      "share": "Share",
+      "hashtag": "Hashtag",
+      "quickHint": "Tag your post with #KStyleMagic",
+      "downloadFinal": "Download final",
+      "shareWithFriends": "Share with friends",
+      "tryAnother": "Try another style",
+      "deleteLocal": "Delete local data",
+      "empty": "No final preview is available yet. Complete the flow before visiting this page.",
+      "sharePayloadTitle": "K-StyleMagic result",
+      "sharePayloadText": "I just completed my K-style transformation.",
+      "shareSheetOpened": "Share sheet opened.",
+      "linkCopied": "Result link copied to clipboard.",
+      "sharingUnavailable": "Sharing is not available in this browser.",
+      "shareCancelled": "Share action was cancelled or blocked.",
+      "hashtagCopied": "Hashtag copied: #KStyleMagic",
+      "hashtagCopyFailed": "Unable to copy hashtag.",
+      "clipboardUnavailable": "Clipboard is unavailable in this browser.",
+      "meta": {
+        "order": "Order",
+        "session": "Session",
+        "hair": "Hair",
+        "outfit": "Outfit",
+        "background": "Background",
+        "demoOrder": "demo-order",
+        "demoSession": "demo-session"
+      }
+    }
+  },
+  "legal": {
+    "terms": {
+      "title": "Terms",
+      "description": "Add the production legal copy here. Keep the no-affiliation and no exact likeness terms explicit."
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "Document temporary image processing, token storage, and delete behavior."
+    },
+    "refund": {
+      "title": "Refund Policy",
+      "description": "Keep the automatic refund rules aligned with the real backend flow."
+    },
+    "cookie": {
+      "title": "Cookie Policy",
+      "description": "Document the minimal session and analytics policy here."
+    }
+  }
 }

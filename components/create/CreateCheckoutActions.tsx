@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 type CreateCheckoutActionsProps = {
   lang: string;
@@ -38,6 +39,7 @@ function readErrorMessage(payload: unknown, fallback: string): string {
 }
 
 export function CreateCheckoutActions({ lang }: CreateCheckoutActionsProps) {
+  const t = useTranslations("create.checkoutActions");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const allowDemoFlow =
@@ -62,15 +64,13 @@ export function CreateCheckoutActions({ lang }: CreateCheckoutActionsProps) {
       const payload = (await response.json().catch(() => null)) as CheckoutCreateResponse | null;
 
       if (!response.ok || !payload || !payload.ok) {
-        throw new Error(readErrorMessage(payload, "Unable to create a checkout session."));
+        throw new Error(readErrorMessage(payload, t("errors.create")));
       }
 
       window.location.assign(payload.checkoutUrl);
     } catch (error) {
       setIsLoading(false);
-      setErrorMessage(
-        error instanceof Error ? error.message : "Unable to create a checkout session."
-      );
+      setErrorMessage(error instanceof Error ? error.message : t("errors.create"));
     }
   }
 
@@ -78,18 +78,15 @@ export function CreateCheckoutActions({ lang }: CreateCheckoutActionsProps) {
     <div className="stack">
       <div className="actions">
         <button className="button" disabled={isLoading} onClick={handleStartCheckout} type="button">
-          {isLoading ? "Opening checkout..." : "Start Polar checkout"}
+          {isLoading ? t("opening") : t("start")}
         </button>
         {allowDemoFlow ? (
           <Link className="button secondary" href={`/${lang}/create/upload`}>
-            Open local demo flow
+            {t("demo")}
           </Link>
         ) : null}
       </div>
-      <p className="muted">
-        Checkout creates a paid session and returns through `checkout_id` polling. Demo flow is
-        development-only unless explicitly enabled.
-      </p>
+      <p className="muted">{t("description")}</p>
       {errorMessage ? <div className="notice">{errorMessage}</div> : null}
     </div>
   );

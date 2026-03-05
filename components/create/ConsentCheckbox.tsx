@@ -1,8 +1,14 @@
-﻿export function ConsentCheckbox() {
+﻿"use client";
+
+import { useTranslations } from "next-intl";
+
+export function ConsentCheckbox() {
+  const t = useTranslations("create.consent");
+
   return (
     <label className="checkline">
       <input type="checkbox" />
-      <span>I own the rights to this photo and consent to AI processing.</span>
+      <span>{t("ownership")}</span>
     </label>
   );
 }
