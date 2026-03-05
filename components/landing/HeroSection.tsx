@@ -11,6 +11,12 @@ export function HeroSection() {
 
   return (
     <section className="hero card">
+      <img
+        alt="K-style portrait hero scene"
+        className="hero-art"
+        fetchPriority="high"
+        src="/visuals/landing/hero-scene.svg"
+      />
       <div className="hero-overlay" />
       <div className="hero-content stack">
         <p className="eyebrow">{t("eyebrow")}</p>

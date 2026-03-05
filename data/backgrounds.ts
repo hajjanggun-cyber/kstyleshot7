@@ -4,23 +4,22 @@ export const backgrounds: Background[] = [
   {
     id: "hongdae",
     name: "Hongdae",
-    thumbUrl: "/backgrounds/hongdae-thumb.webp",
-    fullUrl: "/backgrounds/hongdae-full.webp",
+    thumbUrl: "/backgrounds/hongdae-thumb.svg",
+    fullUrl: "/backgrounds/hongdae-full.svg",
     mood: "urban, bright, street"
   },
   {
     id: "gyeongbokgung",
     name: "Gyeongbokgung",
-    thumbUrl: "/backgrounds/gyeongbokgung-thumb.webp",
-    fullUrl: "/backgrounds/gyeongbokgung-full.webp",
+    thumbUrl: "/backgrounds/gyeongbokgung-thumb.svg",
+    fullUrl: "/backgrounds/gyeongbokgung-full.svg",
     mood: "historic, open, grand"
   },
   {
     id: "seongsu",
     name: "Seongsu",
-    thumbUrl: "/backgrounds/seongsu-thumb.webp",
-    fullUrl: "/backgrounds/seongsu-full.webp",
+    thumbUrl: "/backgrounds/seongsu-thumb.svg",
+    fullUrl: "/backgrounds/seongsu-full.svg",
     mood: "industrial, modern, stylish"
   }
 ];
-

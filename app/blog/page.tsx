@@ -1,12 +1,17 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 
 import { getBlogCategories, getRecentPosts } from "@/lib/blog";
+import { buildLocaleAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "kstyleshot Blog",
+  title: "kstyleshot Style Guide",
   description:
-    "The central blog landing for K-style photo guides, upload prep, styling tips, and product explainers."
+    "The central style guide landing for K-style photo guides, upload prep, styling tips, and product explainers.",
+  alternates: {
+    canonical: "/blog",
+    languages: buildLocaleAlternates((locale) => `/blog/${locale}`)
+  }
 };
 
 export default async function BlogIndexPage() {
@@ -15,6 +20,7 @@ export default async function BlogIndexPage() {
     getBlogCategories("ko"),
     getRecentPosts(6)
   ]);
+
   const totalEnPosts = enCategories.reduce((sum, category) => sum + category.count, 0);
   const totalKoPosts = koCategories.reduce((sum, category) => sum + category.count, 0);
   const totalPosts = totalEnPosts + totalKoPosts;
@@ -23,12 +29,15 @@ export default async function BlogIndexPage() {
   return (
     <main className="stack">
       <section className="card stack blog-hero">
-        <span className="count-badge">Editorial Landing</span>
-        <h1>kstyleshot Blog</h1>
+        <span className="count-badge">Style Guide Hub</span>
+        <h1>kstyleshot Style Guide</h1>
         <p className="muted">
-          This is the content hub for the styling guides, upload tips, and product explainers that
+          This is the content hub for styling guides, upload tips, and product explainers that
           support the main create flow.
         </p>
+        <div className="preview-frame blog-hero-media">
+          <img alt="kstyleshot style guide hub" loading="lazy" src="/visuals/blog/index.svg" />
+        </div>
         <div className="actions">
           <span className="count-badge">{totalPosts} total posts</span>
           <span className="count-badge">{totalEnPosts} EN posts</span>
@@ -37,17 +46,17 @@ export default async function BlogIndexPage() {
         </div>
         <div className="actions">
           <Link className="button" href="/blog/en">
-            Browse English posts
+            Browse English guides
           </Link>
           <Link className="button secondary" href="/blog/ko">
-            한국어 글 보기
+            한국어 가이드 보기
           </Link>
         </div>
       </section>
 
       <section className="grid two">
         <article className="card stack category-link-card">
-          <p className="muted">English editorial hub</p>
+          <p className="muted">English style guide hub</p>
           <h2>Search-friendly, conversion-close guides</h2>
           <p className="muted">
             Built around upload quality, hair direction, and product expectations.
@@ -63,19 +72,19 @@ export default async function BlogIndexPage() {
           </Link>
         </article>
         <article className="card stack category-link-card">
-          <p className="muted">한국어 콘텐츠 허브</p>
-          <h2>실전 검색과 전환 중심 가이드</h2>
+          <p className="muted">Korean style guide hub</p>
+          <h2>Practical guides for search and conversion</h2>
           <p className="muted">
-            셀카 준비, 헤어 선택, 촬영 팁부터 제품 FAQ까지 한 흐름으로 정리합니다.
+            Organized for upload prep, hair selection, photo technique, and product FAQ.
           </p>
           <div className="actions">
-            <span className="count-badge">{totalKoPosts}개 공개됨</span>
+            <span className="count-badge">{totalKoPosts} live posts</span>
             <span className="muted">
-              {koCategories.filter((category) => category.count > 0).length}개 카테고리 운영 중
+              {koCategories.filter((category) => category.count > 0).length} active categories
             </span>
           </div>
           <Link className="button secondary" href="/blog/ko">
-            한국어 허브 열기
+            Open Korean hub
           </Link>
         </article>
       </section>
@@ -129,4 +138,3 @@ export default async function BlogIndexPage() {
     </main>
   );
 }
-

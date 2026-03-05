@@ -9,6 +9,7 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ lang }: SiteHeaderProps) {
   const t = useTranslations("header");
+  const guideLabel = lang === "ko" ? "스타일 가이드" : "Style Guide";
 
   return (
     <header className="site-header">
@@ -22,7 +23,7 @@ export function SiteHeader({ lang }: SiteHeaderProps) {
         <nav className="site-nav" aria-label={t("ariaLabel")}>
           <Link href={`/${lang}`}>{t("home")}</Link>
           <Link href={`/${lang}/create`}>{t("create")}</Link>
-          <Link href={`/blog/${lang}`}>{t("blog")}</Link>
+          <Link href={`/blog/${lang}`}>{guideLabel}</Link>
           <Link href={`/${lang}/terms`}>{t("terms")}</Link>
         </nav>
         <div className="site-actions" aria-hidden>

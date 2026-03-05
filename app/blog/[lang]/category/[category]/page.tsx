@@ -1,12 +1,13 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import {
-  getBlogCategories,
   getAllBlogCategoryParams,
+  getBlogCategories,
   getBlogCategoryPageData
 } from "@/lib/blog";
+import { buildLocaleAlternates } from "@/lib/seo";
 
 const RELATED_CATEGORY_MAP: Record<string, string[]> = {
   "product-faq": ["hair", "photo-technique"],
@@ -39,8 +40,12 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${data.category.name} | kstyleshot Blog`,
-    description: data.category.description
+    title: `${data.category.name} | kstyleshot Style Guide`,
+    description: data.category.description,
+    alternates: {
+      canonical: `/blog/${lang}/category/${category}`,
+      languages: buildLocaleAlternates((locale) => `/blog/${locale}/category/${category}`)
+    }
   };
 }
 
@@ -58,6 +63,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
   const { posts } = data;
   const relatedCategorySlugs = RELATED_CATEGORY_MAP[category] ?? [];
   const relatedCategoryLookup = new Map(categories.map((entry) => [entry.slug, entry]));
+  const isEn = lang === "en";
 
   const recommendedPosts: Array<{
     slug: string;
@@ -73,6 +79,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
     if (seen.has(post.slug)) {
       continue;
     }
+
     seen.add(post.slug);
     recommendedPosts.push({
       slug: post.slug,
@@ -80,7 +87,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
       description: post.description,
       date: post.date,
       category: post.category,
-      reason: lang === "en" ? "Top post in this category" : "이 카테고리 핵심 글"
+      reason: isEn ? "Top post in this category" : "이 카테고리의 대표 글"
     });
   }
 
@@ -102,10 +109,9 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
         description: post.description,
         date: post.date,
         category: post.category,
-        reason:
-          lang === "en"
-            ? `Related from ${relatedCategory.name}`
-            : `${relatedCategory.name} 연계 글`
+        reason: isEn
+          ? `Related from ${relatedCategory.name}`
+          : `${relatedCategory.name} 카테고리의 연관 글`
       });
 
       if (recommendedPosts.length >= 6) {
@@ -123,31 +129,30 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
       <section className="card stack blog-hero">
         <div className="actions">
           <Link className="button secondary" href={`/blog/${lang}`}>
-            {lang === "en" ? "Back to language hub" : "언어 허브로 돌아가기"}
+            {isEn ? "Back to language hub" : "언어 허브로 돌아가기"}
           </Link>
           <Link className="button" href={`/${lang}/create`}>
-            {lang === "en" ? "Try kstyleshot" : "바로 체험하기"}
+            {isEn ? "Try kstyleshot" : "kstyleshot 시작하기"}
           </Link>
         </div>
-        <p className="muted">{lang === "en" ? "Category landing" : "카테고리 랜딩"}</p>
+        <p className="muted">{isEn ? "Category landing" : "카테고리 랜딩"}</p>
         <h1>{data.category.name}</h1>
         <p className="muted">{data.category.description}</p>
+        <div className="preview-frame blog-hero-media">
+          <img alt={data.category.name} loading="lazy" src="/visuals/blog/category.svg" />
+        </div>
         <div className="actions">
-          <span className="count-badge">
-            {posts.length} {lang === "en" ? "posts" : "개 포스트"}
-          </span>
+          <span className="count-badge">{posts.length} posts</span>
         </div>
       </section>
 
       {recommendedPosts.length > 0 ? (
         <section className="card stack">
           <p className="muted">
-            {lang === "en" ? "Recommended reading path" : "추천 읽기 경로"}
+            {isEn ? "Recommended reading path" : "추천 읽기 순서"}
           </p>
           <h2>
-            {lang === "en"
-              ? "Start with these linked articles"
-              : "아래 연결 글부터 읽으면 흐름이 빠릅니다"}
+            {isEn ? "Start with these linked articles" : "아래 연관 글부터 읽어보세요"}
           </h2>
           <div className="grid two">
             {recommendedPosts.map((post) => (
@@ -160,7 +165,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
                 <p className="muted">{post.description}</p>
                 <span className="muted">{post.reason}</span>
                 <Link className="button secondary" href={`/blog/${lang}/${post.slug}`}>
-                  {lang === "en" ? "Read article" : "글 읽기"}
+                  {isEn ? "Read article" : "글 읽기"}
                 </Link>
               </article>
             ))}
@@ -186,7 +191,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
                 ))}
               </div>
               <Link className="button secondary" href={`/blog/${lang}/${post.slug}`}>
-                {lang === "en" ? "Read article" : "글 읽기"}
+                {isEn ? "Read article" : "글 읽기"}
               </Link>
             </article>
           ))}
@@ -194,9 +199,9 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
       ) : (
         <section className="card stack">
           <div className="empty-state">
-            {lang === "en"
+            {isEn
               ? "This category landing is ready, but the next post batch has not been published yet."
-              : "카테고리 랜딩은 먼저 열어뒀고, 다음 포스트 배치가 아직 들어오지 않은 상태입니다."}
+              : "카테고리 랜딩은 준비되어 있으며, 다음 포스트 배치가 아직 발행되지 않은 상태입니다."}
           </div>
         </section>
       )}

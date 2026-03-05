@@ -51,6 +51,14 @@ export function CreateShell({
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "en";
   const { status, orderId, sessionToken, photoBlobUrl, hair, outfit, location } = useCreateStore();
+  const stageVisual = {
+    create: "/visuals/create/create.svg",
+    upload: "/visuals/create/upload.svg",
+    hair: "/visuals/create/hair.svg",
+    outfit: "/visuals/create/outfit.svg",
+    location: "/visuals/create/location.svg",
+    done: "/visuals/create/done.svg"
+  }[current];
 
   return (
     <section className="create-shell">
@@ -108,6 +116,9 @@ export function CreateShell({
 
       <div className="create-stage">
         <header className="card stack stage-header">
+          <div className="preview-frame stage-visual">
+            <img alt={`${title} preview`} loading="lazy" src={stageVisual} />
+          </div>
           <p className="eyebrow">{t("flowEyebrow")}</p>
           <h1>{title}</h1>
           <p className="muted">{description}</p>

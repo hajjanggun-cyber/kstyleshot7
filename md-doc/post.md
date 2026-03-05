@@ -11,6 +11,18 @@
 3. 한영 글은 같은 주제를 다뤄도 제목, 각도, 사례, 톤을 다르게 간다.
 4. 모든 글 하단에는 `Try kstyleshot` CTA 1개와 비제휴/AI disclaimer를 고정한다.
 5. 특정 아이돌, 그룹, 기획사, 브랜드 직접 언급은 피한다.
+6. 포스팅은 `/blog`에서 독립 운영하고, create 단계 UI 내부에는 본문을 삽입하지 않는다.
+7. 제품 공식 플로우 설명은 `헤어 -> 의상 -> 배경`을 기본값으로 유지한다.
+8. "배경 먼저" 계열 주제는 기본 플로우 대체가 아니라 비교/예외 케이스로만 다룬다.
+
+---
+
+## 포스팅-제품 분리 규칙
+
+1. 포스팅의 목적은 검색 유입/신뢰 형성이고, 실제 생성 인터랙션은 create 플로우에서만 수행한다.
+2. 개별 포스트는 본문 하단 CTA 1개로만 `/${lang}/create`에 연결한다.
+3. create 단계 화면에는 짧은 도움말만 두고, 긴 설명은 블로그 글로 보낸다.
+4. 제품 플로우 자체를 바꾸는 가이드는 `제품 / FAQ` 카테고리에서만 공식 문서처럼 관리한다.
 
 ---
 
@@ -50,14 +62,14 @@
 | 30 | Outfit | Casual City Looks That Still Feel Polished on Camera | casual-city-looks-that-feel-polished-on-camera | lifestyle search |
 | 31 | Outfit | Choosing Color Temperature in K-Style Wardrobe Planning | choosing-color-temperature-in-k-style-wardrobe | styling help |
 | 32 | Outfit | The Best Simple Layers for Street-to-Editorial Looks | best-simple-layers-for-street-to-editorial-looks | search + conversion |
-| 33 | Seoul Backdrop | Best Seoul-Inspired Backdrops for Clean Portrait Mood | best-seoul-inspired-backdrops-for-clean-portrait-mood | backdrop search |
-| 34 | Seoul Backdrop | Why Hongdae Feels Different From Seongsu in Photos | hongdae-vs-seongsu-photo-mood | comparison |
-| 35 | Seoul Backdrop | How Palace Backdrops Change a Portrait Tone | how-palace-backdrops-change-a-portrait-tone | aesthetic education |
-| 36 | Seoul Backdrop | The Most Camera-Friendly Urban Night Backdrop Styles | most-camera-friendly-urban-night-backdrop-styles | backdrop style |
-| 37 | Seoul Backdrop | Riverfront Backgrounds for Relaxed K-Style Portraits | riverfront-backgrounds-for-relaxed-k-style-portraits | scene planning |
-| 38 | Seoul Backdrop | Warm Street Backdrops vs Minimal Architecture Shots | warm-street-backdrops-vs-minimal-architecture-shots | comparison |
-| 39 | Seoul Backdrop | What Kind of Outfit Matches a Dense City Background | outfit-for-dense-city-background | pairing intent |
-| 40 | Seoul Backdrop | How to Pick a Backdrop Before You Pick a Hairstyle | pick-a-backdrop-before-hairstyle | workflow education |
+| 33 | Backdrop / Mood | Best Seoul-Inspired Backdrops for Clean Portrait Mood | best-seoul-inspired-backdrops-for-clean-portrait-mood | backdrop search |
+| 34 | Backdrop / Mood | Why Hongdae Feels Different From Seongsu in Photos | hongdae-vs-seongsu-photo-mood | comparison |
+| 35 | Backdrop / Mood | How Palace Backdrops Change a Portrait Tone | how-palace-backdrops-change-a-portrait-tone | aesthetic education |
+| 36 | Backdrop / Mood | The Most Camera-Friendly Urban Night Backdrop Styles | most-camera-friendly-urban-night-backdrop-styles | backdrop style |
+| 37 | Backdrop / Mood | Riverfront Backgrounds for Relaxed K-Style Portraits | riverfront-backgrounds-for-relaxed-k-style-portraits | scene planning |
+| 38 | Backdrop / Mood | Warm Street Backdrops vs Minimal Architecture Shots | warm-street-backdrops-vs-minimal-architecture-shots | comparison |
+| 39 | Backdrop / Mood | What Kind of Outfit Matches a Dense City Background | outfit-for-dense-city-background | pairing intent |
+| 40 | Backdrop / Mood | Backdrop-first vs Hair-first: When Each Works Better | pick-a-backdrop-before-hairstyle | workflow comparison |
 | 41 | Photo Technique | Best Front Camera Angle for Balanced Facial Proportions | best-front-camera-angle-for-balanced-facial-proportions | practical help |
 | 42 | Photo Technique | How to Use Window Light for a Cleaner Portrait Upload | use-window-light-for-cleaner-portrait-upload | photo tip |
 | 43 | Photo Technique | The Easiest Pose Fixes for Better 9:16 Portraits | easiest-pose-fixes-for-better-9x16-portraits | tutorial |
@@ -117,14 +129,14 @@
 | 30 | 코디 | 상의 핏만 바꿔도 사진 분위기 달라지는 이유 | why-top-fit-changes-photo-mood-ko | 정보형 |
 | 31 | 코디 | 촬영용으로 실패 적은 톤온톤 조합 정리 | low-risk-tone-on-tone-outfit-guide-ko | 초보 코디 |
 | 32 | 코디 | 번화가 배경에서 튀지 않으면서 묻히지 않는 옷 | outfits-for-busy-city-backgrounds-ko | 배경 매칭 |
-| 33 | 서울 배경 | 홍대 느낌 배경이 잘 어울리는 스타일 정리 | style-that-matches-hongdae-mood-ko | 배경 탐색 |
-| 34 | 서울 배경 | 성수 감성 배경에는 어떤 분위기가 어울릴까 | best-mood-for-seongsu-style-backdrops-ko | 배경 탐색 |
-| 35 | 서울 배경 | 경복궁 계열 배경이 얼굴 분위기를 바꾸는 방식 | palace-backdrop-effect-on-portrait-mood-ko | 미학 설명 |
-| 36 | 서울 배경 | 한강 느낌 배경이 편안해 보이는 이유 | why-riverfront-backdrops-feel-relaxed-ko | 정보형 |
-| 37 | 서울 배경 | 야간 도심 배경이 잘 받는 옷 색상 가이드 | outfit-colors-for-night-city-backdrops-ko | 매칭 검색 |
-| 38 | 서울 배경 | 관광지 느낌 말고 세련된 서울 무드 고르는 법 | choose-seoul-inspired-backdrops-without-tourist-look-ko | 전환 인접 |
-| 39 | 서울 배경 | 배경 먼저 정하면 스타일 고르기 쉬운 이유 | why-backdrop-first-can-simplify-style-choice-ko | 워크플로우 |
-| 40 | 서울 배경 | 복잡한 거리 배경에서 얼굴이 묻히지 않게 만드는 법 | avoid-losing-your-face-in-busy-street-backdrops-ko | 실전 팁 |
+| 33 | 배경 / 무드 | 홍대 느낌 배경이 잘 어울리는 스타일 정리 | style-that-matches-hongdae-mood-ko | 배경 탐색 |
+| 34 | 배경 / 무드 | 성수 감성 배경에는 어떤 분위기가 어울릴까 | best-mood-for-seongsu-style-backdrops-ko | 배경 탐색 |
+| 35 | 배경 / 무드 | 경복궁 계열 배경이 얼굴 분위기를 바꾸는 방식 | palace-backdrop-effect-on-portrait-mood-ko | 미학 설명 |
+| 36 | 배경 / 무드 | 한강 느낌 배경이 편안해 보이는 이유 | why-riverfront-backdrops-feel-relaxed-ko | 정보형 |
+| 37 | 배경 / 무드 | 야간 도심 배경이 잘 받는 옷 색상 가이드 | outfit-colors-for-night-city-backdrops-ko | 매칭 검색 |
+| 38 | 배경 / 무드 | 관광지 느낌 말고 세련된 서울 무드 고르는 법 | choose-seoul-inspired-backdrops-without-tourist-look-ko | 전환 인접 |
+| 39 | 배경 / 무드 | 배경 먼저 vs 헤어 먼저, 언제 더 유리한가 | why-backdrop-first-can-simplify-style-choice-ko | 워크플로우 비교 |
+| 40 | 배경 / 무드 | 복잡한 거리 배경에서 얼굴이 묻히지 않게 만드는 법 | avoid-losing-your-face-in-busy-street-backdrops-ko | 실전 팁 |
 | 41 | 촬영 팁 | 정면 셀카가 덜 어색해 보이는 카메라 각도 | best-front-selfie-angle-for-natural-look-ko | 실전 검색 |
 | 42 | 촬영 팁 | 창가 빛만으로도 얼굴이 깔끔하게 나오는 세팅 | window-light-setup-for-clean-face-selfies-ko | 조명 팁 |
 | 43 | 촬영 팁 | 작은 방에서도 셀카가 덜 답답하게 나오는 구도 | selfie-framing-in-small-rooms-ko | 생활형 검색 |
@@ -154,7 +166,7 @@
   - Hair 12
   - Beauty Prep 10
   - Outfit 10
-  - Seoul Backdrop 8
+  - Backdrop / Mood 8
   - Photo Technique 10
   - Product / FAQ 6
   - Seasonal / Trend 4
@@ -163,7 +175,7 @@
   - 헤어 12
   - K-뷰티 준비 10
   - 코디 10
-  - 서울 배경 8
+  - 배경 / 무드 8
   - 촬영 팁 10
   - 제품 / FAQ 6
   - 시즌 / 트렌드 4
@@ -177,7 +189,7 @@
 3. 촬영 팁
 4. K-뷰티 준비
 5. 코디
-6. 서울 배경
+6. 배경 / 무드
 7. 시즌 / 트렌드
 
 이 순서가 좋은 이유:
