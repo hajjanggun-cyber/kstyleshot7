@@ -700,3 +700,19 @@ NEXT_PUBLIC_PRICE=3.99
 - 상용 검토 없는 `cuuupid/idm-vton` 직접 사용
 
 이 문서를 기준으로 구현을 시작한다.
+
+---
+
+## 2026 Seoul Background Content Cluster (Addendum)
+
+- Posting is independent under `/blog` (Style Guide).
+- Product interaction remains only in create flow.
+- Official generation flow is fixed: `Hair -> Outfit -> Background`.
+- Seoul background expansion is tracked in:
+  - `md-doc/post-seoul-background-100.md`
+
+Cluster scope:
+- Locations: 10
+- Formats per location: 5
+- Languages: KO + EN
+- Total: 100 posts

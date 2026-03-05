@@ -451,3 +451,20 @@ KO:
 - `content/blog/ko/best-front-selfie-angle-for-natural-look-ko.mdx`
 - `content/blog/ko/window-light-setup-for-clean-face-selfies-ko.mdx`
 - `content/blog/ko/why-camera-distance-matters-for-selfies-ko.mdx`
+
+---
+
+## Seoul Background 100 Backlog (New)
+
+Detailed list moved to:
+- `md-doc/post-seoul-background-100.md`
+
+Execution order:
+1. Tier 1: mood guide 20 posts (KO 10 + EN 10)
+2. Tier 2: hair + outfit 40 posts (KO 20 + EN 20)
+3. Tier 3: framing + checklist 40 posts (KO 20 + EN 20)
+
+Rule:
+- Keep KO and EN as independent editorial tracks.
+- Use fixed URLs and stable slugs for SEO.
+- Keep create flow unchanged (`Hair -> Outfit -> Background`).
