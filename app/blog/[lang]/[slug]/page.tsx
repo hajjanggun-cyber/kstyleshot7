@@ -265,7 +265,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {lang === "en" ? "Back to list" : "목록으로"}
           </Link>
           {pairedPath ? (
-            <Link className="button secondary" href={pairedPath}>
+            <Link className="button secondary" href={pairedPath} prefetch={false}>
               {lang === "en" ? "한국어 보기" : "Read in English"}
             </Link>
           ) : null}
