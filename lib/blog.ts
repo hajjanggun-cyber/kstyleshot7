@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+﻿import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
 export type BlogLang = "en" | "ko";
@@ -70,7 +70,7 @@ const BLOG_CATEGORY_CONFIG: CategoryConfig[] = [
     },
     descriptions: {
       en: "Start here for product logic, upload standards, expectations, and policy trust.",
-      ko: "서비스 이해, 업로드 기준, 기대치 조정, 정책 신뢰를 먼저 잡는 허브입니다."
+      ko: "서비스 흐름, 업로드 기준, 결과 기대치, 환불 정책을 먼저 확인하는 안내 카테고리입니다."
     }
   },
   {
@@ -82,7 +82,7 @@ const BLOG_CATEGORY_CONFIG: CategoryConfig[] = [
     },
     descriptions: {
       en: "The core style category for face framing, bangs, layers, and lower-risk hair choices.",
-      ko: "앞머리, 레이어, 가르마, 얼굴선 정리에 집중하는 핵심 스타일 카테고리입니다."
+      ko: "얼굴선 정리, 앞머리, 레이어드, 실패 확률이 낮은 헤어 선택을 다루는 핵심 카테고리입니다."
     }
   },
   {
@@ -94,7 +94,7 @@ const BLOG_CATEGORY_CONFIG: CategoryConfig[] = [
     },
     descriptions: {
       en: "Lighting, angle, framing, and distance tips that improve the upload before styling.",
-      ko: "조명, 각도, 거리, 구도를 먼저 잡아 업로드 품질을 높이는 실전 팁 묶음입니다."
+      ko: "조명, 각도, 구도, 거리 세팅으로 업로드 품질을 높이는 실전 촬영 팁 모음입니다."
     }
   },
   {
@@ -106,7 +106,7 @@ const BLOG_CATEGORY_CONFIG: CategoryConfig[] = [
     },
     descriptions: {
       en: "Prep the face before the photo with lighter makeup, skin texture cleanup, and balance.",
-      ko: "셀카 전에 피부결, 베이스, 눈썹, 립 밸런스를 정리하는 준비형 카테고리입니다."
+      ko: "가벼운 베이스, 피부결 정리, 얼굴 밸런스 체크로 셀카 준비를 돕는 카테고리입니다."
     }
   },
   {
@@ -114,11 +114,11 @@ const BLOG_CATEGORY_CONFIG: CategoryConfig[] = [
     slug: "outfit-styling",
     labels: {
       en: "Outfit / Styling",
-      ko: "코디"
+      ko: "의상 / 스타일링"
     },
     descriptions: {
       en: "Outfit silhouettes, necklines, color temperature, and cleaner camera-friendly styling.",
-      ko: "실루엣, 넥라인, 톤온톤, 배경 매칭까지 보는 코디 허브입니다."
+      ko: "실루엣, 넥라인, 색온도, 배경 매칭까지 다루는 카메라 친화 스타일링 허브입니다."
     },
     aliases: {
       en: ["Outfit"]
@@ -133,7 +133,7 @@ const BLOG_CATEGORY_CONFIG: CategoryConfig[] = [
     },
     descriptions: {
       en: "Backdrop choice, city mood, spatial tone, and the way scene selection changes the result.",
-      ko: "서울 무드, 도심 배경, 배경 밀도, 합성 기대치를 다루는 배경 허브입니다."
+      ko: "장소 무드, 공간 톤, 배경 선택에 따른 결과 차이를 다루는 배경 중심 카테고리입니다."
     },
     aliases: {
       en: ["Seoul Backdrop"],
@@ -149,7 +149,7 @@ const BLOG_CATEGORY_CONFIG: CategoryConfig[] = [
     },
     descriptions: {
       en: "Season-led styling updates for spring, summer, fall, winter, and evergreen trend shifts.",
-      ko: "봄, 여름, 가을, 겨울 흐름을 따라가는 계절성 확장 카테고리입니다."
+      ko: "봄, 여름, 가을, 겨울 시즌 변화에 맞춘 스타일 가이드를 다루는 트렌드 카테고리입니다."
     }
   }
 ];
@@ -184,17 +184,18 @@ function parseStringArray(value: string): string[] {
 }
 
 function parseFrontmatter(raw: string): { frontmatter: ParsedFrontmatter; body: string } {
-  if (!raw.startsWith("---")) {
-    return { frontmatter: {}, body: raw.trim() };
+  const normalizedRaw = raw.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
+  if (!normalizedRaw.startsWith("---")) {
+    return { frontmatter: {}, body: normalizedRaw.trim() };
   }
 
-  const endIndex = raw.indexOf("\n---", 3);
+  const endIndex = normalizedRaw.indexOf("\n---", 3);
   if (endIndex === -1) {
-    return { frontmatter: {}, body: raw.trim() };
+    return { frontmatter: {}, body: normalizedRaw.trim() };
   }
 
-  const frontmatterBlock = raw.slice(4, endIndex).trim();
-  const body = raw.slice(endIndex + 4).trim();
+  const frontmatterBlock = normalizedRaw.slice(4, endIndex).trim();
+  const body = normalizedRaw.slice(endIndex + 4).trim();
   const frontmatter: ParsedFrontmatter = {};
 
   for (const line of frontmatterBlock.split("\n")) {
@@ -292,6 +293,10 @@ function getCategoryConfigByName(category: string): CategoryConfig | null {
   }
 
   return null;
+}
+
+export function getBlogCategorySlug(category: string): string | null {
+  return getCategoryConfigByName(category)?.slug ?? null;
 }
 
 function getCategoryConfigBySlug(slug: string): CategoryConfig | null {
@@ -397,4 +402,5 @@ export async function getAllBlogCategoryParams(): Promise<Array<{ lang: BlogLang
     }))
   );
 }
+
 

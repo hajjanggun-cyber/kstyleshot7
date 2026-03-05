@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
 
 import { getBlogCategories, getBlogPosts } from "@/lib/blog";
-import { buildLocaleAlternatesAbsolute, toAbsoluteUrl } from "@/lib/seo";
+import { buildLocaleAlternatesAbsolute, toAbsoluteAssetUrl, toAbsoluteUrl } from "@/lib/seo";
 import { routing, type AppLocale } from "@/i18n/routing";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
-const LOCALIZED_STATIC_SUFFIXES = ["", "/create", "/terms", "/privacy", "/refund-policy", "/cookie-policy"];
+const LOCALIZED_STATIC_SUFFIXES = ["", "/terms", "/privacy", "/refund-policy", "/cookie-policy"];
 
 function parseIsoDate(input: string): Date | undefined {
   if (!input) {
@@ -28,6 +28,14 @@ function withAlternates(entry: SitemapEntry, languages: Record<string, string>):
 
 function resolvePairLocale(locale: AppLocale): AppLocale {
   return locale === "en" ? "ko" : "en";
+}
+
+function buildPostImages(post: {
+  heroImage: string;
+  galleryImages: string[];
+}): string[] {
+  const candidates = [post.heroImage, ...post.galleryImages].filter(Boolean);
+  return Array.from(new Set(candidates)).map((src) => toAbsoluteAssetUrl(src));
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -56,6 +64,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: now,
     changeFrequency: "daily",
     priority: 0.9
+  });
+
+  entries.push({
+    url: toAbsoluteUrl("/blog/rss.xml"),
+    lastModified: now,
+    changeFrequency: "daily",
+    priority: 0.4
   });
 
   entries.push(
@@ -124,7 +139,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: toAbsoluteUrl(currentPath),
             lastModified: parseIsoDate(post.updated) ?? parseIsoDate(post.date) ?? now,
             changeFrequency: "weekly",
-            priority: 0.7
+            priority: 0.7,
+            images: buildPostImages(post)
           },
           languages
         )

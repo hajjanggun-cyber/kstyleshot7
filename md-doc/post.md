@@ -1,4 +1,4 @@
-﻿Updated At: 2026-03-05 19:29:04 +09:00 (Asia/Seoul)
+﻿Updated At: 2026-03-05 21:49:41 +09:00 (Asia/Seoul)
 
 # Post Operations (Latest)
 
@@ -14,6 +14,13 @@
 ## Today Posting Priority (Pair)
 1. EN: /blog/en/gyeongbokgung-mood-guide
 2. KO: /blog/ko/gyeongbokgung-mood-guide-ko
+
+## Today Execution Status (2026-03-05)
+- 본문 최종 점검 완료 (EN/KO)
+- 내부 링크 3개씩 추가 완료
+- 이미지 슬롯 배치 완료 (EN 9/9, KO 9/9)
+- sitemap 반영 확인 완료
+- 다음 작업: Google Search Console 수동 색인 요청
 
 ## Image Policy For New Posts
 - 기본 슬롯: hero 1 + gallery 8 (총 9장)
@@ -575,4 +582,9 @@ Linked status docs updated together:
 - `md-doc/tier2-batch-40.md`
 - `md-doc/publish-ready-wave2-top10.md`
 - `md-doc/todo.md`
+
+
+
+
+
 

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getBlogCategories, getBlogPosts } from "@/lib/blog";
-import { buildLocaleAlternates } from "@/lib/seo";
+import { buildLocaleAlternates, getOgLocale, toAbsoluteAssetUrl, toAbsoluteUrl } from "@/lib/seo";
 
 type BlogLangPageProps = {
   params: Promise<{ lang: string }>;
@@ -24,14 +24,46 @@ export async function generateMetadata({
   }
 
   return {
-    title: lang === "en" ? "English Style Guide | kstyleshot" : "한국어 스타일 가이드 | kstyleshot",
+    title: lang === "en" ? "English Style Guide" : "한국어 스타일 가이드",
     description:
       lang === "en"
         ? "Browse the English category hub for K-style portrait guides and styling explainers."
         : "실전형 케이스타일 촬영 가이드와 제품 설명 글을 모은 한국어 카테고리 허브입니다.",
+    keywords:
+      lang === "en"
+        ? ["k-style guide", "kstyle blog", "portrait tips", "hair outfit backdrop"]
+        : ["케이스타일 가이드", "스타일 블로그", "촬영 팁", "헤어 의상 배경"],
     alternates: {
       canonical: `/blog/${lang}`,
       languages: buildLocaleAlternates((locale) => `/blog/${locale}`)
+    },
+    openGraph: {
+      type: "website",
+      url: `/blog/${lang}`,
+      title: lang === "en" ? "English Style Guide" : "한국어 스타일 가이드",
+      description:
+        lang === "en"
+          ? "Browse the English category hub for K-style portrait guides and styling explainers."
+          : "실전형 케이스타일 촬영 가이드와 제품 설명 글을 모은 한국어 카테고리 허브입니다.",
+      locale: getOgLocale(lang),
+      alternateLocale: [getOgLocale(lang === "en" ? "ko" : "en")],
+      images: [
+        {
+          url: toAbsoluteAssetUrl("/visuals/blog/lang.svg"),
+          width: 1200,
+          height: 630,
+          alt: lang === "en" ? "English style guide hub" : "한국어 스타일 가이드 허브"
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: lang === "en" ? "English Style Guide" : "한국어 스타일 가이드",
+      description:
+        lang === "en"
+          ? "Browse the English category hub for K-style portrait guides and styling explainers."
+          : "실전형 케이스타일 촬영 가이드와 제품 설명 글을 모은 한국어 카테고리 허브입니다.",
+      images: [toAbsoluteAssetUrl("/visuals/blog/lang.svg")]
     }
   };
 }
@@ -45,9 +77,26 @@ export default async function BlogLangPage({ params }: BlogLangPageProps) {
   const [posts, categories] = await Promise.all([getBlogPosts(lang), getBlogCategories(lang)]);
   const liveCategories = categories.filter((category) => category.count > 0);
   const isEn = lang === "en";
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: isEn ? "English Style Guide" : "한국어 스타일 가이드",
+    url: toAbsoluteUrl(`/blog/${lang}`),
+    inLanguage: lang,
+    hasPart: posts.slice(0, 20).map((post, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: post.title,
+      url: toAbsoluteUrl(`/blog/${lang}/${post.slug}`)
+    }))
+  };
 
   return (
     <main className="stack">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <section className="card stack blog-hero">
         <div className="actions">
           <Link className="button secondary" href="/blog">

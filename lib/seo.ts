@@ -1,6 +1,9 @@
 import { routing, type AppLocale } from "@/i18n/routing";
 
-const DEFAULT_SITE_URL = "https://www.kstylewshot.com";
+const DEFAULT_SITE_URL = "https://www.kstyleshot.com";
+export const SITE_NAME = "kstyleshot";
+const ROOT_DOMAIN = "kstyleshot.com";
+const LEGACY_TYPO_DOMAIN = "kstylewshot.com";
 
 function ensureLeadingSlash(path: string): string {
   return path.startsWith("/") ? path : `/${path}`;
@@ -13,6 +16,15 @@ function normalizeSiteUrl(raw: string | undefined): string {
 
   try {
     const parsed = new URL(raw);
+    if (parsed.hostname === LEGACY_TYPO_DOMAIN || parsed.hostname === `www.${LEGACY_TYPO_DOMAIN}`) {
+      parsed.hostname = `www.${ROOT_DOMAIN}`;
+    }
+
+    // Keep canonical host at www.kstyleshot.com for sitemap/Search Console consistency.
+    if (parsed.hostname === ROOT_DOMAIN) {
+      parsed.hostname = `www.${ROOT_DOMAIN}`;
+    }
+
     return parsed.origin;
   } catch {
     return DEFAULT_SITE_URL;
@@ -20,11 +32,31 @@ function normalizeSiteUrl(raw: string | undefined): string {
 }
 
 export function getSiteUrl(): string {
-  return normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL);
+  return normalizeSiteUrl(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      process.env.SITE_URL ??
+      process.env.NEXT_PUBLIC_APP_URL
+  );
 }
 
 export function toAbsoluteUrl(path: string): string {
   return new URL(ensureLeadingSlash(path), getSiteUrl()).toString();
+}
+
+export function toAbsoluteAssetUrl(pathOrUrl: string): string {
+  if (!pathOrUrl) {
+    return toAbsoluteUrl("/");
+  }
+
+  try {
+    return new URL(pathOrUrl).toString();
+  } catch {
+    return toAbsoluteUrl(pathOrUrl);
+  }
+}
+
+export function getOgLocale(locale: AppLocale): string {
+  return locale === "ko" ? "ko_KR" : "en_US";
 }
 
 export function buildLocaleAlternates(

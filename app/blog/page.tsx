@@ -1,8 +1,8 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 import { getBlogCategories, getRecentPosts } from "@/lib/blog";
-import { buildLocaleAlternates } from "@/lib/seo";
+import { buildLocaleAlternates, toAbsoluteAssetUrl, toAbsoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "kstyleshot Style Guide",
@@ -11,6 +11,28 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/blog",
     languages: buildLocaleAlternates((locale) => `/blog/${locale}`)
+  },
+  openGraph: {
+    type: "website",
+    url: "/blog",
+    title: "kstyleshot Style Guide",
+    description:
+      "The central style guide landing for K-style photo guides, upload prep, styling tips, and product explainers.",
+    images: [
+      {
+        url: toAbsoluteAssetUrl("/visuals/blog/index.svg"),
+        width: 1200,
+        height: 630,
+        alt: "kstyleshot style guide hub"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "kstyleshot Style Guide",
+    description:
+      "The central style guide landing for K-style photo guides, upload prep, styling tips, and product explainers.",
+    images: [toAbsoluteAssetUrl("/visuals/blog/index.svg")]
   }
 };
 
@@ -25,9 +47,28 @@ export default async function BlogIndexPage() {
   const totalKoPosts = koCategories.reduce((sum, category) => sum + category.count, 0);
   const totalPosts = totalEnPosts + totalKoPosts;
   const activeTracks = enCategories.filter((category) => category.count > 0).length;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "kstyleshot Style Guide",
+    url: toAbsoluteUrl("/blog"),
+    description:
+      "The central style guide landing for K-style photo guides, upload prep, styling tips, and product explainers.",
+    inLanguage: ["en", "ko"],
+    hasPart: recentPosts.map((post, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: post.title,
+      url: toAbsoluteUrl(`/blog/${post.lang}/${post.slug}`)
+    }))
+  };
 
   return (
     <main className="stack">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <section className="card stack blog-hero">
         <span className="count-badge">Style Guide Hub</span>
         <h1>kstyleshot Style Guide</h1>

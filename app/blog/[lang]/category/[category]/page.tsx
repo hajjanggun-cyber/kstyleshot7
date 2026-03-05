@@ -7,7 +7,7 @@ import {
   getBlogCategories,
   getBlogCategoryPageData
 } from "@/lib/blog";
-import { buildLocaleAlternates } from "@/lib/seo";
+import { buildLocaleAlternates, getOgLocale, toAbsoluteAssetUrl, toAbsoluteUrl } from "@/lib/seo";
 
 const RELATED_CATEGORY_MAP: Record<string, string[]> = {
   "product-faq": ["hair", "photo-technique"],
@@ -40,11 +40,34 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${data.category.name} | kstyleshot Style Guide`,
+    title: `${data.category.name} Style Guide`,
     description: data.category.description,
+    keywords: [data.category.name, "kstyleshot", "style guide", "category"],
     alternates: {
       canonical: `/blog/${lang}/category/${category}`,
       languages: buildLocaleAlternates((locale) => `/blog/${locale}/category/${category}`)
+    },
+    openGraph: {
+      type: "website",
+      url: `/blog/${lang}/category/${category}`,
+      title: `${data.category.name} Style Guide`,
+      description: data.category.description,
+      locale: getOgLocale(lang === "ko" ? "ko" : "en"),
+      alternateLocale: [getOgLocale(lang === "en" ? "ko" : "en")],
+      images: [
+        {
+          url: toAbsoluteAssetUrl("/visuals/blog/category.svg"),
+          width: 1200,
+          height: 630,
+          alt: data.category.name
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${data.category.name} Style Guide`,
+      description: data.category.description,
+      images: [toAbsoluteAssetUrl("/visuals/blog/category.svg")]
     }
   };
 }
@@ -64,6 +87,20 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
   const relatedCategorySlugs = RELATED_CATEGORY_MAP[category] ?? [];
   const relatedCategoryLookup = new Map(categories.map((entry) => [entry.slug, entry]));
   const isEn = lang === "en";
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: data.category.name,
+    description: data.category.description,
+    url: toAbsoluteUrl(`/blog/${lang}/category/${category}`),
+    inLanguage: lang,
+    hasPart: posts.slice(0, 20).map((post, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: post.title,
+      url: toAbsoluteUrl(`/blog/${lang}/${post.slug}`)
+    }))
+  };
 
   const recommendedPosts: Array<{
     slug: string;
@@ -126,6 +163,10 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
 
   return (
     <main className="stack">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <section className="card stack blog-hero">
         <div className="actions">
           <Link className="button secondary" href={`/blog/${lang}`}>
