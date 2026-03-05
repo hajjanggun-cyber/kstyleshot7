@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4257b",
+                        "background-light": "#f8f5f7",
+                        "background-dark": "#221017",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>K-Style Magic</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative min-h-screen flex flex-col">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-20 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined !text-2xl">magic_button</span>
+</div>
+<h2 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">K-Style Magic</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wider">
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Home</a>
+<a class="hover:text-primary transition-colors" href="#">Gallery</a>
+<a class="hover:text-primary transition-colors" href="#">Trends</a>
+<a class="hover:text-primary transition-colors" href="#">Profile</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center rounded-full size-10 bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-full size-10 bg-primary text-white hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<!-- Hero Section -->
+<section class="relative overflow-hidden rounded-xl lg:rounded-lg">
+<div class="absolute inset-0 bg-gradient-to-r from-background-dark/90 via-background-dark/40 to-transparent z-10"></div>
+<div class="relative h-[500px] lg:h-[650px] w-full bg-cover bg-center flex items-center px-8 lg:px-16" data-alt="Trendy K-POP idol model posing in neon lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBE1XKXp1emLZGP2mqr16otX1qHc4DZFQDOdX8GjaRfSVzbKmYsx96nyXbroc2PTHV4KPZ9HoA7nyMQ0sf_kzr9O6vrUfaG3l5dfMKR3aiqkmxxivFYiZGEr5OKAnTReDZKAx4SBIiOGHjahNv-s_VcKOUSs2PKz6pQYfh9X7Rf2_-WiOXgF4C0VOuGs6ByQbUa09d9up4OTCfs0xVxMYiX4BWl18R8TNbTyBJCSq7VzGeCChzgjkTSIH1IagE45WygkE-LzFRSiO7y');">
+<div class="relative z-20 max-w-2xl flex flex-col gap-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined !text-sm">auto_awesome</span>
+                            Next-Gen AI Transformation
+                        </div>
+<h1 class="text-5xl lg:text-7xl font-black leading-[1.1] text-white tracking-tighter">
+                            Transform into Your Favorite <span class="text-primary italic">K-POP</span> Star!
+                        </h1>
+<p class="text-slate-200 text-lg lg:text-xl max-w-lg leading-relaxed">
+                            Experience the ultimate K-Style makeover. Our AI-powered magic analyzes your features to craft the perfect idol look tailored just for you.
+                        </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="h-14 px-10 bg-primary hover:bg-primary/90 text-white font-bold rounded-full text-lg shadow-lg shadow-primary/25 transition-all flex items-center gap-2">
+                                Start Experience
+                                <span class="material-symbols-outlined">arrow_forward_ios</span>
+</button>
+<button class="h-14 px-8 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-full text-lg hover:bg-white/20 transition-all">
+                                View Gallery
+                            </button>
+</div>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute bottom-0 right-0 p-8 z-20 hidden lg:block">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-full border-4 border-primary/50 overflow-hidden ring-4 ring-background-dark shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="User profile avatar preview 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtTwcougiEQMWtcx1nTpD80rq-1CM1sdflJ0jcQKpc6513TJO5U7P_7ArPocHitbuyIRJ1z-2PjQ2ba2wjPPqjKRmndC3P4bMAVOa-_yozghVAzKKptcGto1eUTSTPPYKY6vtt786rqdBPOfT8L1WYqxE0r4oAbu8EAVqRA5jb5o6NvpuCxtcna65hXt4DSnrD3OPZzv9Gmb4C_POSO4BJQZog5h8w5-XekbcAMmJpsfFVKC8PF12sGNjvmNNF9I84JkynQ1iyx9nF"/>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-primary/50 overflow-hidden ring-4 ring-background-dark shadow-2xl -ml-8">
+<img class="w-full h-full object-cover" data-alt="User profile avatar preview 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkQ22oPPtWgN1oyHgwKdgTosjoNjfiUGh8qNpadYFr36AbxEWCLQibUxpP1ay8_Y6alETCssjpgyy8laE9I5wVziJNzyaf1dyeeJV_pP9DJ6yrynEfaeOpeTl-MVKfCM-4xeRRjp0E50vJBuEFoAqiZKUZkLkT37OcDVltU9ixDGKuz_xQcrF6JssVdZw9NHkSDW2XjFdMdsD6Xeqymd3rUP3_IuhJ9_hTx8C52_g11JAbfXi9dG5BtpWQdh_S8Bize7r8ImnX5HUq"/>
+</div>
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center ring-4 ring-background-dark -ml-8 text-white font-bold text-sm">
+                            +10k
+                        </div>
+</div>
+<p class="text-white/80 text-xs mt-3 font-medium text-right uppercase tracking-widest">Joined the magic</p>
+</div>
+</section>
+<!-- Stats/Trust Bar -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-6 border border-primary/10 text-center">
+<p class="text-3xl font-black text-primary">500+</p>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400">Idol Outfits</p>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-6 border border-primary/10 text-center">
+<p class="text-3xl font-black text-primary">0.5s</p>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400">Gen Speed</p>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-6 border border-primary/10 text-center">
+<p class="text-3xl font-black text-primary">99%</p>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400">Satisfaction</p>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-6 border border-primary/10 text-center">
+<p class="text-3xl font-black text-primary">24/7</p>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400">AI Stylist</p>
+</div>
+</div>
+<!-- How it works -->
+<section class="py-20">
+<div class="flex flex-col items-center text-center gap-4 mb-16">
+<h2 class="text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight">How the magic happens</h2>
+<p class="text-slate-600 dark:text-slate-400 max-w-lg">Three simple steps to unlock your idol persona. Our neural networks handle the styling, you handle the spotlight.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Step 1 -->
+<div class="group relative bg-white dark:bg-primary/5 p-8 rounded-lg border border-primary/10 hover:border-primary/40 transition-all flex flex-col items-center text-center">
+<div class="absolute -top-6 bg-primary size-14 rounded-full flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-3xl">upload_file</span>
+</div>
+<h3 class="mt-6 text-xl font-bold mb-3">1. Upload</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Take a selfie or upload a portrait. For best results, ensure clear lighting and a neutral expression.
+                        </p>
+<div class="w-full h-32 bg-slate-100 dark:bg-primary/10 rounded-xl flex items-center justify-center border-2 border-dashed border-primary/20">
+<span class="material-symbols-outlined text-primary/40 !text-4xl">add_a_photo</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="group relative bg-white dark:bg-primary/5 p-8 rounded-lg border border-primary/10 hover:border-primary/40 transition-all flex flex-col items-center text-center">
+<div class="absolute -top-6 bg-primary size-14 rounded-full flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-3xl">wand_stars</span>
+</div>
+<h3 class="mt-6 text-xl font-bold mb-3">2. Style</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Browse through hundreds of curated K-POP styles from minimalist street style to glam stage outfits.
+                        </p>
+<div class="w-full flex gap-2 justify-center">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">BP</div>
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">BTS</div>
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">NW</div>
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">IV</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="group relative bg-white dark:bg-primary/5 p-8 rounded-lg border border-primary/10 hover:border-primary/40 transition-all flex flex-col items-center text-center">
+<div class="absolute -top-6 bg-primary size-14 rounded-full flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-3xl">ios_share</span>
+</div>
+<h3 class="mt-6 text-xl font-bold mb-3">3. Share</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Download your high-res transformation and share it with your community or use it as a new profile pic.
+                        </p>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined">public</span>
+<span class="material-symbols-outlined">share_reviews</span>
+<span class="material-symbols-outlined">download</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Trending Carousel Highlight -->
+<section class="mb-20">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-3xl font-black tracking-tight">Trending This Week</h2>
+<button class="text-primary font-bold flex items-center gap-1 hover:underline">
+                        Explore all <span class="material-symbols-outlined !text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="group relative aspect-[3/4] rounded-lg overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Model in futuristic neon K-style outfit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiQAKKbtkuQM6yuPig_XVazMDsqxtS6LZa78d4-5-W6F_w6xMxzYXxwqT1OTMytUJlI5mpyM0esfIHuHBRxkJAAogUUEYuWcfYS442vlCWFvqER_dfeG3GGDRBsorN9R0cScs27UXzkvWx4ni2-BVkVCBAyezjls4T_fHTnqVyh1wND46V8uCVFCNt9nVEEJDSY0g0qAKP89pGfBJVpTOuAADEPCezQqMIp9zN8JRdSWT0eov8BFGZY4MBu42GfftG_4YzBG0W32Ap"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-6 flex flex-col justify-end">
+<p class="text-white font-bold">Cyber Idol</p>
+<p class="text-primary text-xs font-semibold">2.4k Uses</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-lg overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Model in elegant soft pink aesthetic style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADKxRce5YQpXp7mhvf2ryb8Kew0YNrfoJZ_AlSEmdaAkaQeB7v_G6HztJTuvgygtJZF-FIWK6s5JGWf8E7-AYQNc5ISFWd6DLTyGbh1F2Q7O_PwlPx_3yTKRBqdLDIw3XcNNlm_j7UnRf6vxFqytkGe68FDCeC_lWZWD8_1vaCyDUjeIQixYWmxCBAjwhfaAYcKLrXY_Ot2FMkY66LLWjsvpPeaNYlbHKNrv1P9dZm-H-QoxiSXo0NhtMP6Ji-bgpfmhlB-1DqWMtf"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-6 flex flex-col justify-end">
+<p class="text-white font-bold">Soft Glam</p>
+<p class="text-primary text-xs font-semibold">1.8k Uses</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-lg overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Model in street style hip-hop K-POP outfit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW4ocTWlv0X95WTK0jkL9UpflTkej407NvPuhtItK2ZKrKzCsmU4Cdl9D98NkskShXvggPXx34f7x4XEnJ90tx9DaNpgUFe8Y7fLfMMD9SxHojUVVq52DI22Ta6F3N8lb5QiZ_0YInRguUncAXnBofwEuudwWbdm5hZodMpYKqfXEncbKIrwpVoxGA4F3kzNU5boYCBRpy4IzF-87cTcTjr2qxb72zN4_FEzEV4xCO_WB9Xj8Sz7-cCWcZ_3wrN-QHdRqedO9Kg5Eb"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-6 flex flex-col justify-end">
+<p class="text-white font-bold">Street Beat</p>
+<p class="text-primary text-xs font-semibold">4.1k Uses</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-lg overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Model in minimal clean aesthetic office K-style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP5NCeC3Pocsb--_25-_kW5bI_wdlf1lY1EB7MAwv1yGBH5f3JJJfNUQXt-d37qlWZuZLj47eFL_D_SfZBpW6_MMuxLaidEg_jnJWVFhUh_vBR1h6CByAA2MTOjB4JxttbYxna0DJmY29_XQcQxDaUXiPO5DG8LPjVXbsx60VpDiXznJtAEEC8Bxp690NFOQwRKpH1JXl8lpxb_SFLfqShz9DHGYTW-zEB1aAtjZgzpiMzLlvkmwvCWyvkzvcqmhto75BLXKjNo_D2"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-6 flex flex-col justify-end">
+<p class="text-white font-bold">Clean Royal</p>
+<p class="text-primary text-xs font-semibold">900 Uses</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-primary/10 bg-white dark:bg-background-dark py-12 px-6">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined !text-xl">magic_button</span>
+</div>
+<span class="text-lg font-extrabold tracking-tight">K-Style Magic</span>
+</div>
+<p class="text-slate-500 text-sm">© 2024 K-Style Magic. Powered by Advanced Vision AI.</p>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-primary" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-slate-500 hover:text-primary" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-slate-500 hover:text-primary" href="#"><span class="material-symbols-outlined">language</span></a>
+</div>
+</div>
+</footer>
+<!-- Background Decorations -->
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden opacity-20 dark:opacity-30">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary rounded-full blur-[150px] animate-pulse"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/40 rounded-full blur-[120px]"></div>
+<!-- Grid pattern -->
+<div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, #f4257b 1px, transparent 0); background-size: 40px 40px; opacity: 0.1;"></div>
+</div>
+</div>
+</body></html>

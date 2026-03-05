@@ -214,6 +214,49 @@ main {
   font-size: 13px;
 }
 
+.status-list {
+  display: grid;
+  gap: 10px;
+}
+
+.status-row {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.status-chip.is-ready {
+  background: rgba(26, 122, 72, 0.14);
+  color: #1a7a48;
+}
+
+.status-chip.is-missing {
+  background: rgba(185, 80, 47, 0.14);
+  color: #8f3b22;
+}
+
+.status-chip.is-blocked {
+  background: rgba(22, 18, 13, 0.1);
+  color: var(--muted);
+}
+
 .article-body {
   display: grid;
   gap: 14px;

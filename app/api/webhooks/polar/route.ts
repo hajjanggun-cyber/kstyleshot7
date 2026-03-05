@@ -1,5 +1,4 @@
-import { NextResponse } from "next/server";
-
+import { getRequestId, jsonError, jsonOk, logApiEvent } from "@/lib/api-response";
 import {
   PolarApiError,
   createConfirmedJob,
@@ -16,6 +15,7 @@ import { getRedis } from "@/lib/redis";
 export const maxDuration = 30;
 
 export async function POST(request: Request) {
+  const requestId = getRequestId(request);
   const body = await request.text();
   let event: unknown;
 
@@ -31,19 +31,26 @@ export async function POST(request: Request) {
     const message =
       error instanceof Error ? error.message : "Unable to validate the Polar webhook.";
 
-    return NextResponse.json({ ok: false, message }, { status });
+    logApiEvent("error", {
+      requestId,
+      route: "POST /api/webhooks/polar",
+      message,
+      details: { status }
+    });
+
+    return jsonError(requestId, { status, message });
   }
 
   if (!isSupportedPaymentEvent(event)) {
-    return NextResponse.json({ ok: true, ignored: true });
+    return jsonOk(requestId, { ok: true, ignored: true });
   }
 
   const paidOrder = extractPaidOrder(event);
   if (!paidOrder) {
-    return NextResponse.json(
-      { ok: false, message: "Webhook payload is missing order or checkout identifiers." },
-      { status: 400 }
-    );
+    return jsonError(requestId, {
+      status: 400,
+      message: "Webhook payload is missing order or checkout identifiers."
+    });
   }
 
   try {
@@ -55,7 +62,18 @@ export async function POST(request: Request) {
     });
 
     if (eventLocked !== "OK") {
-      return NextResponse.json({
+      logApiEvent("warn", {
+        requestId,
+        route: "POST /api/webhooks/polar",
+        message: "Duplicate webhook event ignored.",
+        details: {
+          eventId: paidOrder.eventId,
+          orderId: paidOrder.orderId,
+          checkoutId: paidOrder.checkoutId
+        }
+      });
+
+      return jsonOk(requestId, {
         ok: true,
         duplicate: true,
         orderId: paidOrder.orderId,
@@ -80,7 +98,18 @@ export async function POST(request: Request) {
       throw error;
     }
 
-    return NextResponse.json({
+    logApiEvent("info", {
+      requestId,
+      route: "POST /api/webhooks/polar",
+      message: "Paid order session persisted.",
+      details: {
+        eventId: paidOrder.eventId,
+        orderId: job.orderId,
+        checkoutId: job.checkoutId
+      }
+    });
+
+    return jsonOk(requestId, {
       ok: true,
       processed: true,
       orderId: job.orderId,
@@ -93,7 +122,19 @@ export async function POST(request: Request) {
     const message =
       error instanceof Error ? error.message : "Unable to persist the paid Polar session.";
 
-    return NextResponse.json({ ok: false, message }, { status });
+    logApiEvent("error", {
+      requestId,
+      route: "POST /api/webhooks/polar",
+      message,
+      details: {
+        status,
+        eventId: paidOrder.eventId,
+        orderId: paidOrder.orderId,
+        checkoutId: paidOrder.checkoutId
+      }
+    });
+
+    return jsonError(requestId, { status, message });
   }
 }
 

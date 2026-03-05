@@ -12,15 +12,36 @@ type CheckoutCreateResponse =
       ok: true;
       checkoutId: string;
       checkoutUrl: string;
+      requestId?: string;
     }
   | {
       ok: false;
       message?: string;
+      requestId?: string;
     };
+
+function readErrorMessage(payload: unknown, fallback: string): string {
+  let message = fallback;
+  let requestId = "";
+
+  if (payload && typeof payload === "object") {
+    if ("message" in payload && typeof payload.message === "string") {
+      message = payload.message;
+    }
+
+    if ("requestId" in payload && typeof payload.requestId === "string") {
+      requestId = payload.requestId;
+    }
+  }
+
+  return requestId ? `${message} (requestId: ${requestId})` : message;
+}
 
 export function CreateCheckoutActions({ lang }: CreateCheckoutActionsProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const allowDemoFlow =
+    process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ALLOW_DEMO_FLOW === "1";
 
   async function handleStartCheckout() {
     if (isLoading) {
@@ -41,11 +62,7 @@ export function CreateCheckoutActions({ lang }: CreateCheckoutActionsProps) {
       const payload = (await response.json().catch(() => null)) as CheckoutCreateResponse | null;
 
       if (!response.ok || !payload || !payload.ok) {
-        throw new Error(
-          payload && "message" in payload && typeof payload.message === "string"
-            ? payload.message
-            : "Unable to create a checkout session."
-        );
+        throw new Error(readErrorMessage(payload, "Unable to create a checkout session."));
       }
 
       window.location.assign(payload.checkoutUrl);
@@ -63,13 +80,15 @@ export function CreateCheckoutActions({ lang }: CreateCheckoutActionsProps) {
         <button className="button" disabled={isLoading} onClick={handleStartCheckout} type="button">
           {isLoading ? "Opening checkout..." : "Start Polar checkout"}
         </button>
-        <Link className="button secondary" href={`/${lang}/create/upload`}>
-          Open local demo flow
-        </Link>
+        {allowDemoFlow ? (
+          <Link className="button secondary" href={`/${lang}/create/upload`}>
+            Open local demo flow
+          </Link>
+        ) : null}
       </div>
       <p className="muted">
-        For a full local handshake test, copy `.env.local.example` to `.env.local` and fill in the
-        Polar and Upstash values first.
+        Fill `.env.local` with Polar and Upstash values before starting checkout. Demo flow is
+        available only in development mode unless explicitly enabled.
       </p>
       {errorMessage ? <div className="notice">{errorMessage}</div> : null}
     </div>

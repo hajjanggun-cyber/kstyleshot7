@@ -18,6 +18,7 @@ type StoredSession = {
 
 type PhotoUploadProps = {
   checkoutIdFromUrl?: string;
+  allowDemoFlow?: boolean;
 };
 
 function revokeObjectUrl(url: string | null) {
@@ -77,7 +78,24 @@ function removeCheckoutIdFromUrl() {
   window.history.replaceState({}, "", `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
 }
 
-export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
+function readApiErrorMessage(payload: unknown, fallback: string): string {
+  let message = fallback;
+  let requestId = "";
+
+  if (payload && typeof payload === "object") {
+    if ("message" in payload && typeof payload.message === "string") {
+      message = payload.message;
+    }
+
+    if ("requestId" in payload && typeof payload.requestId === "string") {
+      requestId = payload.requestId;
+    }
+  }
+
+  return requestId ? `${message} (requestId: ${requestId})` : message;
+}
+
+export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: PhotoUploadProps) {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const {
@@ -100,7 +118,11 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
   useEffect(() => {
     if (!checkoutIdFromUrl) {
       setPollError("");
-      setSessionNotice("");
+      setSessionNotice(
+        allowDemoFlow
+          ? "No checkout_id found. Demo flow is available in this environment."
+          : ""
+      );
       setIsPollingSession(false);
       setIsPaidSessionReady(false);
       return;
@@ -141,11 +163,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
           | null;
 
         if (!response.ok && response.status !== 202) {
-          throw new Error(
-            payload && "message" in payload && typeof payload.message === "string"
-              ? payload.message
-              : "Unable to check the paid session yet."
-          );
+          throw new Error(readApiErrorMessage(payload, "Unable to check the paid session yet."));
         }
 
         if (payload && "ready" in payload && payload.ready) {
@@ -195,9 +213,13 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
         clearTimeout(timer);
       }
     };
-  }, [checkoutIdFromUrl, setCheckout, setSession]);
+  }, [allowDemoFlow, checkoutIdFromUrl, setCheckout, setSession]);
 
   function ensureDemoSession() {
+    if (!allowDemoFlow) {
+      return;
+    }
+
     if (sessionToken) {
       return;
     }
@@ -222,7 +244,7 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
     setPhotoBlobUrl(nextBlobUrl);
     setFileName(file.name);
 
-    if (!checkoutIdFromUrl) {
+    if (!checkoutIdFromUrl && allowDemoFlow) {
       ensureDemoSession();
     }
   }
@@ -233,6 +255,11 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
     }
 
     if (!checkoutIdFromUrl) {
+      if (!allowDemoFlow) {
+        setPollError("A paid checkout session is required. Start from Step 1 first.");
+        return;
+      }
+
       ensureDemoSession();
     } else if (!isPaidSessionReady || !sessionToken) {
       setPollError("The paid session is still pending. Wait for the webhook to finish first.");
@@ -243,8 +270,8 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
     router.push(`/${lang}/create/hair`);
   }
 
-  const canContinue =
-    Boolean(photoBlobUrl) && (!checkoutIdFromUrl || (isPaidSessionReady && Boolean(sessionToken)));
+  const canContinue = Boolean(photoBlobUrl) &&
+    (checkoutIdFromUrl ? isPaidSessionReady && Boolean(sessionToken) : allowDemoFlow);
 
   return (
     <div className="stack">
@@ -254,9 +281,13 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
             Checkout detected: <span className="inline-code">{checkoutIdFromUrl}</span>. The page
             now polls the real session handshake before you can continue.
           </span>
+        ) : allowDemoFlow ? (
+          <span className="muted">
+            No `checkout_id` is present. Demo flow is enabled in this environment.
+          </span>
         ) : (
           <span className="muted">
-            No `checkout_id` is present. You can still test the full UX in local demo mode.
+            No `checkout_id` is present. Start checkout on Step 1 to continue.
           </span>
         )}
       </div>
@@ -267,7 +298,12 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
         <span className="muted">
           Use a clear front-facing image. The production client should resize it before API upload.
         </span>
-        <input accept="image/*" onChange={handleFileChange} type="file" />
+        <input
+          accept="image/*"
+          disabled={!checkoutIdFromUrl && !allowDemoFlow}
+          onChange={handleFileChange}
+          type="file"
+        />
       </label>
       {photoBlobUrl ? (
         <div className="card stack">
@@ -282,7 +318,11 @@ export function PhotoUpload({ checkoutIdFromUrl = "" }: PhotoUploadProps) {
       ) : null}
       <div className="actions">
         <button className="button" disabled={!canContinue} onClick={handleContinue} type="button">
-          {checkoutIdFromUrl && isPollingSession ? "Waiting for paid session..." : "Continue to hair"}
+          {checkoutIdFromUrl && isPollingSession
+            ? "Waiting for paid session..."
+            : !checkoutIdFromUrl && !allowDemoFlow
+              ? "Checkout required"
+              : "Continue to hair"}
         </button>
       </div>
     </div>

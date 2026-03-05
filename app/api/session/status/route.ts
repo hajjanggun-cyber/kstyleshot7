@@ -1,17 +1,17 @@
-import { NextResponse } from "next/server";
-
+import { getRequestId, jsonError, jsonOk, logApiEvent } from "@/lib/api-response";
 import { getRedis } from "@/lib/redis";
 import type { KVJob, SessionStatusResponse } from "@/types";
 
 export async function GET(request: Request) {
+  const requestId = getRequestId(request);
   const { searchParams } = new URL(request.url);
   const checkoutId = searchParams.get("checkoutId") ?? searchParams.get("checkout_id");
 
   if (!checkoutId) {
-    return NextResponse.json(
-      { ok: false, message: "checkoutId is required." },
-      { status: 400 }
-    );
+    return jsonError(requestId, {
+      status: 400,
+      message: "checkoutId is required."
+    });
   }
 
   try {
@@ -23,7 +23,7 @@ export async function GET(request: Request) {
         ready: false,
         status: "pending"
       };
-      return NextResponse.json(response, { status: 202 });
+      return jsonOk(requestId, response, 202);
     }
 
     const job = await redis.get<KVJob>(`job:${orderId}`);
@@ -32,7 +32,7 @@ export async function GET(request: Request) {
         ready: false,
         status: "pending"
       };
-      return NextResponse.json(response, { status: 202 });
+      return jsonOk(requestId, response, 202);
     }
 
     const response: SessionStatusResponse = {
@@ -42,11 +42,34 @@ export async function GET(request: Request) {
       status: job.status
     };
 
-    return NextResponse.json(response);
+    logApiEvent("info", {
+      requestId,
+      route: "GET /api/session/status",
+      message: "Session ready.",
+      details: {
+        checkoutId,
+        orderId: job.orderId,
+        status: job.status
+      }
+    });
+
+    return jsonOk(requestId, response);
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Unable to read the current session state.";
 
-    return NextResponse.json({ ok: false, message }, { status: 500 });
+    logApiEvent("error", {
+      requestId,
+      route: "GET /api/session/status",
+      message,
+      details: {
+        checkoutId
+      }
+    });
+
+    return jsonError(requestId, {
+      status: 500,
+      message
+    });
   }
 }

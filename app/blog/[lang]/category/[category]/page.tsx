@@ -3,9 +3,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import {
+  getBlogCategories,
   getAllBlogCategoryParams,
   getBlogCategoryPageData
 } from "@/lib/blog";
+
+const RELATED_CATEGORY_MAP: Record<string, string[]> = {
+  "product-faq": ["hair", "photo-technique"],
+  hair: ["product-faq", "photo-technique"],
+  "photo-technique": ["hair", "product-faq"],
+  "beauty-prep": ["photo-technique", "outfit-styling"],
+  "outfit-styling": ["hair", "backdrop-mood"],
+  "backdrop-mood": ["outfit-styling", "seasonal-trend"],
+  "seasonal-trend": ["backdrop-mood", "hair"]
+};
 
 type BlogCategoryPageProps = {
   params: Promise<{ lang: string; category: string }>;
@@ -35,13 +46,77 @@ export async function generateMetadata({
 
 export default async function BlogCategoryPage({ params }: BlogCategoryPageProps) {
   const { lang, category } = await params;
-  const data = await getBlogCategoryPageData(lang, category);
+  const [data, categories] = await Promise.all([
+    getBlogCategoryPageData(lang, category),
+    getBlogCategories(lang)
+  ]);
 
   if (!data) {
     notFound();
   }
 
   const { posts } = data;
+  const relatedCategorySlugs = RELATED_CATEGORY_MAP[category] ?? [];
+  const relatedCategoryLookup = new Map(categories.map((entry) => [entry.slug, entry]));
+
+  const recommendedPosts: Array<{
+    slug: string;
+    title: string;
+    description: string;
+    date: string;
+    category: string;
+    reason: string;
+  }> = [];
+  const seen = new Set<string>();
+
+  for (const post of posts.slice(0, 3)) {
+    if (seen.has(post.slug)) {
+      continue;
+    }
+    seen.add(post.slug);
+    recommendedPosts.push({
+      slug: post.slug,
+      title: post.title,
+      description: post.description,
+      date: post.date,
+      category: post.category,
+      reason: lang === "en" ? "Top post in this category" : "이 카테고리 핵심 글"
+    });
+  }
+
+  for (const relatedSlug of relatedCategorySlugs) {
+    const relatedCategory = relatedCategoryLookup.get(relatedSlug);
+    if (!relatedCategory) {
+      continue;
+    }
+
+    for (const post of relatedCategory.posts.slice(0, 2)) {
+      if (seen.has(post.slug)) {
+        continue;
+      }
+
+      seen.add(post.slug);
+      recommendedPosts.push({
+        slug: post.slug,
+        title: post.title,
+        description: post.description,
+        date: post.date,
+        category: post.category,
+        reason:
+          lang === "en"
+            ? `Related from ${relatedCategory.name}`
+            : `${relatedCategory.name} 연계 글`
+      });
+
+      if (recommendedPosts.length >= 6) {
+        break;
+      }
+    }
+
+    if (recommendedPosts.length >= 6) {
+      break;
+    }
+  }
 
   return (
     <main className="stack">
@@ -63,6 +138,35 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
           </span>
         </div>
       </section>
+
+      {recommendedPosts.length > 0 ? (
+        <section className="card stack">
+          <p className="muted">
+            {lang === "en" ? "Recommended reading path" : "추천 읽기 경로"}
+          </p>
+          <h2>
+            {lang === "en"
+              ? "Start with these linked articles"
+              : "아래 연결 글부터 읽으면 흐름이 빠릅니다"}
+          </h2>
+          <div className="grid two">
+            {recommendedPosts.map((post) => (
+              <article className="card stack" key={post.slug}>
+                <div className="actions">
+                  <span className="count-badge">{post.category}</span>
+                  <span className="muted">{post.date}</span>
+                </div>
+                <h3>{post.title}</h3>
+                <p className="muted">{post.description}</p>
+                <span className="muted">{post.reason}</span>
+                <Link className="button secondary" href={`/blog/${lang}/${post.slug}`}>
+                  {lang === "en" ? "Read article" : "글 읽기"}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {posts.length > 0 ? (
         <section className="grid two">

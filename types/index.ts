@@ -85,6 +85,12 @@ export type KVJob = {
     outfit: string | null;
     location: string | null;
   };
+  generatedResults: {
+    hair: Array<{ id: string; imageUrl: string }>;
+    outfit: Array<{ id: string; imageUrl: string }>;
+    cutout: Array<{ id: string; imageUrl: string }>;
+    location: Array<{ id: string; imageUrl: string }>;
+  };
   predictionIds: {
     hair: string[];
     outfit: string[];
@@ -113,4 +119,3 @@ export type SessionStatusResponse =
       orderId: string;
       sessionToken: string;
     };
-

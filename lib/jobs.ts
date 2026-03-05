@@ -1,9 +1,24 @@
 import { NextResponse } from "next/server";
 
 import { getRedis } from "@/lib/redis";
+import type { RedisLike } from "@/lib/redis";
 import type { KVJob } from "@/types";
 
 const AUTHORIZATION_PREFIX = "Bearer ";
+const DEFAULT_JOB_TTL_SECONDS = 60 * 60 * 24;
+const MIN_JOB_TTL_SECONDS = 60;
+
+export function normalizeJob(job: KVJob): KVJob {
+  return {
+    ...job,
+    generatedResults: {
+      hair: job.generatedResults?.hair ?? [],
+      outfit: job.generatedResults?.outfit ?? [],
+      cutout: job.generatedResults?.cutout ?? [],
+      location: job.generatedResults?.location ?? []
+    }
+  };
+}
 
 export function readSessionTokenFromRequest(request: Request): string | null {
   const header = request.headers.get("authorization");
@@ -25,7 +40,7 @@ export async function getOrderIdFromSessionToken(
 export async function getJobByOrderId(orderId: string): Promise<KVJob | null> {
   const redis = getRedis();
   const job = await redis.get<KVJob>(`job:${orderId}`);
-  return job ?? null;
+  return job ? normalizeJob(job) : null;
 }
 
 export async function getJobFromRequest(request: Request): Promise<KVJob | null> {
@@ -53,3 +68,18 @@ export function jsonNotImplemented(message: string, status = 501): NextResponse 
   );
 }
 
+export function getJobTtlSeconds(job: Pick<KVJob, "expiresAt">): number {
+  const expiresAt = Date.parse(job.expiresAt);
+  if (!Number.isFinite(expiresAt)) {
+    return DEFAULT_JOB_TTL_SECONDS;
+  }
+
+  const seconds = Math.floor((expiresAt - Date.now()) / 1000);
+  return Math.max(MIN_JOB_TTL_SECONDS, seconds);
+}
+
+export async function saveJob(redis: RedisLike, job: KVJob): Promise<void> {
+  await redis.set(`job:${job.orderId}`, job, {
+    ex: getJobTtlSeconds(job)
+  });
+}

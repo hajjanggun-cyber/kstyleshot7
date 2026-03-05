@@ -701,3 +701,275 @@
 블로그부터 더 밀 때:
 
 `todo.md 최신 기록 기준으로 진행해. tier1-hub-40 다음으로 Tier 2 블로그 40개 선별하고 초안 배치 생성하자`
+
+---
+
+## 추가 기록 (2026-03-05 15:20:00 +09:00)
+
+이 섹션이 현재 최신 상태다. 아래 내용을 기준으로 이어서 작업하면 된다.
+
+### 1. 이번 세션에서 완료한 것
+
+#### 1.1 결제/세션 실검증 준비 및 상태 확인
+
+완료:
+
+1. `.env.local` 생성 완료 (`.env.local.example` 복사)
+2. 로컬 서버 기준 handshake 엔드포인트 응답 확인
+3. 실키 미입력 상태에서의 실패 원인 메시지 확인
+
+확인된 응답:
+
+1. `POST /api/checkout/create` -> `POLAR_ACCESS_TOKEN` 누락
+2. `GET /api/session/status` -> `UPSTASH_REDIS_REST_URL` 누락
+3. `POST /api/webhooks/polar` -> `POLAR_WEBHOOK_SECRET` 누락
+
+즉:
+
+- 코드 경로는 연결됨
+- 실환경 E2E는 `.env.local` 실값 입력이 남아 있음
+
+#### 1.2 hair 단계 실연동 완료 (mock 제거)
+
+완료:
+
+1. `lib/replicate.ts`에 실제 prediction start/poll 구현 (`flux-kontext-pro`, `input_image` 사용)
+2. `POST /api/jobs/start` hair 시작 로직 구현
+3. `GET /api/jobs/status` polling + 완료/실패 상태 반영 구현
+4. `POST /api/jobs/select` hair 선택 저장 + `outfit_selecting` 전이 구현
+5. `app/[lang]/create/hair/page.tsx`를 실제 API 호출 + polling UI로 교체
+
+관련 파일:
+
+1. `lib/replicate.ts`
+2. `app/api/jobs/start/route.ts`
+3. `app/api/jobs/status/route.ts`
+4. `app/api/jobs/select/route.ts`
+5. `app/[lang]/create/hair/page.tsx`
+6. `types/index.ts` (`generatedResults` 추가)
+7. `lib/jobs.ts`, `lib/polar.ts` (job 저장/초기 구조 보강)
+
+#### 1.3 블로그 배치 확장 완료
+
+완료:
+
+1. Tier 2 배치 40개(EN20+KO20) 생성
+2. Wave 2 배치 40개(EN20+KO20) 생성
+3. 현재 총 글 수: `EN 60`, `KO 60`
+
+관련 문서:
+
+1. `md-doc/tier2-batch-40.md`
+2. `md-doc/next-batch-40-wave2.md`
+
+#### 1.4 SEO 강화 작업 완료
+
+완료:
+
+1. Wave 2 글 40개 description 최적화
+2. Wave 2 글 40개에 내부 링크 구조 고정 적용
+   - `허브 1 + 연관 2 + CTA 1`
+3. 카테고리 페이지에 추천 글 블록 추가 (내부 링크 깊이 강화)
+
+description 길이 결과:
+
+1. EN: `146~158`자
+2. KO: `76~94`자
+
+관련 파일:
+
+1. `app/blog/[lang]/category/[category]/page.tsx`
+2. `content/blog/en/*.mdx` (Wave 2 대상)
+3. `content/blog/ko/*.mdx` (Wave 2 대상)
+
+---
+
+### 2. 이 문서에서 현재 기준으로 오래된 내용 (정정)
+
+아래는 이전 기록 기준으로 남아 있지만, 지금은 완료된 항목이다:
+
+1. `새 2순위: hair 단계 실연동` -> **완료됨**
+2. `새 3순위: Tier 2 블로그 배치 작성` -> **완료됨**
+3. `EN 20 / KO 20` 상태 표기 -> **현재 EN 60 / KO 60**
+
+아래는 여전히 미완료 상태로 유지:
+
+1. `.env.local` 실값 기반의 checkout->webhook->session 실환경 검증
+2. outfit 상용 provider 확정 및 실연동
+3. cutout provider 확정 및 실연동
+
+---
+
+### 3. 지금 기준 다음 우선순위
+
+#### 새 1순위: 실환경 키 입력 후 E2E 검증 완료
+
+1. `.env.local`에 `POLAR_*`, `UPSTASH_*`, `REPLICATE_API_TOKEN`, `NEXT_PUBLIC_APP_URL` 입력
+2. `/en/create`에서 checkout -> webhook -> upload polling -> hair generation까지 끝까지 검증
+
+#### 새 2순위: 로컬 데모 fallback 정리
+
+1. `checkout_id` 없는 데모 경로를 개발 모드 전용으로 제한하거나 제거
+2. 운영 경로에서는 실세션 강제
+
+#### 새 3순위: outfit/cutout 실연동 시작
+
+1. 상용 가능 outfit provider 확정
+2. cutout provider 확정
+3. `jobs` 상태 전이 확장 (outfit/cutout)
+
+---
+
+### 4. 이번 세션 검증 결과
+
+확인 완료:
+
+1. `npm.cmd run typecheck` 통과
+2. `npm.cmd run build` 통과
+
+---
+
+## 추가 기록 (2026-03-05 15:01:24 +09:00)
+
+### 1. 요청한 1번/2번 진행 결과
+
+#### 1.1 새 1순위: 실환경 키 입력 후 E2E 검증
+
+상태:
+
+1. **진행 중 (실키 입력 대기)**
+
+완료:
+
+1. `.env.local` 필수 키 상태 점검 완료
+2. checkout/webhook/session/hair 경로 빌드/타입 검증 완료
+
+환경 키 점검 결과:
+
+1. `POLAR_ACCESS_TOKEN=EMPTY`
+2. `POLAR_PRODUCT_ID=EMPTY`
+3. `POLAR_WEBHOOK_SECRET=EMPTY`
+4. `UPSTASH_REDIS_REST_URL=EMPTY`
+5. `UPSTASH_REDIS_REST_TOKEN=EMPTY`
+6. `REPLICATE_API_TOKEN=EMPTY`
+7. `NEXT_PUBLIC_APP_URL=SET`
+
+검증 결과:
+
+1. `npm.cmd run build` 통과
+2. `npm.cmd run typecheck` 통과
+
+---
+
+## 추가 기록 (2026-03-05 15:28:19 +09:00)
+
+### 1. UI/API 연결 전 선행 작업 반영 완료
+
+#### 1.1 시스템 readiness API + Create preflight UI 추가
+
+완료:
+
+1. `GET /api/system/readiness` 추가
+2. Create Step 1 화면에 preflight 패널 추가
+3. checkout/session/hair의 env 준비 상태와 outfit/cutout blocked 상태를 한 화면에서 확인 가능
+
+추가 파일:
+
+1. `app/api/system/readiness/route.ts`
+2. `lib/env-readiness.ts`
+3. `components/create/ApiReadinessPanel.tsx`
+
+수정 파일:
+
+1. `app/[lang]/create/page.tsx`
+2. `app/globals.css`
+
+#### 1.2 공통 API 응답/로그 유틸 적용
+
+완료:
+
+1. `requestId` 기반 공통 응답 유틸 추가 (`jsonOk`, `jsonError`)
+2. 공통 API 로그 유틸 추가 (`logApiEvent`)
+3. 핵심 API 라우트에 requestId/로그 적용
+
+추가 파일:
+
+1. `lib/api-response.ts`
+
+적용 라우트:
+
+1. `app/api/checkout/create/route.ts`
+2. `app/api/session/status/route.ts`
+3. `app/api/jobs/start/route.ts`
+4. `app/api/jobs/status/route.ts`
+5. `app/api/jobs/select/route.ts`
+6. `app/api/webhooks/polar/route.ts`
+7. `app/api/data/delete/route.ts`
+
+#### 1.3 API 계약 안전장치 강화
+
+완료:
+
+1. hair 선택 API에서 상태 가드 추가
+   - `job.status === "hair_completed"`일 때만 선택 허용
+2. 클라이언트 에러 메시지에 `requestId` 노출 연결
+   - checkout 시작 실패
+   - upload session polling 실패
+   - hair 생성/선택 실패
+
+수정 파일:
+
+1. `app/api/jobs/select/route.ts`
+2. `components/create/CreateCheckoutActions.tsx`
+3. `components/create/PhotoUpload.tsx`
+4. `app/[lang]/create/hair/page.tsx`
+
+---
+
+### 2. 이번 세션 검증 결과
+
+확인 완료:
+
+1. `npm.cmd run build` 통과
+2. `npm.cmd run typecheck` 통과
+
+참고:
+
+1. `typecheck`는 `.next/types` 생성 전 1회 실패할 수 있어, build 후 재실행 시 정상 통과 확인
+
+---
+
+### 3. 지금 기준 다음 액션
+
+1. `.env.local` 실키 입력 후 `/en/create` 기준 checkout -> webhook -> session polling -> hair generation 실 E2E 실행
+2. outfit provider 확정 후 `jobs/start|status|select`에 outfit 단계 실연동
+3. cutout provider 확정 후 `jobs` 상태 전이에 cutout 단계 실연동
+
+남은 즉시 작업:
+
+1. `.env.local`에 위 `EMPTY` 키 실값 입력
+2. `/en/create` 기준 checkout -> webhook -> `/api/session/status` -> hair generation E2E 실행
+
+#### 1.2 새 2순위: 로컬 데모 fallback 정리
+
+상태:
+
+1. **완료**
+
+적용 내용:
+
+1. 운영 경로에서 `checkout_id` 없는 업로드 진행 차단
+2. 데모 경로는 개발 모드(`NODE_ENV !== "production"`) 또는 `NEXT_PUBLIC_ALLOW_DEMO_FLOW=1`에서만 허용
+3. `create`/`upload` 화면 문구를 실세션 강제 정책에 맞게 정리
+
+수정 파일:
+
+1. `components/create/PhotoUpload.tsx`
+2. `components/create/CreateCheckoutActions.tsx`
+3. `app/[lang]/create/page.tsx`
+4. `app/[lang]/create/upload/page.tsx`
+
+검증:
+
+1. `npm.cmd run build` 통과
+2. `npm.cmd run typecheck` 통과

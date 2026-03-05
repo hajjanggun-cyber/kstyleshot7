@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4257b",
+                        "background-light": "#f8f5f7",
+                        "background-dark": "#221017",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>K-Style Magic | Create Your Look</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 py-4 md:px-10">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<span class="material-symbols-outlined text-4xl">magic_button</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">K-Style Magic</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="User profile avatar portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDFafcd8DiLrBYZaVadm8XxCJK-nM7qscXojC3vEafk5pzgNfP2CENcqLMFkIhci9FIuBwe9mqlTm8RQ-nEDdT1V8fwT1Wx72ZhBxlS7NYwH6K67clnyTK9c-iu2PrW--oSpFmOU0OoIixwAt3W9CEGbxwz5ig8ZXn7DJ59X3ZTGksnHcQ39IFVRgUq1zCnNMDeL__krQnnnD3QMn9IiTVnTge1zgU2dYW4Pgj9PFFfMqBolEkPS4ZMclBryiL95ZMNXM6gUIOHWlpB");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full p-4 md:p-8">
+<!-- Header Section -->
+<div class="mb-8">
+<h1 class="text-slate-900 dark:text-slate-100 text-3xl md:text-4xl font-bold tracking-tight mb-2">Create Your K-Look</h1>
+<p class="text-slate-600 dark:text-primary/70 text-lg">Upload your photo and transform into your favorite K-POP aesthetic</p>
+</div>
+<!-- Two-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Side: Upload Column -->
+<div class="lg:col-span-5 space-y-6">
+<div class="bg-white dark:bg-primary/5 rounded-xl border-2 border-dashed border-primary/30 p-8 flex flex-col items-center justify-center min-h-[400px] text-center">
+<div class="bg-primary/10 p-6 rounded-full mb-4">
+<span class="material-symbols-outlined text-primary text-5xl">cloud_upload</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Upload your selfie</h3>
+<p class="text-slate-500 dark:text-slate-400 mb-6 text-sm max-w-xs">For best results, use a clear, front-facing photo with good lighting.</p>
+<div class="w-full max-w-sm aspect-[3/4] rounded-lg bg-slate-200 dark:bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 relative overflow-hidden">
+<span class="material-symbols-outlined text-primary/30 text-6xl">person_outline</span>
+<!-- Placeholder for preview -->
+</div>
+<button class="bg-primary text-white px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined">add_a_photo</span>
+                            Select Photo
+                        </button>
+</div>
+</div>
+<!-- Right Side: Style Selection Column -->
+<div class="lg:col-span-7 flex flex-col">
+<div class="bg-white dark:bg-primary/5 rounded-xl border border-primary/20 overflow-hidden flex flex-col h-full">
+<!-- Tabs -->
+<div class="flex border-b border-primary/20 bg-primary/5">
+<button class="flex-1 py-4 px-2 text-primary border-b-2 border-primary font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">face</span> Hairstyle
+                            </button>
+<button class="flex-1 py-4 px-2 text-slate-500 dark:text-slate-400 font-medium hover:text-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">checkroom</span> Outfit
+                            </button>
+<button class="flex-1 py-4 px-2 text-slate-500 dark:text-slate-400 font-medium hover:text-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">distance</span> Background
+                            </button>
+</div>
+<!-- Content Grid -->
+<div class="p-6 overflow-y-auto max-h-[600px]">
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+<!-- Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden border-2 border-transparent group-hover:border-primary transition-all relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="K-pop style pink hair trend" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD-YiETO7hsXzAIM8wQUH8EXD7Xgq5tKxGE0soYTnkt7IFUPQ06C3lHJZLhe_aOKnQjFxpmhxksKvPbAOykBlfq1izfC8NYUI2ZbeT7ZHRHVqG0ZBn3-Qye2aOe2D8xR_TyKktQInRSQtUXATZEyctHealKyuyxbkPLYQKyRosFt3J85lPE1QxJD3DrYPywxJ0uhA_kvXp0nAhaoake2-Tkk5SYGaRtAgnHYaC4HZdhlhhXvZ99dLRo-MYjH8o3ge6eIJXlbefSosmW')"></div>
+<div class="absolute bottom-2 left-2 text-white text-xs font-bold">Pink Blossom</div>
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 bg-primary text-white rounded-full p-1">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden border-2 border-transparent group-hover:border-primary transition-all relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="K-pop style silver ash hair" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlT51TM7ZDDPX3MbHfixITl3v-CVluxe8NfDEkH04Phqa3S07EJtq6Lh81tjYoB9XeIo60q5lXWNdmFnGc6gX5801fLRIQZIhshqDrhU4ZpmYwcEfLNLkcrAq3Zx2_oiLW8VU5QQdlKdhJ_o43_pg0J_1aqWNEJlanVFQGaxmt-m6mLiU9kQpJ7nGuvZLvSOd5dUUvViv6t7xkKoPlZYm85hN8TLR2CLw4emmLLrvmFyFRtPd6RkCeVI76KwJ7fU5XOVIbXQOj_yw7')"></div>
+<div class="absolute bottom-2 left-2 text-white text-xs font-bold">Silver Ash</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden border-2 border-primary transition-all relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="K-pop style blue velvet hair" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBX8HD47hUVQn2KvFjqo8oIg9BEtXvsYL85Wb4rWkiI36QBZx2Nn31Pw7BF8M5m6kktdwIhe4GpNHSkPyipyKVD7dXOnnG2gtVl87ZPQRplHTs-G8BdpBiasuJE24PYhil9d56eQvVRy3zPXmca9PSghwYt-FHjte1NBPQDYpi5BNAHf-a9gLefN4V6teRKkINETz4N4secyh6UsGj6E_HjxiUBiOkdyO5CDf3WTUVkWXKKP05-LK8xvBn2v4Ui32fLE-vcQbgtFUEL')"></div>
+<div class="absolute bottom-2 left-2 text-white text-xs font-bold">Blue Velvet</div>
+<div class="absolute top-2 right-2 bg-primary text-white rounded-full p-1">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden border-2 border-transparent group-hover:border-primary transition-all relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="K-pop style soft lavender hair" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvKbxPszDWIOjB64jsmx9DQg6vB5AWFCItXYUdC6NqIw3dECD_REiYzI0Q_cBWo2lI5LgYDvg-HwPDeqSdesEr0IgDAha4j5rvmslACNvquRb-cHVZQRJjToJU9WkqR6X2GjUumW9YiQVVDOElbnOhNdjaABqONmJvNgnK3fHjNo5645uXKZdeVkPNfKSyPfXgu_BaXhqFMAP4C6hzKtaQT9GYPO6XsR8R8BmRjzpkc6ezLOQrHHmU1P1A-yLtEY94Vfjw3SApS4oI')"></div>
+<div class="absolute bottom-2 left-2 text-white text-xs font-bold">Soft Lavender</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden border-2 border-transparent group-hover:border-primary transition-all relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="K-pop style messy wet look" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCUGFUId9gYe0Z0brRfr2kP-hyvzU3WFz_wV88h4FMaRNRMS5nG-iz9G1p42vB8fNBrxanaEYddqOWFhzLgzNGU3DtbtsdEri6fStsrVO82ZMyYOI0e4wWGxKAb_7qR9hr9Sj67t-I7rWT_fEmjMdoWoVVXndn2xLXNTQUkCBrlp4OTNIhKF5KFl0hpUYWi6aZk_KZMFWkivWtytP9VrYWXf_QudIOgL9lu0vjkMRyoPPxERpaA8xJHA78-3B3jcXG-0dBOTiv_7UxP')"></div>
+<div class="absolute bottom-2 left-2 text-white text-xs font-bold">Wet Look</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden border-2 border-transparent group-hover:border-primary transition-all relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="K-pop style neon mint hair" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_0B9SOaqbY6BDaRU9-D-4GRbX5Kwy9l0kerZQvdbBadr3vU6ooyPfJ8FtznX63PcZtzhkGz9nnATIisaeTqdDPTCoZAKhuii8Ls2QF-CSnnc3hE8KMBlQC-UisVwpFAXS49Gh3tY6VO_W_1kpnx8wM1HKFPhv2sqydv4sOXOXgt_166Awx1UXK_AZanPa_yBnDUnLMR71ZYIiPskbYNxBhVrv33EMgm0il5Ck1VIQXTMiAYGoNYGzyJBbkEUc_ijPgGUPsW2FrMPy')"></div>
+<div class="absolute bottom-2 left-2 text-white text-xs font-bold">Neon Mint</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="mt-auto p-6 bg-primary/5 border-t border-primary/20 flex items-center justify-between">
+<div class="text-sm">
+<span class="text-slate-500">Selected:</span>
+<span class="text-primary font-bold ml-1">Blue Velvet</span>
+</div>
+<button class="bg-primary text-white px-10 py-3 rounded-full font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                                Generate Magic
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recently Created Section -->
+<div class="mt-16">
+<h2 class="text-2xl font-bold mb-6">Recent Creations</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<div class="aspect-square rounded-lg bg-primary/10 border border-primary/20 overflow-hidden">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer" data-alt="User transformation history example 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZF3ZEOGxgsqb6lRq-hkev5NEO-bXkmHSw5fAgn-Q-zm3D_ld6Oie36v6pnFRVqeigGzuy-Wwn0NqBZ3qdUE2ClEV5Zl-6g4J4g-Kxd6ZdVoKoj524-Ja_OxTDq_i0RdqoFb8EAMLwI1qFBmqk7DFmNOBNXkLchoZUdgRpqsBmkuqpd1Rlg-_xCfRooEo9FWml4IXNzfKZpGQvn_feif3_9SnL2-9QpNDLkujggytiF1_JW9Bs158lyA4wfC7kLpdfQRTAkzZ2-XYz"/>
+</div>
+<div class="aspect-square rounded-lg bg-primary/10 border border-primary/20 overflow-hidden">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer" data-alt="User transformation history example 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD58_qUuzkilbtB75PF_Nn1vjYZ2gFkc_upfswIu8n3Cd7I-5ZoFLWjb_Z6xDfGS-IAsZlIF0F2yUdaWxQLpqjJBRquW_DwDOKFQtF9diPpa7YbmfqKgw087Rtz6JGckmejJTOWM1cZ01oOYbWkON3eA8616IeHeRUNtdmd2nRD5QkTBX8VJP2Aop5tgQlLxTiL-C4W_2BSFapYWa16InSl9z-z5O6kyWjnza70M87Ifqr4wWE6Bsar7D0cIJMblxc6o5-2VePJROuR"/>
+</div>
+<div class="aspect-square rounded-lg bg-primary/10 border border-primary/20 overflow-hidden">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer" data-alt="User transformation history example 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcz3yhwC4CMPIgqLfmy4JAf2VTvOaMBXvpSG3dJiWe7MYpTOMfJUvFGeZFaom3rqWXCImCLredfmQ0x5PfjFM6Scib2aSnMxPNYcQ3KEnFEi7ZBIBGq8DwbPfqTFztxnw1Q-jAPudVoYffDYsfvdTRJylKT7CtVNRLFgLB4SQMhItH36Eqt-Ddo4KFsKcCbv1WcZEY3zJuMagQ9iuh4KnEmuCwMFMlqYZAkden2tvq5fwzopIAmOTMhKTbGwkutxVnQ_ihIWHXLcLv"/>
+</div>
+<div class="aspect-square rounded-lg bg-primary/10 border border-primary/20 overflow-hidden">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer" data-alt="User transformation history example 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO6h1D9Q9-T1bACTvDplsT7kM2HuyrAwk8KdBDhzefZqJ1WO0oOhh_t4eao-q_1JaiHiDEfAj3RyseKBF147IwQw09zUhb633amBCzybtsm4VxR7Dtackynm5Ghs_dXgKjB2WPMwjAtsa2NdDDpwMR6T7GELeppv7EcJ_coUjcP1vGU9raZN7g8s5FQeyMD9jqqR0d5CzUuaBrsNyYzu0TVm1sEceYB3_icdwvU6JTqB2BT15U-qFOl3FVg6zOWIXQu5k9A0N4NrFv"/>
+</div>
+<div class="aspect-square rounded-lg bg-primary/10 border border-primary/20 overflow-hidden">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer" data-alt="User transformation history example 5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq_9gVbugktv2B6EhWSafJJanMeTeK4qjdnZeFWFGZumCT62zB25c9212QMD5VsBSSg2U6-mvNPc7nRsKshzw37Lwmz7ls8XVP898v0qQOTxqdAnXz1LQhiwKtieEYMax7uSUOvPvq7rqGpdo1iuA9ZHD02G1NBsJAAlV1nudk0a9kRUqJC7wG9Yi5vadVbcpPjSyyDvu1vgx-hUcK8I6K3hjo2CE5mFljBx3Obn-GcJNSuV750aafEksgG6OvIxlxAtYeJ1j8vVI3"/>
+</div>
+<div class="aspect-square rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center cursor-pointer hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+</div>
+</div>
+</main>
+<footer class="p-8 text-center text-slate-500 text-sm border-t border-primary/10">
+<p>© 2024 K-Style Magic AI. All rights reserved.</p>
+</footer>
+</div>
+</body></html>

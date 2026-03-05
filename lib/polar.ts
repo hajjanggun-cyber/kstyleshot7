@@ -337,6 +337,12 @@ export function createConfirmedJob(input: {
       outfit: null,
       location: null
     },
+    generatedResults: {
+      hair: [],
+      outfit: [],
+      cutout: [],
+      location: []
+    },
     predictionIds: {
       hair: [],
       outfit: [],
