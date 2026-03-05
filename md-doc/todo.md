@@ -1,4 +1,36 @@
-﻿Updated At: 2026-03-05 21:49:41 +09:00 (Asia/Seoul)
+﻿Updated At: 2026-03-06 00:12:50 +09:00 (Asia/Seoul)
+
+# TODO (Latest)
+
+## Update (2026-03-06 00:12:50 +09:00)
+
+### 오늘 진행 완료
+1. 블로그 색인용 URL 2개 확정
+- EN: /blog/en/gyeongbokgung-mood-guide
+- KO: /blog/ko/gyeongbokgung-mood-guide-ko
+
+2. 블로그 상세 페이지 깨진 한글 텍스트 수정 및 배포
+- 파일: app/blog/[lang]/[slug]/page.tsx
+- 반영: 버튼/라벨 한글 깨짐 문자열 교체
+
+3. 상세 페이지 언어 전환 링크 프리패치 비활성화
+- 파일: app/blog/[lang]/[slug]/page.tsx
+- 반영: prefetch={false} 적용 (불필요 preload 경고 완화 목적)
+
+4. git 정리 및 원격 동기화 확인
+- tmp-hero.webp, tmp-gallery.webp 임시 파일 정리
+- git push origin main 결과: Everything up-to-date
+
+### 오늘 미해결 오류
+1. 브라우저(Chrome/Brave/Whale)에서 글/이미지가 안 보인다는 제보
+- 사용자 콘솔: Failed to load resource: the server responded with a status of 404 ()
+- 서버 측 점검: 대표 CSS/hero/gallery URL은 모두 200 OK 확인
+- 현재 상태: 재현 원인 미확정 (클라이언트 측 캐시/확장/네트워크 계층 가능성)
+- 다음 액션: 브라우저 Network 탭에서 실제 404 리소스 URL 1개 확보 후 즉시 추적
+
+======================================================================
+
+Updated At: 2026-03-05 21:49:41 +09:00 (Asia/Seoul)
 
 # TODO (Latest)
 
@@ -1013,6 +1045,10 @@ New high-priority TODO after today:
 3. Validate internal links per published post (2-3 links)
 4. Verify Replicate token setup in local/prod env and run live hair generation smoke test
 5. Commit and push pending config/docs/code updates together
+
+
+
+
 
 
 
