@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
+import { CreateShell } from "@/components/create/CreateShell";
 import { ResultGrid } from "@/components/create/ResultGrid";
-import { StepProgress } from "@/components/create/StepProgress";
 import { StyleSelector } from "@/components/create/StyleSelector";
 import { outfits } from "@/data/outfits";
 import { createMockStepResults } from "@/lib/mockResults";
@@ -71,10 +71,13 @@ export default function OutfitPage() {
 
   if (!hair.picked) {
     return (
-      <div className="stack">
-        <StepProgress current="outfit" />
+      <CreateShell
+        current="outfit"
+        description="This stage requires a selected hair result from the previous step."
+        title="Choose 2 outfits"
+      >
         <section className="card stack">
-          <h1>Hair step required</h1>
+          <h2>Hair step required</h2>
           <p className="muted">
             Finish the hair selection first so the outfit step has a selected base.
           </p>
@@ -84,22 +87,37 @@ export default function OutfitPage() {
             </Link>
           </div>
         </section>
-      </div>
+      </CreateShell>
     );
   }
 
   return (
-    <div className="stack">
-      <StepProgress current="outfit" />
+    <CreateShell
+      current="outfit"
+      description="Outfit provider is still pending for commercial use, so this stage runs in mock mode."
+      title="Choose 2 outfits"
+    >
+      <section className="card stack mock-panel">
+        <div className="section-head">
+          <h2>Provider status</h2>
+          <span className="mock-chip">MOCK ONLY</span>
+        </div>
+        <p className="muted">
+          Outfit generation is currently simulated for UX validation. Do not treat these results as
+          production output.
+        </p>
+      </section>
       <StyleSelector
         ctaDisabled={outfit.chosen.length !== 2 || isGenerating}
         ctaLabel={isGenerating ? "Generating..." : "Generate outfit previews"}
-        title="Choose 2 outfits"
-        description="The real provider is not selected yet, but the UX now behaves like a proper choose-generate-pick flow."
+        title="Outfit options"
+        description="MVP mock stage: choose 2 outfits, generate 2 previews, then keep one."
         items={outfits.map((item) => ({
           id: item.id,
           name: item.name,
-          detail: item.description
+          detail: item.description,
+          thumbnail: item.thumbnail,
+          tags: item.tags
         }))}
         onSubmit={handleGenerate}
         onToggle={toggleSelection}
@@ -144,6 +162,6 @@ export default function OutfitPage() {
           Continue to backgrounds
         </button>
       </div>
-    </div>
+    </CreateShell>
   );
 }

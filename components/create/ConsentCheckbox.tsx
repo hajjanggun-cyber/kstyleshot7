@@ -1,9 +1,8 @@
-export function ConsentCheckbox() {
+﻿export function ConsentCheckbox() {
   return (
-    <label style={{ display: "grid", gap: 8 }}>
-      <span>I own the rights to this photo and consent to AI processing.</span>
+    <label className="checkline">
       <input type="checkbox" />
+      <span>I own the rights to this photo and consent to AI processing.</span>
     </label>
   );
 }
-

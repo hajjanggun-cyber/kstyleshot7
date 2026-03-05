@@ -278,44 +278,48 @@ export function PhotoUpload({ checkoutIdFromUrl = "", allowDemoFlow = false }: P
       <div className="notice">
         {checkoutIdFromUrl ? (
           <span className="muted">
-            Checkout detected: <span className="inline-code">{checkoutIdFromUrl}</span>. The page
-            now polls the real session handshake before you can continue.
+            Checkout detected: <span className="inline-code">{checkoutIdFromUrl}</span>. Polling
+            session handshake before unlock.
           </span>
         ) : allowDemoFlow ? (
-          <span className="muted">
-            No `checkout_id` is present. Demo flow is enabled in this environment.
-          </span>
+          <span className="muted">No `checkout_id` found. Development demo path is enabled.</span>
         ) : (
-          <span className="muted">
-            No `checkout_id` is present. Start checkout on Step 1 to continue.
-          </span>
+          <span className="muted">No `checkout_id` found. Start checkout on Step 1 first.</span>
         )}
       </div>
       {sessionNotice ? <div className="notice">{sessionNotice}</div> : null}
       {pollError ? <div className="notice">{pollError}</div> : null}
-      <label className="card stack">
-        <strong>Select a selfie</strong>
-        <span className="muted">
-          Use a clear front-facing image. The production client should resize it before API upload.
-        </span>
-        <input
-          accept="image/*"
-          disabled={!checkoutIdFromUrl && !allowDemoFlow}
-          onChange={handleFileChange}
-          type="file"
-        />
-      </label>
-      {photoBlobUrl ? (
+      <section className="upload-layout">
+        <label className="card stack upload-card">
+          <div className="upload-icon" aria-hidden>
+            UP
+          </div>
+          <strong>Upload your selfie</strong>
+          <span className="muted">
+            Use a clear front-facing image with good lighting for stable generation quality.
+          </span>
+          <input
+            accept="image/*"
+            className="upload-input"
+            disabled={!checkoutIdFromUrl && !allowDemoFlow}
+            onChange={handleFileChange}
+            type="file"
+          />
+        </label>
         <div className="card stack">
           <div className="actions">
-            <span className="count-badge">Ready to continue</span>
-            <span className="muted">{fileName || "Selected image"}</span>
+            <span className="count-badge">{photoBlobUrl ? "Photo ready" : "Awaiting upload"}</span>
+            <span className="muted">{fileName || "No file selected"}</span>
           </div>
           <div className="preview-frame">
-            <img alt="Uploaded preview" src={photoBlobUrl} />
+            {photoBlobUrl ? (
+              <img alt="Uploaded preview" src={photoBlobUrl} />
+            ) : (
+              <div className="preview-fallback">Preview appears here</div>
+            )}
           </div>
         </div>
-      ) : null}
+      </section>
       <div className="actions">
         <button className="button" disabled={!canContinue} onClick={handleContinue} type="button">
           {checkoutIdFromUrl && isPollingSession

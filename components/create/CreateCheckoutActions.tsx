@@ -87,8 +87,8 @@ export function CreateCheckoutActions({ lang }: CreateCheckoutActionsProps) {
         ) : null}
       </div>
       <p className="muted">
-        Fill `.env.local` with Polar and Upstash values before starting checkout. Demo flow is
-        available only in development mode unless explicitly enabled.
+        Checkout creates a paid session and returns through `checkout_id` polling. Demo flow is
+        development-only unless explicitly enabled.
       </p>
       {errorMessage ? <div className="notice">{errorMessage}</div> : null}
     </div>

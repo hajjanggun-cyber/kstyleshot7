@@ -2,6 +2,7 @@ import { AgeGate } from "@/components/create/AgeGate";
 import { ApiReadinessPanel } from "@/components/create/ApiReadinessPanel";
 import { ConsentCheckbox } from "@/components/create/ConsentCheckbox";
 import { CreateCheckoutActions } from "@/components/create/CreateCheckoutActions";
+import { CreateShell } from "@/components/create/CreateShell";
 
 type CreatePageProps = {
   params: Promise<{ lang: string }>;
@@ -13,19 +14,26 @@ export default async function CreatePage({ params }: CreatePageProps) {
     process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ALLOW_DEMO_FLOW === "1";
 
   return (
-    <section className="card stack">
-      <p className="muted">Step 1</p>
-      <h1>Create session</h1>
-      <p className="muted">
-        This step starts the real checkout flow.
-        {allowDemoFlow
-          ? " Local demo path is available only for development testing."
-          : " Production flow requires a paid checkout session."}
-      </p>
+    <CreateShell
+      blockedSteps={["outfit", "location"]}
+      current="create"
+      description={
+        allowDemoFlow
+          ? "Start checkout for the real paid flow. Development-only demo path is still available."
+          : "Start checkout for the real paid flow. Production requires a verified paid session."
+      }
+      title="Create session"
+    >
       <ApiReadinessPanel />
-      <AgeGate />
-      <ConsentCheckbox />
-      <CreateCheckoutActions lang={lang} />
-    </section>
+      <section className="card stack">
+        <h2>Consent checkpoint</h2>
+        <AgeGate />
+        <ConsentCheckbox />
+      </section>
+      <section className="card stack">
+        <h2>Checkout</h2>
+        <CreateCheckoutActions lang={lang} />
+      </section>
+    </CreateShell>
   );
 }

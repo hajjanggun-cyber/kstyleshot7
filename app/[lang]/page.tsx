@@ -7,10 +7,9 @@ export default function LandingPage() {
   return (
     <div className="stack">
       <HeroSection />
-      <GalleryTabs />
       <HowItWorks />
+      <GalleryTabs />
       <PricingSection />
     </div>
   );
 }
-

@@ -1,12 +1,14 @@
+import { CreateShell } from "@/components/create/CreateShell";
 import { FinalResult } from "@/components/create/FinalResult";
-import { StepProgress } from "@/components/create/StepProgress";
 
 export default function DonePage() {
   return (
-    <div className="stack">
-      <StepProgress current="done" />
+    <CreateShell
+      current="done"
+      description="Download your final image or clear local data to start a new session."
+      title="You look amazing"
+    >
       <FinalResult />
-    </div>
+    </CreateShell>
   );
 }
-

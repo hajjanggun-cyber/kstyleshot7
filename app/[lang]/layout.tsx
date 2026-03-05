@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { DisclaimerBox } from "@/components/common/DisclaimerBox";
+import { SiteHeader } from "@/components/common/SiteHeader";
 import { routing } from "@/i18n/routing";
 
 type LocaleLayoutProps = {
@@ -27,11 +28,13 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
-      <main className="stack">
-        {children}
-        <DisclaimerBox />
-      </main>
+      <div className="page-shell">
+        <SiteHeader lang={lang} />
+        <main className="app-main stack">{children}</main>
+        <div className="app-main">
+          <DisclaimerBox />
+        </div>
+      </div>
     </NextIntlClientProvider>
   );
 }
-

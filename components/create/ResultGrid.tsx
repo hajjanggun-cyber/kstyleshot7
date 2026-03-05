@@ -28,7 +28,10 @@ export function ResultGrid({
 }: ResultGridProps) {
   return (
     <section className="card stack">
-      <h2>{title}</h2>
+      <div className="section-head">
+        <h2>{title}</h2>
+        <span className="count-badge">{results.length} result(s)</span>
+      </div>
       {description ? <p className="muted">{description}</p> : null}
       {results.length === 0 ? (
         <div className="empty-state">{emptyMessage}</div>
@@ -38,7 +41,7 @@ export function ResultGrid({
             const isSelected = result.id === selectedId;
 
             return (
-              <article className="card stack" key={result.id}>
+              <article className={isSelected ? "card stack result-card is-selected" : "card stack result-card"} key={result.id}>
                 <div className="preview-frame">
                   <img alt={result.name} src={result.blobUrl} />
                 </div>
@@ -58,6 +61,7 @@ export function ResultGrid({
                     filename={`${result.id}.jpg`}
                     href={result.blobUrl}
                     label="Download"
+                    className="ghost"
                   />
                 </div>
               </article>

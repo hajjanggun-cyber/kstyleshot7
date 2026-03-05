@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
+
 export type StyleSelectorItem = {
   id: string;
   name: string;
   detail: string;
+  thumbnail?: string;
+  tags?: string[];
 };
 
 export type StyleSelectorProps = {
@@ -18,6 +22,28 @@ export type StyleSelectorProps = {
   maxSelected?: number;
 };
 
+function StyleThumb({ src, name }: { src?: string; name: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (!src || failed) {
+    return (
+      <div className="selector-fallback">
+        <span>{name.slice(0, 1).toUpperCase()}</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      alt={name}
+      className="selector-image"
+      loading="lazy"
+      onError={() => setFailed(true)}
+      src={src}
+    />
+  );
+}
+
 export function StyleSelector({
   title,
   description,
@@ -31,7 +57,7 @@ export function StyleSelector({
 }: StyleSelectorProps) {
   return (
     <section className="card stack">
-      <h1>{title}</h1>
+      <h2>{title}</h2>
       <p className="muted">{description}</p>
       <div className="actions">
         <span className="count-badge">
@@ -48,7 +74,7 @@ export function StyleSelector({
           </button>
         ) : null}
       </div>
-      <div className="selector-grid two">
+      <div className="selector-grid three">
         {items.map((item) => (
           <button
             className={
@@ -60,8 +86,14 @@ export function StyleSelector({
             onClick={() => onToggle(item.id)}
             type="button"
           >
-            <strong>{item.name}</strong>
-            <span className="muted">{item.detail}</span>
+            <div className="selector-media">
+              <StyleThumb name={item.name} src={item.thumbnail} />
+            </div>
+            <div className="stack">
+              <strong>{item.name}</strong>
+              <span className="muted">{item.detail}</span>
+              {item.tags?.length ? <span className="tag-row">{item.tags.join(" · ")}</span> : null}
+            </div>
           </button>
         ))}
       </div>

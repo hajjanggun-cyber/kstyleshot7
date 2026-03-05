@@ -26,12 +26,12 @@ export function BackgroundSelector({
     <StyleSelector
       ctaDisabled={ctaDisabled}
       ctaLabel={ctaLabel}
-      description="Pick two backdrops, then create local composite previews."
+      description="Pick two Seoul backdrops, then generate two composite previews and keep one."
       items={items}
       onSubmit={onSubmit}
       onToggle={onToggle}
       selectedIds={selectedIds}
-      title="Choose 2 backgrounds"
+      title="Choose 2 backdrops"
     />
   );
 }

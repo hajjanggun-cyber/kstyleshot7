@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
+import { CreateShell } from "@/components/create/CreateShell";
 import { ResultGrid } from "@/components/create/ResultGrid";
-import { StepProgress } from "@/components/create/StepProgress";
 import { StyleSelector } from "@/components/create/StyleSelector";
 import { hairStyles } from "@/data/hairStyles";
 import { useCreateStore } from "@/store/createStore";
@@ -284,10 +284,13 @@ export default function HairPage() {
 
   if (!photoBlobUrl) {
     return (
-      <div className="stack">
-        <StepProgress current="hair" />
+      <CreateShell
+        current="hair"
+        description="Upload is required before hair generation can start."
+        title="Choose 2 hairstyles"
+      >
         <section className="card stack">
-          <h1>Upload required</h1>
+          <h2>Upload required</h2>
           <p className="muted">
             Add a selfie first so the hair step has something to work from.
           </p>
@@ -297,22 +300,27 @@ export default function HairPage() {
             </Link>
           </div>
         </section>
-      </div>
+      </CreateShell>
     );
   }
 
   return (
-    <div className="stack">
-      <StepProgress current="hair" />
+    <CreateShell
+      current="hair"
+      description="Pick two hair concepts, run async generation, then choose one winning result."
+      title="Choose 2 hairstyles"
+    >
       <StyleSelector
         ctaDisabled={hair.chosen.length !== 2 || isGenerating}
         ctaLabel={isGenerating ? "Generating..." : "Generate hair previews"}
-        title="Choose 2 hairstyles"
-        description="Pick two styles, run real generation with polling, then choose one result."
+        title="Hair style options"
+        description="Pick exactly 2 options. Results are generated through the live job pipeline."
         items={hairStyles.map((item) => ({
           id: item.id,
           name: item.name,
-          detail: item.prompt
+          detail: item.prompt,
+          thumbnail: item.thumbnail,
+          tags: item.tags
         }))}
         onSubmit={handleGenerate}
         onToggle={toggleSelection}
@@ -351,6 +359,6 @@ export default function HairPage() {
           Continue to outfit
         </button>
       </div>
-    </div>
+    </CreateShell>
   );
 }

@@ -5,8 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
 import { BackgroundSelector } from "@/components/create/BackgroundSelector";
+import { CreateShell } from "@/components/create/CreateShell";
 import { ResultGrid } from "@/components/create/ResultGrid";
-import { StepProgress } from "@/components/create/StepProgress";
 import { backgrounds } from "@/data/backgrounds";
 import { createMockStepResults } from "@/lib/mockResults";
 import { useCreateStore } from "@/store/createStore";
@@ -67,10 +67,13 @@ export default function LocationPage() {
 
   if (!outfit.picked) {
     return (
-      <div className="stack">
-        <StepProgress current="location" />
+      <CreateShell
+        current="location"
+        description="A selected outfit is required before background compositing."
+        title="Choose 2 backdrops"
+      >
         <section className="card stack">
-          <h1>Outfit step required</h1>
+          <h2>Outfit step required</h2>
           <p className="muted">
             Finish the outfit step first. This page expects a selected cutout-ready outfit.
           </p>
@@ -80,20 +83,35 @@ export default function LocationPage() {
             </Link>
           </div>
         </section>
-      </div>
+      </CreateShell>
     );
   }
 
   return (
-    <div className="stack">
-      <StepProgress current="location" />
+    <CreateShell
+      current="location"
+      description="Pick two Seoul backdrops, generate composites, then select the final winner."
+      title="Choose 2 backdrops"
+    >
+      <section className="card stack mock-panel">
+        <div className="section-head">
+          <h2>Cutout/composite status</h2>
+          <span className="mock-chip">SIMULATED</span>
+        </div>
+        <p className="muted">
+          Transparent cutout and final composite are currently mocked. Wire real cutout provider
+          before production release.
+        </p>
+      </section>
       <BackgroundSelector
         ctaDisabled={location.chosen.length !== 2 || isCompositing}
         ctaLabel={isCompositing ? "Compositing..." : "Create composite previews"}
         items={backgrounds.map((item) => ({
           id: item.id,
           name: item.name,
-          detail: item.mood
+          detail: item.mood,
+          thumbnail: item.thumbUrl,
+          tags: [item.mood]
         }))}
         onSubmit={handleComposite}
         onToggle={toggleSelection}
@@ -130,6 +148,6 @@ export default function LocationPage() {
           Finish and review
         </button>
       </div>
-    </div>
+    </CreateShell>
   );
 }
