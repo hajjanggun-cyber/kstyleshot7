@@ -24,6 +24,12 @@ export type BlogPostMeta = {
   canonical: string;
   pairSlug: string;
   ctaVariant: string;
+  heroImage: string;
+  heroAlt: string;
+  heroPromptId: string;
+  galleryImages: string[];
+  galleryAlts: string[];
+  galleryPromptIds: string[];
 };
 
 export type BlogPost = BlogPostMeta & {
@@ -216,10 +222,33 @@ function parseFrontmatter(raw: string): { frontmatter: ParsedFrontmatter; body: 
   return { frontmatter, body };
 }
 
+function parseMediaArray(
+  value: string | string[] | boolean | undefined
+): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .map((item) => String(item).trim())
+    .filter(Boolean)
+    .slice(0, 10);
+}
+
 function buildPost(meta: ParsedFrontmatter, body: string, lang: BlogLang, fallbackSlug: string): BlogPost {
+  const slug = String(meta.slug ?? fallbackSlug);
+  const heroImage = String(meta.heroImage ?? `/blog/hero/${slug}.webp`);
+  const heroAlt = String(meta.heroAlt ?? String(meta.title ?? fallbackSlug));
+  const heroPromptId = String(
+    meta.heroPromptId ?? (slug.endsWith("-ko") ? slug.slice(0, -3) : slug)
+  );
+  const galleryImages = parseMediaArray(meta.galleryImages);
+  const galleryAlts = parseMediaArray(meta.galleryAlts);
+  const galleryPromptIds = parseMediaArray(meta.galleryPromptIds);
+
   return {
     title: String(meta.title ?? fallbackSlug),
-    slug: String(meta.slug ?? fallbackSlug),
+    slug,
     lang,
     date: String(meta.date ?? ""),
     updated: String(meta.updated ?? meta.date ?? ""),
@@ -230,6 +259,12 @@ function buildPost(meta: ParsedFrontmatter, body: string, lang: BlogLang, fallba
     canonical: String(meta.canonical ?? ""),
     pairSlug: String(meta.pairSlug ?? ""),
     ctaVariant: String(meta.ctaVariant ?? "default"),
+    heroImage,
+    heroAlt,
+    heroPromptId,
+    galleryImages,
+    galleryAlts,
+    galleryPromptIds,
     body
   };
 }

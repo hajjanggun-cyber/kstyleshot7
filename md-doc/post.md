@@ -1,3 +1,26 @@
+﻿Updated At: 2026-03-05 19:29:04 +09:00 (Asia/Seoul)
+
+# Post Operations (Latest)
+
+## Posting Inventory Snapshot
+- EN: 110
+- KO: 110
+- TOTAL: 220
+
+## Posting Scope Rule
+- 포스팅 관련 기획/현황/카테고리/발행전략은 `post.md`에서만 관리
+- 실행용 할 일(TODO), 점검 체크리스트, 당일 액션은 `todo.md`에서만 관리
+
+## Today Posting Priority (Pair)
+1. EN: /blog/en/gyeongbokgung-mood-guide
+2. KO: /blog/ko/gyeongbokgung-mood-guide-ko
+
+## Image Policy For New Posts
+- 기본 슬롯: hero 1 + gallery 8 (총 9장)
+- 모든 이미지에 문맥형 alt 텍스트 필수
+
+======================================================================
+
 # kstyleshot Blog Post Plan (120 Posts)
 
 작성: Codex (GPT-5)

@@ -1,3 +1,27 @@
+﻿Updated At: 2026-03-05 19:29:04 +09:00 (Asia/Seoul)
+
+# TODO (Latest)
+
+## Immediate Tasks
+1. 오늘 포스팅 2개 발행
+- EN: /blog/en/gyeongbokgung-mood-guide
+- KO: /blog/ko/gyeongbokgung-mood-guide-ko
+
+2. 각 글 이미지 9장 제작/배치
+- hero 1 + gallery 8
+- 파일 규칙: `/public/blog/hero/<slug>.webp`, `/public/blog/gallery/<slug>-01~08.webp`
+
+3. 발행 후 SEO 운영 루틴
+- sitemap.xml 반영 확인
+- Google Search Console 색인 요청
+- 내부링크 2~3개 추가
+
+4. 문서 동기화
+- 포스팅 현황은 `post.md`만 업데이트
+- 실행 TODO는 `todo.md` 상단 최신 블록만 업데이트
+
+======================================================================
+
 # kstyleshot - TODO Handoff
 
 작성: Codex (GPT-5)

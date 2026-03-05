@@ -75,6 +75,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const galleryItems = post.galleryImages.map((src, index) => ({
+    src,
+    alt: post.galleryAlts[index] || `${post.title} image ${index + 1}`,
+    promptId: post.galleryPromptIds[index] || ""
+  }));
+
   return (
     <main className="stack">
       <article className="card stack">
@@ -91,8 +97,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <h1>{post.title}</h1>
         <p className="muted">{post.description}</p>
         <div className="preview-frame blog-post-media">
-          <img alt={post.title} loading="lazy" src="/visuals/blog/post.svg" />
+          <img alt={post.heroAlt || post.title} loading="lazy" src={post.heroImage || "/visuals/blog/post.svg"} />
         </div>
+        {galleryItems.length > 0 ? (
+          <section className="blog-gallery-grid" aria-label="Post image gallery">
+            {galleryItems.map((item, index) => (
+              <figure className="blog-gallery-item" key={`${item.src}-${index}`}>
+                <img alt={item.alt} loading="lazy" src={item.src} />
+                <figcaption className="muted">
+                  {item.promptId ? `Image ${index + 1} · ${item.promptId}` : `Image ${index + 1}`}
+                </figcaption>
+              </figure>
+            ))}
+          </section>
+        ) : null}
         <div className="actions">
           {post.tags.map((tag) => (
             <span className="muted" key={tag}>
