@@ -12,10 +12,10 @@ export function HeroSection() {
   return (
     <section className="hero card">
       <img
-        alt="K-style portrait hero scene"
+        alt="Kstyleshot landing hero"
         className="hero-art"
         fetchPriority="high"
-        src="/visuals/landing/hero-scene.svg"
+        src="/visuals/landing/main.png"
       />
       <div className="hero-overlay" />
       <div className="hero-content stack">
