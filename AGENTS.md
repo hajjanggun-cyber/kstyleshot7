@@ -25,14 +25,11 @@ lang: "en"
 category: "Seoul Locations"
 title: "Gyeongbokgung Palace Photo Guide — Traditional Aesthetics for Modern Shots"
 description: "A complete photo guide to Gyeongbokgung Palace. Best spots, light timing, and framing tips for capturing Seoul's most iconic royal grounds."
-authorName: "Ji-ho Choi"
-authorRole: "Seoul Culture Correspondent"
 publishedAt: "2026-03-06"
 readTime: "6 Min Read"
 headerGradient: "linear-gradient(135deg, #1a0a2e 0%, #f4258c 100%)"
 pullQuote: "Gyeongbokgung is not just a backdrop. It is a visual argument for why Seoul cannot be summarized."
 hreflangSlug: "gyeongbokgung-photo-guide"
-aiGenerated: true
 ---
 
 [Article body in MDX]
@@ -61,31 +58,13 @@ aiGenerated: true
 | `category` | YES | Must match one of the 8 categories in `kpop-blog-topics-300.md` |
 | `title` | YES | Unique per page. Max 60 characters. Must describe content accurately. |
 | `description` | YES | 120–155 characters. Answers why the reader should click. |
-| `authorName` | YES | Use a consistent author persona per category (see Author Table below) |
-| `authorRole` | YES | e.g. "Seoul Culture Correspondent", "K-Beauty Expert" |
 | `publishedAt` | YES | ISO date string: `"YYYY-MM-DD"` |
 | `readTime` | YES | e.g. `"5 Min Read"` |
 | `headerGradient` | YES | CSS gradient string for hero background |
 | `pullQuote` | YES | A single memorable sentence from the article. Starts with a lowercase letter inside quotes. |
 | `hreflangSlug` | YES | Identical value in both KO and EN files to enable hreflang pairing |
-| `aiGenerated` | YES | Always `true` for Codex-written content (Google transparency requirement) |
 | `nextSlug` | optional | slug of the next recommended article |
 | `nextTitle` | optional | display title of the next article |
-
----
-
-## Author Table (Fixed Personas per Category)
-
-| Category | Korean Author | English Author |
-|----------|---------------|----------------|
-| 한국 명소 & 포토존 | 최지호 | Ji-ho Choi |
-| K-스타일 패션 | 박민아 | Mina Park |
-| K-뷰티 & 헤어 | 강예진 | Ye-jin Kang |
-| K-POP 문화 & 팬덤 | 신나래 | Na-rae Shin |
-| 셀카 & 포토그래피 | 임수연 | Soo-yeon Lim |
-| 서울 여행 가이드 | 오태양 | Tae-yang Oh |
-| 팬 커뮤니티 & SNS | 송다은 | Da-eun Song |
-| 가상 스타일 체험 | 박민아 | Mina Park |
 
 ---
 
@@ -134,26 +113,6 @@ aiGenerated: true
 | Domestic trend and social meaning | Cultural/visual meaning for international reader |
 | Comparison with similar Korean areas | Background explanation unfamiliar to foreign readers |
 | Visitor intent from Korean user perspective | Why international visitors seek this place |
-
----
-
-## AI Content Disclosure (Google Policy — Mandatory)
-
-Every article must end with this footer block:
-
-```mdx
----
-
-*This article was produced with AI assistance and reviewed for accuracy against publicly available information. Author persona represents the editorial voice for this content category.*
-```
-
-Korean version:
-
-```mdx
----
-
-*이 글은 AI 보조 도구를 활용하여 작성되었으며, 공개된 정보를 기반으로 사실 확인을 거쳤습니다. 저자 표기는 해당 카테고리의 편집 방향을 대표합니다.*
-```
 
 ---
 
@@ -246,9 +205,7 @@ Do not write a single line of article content until both files are read.
 - [ ] No private property or personal location references
 
 **기술 스펙**
-- [ ] AI disclosure footer is present
 - [ ] `hreflangSlug` matches the paired language file
-- [ ] `aiGenerated: true` is set
 
 ## Character Count Verification (mandatory)
 

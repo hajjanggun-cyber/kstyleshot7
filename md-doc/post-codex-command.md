@@ -507,14 +507,11 @@ lang: "ko"
 category: "한국 명소 & 포토존"
 title: "경복궁 포토존 완전 가이드 — 전통 미학의 사진 명소 총정리"
 description: "120~155자. 클릭 이유가 담긴 문장."
-authorName: "최지호"
-authorRole: "서울 문화 리포터"
 publishedAt: "YYYY-MM-DD"
 readTime: "6분 읽기"
 headerGradient: "linear-gradient(135deg, #1a0a2e 0%, #f4258c 100%)"
 pullQuote: "소문자로 시작하는 인상적인 한 문장."
 hreflangSlug: "gyeongbokgung-photo-guide"
-aiGenerated: true
 ---
 ```
 
@@ -525,34 +522,6 @@ aiGenerated: true
 | `title` | 60자 이하, 고유, 내용 정확 반영 |
 | `description` | 120–155자, 클릭 이유 포함 |
 | `hreflangSlug` | KO/EN 동일값 |
-| `aiGenerated` | 항상 `true` |
-
-### 저자 테이블
-
-| 카테고리 | 한글 저자 | 영문 저자 |
-|----------|-----------|-----------|
-| 한국 명소 & 포토존 | 최지호 | Ji-ho Choi |
-| K-스타일 패션 | 박민아 | Mina Park |
-| K-뷰티 & 헤어 | 강예진 | Ye-jin Kang |
-| K-POP 문화 & 팬덤 | 신나래 | Na-rae Shin |
-| 셀카 & 포토그래피 | 임수연 | Soo-yeon Lim |
-| 서울 여행 가이드 | 오태양 | Tae-yang Oh |
-| 팬 커뮤니티 & SNS | 송다은 | Da-eun Song |
-| 가상 스타일 체험 | 박민아 | Mina Park |
-
-### AI 공개 문구 (모든 글 마지막 필수)
-
-한글:
-```
----
-*이 글은 AI 보조 도구를 활용하여 작성되었으며, 공개된 정보를 기반으로 사실 확인을 거쳤습니다. 저자 표기는 해당 카테고리의 편집 방향을 대표합니다.*
-```
-
-영문:
-```
----
-*This article was produced with AI assistance and reviewed for accuracy against publicly available information. Author persona represents the editorial voice for this content category.*
-```
 
 ---
 
@@ -564,9 +533,8 @@ content/hub/ko/[slug].mdx 를 검토하고 아래 항목을 수정해:
 
 1. title이 60자를 넘으면 줄여라
 2. description이 120자 미만이면 보완해. 수정 후 글자수를 직접 세어 숫자를 보고해라.
-3. AI 공개 문구가 없으면 추가해
-4. padding 문장(분량만 채우는 문장)을 제거해
-5. 특정 아이돌/그룹/기획사 상표명이 있으면 제거해
+3. padding 문장(분량만 채우는 문장)을 제거해
+4. 특정 아이돌/그룹/기획사 상표명이 있으면 제거해
 
 수정 후 변경된 항목을 목록으로 보고해.
 ```
