@@ -98,6 +98,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
 
   const lang = params.lang ?? "en";
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
   const [isPollingSession, setIsPollingSession] = useState(false);
   const [isPaidSessionReady, setIsPaidSessionReady] = useState(false);
   const [pollError, setPollError] = useState("");
@@ -249,37 +250,61 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
         {/* Error notice */}
         {pollError ? <p className="up-error">{pollError}</p> : null}
 
-        {/* Upload zone */}
-        <label className={`up-zone${photoBlobUrl ? " up-zone--filled" : ""}`}>
-          {photoBlobUrl ? (
-            <img alt="Your uploaded photo" className="up-preview-img" src={photoBlobUrl} />
-          ) : (
-            <>
-              <div className="up-zone-icon">📷</div>
-              <p className="up-zone-title">{tf("zoneTitle")}</p>
-              <p className="up-zone-sub">{tf("zoneSub")}</p>
-              <span className="up-select-btn">{tf("selectBtn")}</span>
-            </>
-          )}
-          <input
-            ref={fileInputRef}
-            accept="image/*"
-            className="up-input"
-            disabled={false}
-            onChange={handleFileChange}
-            type="file"
-          />
-        </label>
-
+        {/* Photo source picker / preview */}
         {photoBlobUrl ? (
-          <button
-            className="up-change-btn"
-            onClick={() => fileInputRef.current?.click()}
-            type="button"
-          >
-            {tf("changeBtn")}
-          </button>
-        ) : null}
+          <div className="up-preview-wrap">
+            <img alt="Your uploaded photo" className="up-preview-img" src={photoBlobUrl} />
+            <div className="up-preview-actions">
+              <button className="up-reshot-btn" onClick={() => cameraInputRef.current?.click()} type="button">
+                <span>📸</span> {tf("cameraBtn")}
+              </button>
+              <button className="up-reshot-btn" onClick={() => fileInputRef.current?.click()} type="button">
+                <span>🖼</span> {tf("uploadBtn")}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="up-source-wrap">
+            <p className="up-source-label">{tf("chooseMethod")}</p>
+            <div className="up-source-cards">
+              <button
+                className="up-source-card"
+                onClick={() => cameraInputRef.current?.click()}
+                type="button"
+              >
+                <span className="up-source-icon">📸</span>
+                <span className="up-source-name">{tf("cameraBtn")}</span>
+                <span className="up-source-sub">{tf("cameraSub")}</span>
+              </button>
+              <button
+                className="up-source-card"
+                onClick={() => fileInputRef.current?.click()}
+                type="button"
+              >
+                <span className="up-source-icon">🖼</span>
+                <span className="up-source-name">{tf("uploadBtn")}</span>
+                <span className="up-source-sub">{tf("uploadSub")}</span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Hidden inputs */}
+        <input
+          ref={cameraInputRef}
+          accept="image/*"
+          capture="user"
+          className="up-input"
+          onChange={handleFileChange}
+          type="file"
+        />
+        <input
+          ref={fileInputRef}
+          accept="image/*"
+          className="up-input"
+          onChange={handleFileChange}
+          type="file"
+        />
 
         {/* Photo Guide */}
         <div className="up-guide">
