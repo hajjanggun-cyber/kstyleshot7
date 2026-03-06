@@ -61,6 +61,8 @@ export type Outfit = {
   garmentImage: string;
   description: string;
   tags: string[];
+  category?: "stage" | "street" | "award";
+  colorHint?: string;
 };
 
 export type Background = {

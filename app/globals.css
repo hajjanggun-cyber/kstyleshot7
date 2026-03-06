@@ -2026,3 +2026,404 @@ h2 {
 .hr-next-btn--active:hover {
   background: #e07b18;
 }
+
+/* =============================================
+   OUTFIT FLOW (step4) — ot-* prefix
+   ============================================= */
+
+.ot-root {
+  min-height: 100dvh;
+  background: #221910;
+  color: #f1ede8;
+  font-family: "Space Grotesk", "Spline Sans", "Pretendard", sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding-bottom: 90px;
+}
+
+/* Nav */
+.ot-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px 10px;
+  background: rgba(34, 25, 16, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.ot-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #f1ede8;
+  font-size: 18px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.ot-back-btn:hover {
+  background: rgba(244, 140, 37, 0.12);
+}
+
+.ot-nav-title {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.ot-nav-spacer {
+  width: 40px;
+  flex-shrink: 0;
+}
+
+/* Progress dots */
+.ot-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 0;
+}
+
+.ot-dot {
+  width: 8px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(244, 140, 37, 0.28);
+  transition: all 0.3s;
+}
+
+.ot-dot--done {
+  background: rgba(244, 140, 37, 0.4);
+}
+
+.ot-dot--active {
+  width: 40px;
+  background: #f48c25;
+  box-shadow: 0 0 8px rgba(244, 140, 37, 0.6);
+}
+
+/* Avatar section */
+.ot-avatar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+}
+
+.ot-avatar-ring {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid rgba(244, 140, 37, 0.25);
+  box-shadow: 0 8px 30px rgba(244, 140, 37, 0.12);
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.ot-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.ot-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #3a2818;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.ot-avatar-badge {
+  position: absolute;
+  bottom: -4px;
+  right: 4px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f48c25;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(244, 140, 37, 0.5);
+}
+
+.ot-avatar-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+.ot-avatar-sub {
+  font-size: 14px;
+  color: rgba(244, 140, 37, 0.75);
+  margin: 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Tabs */
+.ot-tabs-wrap {
+  position: sticky;
+  top: 56px;
+  z-index: 15;
+  background: #221910;
+  border-bottom: 1px solid rgba(244, 140, 37, 0.1);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ot-tabs-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.ot-tabs {
+  display: flex;
+  padding: 0 16px;
+  gap: 28px;
+  white-space: nowrap;
+}
+
+.ot-tab {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(241, 237, 232, 0.45);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px 0 12px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.ot-tab--active {
+  border-bottom-color: #f48c25;
+  color: #f48c25;
+}
+
+/* Outfit grid */
+.ot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 16px;
+}
+
+.ot-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(244, 140, 37, 0.06);
+  border: 2px solid rgba(244, 140, 37, 0.1);
+  border-radius: 16px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.ot-card--selected {
+  border-color: #f48c25;
+  background: rgba(244, 140, 37, 0.14);
+  box-shadow: 0 0 18px rgba(244, 140, 37, 0.25);
+}
+
+.ot-card-img {
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-color: #3a2818;
+  width: 100%;
+}
+
+.ot-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ot-card-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ot-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f1ede8;
+}
+
+.ot-card-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #f48c25;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ot-card-sub {
+  font-size: 11px;
+  color: rgba(244, 140, 37, 0.6);
+}
+
+.ot-card-heart {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Complete the Look */
+.ot-complete {
+  padding: 8px 16px 4px;
+}
+
+.ot-complete-title {
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.ot-complete-star {
+  color: #f48c25;
+  font-size: 18px;
+}
+
+.ot-complete-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  margin: 0 -16px;
+  padding: 0 16px 4px;
+  scrollbar-width: none;
+}
+
+.ot-complete-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.ot-inspire-card {
+  flex-shrink: 0;
+  width: 256px;
+  background: rgba(244, 140, 37, 0.05);
+  border: 1px solid rgba(244, 140, 37, 0.1);
+  border-radius: 20px;
+  padding: 14px;
+}
+
+.ot-inspire-img {
+  height: 140px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+}
+
+.ot-inspire-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #f1ede8;
+}
+
+.ot-inspire-sub {
+  font-size: 11px;
+  color: rgba(244, 140, 37, 0.6);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Missing state */
+.ot-missing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+  text-align: center;
+  color: rgba(241, 237, 232, 0.6);
+}
+
+.ot-missing-link {
+  color: #f48c25;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Fixed bottom */
+.ot-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 16px;
+  background: linear-gradient(
+    to top,
+    #221910 60%,
+    rgba(34, 25, 16, 0.9) 85%,
+    transparent
+  );
+}
+
+.ot-apply-btn {
+  width: 100%;
+  height: 56px;
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(241, 237, 232, 0.35);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: not-allowed;
+  transition: all 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.ot-apply-btn--active {
+  background: linear-gradient(to right, #f48c25, #ff6b00);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(244, 140, 37, 0.45);
+}
+
+.ot-apply-btn--active:hover {
+  background: linear-gradient(to right, #e07b18, #e85f00);
+}
