@@ -109,6 +109,23 @@ aiGenerated: true
 - Use specific, concrete details over vague adjectives ("예쁘다", "유명하다", "핫하다" alone = reject)
 - Korean and English articles on the same topic are NOT translations — they are written for different search intents (see KO/EN rules below)
 
+### Keyword Rules (SEO — mandatory)
+
+- Before writing, select one primary target keyword per language (KO and EN separately)
+- Place the target keyword naturally in: (1) title, (2) first paragraph, (3) at least one H2
+- No keyword stuffing — keyword appears at most 3–4 times total in the body
+- No two articles within the same hub may share the same primary keyword (cannibalization prevention)
+- Long-tail keywords preferred over broad terms (e.g. "경복궁 오전 사진 촬영" over "경복궁 사진")
+- Record the selected keyword in the session log alongside the file path
+
+### Internal Link Rules (SEO — mandatory)
+
+- Every sub-article must include a link back to its hub article in the body text (not only in Quick Summary)
+- Hub article's "함께 읽을 글" / "Related Guides" section must list only articles that already exist as files
+- Cross-link to 1–2 related articles within the same hub where naturally relevant
+- Do NOT link to articles that do not yet exist — no dead links
+- Internal link anchor text must describe the destination naturally (no "여기", "click here")
+
 ### KO vs EN Search Intent
 
 | Korean articles | English articles |
@@ -142,10 +159,28 @@ Korean version:
 
 ## Legal Rules
 
-- Do NOT use specific idol names, group names, or agency trademarks (HYBE, SM, YG, JYP, etc.)
-- Do NOT describe unauthorized access to private property
-- Use style concepts, cultural trends, and public place names only
-- When referencing K-pop culture, use descriptive terms: "major label HQ areas", "idol-adjacent street style", etc.
+### 인물 및 단체명 금지
+- 특정 아이돌 이름(활동명·본명 모두) 사용 금지
+- 특정 그룹명 사용 금지
+- 기획사 상표명 사용 금지: HYBE, SM, YG, JYP, 스타쉽, 카카오엔터 등 모든 기획사
+- 팬덤명 사용 금지
+- K-pop 문화 언급 시 대체 표현 사용: "대형 기획사 인근", "아이돌 인접 스트릿 스타일", "주요 레이블 사옥 주변" 등
+
+### 저작권 금지
+- 앨범 제목, 곡명, 가사 인용 금지
+- 뮤직비디오·앨범 아트·공식 사진 묘사 금지 (간접 묘사 포함)
+- 특정 콘서트·투어명 언급 금지
+- 방송 프로그램명(서바이벌·예능 포함) 직접 언급 금지
+
+### 상표·브랜드 사용 제한
+- 패션·뷰티 브랜드는 일반 상거래 정보 맥락에서만 허용 (예: 올리브영, 무신사)
+- 특정 브랜드를 특정 아이돌과 연결하는 표현 금지
+- 콜라보·한정판 제품을 특정 인물과 연결하는 표현 금지
+
+### 장소·재산 관련
+- 사유지·비공개 구역 무단 접근 묘사 금지
+- 공개된 장소명·지명만 사용
+- 특정 인물의 거주지·자주 가는 장소로 알려진 곳을 그 인물과 연결하는 표현 금지
 
 ---
 
@@ -164,22 +199,53 @@ Do not write a single line of article content until both files are read.
 
 - 3 Korean + 3 English per session (= 3 KO/EN pairs)
 - Must be paired: each KO article has a corresponding EN article with the same `hreflangSlug`
-- Follow the 3-stage priority order in `md-doc/post-codex-command.md` Section 10
+- Follow the 3-stage priority order in `md-doc/post-codex-command.md` 섹션 4
   - Stage 1: Hub articles (10 locations, in order)
-  - Stage 2: Sub-articles linked to each hub (see Section 10 mapping)
+  - Stage 2: Sub-articles linked to each hub (see 섹션 4 mapping)
   - Stage 3: Remaining topics from `md-doc/kpop-blog-topics-300.md`
-- Check `md-doc/post-codex-command.md` Section 15 (progress log) before starting
-- Log completed files with date/time (KST) in Section 15 after each session
+- Check `md-doc/post-codex-command.md` 섹션 3 (progress log) before starting
+- Log completed files with date/time (KST) in 섹션 3 after each session
+
+## Hub Completion Tasks (허브 1개의 모든 하위 글 완료 시 반드시 실행)
+
+허브 글 + 해당 허브의 모든 하위 글이 완료된 직후, 글 작성 전에 아래 두 작업을 먼저 실행한다.
+
+### 1. 내부 링크 정리
+- 해당 허브의 모든 파일(허브 글 + 하위 글)을 읽는다
+- 허브 글의 "함께 읽을 글" / "Related Guides"에 모든 하위 글이 포함됐는지 확인하고 누락 시 추가
+- 각 하위 글 본문에 허브 글로의 역링크가 있는지 확인하고 누락 시 추가
+- 존재하지 않는 파일로의 링크는 제거
+
+### 2. 키워드 중복 확인
+- 해당 허브 내 모든 글의 타깃 키워드를 목록으로 정리
+- 겹치는 키워드가 있으면 더 구체적인 롱테일로 수정
+- 확인 결과를 섹션 3 로그에 기록
 
 ---
 
 ## Quality Gate (check before output)
 
+**콘텐츠 품질**
 - [ ] `title` is unique and under 60 characters
 - [ ] `description` is 120–155 characters and answers "why click"
 - [ ] Intro defines, challenges, and promises
 - [ ] No padding sentences
-- [ ] No specific idol/group/agency names
+
+**키워드**
+- [ ] 타깃 키워드가 title과 첫 단락에 자연스럽게 포함됐는가
+- [ ] 같은 허브의 다른 글과 타깃 키워드가 겹치지 않는가
+
+**내부 링크**
+- [ ] 하위 글인 경우 허브 글로의 역링크가 본문에 포함됐는가
+- [ ] 링크된 모든 URL이 실제 존재하는 파일인가 (dead link 없음)
+
+**법적 준수**
+- [ ] No specific idol/group/agency/fandom names
+- [ ] No album titles, song names, or lyric quotes
+- [ ] No brand-to-idol association
+- [ ] No private property or personal location references
+
+**기술 스펙**
 - [ ] AI disclosure footer is present
 - [ ] `hreflangSlug` matches the paired language file
 - [ ] `aiGenerated: true` is set
