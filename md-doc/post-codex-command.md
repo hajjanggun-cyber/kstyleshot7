@@ -196,6 +196,24 @@ Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
 - keyword: myeongdong neon street photography
 다음 세션 시작: 2단계 - 명동 하위 글 [011] 명동 K-뷰티 쇼핑 지도
 
+[2026-03-07 00:27 KST]
+완료:
+- content/hub/ko/myeongdong-k-beauty-shopping-map.mdx
+- keyword: 명동 K뷰티 쇼핑 동선
+- content/hub/en/myeongdong-k-beauty-shopping-map.mdx
+- keyword: myeongdong k-beauty shopping route
+다음 세션 시작: 2단계 - 명동 하위 글 [217] 명동 & 홍대 길거리 음식 완전 정복
+
+[2026-03-07 00:43 KST]
+완료:
+- content/hub/ko/myeongdong-hongdae-street-food-guide.mdx
+- keyword: 명동 홍대 길거리 음식 비교
+- content/hub/en/myeongdong-hongdae-street-food-guide.mdx
+- keyword: myeongdong vs hongdae street food
+다음 세션 시작: 1단계 - 남산 N서울타워 허브 글
+
+[2026-03-07 00:45 KST] 명동 허브 내부링크·키워드·nextSlug 정리 완료
+
 <!-- 로그 끝 -->
 
 ---
