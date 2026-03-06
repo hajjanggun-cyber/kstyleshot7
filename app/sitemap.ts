@@ -38,24 +38,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     );
   }
 
-  // Hub MDX articles — auto-generated from content/hub/[lang]/
-  const koSlugs = getAllSlugs("ko");
-  for (const slug of koSlugs) {
-    const languages = buildLocaleAlternatesAbsolute(
-      (locale) => `/${locale}/hub/${slug}`
-    );
-    const canonicalUrl = toAbsoluteUrl(`/ko/hub/${slug}`);
-    entries.push(
-      withAlternates(
-        {
-          url: canonicalUrl,
-          lastModified: now,
-          changeFrequency: "monthly",
-          priority: 0.7,
-        },
-        languages
-      )
-    );
+  // Hub MDX articles — one entry per locale URL (KO + EN each indexed separately)
+  for (const locale of routing.locales) {
+    const slugs = getAllSlugs(locale);
+    for (const slug of slugs) {
+      const languages = buildLocaleAlternatesAbsolute(
+        (l) => `/${l}/hub/${slug}`
+      );
+      const canonicalUrl = toAbsoluteUrl(`/${locale}/hub/${slug}`);
+      entries.push(
+        withAlternates(
+          {
+            url: canonicalUrl,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.7,
+          },
+          languages
+        )
+      );
+    }
   }
 
   return entries;
