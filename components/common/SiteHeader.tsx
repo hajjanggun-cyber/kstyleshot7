@@ -21,7 +21,7 @@ export function SiteHeader({ lang }: SiteHeaderProps) {
         </Link>
         <nav className="site-nav" aria-label={t("ariaLabel")}>
           <Link href={`/${lang}`}>{t("home")}</Link>
-          <Link href={`/${lang}/create`}>{t("create")}</Link>
+          <Link href={`/${lang}/create/upload`}>{t("create")}</Link>
           <Link href={`/${lang}/terms`}>{t("terms")}</Link>
         </nav>
         <div className="site-actions" aria-hidden>
