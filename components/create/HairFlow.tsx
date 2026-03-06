@@ -179,12 +179,11 @@ export function HairFlow() {
       {/* Fixed bottom */}
       <div className="hr-bottom">
         <button
-          className={`hr-next-btn${selectedId ? " hr-next-btn--active" : ""}`}
-          disabled={false}
+          className="up-next-btn up-next-btn--active"
           onClick={handleNext}
           type="button"
         >
-          Next: Choose Outfit →
+          Next Step →
         </button>
       </div>
     </div>

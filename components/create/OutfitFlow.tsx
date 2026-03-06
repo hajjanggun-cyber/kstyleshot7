@@ -188,12 +188,12 @@ export function OutfitFlow() {
       {/* Fixed bottom */}
       <div className="ot-bottom">
         <button
-          className={`ot-apply-btn${selectedId ? " ot-apply-btn--active" : ""}`}
+          className="up-next-btn up-next-btn--active"
           disabled={isApplying}
           onClick={handleApply}
           type="button"
         >
-          {isApplying ? "Applying…" : "Apply & Continue →"}
+          {isApplying ? "Applying…" : "Next Step →"}
         </button>
       </div>
     </div>

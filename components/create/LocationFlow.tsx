@@ -195,7 +195,7 @@ export function LocationFlow() {
       {/* Fixed bottom */}
       <div className="lc-bottom">
         <button
-          className={`lc-gen-btn${selectedId && !isGenerating ? " lc-gen-btn--active" : ""}`}
+          className="up-next-btn up-next-btn--active"
           disabled={isGenerating}
           onClick={handleGenerate}
           type="button"
@@ -206,7 +206,7 @@ export function LocationFlow() {
               Generating…
             </>
           ) : (
-            <>GENERATE VIRTUAL SHOOT ✦</>
+            <>Next Step →</>
           )}
         </button>
       </div>
