@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-
+// Root / is handled by next-intl middleware → redirects to /ko
 export default function IndexPage() {
-  redirect("/ko");
+  return null;
 }
