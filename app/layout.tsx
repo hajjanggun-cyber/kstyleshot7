@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     description: defaultDescription,
     images: [
       {
-        url: toAbsoluteAssetUrl("/visuals/landing/main.png"),
-        width: 1200,
-        height: 630,
+        url: toAbsoluteAssetUrl("/visuals/landing/main.webp"),
+        width: 1600,
+        height: 894,
         alt: "kstyleshot hero visual"
       }
     ]
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: [toAbsoluteAssetUrl("/visuals/landing/main.png")]
+    images: [toAbsoluteAssetUrl("/visuals/landing/main.webp")]
   },
   verification: {
     google: googleVerification,
@@ -81,7 +81,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       "@type": "Organization",
       name: SITE_NAME,
       url: siteUrl,
-      logo: toAbsoluteAssetUrl("/visuals/landing/main.png")
+      logo: toAbsoluteAssetUrl("/visuals/landing/main.webp")
     },
     {
       "@context": "https://schema.org",

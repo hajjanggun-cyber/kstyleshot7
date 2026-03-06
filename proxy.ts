@@ -17,10 +17,6 @@ export default function proxy(request: NextRequest) {
     return NextResponse.redirect(redirectUrl, 308);
   }
 
-  if (nextUrl.pathname.startsWith("/blog")) {
-    return NextResponse.next();
-  }
-
   return intlMiddleware(request);
 }
 

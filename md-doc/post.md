@@ -1,590 +1,564 @@
-﻿Updated At: 2026-03-05 21:49:41 +09:00 (Asia/Seoul)
+Updated At: 2026-03-06 18:05:00 +09:00 (Asia/Seoul)
 
-# Post Operations (Latest)
+# 포스트 기획 기준 문서
 
-## Posting Inventory Snapshot
-- EN: 110
-- KO: 110
-- TOTAL: 220
+## 최상단 필수 숙지 사항
 
-## Posting Scope Rule
-- 포스팅 관련 기획/현황/카테고리/발행전략은 `post.md`에서만 관리
-- 실행용 할 일(TODO), 점검 체크리스트, 당일 액션은 `todo.md`에서만 관리
+글 작성 전 반드시 아래 Google 공식 문서를 먼저 확인한다.
 
-## Today Posting Priority (Pair)
-1. EN: /blog/en/gyeongbokgung-mood-guide
-2. KO: /blog/ko/gyeongbokgung-mood-guide-ko
+- Google SEO 기본 가이드:
+  `https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko`
 
-## Today Execution Status (2026-03-05)
-- 본문 최종 점검 완료 (EN/KO)
-- 내부 링크 3개씩 추가 완료
-- 이미지 슬롯 배치 완료 (EN 9/9, KO 9/9)
-- sitemap 반영 확인 완료
-- 다음 작업: Google Search Console 수동 색인 요청
+이 링크는 선택 사항이 아니라 기본 기준이다.
+앞으로 작성하는 모든 글은 아래 원칙을 먼저 점검한 뒤 작성한다.
 
-## Image Policy For New Posts
-- 기본 슬롯: hero 1 + gallery 8 (총 9장)
-- 모든 이미지에 문맥형 alt 텍스트 필수
+1. 검색엔진보다 사람에게 먼저 도움이 되는 글인가
+2. 제목이 내용을 정확하게 설명하는가
+3. 설명문(description)이 검색 결과에서 클릭 이유를 주는가
+4. 본문 구조가 명확하고 소제목이 실제 내용을 반영하는가
+5. 독창적인 정보, 설명, 비교, 해석이 있는가
+6. 얇은 요약문이나 중복 문장으로 분량만 늘린 글이 아닌가
+7. 링크 텍스트가 자연스럽고 문맥상 의미가 있는가
+8. 사이트맵과 색인 요청은 운영 단계에서 별도로 확인하는가
+9. 이미지가 없더라도 텍스트만으로 문서 가치가 충분한가
+10. 한글 글과 영어 글이 각각의 검색 의도에 맞게 독립적으로 설계되었는가
 
-======================================================================
+추가 원칙:
 
-# kstyleshot Blog Post Plan (120 Posts)
+- 길다고 SEO에 좋은 것이 아니다.
+- 짧아도 검색 의도에 정확히 답하면 강한 글이 될 수 있다.
+- 반대로 길어도 중복과 추상어가 많으면 약한 글이다.
+- 앞으로는 "분량"보다 "검색 의도 적합성 + 정보 밀도 + 구조 명확성"을 우선한다.
 
-작성: Codex (GPT-5)
-기준: EN 60개 + KO 60개
-원칙: 한글/영문은 번역 쌍이 아니라, 각각 독립 기획 포스팅으로 운영
+## 0. 문서 목적
 
-## 운영 원칙
+이 문서는 블로그 포스트 기획의 기준 문서다.
 
-1. 영어 글은 글로벌 검색 의도 기준으로 작성한다.
-2. 한글 글은 한국 사용자 검색 습관과 구매 전환 기준으로 작성한다.
-3. 한영 글은 같은 주제를 다뤄도 제목, 각도, 사례, 톤을 다르게 간다.
-4. 모든 글 하단에는 `Try kstyleshot` CTA 1개와 비제휴/AI disclaimer를 고정한다.
-5. 특정 아이돌, 그룹, 기획사, 브랜드 직접 언급은 피한다.
-6. 포스팅은 `/blog`에서 독립 운영하고, create 단계 UI 내부에는 본문을 삽입하지 않는다.
-7. 제품 공식 플로우 설명은 `헤어 -> 의상 -> 배경`을 기본값으로 유지한다.
-8. "배경 먼저" 계열 주제는 기본 플로우 대체가 아니라 비교/예외 케이스로만 다룬다.
+이 문서에서만 관리하는 항목:
 
----
+- 포스트 방향
+- 허브 글 제목
+- 소제목 구조
+- 장소 확장 전략
+- 한글/영문 운영 원칙
+- SEO 기준
+- 작성 순서
 
-## 포스팅-제품 분리 규칙
-
-1. 포스팅의 목적은 검색 유입/신뢰 형성이고, 실제 생성 인터랙션은 create 플로우에서만 수행한다.
-2. 개별 포스트는 본문 하단 CTA 1개로만 `/${lang}/create`에 연결한다.
-3. create 단계 화면에는 짧은 도움말만 두고, 긴 설명은 블로그 글로 보낸다.
-4. 제품 플로우 자체를 바꾸는 가이드는 `제품 / FAQ` 카테고리에서만 공식 문서처럼 관리한다.
+이 문서는 실행용 TODO 문서가 아니다.
+당일 작업, 체크리스트, 점검 메모는 `todo.md`에서만 관리한다.
 
 ---
 
-## EN Posts (60)
+## 1. 현재 방향 전환
 
-| No | Category | Working Title | Slug | Intent |
-|---|---|---|---|---|
-| 1 | Hair | K-Style Curtain Bangs for Better Selfies | k-style-curtain-bangs-for-better-selfies | haircut intent |
-| 2 | Hair | How Soft Layers Change a Portrait Mood | how-soft-layers-change-a-portrait-mood | style education |
-| 3 | Hair | Best Wispy Bang Looks for Front-Facing Photos | best-wispy-bang-looks-for-front-facing-photos | search + conversion |
-| 4 | Hair | The Easiest K-Style Hair Shapes for Round Faces | easiest-k-style-hair-shapes-for-round-faces | face shape intent |
-| 5 | Hair | K-Style Hair Ideas That Make Jawlines Look Cleaner | k-style-hair-ideas-for-cleaner-jawlines | beauty angle |
-| 6 | Hair | Why Hush Cuts Photograph So Well | why-hush-cuts-photograph-so-well | informational |
-| 7 | Hair | Hair Volume Tricks That Improve AI Portrait Uploads | hair-volume-tricks-for-ai-portrait-uploads | product-adjacent |
-| 8 | Hair | Choosing Between Center Part and Side Part in K-Style Portraits | center-part-vs-side-part-k-style-portraits | comparison |
-| 9 | Hair | The Best Soft Wolf Cut Mood for Editorial Selfies | best-soft-wolf-cut-mood-for-editorial-selfies | trend intent |
-| 10 | Hair | K-Style Hair Looks That Work Without Heavy Styling | k-style-hair-looks-without-heavy-styling | beginner intent |
-| 11 | Hair | How to Pick a Hair Mood Before Using an AI Photo Tool | pick-a-hair-mood-before-using-ai-photo-tool | conversion |
-| 12 | Hair | Clean Fringe vs Airy Fringe for Portrait Photos | clean-fringe-vs-airy-fringe-for-portrait-photos | comparison |
-| 13 | Beauty Prep | How to Prep Skin Before Taking a Selfie for AI Styling | prep-skin-before-ai-styling-selfie | product-adjacent |
-| 14 | Beauty Prep | The Best Lightweight Base for Glossy Portrait Photos | best-lightweight-base-for-glossy-portrait-photos | beauty search |
-| 15 | Beauty Prep | Glass-Skin Photo Prep Without Looking Oily | glass-skin-photo-prep-without-looking-oily | beauty search |
-| 16 | Beauty Prep | Simple Brow Cleanup That Changes Portrait Balance | simple-brow-cleanup-for-portrait-balance | beauty tip |
-| 17 | Beauty Prep | Lip Colors That Read Better in Soft Lighting | lip-colors-that-read-better-in-soft-lighting | beauty tip |
-| 18 | Beauty Prep | How to Reduce Under-Eye Shadows Before a Portrait Upload | reduce-under-eye-shadows-before-portrait-upload | practical help |
-| 19 | Beauty Prep | The Best Contact Lens Colors for Soft K-Style Photos | best-contact-lens-colors-for-soft-k-style-photos | style search |
-| 20 | Beauty Prep | Natural Flush Placement for Better Selfie Depth | natural-flush-placement-for-better-selfie-depth | makeup tutorial |
-| 21 | Beauty Prep | How to Keep Shine Only Where the Camera Likes It | keep-shine-where-the-camera-likes-it | practical beauty |
-| 22 | Beauty Prep | Why Minimal Makeup Often Works Better for AI Portrait Tools | minimal-makeup-works-better-for-ai-portraits | product trust |
-| 23 | Outfit | Clean Stage-Inspired Outfit Ideas Without Looking Costume-Like | clean-stage-inspired-outfit-ideas | style inspiration |
-| 24 | Outfit | How to Style a Cropped Jacket for a K-Editorial Mood | style-a-cropped-jacket-for-k-editorial-mood | outfit styling |
-| 25 | Outfit | Soft Knit Layers That Feel Camera-Friendly | soft-knit-layers-that-feel-camera-friendly | outfit search |
-| 26 | Outfit | Monotone Outfit Combinations for Sleeker Portraits | monotone-outfit-combinations-for-sleeker-portraits | style guide |
-| 27 | Outfit | The Best Necklines for Clean Front-Facing Portraits | best-necklines-for-clean-front-facing-portraits | practical search |
-| 28 | Outfit | How to Use Contrast in a Minimal K-Style Outfit | use-contrast-in-a-minimal-k-style-outfit | educational |
-| 29 | Outfit | Why Structured Shoulders Change the Photo Mood | why-structured-shoulders-change-photo-mood | style analysis |
-| 30 | Outfit | Casual City Looks That Still Feel Polished on Camera | casual-city-looks-that-feel-polished-on-camera | lifestyle search |
-| 31 | Outfit | Choosing Color Temperature in K-Style Wardrobe Planning | choosing-color-temperature-in-k-style-wardrobe | styling help |
-| 32 | Outfit | The Best Simple Layers for Street-to-Editorial Looks | best-simple-layers-for-street-to-editorial-looks | search + conversion |
-| 33 | Backdrop / Mood | Best Seoul-Inspired Backdrops for Clean Portrait Mood | best-seoul-inspired-backdrops-for-clean-portrait-mood | backdrop search |
-| 34 | Backdrop / Mood | Why Hongdae Feels Different From Seongsu in Photos | hongdae-vs-seongsu-photo-mood | comparison |
-| 35 | Backdrop / Mood | How Palace Backdrops Change a Portrait Tone | how-palace-backdrops-change-a-portrait-tone | aesthetic education |
-| 36 | Backdrop / Mood | The Most Camera-Friendly Urban Night Backdrop Styles | most-camera-friendly-urban-night-backdrop-styles | backdrop style |
-| 37 | Backdrop / Mood | Riverfront Backgrounds for Relaxed K-Style Portraits | riverfront-backgrounds-for-relaxed-k-style-portraits | scene planning |
-| 38 | Backdrop / Mood | Warm Street Backdrops vs Minimal Architecture Shots | warm-street-backdrops-vs-minimal-architecture-shots | comparison |
-| 39 | Backdrop / Mood | What Kind of Outfit Matches a Dense City Background | outfit-for-dense-city-background | pairing intent |
-| 40 | Backdrop / Mood | Backdrop-first vs Hair-first: When Each Works Better | pick-a-backdrop-before-hairstyle | workflow comparison |
-| 41 | Photo Technique | Best Front Camera Angle for Balanced Facial Proportions | best-front-camera-angle-for-balanced-facial-proportions | practical help |
-| 42 | Photo Technique | How to Use Window Light for a Cleaner Portrait Upload | use-window-light-for-cleaner-portrait-upload | photo tip |
-| 43 | Photo Technique | The Easiest Pose Fixes for Better 9:16 Portraits | easiest-pose-fixes-for-better-9x16-portraits | tutorial |
-| 44 | Photo Technique | Why Eye Level Matters More Than You Think in Selfies | why-eye-level-matters-in-selfies | practical education |
-| 45 | Photo Technique | How to Avoid Flat Lighting in Indoor Selfies | avoid-flat-lighting-in-indoor-selfies | practical search |
-| 46 | Photo Technique | Background Cleanliness Tips Before Uploading a Selfie | background-cleanliness-before-uploading-selfie | prep checklist |
-| 47 | Photo Technique | The Best Distance Between Camera and Face for AI Portraits | best-distance-between-camera-and-face-for-ai-portraits | product-adjacent |
-| 48 | Photo Technique | What to Do With Your Chin for Better Portrait Shape | what-to-do-with-your-chin-for-better-portrait-shape | technique |
-| 49 | Photo Technique | How to Take a Better Selfie in a Small Room | how-to-take-a-better-selfie-in-a-small-room | practical search |
-| 50 | Photo Technique | Why Simple Framing Outperforms Busy Composition for AI Uploads | simple-framing-for-ai-uploads | product trust |
-| 51 | Product / FAQ | What Makes a Good Selfie for AI Style Generation | what-makes-a-good-selfie-for-ai-style-generation | FAQ |
-| 52 | Product / FAQ | Why AI Style Results Can Vary From the Original Face | why-ai-style-results-can-vary | expectation setting |
-| 53 | Product / FAQ | How the Kstyleshot Flow Works From Upload to Download | how-kstyleshot-works-from-upload-to-download | onboarding |
-| 54 | Product / FAQ | Why We Recommend Picking Hair Before Outfit | why-pick-hair-before-outfit | workflow explanation |
-| 55 | Product / FAQ | What to Expect From Background Compositing in AI Portrait Tools | what-to-expect-from-background-compositing | expectation setting |
-| 56 | Product / FAQ | When an AI Portrait Tool Should Refund a Purchase | when-an-ai-portrait-tool-should-refund | policy trust |
-| 57 | Seasonal / Trend | Spring K-Style Photo Ideas With Soft Color Energy | spring-k-style-photo-ideas-with-soft-color-energy | seasonal traffic |
-| 58 | Seasonal / Trend | Summer Portrait Looks That Stay Clean in Bright Light | summer-portrait-looks-for-bright-light | seasonal traffic |
-| 59 | Seasonal / Trend | Fall Layering Ideas for Editorial-Style Selfies | fall-layering-ideas-for-editorial-style-selfies | seasonal traffic |
-| 60 | Seasonal / Trend | Winter Color Moods for Sleek K-Style Portraits | winter-color-moods-for-sleek-k-style-portraits | seasonal traffic |
+이전 장소형 글은 주로 아래 5종에 집중되어 있었다.
 
----
-
-## KO Posts (60)
-
-| No | Category | Working Title | Slug | Intent |
-|---|---|---|---|---|
-| 1 | 헤어 | 셀카가 잘 받는 시스루뱅 고르는 법 | selfie-friendly-see-through-bangs-guide-ko | 실전 검색 |
-| 2 | 헤어 | 허쉬컷 느낌을 사진에서 살리는 포인트 | make-hush-cut-look-better-in-photos-ko | 스타일 가이드 |
-| 3 | 헤어 | 얼굴형별로 무난하게 먹히는 케이스타일 앞머리 | k-style-bangs-by-face-shape-ko | 얼굴형 검색 |
-| 4 | 헤어 | 중단발 레이어드가 사진빨 좋은 이유 | why-mid-length-layers-photograph-well-ko | 정보형 |
-| 5 | 헤어 | 볼륨 없는 머리도 덜 밋밋하게 보이는 연출법 | add-volume-to-flat-hair-for-photos-ko | 실용 팁 |
-| 6 | 헤어 | 가르마 하나로 분위기 달라지는 셀카 헤어 선택법 | parting-choice-for-selfie-mood-ko | 비교 검색 |
-| 7 | 헤어 | 긴 머리보다 단정해 보이는 숏~미디 길이 조합 | neat-short-to-midi-hair-combos-ko | 스타일 탐색 |
-| 8 | 헤어 | 카메라에서 얼굴선이 정리돼 보이는 옆머리 연출 | side-hair-framing-for-cleaner-face-lines-ko | 실전 팁 |
-| 9 | 헤어 | 부스스한 머리 정리만 해도 사진 분위기 좋아지는 이유 | tame-frizz-for-better-portrait-mood-ko | 문제 해결 |
-| 10 | 헤어 | 처음 스타일 사진 만들 때 실패 적은 헤어 5가지 | beginner-friendly-k-style-hair-ideas-ko | 초보 전환 |
-| 11 | 헤어 | 셀카 업로드 전에 머리만 정리해도 달라지는 체크리스트 | hair-checklist-before-selfie-upload-ko | 제품 인접 |
-| 12 | 헤어 | 머리숱 적어 보여도 답답하지 않게 찍히는 법 | make-thin-hair-look-light-in-photos-ko | 실전 검색 |
-| 13 | K-뷰티 준비 | 셀카 찍기 전 피부결 정리 루틴 | skin-texture-routine-before-selfie-ko | 뷰티 검색 |
-| 14 | K-뷰티 준비 | 광은 살리고 번들거림은 줄이는 베이스 팁 | glossy-but-not-greasy-base-tip-ko | 뷰티 검색 |
-| 15 | K-뷰티 준비 | 사진에서 다크서클이 덜 도드라지는 메이크업 포인트 | reduce-dark-circle-look-in-photos-ko | 문제 해결 |
-| 16 | K-뷰티 준비 | 셀카에서 눈매가 또렷해 보이는 기본 음영 위치 | eye-definition-placement-for-selfies-ko | 메이크업 팁 |
-| 17 | K-뷰티 준비 | 입술 색 하나로 분위기 정리하는 가장 쉬운 방법 | easiest-lip-color-trick-for-photo-mood-ko | 간편 팁 |
-| 18 | K-뷰티 준비 | 톤업만 과하면 왜 사진이 뜨는지 | why-too-much-tone-up-looks-off-in-photos-ko | 정보형 |
-| 19 | K-뷰티 준비 | 화장 진한 것보다 깔끔한 피부표현이 중요한 이유 | clean-skin-over-heavy-makeup-ko | 제품 신뢰 |
-| 20 | K-뷰티 준비 | 카메라에서 정돈돼 보이는 눈썹 결 정리법 | eyebrow-grooming-for-clean-camera-look-ko | 실전 팁 |
-| 21 | K-뷰티 준비 | 조명 약한 실내에서 먹히는 메이크업 밸런스 | indoor-low-light-makeup-balance-ko | 상황 검색 |
-| 22 | K-뷰티 준비 | 셀카용 준비 메이크업에서 덜어내야 하는 것들 | what-to-remove-from-selfie-prep-makeup-ko | 체크리스트 |
-| 23 | 코디 | 사진에서 덜 촌스럽게 보이는 무채색 코디 조합 | clean-neutral-outfit-combos-for-photos-ko | 코디 검색 |
-| 24 | 코디 | 재킷 하나로 케이스타일 느낌 내는 방법 | use-one-jacket-for-k-style-mood-ko | 스타일 가이드 |
-| 25 | 코디 | 니트 레이어드가 셀카에서 예쁘게 보이는 이유 | why-knit-layers-look-good-in-selfies-ko | 정보형 |
-| 26 | 코디 | 상체가 답답해 보이지 않는 넥라인 고르는 법 | choose-necklines-that-look-clean-on-camera-ko | 실전 검색 |
-| 27 | 코디 | 컬러를 많이 안 써도 사진이 심심하지 않게 만드는 팁 | avoid-boring-looks-with-fewer-colors-ko | 실용 팁 |
-| 28 | 코디 | 출근룩 같은데 사진은 더 세련돼 보이는 코디 공식 | polished-but-simple-outfit-formula-ko | 라이프스타일 |
-| 29 | 코디 | 체형 보정처럼 보이는 아우터 실루엣 고르기 | outerwear-silhouette-for-better-shape-ko | 체형 검색 |
-| 30 | 코디 | 상의 핏만 바꿔도 사진 분위기 달라지는 이유 | why-top-fit-changes-photo-mood-ko | 정보형 |
-| 31 | 코디 | 촬영용으로 실패 적은 톤온톤 조합 정리 | low-risk-tone-on-tone-outfit-guide-ko | 초보 코디 |
-| 32 | 코디 | 번화가 배경에서 튀지 않으면서 묻히지 않는 옷 | outfits-for-busy-city-backgrounds-ko | 배경 매칭 |
-| 33 | 배경 / 무드 | 홍대 느낌 배경이 잘 어울리는 스타일 정리 | style-that-matches-hongdae-mood-ko | 배경 탐색 |
-| 34 | 배경 / 무드 | 성수 감성 배경에는 어떤 분위기가 어울릴까 | best-mood-for-seongsu-style-backdrops-ko | 배경 탐색 |
-| 35 | 배경 / 무드 | 경복궁 계열 배경이 얼굴 분위기를 바꾸는 방식 | palace-backdrop-effect-on-portrait-mood-ko | 미학 설명 |
-| 36 | 배경 / 무드 | 한강 느낌 배경이 편안해 보이는 이유 | why-riverfront-backdrops-feel-relaxed-ko | 정보형 |
-| 37 | 배경 / 무드 | 야간 도심 배경이 잘 받는 옷 색상 가이드 | outfit-colors-for-night-city-backdrops-ko | 매칭 검색 |
-| 38 | 배경 / 무드 | 관광지 느낌 말고 세련된 서울 무드 고르는 법 | choose-seoul-inspired-backdrops-without-tourist-look-ko | 전환 인접 |
-| 39 | 배경 / 무드 | 배경 먼저 vs 헤어 먼저, 언제 더 유리한가 | why-backdrop-first-can-simplify-style-choice-ko | 워크플로우 비교 |
-| 40 | 배경 / 무드 | 복잡한 거리 배경에서 얼굴이 묻히지 않게 만드는 법 | avoid-losing-your-face-in-busy-street-backdrops-ko | 실전 팁 |
-| 41 | 촬영 팁 | 정면 셀카가 덜 어색해 보이는 카메라 각도 | best-front-selfie-angle-for-natural-look-ko | 실전 검색 |
-| 42 | 촬영 팁 | 창가 빛만으로도 얼굴이 깔끔하게 나오는 세팅 | window-light-setup-for-clean-face-selfies-ko | 조명 팁 |
-| 43 | 촬영 팁 | 작은 방에서도 셀카가 덜 답답하게 나오는 구도 | selfie-framing-in-small-rooms-ko | 생활형 검색 |
-| 44 | 촬영 팁 | 턱 각도 하나로 얼굴선이 달라 보이는 이유 | chin-angle-for-cleaner-face-line-ko | 실전 팁 |
-| 45 | 촬영 팁 | 카메라와 얼굴 거리 조절이 중요한 이유 | why-camera-distance-matters-for-selfies-ko | 정보형 |
-| 46 | 촬영 팁 | 실내 조명이 누래도 사진이 덜 탁해 보이게 찍는 법 | fix-warm-indoor-lighting-for-selfies-ko | 문제 해결 |
-| 47 | 촬영 팁 | 셀카 찍기 전에 배경 정리만 해도 결과가 달라지는 이유 | clean-your-background-before-selfie-ko | 준비 체크 |
-| 48 | 촬영 팁 | 9대16 비율에서 덜 어색한 상반신 구도 잡기 | better-upper-body-framing-for-9x16-ko | 제품 인접 |
-| 49 | 촬영 팁 | 표정이 굳어 보일 때 가장 먼저 고칠 포인트 | first-fix-when-your-expression-looks-stiff-ko | 실전 팁 |
-| 50 | 촬영 팁 | 사진용 셀카는 왜 단순한 구도가 유리한가 | why-simple-framing-works-better-for-selfie-uploads-ko | 정보형 |
-| 51 | 제품 / FAQ | 스타일 사진 만들기 전에 어떤 셀카를 준비해야 할까 | best-selfie-prep-for-style-photo-tools-ko | 제품 FAQ |
-| 52 | 제품 / FAQ | AI 스타일 결과가 원본 얼굴과 똑같지 않은 이유 | why-ai-style-results-are-not-exact-matches-ko | 기대치 조정 |
-| 53 | 제품 / FAQ | 업로드부터 다운로드까지 사용 흐름 한 번에 이해하기 | understand-kstyleshot-flow-at-once-ko | 온보딩 |
-| 54 | 제품 / FAQ | 왜 헤어를 먼저 고르고 의상을 나중에 고르나 | why-hair-comes-before-outfit-in-the-flow-ko | 설계 설명 |
-| 55 | 제품 / FAQ | 배경 합성 결과에서 기대해야 할 것과 아닌 것 | what-to-expect-from-background-compositing-ko | 기대치 조정 |
-| 56 | 제품 / FAQ | 어떤 경우에 환불이 자동으로 이뤄져야 하나 | when-auto-refunds-should-happen-ko | 정책 신뢰 |
-| 57 | 시즌 / 트렌드 | 봄에 잘 먹히는 화사한 케이스타일 사진 무드 | spring-k-style-photo-mood-guide-ko | 시즌성 |
-| 58 | 시즌 / 트렌드 | 여름 셀카에서 답답해 보이지 않는 스타일 조합 | summer-selfie-styling-that-stays-light-ko | 시즌성 |
-| 59 | 시즌 / 트렌드 | 가을엔 레이어드가 왜 사진에서 강해지는가 | why-layering-gets-stronger-in-fall-photos-ko | 시즌성 |
-| 60 | 시즌 / 트렌드 | 겨울엔 차가운 톤이 더 세련돼 보이는 이유 | why-cool-tones-look-sleeker-in-winter-ko | 시즌성 |
-
----
-
-## 카테고리 분배 요약
-
-- EN 60개
-  - Hair 12
-  - Beauty Prep 10
-  - Outfit 10
-  - Backdrop / Mood 8
-  - Photo Technique 10
-  - Product / FAQ 6
-  - Seasonal / Trend 4
-
-- KO 60개
-  - 헤어 12
-  - K-뷰티 준비 10
-  - 코디 10
-  - 배경 / 무드 8
-  - 촬영 팁 10
-  - 제품 / FAQ 6
-  - 시즌 / 트렌드 4
-
----
-
-## 추천 발행 순서
-
-1. 제품 / FAQ
+1. 무드 가이드
 2. 헤어
-3. 촬영 팁
-4. K-뷰티 준비
-5. 코디
-6. 배경 / 무드
-7. 시즌 / 트렌드
+3. 의상
+4. 프레이밍
+5. 체크리스트
 
-이 순서가 좋은 이유:
+이 구조는 전환 보조용으로는 쓸 수 있지만, 검색 유입용으로는 약하다.
 
-1. 전환에 가까운 글이 먼저 쌓인다.
-2. 이후 헤어/촬영/배경 글에서 내부 링크를 자연스럽게 연결할 수 있다.
-3. 시즌 글은 후반에 넣어도 늦지 않다.
+이제는 방향을 바꾼다.
 
----
+새 기준:
 
-## 다음 확장안 (120개 이후)
+- 장소 자체를 설명하는 정보형 허브 글이 먼저다.
+- 스타일형 글은 그 다음이다.
 
-120개를 다 소화한 뒤에는 아래 방식으로 확장한다.
+즉 앞으로의 장소형 포스트는 두 층으로 나뉜다.
 
-1. 성과 좋은 카테고리에서 하위 키워드 2차 확장
-2. `before use / after use`가 아니라 `prep / selection / workflow` 중심 확장
-3. "도구 리뷰"보다 "사진 결과 개선" 중심 확장
-4. 전환 낮은 주제는 추가 생산 중단
+### 1단계: 장소 엔티티 글
 
----
+- 이 장소는 무엇인가
+- 왜 유명해졌는가
+- 왜 핫플이 되었는가
+- 사람들이 왜 찾는가
+- 어떤 분위기와 상징을 가지는가
 
-## 1차 발행 20개 (바로 시작용)
+### 2단계: 스타일 연결 글
 
-초기 20개는 "전환 가까운 주제 + 검색 수요가 분명한 주제"로 먼저 깐다.
-
-구성:
-
-- EN 10개
-- KO 10개
-- 제품/FAQ -> 헤어 -> 촬영 팁 순서
-
-### EN First 10
-
-| Priority | Category | Working Title | Slug | Why First |
-|---|---|---|---|---|
-| 1 | Product / FAQ | What Makes a Good Selfie for AI Style Generation | what-makes-a-good-selfie-for-ai-style-generation | 제품 이해 + 전환 |
-| 2 | Product / FAQ | How the Kstyleshot Flow Works From Upload to Download | how-kstyleshot-works-from-upload-to-download | 서비스 설명 |
-| 3 | Product / FAQ | Why AI Style Results Can Vary From the Original Face | why-ai-style-results-can-vary | 기대치 조정 |
-| 4 | Product / FAQ | When an AI Portrait Tool Should Refund a Purchase | when-an-ai-portrait-tool-should-refund | 신뢰 확보 |
-| 5 | Hair | K-Style Curtain Bangs for Better Selfies | k-style-curtain-bangs-for-better-selfies | 검색 수요 강함 |
-| 6 | Hair | How Soft Layers Change a Portrait Mood | how-soft-layers-change-a-portrait-mood | 스타일 기초 |
-| 7 | Hair | Why Hush Cuts Photograph So Well | why-hush-cuts-photograph-so-well | 클릭 유도 쉬움 |
-| 8 | Photo Technique | Best Front Camera Angle for Balanced Facial Proportions | best-front-camera-angle-for-balanced-facial-proportions | 실전 검색 |
-| 9 | Photo Technique | How to Use Window Light for a Cleaner Portrait Upload | use-window-light-for-cleaner-portrait-upload | 실용성 높음 |
-| 10 | Photo Technique | The Best Distance Between Camera and Face for AI Portraits | best-distance-between-camera-and-face-for-ai-portraits | 제품 인접 |
-
-### KO First 10
-
-| Priority | Category | Working Title | Slug | Why First |
-|---|---|---|---|---|
-| 1 | 제품 / FAQ | 스타일 사진 만들기 전에 어떤 셀카를 준비해야 할까 | best-selfie-prep-for-style-photo-tools-ko | 전환 가까움 |
-| 2 | 제품 / FAQ | 업로드부터 다운로드까지 사용 흐름 한 번에 이해하기 | understand-kstyleshot-flow-at-once-ko | 서비스 설명 |
-| 3 | 제품 / FAQ | AI 스타일 결과가 원본 얼굴과 똑같지 않은 이유 | why-ai-style-results-are-not-exact-matches-ko | 기대치 조정 |
-| 4 | 제품 / FAQ | 어떤 경우에 환불이 자동으로 이뤄져야 하나 | when-auto-refunds-should-happen-ko | 신뢰 확보 |
-| 5 | 헤어 | 셀카가 잘 받는 시스루뱅 고르는 법 | selfie-friendly-see-through-bangs-guide-ko | 검색 수요 강함 |
-| 6 | 헤어 | 허쉬컷 느낌을 사진에서 살리는 포인트 | make-hush-cut-look-better-in-photos-ko | 스타일 기초 |
-| 7 | 헤어 | 처음 스타일 사진 만들 때 실패 적은 헤어 5가지 | beginner-friendly-k-style-hair-ideas-ko | 초보 유입 |
-| 8 | 촬영 팁 | 정면 셀카가 덜 어색해 보이는 카메라 각도 | best-front-selfie-angle-for-natural-look-ko | 실전 검색 |
-| 9 | 촬영 팁 | 창가 빛만으로도 얼굴이 깔끔하게 나오는 세팅 | window-light-setup-for-clean-face-selfies-ko | 실용성 높음 |
-| 10 | 촬영 팁 | 카메라와 얼굴 거리 조절이 중요한 이유 | why-camera-distance-matters-for-selfies-ko | 제품 인접 |
-
-### 1차 발행 순서 추천
-
-1주차:
-
-1. EN 1~4
-2. KO 1~4
-
-2주차:
-
-1. EN 5~7
-2. KO 5~7
-
-3주차:
-
-1. EN 8~10
-2. KO 8~10
-
-이렇게 하면:
-
-1. 초반부터 FAQ로 신뢰를 깔고
-2. 헤어 검색으로 유입을 받고
-3. 촬영 팁으로 롱테일까지 확보할 수 있다
+- 무드 가이드
+- 헤어
+- 의상
+- 프레이밍
+- 체크리스트
 
 ---
 
-## 본문 템플릿 (실전용)
+## 2. 핵심 원칙
 
-모든 글은 아래 구조로 통일하는 것이 좋다.
-
-### MDX Frontmatter Template
-
-```mdx
----
-title: "Post title"
-slug: "post-slug"
-lang: "en"
-date: "2026-03-04"
-updated: "2026-03-04"
-description: "One-sentence summary for search results."
-tags: ["hair", "selfie", "k-style"]
-category: "Hair"
-draft: false
-canonical: ""
-pairSlug: ""
-ctaVariant: "default"
----
-```
-
-설명:
-
-1. `pairSlug`는 번역 짝글용이 아니라, 필요할 때만 비슷한 성격 글을 연결
-2. 한영이 독립 기획이므로 기본값은 빈 문자열 권장
-3. `ctaVariant`는 나중에 CTA 문구 실험용
-
-### EN Article Structure
-
-```mdx
-## Intro
-Hook the reader with one concrete problem.
-
-## Why This Matters
-Explain why this changes the final photo result.
-
-## 3-7 Practical Tips
-Use short subheads and keep each tip actionable.
-
-## Common Mistakes
-Call out what usually ruins the result.
-
-## Quick Checklist
-Summarize what to do before using the tool.
-
-## Try It in kstyleshot
-One short CTA paragraph with one link.
-
-## Disclaimer
-This is an unofficial service and is not affiliated with any artists, labels, or brands.
-All results are AI-generated style images; exact likeness is not guaranteed.
-```
-
-### KO Article Structure
-
-```mdx
-## 도입
-사용자가 겪는 상황을 구체적으로 던진다.
-
-## 왜 중요한가
-이 포인트가 결과 사진에 어떤 영향을 주는지 설명한다.
-
-## 실전 팁 3~7개
-짧은 소제목으로 나누고 바로 적용 가능하게 쓴다.
-
-## 자주 하는 실수
-결과를 망치는 포인트를 짚는다.
-
-## 업로드 전 체크리스트
-실제로 하기 전에 확인할 항목을 정리한다.
-
-## kstyleshot에서 바로 적용해보기
-CTA는 한 문단, 링크는 1개만 둔다.
-
-## 고지 문구
-본 서비스는 특정 아티스트·기획사·브랜드와 제휴/공식 관계가 없습니다.
-결과물은 AI로 생성된 스타일 이미지이며 동일 재현을 보장하지 않습니다.
-```
-
-### 본문 작성 규칙
-
-1. 서론은 2~4문장 이내
-2. 한 섹션은 너무 길게 끌지 않는다
-3. 한 글당 CTA는 1회만
-4. 제품 링크는 문맥상 자연스러운 위치에만 삽입
-5. 특정 실존 인물 연상 문구 금지
-
-### CTA 문장 예시
-
-EN:
-
-- Try the full style flow in kstyleshot with one selfie.
-- Start with a clean selfie and test the look in kstyleshot.
-
-KO:
-
-- 셀카 한 장으로 kstyleshot에서 바로 분위기를 확인해보세요.
-- 정면 셀카를 준비했다면 kstyleshot에서 바로 적용해보세요.
+1. 한글 글과 영어 글은 번역 쌍으로 만들지 않는다.
+2. 같은 장소를 다뤄도 한글과 영어는 다른 검색 의도로 설계한다.
+3. 장소 글은 먼저 "장소 자체"를 설명해야 한다.
+4. "예쁘다", "유명하다", "핫하다"만 반복하는 글은 기획 미완성으로 본다.
+5. 허브 글은 검색 상단 퍼널을 담당하고, 기존 스타일 글은 하단 퍼널을 담당한다.
+6. create CTA는 허브 글 마지막에만 자연스럽게 붙인다.
+7. 얇은 리스트형 글 양산보다, 설명력 있는 허브 글이 우선이다.
 
 ---
 
-## 파일명 / 저장 규칙
+## 3. 현재 장소 10개
 
-저장 위치:
+고정 장소 10개:
 
-- `content/blog/en/*.mdx`
-- `content/blog/ko/*.mdx`
+1. 경복궁
+2. 남산 N서울타워
+3. 가로수길
+4. 홍대
+5. 한강공원
+6. 명동
+7. 인사동
+8. 이태원 & 경리단길
+9. 잠실 롯데월드
+10. 대형 기획사 사옥 주변
 
-파일명 규칙:
-
-1. 파일명은 반드시 `slug.mdx`
-2. slug는 소문자 영문 + 숫자 + 하이픈만 사용
-3. 공백, 한글, 특수문자 사용 금지
-4. 언어 폴더로 구분하므로 파일명에 `-en`, `-ko`를 굳이 붙이지 않는다
-
-예시:
-
-- `content/blog/en/what-makes-a-good-selfie-for-ai-style-generation.mdx`
-- `content/blog/en/k-style-curtain-bangs-for-better-selfies.mdx`
-- `content/blog/ko/best-selfie-prep-for-style-photo-tools-ko.mdx`
-- `content/blog/ko/selfie-friendly-see-through-bangs-guide-ko.mdx`
-
-### 권장 파일명 패턴
-
-EN:
-
-- 설명형: `how-to-*`, `why-*`, `best-*`
-- 비교형: `x-vs-y-*`
-- 체크리스트형: `*-checklist`
-
-KO:
-
-- 가능하면 검색 의도를 그대로 반영
-- 지금은 slug도 영문 기반으로 유지
-- 제목만 한국어로 쓰고, 파일명은 URL 안정성을 위해 영문 slug 유지
-
-### 실제 작성 순서
-
-1. `post.md`에서 주제 선택
-2. slug 확정
-3. 해당 언어 폴더에 `slug.mdx` 생성
-4. Frontmatter 입력
-5. 본문 템플릿 순서대로 작성
-6. 내부 링크 3~5개 연결
-7. CTA + disclaimer 삽입
-
-### 추천 초기 실제 파일 20개
-
-EN:
-
-- `content/blog/en/what-makes-a-good-selfie-for-ai-style-generation.mdx`
-- `content/blog/en/how-kstyleshot-works-from-upload-to-download.mdx`
-- `content/blog/en/why-ai-style-results-can-vary.mdx`
-- `content/blog/en/when-an-ai-portrait-tool-should-refund-a-purchase.mdx`
-- `content/blog/en/k-style-curtain-bangs-for-better-selfies.mdx`
-- `content/blog/en/how-soft-layers-change-a-portrait-mood.mdx`
-- `content/blog/en/why-hush-cuts-photograph-so-well.mdx`
-- `content/blog/en/best-front-camera-angle-for-balanced-facial-proportions.mdx`
-- `content/blog/en/use-window-light-for-cleaner-portrait-upload.mdx`
-- `content/blog/en/best-distance-between-camera-and-face-for-ai-portraits.mdx`
-
-KO:
-
-- `content/blog/ko/best-selfie-prep-for-style-photo-tools-ko.mdx`
-- `content/blog/ko/understand-kstyleshot-flow-at-once-ko.mdx`
-- `content/blog/ko/why-ai-style-results-are-not-exact-matches-ko.mdx`
-- `content/blog/ko/when-auto-refunds-should-happen-ko.mdx`
-- `content/blog/ko/selfie-friendly-see-through-bangs-guide-ko.mdx`
-- `content/blog/ko/make-hush-cut-look-better-in-photos-ko.mdx`
-- `content/blog/ko/beginner-friendly-k-style-hair-ideas-ko.mdx`
-- `content/blog/ko/best-front-selfie-angle-for-natural-look-ko.mdx`
-- `content/blog/ko/window-light-setup-for-clean-face-selfies-ko.mdx`
-- `content/blog/ko/why-camera-distance-matters-for-selfies-ko.mdx`
+이 10개는 모두 "배경"이 아니라 서울의 개별 장소 엔티티로 다룬다.
 
 ---
 
-## Seoul Background 100 Backlog (New)
+## 4. SEO 관점에서 반드시 들어가야 하는 질문
 
-Detailed list moved to:
-- `md-doc/post-seoul-background-100.md`
+각 장소 허브 글은 최소한 아래 질문에 답해야 한다.
 
-Execution order:
-1. Tier 1: mood guide 20 posts (KO 10 + EN 10)
-2. Tier 2: hair + outfit 40 posts (KO 20 + EN 20)
-3. Tier 3: framing + checklist 40 posts (KO 20 + EN 20)
+1. 왜 이 장소가 유명해졌는가
+2. 왜 이 장소가 핫플이 되었는가
+3. 사람들이 이 장소를 어떤 의도로 찾는가
+4. 이 장소는 서울의 어떤 이미지를 대표하는가
+5. 이 장소는 어떤 시각적 무드를 만드는가
+6. 비슷한 다른 서울 장소와 무엇이 다른가
 
-Rule:
-- Keep KO and EN as independent editorial tracks.
-- Use fixed URLs and stable slugs for SEO.
-- Keep create flow unchanged (`Hair -> Outfit -> Background`).
+이 질문에 답하지 못하면 허브 글이 아니다.
 
 ---
 
-## 4-Week Publishing Calendar (SEO Split Upload)
+## 5. 인트로 기준
 
-기준:
-- 기간: 2026-03-09 ~ 2026-04-03 (KST)
-- 업로드: 평일 하루 2개 (EN 1 + KO 1, 같은 주제 페어)
-- 순서: Tier 1 Mood 20개 먼저 소화 후, Tier 2 Hair 20개 진행
+인트로는 절대 가볍게 쓰지 않는다.
 
-| Week | Date (KST) | Theme | EN URL | KO URL |
-|---|---|---|---|---|
-| 1 | 2026-03-09 | Gyeongbokgung Mood | `/blog/en/gyeongbokgung-mood-guide` | `/blog/ko/gyeongbokgung-mood-guide-ko` |
-| 1 | 2026-03-10 | N Seoul Tower Mood | `/blog/en/n-seoul-tower-mood-guide` | `/blog/ko/n-seoul-tower-mood-guide-ko` |
-| 1 | 2026-03-11 | Garosu-gil Mood | `/blog/en/garosu-gil-mood-guide` | `/blog/ko/garosu-gil-mood-guide-ko` |
-| 1 | 2026-03-12 | Hongdae Mood | `/blog/en/hongdae-mood-guide` | `/blog/ko/hongdae-mood-guide-ko` |
-| 1 | 2026-03-13 | Hangang Park Mood | `/blog/en/hangang-park-mood-guide` | `/blog/ko/hangang-park-mood-guide-ko` |
-| 2 | 2026-03-16 | Myeongdong Mood | `/blog/en/myeongdong-mood-guide` | `/blog/ko/myeongdong-mood-guide-ko` |
-| 2 | 2026-03-17 | Insadong Mood | `/blog/en/insadong-mood-guide` | `/blog/ko/insadong-mood-guide-ko` |
-| 2 | 2026-03-18 | Itaewon & Gyeongnidan Mood | `/blog/en/itaewon-gyeongnidan-mood-guide` | `/blog/ko/itaewon-gyeongnidan-mood-guide-ko` |
-| 2 | 2026-03-19 | Jamsil Lotte World Mood | `/blog/en/jamsil-lotte-world-mood-guide` | `/blog/ko/jamsil-lotte-world-mood-guide-ko` |
-| 2 | 2026-03-20 | Label HQ Area Mood | `/blog/en/kpop-label-hq-area-mood-guide` | `/blog/ko/kpop-label-hq-area-mood-guide-ko` |
-| 3 | 2026-03-23 | Gyeongbokgung Hair | `/blog/en/gyeongbokgung-hair-trends-2026` | `/blog/ko/gyeongbokgung-hair-trends-2026-ko` |
-| 3 | 2026-03-24 | N Seoul Tower Hair | `/blog/en/n-seoul-tower-hair-trends-2026` | `/blog/ko/n-seoul-tower-hair-trends-2026-ko` |
-| 3 | 2026-03-25 | Garosu-gil Hair | `/blog/en/garosu-gil-hair-trends-2026` | `/blog/ko/garosu-gil-hair-trends-2026-ko` |
-| 3 | 2026-03-26 | Hongdae Hair | `/blog/en/hongdae-hair-trends-2026` | `/blog/ko/hongdae-hair-trends-2026-ko` |
-| 3 | 2026-03-27 | Hangang Park Hair | `/blog/en/hangang-park-hair-trends-2026` | `/blog/ko/hangang-park-hair-trends-2026-ko` |
-| 4 | 2026-03-30 | Myeongdong Hair | `/blog/en/myeongdong-hair-trends-2026` | `/blog/ko/myeongdong-hair-trends-2026-ko` |
-| 4 | 2026-03-31 | Insadong Hair | `/blog/en/insadong-hair-trends-2026` | `/blog/ko/insadong-hair-trends-2026-ko` |
-| 4 | 2026-04-01 | Itaewon & Gyeongnidan Hair | `/blog/en/itaewon-gyeongnidan-hair-trends-2026` | `/blog/ko/itaewon-gyeongnidan-hair-trends-2026-ko` |
-| 4 | 2026-04-02 | Jamsil Lotte World Hair | `/blog/en/jamsil-lotte-world-hair-trends-2026` | `/blog/ko/jamsil-lotte-world-hair-trends-2026-ko` |
-| 4 | 2026-04-03 | Label HQ Area Hair | `/blog/en/kpop-label-hq-area-hair-trends-2026` | `/blog/ko/kpop-label-hq-area-hair-trends-2026-ko` |
+좋은 인트로는 반드시 3가지 역할을 해야 한다.
 
-운영 체크:
-- 발행 직후 `sitemap.xml` 반영 여부 확인
-- 발행 당일 Google Search Console 수동 색인 요청
-- 같은 주차 글끼리 내부 링크 2~3개 연결
+1. 이 장소를 정의한다
+2. 사람들이 이 장소를 어떻게 단순하게 이해하는지 짚는다
+3. 이 글이 무엇을 더 깊게 설명하는지 말한다
+
+나쁜 인트로 예시:
+
+- 경복궁은 사진이 잘 나오는 장소다
+- 명동은 분위기 있는 번화가다
+
+좋은 인트로 방향:
+
+- 장소의 정체성 제시
+- 대중적 인식과 실제 의미의 차이 제시
+- 글의 핵심 질문 제시
 
 ---
 
-## Posting Changes Log (2026-03-05 18:57:00 +09:00)
+## 6. 허브 글 공통 구조
 
-Summary of completed posting updates:
-- Seoul background cluster planning document added:
-  - `md-doc/post-seoul-background-100.md`
-- Tier 1 generated (Mood): 20 posts
-  - EN 10: `content/blog/en/*-mood-guide.mdx`
-  - KO 10: `content/blog/ko/*-mood-guide-ko.mdx`
-- Tier 2 generated (Hair + Outfit): 40 posts
-  - EN 20: `content/blog/en/*-hair-trends-2026.mdx`, `content/blog/en/*-outfit-styles.mdx`
-  - KO 20: `content/blog/ko/*-hair-trends-2026-ko.mdx`, `content/blog/ko/*-outfit-styles-ko.mdx`
-- Tier 3 generated (Framing + Checklist): 40 posts
-  - EN 20: `content/blog/en/*-framing-tips.mdx`, `content/blog/en/*-backdrop-mistakes-checklist.mdx`
-  - KO 20: `content/blog/ko/*-framing-tips-ko.mdx`, `content/blog/ko/*-backdrop-mistakes-checklist-ko.mdx`
+장소 허브 글은 아래 구조를 기본으로 한다.
 
-Current post inventory:
-- EN: 110
-- KO: 110
-- TOTAL: 220
-- Seoul cluster: EN 50 + KO 50 = 100
+1. 인트로
+2. 이 장소가 서울에서 중요한 이유
+3. 이 장소가 유명해지거나 핫플이 된 배경
+4. 지금 사람들이 이곳을 찾는 실제 이유
+5. 이 장소를 규정하는 시각적 정체성
+6. 비슷한 다른 서울 장소와의 차이
+7. 이 정체성이 사진/스타일 무드에 주는 영향
+8. 함께 읽을 글
 
-Publishing ops updates:
-- 4-week split calendar added (2026-03-09 ~ 2026-04-03, KST)
-- Daily pair publish rule: EN 1 + KO 1
-- Post-publish SEO routine:
-  - Check `sitemap.xml`
-  - Request indexing in Google Search Console
-  - Add 2-3 internal links within same cluster/week
+설명 중심으로 쓰고, 필요할 때만 리스트를 쓴다.
 
 ---
 
-## Cross-Doc Sync Note (2026-03-05)
+## 7. 한글 / 영어 분리 원칙
 
-Updated at: 2026-03-05 18:58:40 +09:00 (Asia/Seoul)
+### 한글 글
 
-This file is the canonical posting operations document.
-Linked status docs updated together:
-- `md-doc/post-seoul-background-100.md`
-- `md-doc/post-scale-400.md`
-- `md-doc/post-candidate-backlog-280.md`
-- `md-doc/tier1-hub-40.md`
-- `md-doc/tier2-batch-40.md`
-- `md-doc/publish-ready-wave2-top10.md`
-- `md-doc/todo.md`
+한글 글은 아래 쪽으로 기운다.
 
+- 한국 사용자 검색 습관
+- 왜 핫해졌는지
+- 실제 방문 의도
+- 사회적 / 트렌드적 의미
+- 다른 지역과 비교했을 때 체감 차이
 
+### 영어 글
 
+영어 글은 아래 쪽으로 기운다.
 
+- 서울 맥락 설명
+- 왜 유명한지
+- 왜 상징적인지
+- 외부 독자에게 필요한 배경 설명
+- 장소가 주는 문화적 / 시각적 의미
 
+즉 같은 장소라도 한글과 영어는 제목부터 달라질 수 있다.
 
+---
+
+## 8. 10개 장소 허브 글 제목 확정
+
+이 섹션은 10개 장소의 메인 허브 글 제목을 확정한 것이다.
+
+### 1. 경복궁
+
+한글:
+- 경복궁이 서울에서 가장 상징적인 궁궐로 여겨지는 이유
+
+영어:
+- Why Gyeongbokgung Became the Most Symbolic Palace in Seoul
+
+### 2. 남산 N서울타워
+
+한글:
+- 남산 N서울타워가 서울의 대표 랜드마크가 된 이유
+
+영어:
+- Why N Seoul Tower Became One of Seoul's Most Recognizable Landmarks
+
+### 3. 가로수길
+
+한글:
+- 가로수길이 서울의 대표 패션 거리로 자리 잡은 이유
+
+영어:
+- Why Garosu-gil Became One of Seoul's Best-Known Fashion Streets
+
+### 4. 홍대
+
+한글:
+- 홍대가 서울의 대표적인 청년 문화 상권이 된 이유
+
+영어:
+- Why Hongdae Became One of Seoul's Strongest Youth Culture Districts
+
+### 5. 한강공원
+
+한글:
+- 한강공원이 서울 사람들의 대표적인 일상 여가 공간이 된 이유
+
+영어:
+- Why Hangang Park Became One of Seoul's Essential Everyday Leisure Spaces
+
+### 6. 명동
+
+한글:
+- 명동이 서울에서 가장 유명한 상권 중 하나가 된 이유
+
+영어:
+- Why Myeongdong Became One of the Most Famous Districts in Seoul
+
+### 7. 인사동
+
+한글:
+- 인사동이 여전히 서울의 전통적인 분위기를 대표하는 이유
+
+영어:
+- Why Insadong Still Represents Traditional Seoul for So Many Visitors
+
+### 8. 이태원 & 경리단길
+
+한글:
+- 이태원과 경리단길이 다른 서울 상권과 다르게 느껴지는 이유
+
+영어:
+- Why Itaewon and Gyeongnidan-gil Feel Different From Other Seoul Districts
+
+### 9. 잠실 롯데월드
+
+한글:
+- 잠실 롯데월드 일대가 서울의 대표 여가 공간으로 인식되는 이유
+
+영어:
+- Why Jamsil Lotte World Became One of Seoul's Most Recognizable Leisure Zones
+
+### 10. 대형 기획사 사옥 주변
+
+한글:
+- 서울의 대형 기획사 사옥 주변이 팬들에게 특별한 의미를 갖는 이유
+
+영어:
+- Why Seoul's K-pop Label HQ Areas Attract So Much Attention From Fans
+
+---
+
+## 9. 10개 장소 허브 글 소제목 확정
+
+### 1. 경복궁
+
+한글 소제목:
+
+1. 경복궁은 서울에서 무엇을 상징하는가
+2. 경복궁이 강한 상징성을 갖게 된 역사적 배경
+3. 사람들이 경복궁에서 실제로 기대하는 경험은 무엇인가
+4. 경복궁 이미지를 만드는 핵심 공간들
+5. 다른 궁궐과 비교했을 때 경복궁이 더 강하게 기억되는 이유
+6. 경복궁의 전통미와 대칭감이 사진 분위기에 주는 영향
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What Gyeongbokgung Represents in Seoul
+2. Why Gyeongbokgung Became So Symbolically Important
+3. What Visitors Actually Go to Gyeongbokgung to Experience
+4. The Key Spaces That Shape the Gyeongbokgung Image
+5. Why Gyeongbokgung Feels Different From Other Palace Areas
+6. How Gyeongbokgung's Heritage Mood Changes Visual Perception
+7. Related Guides
+
+### 2. 남산 N서울타워
+
+한글 소제목:
+
+1. 남산 N서울타워는 서울 이미지에서 무엇을 상징하는가
+2. 단순한 전망대가 아니라 랜드마크가 된 이유
+3. 사람들이 이곳에 실제로 가는 목적은 무엇인가
+4. 높이와 스카이라인이 이 장소 정체성의 중심인 이유
+5. 다른 서울 전망 명소와 비교했을 때 N서울타워의 차이
+6. 도시를 내려다보는 무드가 사진 기대감을 바꾸는 방식
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What N Seoul Tower Represents in the Seoul Image
+2. Why It Became a Landmark Rather Than Just an Observation Point
+3. What People Actually Go There For Today
+4. Why Height and Skyline Matter So Much to Its Identity
+5. How N Seoul Tower Differs From Other Seoul View Spots
+6. How Its City-Overlook Mood Changes Photo Expectations
+7. Related Guides
+
+### 3. 가로수길
+
+한글 소제목:
+
+1. 가로수길은 서울의 스트리트 패션 문화에서 무엇을 상징하는가
+2. 가로수길이 패션과 라이프스타일 거리로 자리 잡은 이유
+3. 사람들이 지금도 가로수길을 찾는 이유는 무엇인가
+4. 이 거리가 복잡함보다 정돈된 인상을 주는 이유
+5. 홍대나 성수와 비교했을 때 가로수길의 차이
+6. 가로수길의 패션 거리 이미지가 사진 분위기를 바꾸는 방식
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What Garosu-gil Represents in Seoul Street Fashion Culture
+2. Why Garosu-gil Became a Known Fashion and Lifestyle Area
+3. What Kind of Visitor Still Searches for Garosu-gil
+4. Why the Street Reads as Polished Rather Than Chaotic
+5. How Garosu-gil Differs From Hongdae or Seongsu
+6. How Its Fashion-Street Identity Changes Portrait Mood
+7. Related Guides
+
+### 4. 홍대
+
+한글 소제목:
+
+1. 홍대는 서울의 청년 문화에서 무엇을 상징하는가
+2. 홍대가 단순한 대학가를 넘어선 이유
+3. 사람들이 홍대에서 실제로 찾는 것은 무엇인가
+4. 거리의 에너지가 홍대 정체성에서 중요한 이유
+5. 더 정돈된 서울 상권과 비교했을 때 홍대의 차이
+6. 홍대 특유의 밀도와 움직임이 시각 무드에 주는 영향
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What Hongdae Represents in Seoul Youth Culture
+2. Why Hongdae Became More Than Just a University Area
+3. What People Actually Look For in Hongdae Today
+4. Why Street Energy Matters to the Hongdae Identity
+5. How Hongdae Differs From More Polished Seoul Districts
+6. How Hongdae's Movement and Noise Affect Visual Mood
+7. Related Guides
+
+### 5. 한강공원
+
+한글 소제목:
+
+1. 한강공원은 서울의 일상에서 무엇을 상징하는가
+2. 강이라는 공간이 서울의 공공 이미지에서 중요한 이유
+3. 사람들이 한강공원에 가서 실제로 하는 일은 무엇인가
+4. 열린 공간감이 이 장소의 핵심인 이유
+5. 번화한 도심 상권과 비교했을 때 한강공원의 차이
+6. 강변의 여유로운 분위기가 사진 인상을 바꾸는 방식
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What Hangang Park Represents in Everyday Seoul Life
+2. Why the River Matters So Much to Seoul's Public Identity
+3. What People Actually Go to Hangang Park to Do
+4. Why Openness and Breathing Room Define the Space
+5. How Hangang Park Differs From Dense Urban Districts
+6. How Riverside Calm Changes Visual and Portrait Mood
+7. Related Guides
+
+### 6. 명동
+
+한글 소제목:
+
+1. 명동은 서울 방문 이미지에서 무엇을 상징하는가
+2. 명동이 일찍부터 전국적 인지도를 얻게 된 이유
+3. 지금 사람들이 명동에 실제로 가는 목적은 무엇인가
+4. 쇼핑과 뷰티가 여전히 명동 정체성의 중심인 이유
+5. 다른 서울 상권과 비교했을 때 명동의 차이
+6. 빽빽한 간판과 밝은 리듬감이 시각 무드에 주는 영향
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What Myeongdong Represents in the Seoul Visitor Imagination
+2. Why Myeongdong Became So Famous So Early
+3. What People Actually Go to Myeongdong For Today
+4. Why Shopping and Beauty Are Still Central to Its Identity
+5. How Myeongdong Differs From Other Seoul Commercial Areas
+6. How Dense Signage and Bright Rhythm Change Visual Mood
+7. Related Guides
+
+### 7. 인사동
+
+한글 소제목:
+
+1. 인사동은 서울의 전통적 이미지에서 무엇을 상징하는가
+2. 다른 지역이 변하는 동안 인사동이 계속 의미를 지닌 이유
+3. 사람들이 인사동에서 실제로 기대하는 것은 무엇인가
+4. 공예와 질감, 오래된 거리감이 이곳에서 중요한 이유
+5. 궁궐권이나 현대적 상권과 비교했을 때 인사동의 차이
+6. 인사동의 전통적 질감이 시각 분위기를 바꾸는 방식
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What Insadong Represents in the Idea of Traditional Seoul
+2. Why Insadong Stayed Relevant While Other Areas Changed
+3. What Visitors Actually Expect From Insadong
+4. Why Craft, Texture, and Old-Street Rhythm Matter Here
+5. How Insadong Differs From Palace Areas or Modern Shopping Streets
+6. How Insadong's Traditional Texture Changes Visual Mood
+7. Related Guides
+
+### 8. 이태원 & 경리단길
+
+한글 소제목:
+
+1. 이태원과 경리단길은 서울의 글로벌 이미지에서 무엇을 상징하는가
+2. 이 지역이 다른 상권과 다른 정체성을 갖게 된 이유
+3. 사람들이 이태원과 경리단길에서 실제로 찾는 것은 무엇인가
+4. 섞인 거리 문화가 이 지역을 규정하는 이유
+5. 홍대나 가로수길과 비교했을 때 이태원·경리단길의 차이
+6. 여러 층위의 나이트라이프 무드가 시각 해석을 바꾸는 방식
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What Itaewon and Gyeongnidan-gil Represent in Seoul's Global Image
+2. Why These Areas Developed a Different Identity From Other Districts
+3. What People Actually Go There For Today
+4. Why Mixed Street Culture Defines the Area
+5. How Itaewon and Gyeongnidan-gil Differ From Hongdae or Garosu-gil
+6. How Their Layered Nightlife Mood Changes Visual Interpretation
+7. Related Guides
+
+### 9. 잠실 롯데월드
+
+한글 소제목:
+
+1. 잠실 롯데월드 일대는 서울의 여가 문화에서 무엇을 상징하는가
+2. 단순한 놀이공원 공간을 넘어선 이유
+3. 사람들이 잠실 롯데월드 일대에서 실제로 찾는 것은 무엇인가
+4. 랜드마크 밀도가 잠실 이미지에서 중요한 이유
+5. 다른 데이트·가족형 지역과 비교했을 때 잠실의 차이
+6. 밝고 큰 구조감이 시각 분위기를 바꾸는 방식
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What Jamsil Lotte World Represents in Seoul Leisure Culture
+2. Why the Area Became More Than Just an Amusement Destination
+3. What People Actually Go There For Today
+4. Why Landmark Density Defines the Jamsil Image
+5. How Jamsil Differs From Other Seoul Date and Family Areas
+6. How Playful Scale and Bright Structure Change Visual Mood
+7. Related Guides
+
+### 10. 대형 기획사 사옥 주변
+
+한글 소제목:
+
+1. 대형 기획사 사옥 주변은 팬들에게 무엇을 상징하는가
+2. 평범한 오피스 권역이 목적지가 된 이유
+3. 사람들이 이곳에 가서 실제로 기대하는 감정과 경험은 무엇인가
+4. 건물 자체보다 업계의 기운이 더 중요하게 작동하는 이유
+5. 일반 상권과 비교했을 때 사옥 주변 권역의 차이
+6. 동경과 팬심의 무드가 시각 해석을 바꾸는 방식
+7. 함께 읽을 글
+
+영어 소제목:
+
+1. What K-pop Label HQ Areas Represent to Fans in Seoul
+2. Why These Office Zones Became Destination Spaces
+3. What People Actually Go There Hoping to Feel or See
+4. Why Industry Aura Matters More Than Architecture Alone
+5. How These Areas Differ From Standard Commercial Districts
+6. How Aspirational Fandom Mood Changes Visual Reading
+7. Related Guides
+
+---
+
+## 10. 허브 글 작성 우선순위
+
+1. 경복궁
+2. 명동
+3. 남산 N서울타워
+4. 홍대
+5. 인사동
+6. 가로수길
+7. 한강공원
+8. 이태원 & 경리단길
+9. 잠실 롯데월드
+10. 대형 기획사 사옥 주변
+
+이 순서로 가는 이유:
+
+- 경복궁과 명동이 가장 대표적인 기준 모델이 된다.
+- 여기서 톤과 깊이를 먼저 잡아야 나머지 8개에 복제하기 쉽다.
+
+---
+
+## 11. 운영 규칙
+
+허브 글 작성 후 운영 순서:
+
+1. 발행
+2. 사이트맵 반영 확인
+3. Google Search Console 수동 색인 요청
+4. 기존 스타일형 글과 내부 링크 연결
+
+원칙:
+
+- 사이트맵 자동 반영과
+- 구글 실제 색인 요청은
+
+같은 일이 아니다.
+
+사이트맵은 코드/배포 구조 문제이고,
+색인 요청은 운영 작업이다.
+
+---
+
+## 12. 최종 기준
+
+앞으로 장소형 글은 아래 질문에 답하지 못하면 발행 가치가 낮다.
+
+1. 왜 이 장소가 중요한가
+2. 왜 이 장소가 유명해졌는가
+3. 왜 이 장소가 핫플이 되었는가
+4. 사람들이 왜 이곳을 찾는가
+5. 이 장소는 서울의 어떤 이미지를 대표하는가
+
+장소를 설명하지 못한 채 스타일만 설명하는 글은 더 이상 허브 글로 취급하지 않는다.

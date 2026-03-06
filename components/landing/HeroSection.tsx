@@ -16,7 +16,7 @@ export function HeroSection() {
           alt="Kstyleshot landing main visual"
           className="hero-main-visual"
           fetchPriority="high"
-          src="/visuals/landing/main.png"
+          src="/visuals/landing/main.webp"
         />
       </div>
       <div className="hero-actions">
