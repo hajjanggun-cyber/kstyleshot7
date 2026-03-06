@@ -10,8 +10,8 @@ export default async function UploadPage({ params, searchParams }: UploadPagePro
   const resolvedSearchParams = await searchParams;
   const checkoutId =
     resolvedSearchParams.checkout_id ?? resolvedSearchParams.checkoutId ?? "";
-  const allowDemoFlow =
-    process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ALLOW_DEMO_FLOW === "1";
+  // TODO: restore payment gate when checkout is ready
+  const allowDemoFlow = true;
 
   return <UploadFlow allowDemoFlow={allowDemoFlow} checkoutIdFromUrl={checkoutId} />;
 }
