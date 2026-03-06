@@ -224,7 +224,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
     <div className="up-root">
       {/* Nav */}
       <nav className="up-nav">
-        <Link className="up-back-btn" href={`/${lang}/create`}>
+        <Link className="up-back-btn" href={`/${lang}`}>
           ←
         </Link>
         <h2 className="up-nav-title">K-Pop Transformation</h2>
