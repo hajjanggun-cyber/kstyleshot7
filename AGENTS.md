@@ -105,6 +105,7 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - Do NOT link to articles that do not yet exist — no dead links
 - Internal link anchor text must describe the destination naturally (no "여기", "click here")
 - **Language isolation (mandatory): KO files must only link to `/ko/hub/[slug]` paths. EN files must only link to `/en/hub/[slug]` paths. Cross-language links are never allowed.**
+- Markdown links in the article body (`[text](/ko/hub/slug)`) are fully rendered and styled on the site — use them freely for all internal references.
 
 ### KO vs EN Search Intent
 
