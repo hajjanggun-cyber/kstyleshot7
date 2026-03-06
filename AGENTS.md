@@ -78,9 +78,9 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 4. Additional H2 sections as needed
 5. Quick Summary block (3 items, factual, non-repetitive)
 6. CTA link — one line at the end of the body, fixed text and path as follows:
-   - KO: `[이 장소를 배경으로 내 K-스타일 사진을 만들러 가기](/ko/create/upload)`
-   - EN: `[Create your own K-style photo with this Seoul mood →](/en/create/upload)`
-   - Do NOT change the link text. Do NOT use `/[lang]/create` — always `/[lang]/create/upload`.
+   - KO: `[이 장소를 배경으로 내 K-스타일 사진을 만들러 가기](/ko)`
+   - EN: `[Create your own K-style photo with this Seoul mood →](/en)`
+   - Do NOT change the link text. Link destination is the locale landing page, not /create.
 
 ### Writing Standards (Google E-E-A-T)
 
