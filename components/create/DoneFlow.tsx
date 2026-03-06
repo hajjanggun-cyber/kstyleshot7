@@ -84,7 +84,7 @@ export function DoneFlow() {
 
   function handleTryAnother() {
     clearAndReset();
-    router.push(`/${lang}/create`);
+    router.push(`/${lang}/create/upload`);
   }
 
   return (
