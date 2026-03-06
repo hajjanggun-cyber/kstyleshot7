@@ -24,7 +24,7 @@ export function SiteHeader({ lang }: SiteHeaderProps) {
           <span className="brand-dot" aria-hidden>
             *
           </span>
-          <strong>K-StyleMagic</strong>
+          <strong>K-StyleShot</strong>
         </Link>
         <nav className="site-nav" aria-label={t("ariaLabel")}>
           <Link href={`/${lang}`}>{t("home")}</Link>

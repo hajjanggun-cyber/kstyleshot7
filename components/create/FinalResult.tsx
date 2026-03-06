@@ -97,7 +97,7 @@ export function FinalResult() {
   async function handleCopyTag() {
     try {
       if (typeof navigator !== "undefined" && navigator.clipboard) {
-        await navigator.clipboard.writeText("#KStyleMagic");
+        await navigator.clipboard.writeText("#KStyleShot");
         setShareNotice(t("hashtagCopied"));
         return;
       }

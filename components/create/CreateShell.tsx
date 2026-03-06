@@ -68,7 +68,7 @@ export function CreateShell({
             <span className="brand-dot" aria-hidden>
               *
             </span>
-            <strong>K-StyleMagic</strong>
+            <strong>K-StyleShot</strong>
           </div>
           <StepProgress blockedSteps={blockedSteps} compact current={current} />
           <div className="status-row">
