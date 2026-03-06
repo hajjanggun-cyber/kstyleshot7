@@ -149,13 +149,27 @@ Korean version:
 
 ---
 
-## Daily Execution (10 articles/day)
+## Pre-Writing Requirement (mandatory before any article)
 
-- 5 Korean + 5 English
+Before writing any article, read and internalize the following files in order:
+
+1. `md-doc/google-seo-guide.md` — Google official SEO standards (must read first)
+2. `md-doc/post-codex-command.md` — Content strategy, hub structure, and execution rules
+
+Do not write a single line of article content until both files are read.
+
+---
+
+## Session Execution (6 files per session = 3 pairs)
+
+- 3 Korean + 3 English per session (= 3 KO/EN pairs)
 - Must be paired: each KO article has a corresponding EN article with the same `hreflangSlug`
-- Follow the priority order in `md-doc/post-codex-command.md` Section 10
-- Reference topic list: `md-doc/kpop-blog-topics-300.md`
-- Reference content strategy: `md-doc/post-codex-command.md`
+- Follow the 3-stage priority order in `md-doc/post-codex-command.md` Section 10
+  - Stage 1: Hub articles (10 locations, in order)
+  - Stage 2: Sub-articles linked to each hub (see Section 10 mapping)
+  - Stage 3: Remaining topics from `md-doc/kpop-blog-topics-300.md`
+- Check `md-doc/post-codex-command.md` Section 15 (progress log) before starting
+- Log completed files with date/time (KST) in Section 15 after each session
 
 ---
 
@@ -169,3 +183,17 @@ Korean version:
 - [ ] AI disclosure footer is present
 - [ ] `hreflangSlug` matches the paired language file
 - [ ] `aiGenerated: true` is set
+
+## Character Count Verification (mandatory)
+
+After writing each file, count the exact character length of `title` and `description` and report the numbers before finishing.
+
+Do not estimate. Count character by character.
+
+Required format:
+```
+title: [actual text] → [N]자
+description: [actual text] → [N]자
+```
+
+If `description` is under 120 or over 155 characters, rewrite it and count again before submitting.
