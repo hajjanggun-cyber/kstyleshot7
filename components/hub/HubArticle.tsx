@@ -89,14 +89,6 @@ export function HubArticle({ article }: HubArticleProps) {
           {article.category} • {article.readTime}
         </div>
         <h1 className="ha-hero-title">{article.title}</h1>
-        <div className="ha-hero-author">
-          <div className="ha-author-avatar" aria-hidden>
-            {article.authorName[0]}
-          </div>
-          <span className="ha-author-name">
-            {article.authorName} · {article.authorRole}
-          </span>
-        </div>
       </header>
 
       {/* Pull quote */}

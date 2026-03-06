@@ -50,14 +50,6 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           {frontmatter.category} • {frontmatter.readTime}
         </div>
         <h1 className="ha-hero-title">{frontmatter.title}</h1>
-        <div className="ha-hero-author">
-          <div className="ha-author-avatar" aria-hidden>
-            {frontmatter.authorName[0]}
-          </div>
-          <span className="ha-author-name">
-            {frontmatter.authorName} · {frontmatter.authorRole}
-          </span>
-        </div>
       </header>
 
       {/* Pull quote */}

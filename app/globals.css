@@ -3925,6 +3925,7 @@ h2 {
   box-shadow: 0 0 24px rgba(244, 37, 140, 0.22);
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 .ha-quote-card::before {
