@@ -25,6 +25,9 @@ const mdxComponents = {
       {children}
     </Link>
   ),
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    <img className="ha-media" loading="lazy" {...props} />
+  ),
 };
 
 type HubMdxPageProps = {
