@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { backgrounds } from "@/data/backgrounds";
 import { useCreateStore } from "@/store/createStore";
@@ -18,6 +19,7 @@ export function LocationFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
+  const t = useTranslations("flow.location");
 
   const { photoBlobUrl, outfit, hair, setLocationChosen, pickLocation, setStatus } =
     useCreateStore();
@@ -48,13 +50,13 @@ export function LocationFlow() {
       <div className="lc-root">
         <nav className="lc-nav">
           <Link className="lc-back-btn" href={`/${lang}/create/outfit`}>←</Link>
-          <h2 className="lc-nav-title">STAGE 4: SET THE SCENE</h2>
+          <h2 className="lc-nav-title">{t("navTitle")}</h2>
           <div className="lc-nav-spacer" />
         </nav>
         <div className="lc-missing">
-          <p>Please choose an outfit first.</p>
+          <p>{t("noOutfit")}</p>
           <Link className="lc-missing-link" href={`/${lang}/create/outfit`}>
-            ← Go to Outfit
+            {t("goOutfit")}
           </Link>
         </div>
       </div>
@@ -66,7 +68,7 @@ export function LocationFlow() {
       {/* Nav */}
       <nav className="lc-nav">
         <Link className="lc-back-btn" href={`/${lang}/create/outfit`}>←</Link>
-        <h2 className="lc-nav-title">STAGE 4: SET THE SCENE</h2>
+        <h2 className="lc-nav-title">{t("navTitle")}</h2>
         <button className="lc-help-btn" type="button">?</button>
       </nav>
 
@@ -104,9 +106,9 @@ export function LocationFlow() {
           {/* HUD */}
           <div className="lc-preview-hud">
             <div className="lc-hud-tag">
-              <p className="lc-hud-label">Current Concept</p>
+              <p className="lc-hud-label">{t("currentConcept")}</p>
               <p className="lc-hud-name">
-                {selectedBg ? selectedBg.name : "Select a location"}
+                {selectedBg ? selectedBg.name : t("selectPrompt")}
               </p>
             </div>
             <button className="lc-hud-cam" type="button">📷</button>
@@ -116,7 +118,7 @@ export function LocationFlow() {
         {/* Location picker */}
         <div className="lc-section">
           <div className="lc-section-head">
-            <h3 className="lc-section-title">Pick Your Location</h3>
+            <h3 className="lc-section-title">{t("pickTitle")}</h3>
             <span className="lc-count-badge">{backgrounds.length} OPTIONS</span>
           </div>
           <div className="lc-loc-grid">
@@ -153,7 +155,7 @@ export function LocationFlow() {
           <div className="lc-summary">
             <h3 className="lc-summary-title">
               <span className="lc-summary-star">✦</span>
-              Your K-Pop Look
+              {t("summaryTitle")}
             </h3>
             <div className="lc-summary-chips">
               {hair.chosen[0] ? (
@@ -173,7 +175,7 @@ export function LocationFlow() {
         <div className="lc-shoots">
           <div className="lc-shoots-head">
             <span className="lc-shoots-star">✦</span>
-            <h3 className="lc-shoots-title">Successful Shoots</h3>
+            <h3 className="lc-shoots-title">{t("shootsTitle")}</h3>
           </div>
           <div className="lc-shoots-scroll">
             {SAMPLE_SHOOTS.map((s, i) => (
@@ -203,10 +205,10 @@ export function LocationFlow() {
           {isGenerating ? (
             <>
               <span className="lc-gen-spinner" />
-              Generating…
+              {t("generating")}
             </>
           ) : (
-            <>Next Step →</>
+            <>{t("nextBtn")}</>
           )}
         </button>
       </div>

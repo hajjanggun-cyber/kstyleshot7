@@ -3,16 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { outfits } from "@/data/outfits";
 import { useCreateStore } from "@/store/createStore";
 
 type Category = "stage" | "street" | "award";
 
-const CATEGORIES: { key: Category; label: string }[] = [
-  { key: "stage", label: "Stage Outfits" },
-  { key: "street", label: "Street K-Style" },
-  { key: "award", label: "Award Show" },
+const CATEGORY_KEYS: { key: Category; labelKey: "cat1" | "cat2" | "cat3" }[] = [
+  { key: "stage", labelKey: "cat1" },
+  { key: "street", labelKey: "cat2" },
+  { key: "award", labelKey: "cat3" },
 ];
 
 const COMPLETE_LOOK = [
@@ -32,6 +33,7 @@ export function OutfitFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
+  const t = useTranslations("flow.outfit");
 
   const { photoBlobUrl, hair, setOutfitChosen, pickOutfit, setStatus } = useCreateStore();
 
@@ -63,13 +65,13 @@ export function OutfitFlow() {
       <div className="ot-root">
         <nav className="ot-nav">
           <Link className="ot-back-btn" href={`/${lang}/create/hair`}>←</Link>
-          <h2 className="ot-nav-title">Step 3: Choose Your Outfit</h2>
+          <h2 className="ot-nav-title">{t("navTitle")}</h2>
           <div className="ot-nav-spacer" />
         </nav>
         <div className="ot-missing">
-          <p>Please select a hair style first.</p>
+          <p>{t("noHair")}</p>
           <Link className="ot-missing-link" href={`/${lang}/create/hair`}>
-            ← Go to Hair Styling
+            {t("goHair")}
           </Link>
         </div>
       </div>
@@ -81,7 +83,7 @@ export function OutfitFlow() {
       {/* Nav */}
       <nav className="ot-nav">
         <Link className="ot-back-btn" href={`/${lang}/create/hair`}>←</Link>
-        <h2 className="ot-nav-title">Step 3: Choose Your Outfit</h2>
+        <h2 className="ot-nav-title">{t("navTitle")}</h2>
         <div className="ot-nav-spacer" />
       </nav>
 
@@ -103,23 +105,21 @@ export function OutfitFlow() {
           )}
           <span className="ot-avatar-badge">✦</span>
         </div>
-        <h2 className="ot-avatar-title">Looking Iconic!</h2>
-        <p className="ot-avatar-sub">
-          Now select an outfit to complete your debut look
-        </p>
+        <h2 className="ot-avatar-title">{t("avatarTitle")}</h2>
+        <p className="ot-avatar-sub">{t("avatarSub")}</p>
       </div>
 
       {/* Sticky category tabs */}
       <div className="ot-tabs-wrap">
         <div className="ot-tabs">
-          {CATEGORIES.map((cat) => (
+          {CATEGORY_KEYS.map((cat) => (
             <button
               className={`ot-tab${activeCategory === cat.key ? " ot-tab--active" : ""}`}
               key={cat.key}
               onClick={() => setActiveCategory(cat.key)}
               type="button"
             >
-              {cat.label}
+              {t(cat.labelKey)}
             </button>
           ))}
         </div>
@@ -193,7 +193,7 @@ export function OutfitFlow() {
           onClick={handleApply}
           type="button"
         >
-          {isApplying ? "Applying…" : "Next Step →"}
+          {isApplying ? t("applying") : t("nextBtn")}
         </button>
       </div>
     </div>

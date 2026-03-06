@@ -3,16 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { hairStyles } from "@/data/hairStyles";
 import { useCreateStore } from "@/store/createStore";
 
 type Category = "trendy" | "bangs" | "waves";
 
-const CATEGORIES: { key: Category; label: string }[] = [
-  { key: "trendy", label: "Trendy Colors" },
-  { key: "bangs", label: "Classic Bangs" },
-  { key: "waves", label: "Idol Waves" },
+const CATEGORY_KEYS: { key: Category; labelKey: "cat1" | "cat2" | "cat3" }[] = [
+  { key: "trendy", labelKey: "cat1" },
+  { key: "bangs", labelKey: "cat2" },
+  { key: "waves", labelKey: "cat3" },
 ];
 
 const POPULAR_COMBOS = [
@@ -34,6 +35,7 @@ export function HairFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
+  const t = useTranslations("flow.hair");
 
   const { photoBlobUrl, setHairChosen, setStatus } = useCreateStore();
 
@@ -65,13 +67,13 @@ export function HairFlow() {
       <div className="hr-root">
         <nav className="hr-nav">
           <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
-          <h2 className="hr-nav-title">Step 2: Hair Styling</h2>
+          <h2 className="hr-nav-title">{t("navTitle")}</h2>
           <div className="hr-nav-right" />
         </nav>
         <div className="hr-missing">
-          <p>No photo uploaded yet.</p>
+          <p>{t("noPhoto")}</p>
           <Link className="hr-missing-link" href={`/${lang}/create/upload`}>
-            ← Go back to upload
+            {t("goUpload")}
           </Link>
         </div>
       </div>
@@ -83,7 +85,7 @@ export function HairFlow() {
       {/* Nav */}
       <nav className="hr-nav">
         <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
-        <h2 className="hr-nav-title">Step 2: Hair Styling</h2>
+        <h2 className="hr-nav-title">{t("navTitle")}</h2>
         <div className="hr-nav-right">
           <button className="hr-help-btn" type="button">?</button>
         </div>
@@ -108,9 +110,9 @@ export function HairFlow() {
           <div className="hr-preview-fade" />
           <div className="hr-preview-info">
             <div className="hr-preview-tag">
-              <p className="hr-preview-label">Current Selection</p>
+              <p className="hr-preview-label">{t("currentSelection")}</p>
               <p className="hr-preview-name">
-                {selectedStyle ? selectedStyle.name : "— none —"}
+                {selectedStyle ? selectedStyle.name : t("none")}
               </p>
             </div>
             <button className="hr-preview-magic" type="button">✦</button>
@@ -121,14 +123,14 @@ export function HairFlow() {
       {/* Category tabs */}
       <div className="hr-tabs-wrap">
         <div className="hr-tabs">
-          {CATEGORIES.map((cat) => (
+          {CATEGORY_KEYS.map((cat) => (
             <button
               className={`hr-tab${activeCategory === cat.key ? " hr-tab--active" : ""}`}
               key={cat.key}
               onClick={() => setActiveCategory(cat.key)}
               type="button"
             >
-              {cat.label}
+              {t(cat.labelKey)}
             </button>
           ))}
         </div>
@@ -161,7 +163,7 @@ export function HairFlow() {
       <div className="hr-combos">
         <h3 className="hr-combos-title">
           <span className="hr-combos-star">✦</span>
-          Popular Hair Combos
+          {t("popularTitle")}
         </h3>
         <div className="hr-combos-scroll">
           {POPULAR_COMBOS.map((combo, i) => (

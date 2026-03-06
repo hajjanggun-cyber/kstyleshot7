@@ -317,6 +317,62 @@
       }
     }
   },
+  "flow": {
+    "upload": {
+      "navTitle": "K-Pop Transformation",
+      "heading": "Step 1: Upload Your Photo",
+      "sub": "Upload a clear selfie to start your idol-style transformation.",
+      "zoneTitle": "Upload Your Selfie",
+      "zoneSub": "Tap to browse or drag and drop your photo",
+      "selectBtn": "Select Photo",
+      "changeBtn": "Change Photo",
+      "guideTitle": "Photo Guide",
+      "guide1": "Look straight ahead",
+      "guide2": "Good lighting",
+      "guide3": "No glasses / masks",
+      "guide4": "Clear background",
+      "trendingTitle": "Trending Transformations",
+      "trendingMore": "View Gallery",
+      "nextBtn": "Next Step →",
+      "verifying": "Verifying payment…"
+    },
+    "hair": {
+      "navTitle": "Step 2: Hair Styling",
+      "noPhoto": "No photo uploaded yet.",
+      "goUpload": "← Go back to upload",
+      "currentSelection": "Current Selection",
+      "none": "— none —",
+      "cat1": "Trendy Colors",
+      "cat2": "Classic Bangs",
+      "cat3": "Idol Waves",
+      "popularTitle": "Popular Hair Combos",
+      "nextBtn": "Next Step →"
+    },
+    "outfit": {
+      "navTitle": "Step 3: Choose Your Outfit",
+      "noHair": "Please select a hair style first.",
+      "goHair": "← Go to Hair Styling",
+      "avatarTitle": "Looking Iconic!",
+      "avatarSub": "Now select an outfit to complete your debut look",
+      "cat1": "Stage Outfits",
+      "cat2": "Street K-Style",
+      "cat3": "Award Show",
+      "nextBtn": "Next Step →",
+      "applying": "Applying…"
+    },
+    "location": {
+      "navTitle": "Stage 4: Set the Scene",
+      "noOutfit": "Please choose an outfit first.",
+      "goOutfit": "← Go to Outfit",
+      "pickTitle": "Pick Your Location",
+      "currentConcept": "Current Concept",
+      "selectPrompt": "Select a location",
+      "summaryTitle": "Your K-Pop Look",
+      "shootsTitle": "Successful Shoots",
+      "nextBtn": "Next Step →",
+      "generating": "Generating…"
+    }
+  },
   "legal": {
     "terms": {
       "title": "Terms",

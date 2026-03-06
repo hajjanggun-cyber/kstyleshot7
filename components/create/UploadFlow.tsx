@@ -83,6 +83,7 @@ type UploadFlowProps = {
 
 export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: UploadFlowProps) {
   const t = useTranslations("create.photoUpload");
+  const tf = useTranslations("flow.upload");
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const {
@@ -227,7 +228,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
         <Link className="up-back-btn" href={`/${lang}`}>
           ←
         </Link>
-        <h2 className="up-nav-title">K-Pop Transformation</h2>
+        <h2 className="up-nav-title">{tf("navTitle")}</h2>
       </nav>
 
       {/* Progress dots */}
@@ -241,10 +242,8 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
       <main className="up-main">
         {/* Heading */}
         <div className="up-head">
-          <h1 className="up-head-title">Step 1: Upload Your Photo</h1>
-          <p className="up-head-sub">
-            Upload a clear selfie to start your idol-style transformation.
-          </p>
+          <h1 className="up-head-title">{tf("heading")}</h1>
+          <p className="up-head-sub">{tf("sub")}</p>
         </div>
 
         {/* Error notice */}
@@ -257,9 +256,9 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
           ) : (
             <>
               <div className="up-zone-icon">📷</div>
-              <p className="up-zone-title">Upload Your Selfie</p>
-              <p className="up-zone-sub">Tap to browse or drag and drop your photo</p>
-              <span className="up-select-btn">Select Photo</span>
+              <p className="up-zone-title">{tf("zoneTitle")}</p>
+              <p className="up-zone-sub">{tf("zoneSub")}</p>
+              <span className="up-select-btn">{tf("selectBtn")}</span>
             </>
           )}
           <input
@@ -278,7 +277,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
             onClick={() => fileInputRef.current?.click()}
             type="button"
           >
-            Change Photo
+            {tf("changeBtn")}
           </button>
         ) : null}
 
@@ -286,33 +285,21 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
         <div className="up-guide">
           <h3 className="up-guide-title">
             <span className="up-guide-icon">💡</span>
-            Photo Guide
+            {tf("guideTitle")}
           </h3>
           <div className="up-guide-grid">
-            <div className="up-guide-item">
-              <span className="up-guide-check">✓</span>
-              Look straight ahead
-            </div>
-            <div className="up-guide-item">
-              <span className="up-guide-check">✓</span>
-              Good lighting
-            </div>
-            <div className="up-guide-item">
-              <span className="up-guide-check">✓</span>
-              No glasses / masks
-            </div>
-            <div className="up-guide-item">
-              <span className="up-guide-check">✓</span>
-              Clear background
-            </div>
+            <div className="up-guide-item"><span className="up-guide-check">✓</span>{tf("guide1")}</div>
+            <div className="up-guide-item"><span className="up-guide-check">✓</span>{tf("guide2")}</div>
+            <div className="up-guide-item"><span className="up-guide-check">✓</span>{tf("guide3")}</div>
+            <div className="up-guide-item"><span className="up-guide-check">✓</span>{tf("guide4")}</div>
           </div>
         </div>
 
         {/* Trending */}
         <div className="up-trending">
           <div className="up-trending-head">
-            <h3 className="up-trending-title">Trending Transformations</h3>
-            <span className="up-trending-more">View Gallery</span>
+            <h3 className="up-trending-title">{tf("trendingTitle")}</h3>
+            <span className="up-trending-more">{tf("trendingMore")}</span>
           </div>
           <div className="up-trending-scroll">
             {TRENDING.map((item, i) => (
@@ -339,7 +326,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
           onClick={handleContinue}
           type="button"
         >
-          {checkoutIdFromUrl && isPollingSession ? "Verifying payment…" : "Next Step →"}
+          {checkoutIdFromUrl && isPollingSession ? tf("verifying") : tf("nextBtn")}
         </button>
       </div>
     </div>
