@@ -11,32 +11,31 @@ export function HeroSection() {
 
   return (
     <section className="hero card">
-      <img
-        alt="Kstyleshot landing hero"
-        className="hero-art"
-        fetchPriority="high"
-        src="/visuals/landing/main.png"
-      />
-      <div className="hero-overlay" />
-      <div className="hero-content stack">
-        <p className="eyebrow">{t("eyebrow")}</p>
-        <h1>
-          {t("titlePrefix")} <span className="hot">K-POP</span> {t("titleSuffix")}
-        </h1>
-        <p className="muted">{t("description")}</p>
-        <div className="actions">
-          <Link className="button" href={`/${lang}/create`}>
-            {t("start")}
-          </Link>
-          <a className="button secondary" href="#trending">
-            {t("gallery")}
-          </a>
-        </div>
+      <div className="hero-visual-frame">
+        <img
+          alt="Kstyleshot landing main visual"
+          className="hero-main-visual"
+          fetchPriority="high"
+          src="/visuals/landing/main.png"
+        />
       </div>
-      <div className="hero-badges" aria-hidden>
-        <span>{t("badge1")}</span>
-        <span>{t("badge2")}</span>
-        <span>{t("badge3")}</span>
+      <div className="hero-actions">
+        <Link className="button" href={`/${lang}/create`}>
+          {t("start")}
+        </Link>
+        <a className="button secondary" href="#trending">
+          {t("gallery")}
+        </a>
+      </div>
+      <div className="sr-only">
+        <p>{t("eyebrow")}</p>
+        <p>
+          {t("titlePrefix")} K-POP {t("titleSuffix")}
+        </p>
+        <p>{t("description")}</p>
+        <p>{t("badge1")}</p>
+        <p>{t("badge2")}</p>
+        <p>{t("badge3")}</p>
       </div>
     </section>
   );
