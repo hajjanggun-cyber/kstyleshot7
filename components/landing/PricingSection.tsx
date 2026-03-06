@@ -20,7 +20,7 @@ export function PricingSection() {
         </div>
         <div className="lp-pricing-right">
           <span className="lp-pricing-badge">$3.99</span>
-          <Link className="lp-cta-btn lp-cta-btn--sm" href={`/${lang}/create`}>
+          <Link className="lp-cta-btn lp-cta-btn--sm" href={`/${lang}/create/upload`}>
             Try now →
           </Link>
         </div>

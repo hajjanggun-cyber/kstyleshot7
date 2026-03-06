@@ -21,7 +21,7 @@ export function HeroSection() {
         <div className="lp-hero-fade" />
       </div>
       <div className="lp-cta-wrap">
-        <Link className="lp-cta-btn" href={`/${lang}/create`}>
+        <Link className="lp-cta-btn" href={`/${lang}/create/upload`}>
           {t("start")} →
         </Link>
         <p className="lp-cta-note">Unofficial. AI-generated results for fans.</p>
