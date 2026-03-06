@@ -1,0 +1,176 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4258c",
+                        "background-light": "#f8f5f7",
+                        "background-dark": "#12080d",
+                        "accent-blue": "#00d2ff",
+                        "accent-yellow": "#ffeb3b",
+                        "card-dark": "#1f0f17",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden pb-24">
+<!-- Header -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-50 backdrop-blur-md bg-opacity-80 dark:bg-opacity-80">
+<div class="text-primary flex size-12 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-3xl">grid_view</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-extrabold leading-tight tracking-tighter flex-1 text-center uppercase">K-Culture Hub</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="px-4 py-3">
+<label class="flex flex-col min-w-40 h-14 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full shadow-lg shadow-primary/5">
+<div class="text-primary/60 flex border-none bg-white dark:bg-card-dark items-center justify-center pl-4 rounded-l-xl">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-xl text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-0 border-none bg-white dark:bg-card-dark placeholder:text-slate-400 dark:placeholder:text-slate-500 px-4 pl-2 text-base font-medium leading-normal" placeholder="Search 300+ Stories" value=""/>
+</div>
+</label>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-3 px-4 py-2 overflow-x-auto no-scrollbar">
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-5 shadow-lg shadow-primary/20">
+<p class="text-white text-sm font-bold leading-normal">For You</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-slate-200 dark:border-primary/20 px-5">
+<p class="text-slate-600 dark:text-slate-300 text-sm font-semibold">K-Beauty</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-slate-200 dark:border-primary/20 px-5">
+<p class="text-slate-600 dark:text-slate-300 text-sm font-semibold">Hidden Spots</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-slate-200 dark:border-primary/20 px-5">
+<p class="text-slate-600 dark:text-slate-300 text-sm font-semibold">Idol Secret</p>
+</div>
+</div>
+<!-- Bento Grid Feed -->
+<div class="p-4 grid grid-cols-2 gap-4">
+<!-- Large Hero Card -->
+<div class="col-span-2 relative overflow-hidden rounded-xl h-72 group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary via-purple-600 to-accent-blue opacity-90" data-alt="Vibrant neon pink and purple abstract gradient background"></div>
+<div class="absolute inset-0 flex flex-col justify-between p-6 z-10">
+<div class="flex justify-between items-start">
+<span class="bg-white/20 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-white/30">Feature Story</span>
+<span class="material-symbols-outlined text-white">star</span>
+</div>
+<div>
+<h3 class="text-white text-4xl font-black leading-none mb-2 tracking-tighter italic uppercase">Seoul<br/>Nights</h3>
+<p class="text-white/90 text-sm font-medium">Inside the neon underworld of Gangnam</p>
+<button class="mt-4 bg-white text-primary px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider">Read Now</button>
+</div>
+</div>
+<!-- Abstract Shape -->
+<div class="absolute -right-10 -bottom-10 text-[180px] font-black text-white/10 leading-none select-none italic">SEOUL</div>
+</div>
+<!-- Square Card 1 -->
+<div class="col-span-1 aspect-square relative overflow-hidden rounded-xl bg-accent-blue/10 dark:bg-accent-blue/20 border border-accent-blue/30 p-5 flex flex-col justify-between">
+<span class="bg-accent-blue text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-md w-fit">Idol Secret</span>
+<div>
+<h4 class="text-accent-blue dark:text-accent-blue text-2xl font-black leading-tight tracking-tight uppercase">Stage<br/>Skin</h4>
+<p class="text-slate-600 dark:text-slate-300 text-[10px] mt-1 font-semibold">The 10-step idol routine</p>
+</div>
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-8xl text-accent-blue">auto_awesome</span>
+</div>
+</div>
+<!-- Square Card 2 -->
+<div class="col-span-1 aspect-square relative overflow-hidden rounded-xl bg-accent-yellow p-5 flex flex-col justify-between">
+<span class="bg-black text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-md w-fit">Hidden Spot</span>
+<div>
+<h4 class="text-black text-2xl font-black leading-tight tracking-tight uppercase">Cafe<br/>Hopping</h4>
+<p class="text-black/60 text-[10px] mt-1 font-semibold">Yeonnam-dong secrets</p>
+</div>
+<div class="absolute -right-2 -bottom-2 text-6xl font-black text-black/5 leading-none">카페</div>
+</div>
+<!-- Vertical Tall Card -->
+<div class="col-span-1 row-span-2 relative overflow-hidden rounded-xl bg-card-dark border border-primary/30 p-6 flex flex-col">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" data-alt="Dark aesthetic gradient with pink highlight"></div>
+<span class="bg-primary text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-md w-fit mb-4 z-10">K-Beauty</span>
+<h4 class="text-white text-3xl font-black leading-none uppercase z-10 italic">Glass<br/>Skin<br/>Guide</h4>
+<div class="mt-auto z-10">
+<div class="flex -space-x-2 mb-3">
+<div class="size-6 rounded-full border-2 border-card-dark bg-slate-400" data-alt="User avatar 1"></div>
+<div class="size-6 rounded-full border-2 border-card-dark bg-slate-500" data-alt="User avatar 2"></div>
+<div class="size-6 rounded-full border-2 border-card-dark bg-slate-600" data-alt="User avatar 3"></div>
+</div>
+<p class="text-white/70 text-[10px] font-medium">12k fans reading</p>
+</div>
+</div>
+<!-- Horizontal Small Card -->
+<div class="col-span-1 relative overflow-hidden rounded-xl bg-white dark:bg-card-dark border border-slate-100 dark:border-primary/10 p-4 flex flex-col justify-center gap-2 h-32">
+<span class="text-primary text-[10px] font-black uppercase tracking-widest">Trending</span>
+<h4 class="text-slate-900 dark:text-slate-100 text-lg font-extrabold leading-tight tracking-tight uppercase italic">Munja-do Art</h4>
+</div>
+<!-- Horizontal Small Card 2 -->
+<div class="col-span-1 relative overflow-hidden rounded-xl bg-accent-blue p-4 flex flex-col justify-center gap-2 h-32">
+<span class="text-white text-[10px] font-black uppercase tracking-widest">Music</span>
+<h4 class="text-white text-lg font-extrabold leading-tight tracking-tight uppercase italic">Retro Pop</h4>
+<div class="absolute right-2 bottom-2 text-white/20">
+<span class="material-symbols-outlined text-4xl">music_note</span>
+</div>
+</div>
+<!-- Wide Bento -->
+<div class="col-span-2 relative overflow-hidden rounded-xl h-40 bg-gradient-to-r from-accent-yellow to-primary">
+<div class="absolute inset-0 flex items-center justify-between px-8" data-alt="Yellow to pink vibrant linear gradient">
+<div class="flex flex-col">
+<span class="text-black text-[10px] font-black uppercase tracking-[0.2em] mb-1">Weekly Digest</span>
+<h3 class="text-black text-3xl font-black italic uppercase leading-none">Gen Z<br/>Hallyu</h3>
+</div>
+<div class="size-16 rounded-full bg-black/10 flex items-center justify-center backdrop-blur-sm border border-black/10">
+<span class="material-symbols-outlined text-black text-3xl">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-0 left-0 right-0 z-50 px-4 pb-6">
+<div class="flex gap-2 border border-slate-200/20 bg-white/80 dark:bg-card-dark/90 backdrop-blur-xl px-4 py-3 rounded-full shadow-2xl items-center justify-around">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">home</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Feed</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">auto_fix_high</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">AI Studio</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">map</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Map</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Me</p>
+</a>
+</div>
+</div>
+</div>
+</body></html>

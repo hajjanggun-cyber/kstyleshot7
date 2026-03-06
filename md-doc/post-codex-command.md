@@ -1,4 +1,64 @@
-Updated At: 2026-03-06 18:05:00 +09:00 (Asia/Seoul)
+Updated At: 2026-03-06 (Asia/Seoul)
+
+---
+
+# 집에서 재개할 때 — 첫 번째 글 시작 방법
+
+## 현재 상태 (2026-03-06 완료)
+
+인프라 구축 완료. Codex가 글을 쓸 수 있는 환경이 모두 준비되어 있다.
+
+완료된 것:
+- AGENTS.md (프로젝트 루트) — Codex 자동 인식 지침 파일
+- content/hub/ko/ + content/hub/en/ — 글 저장 디렉토리 생성
+- lib/mdx.ts — MDX 파일 읽기 유틸리티
+- components/hub/HubMdxPage.tsx — MDX 렌더러
+- app/[lang]/hub/[slug]/page.tsx — SEO generateMetadata 포함, MDX 우선 라우팅
+- app/sitemap.ts — MDX 파일 자동 스캔 → sitemap 동적 생성
+- next-mdx-remote + gray-matter 설치 완료
+
+아직 안 한 것:
+- hreflang + JSON-LD (④번) — 글 작성 시작 후 해도 됨
+- 실제 글 작성 (Codex)
+
+---
+
+## 첫 글 시작 — Codex에게 복사해서 붙여넣기
+
+```
+AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
+
+경복궁 허브 글 1쌍을 작성해.
+
+주제:
+- KO: 경복궁이 서울에서 가장 상징적인 궁궐로 여겨지는 이유
+- EN: Why Gyeongbokgung Became the Most Symbolic Palace in Seoul
+- slug: gyeongbokgung-hub
+- 카테고리: 한국 명소 & 포토존
+
+출력 파일:
+- content/hub/ko/gyeongbokgung-hub.mdx
+- content/hub/en/gyeongbokgung-hub.mdx
+
+소제목은 post-codex-command.md 섹션 9의 경복궁 소제목을 그대로 사용한다.
+섹션 4의 질문 6가지에 모두 답해야 한다.
+두 파일 모두 AGENTS.md frontmatter 스키마를 완전히 따른다.
+AI 공개 문구로 마무리한다.
+
+중요: 한글 글과 영어 글은 번역이 아니다.
+같은 장소를 다루지만 완전히 다른 검색 의도로 처음부터 새로 쓴다.
+한글은 한국 사용자 관점(왜 핫해졌는지, 사회적 의미),
+영어는 외국인 독자 관점(서울 맥락 설명, 문화적 상징성)으로 쓴다.
+```
+
+---
+
+## 두 번째 이후 — 일일 10개 배치
+
+섹션 10의 우선순위 순서대로 진행.
+배치 프롬프트는 이 문서 섹션 14 참조.
+
+---
 
 # 포스트 기획 기준 문서
 
@@ -562,3 +622,165 @@ Updated At: 2026-03-06 18:05:00 +09:00 (Asia/Seoul)
 5. 이 장소는 서울의 어떤 이미지를 대표하는가
 
 장소를 설명하지 못한 채 스타일만 설명하는 글은 더 이상 허브 글로 취급하지 않는다.
+
+---
+
+## 13. Codex 기술 출력 스펙
+
+이 섹션은 Codex가 실제로 파일을 생성할 때 따라야 하는 기술 규격이다.
+전체 상세 규칙은 프로젝트 루트의 `AGENTS.md`를 우선 참조한다.
+
+### 파일 위치
+
+```
+content/hub/ko/[slug].mdx    ← 한글 글
+content/hub/en/[slug].mdx    ← 영문 글
+```
+
+### 필수 frontmatter 필드
+
+```mdx
+---
+slug: "gyeongbokgung-photo-guide"
+lang: "ko"
+category: "한국 명소 & 포토존"
+title: "경복궁 포토존 완전 가이드 — 전통 미학의 사진 명소 총정리"
+description: "경복궁 포토존 완전 가이드. 최적의 촬영 스팟, 빛이 좋은 시간대, 전통미를 살린 구도 팁을 한 곳에 정리했다."
+authorName: "최지호"
+authorRole: "서울 문화 리포터"
+publishedAt: "2026-03-06"
+readTime: "6분 읽기"
+headerGradient: "linear-gradient(135deg, #1a0a2e 0%, #f4258c 100%)"
+pullQuote: "경복궁은 단순한 배경이 아니다. 서울이 왜 한 마디로 정의될 수 없는지를 보여주는 공간이다."
+hreflangSlug: "gyeongbokgung-photo-guide"
+aiGenerated: true
+---
+```
+
+### SEO 필드 기준
+
+| 필드 | 기준 |
+|------|------|
+| `title` | 60자 이하, 페이지마다 고유, 내용 정확 반영 |
+| `description` | 120–155자, 클릭 이유 포함 |
+| `hreflangSlug` | KO/EN 동일값 — hreflang 자동 연결용 |
+| `aiGenerated` | 항상 `true` — Google 투명성 정책 준수 |
+
+### AI 공개 문구 (모든 글 마지막에 필수)
+
+한글:
+```
+---
+*이 글은 AI 보조 도구를 활용하여 작성되었으며, 공개된 정보를 기반으로 사실 확인을 거쳤습니다. 저자 표기는 해당 카테고리의 편집 방향을 대표합니다.*
+```
+
+영문:
+```
+---
+*This article was produced with AI assistance and reviewed for accuracy against publicly available information. Author persona represents the editorial voice for this content category.*
+```
+
+### 저자 고정 테이블
+
+| 카테고리 | 한글 저자 | 영문 저자 |
+|----------|-----------|-----------|
+| 한국 명소 & 포토존 | 최지호 | Ji-ho Choi |
+| K-스타일 패션 | 박민아 | Mina Park |
+| K-뷰티 & 헤어 | 강예진 | Ye-jin Kang |
+| K-POP 문화 & 팬덤 | 신나래 | Na-rae Shin |
+| 셀카 & 포토그래피 | 임수연 | Soo-yeon Lim |
+| 서울 여행 가이드 | 오태양 | Tae-yang Oh |
+| 팬 커뮤니티 & SNS | 송다은 | Da-eun Song |
+| 가상 스타일 체험 | 박민아 | Mina Park |
+
+### 일일 실행 원칙
+
+- 하루 10개: 한글 5개 + 영문 5개
+- 반드시 쌍으로: 동일한 `hreflangSlug`를 가진 KO/EN 한 세트
+- 주제 목록 참조: `md-doc/kpop-blog-topics-300.md`
+- 우선순위: 이 문서 섹션 10번 순서 따름
+
+### 출력 전 품질 체크
+
+- [ ] title 60자 이하, 고유한가
+- [ ] description 120–155자, 클릭 이유 있는가
+- [ ] 인트로가 정의 / 통념 반박 / 글의 약속 세 가지를 하는가
+- [ ] 분량 채우기용 문장이 없는가
+- [ ] 특정 아이돌·그룹명·기획사 상표가 없는가
+- [ ] AI 공개 문구가 마지막에 있는가
+- [ ] `hreflangSlug`가 쌍 파일과 일치하는가
+
+---
+
+## 14. Codex 실행 프롬프트 (복사해서 그대로 사용)
+
+### 기본 프롬프트 — 신규 글 1쌍 작성
+
+```
+AGENTS.md와 md-doc/post-codex-command.md를 읽고 아래 주제로 MDX 글 1쌍을 작성해.
+
+주제:
+- KO: [여기에 한글 제목 입력]
+- EN: [여기에 영문 제목 입력]
+- slug: [kebab-case-slug]
+- 카테고리: [카테고리명]
+
+출력 파일:
+- content/hub/ko/[slug].mdx
+- content/hub/en/[slug].mdx
+
+두 파일 모두 AGENTS.md의 frontmatter 스키마를 완전히 따르고,
+AI 공개 문구로 마무리한다.
+한글 글과 영어 글은 번역이 아니라 각각의 검색 의도로 독립 작성한다.
+```
+
+---
+
+### 일일 10개 배치 프롬프트
+
+```
+AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
+md-doc/kpop-blog-topics-300.md에서 아직 작성되지 않은 주제를
+한글 5개 + 영문 5개 (총 5쌍)를 골라 MDX 파일로 작성해.
+
+규칙:
+1. 각 쌍은 동일한 hreflangSlug를 가진다
+2. content/hub/ko/[slug].mdx + content/hub/en/[slug].mdx 에 저장
+3. AGENTS.md 품질 체크리스트를 통과해야 한다
+4. 이미 존재하는 파일은 건드리지 않는다
+5. 작성 완료 후 생성된 파일 목록을 보고한다
+```
+
+---
+
+### 특정 장소 허브 글 프롬프트 (경복궁 예시)
+
+```
+AGENTS.md와 md-doc/post-codex-command.md 섹션 9를 읽어라.
+
+경복궁 허브 글을 작성해:
+- KO slug: gyeongbokgung-hub-ko
+- EN slug: gyeongbokgung-hub-en
+- hreflangSlug: gyeongbokgung-hub
+
+post-codex-command.md 섹션 9의 소제목 구조를 그대로 사용해.
+섹션 4의 질문 6가지에 모두 답하는 글을 써야 한다.
+분량은 검색 의도 충족에 필요한 만큼만 쓴다 (padding 금지).
+```
+
+---
+
+### 기존 글 검토/수정 프롬프트
+
+```
+AGENTS.md의 품질 체크리스트를 기준으로
+content/hub/ko/[slug].mdx 를 검토하고 아래 항목을 수정해:
+
+1. title이 60자를 넘으면 줄여라
+2. description이 120자 미만이면 보완해
+3. AI 공개 문구가 없으면 추가해
+4. padding 문장(내용 없이 분량만 채우는 문장)을 제거해
+5. 특정 아이돌/그룹/기획사 상표명이 있으면 제거해
+
+수정 후 변경된 항목을 목록으로 보고해.
+```

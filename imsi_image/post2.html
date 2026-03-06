@@ -1,0 +1,172 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4258c",
+                        "background-light": "#f8f5f7",
+                        "background-dark": "#221019",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .k-pop-gradient {
+            background: linear-gradient(135deg, #f4258c 0%, #7c2ae8 50%, #00d4ff 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-box {
+            box-shadow: 0 0 20px rgba(244, 37, 140, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Header / Navigation -->
+<nav class="sticky top-0 z-50 flex items-center justify-between p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back_ios_new</span>
+</button>
+<span class="text-sm font-bold tracking-widest uppercase text-primary">K-Insights</span>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">share</span>
+</button>
+</nav>
+<!-- Hero Section -->
+<header class="k-pop-gradient px-6 py-16 flex flex-col items-center text-center">
+<div class="mb-4 inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-bold tracking-tighter text-white uppercase">
+            Beauty &amp; Style • 5 Min Read
+        </div>
+<h1 class="text-4xl md:text-5xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
+            The Digital Renaissance of <span class="underline decoration-white/30">K-Beauty</span>
+</h1>
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 border-2 border-white/50 overflow-hidden">
+<img alt="Author Portrait" data-alt="Portrait of a stylish young woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhaGfSkSA92pmxqNUmy3L8UXuS8TiqxuxbnjVmKbsltTocS2nIF361KZdFxT4UcQ-jD5iEUDuooPhfUj2gE97nxNuqq6yOF2mT2QxpQnrb6cDPJNjQT5wsM_cr23GWWwhb50T7tKvC2MVDzpywHucvgm8hLGrbbaaUOxGHCp74aIPUkJ64TGTR5PNT51-Dxnu4MYLMZS0f5FU3Gvc7Vuny9SDrmHEl0ggmVRMX6HIJdjWtbS_PGGs7PbkN1GviyyYcsqcD2iSALz9S"/>
+</div>
+<p class="text-white/90 text-sm font-medium">Mina Park • Style Consultant</p>
+</div>
+</header>
+<!-- Pull Quote / Glow Box -->
+<section class="px-6 -mt-8">
+<div class="bg-background-light dark:bg-slate-800/40 glow-box rounded-xl p-6 border-2 border-primary/20 relative overflow-hidden">
+<div class="absolute -top-4 -left-4 size-24 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary text-4xl opacity-50 mb-2">format_quote</span>
+<p class="text-xl font-bold leading-relaxed italic text-slate-800 dark:text-slate-100">
+                    "AI isn't just changing how we see ourselves; it's redefining the very fabric of K-Pop visual storytelling."
+                </p>
+</div>
+</div>
+</section>
+<!-- Main Content -->
+<article class="px-6 py-10 max-w-2xl mx-auto">
+<div class="space-y-6 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+<p>
+                The intersection of technology and aesthetic expression has reached a fever pitch in Seoul. As we navigate the 2024 fashion landscape, the "Virtual Idol" aesthetic is no longer confined to digital screens—it’s bleeding into the streets of Hongdae and Gangnam.
+            </p>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 pt-4">Synchronized Aesthetics</h2>
+<p>
+                In the world of K-Culture, style is rarely a solitary endeavor. It is a highly curated, synchronized experience. With the rise of AI-driven styling apps, fans can now achieve the precision of a professional K-Pop coordinator from their own devices.
+            </p>
+<!-- Styled Bullet Points -->
+<ul class="space-y-4 py-4">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary fill-1 mt-1">star</span>
+<span><strong class="text-slate-900 dark:text-slate-100">Hyper-Personalization:</strong> Algorithms that analyze facial features to suggest specific palette matches.</span>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary fill-1 mt-1">star</span>
+<span><strong class="text-slate-900 dark:text-slate-100">Virtual Try-Ons:</strong> Instant AR overlays of the latest stage outfits.</span>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary fill-1 mt-1">star</span>
+<span><strong class="text-slate-900 dark:text-slate-100">Global Accessibility:</strong> Breaking the geographical barriers of high-end Korean boutiques.</span>
+</li>
+</ul>
+<p>
+                This digital shift is fostering a new kind of "Readable Style"—where every element of an outfit tells a clear story, optimized for both the lens and the eye.
+            </p>
+</div>
+<!-- Quick Summary Box -->
+<div class="mt-12 bg-primary/5 dark:bg-primary/10 rounded-2xl p-6 border border-primary/20">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Quick Summary</h3>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 bg-white dark:bg-background-dark p-3 rounded-lg border border-primary/5">
+<span class="text-primary font-bold">01</span>
+<p class="text-sm">AI is democratizing luxury K-Pop styling for global fans.</p>
+</div>
+<div class="flex items-center gap-3 bg-white dark:bg-background-dark p-3 rounded-lg border border-primary/5">
+<span class="text-primary font-bold">02</span>
+<p class="text-sm">Digital identity is now as important as physical appearance.</p>
+</div>
+<div class="flex items-center gap-3 bg-white dark:bg-background-dark p-3 rounded-lg border border-primary/5">
+<span class="text-primary font-bold">03</span>
+<p class="text-sm">Seoul remains the epicenter of high-tech fashion innovation.</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Next Article Bar -->
+<div class="px-4 pb-24">
+<a class="group block bg-primary rounded-2xl p-6 text-white overflow-hidden relative transition-transform active:scale-95" href="#">
+<div class="absolute right-0 top-0 h-full w-1/3 bg-white/10 skew-x-[-20deg] translate-x-10 group-hover:translate-x-5 transition-transform"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Up Next</p>
+<h4 class="text-xl font-bold">Gyeongbokgung: A Night Tour Guide</h4>
+</div>
+<span class="material-symbols-outlined text-3xl">arrow_forward</span>
+</div>
+</a>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-primary/10 px-6 py-3">
+<div class="flex justify-between items-center max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">auto_fix_high</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Style AI</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">menu_book</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Events</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
+</a>
+</div>
+</div>
+</body></html>
