@@ -104,6 +104,7 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - Cross-link to 1–2 related articles within the same hub where naturally relevant
 - Do NOT link to articles that do not yet exist — no dead links
 - Internal link anchor text must describe the destination naturally (no "여기", "click here")
+- **Language isolation (mandatory): KO files must only link to `/ko/hub/[slug]` paths. EN files must only link to `/en/hub/[slug]` paths. Cross-language links are never allowed.**
 
 ### KO vs EN Search Intent
 

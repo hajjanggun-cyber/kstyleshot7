@@ -180,6 +180,14 @@ Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
 - content/hub/en/gyeongbokgung-nearby-hanok-photo-spots.mdx
 다음 세션 시작: 2단계 — 경복궁 하위 글 [286] 가상 경복궁 배경 — 서울에 없어도 전통 감성 사진 완성하기
 
+[2026-03-06 20:16 KST]
+완료:
+- content/hub/ko/virtual-gyeongbokgung-background-guide.mdx
+- content/hub/en/virtual-gyeongbokgung-background-guide.mdx
+다음 세션 시작: 1단계 — 남산 N서울타워 허브 글
+
+[2026-03-06 23:24 KST] 경복궁 허브 내부링크·키워드·nextSlug 정리 완료
+
 <!-- 로그 끝 -->
 
 ---
