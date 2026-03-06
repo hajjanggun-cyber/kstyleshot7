@@ -1,53 +1,77 @@
-﻿"use client";
+"use client";
 
 import { useTranslations } from "next-intl";
+
+const TRANSFORMATIONS = [
+  {
+    title: "Midnight Seoul Palace",
+    subtitle: "Cyberpunk Hanbok Style",
+    accentColor: "#FF4EBD",
+    afterSrc: "/visuals/landing/trend-cyber.svg",
+    likes: "4.8k",
+  },
+  {
+    title: "Vocalist Stage Red",
+    subtitle: "Elegant Concert Look",
+    accentColor: "#9D50FF",
+    afterSrc: "/visuals/landing/trend-soft.svg",
+    likes: "3.2k",
+  },
+  {
+    title: "Street Idol Vibe",
+    subtitle: "Urban K-Fashion",
+    accentColor: "#FF834E",
+    afterSrc: "/visuals/landing/trend-street.svg",
+    likes: "2.1k",
+  },
+];
 
 export function GalleryTabs() {
   const t = useTranslations("landing.trending");
 
   return (
-    <section className="card stack" id="trending">
-      <div className="section-head">
-        <h2>{t("title")}</h2>
-        <span className="muted">{t("explore")}</span>
+    <section className="lp-gallery" id="trending">
+      <div className="lp-gallery-head">
+        <div>
+          <h2 className="lp-gallery-title">Top Transformations</h2>
+          <p className="lp-gallery-sub">K-Idol Editorial Picks</p>
+        </div>
+        <span className="lp-gallery-more">{t("explore")} ›</span>
       </div>
-      <div className="grid four">
-        <article className="trend-card trend-cyber">
-          <div className="trend-media">
-            <img alt={t("item1.name")} loading="lazy" src="/visuals/landing/trend-cyber.svg" />
+      <div className="lp-gallery-scroll">
+        {TRANSFORMATIONS.map((item, i) => (
+          <div className="lp-transform-card lp-glass" key={i}>
+            <div className="lp-transform-imgs">
+              <div className="lp-transform-before">
+                <span className="lp-transform-label">Base</span>
+              </div>
+              <div
+                className="lp-transform-after"
+                style={{ borderColor: `${item.accentColor}55` }}
+              >
+                <img alt={item.title} loading="lazy" src={item.afterSrc} />
+                <span
+                  className="lp-transform-label lp-transform-label--result"
+                  style={{ background: item.accentColor }}
+                >
+                  Result
+                </span>
+              </div>
+            </div>
+            <div className="lp-transform-info">
+              <div>
+                <p className="lp-transform-name">{item.title}</p>
+                <p className="lp-transform-style" style={{ color: item.accentColor }}>
+                  {item.subtitle}
+                </p>
+              </div>
+              <div className="lp-transform-likes">
+                <span>♥</span>
+                <span>{item.likes}</span>
+              </div>
+            </div>
           </div>
-          <div className="trend-copy">
-            <strong>{t("item1.name")}</strong>
-            <span>{t("item1.uses")}</span>
-          </div>
-        </article>
-        <article className="trend-card trend-soft">
-          <div className="trend-media">
-            <img alt={t("item2.name")} loading="lazy" src="/visuals/landing/trend-soft.svg" />
-          </div>
-          <div className="trend-copy">
-            <strong>{t("item2.name")}</strong>
-            <span>{t("item2.uses")}</span>
-          </div>
-        </article>
-        <article className="trend-card trend-street">
-          <div className="trend-media">
-            <img alt={t("item3.name")} loading="lazy" src="/visuals/landing/trend-street.svg" />
-          </div>
-          <div className="trend-copy">
-            <strong>{t("item3.name")}</strong>
-            <span>{t("item3.uses")}</span>
-          </div>
-        </article>
-        <article className="trend-card trend-clean">
-          <div className="trend-media">
-            <img alt={t("item4.name")} loading="lazy" src="/visuals/landing/trend-clean.svg" />
-          </div>
-          <div className="trend-copy">
-            <strong>{t("item4.name")}</strong>
-            <span>{t("item4.uses")}</span>
-          </div>
-        </article>
+        ))}
       </div>
     </section>
   );

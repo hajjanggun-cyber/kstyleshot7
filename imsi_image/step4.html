@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#f48c25",
+              "background-light": "#f8f7f5",
+              "background-dark": "#221910",
+            },
+            fontFamily: {
+              "display": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<title>K-Pop Makeover - Step 3</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-24">
+<!-- Header -->
+<div class="flex items-center p-4 justify-between sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<button class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Step 3: Choose Your Outfit</h2>
+</div>
+<!-- Progress Indicator -->
+<div class="flex w-full flex-row items-center justify-center gap-3 py-4">
+<div class="h-1.5 w-6 rounded-full bg-primary/30"></div>
+<div class="h-1.5 w-6 rounded-full bg-primary/30"></div>
+<div class="h-1.5 w-10 rounded-full bg-primary"></div>
+<div class="h-1.5 w-6 rounded-full bg-primary/30"></div>
+</div>
+<!-- User Preview Section -->
+<div class="flex p-6 @container">
+<div class="flex w-full flex-col gap-6 items-center">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-40 w-40 ring-4 ring-primary/20 shadow-xl shadow-primary/10" data-alt="User face with K-Pop hairstyle applied" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCgkTwV1REHGKB6Xf_9HnKgMCJ0rcsQl6rwXEl9XUFCX5OOFAPZzlNhcE2mVjYTB-8uc_Gavs8FEReh_W9rGc7GvkM_Y106iQLb42KwWeWXFDgbncZdUrLeYYkJ-0KwXtfbG03qDV8BHVRayf1y1dHRzvwJVnl9hMI73z_c7G0NgyYo_iFDJH1s-PYRblE-lgVxLrUJaSQMyGCvsYpNhcJWlqrUqKeP2lnrVMqXKxiquM-uJw4JbBAVeuYfShrrbWet13bjNk8QeeWu");'>
+</div>
+<div class="absolute -bottom-2 right-2 bg-primary text-white p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-sm">face</span>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center">
+<p class="text-[24px] font-bold leading-tight tracking-tight text-center">Looking Iconic!</p>
+<p class="text-slate-500 dark:text-primary/70 text-base font-normal leading-normal text-center">Now select an outfit to complete your debut look</p>
+</div>
+</div>
+</div>
+<!-- Tab Selection -->
+<div class="sticky top-16 z-40 bg-background-light dark:bg-background-dark">
+<div class="flex border-b border-primary/10 px-4 gap-8 overflow-x-auto no-scrollbar">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-3 pt-4 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-wide">Stage Outfits</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 pb-3 pt-4 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-wide">Street K-Style</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 pb-3 pt-4 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-wide">Award Show</p>
+</a>
+</div>
+</div>
+<!-- Outfit Grid -->
+<div class="grid grid-cols-2 gap-4 p-4">
+<!-- Outfit Card 1 -->
+<div class="group relative flex flex-col gap-2 bg-primary/5 dark:bg-primary/10 p-3 rounded-xl border border-primary/10">
+<div class="aspect-[3/4] rounded-lg bg-cover bg-center overflow-hidden" data-alt="Cyberpunk inspired stage outfit on mannequin" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA9vx6hE1Il7bYvQ3DMsjAEr6DgXrir0TjENEOrYXIqftL0WGxNhk1W2zGkED51esxcbLuLY93qKSvePEra1-mxhotxINn8TrFMi7XGU39bQp-vYqdlLK-0aJJB9rG3OFFC-2RcZsF_tVC51EkKRadLc4YnAIhrocZq4CZbeEdiNL361mlgl0Dvzf5ht_Ltu8dDUisa6R9__tbwxqtzAEicX9afCC-lMwZahfpWLpclOCjoM4WaAaRlVbHff7Po1PNSF-T4Z4j75KO8');">
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-bold">Neon Pulse</p>
+<p class="text-xs text-slate-500 dark:text-primary/60">Stage Visual</p>
+</div>
+<div class="absolute top-5 right-5 h-6 w-6 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-white">favorite</span>
+</div>
+</div>
+<!-- Outfit Card 2 -->
+<div class="group relative flex flex-col gap-2 bg-primary/20 dark:bg-primary/20 p-3 rounded-xl border-2 border-primary">
+<div class="aspect-[3/4] rounded-lg bg-cover bg-center overflow-hidden" data-alt="High-end streetwear K-pop aesthetic outfit" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRqg4aX3HtM8o2F5Nwk1G9czqldG476rpidCJ0vIPh7PWhbHHm4IdACI16CgJKCbZupAa8BoO9dnWMVn37UV18tN1im0uiWoeM0__Lq7-ZWjeLSN-YCMeibUiPNhs_7L0yehyI0XoWPL3RzoH9IFe99HWrGxZJhj4hgeGHBVrq1ODPVrktksdlJ7XxLyAf_DSjPfqB_Plr_x54m9ASvfS1o7sFJPn-LUrY_U89X3k_69_0GLKzS9ucm13VKQ-WzpjWlp9GPEjcflsD');">
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<p class="text-sm font-bold">District 9</p>
+<span class="material-symbols-outlined text-primary text-base">check_circle</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-primary/60">Street Style</p>
+</div>
+</div>
+<!-- Outfit Card 3 -->
+<div class="group relative flex flex-col gap-2 bg-primary/5 dark:bg-primary/10 p-3 rounded-xl border border-primary/10">
+<div class="aspect-[3/4] rounded-lg bg-cover bg-center overflow-hidden" data-alt="Modern hanbok inspired k-pop outfit" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBIglWeyvFfvNQAhoyLE_snRvlA8718pvWYooZ1Ev93DC5w_mFofQ_7ZYv7g5hgT4LmYJnvxBFCvim_ex4wTBx_bxPw97KDovn1Q84-8fn_XAKi-yA848MJi5UJ30V6AV0w6c3uhUhNLTeomGfpS9r2uBTyMlO8qV4HmgG3lQgFsUe9NMgfshIpZ-4imEcboQy3ci5fuT5_mojBAR2j1QRfT8fsRzksemKAySJz8XyGanBlMUeptZnUn-ZxDFnHHB_Fu_WCjCMXdDG_');">
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-bold">Tradition Vibe</p>
+<p class="text-xs text-slate-500 dark:text-primary/60">Modern Hanbok</p>
+</div>
+</div>
+<!-- Outfit Card 4 -->
+<div class="group relative flex flex-col gap-2 bg-primary/5 dark:bg-primary/10 p-3 rounded-xl border border-primary/10">
+<div class="aspect-[3/4] rounded-lg bg-cover bg-center overflow-hidden" data-alt="Luxury stage ensemble with sequins" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrL1LegIeEFhPwDc-35zka9Bd0JCl3hFsVcNU-YjKPt10TCbKm1kvC1S-r2fL0dpJcDbOoJcrJxg-_VL-KTcP7D1quX6K_eeIWC17b_cEoKUVlUsiYsg8j8BMZBFHDyDy_sSPx26-bzwXzHMbiYZe9RQa_W9hiSJ4iOJobXfFVeVyCJoGPylPec_GAlYzSSsMMUNsosR6-O-qvMr8Wgca6G6J4ehDk5Ej9ID4s_3W0lC6nLz6USWu2wFjkbS4WV4yM9d34VE_j47Ua');">
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-bold">Glitzy Night</p>
+<p class="text-xs text-slate-500 dark:text-primary/60">Premium Stage</p>
+</div>
+</div>
+</div>
+<!-- Inspiration Section -->
+<div class="p-4 mt-4">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+                Complete the Look
+            </h3>
+<div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+<div class="flex-none w-64 bg-slate-100 dark:bg-primary/5 rounded-2xl p-4 border border-primary/10">
+<div class="h-40 rounded-lg bg-cover bg-center mb-3" data-alt="K-pop male idol group stage performance" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuClkMbJeU5rEskfQeHYTFpRjVva-vlHKKqu6i0mzdAGoATyqYtJkyHXHuelcx1wqSqDCc5j6rjO5rDs8RaKTy9_6hgvll274kBXoW2CZj-H5c8uGwmdcvzt28f3Q6wLTcI8560x3FZOUZ8qnQho2M6Idqe3B3rk4idoJOWbPQvFxHop3JXILzl913efMncXF1wweNht8tBMjFaM7pZJ5EqN1K91dAOz0kp4caQymDQybJQvQf9r0DfU6IxwR7_t7GNwDvcinsUG5idl');">
+</div>
+<p class="font-bold text-sm">Visual Inspiration</p>
+<p class="text-xs text-slate-500 dark:text-primary/60">How the "District 9" outfit styles on stage</p>
+</div>
+<div class="flex-none w-64 bg-slate-100 dark:bg-primary/5 rounded-2xl p-4 border border-primary/10">
+<div class="h-40 rounded-lg bg-cover bg-center mb-3" data-alt="K-pop female idol street style photo shoot" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrtpFEG0KKMu9C4ee2lNa88bh41gobKO5wT2VaqCFzBUVnK_p4qBWGhrwgc5_POJ40VJ_mfgOnHbUEBjEpw9TRAlqH9bmdw7OiS5t4AwVEmrVDZkoxTNNn2imkhmjHyrpVx8rDHp1TuO-rO6b8EOlRSvH-gQfni59lS69MJlgdrnO34BD_xu7viNsYYDOQu0QnJEj70TBsf6gKnOtBOR5BhhNWjNfSRJwMENREh4PReZgFR6YPg7S94Rv0VANPzkoYL7Ov9b4wypB3');">
+</div>
+<p class="font-bold text-sm">Street Lookbook</p>
+<p class="text-xs text-slate-500 dark:text-primary/60">Mix &amp; match with your current selection</p>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Action -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/95 dark:via-background-dark/95 to-transparent z-50">
+<button class="w-full h-14 bg-gradient-to-r from-primary to-[#ff6b00] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(244,140,37,0.4)] flex items-center justify-center gap-2">
+                Apply &amp; Continue
+                <span class="material-symbols-outlined">trending_flat</span>
+</button>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 hidden">
+<!-- Provided BottomNavBar logic integrated -->
+<div class="flex gap-2 border-t border-primary/10 bg-background-light dark:bg-background-dark px-4 pb-3 pt-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-xs font-medium">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">flare</span>
+<p class="text-xs font-medium">Makeover</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">checkroom</span>
+<p class="text-xs font-medium">Wardrobe</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-xs font-medium">Profile</p>
+</a>
+</div>
+</div>
+</div>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

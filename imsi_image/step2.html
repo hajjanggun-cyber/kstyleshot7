@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f48c25",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221910",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>K-Pop Virtual Makeover</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<nav class="flex items-center p-4 justify-between bg-background-light dark:bg-background-dark sticky top-0 z-10">
+<button class="text-slate-900 dark:text-slate-100 flex size-10 items-center justify-center rounded-full bg-primary/10">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold leading-tight flex-1 text-center pr-10">K-Pop Transformation</h2>
+</nav>
+<!-- Progress Indicator -->
+<div class="flex w-full flex-row items-center justify-center gap-3 py-4">
+<div class="h-2 w-8 rounded-full bg-primary"></div>
+<div class="h-2 w-2 rounded-full bg-primary/30"></div>
+<div class="h-2 w-2 rounded-full bg-primary/30"></div>
+<div class="h-2 w-2 rounded-full bg-primary/30"></div>
+</div>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col px-4 pb-24">
+<div class="text-center mb-6">
+<h1 class="text-2xl font-bold leading-tight mb-2">Step 1: Upload Your Photo</h1>
+<p class="text-slate-600 dark:text-slate-400 text-sm">Upload a clear selfie to start your idol-style transformation.</p>
+</div>
+<!-- Upload Zone -->
+<div class="flex flex-col mb-8">
+<div class="flex flex-col items-center gap-6 rounded-xl border-2 border-dashed border-primary/40 bg-primary/5 px-6 py-12 transition-colors hover:border-primary/60">
+<div class="bg-primary/20 p-4 rounded-full">
+<span class="material-symbols-outlined text-4xl text-primary">add_a_photo</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<p class="text-lg font-bold text-center">Upload Your Selfie</p>
+<p class="text-sm text-slate-500 dark:text-slate-400 text-center">Tap to browse or drag and drop your photo</p>
+</div>
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center rounded-full h-12 px-6 bg-primary text-white text-sm font-bold tracking-wide">
+                    Select Photo
+                </button>
+</div>
+</div>
+<!-- Photo Guide -->
+<div class="mb-8 bg-primary/5 rounded-lg p-5">
+<h3 class="font-bold text-sm mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">lightbulb</span>
+                Photo Guide
+            </h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
+<p class="text-xs text-slate-600 dark:text-slate-400">Look straight ahead</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
+<p class="text-xs text-slate-600 dark:text-slate-400">Good lighting</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
+<p class="text-xs text-slate-600 dark:text-slate-400">No glasses/masks</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
+<p class="text-xs text-slate-600 dark:text-slate-400">Clear background</p>
+</div>
+</div>
+</div>
+<!-- Trending Transformations -->
+<div class="flex flex-col">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold">Trending Transformations</h3>
+<span class="text-primary text-xs font-medium">View Gallery</span>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-4 px-4">
+<!-- Sample Card 1 -->
+<div class="flex-shrink-0 w-48 bg-white dark:bg-slate-800/50 rounded-lg overflow-hidden border border-primary/10 shadow-sm">
+<div class="relative h-32 flex">
+<div class="w-1/2 h-full bg-slate-200 dark:bg-slate-700">
+<img alt="Before makeover" class="w-full h-full object-cover" data-alt="Before shot of woman looking straight ahead" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0lHAJFQaq6PSqFpMK7FrWYEonkckeG0T-kGTopaGFaOJYxQwR-ULN4YIGFjqDeb7XxMBMiO88YRfRJWmwLBpxx8YsS4DCXNMhm6liCGbZQdqxbqDW5ems_n4hARfkCkGa11bO6ntNwH2H28o1AFqeEQyBkMvRSA6kcaLX7n0-7FnrLkVf2m0E7lSN-PXViYKN-XTWOWbgdiVIxl16cyzLwxYPdJqCzz16B9xmr8wxRrK8YLrX87oSWsNXBmKX1iMoqq9mZQNeKIdB"/>
+</div>
+<div class="w-1/2 h-full bg-slate-300 dark:bg-slate-600">
+<img alt="After makeover" class="w-full h-full object-cover border-l-2 border-white dark:border-slate-800" data-alt="K-pop style virtual makeup transformation after photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDR1V6S0fNgJyhwfNs5TNUIW56iPaUZ5Gc6T7rSFUx91-HywJFy6sqDVDmUW0Ji3arBGGh96asOLW0-VEor_BACJGy4sXz5HjcIs96HQ98r_78tmSP0yUCJLRN0bqaZ8n8SoN1BDkIObHyoicq87rMgS7PlnOd-THlcWRJu_UsmueVKRqqsP-nkP-zWEdnvYRD7kHzF3KKFIxtk1GQhp58xKVNFswHLXeCRBGfGpp5pd4SFDq4fINDgMhM88ifqM9BczgU0I5Euf6Z"/>
+</div>
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 bg-primary px-2 py-0.5 rounded-full">
+<p class="text-[10px] text-white font-bold">Sparkle UI</p>
+</div>
+</div>
+<div class="p-2 text-center">
+<p class="text-[10px] font-medium opacity-70">Glow Concept</p>
+</div>
+</div>
+<!-- Sample Card 2 -->
+<div class="flex-shrink-0 w-48 bg-white dark:bg-slate-800/50 rounded-lg overflow-hidden border border-primary/10 shadow-sm">
+<div class="relative h-32 flex">
+<div class="w-1/2 h-full bg-slate-200 dark:bg-slate-700">
+<img alt="Before makeover" class="w-full h-full object-cover" data-alt="Before shot of young man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNqdQ71XWZPTqTDEIQlbLmB3SqIVBjcRyg6yv3nZMiTGpNAKlHNP3MQC4YUrHRQVisCJEnoWIFm78Z-qqqZWL0t40X6CgdFybhaQ5cZ1RrBK2-5bnCjMD6Od3CdmnYRDbzRLJiY28rEjYWws-CEgwvcV0-VOwQ0uj8X3ODhGNKhK-E8wq1MzcrOWCK2Y0tO4OsO_0rAqhuJJYmIxYPf8S86BE1JLXMHWOoNQQBqu1JTooyIf6_MUnvCAcmAGFfMAKbVjMJ3LH47KP0"/>
+</div>
+<div class="w-1/2 h-full bg-slate-300 dark:bg-slate-600">
+<img alt="After makeover" class="w-full h-full object-cover border-l-2 border-white dark:border-slate-800" data-alt="Male K-pop idol aesthetic virtual makeover result" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq6Lz-nBachVLEmAbEHry2Kf3rEoacJwQLAYFAM4I-zAXEfuOL3gl77X1F-VetXW95_40t6loCdKoLHoOchmGMez3tE9l2VREeSNw3NGWqkGaoJvxF_kQT_KHL-gBn6zA0Qbq6pnOwVGlhU4z4ik4r58Juf9NnbVFtJzAp-i4MlmuSeJAG_zqqHz8rtFGTuUqm0Gem3eEOF-VcUG1BDKLync3zQgzYNdrc7VbduREz9n7a-UnSKMX9k2cQjN6DjbPqD5xJ8QNPIg8U"/>
+</div>
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 bg-primary px-2 py-0.5 rounded-full">
+<p class="text-[10px] text-white font-bold">V-Shape</p>
+</div>
+</div>
+<div class="p-2 text-center">
+<p class="text-[10px] font-medium opacity-70">Urban Style</p>
+</div>
+</div>
+<!-- Sample Card 3 -->
+<div class="flex-shrink-0 w-48 bg-white dark:bg-slate-800/50 rounded-lg overflow-hidden border border-primary/10 shadow-sm">
+<div class="relative h-32 flex">
+<div class="w-1/2 h-full bg-slate-200 dark:bg-slate-700">
+<img alt="Before makeover" class="w-full h-full object-cover" data-alt="Before shot of woman in neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlorW_xjLMs-0EAPWisX_ZTprI-C7efn2A3VWg3cFRFaItqaoD0xSrOCVqqbdO46ny_W_5fjW0_E5GKn_Z_3V76eB7dirdCd2_Xtdfobs3topfFEvUWWOtcM0l0VRzYh7lD_YXTCCzuW0peo0KM8BNGRqL1I9VetFGQd7Dt6JDGAgW9aJZD1EWYNrf3jSCuK76mkNKAehHP-r_f6BCQEroel9DXhHDvv-PCtIIlYALw2ILLE1PywR-xveGknqgjkXbhHUhXPbEDktz"/>
+</div>
+<div class="w-1/2 h-full bg-slate-300 dark:bg-slate-600">
+<img alt="After makeover" class="w-full h-full object-cover border-l-2 border-white dark:border-slate-800" data-alt="Aesthetic K-drama look makeover with glass skin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvLzxztTMRrLsYJXuJMinIw8raqPwF0T_2iOMA8769jQeGL8tgsG9g6aDevfKc0gsq_99jg8UyJbHzD6oHwvQhMggr3xe9vIZ0zvJP2qn7Mqxp48hn-1wsZvxS7jTlz9TDhq9n66XhSj1nb-TpdoYI5qA0lpa2d_Hbx0s8Ykn0KS6ESEbSIgW9lNByj30qBxD7-VkPjshrYT8AqIS_ASWN8-BlMFAMCe5FTDgmopdnd9r_EemspH64FAZPF5lqWjNVn6GCcj8UKRFh"/>
+</div>
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 bg-primary px-2 py-0.5 rounded-full">
+<p class="text-[10px] text-white font-bold">Peach Glass</p>
+</div>
+</div>
+<div class="p-2 text-center">
+<p class="text-[10px] font-medium opacity-70">Idol Core</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-primary/10">
+<button class="w-full h-14 rounded-full bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 font-bold text-lg cursor-not-allowed flex items-center justify-center gap-2" disabled="">
+            Next Step
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

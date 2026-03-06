@@ -1,41 +1,48 @@
-﻿"use client";
+"use client";
 
 import { useTranslations } from "next-intl";
+
+type StepItem = {
+  icon: string;
+  colorVar?: string;
+  gradient?: boolean;
+};
+
+const STEPS: StepItem[] = [
+  { icon: "📸", colorVar: "#FF4EBD" },
+  { icon: "✂️", colorVar: "#9D50FF" },
+  { icon: "🏙️", colorVar: "#38bdf8" },
+  { icon: "✨", gradient: true },
+];
 
 export function HowItWorks() {
   const t = useTranslations("landing.how");
 
+  const labels = [
+    t("step1.title"),
+    t("step2.title"),
+    t("step3.title"),
+    "AI Magic",
+  ];
+
   return (
-    <section className="card stack">
-      <div className="section-head">
-        <h2>{t("title")}</h2>
-      </div>
-      <p className="muted">{t("description")}</p>
-      <div className="grid three">
-        <article className="card stack step-card">
-          <div className="step-media">
-            <img alt={t("step1.title")} loading="lazy" src="/visuals/landing/how-upload.svg" />
+    <section className="lp-steps card">
+      <h3 className="lp-steps-head">The AI Magic Journey</h3>
+      <div className="lp-steps-list">
+        {STEPS.map((step, i) => (
+          <div className="lp-step-row" key={i}>
+            <div
+              className={`lp-step-icon${step.gradient ? " lp-step-icon--gradient" : ""}`}
+              style={!step.gradient && step.colorVar ? { borderColor: `${step.colorVar}44`, color: step.colorVar } : {}}
+            >
+              {step.icon}
+            </div>
+            <div>
+              <p className="lp-step-num">Step 0{i + 1}</p>
+              <h4 className="lp-step-label">{labels[i]}</h4>
+            </div>
           </div>
-          <span className="step-chip">1</span>
-          <strong>{t("step1.title")}</strong>
-          <span className="muted">{t("step1.body")}</span>
-        </article>
-        <article className="card stack step-card">
-          <div className="step-media">
-            <img alt={t("step2.title")} loading="lazy" src="/visuals/landing/how-style.svg" />
-          </div>
-          <span className="step-chip">2</span>
-          <strong>{t("step2.title")}</strong>
-          <span className="muted">{t("step2.body")}</span>
-        </article>
-        <article className="card stack step-card">
-          <div className="step-media">
-            <img alt={t("step3.title")} loading="lazy" src="/visuals/landing/how-finish.svg" />
-          </div>
-          <span className="step-chip">3</span>
-          <strong>{t("step3.title")}</strong>
-          <span className="muted">{t("step3.body")}</span>
-        </article>
+        ))}
       </div>
     </section>
   );

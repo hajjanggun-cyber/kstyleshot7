@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f48c25",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221910",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 border-b border-primary/10">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<div class="flex-1 text-center">
+<h1 class="text-lg font-bold leading-tight tracking-tight uppercase">Stage 4: Set the Scene</h1>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary">help_outline</span>
+</button>
+</header>
+<!-- Progress Indicator -->
+<div class="flex w-full flex-row items-center justify-center gap-3 py-6 bg-background-light dark:bg-background-dark">
+<div class="h-1.5 w-6 rounded-full bg-primary/30"></div>
+<div class="h-1.5 w-6 rounded-full bg-primary/30"></div>
+<div class="h-1.5 w-6 rounded-full bg-primary/30"></div>
+<div class="h-1.5 w-10 rounded-full bg-primary shadow-[0_0_10px_rgba(244,140,37,0.5)]"></div>
+<div class="h-1.5 w-6 rounded-full bg-slate-700"></div>
+</div>
+<!-- Main Avatar Preview Area -->
+<main class="flex-1 flex flex-col px-4 max-w-md mx-auto w-full">
+<div class="@container relative">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-slate-800 shadow-2xl group border-2 border-primary/20">
+<!-- Background Preview (Changes based on selection) -->
+<div class="absolute inset-0 bg-cover bg-center transition-all duration-500" data-alt="Gyeongbokgung Palace at night with traditional lanterns" data-location="Seoul" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBmrX15_5-M5JVBI_CeH2KeKUGJ1K2e6BVBU2GHJm2dR7II7BTKODEW_GiO0wbU_lKzYSR0OLsNBKbq5KXeTfVGHOHdXqbEVB7tPgFx5dj_D5Vt8xQV6gcVKTiYSD232iYLDnFHWIwOc0ogu1jRS9XGQHsM9Rbb46_-rW5cbd4FyLndWfyiBstIri1g_XmuF1cNzGswmZ3N8lWvjPjyY0iDF-q361QrblKfqdzlWhlgBXGcFIv2oPUsPneybqBp5tKBNbBAHf2Ncf9-');">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent"></div>
+</div>
+<!-- Avatar Placeholder -->
+<div class="absolute inset-0 flex items-center justify-center">
+<img alt="Styled K-Pop Avatar" class="h-4/5 w-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]" data-alt="Modern stylish K-pop idol avatar posing in trendy outfit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC0Oxgl46qokcJAmdIVK_pn2vlljBHItKsGzE_vB-7tn7jB65uWMRXRHewfz30FPXBfcoEt3vET2E4Lzsf7QopZiYqRkWGUFuJ277B7LXY0A6mKp3UPwSFBksqxHnXCxPExo3nIMs-JNhAuoyYj3LWrwkKis0rNL45zt1Rngc-DGtgFB6rONVgZUvg-WhfNTN0BBM_07qYVa_jMFqshmJe3-7CePzy81vmcv93O29gqhgzoFoVthYvRKR_DLD3TnP6eWP0m1mRTOSY"/>
+</div>
+<!-- HUD Overlays -->
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<div class="bg-black/40 backdrop-blur-sm p-3 rounded border border-white/10">
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold">Current Concept</p>
+<p class="text-white text-sm font-medium">Midnight in Seoul</p>
+</div>
+<button class="bg-primary p-3 rounded-full text-white shadow-lg">
+<span class="material-symbols-outlined">photo_camera</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Location Selection -->
+<div class="mt-8">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold tracking-tight">Pick Your Location</h3>
+<span class="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">4 OPTIONS</span>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-8">
+<!-- Location Card 1 -->
+<button class="relative aspect-square rounded overflow-hidden border-2 border-primary group transition-all">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Traditional Korean Palace architecture at night" data-location="Gyeongbokgung" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsMPb06uyUVmffMAWfVgIHENm6eNAaaNKmxrvf3g6vrkBdwgyle7hZ-5nyk2GCab5M_ygDzkRYkxsc54i7JrOEWiCkNfar1qv6SxQVh68jWZotvGftmyqbU8FzksTUcdgkfMxxr62vafitdBSl9DeGDR3VonElCwZUjoFFtIrubL3rLz2ajcwsOmxEGDgZKpfbVGolKAo-1olb8DbUTSRn-pL9SX1q9C6IWrAa-k7P69qq0VhWAvToOiBxT-QpUVs4070joDuyFgiN')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+<div class="absolute bottom-2 left-2 right-2 text-left">
+<p class="text-white text-xs font-bold leading-tight">Gyeongbokgung Night</p>
+</div>
+<div class="absolute top-2 right-2 bg-primary rounded-full p-1 shadow-md">
+<span class="material-symbols-outlined text-[14px] text-white">check</span>
+</div>
+</button>
+<!-- Location Card 2 -->
+<button class="relative aspect-square rounded overflow-hidden border-2 border-transparent hover:border-primary/50 transition-all">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="N Seoul Tower and city skyline at night" data-location="Namsan Tower" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCiTyBpo6Do3RXvjB4v57hCxESOkyNKLqG8NvzfOXr2_97HWHZVPXp71advWszADtE2Pn6VN8m5VwDPvccf7blr7zv-Ie7mg7b4ZY_ooSfEwsA9mPenPwkqqQc9TFZt_Jz1DEYNgpvEFU9zQ869dsp8IX5Mv_V2MKUwmb7wrWbF_iFXrwHvm_rCRZ_CCrsbxRoCHMzDmX1KOkW4EquuwmKOulUSmp4Y--UXka84BfECYYl_RUz7l7AWJr7u45ovUjRSVxuGdF0sqZp7')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+<div class="absolute bottom-2 left-2 right-2 text-left">
+<p class="text-white text-xs font-bold leading-tight">Namsan Tower Skyline</p>
+</div>
+</button>
+<!-- Location Card 3 -->
+<button class="relative aspect-square rounded overflow-hidden border-2 border-transparent hover:border-primary/50 transition-all">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Neon lights and signs of Hongdae street" data-location="Hongdae" style="background-image: url('https://placeholder.pics/svg/300')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+<div class="absolute bottom-2 left-2 right-2 text-left">
+<p class="text-white text-xs font-bold leading-tight">Hongdae Street Neon</p>
+</div>
+</button>
+<!-- Location Card 4 -->
+<button class="relative aspect-square rounded overflow-hidden border-2 border-transparent hover:border-primary/50 transition-all">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Sunset over the Han River in Seoul" data-location="Han River" style="background-image: url('https://placeholder.pics/svg/300')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+<div class="absolute bottom-2 left-2 right-2 text-left">
+<p class="text-white text-xs font-bold leading-tight">Han River Sunset</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Successful Shoots Gallery -->
+<section class="mb-24">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<h3 class="text-lg font-bold tracking-tight">Successful Shoots</h3>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-4 px-4">
+<div class="flex-shrink-0 w-32 aspect-[3/4] rounded-lg overflow-hidden bg-slate-800 border border-primary/20">
+<img alt="Sample result 1" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Professional K-pop idol portrait in city setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgJCpdAxmY6_aH70VTazmeYDskEaeeCRrCA8K5A3faw216vc5KaGynJY7L-DDZcyhz-1QKh9KmduRrl_5WXVxF4hxzIOfJ9lwht-UkHNjQOhOQVCDbL5sFhFu_j052JGyNv9mFZyYXGIu8-FEjZQxImWuUAc-0MbR56NagDNEu4bNSo5rbWHzQCT0qJlShjkTFunQkeMvGIwFB7jIq2OMVSJvwQYTOnVKAjEkk0suATxBWMRDLjsJxcm3V4iNQ2Ms3SdrXsMK5ZUac"/>
+</div>
+<div class="flex-shrink-0 w-32 aspect-[3/4] rounded-lg overflow-hidden bg-slate-800 border border-primary/20">
+<img alt="Sample result 2" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Cinematic K-pop style shoot result" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBol_mIyagX5rwK0Sn2z6jantH0iKOscKTjZ4elv54Nwtw5YCZxbCyLzozouoyasyOziHHs3i0wcqqOKbnd5fXQ_QW4x-xtozdrzmikN7k1vVDesg2SNNpKKgvZv0fYA-KaJdr6Sfch3wd2A1ll8CkwMEe3kDpuJEj-9bHFGMcs7xC_d6R2bYvNDC5NKQiLDm44I5TRAO0cgiRvU2JlmviqtVDWq_mchkkI_6L6NgBD3ksGCEZU9iFJTMU4C-OLcNzkw6Ot0E3L3Sjy"/>
+</div>
+<div class="flex-shrink-0 w-32 aspect-[3/4] rounded-lg overflow-hidden bg-slate-800 border border-primary/20">
+<img alt="Sample result 3" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Vibrant pop star aesthetic finished photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxLr997mAeg8Hiec92QDZvzF5ew_KLmZnZun9xUD1sUojZm0sw3pPi929ai_Subdw3IrDkC3PpmI9ly5NCbqWqH9qQpirNOxSHcPK_2MJvD7HC0UynePVo9x9v3FB_CCJpuNLwcAZ9RuANk3zuQDsVHCrqEtCsdac-vtsGHSBpdNCzbXON2gFDQ5xMdP2A8lIdCh_yqecm3ws86VXN-7MIXt5zY_li8e-tzavG-ADhIGyFT3FVptCI1inibIG0-ZN0CSSzJq1qwJqt"/>
+</div>
+<div class="flex-shrink-0 w-32 aspect-[3/4] rounded-lg overflow-hidden bg-slate-800 border border-primary/20 flex items-center justify-center bg-primary/5">
+<span class="material-symbols-outlined text-primary/40 text-3xl">add</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent">
+<div class="max-w-md mx-auto">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-[0_4px_20px_rgba(244,140,37,0.4)] flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span>GENERATE VIRTUAL SHOOT</span>
+<span class="material-symbols-outlined">auto_fix_high</span>
+</button>
+</div>
+</footer>
+</body></html>

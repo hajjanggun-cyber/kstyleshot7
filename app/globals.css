@@ -903,3 +903,378 @@ h2 {
     top: 84px;
   }
 }
+
+/* ======================================================
+   LANDING PAGE – K-POP DARK THEME
+   ====================================================== */
+
+/* Hero */
+.lp-hero {
+  display: grid;
+  gap: 20px;
+}
+
+.lp-hero-visual {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(168, 228, 255, 0.22);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.lp-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.lp-hero-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(6, 5, 9, 0.6) 100%);
+  pointer-events: none;
+}
+
+.lp-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lp-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 340px;
+  min-height: 58px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ff834e, #ffaf7a);
+  box-shadow: 0 0 28px rgba(255, 131, 78, 0.45);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border: none;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+  text-decoration: none;
+}
+
+.lp-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(255, 131, 78, 0.62);
+  color: #fff;
+}
+
+.lp-cta-btn--sm {
+  min-height: 44px;
+  font-size: 13px;
+  border-radius: 12px;
+  max-width: 160px;
+}
+
+.lp-cta-note {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-align: center;
+  margin: 0;
+}
+
+/* Steps */
+.lp-steps {
+  display: grid;
+  gap: 20px;
+}
+
+.lp-steps-head {
+  font-size: 13px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #ff4ebd;
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin: 0;
+}
+
+.lp-steps-list {
+  display: grid;
+  gap: 22px;
+}
+
+.lp-step-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.lp-step-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.lp-step-icon--gradient {
+  background: linear-gradient(135deg, #ff4ebd, #9d50ff);
+  border: none;
+}
+
+.lp-step-num {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0 0 2px;
+}
+
+.lp-step-label {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+/* Gallery */
+.lp-gallery {
+  display: grid;
+  gap: 16px;
+}
+
+.lp-gallery-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lp-gallery-title {
+  font-size: clamp(24px, 5vw, 30px);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.lp-gallery-sub {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 4px 0 0;
+}
+
+.lp-gallery-more {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ff4ebd;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.lp-gallery-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 14px;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.lp-gallery-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.lp-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lp-transform-card {
+  flex-shrink: 0;
+  width: 272px;
+  border-radius: 28px;
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+}
+
+.lp-transform-imgs {
+  display: flex;
+  gap: 8px;
+  height: 164px;
+}
+
+.lp-transform-before {
+  flex: 1;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  padding: 6px;
+}
+
+.lp-transform-after {
+  flex: 1.4;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 78, 189, 0.4);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 6px;
+}
+
+.lp-transform-after img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lp-transform-label {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  padding: 3px 7px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.lp-transform-label--result {
+  background: #ff4ebd;
+  border-color: transparent;
+}
+
+.lp-transform-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  gap: 10px;
+}
+
+.lp-transform-name {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.lp-transform-style {
+  font-size: 10px;
+  font-weight: 600;
+  margin: 2px 0 0;
+}
+
+.lp-transform-likes {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #ff4ebd;
+  white-space: nowrap;
+}
+
+/* Pricing */
+.lp-pricing {
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px solid rgba(255, 131, 78, 0.22);
+  background: linear-gradient(135deg, rgba(255, 131, 78, 0.08), rgba(255, 78, 189, 0.06));
+}
+
+.lp-pricing-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.lp-pricing-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 6px;
+}
+
+.lp-pricing-title {
+  font-size: clamp(18px, 3.5vw, 22px);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+
+.lp-pricing-body {
+  font-size: 13px;
+  margin: 0 0 4px;
+}
+
+.lp-pricing-note {
+  font-size: 11px;
+  margin: 0;
+}
+
+.lp-pricing-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.lp-pricing-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff834e, #ffaf7a);
+  box-shadow: 0 0 20px rgba(255, 131, 78, 0.38);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 900;
+}
