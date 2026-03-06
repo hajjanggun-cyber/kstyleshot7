@@ -47,10 +47,12 @@ export function OutfitFlow() {
   }
 
   async function handleApply() {
-    if (!selectedId || isApplying) return;
+    if (isApplying) return;
+    // TODO: restore — if (!selectedId || isApplying) return;
     setIsApplying(true);
-    setOutfitChosen([selectedId]);
-    pickOutfit(selectedId);
+    const chosen = selectedId ?? "demo-outfit";
+    setOutfitChosen([chosen]);
+    pickOutfit(chosen);
     setStatus("location_selecting");
     await new Promise((resolve) => setTimeout(resolve, 400));
     router.push(`/${lang}/create/location`);
@@ -187,7 +189,7 @@ export function OutfitFlow() {
       <div className="ot-bottom">
         <button
           className={`ot-apply-btn${selectedId ? " ot-apply-btn--active" : ""}`}
-          disabled={!selectedId || isApplying}
+          disabled={isApplying}
           onClick={handleApply}
           type="button"
         >

@@ -32,12 +32,14 @@ export function LocationFlow() {
   }
 
   async function handleGenerate() {
-    if (!selectedId || isGenerating) return;
+    if (isGenerating) return;
+    // TODO: restore — if (!selectedId || isGenerating) return;
     setIsGenerating(true);
-    setLocationChosen([selectedId]);
+    const chosen = selectedId ?? "demo-location";
+    setLocationChosen([chosen]);
     setStatus("composite_completed");
     await new Promise((resolve) => setTimeout(resolve, 1200));
-    pickLocation(selectedId);
+    pickLocation(chosen);
     router.push(`/${lang}/create/done`);
   }
 
@@ -194,7 +196,7 @@ export function LocationFlow() {
       <div className="lc-bottom">
         <button
           className={`lc-gen-btn${selectedId && !isGenerating ? " lc-gen-btn--active" : ""}`}
-          disabled={!selectedId || isGenerating}
+          disabled={isGenerating}
           onClick={handleGenerate}
           type="button"
         >

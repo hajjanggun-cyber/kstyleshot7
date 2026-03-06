@@ -48,8 +48,8 @@ export function HairFlow() {
   }
 
   function handleNext() {
-    if (!selectedId) return;
-    setHairChosen([selectedId]);
+    // TODO: restore — if (!selectedId) return;
+    setHairChosen(selectedId ? [selectedId] : ["demo-hair"]);
     setStatus("outfit_selecting");
     router.push(`/${lang}/create/outfit`);
   }
@@ -174,7 +174,7 @@ export function HairFlow() {
       <div className="hr-bottom">
         <button
           className={`hr-next-btn${selectedId ? " hr-next-btn--active" : ""}`}
-          disabled={!selectedId}
+          disabled={false}
           onClick={handleNext}
           type="button"
         >
