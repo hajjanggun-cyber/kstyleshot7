@@ -188,6 +188,14 @@ Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
 
 [2026-03-06 23:24 KST] 경복궁 허브 내부링크·키워드·nextSlug 정리 완료
 
+[2026-03-07 00:15 KST]
+완료:
+- content/hub/ko/myeongdong-neon-street-guide.mdx
+- keyword: 명동 네온사인 야간 사진
+- content/hub/en/myeongdong-neon-street-guide.mdx
+- keyword: myeongdong neon street photography
+다음 세션 시작: 2단계 - 명동 하위 글 [011] 명동 K-뷰티 쇼핑 지도
+
 <!-- 로그 끝 -->
 
 ---
