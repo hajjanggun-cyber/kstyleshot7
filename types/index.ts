@@ -50,6 +50,8 @@ export type HairStyle = {
   thumbnail: string;
   prompt: string;
   tags: string[];
+  category?: "trendy" | "bangs" | "waves";
+  colorHint?: string;
 };
 
 export type Outfit = {

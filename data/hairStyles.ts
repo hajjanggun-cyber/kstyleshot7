@@ -1,32 +1,115 @@
 import type { HairStyle } from "@/types";
 
 export const hairStyles: HairStyle[] = [
+  // Trendy Colors
   {
-    id: "hush-cut",
-    name: "Hush Cut",
-    thumbnail: "/samples/hair-hush-cut.svg",
-    prompt: "K-style editorial portrait with a soft hush cut and glossy layers.",
-    tags: ["soft", "layered", "editorial"]
+    id: "ash-blue",
+    name: "Ash Blue",
+    thumbnail: "",
+    prompt: "K-pop idol portrait with ash blue waves and vibrant color.",
+    tags: ["color", "trendy"],
+    category: "trendy",
+    colorHint: "linear-gradient(160deg, #1a2a6c, #4a90d9, #8ecae6)",
   },
+  {
+    id: "pink-pastel",
+    name: "Pink Pastel",
+    thumbnail: "",
+    prompt: "K-pop idol portrait with soft pink pastel hair and airy volume.",
+    tags: ["color", "soft"],
+    category: "trendy",
+    colorHint: "linear-gradient(160deg, #f8b4d9, #fcd5e0, #f48fb1)",
+  },
+  {
+    id: "silver-ash",
+    name: "Silver Ash",
+    thumbnail: "",
+    prompt: "K-pop idol portrait with cool silver ash hair and glossy shine.",
+    tags: ["color", "cool"],
+    category: "trendy",
+    colorHint: "linear-gradient(160deg, #bdc3c7, #95a5a6, #d7dee3)",
+  },
+  {
+    id: "ginger",
+    name: "Ginger",
+    thumbnail: "",
+    prompt: "K-pop idol portrait with warm ginger hair and golden tones.",
+    tags: ["color", "warm"],
+    category: "trendy",
+    colorHint: "linear-gradient(160deg, #d4830a, #e8a838, #c46f0a)",
+  },
+  // Classic Bangs
   {
     id: "curtain-bangs",
     name: "Curtain Bangs",
     thumbnail: "/samples/hair-curtain-bangs.svg",
     prompt: "K-style editorial portrait with curtain bangs and clean volume.",
-    tags: ["bangs", "volume"]
+    tags: ["bangs", "volume"],
+    category: "bangs",
+    colorHint: "linear-gradient(160deg, #3d2b1f, #5c3d2e, #7a5244)",
   },
   {
     id: "see-through-bangs",
     name: "See-Through Bangs",
     thumbnail: "/samples/hair-see-through-bangs.svg",
     prompt: "K-style editorial portrait with wispy see-through bangs.",
-    tags: ["bangs", "light"]
+    tags: ["bangs", "light"],
+    category: "bangs",
+    colorHint: "linear-gradient(160deg, #2c1e12, #4a3121, #6b4a35)",
+  },
+  {
+    id: "deep-bangs",
+    name: "Deep Bangs",
+    thumbnail: "",
+    prompt: "K-pop idol portrait with deep straight bangs and sleek finish.",
+    tags: ["bangs", "sleek"],
+    category: "bangs",
+    colorHint: "linear-gradient(160deg, #1a1a1a, #2d2d2d, #3f3f3f)",
+  },
+  {
+    id: "blunt-bangs",
+    name: "Blunt Bangs",
+    thumbnail: "",
+    prompt: "K-pop idol portrait with blunt cut bangs and precise edges.",
+    tags: ["bangs", "sharp"],
+    category: "bangs",
+    colorHint: "linear-gradient(160deg, #4a2040, #7a3060, #a0407a)",
+  },
+  // Idol Waves
+  {
+    id: "hush-cut",
+    name: "Hush Cut",
+    thumbnail: "/samples/hair-hush-cut.svg",
+    prompt: "K-style editorial portrait with a soft hush cut and glossy layers.",
+    tags: ["soft", "layered", "editorial"],
+    category: "waves",
+    colorHint: "linear-gradient(160deg, #2c1810, #5c3a28, #8a5a40)",
   },
   {
     id: "soft-wolf-cut",
     name: "Soft Wolf Cut",
     thumbnail: "/samples/hair-soft-wolf-cut.svg",
     prompt: "K-style editorial portrait with a soft wolf cut and movement.",
-    tags: ["trendy", "textured"]
-  }
+    tags: ["trendy", "textured"],
+    category: "waves",
+    colorHint: "linear-gradient(160deg, #1a2a1a, #2e4a2e, #4a6a4a)",
+  },
+  {
+    id: "beach-waves",
+    name: "Beach Waves",
+    thumbnail: "",
+    prompt: "K-pop idol portrait with loose beach waves and natural bounce.",
+    tags: ["waves", "natural"],
+    category: "waves",
+    colorHint: "linear-gradient(160deg, #7a5c2a, #b8904a, #d4a96a)",
+  },
+  {
+    id: "retro-waves",
+    name: "Retro Waves",
+    thumbnail: "",
+    prompt: "K-pop idol portrait with structured retro waves and vintage glamour.",
+    tags: ["waves", "retro"],
+    category: "waves",
+    colorHint: "linear-gradient(160deg, #2a1050, #5a2090, #8a40c0)",
+  },
 ];
