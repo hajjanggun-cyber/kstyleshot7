@@ -1,0 +1,213 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+
+import { backgrounds } from "@/data/backgrounds";
+import { useCreateStore } from "@/store/createStore";
+
+const SAMPLE_SHOOTS = [
+  { color: "linear-gradient(160deg, #1a2a40, #2a3a60, #1a2030)" },
+  { color: "linear-gradient(160deg, #2a1a30, #4a2a50, #2a1a40)" },
+  { color: "linear-gradient(160deg, #3a2010, #5a3820, #3a2818)" },
+  { color: "linear-gradient(160deg, #1a3010, #2a4820, #1a3018)" },
+];
+
+export function LocationFlow() {
+  const params = useParams<{ lang: string }>();
+  const router = useRouter();
+  const lang = params.lang ?? "en";
+
+  const { photoBlobUrl, outfit, hair, setLocationChosen, pickLocation, setStatus } =
+    useCreateStore();
+
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const selectedBg = backgrounds.find((b) => b.id === selectedId);
+
+  function handleSelect(id: string) {
+    setSelectedId(id === selectedId ? null : id);
+  }
+
+  async function handleGenerate() {
+    if (!selectedId || isGenerating) return;
+    setIsGenerating(true);
+    setLocationChosen([selectedId]);
+    setStatus("composite_completed");
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    pickLocation(selectedId);
+    router.push(`/${lang}/create/done`);
+  }
+
+  if (!outfit.picked) {
+    return (
+      <div className="lc-root">
+        <nav className="lc-nav">
+          <Link className="lc-back-btn" href={`/${lang}/create/outfit`}>←</Link>
+          <h2 className="lc-nav-title">STAGE 4: SET THE SCENE</h2>
+          <div className="lc-nav-spacer" />
+        </nav>
+        <div className="lc-missing">
+          <p>Please choose an outfit first.</p>
+          <Link className="lc-missing-link" href={`/${lang}/create/outfit`}>
+            ← Go to Outfit
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="lc-root">
+      {/* Nav */}
+      <nav className="lc-nav">
+        <Link className="lc-back-btn" href={`/${lang}/create/outfit`}>←</Link>
+        <h2 className="lc-nav-title">STAGE 4: SET THE SCENE</h2>
+        <button className="lc-help-btn" type="button">?</button>
+      </nav>
+
+      {/* Progress — 4th of 5 active */}
+      <div className="lc-dots">
+        <div className="lc-dot lc-dot--done" />
+        <div className="lc-dot lc-dot--done" />
+        <div className="lc-dot lc-dot--done" />
+        <div className="lc-dot lc-dot--active" />
+        <div className="lc-dot" />
+      </div>
+
+      <main className="lc-main">
+        {/* Large preview */}
+        <div className="lc-preview">
+          {/* Background layer */}
+          <div
+            className="lc-preview-bg"
+            style={{
+              backgroundImage: selectedBg?.colorHint ?? "linear-gradient(160deg,#1a1a2e,#0d1a2e)",
+            }}
+          />
+          {/* Gradient fade */}
+          <div className="lc-preview-fade" />
+          {/* Avatar */}
+          {photoBlobUrl ? (
+            <img
+              alt="Your styled avatar"
+              className="lc-preview-avatar"
+              src={photoBlobUrl}
+            />
+          ) : (
+            <div className="lc-preview-avatar-ph">✦</div>
+          )}
+          {/* HUD */}
+          <div className="lc-preview-hud">
+            <div className="lc-hud-tag">
+              <p className="lc-hud-label">Current Concept</p>
+              <p className="lc-hud-name">
+                {selectedBg ? selectedBg.name : "Select a location"}
+              </p>
+            </div>
+            <button className="lc-hud-cam" type="button">📷</button>
+          </div>
+        </div>
+
+        {/* Location picker */}
+        <div className="lc-section">
+          <div className="lc-section-head">
+            <h3 className="lc-section-title">Pick Your Location</h3>
+            <span className="lc-count-badge">{backgrounds.length} OPTIONS</span>
+          </div>
+          <div className="lc-loc-grid">
+            {backgrounds.map((bg) => {
+              const isSelected = selectedId === bg.id;
+              return (
+                <button
+                  className={`lc-loc-card${isSelected ? " lc-loc-card--selected" : ""}`}
+                  key={bg.id}
+                  onClick={() => handleSelect(bg.id)}
+                  type="button"
+                >
+                  <div
+                    className="lc-loc-bg"
+                    style={{
+                      backgroundImage: bg.thumbUrl
+                        ? `url(${bg.thumbUrl})`
+                        : bg.colorHint,
+                    }}
+                  />
+                  <div className="lc-loc-fade" />
+                  <p className="lc-loc-name">{bg.label ?? bg.name}</p>
+                  {isSelected ? (
+                    <span className="lc-loc-check">✓</span>
+                  ) : null}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Selections summary */}
+        {(hair.chosen[0] || outfit.picked) ? (
+          <div className="lc-summary">
+            <h3 className="lc-summary-title">
+              <span className="lc-summary-star">✦</span>
+              Your K-Pop Look
+            </h3>
+            <div className="lc-summary-chips">
+              {hair.chosen[0] ? (
+                <span className="lc-chip">💇 {hair.chosen[0].replace(/-/g, " ")}</span>
+              ) : null}
+              {outfit.picked ? (
+                <span className="lc-chip">👗 {outfit.picked.replace(/-/g, " ")}</span>
+              ) : null}
+              {selectedId ? (
+                <span className="lc-chip lc-chip--loc">📍 {selectedBg?.name}</span>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
+
+        {/* Successful Shoots */}
+        <div className="lc-shoots">
+          <div className="lc-shoots-head">
+            <span className="lc-shoots-star">✦</span>
+            <h3 className="lc-shoots-title">Successful Shoots</h3>
+          </div>
+          <div className="lc-shoots-scroll">
+            {SAMPLE_SHOOTS.map((s, i) => (
+              <div
+                className="lc-shoot-card"
+                key={i}
+                style={{ backgroundImage: s.color }}
+              >
+                <span className="lc-shoot-label">Sample Result {i + 1}</span>
+              </div>
+            ))}
+            <div className="lc-shoot-card lc-shoot-card--add">
+              <span className="lc-shoot-plus">＋</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Fixed bottom */}
+      <div className="lc-bottom">
+        <button
+          className={`lc-gen-btn${selectedId && !isGenerating ? " lc-gen-btn--active" : ""}`}
+          disabled={!selectedId || isGenerating}
+          onClick={handleGenerate}
+          type="button"
+        >
+          {isGenerating ? (
+            <>
+              <span className="lc-gen-spinner" />
+              Generating…
+            </>
+          ) : (
+            <>GENERATE VIRTUAL SHOOT ✦</>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}

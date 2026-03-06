@@ -71,6 +71,8 @@ export type Background = {
   thumbUrl: string;
   fullUrl: string;
   mood: string;
+  colorHint?: string;
+  label?: string;
 };
 
 export type KVJob = {

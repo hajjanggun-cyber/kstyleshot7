@@ -1,23 +1,7 @@
-import { getTranslations } from "next-intl/server";
+"use client";
 
-import { CreateShell } from "@/components/create/CreateShell";
-import { FinalResult } from "@/components/create/FinalResult";
+import { DoneFlow } from "@/components/create/DoneFlow";
 
-type DonePageProps = {
-  params: Promise<{ lang: string }>;
-};
-
-export default async function DonePage({ params }: DonePageProps) {
-  const { lang } = await params;
-  const t = await getTranslations({ locale: lang, namespace: "create.donePage" });
-
-  return (
-    <CreateShell
-      current="done"
-      description={t("description")}
-      title={t("title")}
-    >
-      <FinalResult />
-    </CreateShell>
-  );
+export default function DonePage() {
+  return <DoneFlow />;
 }

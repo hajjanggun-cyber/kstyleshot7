@@ -2,24 +2,57 @@ import type { Background } from "@/types";
 
 export const backgrounds: Background[] = [
   {
-    id: "hongdae",
-    name: "Hongdae",
-    thumbUrl: "/backgrounds/hongdae-thumb.svg",
-    fullUrl: "/backgrounds/hongdae-full.svg",
-    mood: "urban, bright, street"
-  },
-  {
     id: "gyeongbokgung",
-    name: "Gyeongbokgung",
+    name: "Gyeongbokgung Night",
+    label: "Gyeongbokgung Night",
     thumbUrl: "/backgrounds/gyeongbokgung-thumb.svg",
     fullUrl: "/backgrounds/gyeongbokgung-full.svg",
-    mood: "historic, open, grand"
+    mood: "historic, open, grand",
+    colorHint: "linear-gradient(160deg, #0d1a2e, #1a2e50, #2a1810)",
+  },
+  {
+    id: "namsan",
+    name: "Namsan Tower Skyline",
+    label: "Namsan Tower Skyline",
+    thumbUrl: "",
+    fullUrl: "",
+    mood: "panoramic, night, city",
+    colorHint: "linear-gradient(160deg, #0a0a1a, #1a1a3a, #101028)",
+  },
+  {
+    id: "hongdae",
+    name: "Hongdae Street Neon",
+    label: "Hongdae Street Neon",
+    thumbUrl: "/backgrounds/hongdae-thumb.svg",
+    fullUrl: "/backgrounds/hongdae-full.svg",
+    mood: "urban, bright, street",
+    colorHint: "linear-gradient(160deg, #2a001a, #500030, #1a0010)",
+  },
+  {
+    id: "hanriver",
+    name: "Han River Sunset",
+    label: "Han River Sunset",
+    thumbUrl: "",
+    fullUrl: "",
+    mood: "open, warm, riverside",
+    colorHint: "linear-gradient(160deg, #3a1800, #7a3a00, #4a2800)",
   },
   {
     id: "seongsu",
-    name: "Seongsu",
+    name: "Seongsu Industrial",
+    label: "Seongsu Industrial",
     thumbUrl: "/backgrounds/seongsu-thumb.svg",
     fullUrl: "/backgrounds/seongsu-full.svg",
-    mood: "industrial, modern, stylish"
-  }
+    mood: "industrial, modern, stylish",
+    colorHint: "linear-gradient(160deg, #1a1a1a, #2a2a2a, #1a1a28)",
+  },
+  {
+    id: "bukchon",
+    name: "Bukchon Hanok Village",
+    label: "Bukchon Hanok Village",
+    thumbUrl: "",
+    fullUrl: "",
+    mood: "traditional, quiet, morning",
+    colorHint: "linear-gradient(160deg, #2a1810, #4a3020, #3a2818)",
+  },
 ];
