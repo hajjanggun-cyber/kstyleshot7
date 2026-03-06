@@ -202,7 +202,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
   }
 
   function handleContinue() {
-    if (!photoBlobUrl) return;
+    if (!allowDemoFlow && !photoBlobUrl) return;
     if (!checkoutIdFromUrl) {
       if (!allowDemoFlow) {
         setPollError(t("errors.checkoutRequired"));
@@ -217,9 +217,8 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
     router.push(`/${lang}/create/hair`);
   }
 
-  const canContinue =
-    Boolean(photoBlobUrl) &&
-    (checkoutIdFromUrl ? isPaidSessionReady && Boolean(sessionToken) : allowDemoFlow);
+  // TODO: restore payment gate — canContinue = Boolean(photoBlobUrl) && (checkoutIdFromUrl ? isPaidSessionReady && Boolean(sessionToken) : allowDemoFlow)
+  const canContinue = allowDemoFlow || (Boolean(photoBlobUrl) && isPaidSessionReady && Boolean(sessionToken));
 
   return (
     <div className="up-root">
@@ -267,7 +266,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
             ref={fileInputRef}
             accept="image/*"
             className="up-input"
-            disabled={!checkoutIdFromUrl && !allowDemoFlow}
+            disabled={false}
             onChange={handleFileChange}
             type="file"
           />
