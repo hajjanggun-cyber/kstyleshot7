@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { DisclaimerBox } from "@/components/common/DisclaimerBox";
+import { SiteFooter } from "@/components/common/SiteFooter";
 import { SiteHeader } from "@/components/common/SiteHeader";
 import { routing } from "@/i18n/routing";
 
@@ -34,6 +35,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <div className="app-main">
           <DisclaimerBox />
         </div>
+        <SiteFooter />
       </div>
     </NextIntlClientProvider>
   );

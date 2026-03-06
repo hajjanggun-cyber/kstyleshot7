@@ -3,8 +3,9 @@
   "header": {
     "ariaLabel": "Primary",
     "home": "Home",
+    "lookbook": "Lookbook",
     "create": "Create",
-"terms": "Terms"
+    "terms": "Terms"
   },
   "disclaimer": {
     "title": "Important Notice",

@@ -57,6 +57,46 @@ textarea {
   border-bottom: 1px solid rgba(255, 44, 140, 0.2);
 }
 
+/* ── Site Footer ── */
+.site-footer {
+  border-top: 1px solid rgba(255, 44, 140, 0.15);
+  background: rgba(16, 2, 12, 0.6);
+  padding: 24px 0;
+  margin-top: auto;
+}
+
+.site-footer-inner {
+  width: min(1240px, calc(100% - 24px));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-footer-nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.site-footer-nav a {
+  font-size: 13px;
+  color: rgba(241, 237, 232, 0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.site-footer-nav a:hover {
+  color: rgba(255, 44, 140, 0.9);
+}
+
+.site-footer-copy {
+  font-size: 12px;
+  color: rgba(241, 237, 232, 0.3);
+}
+
 .site-header-inner {
   width: min(1240px, calc(100% - 24px));
   margin: 0 auto;

@@ -3,8 +3,9 @@
   "header": {
     "ariaLabel": "주요 메뉴",
     "home": "홈",
+    "lookbook": "Lookbook",
     "create": "생성",
-"terms": "약관"
+    "terms": "약관"
   },
   "disclaimer": {
     "title": "중요 안내",
