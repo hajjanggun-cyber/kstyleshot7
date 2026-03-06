@@ -34,8 +34,7 @@ function buildPostImages(post: {
   heroImage: string;
   galleryImages: string[];
 }): string[] {
-  const candidates = [post.heroImage, ...post.galleryImages].filter(Boolean);
-  return Array.from(new Set(candidates)).map((src) => toAbsoluteAssetUrl(src));
+  return [];
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

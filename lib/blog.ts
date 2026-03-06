@@ -1,4 +1,4 @@
-﻿import { access, readdir, readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
 export type BlogLang = "en" | "ko";
@@ -59,10 +59,7 @@ type CategoryConfig = {
 };
 
 const BLOG_ROOT = path.join(process.cwd(), "content", "blog");
-const PUBLIC_ROOT = path.join(process.cwd(), "public");
 const BLOG_LANGS: BlogLang[] = ["en", "ko"];
-const MIN_GALLERY_IMAGE_COUNT = 6;
-const assetExistsCache = new Map<string, Promise<boolean>>();
 const BLOG_CATEGORY_CONFIG: CategoryConfig[] = [
   {
     key: "product-faq",
@@ -226,9 +223,7 @@ function parseFrontmatter(raw: string): { frontmatter: ParsedFrontmatter; body: 
   return { frontmatter, body };
 }
 
-function parseMediaArray(
-  value: string | string[] | boolean | undefined
-): string[] {
+function parseMediaArray(value: string | string[] | boolean | undefined): string[] {
   if (!Array.isArray(value)) {
     return [];
   }
@@ -314,56 +309,8 @@ async function readPostFile(lang: BlogLang, fileName: string): Promise<BlogPost>
   return buildPost(frontmatter, body, lang, fallbackSlug);
 }
 
-function toPublicFilePath(assetUrl: string): string | null {
-  if (!assetUrl || !assetUrl.startsWith("/")) {
-    return null;
-  }
-
-  const normalized = assetUrl.split("#")[0].split("?")[0];
-  if (!normalized) {
-    return null;
-  }
-
-  return path.join(PUBLIC_ROOT, normalized.replace(/^\//, ""));
-}
-
-async function fileExists(absolutePath: string | null): Promise<boolean> {
-  if (!absolutePath) {
-    return false;
-  }
-
-  if (!assetExistsCache.has(absolutePath)) {
-    assetExistsCache.set(
-      absolutePath,
-      access(absolutePath)
-        .then(() => true)
-        .catch(() => false)
-    );
-  }
-
-  return assetExistsCache.get(absolutePath) as Promise<boolean>;
-}
-
 async function isPublishReady(post: BlogPost): Promise<boolean> {
-  if (post.draft) {
-    return false;
-  }
-
-  const heroReady = await fileExists(toPublicFilePath(post.heroImage));
-  if (!heroReady) {
-    return false;
-  }
-
-  const galleryImages = post.galleryImages.filter(Boolean);
-  if (galleryImages.length < MIN_GALLERY_IMAGE_COUNT) {
-    return false;
-  }
-
-  const galleryReady = await Promise.all(
-    galleryImages.map((imageUrl) => fileExists(toPublicFilePath(imageUrl)))
-  );
-
-  return galleryReady.every(Boolean);
+  return !post.draft;
 }
 
 export async function getBlogPosts(lang: string): Promise<BlogPost[]> {
@@ -456,4 +403,3 @@ export async function getAllBlogCategoryParams(): Promise<Array<{ lang: BlogLang
     }))
   );
 }
-

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -23,12 +23,6 @@ function toIsoDate(input: string): string | undefined {
 
   const parsed = new Date(input);
   return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
-}
-
-function getPostImageList(post: { heroImage: string; galleryImages: string[] }): string[] {
-  return Array.from(new Set([post.heroImage, ...post.galleryImages].filter(Boolean))).map((src) =>
-    toAbsoluteAssetUrl(src)
-  );
 }
 
 function getReadingMinutes(body: string): number {
@@ -88,10 +82,6 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const canonicalPath = post.canonical || `/blog/${lang}/${post.slug}`;
-  const openGraphImages = getPostImageList(post).map((imageUrl) => ({
-    url: imageUrl,
-    alt: post.heroAlt || post.title
-  }));
 
   return {
     title: post.title,
@@ -111,14 +101,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       publishedTime: toIsoDate(post.date),
       modifiedTime: toIsoDate(post.updated) ?? toIsoDate(post.date),
       section: post.category,
-      tags: post.tags,
-      images: openGraphImages
+      tags: post.tags
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: post.title,
-      description: post.description,
-      images: openGraphImages.map((image) => image.url)
+      description: post.description
     }
   };
 }
@@ -155,14 +143,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((entry) => entry.slug !== post.slug && entry.category === post.category)
     .slice(0, 3);
 
-  const galleryItems = post.galleryImages.map((src, index) => ({
-    src,
-    alt: post.galleryAlts[index] || `${post.title} image ${index + 1}`,
-    promptId: post.galleryPromptIds[index] || ""
-  }));
-
   const canonicalUrl = toAbsoluteAssetUrl(post.canonical || `/blog/${lang}/${post.slug}`);
-  const postImages = getPostImageList(post);
   const breadcrumbItems = [
     {
       "@type": "ListItem",
@@ -213,7 +194,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       "@type": "BlogPosting",
       headline: post.title,
       description: post.description,
-      image: postImages,
       datePublished: toIsoDate(post.date),
       dateModified: toIsoDate(post.updated) ?? toIsoDate(post.date),
       inLanguage: lang,
@@ -280,25 +260,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
         <h1>{post.title}</h1>
         <p className="muted">{post.description}</p>
-        <div className="preview-frame blog-post-media">
-          <img
-            alt={post.heroAlt || post.title}
-            loading="eager"
-            src={post.heroImage || "/visuals/blog/post.svg"}
-          />
-        </div>
-        {galleryItems.length > 0 ? (
-          <section className="blog-gallery-grid" aria-label="Post image gallery">
-            {galleryItems.map((item, index) => (
-              <figure className="blog-gallery-item" key={`${item.src}-${index}`}>
-                <img alt={item.alt} loading="lazy" src={item.src} />
-                <figcaption className="muted">
-                  {item.promptId ? `Image ${index + 1} | ${item.promptId}` : `Image ${index + 1}`}
-                </figcaption>
-              </figure>
-            ))}
-          </section>
-        ) : null}
         <div className="actions">
           {post.tags.map((tag) => (
             <span className="muted" key={tag}>
@@ -332,4 +293,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
-
