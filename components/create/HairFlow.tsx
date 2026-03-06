@@ -44,7 +44,13 @@ export function HairFlow() {
   const selectedStyle = hairStyles.find((s) => s.id === selectedId);
 
   function handleSelect(id: string) {
-    setSelectedId(id === selectedId ? null : id);
+    const next = id === selectedId ? null : id;
+    setSelectedId(next);
+    if (next) {
+      setHairChosen([next]);
+      setStatus("outfit_selecting");
+      router.push(`/${lang}/create/outfit`);
+    }
   }
 
   function handleNext() {
