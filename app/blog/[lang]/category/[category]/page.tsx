@@ -167,7 +167,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="card stack blog-hero">
+      <section className="card stack">
         <div className="actions">
           <Link className="button secondary" href={`/blog/${lang}`}>
             {isEn ? "Back to language hub" : "언어 허브로 돌아가기"}
@@ -179,9 +179,6 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
         <p className="muted">{isEn ? "Category landing" : "카테고리 랜딩"}</p>
         <h1>{data.category.name}</h1>
         <p className="muted">{data.category.description}</p>
-        <div className="preview-frame blog-hero-media">
-          <img alt={data.category.name} loading="lazy" src="/visuals/blog/category.svg" />
-        </div>
         <div className="actions">
           <span className="count-badge">{posts.length} posts</span>
         </div>

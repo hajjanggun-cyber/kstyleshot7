@@ -806,16 +806,6 @@ h2 {
   text-underline-offset: 2px;
 }
 
-.blog-hero {
-  background:
-    radial-gradient(circle at top right, rgba(255, 44, 140, 0.16), transparent 35%),
-    linear-gradient(135deg, rgba(52, 11, 36, 0.96), rgba(35, 9, 24, 0.96));
-}
-
-.blog-hero-media img {
-  min-height: 220px;
-}
-
 .blog-post-media img {
   min-height: 230px;
 }

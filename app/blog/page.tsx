@@ -69,16 +69,13 @@ export default async function BlogIndexPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="card stack blog-hero">
+      <section className="card stack">
         <span className="count-badge">Style Guide Hub</span>
         <h1>kstyleshot Style Guide</h1>
         <p className="muted">
           This is the content hub for styling guides, upload tips, and product explainers that
           support the main create flow.
         </p>
-        <div className="preview-frame blog-hero-media">
-          <img alt="kstyleshot style guide hub" loading="lazy" src="/visuals/blog/index.svg" />
-        </div>
         <div className="actions">
           <span className="count-badge">{totalPosts} total posts</span>
           <span className="count-badge">{totalEnPosts} EN posts</span>

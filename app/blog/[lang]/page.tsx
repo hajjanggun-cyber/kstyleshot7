@@ -97,7 +97,7 @@ export default async function BlogLangPage({ params }: BlogLangPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="card stack blog-hero">
+      <section className="card stack">
         <div className="actions">
           <Link className="button secondary" href="/blog">
             {isEn ? "Back to style guide" : "스타일 가이드로 돌아가기"}
@@ -113,13 +113,6 @@ export default async function BlogLangPage({ params }: BlogLangPageProps) {
             ? "This language hub organizes live posts by category so the blog can scale without feeling flat."
             : "카테고리별로 포스트를 묶어 운영해서 글 수가 늘어나도 탐색이 쉽게 유지됩니다."}
         </p>
-        <div className="preview-frame blog-hero-media">
-          <img
-            alt={isEn ? "language blog hub" : "language blog hub"}
-            loading="lazy"
-            src="/visuals/blog/lang.svg"
-          />
-        </div>
         <div className="actions">
           <span className="count-badge">{posts.length} posts live</span>
           <span className="count-badge">{liveCategories.length} active tracks</span>
