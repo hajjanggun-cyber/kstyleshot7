@@ -20,6 +20,11 @@ const mdxComponents = {
     <strong className="ha-bullet-label" {...props} />
   ),
   hr: () => <hr className="ha-divider" />,
+  a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    <Link className="ha-inline-link" href={href ?? "#"} {...props}>
+      {children}
+    </Link>
+  ),
 };
 
 type HubMdxPageProps = {

@@ -3985,6 +3985,20 @@ h2 {
   margin: 8px 0 0;
 }
 
+.ha-inline-link {
+  color: #f4258c;
+  text-decoration: underline;
+  text-decoration-color: rgba(244, 37, 140, 0.4);
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+
+.ha-inline-link:hover {
+  color: #ff6eb8;
+  text-decoration-color: rgba(255, 110, 184, 0.7);
+}
+
 .ha-bullets {
   display: flex;
   flex-direction: column;
