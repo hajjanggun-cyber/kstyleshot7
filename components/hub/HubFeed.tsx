@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-import { hubPosts, FILTER_CHIPS, type HubPost } from "@/data/hubPosts";
+import { hubPosts, hubPostsEn, FILTER_CHIPS_KO, FILTER_CHIPS_EN, type HubPost } from "@/data/hubPosts";
 
 /* ─── Category badge ─────────────────────────── */
 function Badge({ label, style }: { label: string; style: HubPost["categoryStyle"] }) {
@@ -137,8 +137,11 @@ function WideCard({ post, href }: { post: HubPost; href: string }) {
 /* ─── Main feed ───────────────────────────────── */
 export function HubFeed() {
   const params = useParams<{ lang: string }>();
-  const lang = params.lang ?? "en";
-  const [activeChip, setActiveChip] = useState("For You");
+  const lang = params.lang ?? "ko";
+  const isKo = lang === "ko";
+  const posts = isKo ? hubPosts : hubPostsEn;
+  const chips = isKo ? FILTER_CHIPS_KO : FILTER_CHIPS_EN;
+  const [activeChip, setActiveChip] = useState(isKo ? "전체" : "All");
   const [search, setSearch] = useState("");
 
   return (
@@ -166,7 +169,7 @@ export function HubFeed() {
 
       {/* Filter chips */}
       <div className="hf-chips">
-        {FILTER_CHIPS.map((chip) => (
+        {chips.map((chip) => (
           <button
             className={`hf-chip${activeChip === chip ? " hf-chip--active" : ""}`}
             key={chip}
@@ -180,7 +183,7 @@ export function HubFeed() {
 
       {/* Bento grid */}
       <div className="hf-grid">
-        {hubPosts.map((post) => {
+        {posts.map((post) => {
           const href = `/${lang}/hub/${post.slug}`;
           if (post.cardType === "hero")   return <HeroCard   href={href} key={post.slug} post={post} />;
           if (post.cardType === "square") return <SquareCard href={href} key={post.slug} post={post} />;

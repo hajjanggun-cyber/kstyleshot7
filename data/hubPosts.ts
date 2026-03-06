@@ -87,10 +87,91 @@ export const hubPosts: HubPost[] = [
   },
 ];
 
-export const FILTER_CHIPS = [
+export const hubPostsEn: HubPost[] = [
+  {
+    slug: "gyeongbokgung-hub",
+    cardType: "hero",
+    category: "Seoul Locations",
+    categoryStyle: "white-on-pink",
+    title: "Gyeongbokgung\nPalace Guide",
+    subtitle: "Why it matters more than any other palace",
+    bg: "linear-gradient(135deg, #10243f 0%, #c08b3c 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.8)",
+    watermark: "SEOUL",
+    cta: "Read Now",
+  },
+  {
+    slug: "gyeongbokgung-photo-guide",
+    cardType: "square",
+    category: "Seoul Locations",
+    categoryStyle: "white-on-pink",
+    title: "Best Photo\nSpots",
+    subtitle: "Gyeongbokgung visual guide",
+    bg: "linear-gradient(135deg, #10243f 0%, #c08b3c 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.7)",
+    watermark: "📷",
+  },
+  {
+    slug: "gyeongbokgung-light-timing-guide",
+    cardType: "square",
+    category: "Seoul Locations",
+    categoryStyle: "cyan",
+    title: "Morning vs\nAfternoon",
+    subtitle: "Light & shadow timing guide",
+    bg: "linear-gradient(135deg, #17304f 0%, #d4a24c 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.7)",
+    watermark: "🌤",
+  },
+  {
+    slug: "gyeongbokgung-nearby-hanok-photo-spots",
+    cardType: "tall",
+    category: "Seoul Locations",
+    categoryStyle: "white-on-pink",
+    title: "Hanok\nAlley\nSpots",
+    bg: "linear-gradient(135deg, #3b2a1d 0%, #b88452 100%)",
+    titleColor: "#ffffff",
+    readers: "5 hidden walks near the palace",
+  },
+  {
+    slug: "virtual-gyeongbokgung-background-guide",
+    cardType: "small",
+    category: "Virtual Style",
+    categoryStyle: "pink",
+    title: "Virtual\nPalace\nBackground",
+    bg: "linear-gradient(135deg, #28182f 0%, #c08b3c 100%)",
+    titleColor: "#ffffff",
+    watermarkIcon: "✦",
+  },
+  {
+    slug: "myeongdong-hub",
+    cardType: "wide",
+    category: "Seoul Locations",
+    categoryStyle: "black-on-yellow",
+    title: "Myeongdong\nComplete Guide",
+    bg: "linear-gradient(135deg, #4a0f13 0%, #f2a65a 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.8)",
+  },
+];
+
+export const FILTER_CHIPS_KO = [
   "전체",
   "한국 명소 & 포토존",
   "가상 스타일 체험",
   "K-뷰티 & 헤어",
   "K-스타일 패션",
 ];
+
+export const FILTER_CHIPS_EN = [
+  "All",
+  "Seoul Locations",
+  "Virtual Style",
+  "K-Beauty",
+  "K-Fashion",
+];
+
+/** @deprecated use FILTER_CHIPS_KO / FILTER_CHIPS_EN */
+export const FILTER_CHIPS = FILTER_CHIPS_KO;
