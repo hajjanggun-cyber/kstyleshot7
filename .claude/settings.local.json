@@ -5,7 +5,13 @@
       "Bash(npm.cmd run:*)",
       "WebFetch(domain:developers.google.com)",
       "Bash(npm install:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Read(//c/Users/수성길메인/Desktop/11 11 실전코딩/kpop-style/kstryletry/public/images/hub/**)",
+      "Bash(cwebp --version)",
+      "Bash(magick --version)",
+      "Bash(ffmpeg -version)",
+      "Bash(node:*)",
+      "Bash(npx sharp-cli:*)"
     ]
   }
 }
