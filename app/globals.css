@@ -906,6 +906,10 @@ h2 {
   gap: 10px;
 }
 
+.mobile-hub-btn {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .site-nav {
     display: none;
@@ -913,6 +917,27 @@ h2 {
 
   .site-header-inner {
     min-height: 58px;
+  }
+
+  .mobile-hub-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: #ffffff;
+    color: #111111;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 10px 24px;
+    border-radius: 999px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+    text-decoration: none;
+    white-space: nowrap;
   }
 
   .step-row {
