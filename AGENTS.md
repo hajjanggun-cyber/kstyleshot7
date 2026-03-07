@@ -78,7 +78,7 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 2. Main heading (H2) — first major angle
 3. Body paragraphs — explanation-first, list only when genuinely enumerable
 4. Additional H2 sections as needed
-5. Quick Summary block (3 items, factual, non-repetitive)
+5. Quick Summary block (3 items, factual, non-repetitive, rendered as a box/card)
 
 ### H2 Heading Format (mandatory)
 
@@ -86,6 +86,9 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - 예시 (KO): `## — 남산 N서울타워는 서울 이미지에서 무엇을 상징하는가`
 - 예시 (EN): `## — What N Seoul Tower Represents in Seoul`
 - 하이픈(`-`) 사용 금지 — 반드시 em dash(`—`) 사용
+- 예외: Quick Summary 섹션 제목은 `## 빠른 요약` / `## Quick Summary`로 작성한다
+- Quick Summary 제목 앞에는 `—`를 붙이지 않는다
+- Quick Summary 본문은 일반 리스트가 아니라 박스형 요약 카드로 렌더링되도록 작성한다
 6. CTA link — one line at the end of the body, fixed text and path as follows:
    - KO: `[이 장소를 배경으로 내 K-스타일 사진을 만들러 가기](/ko)`
    - EN: `[Create your own K-style photo with this Seoul mood →](/en)`
