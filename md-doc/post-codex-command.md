@@ -120,7 +120,7 @@ AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
 | 명동 | [217] 명동 & 홍대 길거리 음식 완전 정복 | 명동 홍대 길거리 음식 비교 | myeongdong vs hongdae street food | ⬜ 대기 |
 | 남산 N서울타워 | [004] 남산 N서울타워 야경 가이드 | 남산 N서울타워 야경 명소 | n seoul tower night view spots | ✅ 완료 |
 | 남산 N서울타워 | [005] 남산 케이블카에서 찍는 서울 감성 스냅 사진 | 남산 케이블카 스냅 사진 | namsan cable car photo tips | ✅ 완료 |
-| 홍대 | [006] 홍대 거리 포토존 — 버스킹 무대부터 벽화 골목까지 | 홍대 거리 포토존 추천 | best hongdae street photo spots | ⬜ 대기 |
+| 홍대 | [006] 홍대 거리 포토존 — 버스킹 무대부터 벽화 골목까지 | 홍대 거리 포토존 추천 | best hongdae street photo spots | ✅ 완료 |
 | 홍대 | [007] 홍대 인디 감성 카페 — 이색 인테리어 포토존 TOP 7 | 홍대 감성 카페 포토존 | hongdae aesthetic cafes for photos | ⬜ 대기 |
 | 홍대 | [050] K-스트릿 패션 완전 분석 — 홍대·성수동 스타일 해부 | 홍대 성수 스트릿 패션 차이 | hongdae vs seongsu street fashion | ⬜ 대기 |
 | 인사동 | [012] 인사동 전통 감성 포토존 | 인사동 전통 감성 사진 스팟 | insadong traditional photo spots | ⬜ 대기 |
@@ -248,6 +248,14 @@ Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
 - content/hub/en/hongdae-hub.mdx
 - keyword: hongdae seoul neighborhood guide
 다음 세션 시작: 2단계 - 홍대 하위 글 [006] 홍대 거리 포토 스폿 추천
+
+[2026-03-08 01:17 KST]
+완료:
+- content/hub/ko/hongdae-street-photo-spots.mdx
+- keyword: 홍대 거리 포토존 추천
+- content/hub/en/hongdae-street-photo-spots.mdx
+- keyword: best hongdae street photo spots
+다음 세션 시작: 2단계 - 홍대 하위 글 [007] 홍대 인디 감성 카페 — 이색 인테리어 포토존 TOP 7
 
 <!-- 로그 끝 -->
 

@@ -29,6 +29,8 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
+      {/* Sets correct lang attribute on <html> for SEO — root layout can't access [lang] param */}
+      <script dangerouslySetInnerHTML={{ __html: `document.documentElement.lang="${lang}"` }} />
       <div className="page-shell">
         <SiteHeader lang={lang} />
         <main className="app-main stack">{children}</main>

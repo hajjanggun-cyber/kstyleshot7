@@ -53,7 +53,26 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   // MDX file takes priority (new content)
   const mdx = getMdxArticle(lang, slug);
   if (mdx) {
-    return <HubMdxPage frontmatter={mdx.frontmatter} content={mdx.content} lang={lang} />;
+    const { frontmatter: fm } = mdx;
+    const canonical = `${getSiteUrl()}/${lang}/hub/${slug}`;
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: fm.title,
+      description: fm.description,
+      datePublished: fm.publishedAt,
+      url: canonical,
+      inLanguage: lang === "ko" ? "ko-KR" : "en-US",
+    };
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <HubMdxPage frontmatter={fm} content={mdx.content} lang={lang} />
+      </>
+    );
   }
 
   // Fallback: legacy TypeScript article data

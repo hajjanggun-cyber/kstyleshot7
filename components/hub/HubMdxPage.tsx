@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
@@ -25,9 +26,20 @@ const mdxComponents = {
       {children}
     </Link>
   ),
-  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <img className="ha-media" loading="lazy" {...props} />
-  ),
+  img: ({ src, alt }) => {
+    if (!src) return null;
+    return (
+      <Image
+        className="ha-media"
+        src={src}
+        alt={alt ?? ""}
+        width={0}
+        height={0}
+        sizes="(max-width: 768px) 100vw, 800px"
+        style={{ width: "100%", height: "auto" }}
+      />
+    );
+  },
 };
 
 type HubMdxPageProps = {
@@ -81,6 +93,17 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           <p className="ha-quote-text">{frontmatter.pullQuote}</p>
         </div>
       </section>
+
+      {/* Mid-article CTA — shown before body so non-scrollers see it */}
+      <div className="ha-mid-cta">
+        <a href={`/${lang}`} aria-label={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}>
+          <img
+            src={lang === "ko" ? "/visuals/blog/blog-bottom-banner-kr.webp" : "/visuals/blog/blog-bottom-banner-en.webp"}
+            alt={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
+            loading="lazy"
+          />
+        </a>
+      </div>
 
       {/* Article body — MDX rendered */}
       <article className="ha-body">

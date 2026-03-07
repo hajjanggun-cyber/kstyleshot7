@@ -94,7 +94,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   ];
 
   return (
-    <html lang="en">
+    <html lang="ko" suppressHydrationWarning>
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Q3QEDGYL0D"
