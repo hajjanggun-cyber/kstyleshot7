@@ -4379,12 +4379,12 @@ h2 {
 .ha-related-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
 }
 
 .ha-related-card {
   display: block;
-  padding: 16px;
+  padding: 18px 18px 17px;
   border-radius: 16px;
   text-decoration: none;
   background: rgba(255, 255, 255, 0.03);
@@ -4412,7 +4412,7 @@ h2 {
 
 .ha-related-title {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: #f4f1ec;
   font-size: 16px;
   line-height: 1.45;
@@ -4422,7 +4422,13 @@ h2 {
   margin: 0;
   color: rgba(241, 237, 232, 0.76);
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.72;
+}
+
+.ha-related-copy br {
+  display: block;
+  content: "";
+  margin-top: 8px;
 }
 
 @media (max-width: 720px) {

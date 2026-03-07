@@ -79,6 +79,7 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 3. Body paragraphs — explanation-first, list only when genuinely enumerable
 4. Additional H2 sections as needed
 5. Quick Summary block (3 items, factual, non-repetitive, rendered as a box/card with the section label inside the box)
+6. Related reading panel for same-hub internal links
 
 ### H2 Heading Format (mandatory)
 
@@ -89,7 +90,15 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - 예외: Quick Summary는 일반 H2로 쓰지 않는다
 - Quick Summary 라벨은 박스형 요약 카드 내부의 첫 줄 라벨로 넣는다
 - Quick Summary 본문은 일반 리스트가 아니라 박스형 요약 카드로 렌더링되도록 작성한다
-6. CTA link — one line at the end of the body, fixed text and path as follows:
+- Quick Summary 라벨은 아이콘, 숫자, 특수기호 없이 `빠른 요약` / `Quick Summary` 텍스트만 사용한다
+- Quick Summary 카드 바로 아래에는 같은 허브 안의 관련 글을 묶는 내부 링크 패널을 넣을 수 있다
+- 같은 허브 내부 링크 패널은 상단 서론 중간에 끼워 넣지 말고, Quick Summary 아래에서 별도 카드 섹션으로 정리한다
+- KO 내부 링크 패널 기본 문구:
+  - 섹션 라벨: `같은 허브에서 이어서 보면 좋은 글`
+  - 허브 글 카드 라벨: `먼저 보기`
+  - 다음 하위 글 카드 라벨: `다음 글`
+- EN 내부 링크 패널도 같은 구조로 유지하되, 자연스러운 영어 UI 카피를 사용한다
+7. CTA link — one line at the end of the body, fixed text and path as follows:
    - KO: `[이 장소를 배경으로 내 K-스타일 사진을 만들러 가기](/ko)`
    - EN: `[Create your own K-style photo with this Seoul mood →](/en)`
    - Do NOT change the link text. Link destination is the locale landing page, not /create.
@@ -102,6 +111,8 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - Intro must do three things: (1) define the subject, (2) acknowledge the common oversimplification, (3) state what this article adds
 - Use specific, concrete details over vague adjectives ("예쁘다", "유명하다", "핫하다" alone = reject)
 - Korean and English articles on the same topic are NOT translations — they are written for different search intents (see KO/EN rules below)
+- In short UI copy, summary cards, related-link cards, and short guidance text, start a new line after each sentence ending with a period.
+- Do not force sentence-by-sentence line breaks across long body paragraphs; keep standard paragraph flow for the main article body.
 
 ### Keyword Rules (SEO — mandatory)
 
@@ -121,6 +132,8 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - Internal link anchor text must describe the destination naturally (no "여기", "click here")
 - **Language isolation (mandatory): KO files must only link to `/ko/hub/[slug]` paths. EN files must only link to `/en/hub/[slug]` paths. Cross-language links are never allowed.**
 - Markdown links in the article body (`[text](/ko/hub/slug)`) are fully rendered and styled on the site — use them freely for all internal references.
+- When same-hub links are visually emphasized, use a dedicated panel/card section below the Quick Summary instead of leaving two standalone text links near the introduction.
+- In KO sub-articles, the preferred same-hub link panel order is: hub article first, then the next relevant sub-article.
 
 ### KO vs EN Search Intent
 
