@@ -2660,7 +2660,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 16px;
   padding: 20px 24px 6px;
 }
 
@@ -2670,7 +2670,27 @@ h2 {
   align-items: center;
   gap: 8px;
   flex: 1;
-  max-width: 140px;
+  max-width: 160px;
+}
+
+@media (min-width: 480px) {
+  .ot-compare-card {
+    max-width: 220px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ot-compare {
+    gap: 32px;
+    padding: 28px 40px 8px;
+  }
+  .ot-compare-card {
+    max-width: 300px;
+  }
+  .ot-compare-arrow {
+    font-size: 32px;
+    margin-top: -32px;
+  }
 }
 
 .ot-compare-card--ai .ot-compare-img {
