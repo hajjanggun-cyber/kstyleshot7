@@ -95,7 +95,7 @@ AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
 |------|------|----------------|----------------|------|
 | 1 | 경복궁 | 경복궁 여행 가이드 | gyeongbokgung palace travel guide | ✅ 완료 |
 | 2 | 명동 | 명동 서울 여행 코스 | myeongdong seoul travel guide | ✅ 완료 |
-| 3 | 남산 N서울타워 | 남산 N서울타워 서울 야경 | n seoul tower night view guide | ⬜ 대기 |
+| 3 | 남산 N서울타워 | 남산 N서울타워 서울 야경 | n seoul tower night view guide | ✅ 완료 |
 | 4 | 홍대 | 홍대 서울 놀거리 | hongdae seoul neighborhood guide | ⬜ 대기 |
 | 5 | 인사동 | 인사동 서울 전통거리 | insadong seoul cultural street | ⬜ 대기 |
 | 6 | 가로수길 | 가로수길 서울 패션 거리 | garosu-gil seoul fashion street | ⬜ 대기 |
@@ -118,8 +118,8 @@ AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
 | 명동 | [010] 명동 네온사인 거리 — 야간 스트릿 스냅 촬영 가이드 | 명동 네온사인 야간 사진 | myeongdong neon street photography | ⬜ 대기 |
 | 명동 | [011] 명동 K-뷰티 쇼핑 지도 — 동선 효율 최강 루트 | 명동 K뷰티 쇼핑 동선 | myeongdong k-beauty shopping route | ⬜ 대기 |
 | 명동 | [217] 명동 & 홍대 길거리 음식 완전 정복 | 명동 홍대 길거리 음식 비교 | myeongdong vs hongdae street food | ⬜ 대기 |
-| 남산 N서울타워 | [004] 남산 N서울타워 야경 가이드 | 남산 N서울타워 야경 명소 | n seoul tower night view spots | ⬜ 대기 |
-| 남산 N서울타워 | [005] 남산 케이블카에서 찍는 서울 감성 스냅 사진 | 남산 케이블카 스냅 사진 | namsan cable car photo tips | ⬜ 대기 |
+| 남산 N서울타워 | [004] 남산 N서울타워 야경 가이드 | 남산 N서울타워 야경 명소 | n seoul tower night view spots | ✅ 완료 |
+| 남산 N서울타워 | [005] 남산 케이블카에서 찍는 서울 감성 스냅 사진 | 남산 케이블카 스냅 사진 | namsan cable car photo tips | ✅ 완료 |
 | 홍대 | [006] 홍대 거리 포토존 — 버스킹 무대부터 벽화 골목까지 | 홍대 거리 포토존 추천 | best hongdae street photo spots | ⬜ 대기 |
 | 홍대 | [007] 홍대 인디 감성 카페 — 이색 인테리어 포토존 TOP 7 | 홍대 감성 카페 포토존 | hongdae aesthetic cafes for photos | ⬜ 대기 |
 | 홍대 | [050] K-스트릿 패션 완전 분석 — 홍대·성수동 스타일 해부 | 홍대 성수 스트릿 패션 차이 | hongdae vs seongsu street fashion | ⬜ 대기 |
@@ -229,6 +229,16 @@ Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
 - content/hub/en/n-seoul-tower-night-view-guide.mdx
 - keyword: best n seoul tower night view spots
 다음 세션 시작: 2단계 - 남산 N서울타워 하위 글 [005] 남산 케이블카에서 찍는 서울 감성 스냅 사진
+
+[2026-03-07 15:20 KST]
+완료:
+- content/hub/ko/namsan-cable-car-photo-tips.mdx
+- keyword: 남산 케이블카 스냅 사진
+- content/hub/en/namsan-cable-car-photo-tips.mdx
+- keyword: namsan cable car photo tips
+다음 세션 시작: 1단계 - 홍대 허브 글
+
+[2026-03-07 15:20 KST] 남산 N서울타워 허브 내부링크·키워드·nextSlug 정리 완료
 
 <!-- 로그 끝 -->
 
