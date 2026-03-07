@@ -9,8 +9,6 @@ import { hairStyles } from "@/data/hairStyles";
 import { hairColors } from "@/data/hairColors";
 import { useCreateStore } from "@/store/createStore";
 
-type FlowStep = "style" | "color";
-
 export function HairFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
@@ -19,27 +17,18 @@ export function HairFlow() {
 
   const { photoBlobUrl, setHairChosen, setHairColor, setStatus } = useCreateStore();
 
-  const [step, setStep] = useState<FlowStep>("style");
   const [selectedStyleId, setSelectedStyleId] = useState<string | null>(null);
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
 
   const selectedStyle = hairStyles.find((s) => s.id === selectedStyleId);
   const selectedColor = hairColors.find((c) => c.id === selectedColorId);
-
-  function handleStyleSelect(id: string) {
-    setSelectedStyleId(id);
-    setStep("color");
-  }
-
-  function handleColorSelect(id: string) {
-    setSelectedColorId(id);
-  }
+  const colorLabel = selectedColor
+    ? lang === "ko" ? selectedColor.nameKo : selectedColor.nameEn
+    : null;
 
   function handleNext() {
     setHairChosen(selectedStyleId ? [selectedStyleId] : ["demo-hair"]);
-    if (selectedColor) {
-      setHairColor(selectedColor.replicateValue);
-    }
+    if (selectedColor) setHairColor(selectedColor.replicateValue);
     setStatus("outfit_selecting");
     router.push(`/${lang}/create/outfit`);
   }
@@ -49,7 +38,7 @@ export function HairFlow() {
       <div className="hr-root">
         <nav className="hr-nav">
           <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
-          <h2 className="hr-nav-title">{t("navTitle")}</h2>
+          <span className="hr-nav-title">{t("navTitle")}</span>
           <div className="hr-nav-right" />
         </nav>
         <div className="hr-missing">
@@ -64,113 +53,105 @@ export function HairFlow() {
 
   return (
     <div className="hr-root">
-      {/* Nav */}
+
+      {/* ── Nav ── */}
       <nav className="hr-nav">
-        {step === "color" ? (
-          <button className="hr-back-btn" type="button" onClick={() => setStep("style")}>←</button>
-        ) : (
-          <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
-        )}
-        <h2 className="hr-nav-title">{t("navTitle")}</h2>
-        <div className="hr-nav-right">
-          <button className="hr-help-btn" type="button">?</button>
-        </div>
+        <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
+        <span className="hr-step-tag">STEP 2 / 4</span>
+        <div className="hr-nav-right" />
       </nav>
 
-      {/* Progress dots — 2nd active */}
-      <div className="hr-dots">
-        <div className="hr-dot hr-dot--done" />
-        <div className="hr-dot hr-dot--active" />
-        <div className="hr-dot" />
-        <div className="hr-dot" />
-      </div>
-
-      {/* Preview */}
-      <div className="hr-preview-wrap">
-        <div className="hr-preview">
-          <img
-            alt="Your photo"
-            className="hr-preview-img"
-            src={photoBlobUrl}
-          />
-          <div className="hr-preview-fade" />
-          <div className="hr-preview-info">
-            <div className="hr-preview-tag">
-              <p className="hr-preview-label">{t("currentSelection")}</p>
-              <p className="hr-preview-name">
-                {selectedStyle
-                  ? `${selectedStyle.name}${selectedColor ? ` · ${lang === "ko" ? selectedColor.nameKo : selectedColor.nameEn}` : ""}`
-                  : t("none")}
-              </p>
-            </div>
-            <button className="hr-preview-magic" type="button">✦</button>
-          </div>
+      {/* ── Compact photo strip ── */}
+      <div className="hr-strip">
+        <img className="hr-strip-img" src={photoBlobUrl} alt="" />
+        <div className="hr-strip-meta">
+          <p className="hr-strip-kicker">{lang === "ko" ? "내 사진" : "MY PHOTO"}</p>
+          <p className="hr-strip-val">
+            {selectedStyle ? selectedStyle.name : "—"}
+            {colorLabel ? (
+              <span className="hr-strip-color-dot"> · {colorLabel}</span>
+            ) : null}
+          </p>
         </div>
+        <div className="hr-strip-ai-badge">AI</div>
       </div>
 
-      {step === "style" ? (
-        /* Style grid — all 6 styles, no category tabs */
+      {/* ── Style section ── */}
+      <div className="hr-section">
+        <div className="hr-section-hd">
+          <span className="hr-section-pill">{lang === "ko" ? "스타일" : "STYLE"}</span>
+          <span className="hr-section-hint">
+            {lang === "ko" ? "원하는 헤어를 선택하세요" : "Pick a look"}
+          </span>
+        </div>
         <div className="hr-grid">
           {hairStyles.map((style) => {
-            const isSelected = selectedStyleId === style.id;
+            const sel = selectedStyleId === style.id;
             return (
               <button
-                className={`hr-card${isSelected ? " hr-card--selected" : ""}`}
+                className={`hr-card${sel ? " hr-card--sel" : ""}`}
                 key={style.id}
-                onClick={() => handleStyleSelect(style.id)}
+                onClick={() => setSelectedStyleId(style.id)}
                 style={{
                   backgroundImage: style.thumbnail
-                    ? `linear-gradient(0deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 55%),url(${style.thumbnail})`
-                    : `linear-gradient(0deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 55%),${style.colorHint ?? "#2a1a10"}`,
+                    ? `linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%),url(${style.thumbnail})`
+                    : `linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%),${style.colorHint}`,
                 }}
                 type="button"
               >
-                {isSelected ? <span className="hr-card-check">✓</span> : null}
+                {sel && (
+                  <span className="hr-card-check" aria-hidden>✓</span>
+                )}
                 <span className="hr-card-name">{style.name}</span>
               </button>
             );
           })}
         </div>
-      ) : (
-        /* Color picker */
-        <div className="hr-color-section">
-          <h3 className="hr-color-title">
-            {lang === "ko" ? "컬러 선택" : "Choose Color"}
-          </h3>
-          <div className="hr-color-row">
-            {hairColors.map((color) => {
-              const isSelected = selectedColorId === color.id;
-              return (
-                <button
-                  className={`hr-color-btn${isSelected ? " hr-color-btn--selected" : ""}`}
-                  key={color.id}
-                  onClick={() => handleColorSelect(color.id)}
-                  type="button"
-                >
-                  <span
-                    className="hr-color-swatch"
-                    style={{ background: color.swatch }}
-                  />
-                  <span className="hr-color-label">
-                    {lang === "ko" ? color.nameKo : color.nameEn}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      </div>
 
-      {/* Fixed bottom */}
+      {/* ── Color section ── */}
+      <div className="hr-section hr-section--color">
+        <div className="hr-section-hd">
+          <span className="hr-section-pill">{lang === "ko" ? "컬러" : "COLOR"}</span>
+          <span className="hr-section-hint">
+            {lang === "ko" ? "선택 안 하면 AI가 결정" : "Skip to let AI decide"}
+          </span>
+        </div>
+        <div className="hr-color-rail">
+          {hairColors.map((color) => {
+            const sel = selectedColorId === color.id;
+            return (
+              <button
+                className={`hr-swatch-btn${sel ? " hr-swatch-btn--sel" : ""}`}
+                key={color.id}
+                onClick={() =>
+                  setSelectedColorId(sel ? null : color.id)
+                }
+                type="button"
+              >
+                <span className="hr-swatch" style={{ background: color.swatch }} />
+                <span className="hr-swatch-name">
+                  {lang === "ko" ? color.nameKo : color.nameEn}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Bottom CTA ── */}
       <div className="hr-bottom">
         <button
-          className="up-next-btn up-next-btn--active"
+          className={`hr-cta${selectedStyleId ? " hr-cta--on" : ""}`}
           onClick={handleNext}
           type="button"
         >
-          Next Step →
+          {selectedStyleId
+            ? lang === "ko" ? "다음 단계 →" : "Next Step →"
+            : lang === "ko" ? "스타일을 선택하세요" : "Select a style first"}
         </button>
       </div>
+
     </div>
   );
 }
