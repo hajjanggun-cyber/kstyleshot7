@@ -26,7 +26,7 @@ const mdxComponents = {
       {children}
     </Link>
   ),
-  img: ({ src, alt }) => {
+  img: ({ src, alt }: { src?: string; alt?: string }) => {
     if (!src) return null;
     return (
       <Image
