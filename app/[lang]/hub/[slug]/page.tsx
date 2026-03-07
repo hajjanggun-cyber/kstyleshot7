@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   if (mdx) {
     const { frontmatter: fm } = mdx;
     const canonical = `${getSiteUrl()}/${lang}/hub/${slug}`;
+    const authors = fm.authorName ? [fm.authorName] : undefined;
     return {
       title: fm.title,
       description: fm.description,
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
         url: canonical,
         type: "article",
         publishedTime: fm.publishedAt,
-        authors: [fm.authorName],
+        authors,
       },
     };
   }

@@ -9,14 +9,14 @@ export type ArticleFrontmatter = {
   category: string;
   title: string;
   description: string;
-  authorName: string;
-  authorRole: string;
   publishedAt: string;
   readTime: string;
   headerGradient: string;
   pullQuote: string;
   hreflangSlug: string;
-  aiGenerated: boolean;
+  authorName?: string;
+  authorRole?: string;
+  aiGenerated?: boolean;
   nextSlug?: string;
   nextTitle?: string;
 };
