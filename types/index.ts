@@ -50,7 +50,7 @@ export type HairStyle = {
   thumbnail: string;
   prompt: string;
   tags: string[];
-  category?: "trendy" | "bangs" | "waves";
+  category?: "trendy" | "bangs" | "waves" | "classic" | "updo";
   colorHint?: string;
 };
 

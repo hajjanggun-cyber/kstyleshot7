@@ -10,6 +10,7 @@ type CreateActions = {
   setStatus: (status: JobStatus) => void;
   setPhotoBlobUrl: (blobUrl: string | null) => void;
   setHairChosen: (ids: string[]) => void;
+  setHairColor: (color: string) => void;
   setHairResults: (results: StepResult[]) => void;
   pickHair: (id: string) => void;
   setOutfitChosen: (ids: string[]) => void;
@@ -40,8 +41,9 @@ const initialState: CreateSessionState = {
   location: createEmptySelection()
 };
 
-export const useCreateStore = create<CreateSessionState & CreateActions>((set) => ({
+export const useCreateStore = create<CreateSessionState & { hairColor: string | null } & CreateActions>((set) => ({
   ...initialState,
+  hairColor: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
   setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
   setStatus: (status) => set({ status }),
@@ -51,6 +53,7 @@ export const useCreateStore = create<CreateSessionState & CreateActions>((set) =
       hair: { ...createEmptySelection(), chosen: ids.slice(0, 2) },
       status: "hair_selecting"
     })),
+  setHairColor: (color) => set({ hairColor: color }),
   setHairResults: (results) =>
     set((state) => ({
       hair: { ...state.hair, results },

@@ -6,30 +6,10 @@ import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { hairStyles } from "@/data/hairStyles";
+import { hairColors } from "@/data/hairColors";
 import { useCreateStore } from "@/store/createStore";
 
-type Category = "trendy" | "bangs" | "waves";
-
-const CATEGORY_KEYS: { key: Category; labelKey: "cat1" | "cat2" | "cat3" }[] = [
-  { key: "trendy", labelKey: "cat1" },
-  { key: "bangs", labelKey: "cat2" },
-  { key: "waves", labelKey: "cat3" },
-];
-
-const POPULAR_COMBOS = [
-  {
-    label: "Cold Silver + Sharp Face",
-    color: "linear-gradient(160deg, #bdc3c7, #95a5a6, #d7dee3)",
-  },
-  {
-    label: "Peach Bloom + Round Face",
-    color: "linear-gradient(160deg, #f8b4d9, #ffc0cb, #ffb3ba)",
-  },
-  {
-    label: "Midnight Bangs + Oval Face",
-    color: "linear-gradient(160deg, #1a1a2e, #16213e, #0f3460)",
-  },
-];
+type FlowStep = "style" | "color";
 
 export function HairFlow() {
   const params = useParams<{ lang: string }>();
@@ -37,27 +17,29 @@ export function HairFlow() {
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.hair");
 
-  const { photoBlobUrl, setHairChosen, setStatus } = useCreateStore();
+  const { photoBlobUrl, setHairChosen, setHairColor, setStatus } = useCreateStore();
 
-  const [activeCategory, setActiveCategory] = useState<Category>("trendy");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [step, setStep] = useState<FlowStep>("style");
+  const [selectedStyleId, setSelectedStyleId] = useState<string | null>(null);
+  const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
 
-  const filtered = hairStyles.filter((s) => s.category === activeCategory);
-  const selectedStyle = hairStyles.find((s) => s.id === selectedId);
+  const selectedStyle = hairStyles.find((s) => s.id === selectedStyleId);
+  const selectedColor = hairColors.find((c) => c.id === selectedColorId);
 
-  function handleSelect(id: string) {
-    const next = id === selectedId ? null : id;
-    setSelectedId(next);
-    if (next) {
-      setHairChosen([next]);
-      setStatus("outfit_selecting");
-      router.push(`/${lang}/create/outfit`);
-    }
+  function handleStyleSelect(id: string) {
+    setSelectedStyleId(id);
+    setStep("color");
+  }
+
+  function handleColorSelect(id: string) {
+    setSelectedColorId(id);
   }
 
   function handleNext() {
-    // TODO: restore — if (!selectedId) return;
-    setHairChosen(selectedId ? [selectedId] : ["demo-hair"]);
+    setHairChosen(selectedStyleId ? [selectedStyleId] : ["demo-hair"]);
+    if (selectedColor) {
+      setHairColor(selectedColor.replicateValue);
+    }
     setStatus("outfit_selecting");
     router.push(`/${lang}/create/outfit`);
   }
@@ -84,7 +66,11 @@ export function HairFlow() {
     <div className="hr-root">
       {/* Nav */}
       <nav className="hr-nav">
-        <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
+        {step === "color" ? (
+          <button className="hr-back-btn" type="button" onClick={() => setStep("style")}>←</button>
+        ) : (
+          <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
+        )}
         <h2 className="hr-nav-title">{t("navTitle")}</h2>
         <div className="hr-nav-right">
           <button className="hr-help-btn" type="button">?</button>
@@ -112,7 +98,9 @@ export function HairFlow() {
             <div className="hr-preview-tag">
               <p className="hr-preview-label">{t("currentSelection")}</p>
               <p className="hr-preview-name">
-                {selectedStyle ? selectedStyle.name : t("none")}
+                {selectedStyle
+                  ? `${selectedStyle.name}${selectedColor ? ` · ${lang === "ko" ? selectedColor.nameKo : selectedColor.nameEn}` : ""}`
+                  : t("none")}
               </p>
             </div>
             <button className="hr-preview-magic" type="button">✦</button>
@@ -120,63 +108,58 @@ export function HairFlow() {
         </div>
       </div>
 
-      {/* Category tabs */}
-      <div className="hr-tabs-wrap">
-        <div className="hr-tabs">
-          {CATEGORY_KEYS.map((cat) => (
-            <button
-              className={`hr-tab${activeCategory === cat.key ? " hr-tab--active" : ""}`}
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              type="button"
-            >
-              {t(cat.labelKey)}
-            </button>
-          ))}
+      {step === "style" ? (
+        /* Style grid — all 6 styles, no category tabs */
+        <div className="hr-grid">
+          {hairStyles.map((style) => {
+            const isSelected = selectedStyleId === style.id;
+            return (
+              <button
+                className={`hr-card${isSelected ? " hr-card--selected" : ""}`}
+                key={style.id}
+                onClick={() => handleStyleSelect(style.id)}
+                style={{
+                  backgroundImage: style.thumbnail
+                    ? `linear-gradient(0deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 55%),url(${style.thumbnail})`
+                    : `linear-gradient(0deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 55%),${style.colorHint ?? "#2a1a10"}`,
+                }}
+                type="button"
+              >
+                {isSelected ? <span className="hr-card-check">✓</span> : null}
+                <span className="hr-card-name">{style.name}</span>
+              </button>
+            );
+          })}
         </div>
-      </div>
-
-      {/* Style grid */}
-      <div className="hr-grid">
-        {filtered.map((style) => {
-          const isSelected = selectedId === style.id;
-          return (
-            <button
-              className={`hr-card${isSelected ? " hr-card--selected" : ""}`}
-              key={style.id}
-              onClick={() => handleSelect(style.id)}
-              style={{
-                backgroundImage: style.thumbnail
-                  ? `linear-gradient(0deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 55%),url(${style.thumbnail})`
-                  : `linear-gradient(0deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 55%),${style.colorHint ?? "#2a1a10"}`,
-              }}
-              type="button"
-            >
-              {isSelected ? <span className="hr-card-check">✓</span> : null}
-              <span className="hr-card-name">{style.name}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Popular combos */}
-      <div className="hr-combos">
-        <h3 className="hr-combos-title">
-          <span className="hr-combos-star">✦</span>
-          {t("popularTitle")}
-        </h3>
-        <div className="hr-combos-scroll">
-          {POPULAR_COMBOS.map((combo, i) => (
-            <div className="hr-combo-card" key={i}>
-              <div
-                className="hr-combo-img"
-                style={{ backgroundImage: combo.color }}
-              />
-              <p className="hr-combo-label">{combo.label}</p>
-            </div>
-          ))}
+      ) : (
+        /* Color picker */
+        <div className="hr-color-section">
+          <h3 className="hr-color-title">
+            {lang === "ko" ? "컬러 선택" : "Choose Color"}
+          </h3>
+          <div className="hr-color-row">
+            {hairColors.map((color) => {
+              const isSelected = selectedColorId === color.id;
+              return (
+                <button
+                  className={`hr-color-btn${isSelected ? " hr-color-btn--selected" : ""}`}
+                  key={color.id}
+                  onClick={() => handleColorSelect(color.id)}
+                  type="button"
+                >
+                  <span
+                    className="hr-color-swatch"
+                    style={{ background: color.swatch }}
+                  />
+                  <span className="hr-color-label">
+                    {lang === "ko" ? color.nameKo : color.nameEn}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Fixed bottom */}
       <div className="hr-bottom">

@@ -2301,6 +2301,68 @@ h2 {
   background: #e07b18;
 }
 
+/* Color picker */
+.hr-color-section {
+  padding: 20px 16px 8px;
+}
+
+.hr-color-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(241, 237, 232, 0.5);
+  margin: 0 0 20px;
+}
+
+.hr-color-row {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.hr-color-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hr-color-swatch {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(241, 237, 232, 0.15);
+  transition: border-color 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.hr-color-btn--selected .hr-color-swatch {
+  border-color: #f48c25;
+  transform: scale(1.12);
+  box-shadow: 0 0 0 3px rgba(244, 140, 37, 0.3);
+}
+
+.hr-color-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(241, 237, 232, 0.6);
+  text-align: center;
+  line-height: 1.3;
+  word-break: keep-all;
+  transition: color 0.2s;
+}
+
+.hr-color-btn--selected .hr-color-label {
+  color: #f48c25;
+}
+
 /* =============================================
    OUTFIT FLOW (step4) — ot-* prefix
    ============================================= */

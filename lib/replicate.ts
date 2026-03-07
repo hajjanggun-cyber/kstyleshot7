@@ -124,13 +124,14 @@ async function startPrediction(input: {
   photoDataUrl: string;
   haircut: string;
   hairColor: string;
-}): Promise<string> {
+}): Promise<{ predictionId: string; outputUrl: string | null }> {
   const endpoint = getHairPredictionEndpoint();
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {
       Authorization: getReplicateAuthHeader(),
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Prefer: "wait"
     },
     body: JSON.stringify({
       input: {
@@ -160,7 +161,10 @@ async function startPrediction(input: {
     throw new ReplicateApiError("Replicate prediction response is missing an id.", 502);
   }
 
-  return predictionId;
+  // Prefer: wait — output may already be in the response if generation completed in time
+  const outputUrl = extractOutputUrl(isRecord(payload) ? payload.output : null);
+
+  return { predictionId, outputUrl };
 }
 
 async function getPrediction(predictionId: string): Promise<ReplicatePrediction> {
@@ -210,6 +214,11 @@ export type HairVariantInput = {
   hairColor?: string;
 };
 
+export type HairVariantResult = {
+  predictionId: string;
+  outputUrl: string | null;
+};
+
 export type StartHairJobInput = {
   photoDataUrl: string;
   variants: HairVariantInput[];
@@ -222,7 +231,7 @@ export type ReplicatePrediction = {
   error: string | null;
 };
 
-export async function startHairVariantJobs(input: StartHairJobInput): Promise<string[]> {
+export async function startHairVariantJobs(input: StartHairJobInput): Promise<HairVariantResult[]> {
   assertReplicateEnv();
 
   if (!input.photoDataUrl.startsWith("data:image/")) {
@@ -232,8 +241,8 @@ export async function startHairVariantJobs(input: StartHairJobInput): Promise<st
     );
   }
 
-  if (input.variants.length !== 2) {
-    throw new ReplicateApiError("Exactly two hair variants are required.", 400);
+  if (input.variants.length < 1 || input.variants.length > 2) {
+    throw new ReplicateApiError("One or two hair variants are required.", 400);
   }
 
   if (input.variants.some((variant) => !variant.haircut.trim())) {

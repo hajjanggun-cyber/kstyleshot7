@@ -34,6 +34,7 @@ type StartRequestBody = {
   styleIds?: unknown;
   photoDataUrl?: unknown;
   selectedId?: unknown;
+  hairColor?: unknown;
 };
 
 function parseStyleIds(raw: unknown): string[] {
@@ -93,10 +94,10 @@ export async function POST(request: Request) {
     }
 
     const styleIds = parseStyleIds(payload.styleIds);
-    if (styleIds.length !== 2) {
+    if (styleIds.length < 1) {
       return jsonError(requestId, {
         status: 400,
-        message: "styleIds must contain exactly two unique hair style ids."
+        message: "styleIds must contain at least one hair style id."
       });
     }
 
@@ -130,16 +131,33 @@ export async function POST(request: Request) {
       let predictionIds: string[] = [];
       let generatedResults: Array<{ id: string; imageUrl: string }> = [];
       let mode: "replicate" | "local_fallback" = "replicate";
+      let hairStatus: "hair_processing" | "hair_completed" = "hair_processing";
+
+      const hairColorValue = typeof payload.hairColor === "string" && payload.hairColor.trim()
+        ? payload.hairColor.trim()
+        : "Random";
 
       if (canUseRemote) {
-        predictionIds = await startHairVariantJobs({
+        const variantResults = await startHairVariantJobs({
           photoDataUrl,
           variants: styleIds.map((styleId) => ({
             id: styleId,
             haircut: styleLookup[styleId].name,
-            hairColor: "Random"
+            hairColor: hairColorValue
           }))
         });
+
+        predictionIds = variantResults.map((r) => r.predictionId);
+
+        // Prefer: wait — if output arrived immediately, mark completed without polling
+        const allReady = variantResults.every((r) => r.outputUrl);
+        if (allReady) {
+          generatedResults = variantResults.map((r, i) => ({
+            id: styleIds[i] ?? `hair-${i + 1}`,
+            imageUrl: r.outputUrl ?? ""
+          }));
+          hairStatus = "hair_completed";
+        }
       } else {
         mode = "local_fallback";
         generatedResults = createLocalGeneratedResults(
@@ -148,11 +166,12 @@ export async function POST(request: Request) {
           Object.fromEntries(styleIds.map((styleId) => [styleId, styleLookup[styleId].name])),
           "Local hair fallback generation"
         );
+        hairStatus = "hair_completed";
       }
 
       const nextJob = withUpdatedTime({
         ...job,
-        status: "hair_processing",
+        status: hairStatus,
         currentStep: "hair",
         selectedStyles: {
           ...job.selectedStyles,
@@ -183,12 +202,13 @@ export async function POST(request: Request) {
       logApiEvent("info", {
         requestId,
         route: "POST /api/jobs/start",
-        message: "Hair generation started.",
+        message: hairStatus === "hair_completed" ? "Hair generation completed immediately." : "Hair generation started.",
         details: {
           mode,
           orderId: nextJob.orderId,
           styleIds,
-          predictionCount: predictionIds.length
+          predictionCount: predictionIds.length,
+          immediate: hairStatus === "hair_completed"
         }
       });
 
@@ -198,7 +218,8 @@ export async function POST(request: Request) {
         step: "hair",
         mode,
         status: nextJob.status,
-        predictionIds
+        predictionIds,
+        results: generatedResults.length > 0 ? generatedResults : undefined
       });
     } catch (error) {
       const status =
