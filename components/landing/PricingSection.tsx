@@ -13,7 +13,7 @@ export function PricingSection() {
     <section className="lp-pricing">
       <div className="lp-pricing-inner">
         <div>
-          <p className="lp-pricing-label">Simple Pricing</p>
+          <p className="lp-pricing-label">{t("sectionLabel")}</p>
           <h2 className="lp-pricing-title">{t("title")}</h2>
           <p className="lp-pricing-body muted">{t("body")}</p>
           <p className="lp-pricing-note muted">{t("note")}</p>

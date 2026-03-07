@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: LandingPageProps): Promise<Me
   const isEn = safeLang === "en";
   const title = isEn
     ? "Kstyleshot | K-Style Portrait Tool"
-    : "Kstyleshot | 케이스타일 포트레이트 툴";
+    : "셀카를 K-아이돌 스타일로 — KStyleShot";
   const description = isEn
     ? "Upload one selfie and generate K-style portrait directions with hair, outfit, and backdrop flow."
     : "셀카 한 장으로 헤어, 의상, 배경 흐름에 맞춘 케이스타일 포트레이트 가이드를 시작하세요.";

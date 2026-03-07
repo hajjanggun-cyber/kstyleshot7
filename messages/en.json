@@ -11,38 +11,45 @@
     "title": "Important Notice",
     "line1": "This service is not affiliated with any artists, labels, or brands.",
     "line2": "All results are AI-generated style images; exact likeness is not guaranteed.",
-    "line3": "No refund is issued for style preference dissatisfaction alone."
+    "line3": "Style results may vary due to the nature of AI generation."
   },
   "landing": {
     "hero": {
       "eyebrow": "Next-gen AI transformation",
+      "title": "Transform Your Selfie into K-Idol Style",
       "titlePrefix": "Transform into your favorite",
       "titleSuffix": "star.",
-      "description": "Upload one selfie, pick your style, and run a paid session flow built for reliable checkout-to-generation handoff.",
-      "start": "Start experience",
+      "description": "Pick your hair, style, and backdrop — AI handles the rest.",
+      "start": "Create my style →",
       "gallery": "View gallery",
       "badge1": "500+ styles",
       "badge2": "Real async jobs",
       "badge3": "Session-safe flow"
     },
     "how": {
+      "sectionTitle": "How It's Made",
       "title": "How the magic happens",
       "description": "Three steps for users, with real payment/session safeguards under the hood.",
       "step1": {
-        "title": "Checkout",
+        "title": "Pick Your Style",
         "body": "Start paid checkout, return with `checkout_id`, and wait for session handshake."
       },
       "step2": {
-        "title": "Upload + Hair",
+        "title": "Upload Selfie & Choose Hair",
         "body": "Upload one selfie, pick two hairstyles, run async generation, then choose one."
       },
       "step3": {
-        "title": "Finish",
+        "title": "AI Generation",
         "body": "Continue through outfit/background stages and download your final selected result."
+      },
+      "step4": {
+        "title": "Review & Download",
+        "body": "Check your AI-generated results and download the final image."
       }
     },
     "trending": {
       "title": "Trending this week",
+      "sectionTitle": "Top Transformations",
       "explore": "Explore all styles",
       "item1": {
         "name": "Cyber Idol",
@@ -62,9 +69,10 @@
       }
     },
     "pricing": {
+      "sectionLabel": "Pricing",
       "title": "Simple pricing",
       "body": "Per completed generation flow.",
-      "note": "Automatic refund is triggered only after retry and confirmed pipeline failure."
+      "note": "Auto-refunded only on confirmed technical generation failure."
     }
   },
   "create": {

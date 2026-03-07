@@ -22,12 +22,12 @@ export function HowItWorks() {
     t("step1.title"),
     t("step2.title"),
     t("step3.title"),
-    "AI Magic",
+    t("step4.title"),
   ];
 
   return (
     <section className="lp-steps card">
-      <h3 className="lp-steps-head">The AI Magic Journey</h3>
+      <h3 className="lp-steps-head">{t("sectionTitle")}</h3>
       <div className="lp-steps-list">
         {STEPS.map((step, i) => (
           <div className="lp-step-row" key={i}>

@@ -33,7 +33,7 @@ export function GalleryTabs() {
     <section className="lp-gallery" id="trending">
       <div className="lp-gallery-head">
         <div>
-          <h2 className="lp-gallery-title">Top Transformations</h2>
+          <h2 className="lp-gallery-title">{t("sectionTitle")}</h2>
           <p className="lp-gallery-sub">K-Idol Editorial Picks</p>
         </div>
         <span className="lp-gallery-more">{t("explore")} ›</span>

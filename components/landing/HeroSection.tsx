@@ -24,11 +24,10 @@ export function HeroSection() {
         <Link className="lp-cta-btn" href={`/${lang}/create/upload`}>
           {t("start")} →
         </Link>
-        <p className="lp-cta-note">Unofficial. AI-generated results for fans.</p>
       </div>
       <div className="sr-only">
         <p>{t("eyebrow")}</p>
-        <p>{t("titlePrefix")} K-POP {t("titleSuffix")}</p>
+        <p>{t("title")}</p>
         <p>{t("description")}</p>
       </div>
     </section>
