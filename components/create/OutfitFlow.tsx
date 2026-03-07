@@ -35,7 +35,7 @@ export function OutfitFlow() {
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.outfit");
 
-  const { photoBlobUrl, hair, setOutfitChosen, pickOutfit, setStatus } = useCreateStore();
+  const { photoBlobUrl, hair, hairPreviewUrl, setOutfitChosen, pickOutfit, setStatus } = useCreateStore();
 
   const [activeCategory, setActiveCategory] = useState<Category>("stage");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -95,16 +95,39 @@ export function OutfitFlow() {
         <div className="ot-dot" />
       </div>
 
-      {/* User avatar preview */}
-      <div className="ot-avatar-wrap">
-        <div className="ot-avatar-ring">
+      {/* Before / After comparison */}
+      <div className="ot-compare">
+        <div className="ot-compare-card">
           {photoBlobUrl ? (
-            <img alt="Your photo" className="ot-avatar-img" src={photoBlobUrl} />
+            <img className="ot-compare-img" src={photoBlobUrl} alt="Original" />
           ) : (
-            <div className="ot-avatar-placeholder">👤</div>
+            <div className="ot-compare-placeholder">👤</div>
           )}
-          <span className="ot-avatar-badge">✦</span>
+          <span className="ot-compare-label">{lang === "ko" ? "원본" : "Before"}</span>
         </div>
+
+        <div className="ot-compare-arrow">→</div>
+
+        <div className="ot-compare-card ot-compare-card--ai">
+          {hairPreviewUrl ? (
+            <img className="ot-compare-img" src={hairPreviewUrl} alt="AI Hair" />
+          ) : (
+            <div className="ot-compare-pending">
+              <span className="ot-compare-spinner" />
+              <span className="ot-compare-pending-txt">
+                {lang === "ko" ? "AI 합성 중" : "AI styling"}
+              </span>
+            </div>
+          )}
+          <span className="ot-compare-label">
+            {hairPreviewUrl
+              ? (lang === "ko" ? "AI 헤어" : "AI Hair")
+              : (lang === "ko" ? "처리 중…" : "Processing…")}
+          </span>
+        </div>
+      </div>
+
+      <div className="ot-compare-sub">
         <h2 className="ot-avatar-title">{t("avatarTitle")}</h2>
         <p className="ot-avatar-sub">{t("avatarSub")}</p>
       </div>

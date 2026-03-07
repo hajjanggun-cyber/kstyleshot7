@@ -9,16 +9,28 @@ import { hairStyles } from "@/data/hairStyles";
 import { hairColors } from "@/data/hairColors";
 import { useCreateStore } from "@/store/createStore";
 
+async function blobUrlToDataUrl(blobUrl: string): Promise<string> {
+  const res = await fetch(blobUrl);
+  const blob = await res.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
 export function HairFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.hair");
 
-  const { photoBlobUrl, setHairChosen, setHairColor, setStatus } = useCreateStore();
+  const { photoBlobUrl, setHairChosen, setHairColor, setHairPreviewUrl, setStatus } = useCreateStore();
 
   const [selectedStyleId, setSelectedStyleId] = useState<string | null>(null);
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const selectedStyle = hairStyles.find((s) => s.id === selectedStyleId);
   const selectedColor = hairColors.find((c) => c.id === selectedColorId);
@@ -26,10 +38,37 @@ export function HairFlow() {
     ? lang === "ko" ? selectedColor.nameKo : selectedColor.nameEn
     : null;
 
-  function handleNext() {
-    setHairChosen(selectedStyleId ? [selectedStyleId] : ["demo-hair"]);
+  async function handleNext() {
+    if (isLoading) return;
+    setIsLoading(true);
+
+    const styleId = selectedStyleId ?? "demo-hair";
+    setHairChosen([styleId]);
     if (selectedColor) setHairColor(selectedColor.replicateValue);
     setStatus("outfit_selecting");
+
+    // Call Replicate hair preview API if we have a photo and a real style
+    if (photoBlobUrl && selectedStyle) {
+      try {
+        const photoDataUrl = await blobUrlToDataUrl(photoBlobUrl);
+        const res = await fetch("/api/hair/preview", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            photoDataUrl,
+            haircutName: selectedStyle.name,
+            hairColor: selectedColor?.replicateValue ?? "Random",
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json() as { outputUrl?: string };
+          if (data.outputUrl) setHairPreviewUrl(data.outputUrl);
+        }
+      } catch {
+        // non-fatal — outfit page will just show original
+      }
+    }
+
     router.push(`/${lang}/create/outfit`);
   }
 
@@ -142,13 +181,16 @@ export function HairFlow() {
       {/* ── Bottom CTA ── */}
       <div className="hr-bottom">
         <button
-          className={`hr-cta${selectedStyleId ? " hr-cta--on" : ""}`}
+          className={`hr-cta${selectedStyleId && !isLoading ? " hr-cta--on" : ""}${isLoading ? " hr-cta--loading" : ""}`}
           onClick={handleNext}
+          disabled={isLoading}
           type="button"
         >
-          {selectedStyleId
-            ? lang === "ko" ? "다음 단계 →" : "Next Step →"
-            : lang === "ko" ? "스타일을 선택하세요" : "Select a style first"}
+          {isLoading
+            ? lang === "ko" ? "AI 처리 중…" : "AI Processing…"
+            : selectedStyleId
+              ? lang === "ko" ? "다음 단계 →" : "Next Step →"
+              : lang === "ko" ? "스타일을 선택하세요" : "Select a style first"}
         </button>
       </div>
 

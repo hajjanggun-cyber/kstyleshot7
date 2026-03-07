@@ -2531,6 +2531,19 @@ h2 {
   color: #0ff;
 }
 
+/* ── CTA loading state ── */
+.hr-cta--loading {
+  background: rgba(244, 140, 37, 0.18);
+  color: #f48c25;
+  cursor: wait;
+  animation: hr-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes hr-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
 /* ── CTA button ── */
 .hr-cta {
   width: 100%;
@@ -2640,6 +2653,108 @@ h2 {
   width: 40px;
   background: #f48c25;
   box-shadow: 0 0 8px rgba(244, 140, 37, 0.6);
+}
+
+/* Before / After compare strip */
+.ot-compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 24px 6px;
+}
+
+.ot-compare-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 140px;
+}
+
+.ot-compare-card--ai .ot-compare-img {
+  border-color: rgba(0, 255, 255, 0.45);
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.18);
+}
+
+.ot-compare-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  display: block;
+}
+
+.ot-compare-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  background: #2a1c10;
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.ot-compare-pending {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  background: rgba(0, 255, 255, 0.04);
+  border: 2px dashed rgba(0, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ot-compare-spinner {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(0, 255, 255, 0.15);
+  border-top-color: #0ff;
+  border-radius: 50%;
+  animation: ot-spin 0.9s linear infinite;
+}
+
+@keyframes ot-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ot-compare-pending-txt {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(0, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.ot-compare-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(241, 237, 232, 0.45);
+}
+
+.ot-compare-arrow {
+  font-size: 22px;
+  color: rgba(244, 140, 37, 0.6);
+  flex-shrink: 0;
+  margin-top: -24px;
+}
+
+.ot-compare-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 24px 10px;
+  text-align: center;
 }
 
 /* Avatar section */
