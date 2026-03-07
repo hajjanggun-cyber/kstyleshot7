@@ -46,7 +46,21 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
       {/* Nav */}
       <nav className="ha-nav">
         <Link className="ha-nav-back" href={`/${lang}/hub`} aria-label="Back">←</Link>
-        <span className="ha-nav-title">K-Insights</span>
+        <div className="ha-lang-toggle">
+          <Link
+            className={`ha-lang-btn${lang === "ko" ? " ha-lang-btn--active" : ""}`}
+            href={`/ko/hub/${frontmatter.hreflangSlug}`}
+          >
+            KO
+          </Link>
+          <span className="ha-lang-divider">|</span>
+          <Link
+            className={`ha-lang-btn${lang === "en" ? " ha-lang-btn--active" : ""}`}
+            href={`/en/hub/${frontmatter.hreflangSlug}`}
+          >
+            EN
+          </Link>
+        </div>
         <form action={noop}>
           <button className="ha-nav-share" type="submit" aria-label="Share">↗</button>
         </form>

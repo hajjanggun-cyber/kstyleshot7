@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { GalleryTabs } from "@/components/landing/GalleryTabs";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { HowItWorks } from "@/components/landing/HowItWorks";
+import { HubPreview } from "@/components/landing/HubPreview";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { buildLocaleAlternates, getOgLocale, toAbsoluteAssetUrl } from "@/lib/seo";
 
@@ -62,6 +63,7 @@ export default function LandingPage() {
       <HeroSection />
       <HowItWorks />
       <GalleryTabs />
+      <HubPreview />
       <PricingSection />
     </div>
   );
