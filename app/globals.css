@@ -4431,6 +4431,24 @@ h2 {
   margin-top: 8px;
 }
 
+.ha-bottom-banner {
+  margin: 22px 0 6px;
+}
+
+.ha-bottom-banner a {
+  display: block;
+  text-decoration: none;
+}
+
+.ha-bottom-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 36px rgba(8, 10, 20, 0.22);
+}
+
 @media (max-width: 720px) {
   .ha-related-grid {
     grid-template-columns: 1fr;

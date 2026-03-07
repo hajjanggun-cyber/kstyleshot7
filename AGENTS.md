@@ -99,10 +99,13 @@ hreflangSlug: "gyeongbokgung-photo-guide"
   - 다음 하위 글 카드 라벨: `다음 글`
   - 추가 관련 글 카드 라벨: `같이 보기`
 - EN 내부 링크 패널도 같은 구조로 유지하되, 자연스러운 영어 UI 카피를 사용한다
-7. CTA link — one line at the end of the body, fixed text and path as follows:
-   - KO: `[이 장소를 배경으로 내 K-스타일 사진을 만들러 가기](/ko)`
-   - EN: `[Create your own K-style photo with this Seoul mood →](/en)`
-   - Do NOT change the link text. Link destination is the locale landing page, not /create.
+7. CTA banner — one banner block at the end of the body, linking to the locale landing page.
+   - KO path: `/visuals/blog/blog-bottom-banner-kr.webp`
+   - EN path: `/visuals/blog/blog-bottom-banner-en.webp`
+   - KO link destination: `/ko`
+   - EN link destination: `/en`
+   - Use the same bottom banner CTA across all hub articles and sub-articles.
+   - Render as a linked image/banner block, not a text CTA line.
 
 ### Writing Standards (Google E-E-A-T)
 
@@ -242,9 +245,9 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - [ ] No private property or personal location references
 
 **CTA**
-- [ ] KO CTA 텍스트: `이 장소를 배경으로 내 K-스타일 사진을 만들러 가기` 그대로인가
-- [ ] EN CTA 텍스트: `Create your own K-style photo with this Seoul mood →` 그대로인가
-- [ ] 링크 경로가 `/ko` 또는 `/en` 인가 (`/create` 아님)
+- [ ] KO CTA 배너 경로가 `/visuals/blog/blog-bottom-banner-kr.webp` 인가
+- [ ] EN CTA 배너 경로가 `/visuals/blog/blog-bottom-banner-en.webp` 인가
+- [ ] 배너 링크 경로가 `/ko` 또는 `/en` 인가 (`/create` 아님)
 
 **기술 스펙**
 - [ ] `hreflangSlug` matches the paired language file
