@@ -94,9 +94,10 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - Quick Summary 카드 바로 아래에는 같은 허브 안의 관련 글을 묶는 내부 링크 패널을 넣을 수 있다
 - 같은 허브 내부 링크 패널은 상단 서론 중간에 끼워 넣지 말고, Quick Summary 아래에서 별도 카드 섹션으로 정리한다
 - KO 내부 링크 패널 기본 문구:
-  - 섹션 라벨: `같은 허브에서 이어서 보면 좋은 글`
+  - 섹션 라벨: `이어서 보면 좋은 글`
   - 허브 글 카드 라벨: `먼저 보기`
   - 다음 하위 글 카드 라벨: `다음 글`
+  - 추가 관련 글 카드 라벨: `같이 보기`
 - EN 내부 링크 패널도 같은 구조로 유지하되, 자연스러운 영어 UI 카피를 사용한다
 7. CTA link — one line at the end of the body, fixed text and path as follows:
    - KO: `[이 장소를 배경으로 내 K-스타일 사진을 만들러 가기](/ko)`
