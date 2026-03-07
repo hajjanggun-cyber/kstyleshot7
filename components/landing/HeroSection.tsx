@@ -13,10 +13,10 @@ export function HeroSection() {
     <section className="lp-hero">
       <div className="lp-hero-visual">
         <img
-          alt="Kstyleshot – AI K-Style Virtual Shoot"
+          alt="Kstyleshot landing hero showing an AI-generated K-style portrait"
           className="lp-hero-img"
           fetchPriority="high"
-          src="/visuals/landing/main.webp"
+          src="/visuals/landing/seoul-kstyle-landing-hero.webp"
         />
         <div className="lp-hero-fade" />
       </div>

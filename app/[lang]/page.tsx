@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: LandingPageProps): Promise<Me
       alternateLocale: [getOgLocale(safeLang === "en" ? "ko" : "en")],
       images: [
         {
-          url: toAbsoluteAssetUrl("/visuals/landing/main.webp"),
+          url: toAbsoluteAssetUrl("/visuals/landing/seoul-kstyle-landing-hero.webp"),
           width: 1600,
           height: 894,
           alt: isEn ? "Kstyleshot landing hero" : "Kstyleshot 랜딩 히어로"
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: LandingPageProps): Promise<Me
       card: "summary_large_image",
       title,
       description,
-      images: [toAbsoluteAssetUrl("/visuals/landing/main.webp")]
+      images: [toAbsoluteAssetUrl("/visuals/landing/seoul-kstyle-landing-hero.webp")]
     }
   };
 }

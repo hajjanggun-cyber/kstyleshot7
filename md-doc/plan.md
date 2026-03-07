@@ -36,8 +36,8 @@
 
 - `public/visuals/landing/`
   - 랜딩 페이지에서 직접 노출하는 메인 비주얼 저장
-  - 예: `public/visuals/landing/main.png`
-  - 브라우저 노출 경로: `/visuals/landing/main.png`
+  - 예: `public/visuals/landing/seoul-kstyle-landing-hero.webp`
+  - 브라우저 노출 경로: `/visuals/landing/seoul-kstyle-landing-hero.webp`
 
 - `public/visuals/blog/`
   - 블로그 인덱스, 카테고리, 포스트 공통용 정적 비주얼 저장
@@ -56,8 +56,8 @@
 
 ### 1.3 현재 적용 상태
 
-- 랜딩 메인 이미지는 `image/main.png` 원본을 기준으로 사용한다.
-- 실제 서비스 반영 경로는 `public/visuals/landing/main.png` 이다.
+- 랜딩 메인 이미지는 `image/main2.jpg` 원본을 기준으로 사용한다.
+- 실제 서비스 반영 경로는 `public/visuals/landing/seoul-kstyle-landing-hero.webp` 이다.
 - 메인 랜딩 화면과 OG/Twitter 메타 이미지는 같은 파일을 쓰는 구조로 맞춘다.
 
 ### 1.4 운영 원칙
