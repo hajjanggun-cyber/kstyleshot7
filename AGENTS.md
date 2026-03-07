@@ -181,15 +181,17 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 
 - 각 H2 소제목 바로 아래 첫 줄에 `![]()` 를 삽입한다
 - `![]()` 다음 줄부터 본문 단락을 작성한다
+- 본문 이미지는 raw HTML `<img>` 대신 MDX 마크다운 이미지 문법 `![alt](/images/...)`만 사용한다
 - Quick Summary, 함께 읽을 글(Related Guides) 섹션에는 삽입하지 않는다
 - 이미지 파일명과 alt 태그는 사용자가 직접 채운다 — 비워둔 채로 출력한다
-- 파일 위치: `public/images/hub/[hub-slug]/[파일명]-ko.webp` 또는 `-en.webp`
-- MDX 내 경로: `/images/hub/[hub-slug]/[파일명]-ko.webp`
+- 파일 위치: `public/images/hub/[hub-slug]/[파일명]-kr.webp` 또는 `-en.webp`
+- MDX 내 경로: `/images/hub/[hub-slug]/[파일명]-kr.webp`
 - 이미지 수: 글마다 3~7개 (H2 개수에 따라 결정)
-- KO 파일 이미지는 `-ko.webp`, EN 파일 이미지는 `-en.webp` 로 끝난다
+- KO 파일 이미지는 `-kr.webp`, EN 파일 이미지는 `-en.webp` 로 끝난다
 - 사용자가 원본 이미지를 `-kr.png`, `-kr.jpeg`, `-en.png`, `-en.jpeg`, `.jpg` 등 어떤 확장자로 주더라도 본문 삽입 전 반드시 `.webp`로 변환한다
 - 사용자가 확장자를 생략하고 파일명만 주더라도 실제 원본 확장자를 확인한 뒤 게시본은 항상 `.webp`로 만든다
 - 최종 게시 경로와 본문 링크에는 원본 확장자를 쓰지 않는다. 항상 `.webp` 경로만 사용한다
+- 본문 이미지 크기는 사이트의 공통 본문 이미지 스타일로 통일하며, 개별 인라인 크기 지정은 금지한다
 - 이미지 삽입 작업 전에는 `md-doc/image-webp-alt-prompt.md`의 최신 규칙을 따른다
 
 ---

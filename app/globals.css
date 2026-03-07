@@ -4261,7 +4261,7 @@ h2 {
 }
 
 .ha-media {
-  width: min(100%, 420px);
+  width: min(100%, 640px);
   max-width: 100%;
   height: auto;
   display: block;
