@@ -4305,23 +4305,19 @@ h2 {
   box-shadow: 0 18px 40px rgba(8, 10, 20, 0.22);
 }
 
-.ha-summary-head {
-  display: flex;
+.ha-summary-label {
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  min-height: 34px;
+  padding: 0 12px;
   margin-bottom: 16px;
-}
-
-.ha-summary-icon {
-  color: #f4258c;
-  font-size: 18px;
-}
-
-.ha-summary-title {
-  font-size: 16px;
+  border-radius: 999px;
+  background: rgba(244, 37, 140, 0.14);
+  border: 1px solid rgba(244, 37, 140, 0.24);
+  color: #f7d7e8;
+  font-size: 13px;
   font-weight: 800;
-  color: #f1ede8;
-  margin: 0;
+  letter-spacing: 0.02em;
 }
 
 .ha-summary-list {
@@ -4359,6 +4355,80 @@ h2 {
   color: rgba(241, 237, 232, 0.8);
   margin: 0;
   line-height: 1.5;
+}
+
+.ha-related-panel {
+  margin: 18px 0 18px;
+  padding: 18px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
+    rgba(13, 17, 28, 0.82);
+  border: 1px solid rgba(255, 122, 61, 0.16);
+  box-shadow: 0 16px 36px rgba(8, 10, 20, 0.2);
+}
+
+.ha-related-kicker {
+  margin-bottom: 12px;
+  color: #ffd3bc;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.ha-related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ha-related-card {
+  display: block;
+  padding: 16px;
+  border-radius: 16px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.ha-related-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 122, 61, 0.34);
+  background: rgba(255, 122, 61, 0.06);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+}
+
+.ha-related-eyebrow {
+  display: inline-flex;
+  margin-bottom: 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 122, 61, 0.12);
+  color: #ffb68e;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.ha-related-title {
+  display: block;
+  margin-bottom: 8px;
+  color: #f4f1ec;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.ha-related-copy {
+  margin: 0;
+  color: rgba(241, 237, 232, 0.76);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+@media (max-width: 720px) {
+  .ha-related-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Up Next */

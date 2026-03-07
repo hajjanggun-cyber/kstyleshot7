@@ -87,7 +87,7 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - 예시 (EN): `## — What N Seoul Tower Represents in Seoul`
 - 하이픈(`-`) 사용 금지 — 반드시 em dash(`—`) 사용
 - 예외: Quick Summary는 일반 H2로 쓰지 않는다
-- Quick Summary 라벨은 박스형 요약 카드 내부 제목으로 넣는다
+- Quick Summary 라벨은 박스형 요약 카드 내부의 첫 줄 라벨로 넣는다
 - Quick Summary 본문은 일반 리스트가 아니라 박스형 요약 카드로 렌더링되도록 작성한다
 6. CTA link — one line at the end of the body, fixed text and path as follows:
    - KO: `[이 장소를 배경으로 내 K-스타일 사진을 만들러 가기](/ko)`
