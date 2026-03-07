@@ -96,7 +96,7 @@ AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
 | 1 | 경복궁 | 경복궁 여행 가이드 | gyeongbokgung palace travel guide | ✅ 완료 |
 | 2 | 명동 | 명동 서울 여행 코스 | myeongdong seoul travel guide | ✅ 완료 |
 | 3 | 남산 N서울타워 | 남산 N서울타워 서울 야경 | n seoul tower night view guide | ✅ 완료 |
-| 4 | 홍대 | 홍대 서울 놀거리 | hongdae seoul neighborhood guide | ⬜ 대기 |
+| 4 | 홍대 | 홍대 서울 놀거리 | hongdae seoul neighborhood guide | ✅ 완료 |
 | 5 | 인사동 | 인사동 서울 전통거리 | insadong seoul cultural street | ⬜ 대기 |
 | 6 | 가로수길 | 가로수길 서울 패션 거리 | garosu-gil seoul fashion street | ⬜ 대기 |
 | 7 | 한강공원 | 한강공원 서울 피크닉 | hangang park seoul picnic guide | ⬜ 대기 |
@@ -147,6 +147,7 @@ AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
 Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
 **기록이 없으면 다음 세션에서 처음부터 다시 시작한다.**
 로그를 보고 [전체 작성 순서]의 상태 표(⬜/✅)도 함께 업데이트한다.
+현재 기준 작업은 가장 마지막에 기록된 `다음 세션 시작` 1줄만 따른다.
 
 <!-- 로그 시작 -->
 
@@ -239,6 +240,14 @@ Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
 다음 세션 시작: 1단계 - 홍대 허브 글
 
 [2026-03-07 15:20 KST] 남산 N서울타워 허브 내부링크·키워드·nextSlug 정리 완료
+
+[2026-03-08 00:00 KST]
+완료:
+- content/hub/ko/hongdae-hub.mdx
+- keyword: 홍대 서울 동네 가이드
+- content/hub/en/hongdae-hub.mdx
+- keyword: hongdae seoul neighborhood guide
+다음 세션 시작: 2단계 - 홍대 하위 글 [006] 홍대 거리 포토 스폿 추천
 
 <!-- 로그 끝 -->
 
