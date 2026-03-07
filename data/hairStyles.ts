@@ -4,7 +4,7 @@ export const hairStyles: HairStyle[] = [
   {
     id: "blunt-bangs",
     name: "Blunt Bangs",
-    thumbnail: "",
+    thumbnail: "/samples/hair-blunt-bangs.svg",
     prompt: "K-pop idol portrait with blunt cut bangs and precise edges.",
     tags: ["bangs", "sharp"],
     category: "bangs",
@@ -13,7 +13,7 @@ export const hairStyles: HairStyle[] = [
   {
     id: "straight",
     name: "Straight",
-    thumbnail: "",
+    thumbnail: "/samples/hair-straight.svg",
     prompt: "K-pop idol portrait with sleek straight hair and polished finish.",
     tags: ["sleek", "classic"],
     category: "classic",
@@ -22,7 +22,7 @@ export const hairStyles: HairStyle[] = [
   {
     id: "high-ponytail",
     name: "High Ponytail",
-    thumbnail: "",
+    thumbnail: "/samples/hair-high-ponytail.svg",
     prompt: "K-pop idol portrait with a high ponytail and clean lifted silhouette.",
     tags: ["updo", "clean"],
     category: "updo",
@@ -31,7 +31,7 @@ export const hairStyles: HairStyle[] = [
   {
     id: "soft-waves",
     name: "Soft Waves",
-    thumbnail: "",
+    thumbnail: "/samples/hair-soft-waves.svg",
     prompt: "K-pop idol portrait with soft flowing waves and natural movement.",
     tags: ["waves", "soft"],
     category: "waves",
@@ -40,7 +40,7 @@ export const hairStyles: HairStyle[] = [
   {
     id: "half-up-half-down",
     name: "Half-Up Half-Down",
-    thumbnail: "",
+    thumbnail: "/samples/hair-half-up-half-down.svg",
     prompt: "K-pop idol portrait with half-up half-down style and volume at the crown.",
     tags: ["half-up", "feminine"],
     category: "updo",
@@ -49,7 +49,7 @@ export const hairStyles: HairStyle[] = [
   {
     id: "space-buns",
     name: "Space Buns",
-    thumbnail: "",
+    thumbnail: "/samples/hair-space-buns.svg",
     prompt: "K-pop idol portrait with playful space buns and youthful energy.",
     tags: ["updo", "playful"],
     category: "updo",

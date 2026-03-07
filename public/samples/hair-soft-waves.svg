@@ -1,0 +1,42 @@
+<svg width='900' height='1200' viewBox='0 0 900 1200' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Soft Waves'>
+  <defs>
+    <linearGradient id='bg' x1='0.2' y1='0' x2='0.8' y2='1'>
+      <stop offset='0%' stop-color='#7a5c2a'/>
+      <stop offset='55%' stop-color='#b8904a'/>
+      <stop offset='100%' stop-color='#d4a96a'/>
+    </linearGradient>
+    <radialGradient id='halo' cx='0.5' cy='0.2' r='0.6'>
+      <stop offset='0%' stop-color='#ffe8a0' stop-opacity='0.28'/>
+      <stop offset='100%' stop-color='#ffe8a0' stop-opacity='0'/>
+    </radialGradient>
+  </defs>
+  <rect width='900' height='1200' fill='url(#bg)'/>
+  <rect width='900' height='1200' fill='url(#halo)'/>
+  <g opacity='0.18'>
+    <circle cx='110' cy='1080' r='200' fill='#6a4c18'/>
+    <circle cx='820' cy='180' r='150' fill='#e8c070'/>
+  </g>
+
+  <g transform='translate(170 250)'>
+    <!-- body -->
+    <rect x='24' y='440' width='520' height='360' rx='220' fill='rgba(255,255,255,0.82)'/>
+    <!-- left wave hair -->
+    <path d='M122 210 Q70 280 88 370 Q106 460 74 548 Q60 600 82 660 Q110 700 148 694 Q130 640 148 576 Q166 496 144 404 Q126 320 152 222' fill='#1e1408'/>
+    <!-- right wave hair -->
+    <path d='M446 210 Q498 280 480 370 Q462 460 494 548 Q508 600 486 660 Q458 700 420 694 Q438 640 420 576 Q402 496 424 404 Q442 320 416 222' fill='#1e1408'/>
+    <!-- hair cap -->
+    <path d='M152 222 Q148 148 284 148 Q420 148 416 222 Q380 190 284 188 Q188 190 152 222' fill='#1e1408'/>
+    <!-- face -->
+    <circle cx='284' cy='314' r='162' fill='#f5e9e2' fill-opacity='0.95'/>
+  </g>
+
+  <g transform='translate(70 76)'>
+    <rect width='760' height='148' rx='28' fill='rgba(16,10,2,0.38)'/>
+    <text x='34' y='64' fill='#ffffff' font-size='44' font-family='Spline Sans, Pretendard, Arial, sans-serif' font-weight='700'>Soft Waves</text>
+    <text x='34' y='116' fill='#ffe8b0' font-size='26' font-family='Spline Sans, Pretendard, Arial, sans-serif' font-weight='500'>Natural flowing movement</text>
+  </g>
+  <g transform='translate(70 1040)'>
+    <rect width='300' height='72' rx='36' fill='rgba(255,255,255,0.16)'/>
+    <text x='36' y='46' fill='#ffffff' font-size='27' font-family='Spline Sans, Pretendard, Arial, sans-serif' font-weight='700'>Kstyleshot</text>
+  </g>
+</svg>

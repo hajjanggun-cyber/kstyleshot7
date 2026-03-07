@@ -1,0 +1,42 @@
+<svg width='900' height='1200' viewBox='0 0 900 1200' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Blunt Bangs'>
+  <defs>
+    <linearGradient id='bg' x1='0.2' y1='0' x2='0.8' y2='1'>
+      <stop offset='0%' stop-color='#4a2040'/>
+      <stop offset='55%' stop-color='#7a3060'/>
+      <stop offset='100%' stop-color='#a0407a'/>
+    </linearGradient>
+    <radialGradient id='halo' cx='0.5' cy='0.2' r='0.6'>
+      <stop offset='0%' stop-color='#ff90d0' stop-opacity='0.24'/>
+      <stop offset='100%' stop-color='#ff90d0' stop-opacity='0'/>
+    </radialGradient>
+  </defs>
+  <rect width='900' height='1200' fill='url(#bg)'/>
+  <rect width='900' height='1200' fill='url(#halo)'/>
+  <g opacity='0.18'>
+    <circle cx='110' cy='1080' r='210' fill='#c050a0'/>
+    <circle cx='820' cy='180' r='155' fill='#ff80c8'/>
+  </g>
+
+  <g transform='translate(170 250)'>
+    <!-- body -->
+    <rect x='24' y='440' width='520' height='360' rx='220' fill='rgba(255,255,255,0.82)'/>
+    <!-- full hair silhouette (cap + sides) -->
+    <path d='M108 580 Q105 430 108 340 Q112 152 284 148 Q456 152 460 340 Q463 430 460 580 Q440 500 284 492 Q128 500 108 580' fill='#100c14'/>
+    <!-- blunt fringe — flat bottom = sharp edge -->
+    <rect x='108' y='286' width='352' height='52' rx='4' fill='#100c14'/>
+    <!-- face -->
+    <circle cx='284' cy='360' r='162' fill='#f5e9e2' fill-opacity='0.95'/>
+    <!-- hair cap above face (covers crown only, bang line flat at y=292) -->
+    <path d='M122 292 Q122 148 284 148 Q446 148 446 292 Z' fill='#100c14'/>
+  </g>
+
+  <g transform='translate(70 76)'>
+    <rect width='760' height='148' rx='28' fill='rgba(15,8,22,0.36)'/>
+    <text x='34' y='64' fill='#ffffff' font-size='44' font-family='Spline Sans, Pretendard, Arial, sans-serif' font-weight='700'>Blunt Bangs</text>
+    <text x='34' y='116' fill='#ffd0ef' font-size='26' font-family='Spline Sans, Pretendard, Arial, sans-serif' font-weight='500'>Sharp, precise fringe</text>
+  </g>
+  <g transform='translate(70 1040)'>
+    <rect width='300' height='72' rx='36' fill='rgba(255,255,255,0.16)'/>
+    <text x='36' y='46' fill='#ffffff' font-size='27' font-family='Spline Sans, Pretendard, Arial, sans-serif' font-weight='700'>Kstyleshot</text>
+  </g>
+</svg>
