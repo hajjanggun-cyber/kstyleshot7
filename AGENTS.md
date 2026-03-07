@@ -1,5 +1,7 @@
 # AGENTS.md — Codex Writing Instructions for K-Style Hub
 
+Updated At: 2026-03-07 15:20 KST
+
 > This file is automatically read by Codex before any task.
 > All content written for this project must follow every rule below without exception.
 
@@ -148,14 +150,20 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 
 ---
 
-## Pre-Writing Requirement (mandatory before any article)
+## Image Placeholder Rules
 
-Before writing any article, read and internalize the following files in order:
-
-1. `md-doc/google-seo-guide.md` — Google official SEO standards (must read first)
-2. `md-doc/post-codex-command.md` — Content strategy, hub structure, and execution rules
-
-Do not write a single line of article content until both files are read.
+- 각 H2 소제목 바로 아래 첫 줄에 `![]()` 를 삽입한다
+- `![]()` 다음 줄부터 본문 단락을 작성한다
+- Quick Summary, 함께 읽을 글(Related Guides) 섹션에는 삽입하지 않는다
+- 이미지 파일명과 alt 태그는 사용자가 직접 채운다 — 비워둔 채로 출력한다
+- 파일 위치: `public/images/[hub-slug]/[파일명]-ko.webp` 또는 `-en.webp`
+- MDX 내 경로: `/images/[hub-slug]/[파일명]-ko.webp`
+- 이미지 수: 글마다 3~7개 (H2 개수에 따라 결정)
+- KO 파일 이미지는 `-ko.webp`, EN 파일 이미지는 `-en.webp` 로 끝난다
+- 사용자가 원본 이미지를 `-kr.png`, `-kr.jpeg`, `-en.png`, `-en.jpeg`, `.jpg` 등 어떤 확장자로 주더라도 본문 삽입 전 반드시 `.webp`로 변환한다
+- 사용자가 확장자를 생략하고 파일명만 주더라도 실제 원본 확장자를 확인한 뒤 게시본은 항상 `.webp`로 만든다
+- 최종 게시 경로와 본문 링크에는 원본 확장자를 쓰지 않는다. 항상 `.webp` 경로만 사용한다
+- 이미지 삽입 작업 전에는 `md-doc/image-webp-alt-prompt.md`의 최신 규칙을 따른다
 
 ---
 
@@ -208,6 +216,11 @@ Do not write a single line of article content until both files are read.
 - [ ] No album titles, song names, or lyric quotes
 - [ ] No brand-to-idol association
 - [ ] No private property or personal location references
+
+**CTA**
+- [ ] KO CTA 텍스트: `이 장소를 배경으로 내 K-스타일 사진을 만들러 가기` 그대로인가
+- [ ] EN CTA 텍스트: `Create your own K-style photo with this Seoul mood →` 그대로인가
+- [ ] 링크 경로가 `/ko` 또는 `/en` 인가 (`/create` 아님)
 
 **기술 스펙**
 - [ ] `hreflangSlug` matches the paired language file
