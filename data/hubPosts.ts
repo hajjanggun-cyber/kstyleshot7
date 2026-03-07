@@ -111,6 +111,18 @@ export const hubPosts: HubPost[] = [
     titleColor: "#ffffff",
     watermarkIcon: "✦",
   },
+  {
+    slug: "n-seoul-tower-night-view-guide",
+    cardType: "square",
+    category: "한국 명소 & 포토존",
+    categoryStyle: "cyan",
+    title: "남산 N서울타워\n야경 명소",
+    subtitle: "시야 포인트와 시간대 가이드",
+    bg: "linear-gradient(135deg, #102049 0%, #ff7a3d 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.75)",
+    watermark: "🌃",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -206,6 +218,18 @@ export const hubPostsEn: HubPost[] = [
     bg: "linear-gradient(135deg, #3b0b17 0%, #ff7a18 100%)",
     titleColor: "#ffffff",
     watermarkIcon: "✦",
+  },
+  {
+    slug: "n-seoul-tower-night-view-guide",
+    cardType: "square",
+    category: "Seoul Locations",
+    categoryStyle: "cyan",
+    title: "Night View\nSpots",
+    subtitle: "N Seoul Tower practical guide",
+    bg: "linear-gradient(135deg, #102049 0%, #ff7a3d 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.75)",
+    watermark: "🌃",
   },
 ];
 
