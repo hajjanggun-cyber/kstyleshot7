@@ -4,8 +4,15 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: "/image/:hubSlug/:file",
+        destination: "/images/hub/:hubSlug/:file"
+      }
+    ];
+  }
 };
 
 export default withNextIntl(nextConfig);
-

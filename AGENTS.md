@@ -163,8 +163,8 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - `![]()` 다음 줄부터 본문 단락을 작성한다
 - Quick Summary, 함께 읽을 글(Related Guides) 섹션에는 삽입하지 않는다
 - 이미지 파일명과 alt 태그는 사용자가 직접 채운다 — 비워둔 채로 출력한다
-- 파일 위치: `public/images/[hub-slug]/[파일명]-ko.webp` 또는 `-en.webp`
-- MDX 내 경로: `/images/[hub-slug]/[파일명]-ko.webp`
+- 파일 위치: `public/images/hub/[hub-slug]/[파일명]-ko.webp` 또는 `-en.webp`
+- MDX 내 경로: `/images/hub/[hub-slug]/[파일명]-ko.webp`
 - 이미지 수: 글마다 3~7개 (H2 개수에 따라 결정)
 - KO 파일 이미지는 `-ko.webp`, EN 파일 이미지는 `-en.webp` 로 끝난다
 - 사용자가 원본 이미지를 `-kr.png`, `-kr.jpeg`, `-en.png`, `-en.jpeg`, `.jpg` 등 어떤 확장자로 주더라도 본문 삽입 전 반드시 `.webp`로 변환한다
