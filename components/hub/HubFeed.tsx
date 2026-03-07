@@ -150,7 +150,21 @@ export function HubFeed() {
       <header className="hf-header">
         <span className="hf-header-icon">⊞</span>
         <h1 className="hf-header-title">K-Culture Hub</h1>
-        <button className="hf-header-avatar" type="button">👤</button>
+        <div className="hf-lang-toggle">
+          <Link
+            className={`hf-lang-btn${isKo ? " hf-lang-btn--active" : ""}`}
+            href="/ko/hub"
+          >
+            KO
+          </Link>
+          <span className="hf-lang-divider">|</span>
+          <Link
+            className={`hf-lang-btn${!isKo ? " hf-lang-btn--active" : ""}`}
+            href="/en/hub"
+          >
+            EN
+          </Link>
+        </div>
       </header>
 
       {/* Search */}

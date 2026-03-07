@@ -3481,6 +3481,39 @@ h2 {
   color: #f1ede8;
 }
 
+.hf-lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 4px 12px;
+  flex-shrink: 0;
+}
+
+.hf-lang-btn {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.hf-lang-btn--active {
+  color: #ffffff;
+}
+
+.hf-lang-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hf-lang-divider {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
 .hf-header-avatar {
   width: 40px;
   height: 40px;
