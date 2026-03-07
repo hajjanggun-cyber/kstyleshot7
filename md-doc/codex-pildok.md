@@ -35,7 +35,7 @@ Google 공식 SEO 기준. 글 작성 품질의 최상위 기준이다.
 
 | 파일 | 읽어야 할 때 |
 |------|-------------|
-| `md-doc/image-webp-alt-prompt.md` | 이미지 삽입 작업 시 |
+| `md-doc/image-webp-alt-prompt.md` | 이미지 삽입 작업 시. `![alt](/images/...)` 문법, `-kr/-en.webp`, 원본 삭제, 공통 본문 이미지 크기 규칙까지 함께 확인할 때 |
 | `md-doc/kpop-blog-topics-300.md` | 3단계 주제 선정 시 |
 | `md-doc/plan.md` | 전체 기획 방향 확인 시 |
 | `md-doc/todo.md` | 할 일 목록 확인 시 |
