@@ -121,8 +121,8 @@ AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
 | 남산 N서울타워 | [004] 남산 N서울타워 야경 가이드 | 남산 N서울타워 야경 명소 | n seoul tower night view spots | ✅ 완료 |
 | 남산 N서울타워 | [005] 남산 케이블카에서 찍는 서울 감성 스냅 사진 | 남산 케이블카 스냅 사진 | namsan cable car photo tips | ✅ 완료 |
 | 홍대 | [006] 홍대 거리 포토존 — 버스킹 무대부터 벽화 골목까지 | 홍대 거리 포토존 추천 | best hongdae street photo spots | ✅ 완료 |
-| 홍대 | [007] 홍대 인디 감성 카페 — 이색 인테리어 포토존 TOP 7 | 홍대 감성 카페 포토존 | hongdae aesthetic cafes for photos | ⬜ 대기 |
-| 홍대 | [050] K-스트릿 패션 완전 분석 — 홍대·성수동 스타일 해부 | 홍대 성수 스트릿 패션 차이 | hongdae vs seongsu street fashion | ⬜ 대기 |
+| 홍대 | [007] 홍대 인디 감성 카페 — 이색 인테리어 포토존 TOP 7 | 홍대 감성 카페 포토존 | hongdae aesthetic cafes for photos | ✅ 완료 |
+| 홍대 | [050] K-스트릿 패션 완전 분석 — 홍대·성수동 스타일 해부 | 홍대 성수 스트릿 패션 차이 | hongdae vs seongsu street fashion | ✅ 완료 |
 | 인사동 | [012] 인사동 전통 감성 포토존 | 인사동 전통 감성 사진 스팟 | insadong traditional photo spots | ⬜ 대기 |
 | 인사동 | [013] 인사동 쌈지길 | 인사동 쌈지길 가는 법 | ssamziegil insadong guide | ⬜ 대기 |
 | 가로수길 | [015] 가로수길 하이엔드 카페 — 세련된 도시 감성 포토존 | 가로수길 카페 포토존 | garosu-gil cafe photo spots | ⬜ 대기 |
@@ -256,6 +256,34 @@ Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
 - content/hub/en/hongdae-street-photo-spots.mdx
 - keyword: best hongdae street photo spots
 다음 세션 시작: 2단계 - 홍대 하위 글 [007] 홍대 인디 감성 카페 — 이색 인테리어 포토존 TOP 7
+
+[2026-03-08 01:34 KST]
+완료:
+- content/hub/ko/hongdae-aesthetic-cafes-for-photos.mdx
+- keyword: 홍대 감성 카페 포토존
+- content/hub/en/hongdae-aesthetic-cafes-for-photos.mdx
+- keyword: hongdae aesthetic cafes for photos
+다음 세션 시작: 2단계 - 홍대 하위 글 [050] K-스트릿 패션 완전 분석 — 홍대·성수동 스타일 해부
+
+[2026-03-08 02:17 KST]
+완료:
+- content/hub/ko/hongdae-vs-seongsu-street-fashion.mdx
+- keyword: 홍대 성수 스트릿 패션 차이
+- content/hub/en/hongdae-vs-seongsu-street-fashion.mdx
+- keyword: hongdae vs seongsu street fashion
+다음 세션 시작: 1단계 - 인사동 허브 글
+
+[2026-03-08 02:17 KST] 홍대 허브 내부 링크 정리 완료
+- 허브 Related Guides에 하위 글 3개([006], [007], [050]) 모두 반영
+- 하위 글 역링크 확인 완료
+- dead link 없음
+
+[2026-03-08 02:17 KST] 홍대 허브 키워드 중복 확인 완료
+- hongdae-hub: 홍대 서울 동네 가이드 / hongdae seoul neighborhood guide
+- [006]: 홍대 거리 포토존 추천 / best hongdae street photo spots
+- [007]: 홍대 감성 카페 포토존 / hongdae aesthetic cafes for photos
+- [050]: 홍대 성수 스트릿 패션 차이 / hongdae vs seongsu street fashion
+- 중복 없음
 
 <!-- 로그 끝 -->
 

@@ -68,6 +68,12 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 | `nextSlug` | optional | slug of the next recommended article |
 | `nextTitle` | optional | display title of the next article |
 
+### Category Value Lock
+
+- KO hub/location articles in this project must use `category: "한국 명소 & 포토존"`
+- EN hub/location articles in this project must use `category: "Seoul Locations"`
+- Never use `category: "서울 명소 & 포토존"` in KO files
+
 ---
 
 ## Article Body Rules
