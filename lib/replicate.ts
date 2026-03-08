@@ -313,7 +313,8 @@ export async function startOutfitTryOnJob(input: {
       input: {
         person_image: input.photoDataUrl,
         cloth_image: input.garmentImageUrl,
-        clot_type: "overall",
+        output_format: "png",
+        output_quality: 100,
       },
     }),
     cache: "no-store",
