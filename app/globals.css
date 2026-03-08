@@ -5040,6 +5040,20 @@ h2 {
   margin: 0;
 }
 
+/* Mid-article CTA banner */
+.ha-mid-cta {
+  padding: 0 16px;
+  margin: 16px auto;
+  max-width: 680px;
+  width: 100%;
+}
+.ha-mid-cta img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+}
+
 /* Article body */
 .ha-body {
   padding: 28px 20px;
