@@ -141,7 +141,8 @@ async function startPrediction(input: {
       input: {
         haircut: input.haircut,
         hair_color: input.hairColor,
-        input_image: input.photoDataUrl
+        input_image: input.photoDataUrl,
+        prompt: "change only the hair, keep the face identical, do not alter facial features"
       }
     }),
     cache: "no-store"
