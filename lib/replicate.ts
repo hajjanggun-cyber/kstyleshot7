@@ -469,6 +469,52 @@ export async function startFluxKontextJob(imageUrl: string, prompt: string): Pro
   return predictionId;
 }
 
+const IC_LIGHT_VERSION =
+  "60015df78a8a795470da6494822982140d57b150b9ef14354e79302ff89f69e3";
+
+/** Starts an ic-light-background relight job — returns predictionId */
+export async function startIcLightJob(input: {
+  subjectImageUrl: string;
+  backgroundImageUrl: string;
+}): Promise<string> {
+  assertReplicateEnv();
+
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/predictions`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: getReplicateAuthHeader(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      version: IC_LIGHT_VERSION,
+      input: {
+        subject_image: input.subjectImageUrl,
+        background_image: input.backgroundImageUrl,
+        output_format: "jpg",
+        num_inference_steps: 25,
+        guidance_scale: 1.5,
+      },
+    }),
+    cache: "no-store",
+  }).catch(() => {
+    throw new ReplicateApiError("Unable to reach Replicate ic-light API.", 502);
+  });
+
+  const payload = await parseApiJson(response);
+  if (!response.ok) {
+    throw new ReplicateApiError(
+      extractApiErrorMessage(payload, `ic-light job failed with status ${response.status}.`),
+      response.status >= 400 && response.status < 500 ? 400 : 502
+    );
+  }
+
+  const predictionId = pickString(payload, ["id"]);
+  if (!predictionId) throw new ReplicateApiError("ic-light response missing id.", 502);
+
+  return predictionId;
+}
+
 export async function pollPredictions(predictionIds: string[]): Promise<ReplicatePrediction[]> {
   assertReplicateEnv();
 

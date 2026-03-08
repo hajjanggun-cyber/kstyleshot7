@@ -3,12 +3,21 @@
  * 1. Fixes EXIF rotation (browser respects EXIF when loading <img>, canvas bakes it in)
  * 2. Scales image to 85% with 10% top padding so AI-generated hair isn't cropped
  */
+// Vercel body limit is 4.5MB. Keep base64 well under that.
+const MAX_DIMENSION = 1024;
+
 export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
-      const W = img.naturalWidth;
-      const H = img.naturalHeight;
+      const origW = img.naturalWidth;
+      const origH = img.naturalHeight;
+
+      // Downscale if either dimension exceeds MAX_DIMENSION
+      const ratio = Math.min(1, MAX_DIMENSION / Math.max(origW, origH));
+      const W = Math.round(origW * ratio);
+      const H = Math.round(origH * ratio);
+
       const canvas = document.createElement("canvas");
       canvas.width = W;
       canvas.height = H;

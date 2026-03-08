@@ -74,7 +74,10 @@ export function LocationFlow() {
   useEffect(() => {
     if (bgRemovedUrl || !bgRemovedPredictionId) return;
 
+    let retries = 0;
     const interval = setInterval(async () => {
+      retries += 1;
+      if (retries >= 40) { clearInterval(interval); return; }
       try {
         const res = await fetch(`/api/bgremove/poll?predictionId=${bgRemovedPredictionId}`);
         if (!res.ok) return;
@@ -95,7 +98,10 @@ export function LocationFlow() {
   useEffect(() => {
     if (outfitPreviewUrl || !outfitPredictionId) return;
 
+    let retries = 0;
     const interval = setInterval(async () => {
+      retries += 1;
+      if (retries >= 40) { clearInterval(interval); return; }
       try {
         const res = await fetch(`/api/outfit/poll?predictionId=${outfitPredictionId}`);
         if (!res.ok) return;

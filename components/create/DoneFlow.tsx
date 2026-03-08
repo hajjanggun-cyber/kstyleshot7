@@ -21,13 +21,19 @@ export function DoneFlow() {
 
   const [shareNotice, setShareNotice] = useState("");
   const [downloading, setDownloading] = useState(false);
+  const [iclightAsked, setIclightAsked] = useState(false);
+  const [iclightLoading, setIclightLoading] = useState(false);
+  const [compositeError, setCompositeError] = useState(false);
 
   // Poll for flux-kontext-dev composite result
   useEffect(() => {
     const predId = store.compositePredictionId;
     if (!predId || store.compositeUrl) return;
 
+    let retries = 0;
     const interval = setInterval(async () => {
+      retries += 1;
+      if (retries >= 40) { clearInterval(interval); setCompositeError(true); return; }
       try {
         const res = await fetch(`/api/composite/poll?predictionId=${predId}`);
         if (!res.ok) return;
@@ -37,6 +43,7 @@ export function DoneFlow() {
           clearInterval(interval);
         } else if (data.status === "failed" || data.status === "canceled") {
           clearInterval(interval);
+          setCompositeError(true);
         }
       } catch {/* retry */}
     }, 3000);
@@ -44,13 +51,72 @@ export function DoneFlow() {
     return () => clearInterval(interval);
   }, [store.compositePredictionId, store.compositeUrl]);
 
+  // Poll for ic-light relight result
+  useEffect(() => {
+    const predId = store.iclightPredictionId;
+    if (!predId || store.iclightUrl) return;
+
+    let retries = 0;
+    const interval = setInterval(async () => {
+      retries += 1;
+      if (retries >= 40) { clearInterval(interval); setIclightLoading(false); return; }
+      try {
+        const res = await fetch(`/api/iclight/poll?predictionId=${predId}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          store.setIclightUrl(data.outputUrl);
+          setIclightLoading(false);
+          clearInterval(interval);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          setIclightLoading(false);
+          clearInterval(interval);
+        }
+      } catch {/* retry */}
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [store.iclightPredictionId, store.iclightUrl]);
+
+  async function handleApplyIcLight() {
+    const bgId = store.location.picked;
+    const subjectUrl = store.bgRemovedUrl;
+    if (!bgId || !subjectUrl) return;
+
+    const bg = backgrounds.find((b) => b.id === bgId);
+    if (!bg) return;
+
+    setIclightLoading(true);
+    setIclightAsked(true);
+    try {
+      const res = await fetch("/api/iclight/preview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subjectUrl, backgroundPath: bg.fullUrl }),
+      });
+      if (!res.ok) {
+        setIclightLoading(false);
+        return;
+      }
+      const data = await res.json() as { predictionId?: string };
+      if (data.predictionId) {
+        store.setIclightPredictionId(data.predictionId);
+      } else {
+        setIclightLoading(false);
+      }
+    } catch {
+      setIclightLoading(false);
+    }
+  }
+
   const hairName = hairStyles.find((h) => h.id === store.hair.chosen[0])?.name ?? store.hair.chosen[0] ?? "—";
   const outfitName = outfits.find((o) => o.id === store.outfit.picked)?.name ?? store.outfit.picked ?? "—";
   const bgName = backgrounds.find((b) => b.id === store.location.picked)?.name ?? store.location.picked ?? "—";
   const bgHint = backgrounds.find((b) => b.id === store.location.picked)?.colorHint;
 
-  // Best available result image — composite first, then fallbacks
+  // Best available result image — ic-light > composite > fallbacks
   const resultUrl =
+    store.iclightUrl ??
     store.compositeUrl ??
     store.outfitPreviewUrl ??
     store.hairPreviewUrl ??
@@ -131,6 +197,11 @@ export function DoneFlow() {
         >
           {resultUrl ? (
             <img alt="Your K-Pop result" className="dn-result-img" src={resultUrl} />
+          ) : compositeError ? (
+            <div className="dn-result-ph">
+              <span className="dn-result-ph-icon">⚠</span>
+              <p>{lang === "ko" ? "배경 합성에 실패했어요. 배경을 다시 선택해 주세요." : "Background synthesis failed. Please go back and try again."}</p>
+            </div>
           ) : store.compositePredictionId ? (
             <div className="dn-result-ph">
               <span className="ot-compare-spinner" />
@@ -149,6 +220,41 @@ export function DoneFlow() {
           </div>
         </div>
       </div>
+
+      {/* ic-light relight prompt — shown when composite is ready, not yet applied */}
+      {store.compositeUrl && !store.iclightUrl && !iclightAsked && store.bgRemovedUrl && store.location.picked ? (
+        <div className="dn-iclight-banner">
+          <p className="dn-iclight-msg">
+            {lang === "ko"
+              ? "✦ 결과가 완성됐어요. AI 조명 보정을 적용하면 피부톤과 배경이 더 자연스럽게 어우러져요. 약 30초가 추가됩니다. 적용할까요?"
+              : "✦ Your result is ready. Applying AI lighting correction will make your skin tone and background blend more naturally. It takes about 30 seconds. Apply?"}
+          </p>
+          <div className="dn-iclight-btns">
+            <button
+              className="dn-iclight-apply"
+              onClick={handleApplyIcLight}
+              type="button"
+            >
+              {lang === "ko" ? "보정 적용 ✦" : "Apply Enhancement ✦"}
+            </button>
+            <button
+              className="dn-iclight-skip"
+              onClick={() => setIclightAsked(true)}
+              type="button"
+            >
+              {lang === "ko" ? "지금 이대로 저장" : "Keep as is"}
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {/* ic-light loading state */}
+      {iclightLoading ? (
+        <div className="dn-iclight-loading">
+          <span className="ot-compare-spinner" />
+          <p>{lang === "ko" ? "AI 조명 보정 중… (~30초)" : "Applying AI lighting… (~30s)"}</p>
+        </div>
+      ) : null}
 
       {/* Summary chips */}
       <div className="dn-summary">

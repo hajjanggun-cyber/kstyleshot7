@@ -24,6 +24,7 @@ export function HairFlow() {
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
   const [isSynthesizing, setIsSynthesizing] = useState(false);
   const [synthPredictionId, setSynthPredictionId] = useState<string | null>(null);
+  const [synthError, setSynthError] = useState(false);
 
   const selectedStyle = hairStyles.find((s) => s.id === selectedStyleId);
   const selectedColor = hairColors.find((c) => c.id === selectedColorId);
@@ -35,7 +36,15 @@ export function HairFlow() {
   useEffect(() => {
     if (!synthPredictionId || !isSynthesizing) return;
 
+    let retries = 0;
     const interval = setInterval(async () => {
+      retries += 1;
+      if (retries >= 40) {
+        clearInterval(interval);
+        setSynthError(true);
+        setTimeout(() => router.push(`/${lang}/create/outfit`), 2000);
+        return;
+      }
       try {
         const res = await fetch(`/api/hair/poll?predictionId=${synthPredictionId}`);
         if (!res.ok) return;
@@ -46,7 +55,8 @@ export function HairFlow() {
           router.push(`/${lang}/create/outfit`);
         } else if (data.status === "failed" || data.status === "canceled") {
           clearInterval(interval);
-          router.push(`/${lang}/create/outfit`);
+          setSynthError(true);
+          setTimeout(() => router.push(`/${lang}/create/outfit`), 2000);
         }
       } catch {/* retry */}
     }, 3000);
@@ -93,26 +103,31 @@ export function HairFlow() {
       }
     } catch {/* non-fatal */}
 
-    // API 실패 시 그냥 다음 단계로
-    router.push(`/${lang}/create/outfit`);
+    // API 실패 시 에러 안내 후 다음 단계로
+    setSynthError(true);
+    setTimeout(() => router.push(`/${lang}/create/outfit`), 2000);
   }
 
   return (
     <div className="hr-root">
       {isSynthesizing && (
         <div className="ot-synth-overlay">
-          <div className="ot-synth-ring" />
+          {synthError ? null : <div className="ot-synth-ring" />}
           <div>
             <p className="ot-synth-title">
-              {lang === "ko" ? "AI가 헤어를 스타일링 중이에요" : "AI is styling your hair"}
+              {synthError
+                ? (lang === "ko" ? "헤어 합성에 실패했어요" : "Hair synthesis failed")
+                : (lang === "ko" ? "AI가 헤어를 스타일링 중이에요" : "AI is styling your hair")}
             </p>
             <p className="ot-synth-sub">
-              {lang === "ko"
-                ? "합성이 완료되면 자동으로 다음 단계로 이동합니다.\n잠깐만 기다려 주세요."
-                : "We'll take you to the next step the moment your hair is ready.\nUsually takes about a minute."}
+              {synthError
+                ? (lang === "ko" ? "원본 사진으로 계속 진행합니다…" : "Continuing with your original photo…")
+                : (lang === "ko"
+                    ? "합성이 완료되면 자동으로 다음 단계로 이동합니다.\n잠깐만 기다려 주세요."
+                    : "We'll take you to the next step the moment your hair is ready.\nUsually takes about a minute.")}
             </p>
           </div>
-          <p className="ot-synth-badge">✦ AI Processing</p>
+          <p className="ot-synth-badge">{synthError ? "⚠ Error" : "✦ AI Processing"}</p>
         </div>
       )}
 

@@ -17,6 +17,7 @@
     "next-mdx-remote": "^6.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sharp": "^0.34.5",
     "zustand": "^5.0.0"
   },
   "devDependencies": {

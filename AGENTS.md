@@ -124,6 +124,32 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - In short UI copy, summary cards, related-link cards, and short guidance text, start a new line after each sentence ending with a period.
 - Do not force sentence-by-sentence line breaks across long body paragraphs; keep standard paragraph flow for the main article body.
 
+### Intro Type Rotation (필수 — AI 패턴 방지)
+
+같은 허브 안의 글끼리 인트로 유형이 겹치지 않도록 4가지 유형을 돌아가며 사용한다.
+
+| 유형 | 설명 | 예시 (홍대 기준) |
+|------|------|-----------------|
+| A. 질문형 | 독자가 실제로 검색할 법한 질문으로 시작 | "홍대에서 뭘 해야 할지 모르겠다면?" |
+| B. 숫자/통계형 | 구체적인 숫자나 규모로 시작 | "주말 하루 방문객 10만 명이 넘는 거리에서" |
+| C. 장면 묘사형 | 그 장소에 실제로 있는 듯한 감각적 묘사 1–2문장 | "오후 6시, 홍대 걷고싶은거리에 버스킹 소리가 깔리기 시작한다" |
+| D. 직설형 | 장소에 대한 확신 있는 한 문장으로 시작 | "홍대는 두 번 가야 보인다. 낮과 밤이 완전히 다른 동네다" |
+
+**금지 패턴** (AI 냄새, 탐지 위험):
+- "많은 사람은 X를 Y로 단순화하지만 실제로는~" 반복 사용 금지
+- "Many people think of X as Y, but in reality~" 반복 사용 금지
+- 같은 허브 내 두 글 이상 동일 유형 사용 금지
+
+인트로는 3문장 이내로 끝낸다. 인트로 유형과 무관하게 3가지 역할(정의→간극→이 글의 가치)은 유지한다.
+
+### Description 작성 규칙 (추가)
+
+- description의 첫 단어가 title과 동일하면 안 된다
+- description은 title을 다른 말로 반복하거나 풀어쓰는 것이 아니다
+- description은 "왜 이 글을 클릭해야 하는가"에 답하는 독립된 한 문장이어야 한다
+- 나쁜 예: title "홍대 서울 동네 가이드" → description "홍대 서울 동네 가이드가 왜~" (title 앵무새)
+- 좋은 예: title "홍대 서울 동네 가이드" → description "버스킹부터 새벽 클럽까지, 홍대가 서울 청년 문화의 진원지가 된 이유를 낮과 밤으로 나눠 정리했다"
+
 ### Keyword Rules (SEO — mandatory)
 
 - Before writing, select one primary target keyword per language (KO and EN separately)
@@ -235,7 +261,11 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 **콘텐츠 품질**
 - [ ] `title` is unique and under 60 characters
 - [ ] `description` is 120–155 characters and answers "why click"
+- [ ] `description`의 첫 단어가 `title`과 동일하지 않은가
+- [ ] `description`이 `title`을 단순 반복/풀어쓰기 하지 않는가
 - [ ] Intro defines, challenges, and promises
+- [ ] 인트로 유형이 같은 허브 내 다른 글과 겹치지 않는가 (A/B/C/D 중 하나)
+- [ ] 인트로가 "많은 사람은 X를 Y로~" 패턴이 아닌가
 - [ ] No padding sentences
 
 **키워드**
