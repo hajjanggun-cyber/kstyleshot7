@@ -56,6 +56,8 @@ export type HairStyle = {
   colorHint?: string;
 };
 
+export type ClothType = "upper" | "lower" | "overall" | "inner" | "outer";
+
 export type Outfit = {
   id: string;
   name: string;
@@ -65,6 +67,7 @@ export type Outfit = {
   tags: string[];
   category?: "stage" | "street" | "award";
   colorHint?: string;
+  clothType?: ClothType;
 };
 
 export type Background = {

@@ -10,6 +10,7 @@ export const outfits: Outfit[] = [
     description: "Girl Group Stage",
     tags: ["stage", "dress"],
     category: "stage",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #1a0a2a, #3a1a4a, #2a0a3a)",
   },
   {
@@ -20,6 +21,7 @@ export const outfits: Outfit[] = [
     description: "Concert Stage Look",
     tags: ["stage", "costume"],
     category: "stage",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #0a0a1a, #1a1a3a, #2a1a4a)",
   },
   {
@@ -30,6 +32,7 @@ export const outfits: Outfit[] = [
     description: "Idol Comeback Stage",
     tags: ["stage", "bold"],
     category: "stage",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #1a0a0a, #3a1a1a, #2a0a2a)",
   },
   {
@@ -40,6 +43,7 @@ export const outfits: Outfit[] = [
     description: "Stage Visual Set",
     tags: ["stage", "set"],
     category: "stage",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #0a1a0a, #1a2a1a, #0a1a2a)",
   },
   {
@@ -50,6 +54,7 @@ export const outfits: Outfit[] = [
     description: "Practice Room Look",
     tags: ["stage", "casual"],
     category: "stage",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #1a1a1a, #2a2a2a, #1a2a2a)",
   },
   // ── Street ─────────────────────────────────────────
@@ -61,6 +66,7 @@ export const outfits: Outfit[] = [
     description: "Cozy Street Style",
     tags: ["street", "casual"],
     category: "street",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #2a1a0a, #4a3a2a, #3a2a1a)",
   },
   {
@@ -71,6 +77,7 @@ export const outfits: Outfit[] = [
     description: "Sporty Chic",
     tags: ["street", "sporty"],
     category: "street",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #1a2a1a, #2a3a2a, #1a1a2a)",
   },
   {
@@ -81,6 +88,7 @@ export const outfits: Outfit[] = [
     description: "K-Street Classic",
     tags: ["street", "denim"],
     category: "street",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #1e3a5f, #2e5a8f, #1a2a4a)",
   },
   {
@@ -91,6 +99,7 @@ export const outfits: Outfit[] = [
     description: "Feminine Street",
     tags: ["street", "floral"],
     category: "street",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #2a1a2a, #4a2a3a, #3a1a2a)",
   },
   {
@@ -101,6 +110,7 @@ export const outfits: Outfit[] = [
     description: "Han River Vibes",
     tags: ["street", "casual"],
     category: "street",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #0a2a1a, #1a4a2a, #0a3a2a)",
   },
   {
@@ -111,6 +121,7 @@ export const outfits: Outfit[] = [
     description: "Edge Street Look",
     tags: ["street", "leather"],
     category: "street",
+    clothType: "outer",
     colorHint: "linear-gradient(160deg, #0a0a0a, #1a1a1a, #2a1a0a)",
   },
   {
@@ -121,6 +132,7 @@ export const outfits: Outfit[] = [
     description: "Comfy Street Core",
     tags: ["street", "oversized"],
     category: "street",
+    clothType: "upper",
     colorHint: "linear-gradient(160deg, #1a1a3a, #2a2a5a, #1a2a4a)",
   },
   {
@@ -131,6 +143,7 @@ export const outfits: Outfit[] = [
     description: "Street Edit",
     tags: ["street"],
     category: "street",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #1a1a2a, #2a2a3a, #1a2a3a)",
   },
   {
@@ -141,6 +154,7 @@ export const outfits: Outfit[] = [
     description: "Street Edit",
     tags: ["street"],
     category: "street",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #2a1a1a, #3a2a2a, #2a2a1a)",
   },
   // ── Award ──────────────────────────────────────────
@@ -152,6 +166,7 @@ export const outfits: Outfit[] = [
     description: "Modern Hanbok",
     tags: ["award", "hanbok"],
     category: "award",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #2a0a0a, #4a1a1a, #3a0a2a)",
   },
   {
@@ -162,6 +177,7 @@ export const outfits: Outfit[] = [
     description: "Pastel Award Look",
     tags: ["award", "hanbok", "pastel"],
     category: "award",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #2a1a3a, #4a2a5a, #3a2a4a)",
   },
   {
@@ -172,6 +188,7 @@ export const outfits: Outfit[] = [
     description: "Black Tie Edge",
     tags: ["award", "leather", "elegant"],
     category: "award",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #0a0a0a, #1a1a1a, #0a0a1a)",
   },
   {
@@ -182,6 +199,7 @@ export const outfits: Outfit[] = [
     description: "Award Femininity",
     tags: ["award", "dress", "pink"],
     category: "award",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #2a0a1a, #4a1a2a, #3a0a1a)",
   },
   {
@@ -192,6 +210,7 @@ export const outfits: Outfit[] = [
     description: "Daesang Look",
     tags: ["award", "luxury"],
     category: "award",
+    clothType: "overall",
     colorHint: "linear-gradient(160deg, #1a1a0a, #3a3a1a, #2a2a0a)",
   },
 ];

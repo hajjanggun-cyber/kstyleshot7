@@ -17,9 +17,10 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as {
       photoDataUrl?: unknown;
       garmentImagePath?: unknown;
+      clothType?: unknown;
     };
 
-    const { photoDataUrl, garmentImagePath } = body;
+    const { photoDataUrl, garmentImagePath, clothType } = body;
 
     if (typeof photoDataUrl !== "string" || !photoDataUrl) {
       return NextResponse.json({ error: "Missing photoDataUrl" }, { status: 400 });
@@ -43,6 +44,7 @@ export async function POST(request: NextRequest) {
     const predictionId = await startFashnTryOnJob({
       modelImageDataUrl: photoDataUrl,
       garmentImageDataUrl: garmentDataUrl,
+      clothType: typeof clothType === "string" ? clothType : "overall",
     });
 
     return NextResponse.json({ predictionId });

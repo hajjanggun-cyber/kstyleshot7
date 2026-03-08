@@ -140,7 +140,7 @@ export function OutfitFlow() {
       const res = await fetch("/api/outfit/preview", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ photoDataUrl: dataUrl, garmentImagePath: selectedOutfitData.garmentImage }),
+        body: JSON.stringify({ photoDataUrl: dataUrl, garmentImagePath: selectedOutfitData.garmentImage, clothType: selectedOutfitData.clothType ?? "overall" }),
       });
       const data = res.ok ? await res.json() as { predictionId?: string } : null;
 
