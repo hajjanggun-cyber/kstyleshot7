@@ -355,7 +355,16 @@ export async function startBgRemovalJob(imageUrl: string): Promise<string> {
       Authorization: getReplicateAuthHeader(),
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ version: BG_REMOVER_VERSION, input: { image: imageUrl } }),
+    body: JSON.stringify({
+      version: BG_REMOVER_VERSION,
+      input: {
+        image: imageUrl,
+        format: "png",
+        reverse: false,
+        threshold: 0,
+        background_type: "rgba",
+      },
+    }),
     cache: "no-store",
   }).catch(() => {
     throw new ReplicateApiError("Unable to reach Replicate BG removal API.", 502);
