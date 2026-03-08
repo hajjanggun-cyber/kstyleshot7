@@ -43,13 +43,16 @@ export function OutfitFlow() {
     setHairPreviewUrl,
     setOutfitChosen,
     setOutfitPredictionId,
+    setOutfitPreviewUrl,
     pickOutfit,
     setStatus,
   } = useCreateStore();
 
   const [activeCategory, setActiveCategory] = useState<Category>("stage");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [isApplying, setIsApplying] = useState(false);
+  const [isSynthesizing, setIsSynthesizing] = useState(false);
+  const [synthPredictionId, setSynthPredictionId] = useState<string | null>(null);
+  const [pendingChosenId, setPendingChosenId] = useState<string | null>(null);
 
   // Poll Replicate for hair preview result
   useEffect(() => {
@@ -74,6 +77,36 @@ export function OutfitFlow() {
     return () => clearInterval(interval);
   }, [hairPreviewUrl, hairPredictionId, setHairPreviewUrl]);
 
+  // Poll for outfit synthesis result, navigate when done
+  useEffect(() => {
+    if (!synthPredictionId || !isSynthesizing || !pendingChosenId) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/outfit/poll?predictionId=${synthPredictionId}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          setOutfitPreviewUrl(data.outputUrl);
+          clearInterval(interval);
+          navigateNext(pendingChosenId);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          clearInterval(interval);
+          navigateNext(pendingChosenId);
+        }
+      } catch {/* retry */}
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [synthPredictionId, isSynthesizing, pendingChosenId]);
+
+  function navigateNext(chosen: string) {
+    setOutfitChosen([chosen]);
+    pickOutfit(chosen);
+    setStatus("location_selecting");
+    router.push(`/${lang}/create/location`);
+  }
+
   const filtered = outfits.filter((o) => o.category === activeCategory);
   const selectedOutfit = outfits.find((o) => o.id === selectedId);
 
@@ -81,49 +114,58 @@ export function OutfitFlow() {
     setSelectedId(id === selectedId ? null : id);
   }
 
-  function handleApply() {
-    if (isApplying) return;
-    setIsApplying(true);
+  async function handleApply() {
+    if (isSynthesizing) return;
     const chosen = selectedId ?? "demo-outfit";
+    setPendingChosenId(chosen);
 
-    // Truly fire-and-forget: start outfit try-on without blocking navigation
-    if (photoBlobUrl && selectedId) {
-      const selectedOutfitData = outfits.find((o) => o.id === selectedId);
-      if (selectedOutfitData) {
-        const blobUrl = photoBlobUrl;
-        const garmentPath = selectedOutfitData.garmentImage;
-        new Promise<string>((resolve, reject) => {
-          const xhr = new XMLHttpRequest();
-          xhr.responseType = "blob";
-          xhr.onload = () => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result as string);
-            reader.onerror = reject;
-            reader.readAsDataURL(xhr.response as Blob);
-          };
-          xhr.onerror = reject;
-          xhr.open("GET", blobUrl);
-          xhr.send();
-        })
-          .then((dataUrl) =>
-            fetch("/api/outfit/preview", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ photoDataUrl: dataUrl, garmentImagePath: garmentPath }),
-            })
-          )
-          .then((res) => (res.ok ? res.json() : null))
-          .then((data: { predictionId?: string } | null) => {
-            if (data?.predictionId) setOutfitPredictionId(data.predictionId);
-          })
-          .catch(() => {/* ignore */});
-      }
+    if (!photoBlobUrl || !selectedId) {
+      navigateNext(chosen);
+      return;
     }
 
-    setOutfitChosen([chosen]);
-    pickOutfit(chosen);
-    setStatus("location_selecting");
-    router.push(`/${lang}/create/location`);
+    const selectedOutfitData = outfits.find((o) => o.id === selectedId);
+    if (!selectedOutfitData) {
+      navigateNext(chosen);
+      return;
+    }
+
+    setIsSynthesizing(true);
+
+    try {
+      // Convert blob URL to base64
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "blob";
+        xhr.onload = () => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(xhr.response as Blob);
+        };
+        xhr.onerror = reject;
+        xhr.open("GET", photoBlobUrl);
+        xhr.send();
+      });
+
+      const res = await fetch("/api/outfit/preview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ photoDataUrl: dataUrl, garmentImagePath: selectedOutfitData.garmentImage }),
+      });
+      const data = res.ok ? await res.json() as { predictionId?: string } : null;
+
+      if (data?.predictionId) {
+        setOutfitPredictionId(data.predictionId);
+        setSynthPredictionId(data.predictionId);
+        // polling useEffect will navigate when done
+      } else {
+        // API 실패 → 그냥 다음 단계로
+        navigateNext(chosen);
+      }
+    } catch {
+      navigateNext(chosen);
+    }
   }
 
   if (!hair.chosen.length) {
@@ -146,6 +188,23 @@ export function OutfitFlow() {
 
   return (
     <div className="ot-root">
+      {/* Full-screen synthesis overlay */}
+      {isSynthesizing && (
+        <div className="ot-synth-overlay">
+          <div className="ot-synth-ring" />
+          <div>
+            <p className="ot-synth-title">
+              {lang === "ko" ? "AI가 스타일링 중이에요" : "AI is styling your look"}
+            </p>
+            <p className="ot-synth-sub">
+              {lang === "ko"
+                ? "합성이 완료되면 자동으로 다음 단계로 이동합니다.\n잠깐만 기다려 주세요."
+                : "We'll take you to the next step the moment your outfit is ready.\nUsually takes about a minute."}
+            </p>
+          </div>
+          <p className="ot-synth-badge">✦ AI Processing</p>
+        </div>
+      )}
       {/* Nav */}
       <nav className="ot-nav">
         <Link className="ot-back-btn" href={`/${lang}/create/hair`}>←</Link>
@@ -278,11 +337,16 @@ export function OutfitFlow() {
       <div className="ot-bottom">
         <button
           className="up-next-btn up-next-btn--active"
-          disabled={isApplying}
+          disabled={isSynthesizing}
           onClick={handleApply}
           type="button"
         >
-          {isApplying ? t("applying") : t("nextBtn")}
+          {isSynthesizing ? (
+            <>
+              <span className="ot-compare-spinner" />
+              {lang === "ko" ? "AI 합성 중…" : "AI Synthesizing…"}
+            </>
+          ) : t("nextBtn")}
         </button>
       </div>
     </div>

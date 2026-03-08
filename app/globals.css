@@ -3307,6 +3307,57 @@ h2 {
   text-decoration: none;
 }
 
+/* Synthesis overlay — blocks all interaction */
+.ot-synth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background: rgba(10, 8, 6, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 32px;
+  text-align: center;
+}
+
+.ot-synth-ring {
+  width: 64px;
+  height: 64px;
+  border: 4px solid rgba(255, 180, 60, 0.15);
+  border-top-color: #f4a825;
+  border-radius: 50%;
+  animation: ot-spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+.ot-synth-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.ot-synth-sub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.ot-synth-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #f4a825;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
 /* Fixed bottom */
 .ot-bottom {
   position: fixed;
