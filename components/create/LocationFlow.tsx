@@ -8,6 +8,15 @@ import { useTranslations } from "next-intl";
 import { backgrounds } from "@/data/backgrounds";
 import { useCreateStore } from "@/store/createStore";
 
+async function downloadImage(proxyUrl: string) {
+  const a = document.createElement("a");
+  a.href = proxyUrl;
+  a.download = "kstyleshot-hair.jpg";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 const SAMPLE_SHOOTS = [
   { color: "linear-gradient(160deg, #1a2a40, #2a3a60, #1a2030)" },
   { color: "linear-gradient(160deg, #2a1a30, #4a2a50, #2a1a40)" },
@@ -21,11 +30,22 @@ export function LocationFlow() {
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.location");
 
-  const { photoBlobUrl, outfit, hair, setLocationChosen, pickLocation, setStatus } =
+  const { photoBlobUrl, outfit, hair, hairPreviewUrl, setLocationChosen, pickLocation, setStatus } =
     useCreateStore();
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  async function handleDownload() {
+    if (!hairPreviewUrl || isDownloading) return;
+    setIsDownloading(true);
+    try {
+      await downloadImage(`/api/hair/download?url=${encodeURIComponent(hairPreviewUrl)}`);
+    } finally {
+      setIsDownloading(false);
+    }
+  }
 
   const selectedBg = backgrounds.find((b) => b.id === selectedId);
 
@@ -114,6 +134,31 @@ export function LocationFlow() {
             <button className="lc-hud-cam" type="button">📷</button>
           </div>
         </div>
+
+        {/* ── Hair result download ── */}
+        {hairPreviewUrl ? (
+          <div className="lc-dl-card">
+            <img className="lc-dl-img" src={hairPreviewUrl} alt="AI hair result" />
+            <div className="lc-dl-info">
+              <p className="lc-dl-kicker">
+                {lang === "ko" ? "AI 헤어 합성 완료" : "AI Hair Result"}
+              </p>
+              <p className="lc-dl-name">
+                {hair.chosen[0]?.replace(/-/g, " ") ?? "Hair Style"}
+              </p>
+              <button
+                className={`lc-dl-btn${isDownloading ? " lc-dl-btn--loading" : ""}`}
+                disabled={isDownloading}
+                onClick={handleDownload}
+                type="button"
+              >
+                {isDownloading
+                  ? (lang === "ko" ? "다운로드 중…" : "Downloading…")
+                  : (lang === "ko" ? "⬇ 사진 저장" : "⬇ Save Photo")}
+              </button>
+            </div>
+          </div>
+        ) : null}
 
         {/* Location picker */}
         <div className="lc-section">

@@ -3541,6 +3541,79 @@ h2 {
   text-decoration: none;
 }
 
+/* ── Hair download card ── */
+.lc-dl-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 16px 16px;
+  padding: 14px;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 18px;
+}
+
+.lc-dl-img {
+  width: 72px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+  border: 2px solid rgba(0, 255, 255, 0.25);
+}
+
+.lc-dl-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lc-dl-kicker {
+  margin: 0;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0ff;
+}
+
+.lc-dl-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f1ede8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+}
+
+.lc-dl-btn {
+  margin-top: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #0ff;
+  color: #0a0a0a;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.lc-dl-btn:hover {
+  opacity: 0.85;
+}
+
+.lc-dl-btn--loading {
+  opacity: 0.6;
+  cursor: wait;
+}
+
 /* Fixed bottom */
 .lc-bottom {
   position: fixed;
