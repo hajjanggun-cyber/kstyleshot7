@@ -119,7 +119,7 @@ export const hairStyles: HairStyle[] = [
     id: "ombre",
     name: "Ombré",
     haircut: "Ombré",
-    thumbnail: "/hairstyles/trendy/ombre.webp",
+    thumbnail: "/hairstyles/trendy/ombre.jpeg",
     tags: ["color", "gradient"],
     category: "trendy",
     colorHint: "linear-gradient(160deg, #1a1a1a, #5a3a1a, #c8a04a)",
