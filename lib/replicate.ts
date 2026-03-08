@@ -389,6 +389,77 @@ export async function startCutoutJob(): Promise<string[]> {
   );
 }
 
+export { getPrediction };
+
+/** Uploads an image buffer to Replicate Files API — returns a CDN URL */
+export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): Promise<string> {
+  assertReplicateEnv();
+
+  const form = new FormData();
+  form.append("content", new Blob([buffer], { type: mimeType }), "composite.jpg");
+
+  const response = await fetch(`${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/files`, {
+    method: "POST",
+    headers: { Authorization: getReplicateAuthHeader() },
+    body: form,
+    cache: "no-store",
+  }).catch(() => {
+    throw new ReplicateApiError("Unable to reach Replicate Files API.", 502);
+  });
+
+  const payload = await parseApiJson(response);
+  if (!response.ok) {
+    throw new ReplicateApiError(
+      extractApiErrorMessage(payload, `File upload failed with status ${response.status}.`),
+      response.status >= 400 && response.status < 500 ? 400 : 502
+    );
+  }
+
+  const urls = isRecord(payload) ? payload.urls : null;
+  const url = isRecord(urls) ? pickString(urls, ["get"]) : null;
+  if (!url) throw new ReplicateApiError("File upload response missing URL.", 502);
+
+  return url;
+}
+
+/** Starts a flux-kontext-dev prediction — returns predictionId */
+export async function startFluxKontextJob(imageUrl: string, prompt: string): Promise<string> {
+  assertReplicateEnv();
+
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/black-forest-labs/flux-kontext-dev/predictions`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: getReplicateAuthHeader(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      input: {
+        prompt,
+        input_image: imageUrl,
+        output_format: "jpg",
+        num_inference_steps: 28,
+      },
+    }),
+    cache: "no-store",
+  }).catch(() => {
+    throw new ReplicateApiError("Unable to reach Replicate Flux Kontext API.", 502);
+  });
+
+  const payload = await parseApiJson(response);
+  if (!response.ok) {
+    throw new ReplicateApiError(
+      extractApiErrorMessage(payload, `Flux Kontext job failed with status ${response.status}.`),
+      response.status >= 400 && response.status < 500 ? 400 : 502
+    );
+  }
+
+  const predictionId = pickString(payload, ["id"]);
+  if (!predictionId) throw new ReplicateApiError("Flux Kontext response missing id.", 502);
+
+  return predictionId;
+}
+
 export async function pollPredictions(predictionIds: string[]): Promise<ReplicatePrediction[]> {
   assertReplicateEnv();
 

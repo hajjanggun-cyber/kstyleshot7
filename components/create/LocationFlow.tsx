@@ -43,6 +43,7 @@ export function LocationFlow() {
     setBgRemovedUrl,
     setBgRemovedPredictionId,
     setCompositeUrl,
+    setCompositePredictionId,
     setLocationChosen,
     pickLocation,
     setStatus,
@@ -148,7 +149,7 @@ export function LocationFlow() {
     setLocationChosen([chosen]);
     setStatus("composite_completed");
 
-    // If we have a BG-removed person + selected background → composite
+    // If we have a BG-removed person + selected background → composite + flux enhance
     if (bgRemovedUrl && bg?.fullUrl) {
       try {
         const res = await fetch("/api/composite", {
@@ -157,9 +158,8 @@ export function LocationFlow() {
           body: JSON.stringify({ personUrl: bgRemovedUrl, backgroundPath: bg.fullUrl }),
         });
         if (res.ok) {
-          const blob = await res.blob();
-          const url = URL.createObjectURL(blob);
-          setCompositeUrl(url);
+          const data = await res.json() as { predictionId?: string };
+          if (data.predictionId) setCompositePredictionId(data.predictionId);
         }
       } catch {/* show done page anyway */}
     }

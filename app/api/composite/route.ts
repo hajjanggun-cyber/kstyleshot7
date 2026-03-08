@@ -3,10 +3,20 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import sharp from "sharp";
 
-export const maxDuration = 10;
+import {
+  uploadToReplicateFiles,
+  startFluxKontextJob,
+  ReplicateApiError,
+} from "@/lib/replicate";
+
+export const maxDuration = 20;
+
+const FLUX_PROMPT =
+  "Photorealistic photograph. The person is naturally standing at this location. " +
+  "Match the lighting and shadows to the background scene. " +
+  "Seamlessly blend the person into the environment. Keep the person's face and outfit exactly the same.";
 
 function sanitizeBackgroundPath(bgPath: string): string | null {
-  // Only allow /backgrounds/*.png or .webp — no traversal
   if (!/^\/backgrounds\/[\w\-]+\.(png|webp)$/.test(bgPath)) return null;
   return bgPath;
 }
@@ -39,7 +49,7 @@ export async function POST(request: NextRequest) {
     const BG_W = bgMeta.width ?? 1024;
     const BG_H = bgMeta.height ?? 1024;
 
-    // Fetch transparent person PNG from Replicate CDN
+    // Fetch transparent person PNG
     const personRes = await fetch(personUrl, { cache: "no-store" });
     if (!personRes.ok) {
       return NextResponse.json({ error: "Failed to fetch person image" }, { status: 502 });
@@ -67,13 +77,18 @@ export async function POST(request: NextRequest) {
       .jpeg({ quality: 90 })
       .toBuffer();
 
-    return new NextResponse(composited.buffer as ArrayBuffer, {
-      headers: {
-        "Content-Type": "image/jpeg",
-        "Cache-Control": "no-store",
-      },
-    });
+    // Upload composite to Replicate Files → get public URL
+    const compositeFileUrl = await uploadToReplicateFiles(composited, "image/jpeg");
+
+    // Start flux-kontext-dev to blend lighting naturally
+    const predictionId = await startFluxKontextJob(compositeFileUrl, FLUX_PROMPT);
+
+    return NextResponse.json({ predictionId });
   } catch (err) {
+    if (err instanceof ReplicateApiError) {
+      console.error("[composite] Replicate error:", err.status, err.message);
+      return NextResponse.json({ error: err.message }, { status: err.status });
+    }
     console.error("[composite]", err);
     return NextResponse.json({ error: "Composite failed" }, { status: 500 });
   }

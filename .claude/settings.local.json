@@ -20,7 +20,15 @@
       "Bash(for f in \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\app\\\\[lang]\\\\cookie-policy\\\\page.tsx\" \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\app\\\\[lang]\\\\privacy\\\\page.tsx\" \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\app\\\\[lang]\\\\refund-policy\\\\page.tsx\" \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\app\\\\[lang]\\\\terms\\\\page.tsx\")",
       "Bash(echo \"=== $f ===\")",
       "Read(//c/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "WebFetch(domain:replicate.com)",
+      "Bash(mv:*)",
+      "Bash(ls -la \"C:/Users/홈_메인/Desktop/11 11 실전코딩/k-pop/kstyleshot/public/outfits/\"*.jpeg)",
+      "Read(//c/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/{sum+=$5; count++; print $5, $9} END {printf \"\"\"\"총 %d개, 합계 %.1fMB, 평균 %.0fKB/n\"\"\"\", count, sum/1024/1024, sum/count/**)",
+      "Bash(ls -la \"C:/Users/홈_메인/Desktop/11 11 실전코딩/k-pop/kstyleshot/public/backgrounds/\"*.png)",
+      "Bash(ls -la \"C:/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/public/outfits/\"*.jpeg)",
+      "Read(//c/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/{sum+=$5; count++} END {printf \"\"\"\"outfits: %d개, 평균 %.0fKB/n\"\"\"\", count, sum/count/**)",
+      "Bash(ls -la \"C:/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/public/backgrounds/\"*.png)"
     ]
   }
 }

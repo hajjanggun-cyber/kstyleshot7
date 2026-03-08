@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
@@ -21,6 +21,28 @@ export function DoneFlow() {
 
   const [shareNotice, setShareNotice] = useState("");
   const [downloading, setDownloading] = useState(false);
+
+  // Poll for flux-kontext-dev composite result
+  useEffect(() => {
+    const predId = store.compositePredictionId;
+    if (!predId || store.compositeUrl) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/composite/poll?predictionId=${predId}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          store.setCompositeUrl(data.outputUrl);
+          clearInterval(interval);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          clearInterval(interval);
+        }
+      } catch {/* retry */}
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [store.compositePredictionId, store.compositeUrl]);
 
   const hairName = hairStyles.find((h) => h.id === store.hair.chosen[0])?.name ?? store.hair.chosen[0] ?? "—";
   const outfitName = outfits.find((o) => o.id === store.outfit.picked)?.name ?? store.outfit.picked ?? "—";
@@ -109,6 +131,11 @@ export function DoneFlow() {
         >
           {resultUrl ? (
             <img alt="Your K-Pop result" className="dn-result-img" src={resultUrl} />
+          ) : store.compositePredictionId ? (
+            <div className="dn-result-ph">
+              <span className="ot-compare-spinner" />
+              <p>{lang === "ko" ? "AI가 배경을 합성하는 중…" : "AI is blending your background…"}</p>
+            </div>
           ) : (
             <div className="dn-result-ph">
               <span className="dn-result-ph-icon">✦</span>
