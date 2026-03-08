@@ -1,5 +1,5 @@
 const FAL_BASE = "https://queue.fal.run";
-const FAL_OUTFIT_MODEL = "fal-ai/cat-vton";
+const FAL_MODEL = "fal-ai/fashn/tryon/v1.6";
 
 function getFalAuthHeader(): string {
   const key = process.env.FAL_KEY?.trim();
@@ -16,25 +16,28 @@ export class FalApiError extends Error {
   }
 }
 
-/** Starts a cat-vton try-on job — returns request_id */
+/** Starts a FASHN v1.6 try-on job — returns request_id */
 export async function startFashnTryOnJob(input: {
   modelImageDataUrl: string;
   garmentImageDataUrl: string;
   clothType?: string;
 }): Promise<string> {
-  const res = await fetch(`${FAL_BASE}/${FAL_OUTFIT_MODEL}`, {
+  const res = await fetch(`${FAL_BASE}/${FAL_MODEL}`, {
     method: "POST",
     headers: {
       Authorization: getFalAuthHeader(),
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      human_image_url: input.modelImageDataUrl,
-      garment_image_url: input.garmentImageDataUrl,
-      cloth_type: input.clothType ?? "overall",
-      image_size: "portrait_4_3",
-      num_inference_steps: 30,
-      guidance_scale: 2.5,
+      model_image: input.modelImageDataUrl,
+      garment_image: input.garmentImageDataUrl,
+      category: "auto",
+      mode: "balanced",
+      garment_photo_type: "auto",
+      moderation_level: "permissive",
+      num_samples: 1,
+      segmentation_free: true,
+      output_format: "png",
     }),
     cache: "no-store",
   }).catch(() => {
@@ -53,13 +56,13 @@ export async function startFashnTryOnJob(input: {
   return requestId;
 }
 
-/** Polls cat-vton job status — returns status + outputUrl when done */
+/** Polls FASHN job status — returns status + outputUrl when done */
 export async function pollFashnJob(requestId: string): Promise<{
   status: "processing" | "succeeded" | "failed";
   outputUrl: string | null;
 }> {
   const statusRes = await fetch(
-    `${FAL_BASE}/${FAL_OUTFIT_MODEL}/requests/${requestId}/status`,
+    `${FAL_BASE}/fal-ai/fashn/requests/${requestId}/status`,
     {
       headers: { Authorization: getFalAuthHeader() },
       cache: "no-store",
@@ -76,7 +79,7 @@ export async function pollFashnJob(requestId: string): Promise<{
 
   // Fetch result
   const resultRes = await fetch(
-    `${FAL_BASE}/${FAL_OUTFIT_MODEL}/requests/${requestId}`,
+    `${FAL_BASE}/fal-ai/fashn/requests/${requestId}`,
     {
       headers: { Authorization: getFalAuthHeader() },
       cache: "no-store",
@@ -86,8 +89,7 @@ export async function pollFashnJob(requestId: string): Promise<{
   });
 
   const result = await resultRes.json().catch(() => null);
-  // cat-vton output: { image: { url: string } }
-  const outputUrl = (result?.image?.url as string | undefined) ?? null;
+  const outputUrl = (result?.images as Array<{ url: string }> | undefined)?.[0]?.url ?? null;
 
   return { status: "succeeded", outputUrl };
 }
