@@ -17,8 +17,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ predictionId });
   } catch (err) {
     if (err instanceof ReplicateApiError) {
+      console.error("[bgremove] Replicate error:", err.status, err.message);
       return NextResponse.json({ error: err.message }, { status: err.status });
     }
+    console.error("[bgremove] Unexpected error:", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
