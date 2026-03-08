@@ -13,7 +13,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing imageUrl" }, { status: 400 });
     }
 
-    const predictionId = await startBgRemovalJob(imageUrl);
+    // Fetch external image (e.g. fal.ai CDN) server-side → convert to base64
+    // so Replicate doesn't need to access potentially restricted/expiring URLs
+    let inputForReplicate: string = imageUrl;
+    if (!imageUrl.startsWith("data:")) {
+      const res = await fetch(imageUrl, { cache: "no-store" }).catch(() => null);
+      if (res && res.ok) {
+        const buffer = Buffer.from(await res.arrayBuffer());
+        const mime = res.headers.get("content-type") ?? "image/png";
+        inputForReplicate = `data:${mime};base64,${buffer.toString("base64")}`;
+      }
+    }
+
+    const predictionId = await startBgRemovalJob(inputForReplicate);
     return NextResponse.json({ predictionId });
   } catch (err) {
     if (err instanceof ReplicateApiError) {

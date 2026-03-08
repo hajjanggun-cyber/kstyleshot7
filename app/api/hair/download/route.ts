@@ -14,8 +14,8 @@ export async function GET(request: Request) {
     return new Response("Invalid url", { status: 400 });
   }
 
-  // Only allow Replicate delivery domains
-  const allowed = ["replicate.delivery", "pbxt.replicate.delivery", "replicate.com"];
+  // Allow Replicate and fal.ai CDN domains
+  const allowed = ["replicate.delivery", "pbxt.replicate.delivery", "replicate.com", "cdn.fashn.ai", "fal.media", "v3.fal.media"];
   const hostname = new URL(imageUrl).hostname;
   if (!allowed.some((d) => hostname.endsWith(d))) {
     return new Response("Forbidden", { status: 403 });
