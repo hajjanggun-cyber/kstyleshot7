@@ -396,7 +396,7 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
   assertReplicateEnv();
 
   const form = new FormData();
-  form.append("content", new Blob([buffer], { type: mimeType }), "composite.jpg");
+  form.append("content", new Blob([new Uint8Array(buffer)], { type: mimeType }), "composite.jpg");
 
   const response = await fetch(`${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/files`, {
     method: "POST",
