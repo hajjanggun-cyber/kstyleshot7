@@ -1,6 +1,6 @@
 export const HAIR_MODEL = "flux-kontext-apps/change-haircut";
 const REPLICATE_API_BASE_URL = process.env.REPLICATE_API_BASE_URL ?? "https://api.replicate.com";
-const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "Random";
+const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "Black";
 
 type JsonRecord = Record<string, unknown>;
 
