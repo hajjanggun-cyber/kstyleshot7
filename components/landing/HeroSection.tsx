@@ -19,6 +19,7 @@ export function HeroSection() {
           src="/visuals/landing/seoul-kstyle-landing-hero.webp"
         />
         <div className="lp-hero-fade" />
+        {/* Desktop only: text overlaid on image */}
         <div className="lp-hero-overlay">
           <p className="lp-hero-eyebrow">{t("eyebrow")}</p>
           <h1 className="lp-hero-h1">{t("title")}</h1>
@@ -27,6 +28,16 @@ export function HeroSection() {
             {t("start")}
           </Link>
         </div>
+      </div>
+
+      {/* Mobile only: card below the image */}
+      <div className="lp-hero-card">
+        <p className="lp-hero-eyebrow">{t("eyebrow")}</p>
+        <h1 className="lp-hero-h1">{t("title")}</h1>
+        <p className="lp-hero-sub">{t("description")}</p>
+        <Link className="lp-cta-btn lp-cta-btn--full" href={`/${lang}/create/intro`}>
+          {t("start")}
+        </Link>
       </div>
     </section>
   );
