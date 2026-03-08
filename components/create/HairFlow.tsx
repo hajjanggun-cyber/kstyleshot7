@@ -87,7 +87,11 @@ export function HairFlow() {
 
       {/* ── Compact photo strip ── */}
       <div className="hr-strip">
-        <img className="hr-strip-img" src={photoBlobUrl} alt="" />
+        {photoBlobUrl ? (
+          <img className="hr-strip-img" src={photoBlobUrl} alt="" />
+        ) : (
+          <div className="hr-strip-img" style={{ background: "#2a1c10", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>👤</div>
+        )}
         <div className="hr-strip-meta">
           <p className="hr-strip-kicker">{lang === "ko" ? "내 사진" : "MY PHOTO"}</p>
           <p className="hr-strip-val">
