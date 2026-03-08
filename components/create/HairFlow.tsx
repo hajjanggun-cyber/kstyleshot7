@@ -9,17 +9,7 @@ import { hairStyles, HAIR_CATEGORIES } from "@/data/hairStyles";
 import type { HairCategory } from "@/types";
 import { hairColors } from "@/data/hairColors";
 import { useCreateStore } from "@/store/createStore";
-
-async function blobUrlToDataUrl(blobUrl: string): Promise<string> {
-  const res = await fetch(blobUrl);
-  const blob = await res.blob();
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
+import { normalizePhotoForAI } from "@/lib/canvas";
 
 export function HairFlow() {
   const params = useParams<{ lang: string }>();
@@ -82,7 +72,7 @@ export function HairFlow() {
     setIsSynthesizing(true);
 
     try {
-      const photoDataUrl = await blobUrlToDataUrl(photoBlobUrl);
+      const photoDataUrl = await normalizePhotoForAI(photoBlobUrl);
       const res = await fetch("/api/hair/preview", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

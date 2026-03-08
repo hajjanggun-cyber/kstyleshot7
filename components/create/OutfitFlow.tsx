@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 
 import { outfits } from "@/data/outfits";
 import { useCreateStore } from "@/store/createStore";
+import { normalizePhotoForAI } from "@/lib/canvas";
 
 type Category = "stage" | "street" | "award";
 
@@ -133,20 +134,8 @@ export function OutfitFlow() {
     setIsSynthesizing(true);
 
     try {
-      // Convert blob URL to base64
-      const dataUrl = await new Promise<string>((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "blob";
-        xhr.onload = () => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result as string);
-          reader.onerror = reject;
-          reader.readAsDataURL(xhr.response as Blob);
-        };
-        xhr.onerror = reject;
-        xhr.open("GET", photoBlobUrl);
-        xhr.send();
-      });
+      // Normalize: fix EXIF rotation + add top padding for hair headroom
+      const dataUrl = await normalizePhotoForAI(photoBlobUrl);
 
       const res = await fetch("/api/outfit/preview", {
         method: "POST",
