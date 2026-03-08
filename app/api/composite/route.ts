@@ -25,6 +25,44 @@ function sanitizeBackgroundPath(bgPath: string): string | null {
   return bgPath;
 }
 
+/**
+ * Sample the average RGB of the background in the person placement area,
+ * then apply a subtle color tint overlay to the person to match the scene's
+ * ambient color temperature (~14% opacity).
+ */
+async function applyColorTemperature(
+  personBuffer: Buffer,
+  bgBuffer: Buffer,
+  regionTop: number,
+  BG_W: number,
+  BG_H: number,
+): Promise<Buffer> {
+  const regionH = Math.max(1, BG_H - regionTop);
+  const stats = await sharp(bgBuffer)
+    .extract({ left: 0, top: regionTop, width: BG_W, height: regionH })
+    .stats();
+
+  const r = Math.round(stats.channels[0].mean);
+  const g = Math.round(stats.channels[1].mean);
+  const b = Math.round(stats.channels[2].mean);
+
+  const meta = await sharp(personBuffer).metadata();
+  const W = meta.width ?? 512;
+  const H = meta.height ?? 768;
+
+  // Solid color overlay at ~14% opacity — matches ambient color cast
+  const overlay = await sharp({
+    create: { width: W, height: H, channels: 4, background: { r, g, b, alpha: 36 } },
+  })
+    .png()
+    .toBuffer();
+
+  return sharp(personBuffer)
+    .composite([{ input: overlay, blend: "over" }])
+    .png()
+    .toBuffer();
+}
+
 /** Creates a blurred ellipse shadow buffer for ground contact shadow */
 async function makeGroundShadow(width: number, height: number): Promise<Buffer> {
   const shadowW = Math.round(width * 0.7);
@@ -89,6 +127,9 @@ export async function POST(request: NextRequest) {
     const left = Math.max(0, Math.round((BG_W - targetW) / 2));
     const top = Math.max(0, BG_H - targetH);
 
+    // Apply background color temperature to person layer
+    const tintedPerson = await applyColorTemperature(resizedPerson, bgBuffer, top, BG_W, BG_H);
+
     // Ground contact shadow — placed just above the bottom edge
     const shadowBuf = await makeGroundShadow(targetW, targetH);
     const shadowW = Math.round(targetW * 0.7);
@@ -99,7 +140,7 @@ export async function POST(request: NextRequest) {
     const composited = await sharp(bgBuffer)
       .composite([
         { input: shadowBuf, left: shadowLeft, top: shadowTop },
-        { input: resizedPerson, left, top },
+        { input: tintedPerson, left, top },
       ])
       .jpeg({ quality: 90 })
       .toBuffer();
