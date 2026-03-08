@@ -115,24 +115,6 @@ export const hairStyles: HairStyle[] = [
     category: "trendy",
     colorHint: "linear-gradient(160deg, #3d2b1f, #5c3d2e, #7a5244)",
   },
-  {
-    id: "ombre",
-    name: "Ombré",
-    haircut: "Ombré",
-    thumbnail: "/hairstyles/trendy/ombre.jpeg",
-    tags: ["color", "gradient"],
-    category: "trendy",
-    colorHint: "linear-gradient(160deg, #1a1a1a, #5a3a1a, #c8a04a)",
-  },
-  {
-    id: "shag",
-    name: "Shag",
-    haircut: "Shag",
-    thumbnail: "/hairstyles/trendy/shag.jpeg",
-    tags: ["shag", "retro"],
-    category: "trendy",
-    colorHint: "linear-gradient(160deg, #2a1a0a, #5a3a2a, #7a5a3a)",
-  },
   // ── 스페셜 & 포인트 (이미지 제작 예정) ────────────────
   {
     id: "french-braid",
