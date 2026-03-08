@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -32,7 +32,8 @@ export function HairFlow() {
   const [activeCategory, setActiveCategory] = useState<HairCategory>("daily");
   const [selectedStyleId, setSelectedStyleId] = useState<string | null>(null);
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSynthesizing, setIsSynthesizing] = useState(false);
+  const [synthPredictionId, setSynthPredictionId] = useState<string | null>(null);
 
   const selectedStyle = hairStyles.find((s) => s.id === selectedStyleId);
   const selectedColor = hairColors.find((c) => c.id === selectedColorId);
@@ -40,9 +41,31 @@ export function HairFlow() {
     ? lang === "ko" ? selectedColor.nameKo : selectedColor.nameEn
     : null;
 
+  // Poll for hair synthesis result, then navigate
+  useEffect(() => {
+    if (!synthPredictionId || !isSynthesizing) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/hair/poll?predictionId=${synthPredictionId}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          setHairPreviewUrl(data.outputUrl);
+          clearInterval(interval);
+          router.push(`/${lang}/create/outfit`);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          clearInterval(interval);
+          router.push(`/${lang}/create/outfit`);
+        }
+      } catch {/* retry */}
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [synthPredictionId, isSynthesizing]);
+
   async function handleNext() {
-    if (isLoading) return;
-    setIsLoading(true);
+    if (isSynthesizing) return;
 
     const styleId = selectedStyleId ?? "demo-hair";
     setHairChosen([styleId]);
@@ -51,34 +74,57 @@ export function HairFlow() {
     setHairPredictionId(null);
     setStatus("outfit_selecting");
 
-    // Start Replicate job — get predictionId fast, then navigate.
-    // OutfitFlow polls for the result.
-    if (photoBlobUrl && selectedStyle) {
-      try {
-        const photoDataUrl = await blobUrlToDataUrl(photoBlobUrl);
-        const res = await fetch("/api/hair/preview", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            photoDataUrl,
-            haircutName: selectedStyle.haircut,
-            hairColor: selectedColor?.replicateValue ?? "Black",
-          }),
-        });
-        if (res.ok) {
-          const data = await res.json() as { predictionId?: string };
-          if (data.predictionId) setHairPredictionId(data.predictionId);
-        }
-      } catch {
-        // non-fatal — outfit page shows spinner then skips
-      }
+    if (!photoBlobUrl || !selectedStyle) {
+      router.push(`/${lang}/create/outfit`);
+      return;
     }
 
+    setIsSynthesizing(true);
+
+    try {
+      const photoDataUrl = await blobUrlToDataUrl(photoBlobUrl);
+      const res = await fetch("/api/hair/preview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          photoDataUrl,
+          haircutName: selectedStyle.haircut,
+          hairColor: selectedColor?.replicateValue ?? "Black",
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json() as { predictionId?: string };
+        if (data.predictionId) {
+          setHairPredictionId(data.predictionId);
+          setSynthPredictionId(data.predictionId);
+          // polling useEffect will navigate when done
+          return;
+        }
+      }
+    } catch {/* non-fatal */}
+
+    // API 실패 시 그냥 다음 단계로
     router.push(`/${lang}/create/outfit`);
   }
 
   return (
     <div className="hr-root">
+      {isSynthesizing && (
+        <div className="ot-synth-overlay">
+          <div className="ot-synth-ring" />
+          <div>
+            <p className="ot-synth-title">
+              {lang === "ko" ? "AI가 헤어를 스타일링 중이에요" : "AI is styling your hair"}
+            </p>
+            <p className="ot-synth-sub">
+              {lang === "ko"
+                ? "합성이 완료되면 자동으로 다음 단계로 이동합니다.\n잠깐만 기다려 주세요."
+                : "We'll take you to the next step the moment your hair is ready.\nUsually takes about a minute."}
+            </p>
+          </div>
+          <p className="ot-synth-badge">✦ AI Processing</p>
+        </div>
+      )}
 
       {/* ── Nav ── */}
       <nav className="hr-nav">
@@ -196,12 +242,12 @@ export function HairFlow() {
       {/* ── Bottom CTA ── */}
       <div className="hr-bottom">
         <button
-          className={`hr-cta${selectedStyleId && !isLoading ? " hr-cta--on" : ""}${isLoading ? " hr-cta--loading" : ""}`}
+          className={`hr-cta${selectedStyleId && !isSynthesizing ? " hr-cta--on" : ""}${isSynthesizing ? " hr-cta--loading" : ""}`}
           onClick={handleNext}
-          disabled={isLoading}
+          disabled={isSynthesizing}
           type="button"
         >
-          {isLoading
+          {isSynthesizing
             ? lang === "ko" ? "AI 처리 중…" : "AI Processing…"
             : selectedStyleId
               ? lang === "ko" ? "다음 단계 →" : "Next Step →"
