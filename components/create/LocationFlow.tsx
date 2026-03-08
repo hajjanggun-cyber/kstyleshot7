@@ -109,23 +109,6 @@ export function LocationFlow() {
     router.push(`/${lang}/create/done`);
   }
 
-  if (!outfit.picked) {
-    return (
-      <div className="lc-root">
-        <nav className="lc-nav">
-          <Link className="lc-back-btn" href={`/${lang}/create/outfit`}>←</Link>
-          <h2 className="lc-nav-title">{t("navTitle")}</h2>
-          <div className="lc-nav-spacer" />
-        </nav>
-        <div className="lc-missing">
-          <p>{t("noOutfit")}</p>
-          <Link className="lc-missing-link" href={`/${lang}/create/outfit`}>
-            {t("goOutfit")}
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="lc-root">

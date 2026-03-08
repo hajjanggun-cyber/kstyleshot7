@@ -81,50 +81,48 @@ export function OutfitFlow() {
     setSelectedId(id === selectedId ? null : id);
   }
 
-  async function handleApply() {
+  function handleApply() {
     if (isApplying) return;
     setIsApplying(true);
     const chosen = selectedId ?? "demo-outfit";
 
-    // Start outfit try-on in background (fire and forget)
+    // Truly fire-and-forget: start outfit try-on without blocking navigation
     if (photoBlobUrl && selectedId) {
-      const outfit = outfits.find((o) => o.id === selectedId);
-      if (outfit) {
-        try {
-          const dataUrl = await new Promise<string>((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.responseType = "blob";
-            xhr.onload = () => {
-              const reader = new FileReader();
-              reader.onloadend = () => resolve(reader.result as string);
-              reader.onerror = reject;
-              reader.readAsDataURL(xhr.response as Blob);
-            };
-            xhr.onerror = reject;
-            xhr.open("GET", photoBlobUrl);
-            xhr.send();
-          });
-          const res = await fetch("/api/outfit/preview", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ photoDataUrl: dataUrl, garmentImagePath: outfit.garmentImage }),
-          });
-          if (res.ok) {
-            const data = (await res.json()) as { predictionId?: string };
-            if (data.predictionId) {
-              setOutfitPredictionId(data.predictionId);
-            }
-          }
-        } catch {
-          // non-blocking — continue to next step
-        }
+      const selectedOutfitData = outfits.find((o) => o.id === selectedId);
+      if (selectedOutfitData) {
+        const blobUrl = photoBlobUrl;
+        const garmentPath = selectedOutfitData.garmentImage;
+        new Promise<string>((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.responseType = "blob";
+          xhr.onload = () => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result as string);
+            reader.onerror = reject;
+            reader.readAsDataURL(xhr.response as Blob);
+          };
+          xhr.onerror = reject;
+          xhr.open("GET", blobUrl);
+          xhr.send();
+        })
+          .then((dataUrl) =>
+            fetch("/api/outfit/preview", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ photoDataUrl: dataUrl, garmentImagePath: garmentPath }),
+            })
+          )
+          .then((res) => (res.ok ? res.json() : null))
+          .then((data: { predictionId?: string } | null) => {
+            if (data?.predictionId) setOutfitPredictionId(data.predictionId);
+          })
+          .catch(() => {/* ignore */});
       }
     }
 
     setOutfitChosen([chosen]);
     pickOutfit(chosen);
     setStatus("location_selecting");
-    await new Promise((resolve) => setTimeout(resolve, 400));
     router.push(`/${lang}/create/location`);
   }
 
