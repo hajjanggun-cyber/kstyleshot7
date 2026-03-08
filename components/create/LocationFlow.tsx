@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -30,20 +30,64 @@ export function LocationFlow() {
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.location");
 
-  const { photoBlobUrl, outfit, hair, hairPreviewUrl, setLocationChosen, pickLocation, setStatus } =
-    useCreateStore();
+  const {
+    photoBlobUrl,
+    outfit,
+    hair,
+    hairPreviewUrl,
+    outfitPreviewUrl,
+    outfitPredictionId,
+    setOutfitPreviewUrl,
+    setLocationChosen,
+    pickLocation,
+    setStatus,
+  } = useCreateStore();
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
+  const [isDownloadingHair, setIsDownloadingHair] = useState(false);
+  const [isDownloadingOutfit, setIsDownloadingOutfit] = useState(false);
 
-  async function handleDownload() {
-    if (!hairPreviewUrl || isDownloading) return;
-    setIsDownloading(true);
+  // Poll for outfit try-on result
+  useEffect(() => {
+    if (outfitPreviewUrl || !outfitPredictionId) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/outfit/poll?predictionId=${outfitPredictionId}`);
+        if (!res.ok) return;
+        const data = (await res.json()) as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          setOutfitPreviewUrl(data.outputUrl);
+          clearInterval(interval);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          clearInterval(interval);
+        }
+      } catch {
+        // retry next tick
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [outfitPreviewUrl, outfitPredictionId, setOutfitPreviewUrl]);
+
+  async function handleDownloadHair() {
+    if (!hairPreviewUrl || isDownloadingHair) return;
+    setIsDownloadingHair(true);
     try {
       await downloadImage(`/api/hair/download?url=${encodeURIComponent(hairPreviewUrl)}`);
     } finally {
-      setIsDownloading(false);
+      setIsDownloadingHair(false);
+    }
+  }
+
+  async function handleDownloadOutfit() {
+    if (!outfitPreviewUrl || isDownloadingOutfit) return;
+    setIsDownloadingOutfit(true);
+    try {
+      await downloadImage(`/api/hair/download?url=${encodeURIComponent(outfitPreviewUrl)}`);
+    } finally {
+      setIsDownloadingOutfit(false);
     }
   }
 
@@ -135,28 +179,68 @@ export function LocationFlow() {
           </div>
         </div>
 
-        {/* ── Hair result download ── */}
-        {hairPreviewUrl ? (
-          <div className="lc-dl-card">
-            <img className="lc-dl-img" src={hairPreviewUrl} alt="AI hair result" />
-            <div className="lc-dl-info">
-              <p className="lc-dl-kicker">
-                {lang === "ko" ? "AI 헤어 합성 완료" : "AI Hair Result"}
-              </p>
-              <p className="lc-dl-name">
-                {hair.chosen[0]?.replace(/-/g, " ") ?? "Hair Style"}
-              </p>
-              <button
-                className={`lc-dl-btn${isDownloading ? " lc-dl-btn--loading" : ""}`}
-                disabled={isDownloading}
-                onClick={handleDownload}
-                type="button"
-              >
-                {isDownloading
-                  ? (lang === "ko" ? "다운로드 중…" : "Downloading…")
-                  : (lang === "ko" ? "⬇ 사진 저장" : "⬇ Save Photo")}
-              </button>
-            </div>
+        {/* ── AI Results download row ── */}
+        {(hairPreviewUrl || outfitPredictionId) ? (
+          <div className="lc-dl-row">
+            {hairPreviewUrl ? (
+              <div className="lc-dl-card">
+                <img className="lc-dl-img" src={hairPreviewUrl} alt="AI hair result" />
+                <div className="lc-dl-info">
+                  <p className="lc-dl-kicker">
+                    {lang === "ko" ? "AI 헤어 완료" : "AI Hair Result"}
+                  </p>
+                  <p className="lc-dl-name">
+                    {hair.chosen[0]?.replace(/-/g, " ") ?? "Hair Style"}
+                  </p>
+                  <button
+                    className={`lc-dl-btn${isDownloadingHair ? " lc-dl-btn--loading" : ""}`}
+                    disabled={isDownloadingHair}
+                    onClick={handleDownloadHair}
+                    type="button"
+                  >
+                    {isDownloadingHair
+                      ? (lang === "ko" ? "다운로드 중…" : "Downloading…")
+                      : (lang === "ko" ? "⬇ 헤어 저장" : "⬇ Save Hair")}
+                  </button>
+                </div>
+              </div>
+            ) : null}
+
+            {outfitPredictionId ? (
+              <div className="lc-dl-card lc-dl-card--outfit">
+                {outfitPreviewUrl ? (
+                  <img className="lc-dl-img" src={outfitPreviewUrl} alt="AI outfit result" />
+                ) : (
+                  <div className="lc-dl-pending">
+                    <span className="ot-compare-spinner" />
+                  </div>
+                )}
+                <div className="lc-dl-info">
+                  <p className="lc-dl-kicker">
+                    {lang === "ko" ? "AI 의상 합성" : "AI Outfit Result"}
+                  </p>
+                  <p className="lc-dl-name">
+                    {outfit.picked?.replace(/-/g, " ") ?? "Outfit"}
+                  </p>
+                  {outfitPreviewUrl ? (
+                    <button
+                      className={`lc-dl-btn${isDownloadingOutfit ? " lc-dl-btn--loading" : ""}`}
+                      disabled={isDownloadingOutfit}
+                      onClick={handleDownloadOutfit}
+                      type="button"
+                    >
+                      {isDownloadingOutfit
+                        ? (lang === "ko" ? "다운로드 중…" : "Downloading…")
+                        : (lang === "ko" ? "⬇ 의상 저장" : "⬇ Save Outfit")}
+                    </button>
+                  ) : (
+                    <p className="lc-dl-status">
+                      {lang === "ko" ? "AI 합성 중…" : "AI processing…"}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ) : null}
           </div>
         ) : null}
 

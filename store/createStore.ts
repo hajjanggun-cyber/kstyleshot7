@@ -16,6 +16,8 @@ type CreateActions = {
   setHairResults: (results: StepResult[]) => void;
   pickHair: (id: string) => void;
   setOutfitChosen: (ids: string[]) => void;
+  setOutfitPreviewUrl: (url: string | null) => void;
+  setOutfitPredictionId: (id: string | null) => void;
   setOutfitResults: (results: StepResult[]) => void;
   pickOutfit: (id: string) => void;
   setLocationChosen: (ids: string[]) => void;
@@ -43,11 +45,21 @@ const initialState: CreateSessionState = {
   location: createEmptySelection()
 };
 
-export const useCreateStore = create<CreateSessionState & { hairColor: string | null; hairPreviewUrl: string | null; hairPredictionId: string | null } & CreateActions>((set) => ({
+export const useCreateStore = create<
+  CreateSessionState & {
+    hairColor: string | null;
+    hairPreviewUrl: string | null;
+    hairPredictionId: string | null;
+    outfitPreviewUrl: string | null;
+    outfitPredictionId: string | null;
+  } & CreateActions
+>((set) => ({
   ...initialState,
   hairColor: null,
   hairPreviewUrl: null,
   hairPredictionId: null,
+  outfitPreviewUrl: null,
+  outfitPredictionId: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
   setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
   setStatus: (status) => set({ status }),
@@ -75,6 +87,8 @@ export const useCreateStore = create<CreateSessionState & { hairColor: string | 
       outfit: { ...createEmptySelection(), chosen: ids.slice(0, 2) },
       status: "outfit_selecting"
     })),
+  setOutfitPreviewUrl: (url) => set({ outfitPreviewUrl: url }),
+  setOutfitPredictionId: (id) => set({ outfitPredictionId: id }),
   setOutfitResults: (results) =>
     set((state) => ({
       outfit: { ...state.outfit, results },
@@ -105,6 +119,11 @@ export const useCreateStore = create<CreateSessionState & { hairColor: string | 
       ...initialState,
       hair: createEmptySelection(),
       outfit: createEmptySelection(),
-      location: createEmptySelection()
+      location: createEmptySelection(),
+      hairColor: null,
+      hairPreviewUrl: null,
+      hairPredictionId: null,
+      outfitPreviewUrl: null,
+      outfitPredictionId: null,
     })
 }));

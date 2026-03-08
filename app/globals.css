@@ -3771,16 +3771,54 @@ h2 {
   text-decoration: none;
 }
 
-/* ── Hair download card ── */
+/* ── AI Results download row ── */
+.lc-dl-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 16px 16px;
+}
+
 .lc-dl-card {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin: 0 16px 16px;
   padding: 14px;
   background: rgba(0, 255, 255, 0.05);
   border: 1px solid rgba(0, 255, 255, 0.2);
   border-radius: 18px;
+}
+
+.lc-dl-card--outfit {
+  background: rgba(255, 100, 200, 0.05);
+  border-color: rgba(255, 100, 200, 0.2);
+}
+
+.lc-dl-card--outfit .lc-dl-kicker {
+  color: #ff64c8;
+}
+
+.lc-dl-card--outfit .lc-dl-btn {
+  background: #ff64c8;
+}
+
+.lc-dl-pending {
+  width: 72px;
+  height: 90px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 100, 200, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 100, 200, 0.08);
+}
+
+.lc-dl-status {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: rgba(241, 237, 232, 0.5);
+  font-style: italic;
 }
 
 .lc-dl-img {

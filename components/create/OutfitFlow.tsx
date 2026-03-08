@@ -35,7 +35,17 @@ export function OutfitFlow() {
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.outfit");
 
-  const { photoBlobUrl, hair, hairPreviewUrl, hairPredictionId, setHairPreviewUrl, setOutfitChosen, pickOutfit, setStatus } = useCreateStore();
+  const {
+    photoBlobUrl,
+    hair,
+    hairPreviewUrl,
+    hairPredictionId,
+    setHairPreviewUrl,
+    setOutfitChosen,
+    setOutfitPredictionId,
+    pickOutfit,
+    setStatus,
+  } = useCreateStore();
 
   const [activeCategory, setActiveCategory] = useState<Category>("stage");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -73,9 +83,44 @@ export function OutfitFlow() {
 
   async function handleApply() {
     if (isApplying) return;
-    // TODO: restore — if (!selectedId || isApplying) return;
     setIsApplying(true);
     const chosen = selectedId ?? "demo-outfit";
+
+    // Start outfit try-on in background (fire and forget)
+    if (photoBlobUrl && selectedId) {
+      const outfit = outfits.find((o) => o.id === selectedId);
+      if (outfit) {
+        try {
+          const dataUrl = await new Promise<string>((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.responseType = "blob";
+            xhr.onload = () => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result as string);
+              reader.onerror = reject;
+              reader.readAsDataURL(xhr.response as Blob);
+            };
+            xhr.onerror = reject;
+            xhr.open("GET", photoBlobUrl);
+            xhr.send();
+          });
+          const res = await fetch("/api/outfit/preview", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ photoDataUrl: dataUrl, garmentImagePath: outfit.garmentImage }),
+          });
+          if (res.ok) {
+            const data = (await res.json()) as { predictionId?: string };
+            if (data.predictionId) {
+              setOutfitPredictionId(data.predictionId);
+            }
+          }
+        } catch {
+          // non-blocking — continue to next step
+        }
+      }
+    }
+
     setOutfitChosen([chosen]);
     pickOutfit(chosen);
     setStatus("location_selecting");

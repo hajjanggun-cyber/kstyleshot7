@@ -287,6 +287,59 @@ export async function startHairPreviewJob(input: {
   return predictionId;
 }
 
+const OUTFIT_MODEL_VERSION =
+  "cf5cb07a25e726fe2fac166a8c5ab52ddccd48657741670fb09d9954d4d8446f";
+
+/** Starts an outfit try-on prediction without waiting — returns predictionId. */
+export async function startOutfitTryOnJob(input: {
+  photoDataUrl: string;
+  garmentImageUrl: string;
+}): Promise<string> {
+  assertReplicateEnv();
+
+  if (!input.photoDataUrl.startsWith("data:image/")) {
+    throw new ReplicateApiError("photoDataUrl must be an image data URL.", 400);
+  }
+
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/predictions`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: getReplicateAuthHeader(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      version: OUTFIT_MODEL_VERSION,
+      input: {
+        person_image: input.photoDataUrl,
+        cloth_image: input.garmentImageUrl,
+        clot_type: "overall",
+      },
+    }),
+    cache: "no-store",
+  }).catch(() => {
+    throw new ReplicateApiError("Unable to reach Replicate prediction API.", 502);
+  });
+
+  const payload = await parseApiJson(response);
+  if (!response.ok) {
+    throw new ReplicateApiError(
+      extractApiErrorMessage(
+        payload,
+        `Replicate outfit try-on failed with status ${response.status}.`
+      ),
+      response.status >= 400 && response.status < 500 ? 400 : 502
+    );
+  }
+
+  const predictionId = pickString(payload, ["id"]);
+  if (!predictionId) {
+    throw new ReplicateApiError("Replicate prediction response is missing an id.", 502);
+  }
+
+  return predictionId;
+}
+
 export async function startOutfitVariantJobs(): Promise<string[]> {
   throw new Error(
     "Outfit generation is blocked until a commercially permitted provider is selected."
