@@ -109,7 +109,7 @@ export function HairFlow() {
         <div className="hr-strip-meta">
           <p className="hr-strip-kicker">{lang === "ko" ? "내 사진" : "MY PHOTO"}</p>
           <p className="hr-strip-val">
-            {selectedStyle ? selectedStyle.name : "—"}
+            {selectedStyle ? selectedStyle.name : lang === "ko" ? "스타일을 선택하세요" : "Select a style"}
             {colorLabel ? (
               <span className="hr-strip-color-dot"> · {colorLabel}</span>
             ) : null}
@@ -117,6 +117,13 @@ export function HairFlow() {
         </div>
         <div className="hr-strip-ai-badge">AI</div>
       </div>
+
+      {/* ── Photo tip chip ── */}
+      <p className="hr-photo-tip">
+        ✦&nbsp;{lang === "ko"
+          ? "정면·밝은 조명 사진일수록 AI 합성이 더 자연스러워요"
+          : "Front-facing photos in good lighting give the best AI results"}
+      </p>
 
       {/* ── Style section ── */}
       <div className="hr-section">
