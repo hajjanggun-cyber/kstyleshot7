@@ -124,15 +124,19 @@ async function startPrediction(input: {
   photoDataUrl: string;
   haircut: string;
   hairColor: string;
+  wait?: boolean;
 }): Promise<{ predictionId: string; outputUrl: string | null }> {
   const endpoint = getHairPredictionEndpoint();
+  const headers: Record<string, string> = {
+    Authorization: getReplicateAuthHeader(),
+    "Content-Type": "application/json",
+  };
+  if (input.wait !== false) {
+    headers["Prefer"] = "wait";
+  }
   const response = await fetch(endpoint, {
     method: "POST",
-    headers: {
-      Authorization: getReplicateAuthHeader(),
-      "Content-Type": "application/json",
-      Prefer: "wait"
-    },
+    headers,
     body: JSON.stringify({
       input: {
         haircut: input.haircut,
@@ -258,6 +262,28 @@ export async function startHairVariantJobs(input: StartHairJobInput): Promise<Ha
       })
     )
   );
+}
+
+/** Starts a single hair prediction without waiting — returns predictionId only. */
+export async function startHairPreviewJob(input: {
+  photoDataUrl: string;
+  haircutName: string;
+  hairColor: string;
+}): Promise<string> {
+  assertReplicateEnv();
+
+  if (!input.photoDataUrl.startsWith("data:image/")) {
+    throw new ReplicateApiError("photoDataUrl must be an image data URL.", 400);
+  }
+
+  const { predictionId } = await startPrediction({
+    photoDataUrl: input.photoDataUrl,
+    haircut: input.haircutName,
+    hairColor: input.hairColor || DEFAULT_HAIR_COLOR,
+    wait: false,
+  });
+
+  return predictionId;
 }
 
 export async function startOutfitVariantJobs(): Promise<string[]> {

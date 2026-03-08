@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -35,11 +35,34 @@ export function OutfitFlow() {
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.outfit");
 
-  const { photoBlobUrl, hair, hairPreviewUrl, setOutfitChosen, pickOutfit, setStatus } = useCreateStore();
+  const { photoBlobUrl, hair, hairPreviewUrl, hairPredictionId, setHairPreviewUrl, setOutfitChosen, pickOutfit, setStatus } = useCreateStore();
 
   const [activeCategory, setActiveCategory] = useState<Category>("stage");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isApplying, setIsApplying] = useState(false);
+
+  // Poll Replicate for hair preview result
+  useEffect(() => {
+    if (hairPreviewUrl || !hairPredictionId) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/hair/poll?predictionId=${hairPredictionId}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          setHairPreviewUrl(data.outputUrl);
+          clearInterval(interval);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          clearInterval(interval);
+        }
+      } catch {
+        // retry next tick
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [hairPreviewUrl, hairPredictionId, setHairPreviewUrl]);
 
   const filtered = outfits.filter((o) => o.category === activeCategory);
   const selectedOutfit = outfits.find((o) => o.id === selectedId);

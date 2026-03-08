@@ -12,6 +12,7 @@ type CreateActions = {
   setHairChosen: (ids: string[]) => void;
   setHairColor: (color: string) => void;
   setHairPreviewUrl: (url: string | null) => void;
+  setHairPredictionId: (id: string | null) => void;
   setHairResults: (results: StepResult[]) => void;
   pickHair: (id: string) => void;
   setOutfitChosen: (ids: string[]) => void;
@@ -42,10 +43,11 @@ const initialState: CreateSessionState = {
   location: createEmptySelection()
 };
 
-export const useCreateStore = create<CreateSessionState & { hairColor: string | null; hairPreviewUrl: string | null } & CreateActions>((set) => ({
+export const useCreateStore = create<CreateSessionState & { hairColor: string | null; hairPreviewUrl: string | null; hairPredictionId: string | null } & CreateActions>((set) => ({
   ...initialState,
   hairColor: null,
   hairPreviewUrl: null,
+  hairPredictionId: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
   setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
   setStatus: (status) => set({ status }),
@@ -57,6 +59,7 @@ export const useCreateStore = create<CreateSessionState & { hairColor: string | 
     })),
   setHairColor: (color) => set({ hairColor: color }),
   setHairPreviewUrl: (url) => set({ hairPreviewUrl: url }),
+  setHairPredictionId: (id) => set({ hairPredictionId: id }),
   setHairResults: (results) =>
     set((state) => ({
       hair: { ...state.hair, results },

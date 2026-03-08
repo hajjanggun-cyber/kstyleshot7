@@ -26,7 +26,7 @@ export function HairFlow() {
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.hair");
 
-  const { photoBlobUrl, setHairChosen, setHairColor, setHairPreviewUrl, setStatus } = useCreateStore();
+  const { photoBlobUrl, setHairChosen, setHairColor, setHairPreviewUrl, setHairPredictionId, setStatus } = useCreateStore();
 
   const [selectedStyleId, setSelectedStyleId] = useState<string | null>(null);
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
@@ -45,9 +45,12 @@ export function HairFlow() {
     const styleId = selectedStyleId ?? "demo-hair";
     setHairChosen([styleId]);
     if (selectedColor) setHairColor(selectedColor.replicateValue);
+    setHairPreviewUrl(null);
+    setHairPredictionId(null);
     setStatus("outfit_selecting");
 
-    // Call Replicate hair preview API if we have a photo and a real style
+    // Start Replicate job — get predictionId fast, then navigate.
+    // OutfitFlow polls for the result.
     if (photoBlobUrl && selectedStyle) {
       try {
         const photoDataUrl = await blobUrlToDataUrl(photoBlobUrl);
@@ -61,11 +64,11 @@ export function HairFlow() {
           }),
         });
         if (res.ok) {
-          const data = await res.json() as { outputUrl?: string };
-          if (data.outputUrl) setHairPreviewUrl(data.outputUrl);
+          const data = await res.json() as { predictionId?: string };
+          if (data.predictionId) setHairPredictionId(data.predictionId);
         }
       } catch {
-        // non-fatal — outfit page will just show original
+        // non-fatal — outfit page shows spinner then skips
       }
     }
 
