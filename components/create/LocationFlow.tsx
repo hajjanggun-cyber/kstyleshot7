@@ -38,6 +38,11 @@ export function LocationFlow() {
     outfitPreviewUrl,
     outfitPredictionId,
     setOutfitPreviewUrl,
+    bgRemovedUrl,
+    bgRemovedPredictionId,
+    setBgRemovedUrl,
+    setBgRemovedPredictionId,
+    setCompositeUrl,
     setLocationChosen,
     pickLocation,
     setStatus,
@@ -47,6 +52,43 @@ export function LocationFlow() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDownloadingHair, setIsDownloadingHair] = useState(false);
   const [isDownloadingOutfit, setIsDownloadingOutfit] = useState(false);
+
+  // Auto-start BG removal as soon as outfit result is ready
+  useEffect(() => {
+    if (!outfitPreviewUrl || bgRemovedUrl || bgRemovedPredictionId) return;
+
+    fetch("/api/bgremove/preview", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ imageUrl: outfitPreviewUrl }),
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { predictionId?: string } | null) => {
+        if (data?.predictionId) setBgRemovedPredictionId(data.predictionId);
+      })
+      .catch(() => {/* ignore */});
+  }, [outfitPreviewUrl, bgRemovedUrl, bgRemovedPredictionId, setBgRemovedPredictionId]);
+
+  // Poll for BG removal result
+  useEffect(() => {
+    if (bgRemovedUrl || !bgRemovedPredictionId) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/bgremove/poll?predictionId=${bgRemovedPredictionId}`);
+        if (!res.ok) return;
+        const data = (await res.json()) as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          setBgRemovedUrl(data.outputUrl);
+          clearInterval(interval);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          clearInterval(interval);
+        }
+      } catch {/* retry */}
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [bgRemovedUrl, bgRemovedPredictionId, setBgRemovedUrl]);
 
   // Poll for outfit try-on result
   useEffect(() => {
@@ -99,12 +141,29 @@ export function LocationFlow() {
 
   async function handleGenerate() {
     if (isGenerating) return;
-    // TODO: restore — if (!selectedId || isGenerating) return;
     setIsGenerating(true);
     const chosen = selectedId ?? "demo-location";
+    const bg = backgrounds.find((b) => b.id === chosen);
+
     setLocationChosen([chosen]);
     setStatus("composite_completed");
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+
+    // If we have a BG-removed person + selected background → composite
+    if (bgRemovedUrl && bg?.fullUrl) {
+      try {
+        const res = await fetch("/api/composite", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ personUrl: bgRemovedUrl, backgroundPath: bg.fullUrl }),
+        });
+        if (res.ok) {
+          const blob = await res.blob();
+          const url = URL.createObjectURL(blob);
+          setCompositeUrl(url);
+        }
+      } catch {/* show done page anyway */}
+    }
+
     pickLocation(chosen);
     router.push(`/${lang}/create/done`);
   }

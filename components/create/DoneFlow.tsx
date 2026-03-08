@@ -27,11 +27,11 @@ export function DoneFlow() {
   const bgName = backgrounds.find((b) => b.id === store.location.picked)?.name ?? store.location.picked ?? "—";
   const bgHint = backgrounds.find((b) => b.id === store.location.picked)?.colorHint;
 
-  // Best available result image
+  // Best available result image — composite first, then fallbacks
   const resultUrl =
-    store.location.results[0]?.blobUrl ??
-    store.outfit.results[0]?.blobUrl ??
-    store.hair.results[0]?.blobUrl ??
+    store.compositeUrl ??
+    store.outfitPreviewUrl ??
+    store.hairPreviewUrl ??
     store.photoBlobUrl ??
     null;
 

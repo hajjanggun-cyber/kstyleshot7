@@ -341,6 +341,39 @@ export async function startOutfitTryOnJob(input: {
   return predictionId;
 }
 
+/** Starts a background removal prediction — returns predictionId. */
+export async function startBgRemovalJob(imageUrl: string): Promise<string> {
+  assertReplicateEnv();
+
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/briaai/background-removal/predictions`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: getReplicateAuthHeader(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ input: { image: imageUrl } }),
+    cache: "no-store",
+  }).catch(() => {
+    throw new ReplicateApiError("Unable to reach Replicate BG removal API.", 502);
+  });
+
+  const payload = await parseApiJson(response);
+  if (!response.ok) {
+    throw new ReplicateApiError(
+      extractApiErrorMessage(payload, `BG removal failed with status ${response.status}.`),
+      response.status >= 400 && response.status < 500 ? 400 : 502
+    );
+  }
+
+  const predictionId = pickString(payload, ["id"]);
+  if (!predictionId) {
+    throw new ReplicateApiError("BG removal response missing id.", 502);
+  }
+
+  return predictionId;
+}
+
 export async function startOutfitVariantJobs(): Promise<string[]> {
   throw new Error(
     "Outfit generation is blocked until a commercially permitted provider is selected."

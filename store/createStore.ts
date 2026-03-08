@@ -18,6 +18,9 @@ type CreateActions = {
   setOutfitChosen: (ids: string[]) => void;
   setOutfitPreviewUrl: (url: string | null) => void;
   setOutfitPredictionId: (id: string | null) => void;
+  setBgRemovedUrl: (url: string | null) => void;
+  setBgRemovedPredictionId: (id: string | null) => void;
+  setCompositeUrl: (url: string | null) => void;
   setOutfitResults: (results: StepResult[]) => void;
   pickOutfit: (id: string) => void;
   setLocationChosen: (ids: string[]) => void;
@@ -52,6 +55,9 @@ export const useCreateStore = create<
     hairPredictionId: string | null;
     outfitPreviewUrl: string | null;
     outfitPredictionId: string | null;
+    bgRemovedUrl: string | null;
+    bgRemovedPredictionId: string | null;
+    compositeUrl: string | null;
   } & CreateActions
 >((set) => ({
   ...initialState,
@@ -60,6 +66,9 @@ export const useCreateStore = create<
   hairPredictionId: null,
   outfitPreviewUrl: null,
   outfitPredictionId: null,
+  bgRemovedUrl: null,
+  bgRemovedPredictionId: null,
+  compositeUrl: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
   setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
   setStatus: (status) => set({ status }),
@@ -89,6 +98,9 @@ export const useCreateStore = create<
     })),
   setOutfitPreviewUrl: (url) => set({ outfitPreviewUrl: url }),
   setOutfitPredictionId: (id) => set({ outfitPredictionId: id }),
+  setBgRemovedUrl: (url) => set({ bgRemovedUrl: url }),
+  setBgRemovedPredictionId: (id) => set({ bgRemovedPredictionId: id }),
+  setCompositeUrl: (url) => set({ compositeUrl: url }),
   setOutfitResults: (results) =>
     set((state) => ({
       outfit: { ...state.outfit, results },
@@ -125,5 +137,8 @@ export const useCreateStore = create<
       hairPredictionId: null,
       outfitPreviewUrl: null,
       outfitPredictionId: null,
+      bgRemovedUrl: null,
+      bgRemovedPredictionId: null,
+      compositeUrl: null,
     })
 }));
