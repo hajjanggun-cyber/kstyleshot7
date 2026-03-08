@@ -75,24 +75,6 @@ export function HairFlow() {
     router.push(`/${lang}/create/outfit`);
   }
 
-  if (!photoBlobUrl) {
-    return (
-      <div className="hr-root">
-        <nav className="hr-nav">
-          <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
-          <span className="hr-nav-title">{t("navTitle")}</span>
-          <div className="hr-nav-right" />
-        </nav>
-        <div className="hr-missing">
-          <p>{t("noPhoto")}</p>
-          <Link className="hr-missing-link" href={`/${lang}/create/upload`}>
-            {t("goUpload")}
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="hr-root">
 
