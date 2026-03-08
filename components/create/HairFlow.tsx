@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { hairStyles } from "@/data/hairStyles";
+import { hairStyles, HAIR_CATEGORIES } from "@/data/hairStyles";
+import type { HairCategory } from "@/types";
 import { hairColors } from "@/data/hairColors";
 import { useCreateStore } from "@/store/createStore";
 
@@ -28,6 +29,7 @@ export function HairFlow() {
 
   const { photoBlobUrl, setHairChosen, setHairColor, setHairPreviewUrl, setHairPredictionId, setStatus } = useCreateStore();
 
+  const [activeCategory, setActiveCategory] = useState<HairCategory>("daily");
   const [selectedStyleId, setSelectedStyleId] = useState<string | null>(null);
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +61,7 @@ export function HairFlow() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             photoDataUrl,
-            haircutName: selectedStyle.name,
+            haircutName: selectedStyle.haircut,
             hairColor: selectedColor?.replicateValue ?? "Black",
           }),
         });
@@ -119,8 +121,25 @@ export function HairFlow() {
             {lang === "ko" ? "원하는 헤어를 선택하세요" : "Pick a look"}
           </span>
         </div>
+
+        {/* Category tabs */}
+        <div className="hr-tabs-wrap">
+          <div className="hr-tabs">
+            {HAIR_CATEGORIES.map((cat) => (
+              <button
+                key={cat.key}
+                className={`hr-tab${activeCategory === cat.key ? " hr-tab--active" : ""}`}
+                onClick={() => setActiveCategory(cat.key)}
+                type="button"
+              >
+                {lang === "ko" ? cat.labelKo : cat.labelEn}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="hr-grid">
-          {hairStyles.map((style) => {
+          {hairStyles.filter((s) => s.category === activeCategory).map((style) => {
             const sel = selectedStyleId === style.id;
             return (
               <button

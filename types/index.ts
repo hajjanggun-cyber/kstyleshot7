@@ -44,13 +44,15 @@ export type CreateSessionState = {
   location: SelectionState;
 };
 
+export type HairCategory = "daily" | "performance" | "trendy" | "special" | "premium";
+
 export type HairStyle = {
   id: string;
   name: string;
+  haircut: string;
   thumbnail: string;
-  prompt: string;
   tags: string[];
-  category?: "trendy" | "bangs" | "waves" | "classic" | "updo";
+  category: HairCategory;
   colorHint?: string;
 };
 
