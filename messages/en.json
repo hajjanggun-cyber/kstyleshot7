@@ -15,12 +15,12 @@
   },
   "landing": {
     "hero": {
-      "eyebrow": "Next-gen AI transformation",
-      "title": "Transform Your Selfie into K-Idol Style",
-      "titlePrefix": "Transform into your favorite",
-      "titleSuffix": "star.",
-      "description": "Pick your hair, style, and backdrop — AI handles the rest.",
-      "start": "Create my style →",
+      "eyebrow": "AI K-Pop Style Makeover",
+      "title": "Turn Your Photo into a K-Pop Style Shot",
+      "titlePrefix": "Turn Your Photo into a",
+      "titleSuffix": "K-Pop Style Shot",
+      "description": "Pick your hair, outfit, and backdrop. AI transforms your selfie in under a minute.",
+      "start": "Start My Makeover →",
       "gallery": "View gallery",
       "badge1": "500+ styles",
       "badge2": "Real async jobs",

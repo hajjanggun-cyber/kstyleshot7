@@ -1018,8 +1018,46 @@ h2 {
 .lp-hero-fade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 55%, rgba(6, 5, 9, 0.6) 100%);
+  background: linear-gradient(to bottom, transparent 40%, rgba(6, 5, 9, 0.75) 100%);
   pointer-events: none;
+}
+
+.lp-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 24px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.lp-hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+.lp-hero-h1 {
+  font-size: clamp(1.35rem, 4.5vw, 2rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.lp-hero-sub {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0 0 4px;
+  line-height: 1.5;
 }
 
 .lp-cta-wrap {

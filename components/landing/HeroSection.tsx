@@ -19,16 +19,14 @@ export function HeroSection() {
           src="/visuals/landing/seoul-kstyle-landing-hero.webp"
         />
         <div className="lp-hero-fade" />
-      </div>
-      <div className="lp-cta-wrap">
-        <Link className="lp-cta-btn" href={`/${lang}/create/intro`}>
-          {t("start")} →
-        </Link>
-      </div>
-      <div className="sr-only">
-        <p>{t("eyebrow")}</p>
-        <p>{t("title")}</p>
-        <p>{t("description")}</p>
+        <div className="lp-hero-overlay">
+          <p className="lp-hero-eyebrow">{t("eyebrow")}</p>
+          <h1 className="lp-hero-h1">{t("title")}</h1>
+          <p className="lp-hero-sub">{t("description")}</p>
+          <Link className="lp-cta-btn" href={`/${lang}/create/intro`}>
+            {t("start")}
+          </Link>
+        </div>
       </div>
     </section>
   );

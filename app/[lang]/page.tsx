@@ -16,18 +16,18 @@ export async function generateMetadata({ params }: LandingPageProps): Promise<Me
   const safeLang = lang === "ko" ? "ko" : "en";
   const isEn = safeLang === "en";
   const title = isEn
-    ? "Kstyleshot | K-Style Portrait Tool"
-    : "셀카를 K-아이돌 스타일로 — KStyleShot";
+    ? "KStyleShot — AI K-Pop Style Makeover"
+    : "KStyleShot — AI K뷰티 프로필 만들기";
   const description = isEn
-    ? "Upload one selfie and generate K-style portrait directions with hair, outfit, and backdrop flow."
-    : "셀카 한 장으로 헤어, 의상, 배경 흐름에 맞춘 케이스타일 포트레이트 가이드를 시작하세요.";
+    ? "Pick your hair, outfit, and backdrop. AI transforms your selfie into a K-pop style shot in under a minute."
+    : "헤어, 의상, 배경을 고르면 AI가 내 사진을 K뷰티 프로필로 바꿔줍니다. 셀카 한 장으로 시작하세요.";
 
   return {
     title,
     description,
     keywords: isEn
-      ? ["k-style portrait", "selfie styling", "hair outfit backdrop", "kstyleshot"]
-      : ["케이스타일", "셀카 스타일링", "헤어 의상 배경", "kstyleshot"],
+      ? ["k-pop style makeover", "ai k-pop photo", "k-beauty profile", "kstyleshot"]
+      : ["K뷰티 프로필", "AI 헤어 변환", "케이팝 스타일 변신", "kstyleshot"],
     alternates: {
       canonical: `/${safeLang}`,
       languages: buildLocaleAlternates((locale) => `/${locale}`)
