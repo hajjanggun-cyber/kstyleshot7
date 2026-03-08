@@ -99,10 +99,13 @@ export async function POST(request: NextRequest) {
 
     // Load background from local filesystem
     const bgFilePath = join(process.cwd(), "public", safeBgPath);
-    const bgBuffer = await readFile(bgFilePath);
-    const bgMeta = await sharp(bgBuffer).metadata();
+    const bgRaw = await readFile(bgFilePath);
+    const bgMeta = await sharp(bgRaw).metadata();
     const BG_W = bgMeta.width ?? 1024;
     const BG_H = bgMeta.height ?? 1024;
+
+    // Subtle background blur — depth-of-field / bokeh effect (sigma 3)
+    const bgBuffer = await sharp(bgRaw).blur(3).toBuffer();
 
     // Fetch transparent person PNG
     const personRes = await fetch(personUrl, { cache: "no-store" });
