@@ -11,7 +11,16 @@
       "Bash(magick --version)",
       "Bash(ffmpeg -version)",
       "Bash(node:*)",
-      "Bash(npx sharp-cli:*)"
+      "Bash(TZ='Asia/Seoul' date +%Y-%m-%d %H:%M KST:*)",
+      "Bash(python3:*)",
+      "Bash(do:*)",
+      "Bash(sed:*)",
+      "Bash(npx sharp-cli:*)",
+      "Bash(npm run:*)",
+      "Bash(for f in \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\app\\\\[lang]\\\\cookie-policy\\\\page.tsx\" \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\app\\\\[lang]\\\\privacy\\\\page.tsx\" \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\app\\\\[lang]\\\\refund-policy\\\\page.tsx\" \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\app\\\\[lang]\\\\terms\\\\page.tsx\")",
+      "Bash(echo \"=== $f ===\")",
+      "Read(//c/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/**)",
+      "Bash(done)"
     ]
   }
 }
