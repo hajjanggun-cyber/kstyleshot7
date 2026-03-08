@@ -341,18 +341,21 @@ export async function startOutfitTryOnJob(input: {
   return predictionId;
 }
 
+const BG_REMOVER_VERSION =
+  "a029dff38972b5fda4ec5d75d7d1cd25aeff621d2cf4946a41055d7db66b80bc";
+
 /** Starts a background removal prediction — returns predictionId. */
 export async function startBgRemovalJob(imageUrl: string): Promise<string> {
   assertReplicateEnv();
 
-  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/briaai/background-removal/predictions`;
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/predictions`;
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {
       Authorization: getReplicateAuthHeader(),
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ input: { image: imageUrl } }),
+    body: JSON.stringify({ version: BG_REMOVER_VERSION, input: { image: imageUrl } }),
     cache: "no-store",
   }).catch(() => {
     throw new ReplicateApiError("Unable to reach Replicate BG removal API.", 502);
