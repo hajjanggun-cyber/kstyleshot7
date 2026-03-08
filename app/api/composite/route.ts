@@ -12,13 +12,30 @@ import {
 export const maxDuration = 20;
 
 const FLUX_PROMPT =
-  "Photorealistic photograph. The person is naturally standing at this location. " +
-  "Match the lighting and shadows to the background scene. " +
-  "Seamlessly blend the person into the environment. Keep the person's face and outfit exactly the same.";
+  "Professional location photograph. Do not change the person's face, hair, or outfit in any way. " +
+  "Only adjust the lighting and atmosphere: " +
+  "match the ambient light color and direction to the background scene, " +
+  "add a soft natural ground shadow beneath the person's feet, " +
+  "blend the person's skin and clothing tone to match the environment's color temperature. " +
+  "The result should look like a real photo taken on location with a professional camera. " +
+  "Keep all facial features, expressions, and clothing exactly identical to the input.";
 
 function sanitizeBackgroundPath(bgPath: string): string | null {
   if (!/^\/backgrounds\/[\w\-]+\.(png|webp)$/.test(bgPath)) return null;
   return bgPath;
+}
+
+/** Creates a blurred ellipse shadow buffer for ground contact shadow */
+async function makeGroundShadow(width: number, height: number): Promise<Buffer> {
+  const shadowW = Math.round(width * 0.7);
+  const shadowH = Math.round(shadowW * 0.18);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${shadowW}" height="${shadowH}">
+    <ellipse cx="${shadowW / 2}" cy="${shadowH / 2}" rx="${shadowW / 2}" ry="${shadowH / 2}" fill="rgba(0,0,0,0.38)"/>
+  </svg>`;
+  return sharp(Buffer.from(svg))
+    .blur(shadowH * 0.6)
+    .png()
+    .toBuffer();
 }
 
 export async function POST(request: NextRequest) {
@@ -72,8 +89,18 @@ export async function POST(request: NextRequest) {
     const left = Math.max(0, Math.round((BG_W - targetW) / 2));
     const top = Math.max(0, BG_H - targetH);
 
+    // Ground contact shadow — placed just above the bottom edge
+    const shadowBuf = await makeGroundShadow(targetW, targetH);
+    const shadowW = Math.round(targetW * 0.7);
+    const shadowH = Math.round(shadowW * 0.18);
+    const shadowLeft = left + Math.round((targetW - shadowW) / 2);
+    const shadowTop = Math.min(BG_H - shadowH, top + targetH - Math.round(shadowH * 0.6));
+
     const composited = await sharp(bgBuffer)
-      .composite([{ input: resizedPerson, left, top }])
+      .composite([
+        { input: shadowBuf, left: shadowLeft, top: shadowTop },
+        { input: resizedPerson, left, top },
+      ])
       .jpeg({ quality: 90 })
       .toBuffer();
 
