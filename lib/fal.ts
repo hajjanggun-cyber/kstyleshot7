@@ -62,7 +62,7 @@ export async function pollFashnJob(requestId: string): Promise<{
   outputUrl: string | null;
 }> {
   const statusRes = await fetch(
-    `${FAL_BASE}/fal-ai/fashn/requests/${requestId}/status`,
+    `${FAL_BASE}/${FAL_MODEL}/requests/${requestId}/status`,
     {
       headers: { Authorization: getFalAuthHeader() },
       cache: "no-store",
@@ -79,7 +79,7 @@ export async function pollFashnJob(requestId: string): Promise<{
 
   // Fetch result
   const resultRes = await fetch(
-    `${FAL_BASE}/fal-ai/fashn/requests/${requestId}`,
+    `${FAL_BASE}/${FAL_MODEL}/requests/${requestId}`,
     {
       headers: { Authorization: getFalAuthHeader() },
       cache: "no-store",
