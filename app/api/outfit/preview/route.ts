@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
-import { startOutfitTryOnJob, ReplicateApiError } from "@/lib/replicate";
+import { startFashnTryOnJob, FalApiError } from "@/lib/fal";
 
 export const maxDuration = 10;
 
-// Sanitize: only allow /outfits/*.jpeg|jpg|webp|png
+// Only allow /outfits/*.jpeg|jpg|webp|png
 function sanitizeGarmentPath(p: string): string | null {
   if (!/^\/outfits\/[\w\-]+\.(jpeg|jpg|webp|png)$/.test(p)) return null;
   return p;
@@ -33,17 +33,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid garmentImagePath" }, { status: 400 });
     }
 
-    // Read garment from filesystem → base64 data URL (avoids Vercel auth on preview URLs)
+    // Read garment from filesystem → base64 data URL
     const filePath = join(process.cwd(), "public", safePath);
     const fileBuffer = await readFile(filePath);
     const ext = safePath.split(".").pop()!;
     const mime = ext === "jpg" || ext === "jpeg" ? "image/jpeg" : ext === "png" ? "image/png" : "image/webp";
     const garmentDataUrl = `data:${mime};base64,${fileBuffer.toString("base64")}`;
 
-    const predictionId = await startOutfitTryOnJob({ photoDataUrl, garmentImageUrl: garmentDataUrl });
+    const predictionId = await startFashnTryOnJob({
+      modelImageDataUrl: photoDataUrl,
+      garmentImageDataUrl: garmentDataUrl,
+    });
+
     return NextResponse.json({ predictionId });
   } catch (err) {
-    if (err instanceof ReplicateApiError) {
+    if (err instanceof FalApiError) {
       return NextResponse.json({ error: err.message }, { status: err.status });
     }
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

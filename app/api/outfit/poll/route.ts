@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { pollPredictions, ReplicateApiError } from "@/lib/replicate";
+import { pollFashnJob, FalApiError } from "@/lib/fal";
 
 export const maxDuration = 10;
 
@@ -12,14 +12,13 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const [result] = await pollPredictions([predictionId]);
+    const result = await pollFashnJob(predictionId);
     return NextResponse.json({
       status: result.status,
       outputUrl: result.outputUrl ?? undefined,
-      error: result.error ?? undefined,
     });
   } catch (err) {
-    if (err instanceof ReplicateApiError) {
+    if (err instanceof FalApiError) {
       return NextResponse.json({ error: err.message }, { status: err.status });
     }
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
