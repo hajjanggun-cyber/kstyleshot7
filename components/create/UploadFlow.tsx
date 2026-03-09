@@ -201,22 +201,36 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
     revokeObjectUrl(photoBlobUrl);
     const nextBlobUrl = URL.createObjectURL(file);
     setPhotoBlobUrl(nextBlobUrl);
-    setFaceWarning("none");
+    setFaceWarning("checking");
     if (!checkoutIdFromUrl && allowDemoFlow) ensureDemoSession();
 
-    // Face detection (best effort — Chrome/Edge only, graceful fallback on other browsers)
-    if (!("FaceDetector" in window)) return;
-    setFaceWarning("checking");
+    // Face detection via MediaPipe tasks-vision (all browsers, lazy-loaded)
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const detector = new (window as any).FaceDetector({ maxDetectedFaces: 1, fastMode: true });
+      const { FaceDetector, FilesetResolver } = await import("@mediapipe/tasks-vision");
+
+      const vision = await FilesetResolver.forVisionTasks(
+        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+      );
+      const detector = await FaceDetector.createFromOptions(vision, {
+        baseOptions: {
+          modelAssetPath:
+            "https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite",
+          delegate: "GPU",
+        },
+        runningMode: "IMAGE",
+        minDetectionConfidence: 0.5,
+      });
+
       const img = new Image();
       img.src = nextBlobUrl;
       await new Promise<void>((resolve) => { img.onload = () => resolve(); });
-      const faces = await detector.detect(img) as unknown[];
-      setFaceWarning(faces.length > 0 ? "none" : "no_face");
+
+      const result = detector.detect(img);
+      detector.close();
+
+      setFaceWarning(result.detections.length > 0 ? "none" : "no_face");
     } catch {
-      setFaceWarning("none");
+      setFaceWarning("none"); // 감지 실패 시 그냥 통과
     }
   }
 
