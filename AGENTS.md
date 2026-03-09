@@ -1,6 +1,6 @@
 # AGENTS.md — Codex Writing Instructions for K-Style Hub
 
-Updated At: 2026-03-07 15:20 KST
+Updated At: 2026-03-09 22:45 KST
 
 > This file is automatically read by Codex before any task.
 > All content written for this project must follow every rule below without exception.
@@ -124,6 +124,14 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - In short UI copy, summary cards, related-link cards, and short guidance text, start a new line after each sentence ending with a period.
 - Do not force sentence-by-sentence line breaks across long body paragraphs; keep standard paragraph flow for the main article body.
 
+### Conversion Bridge Rule (limited use)
+
+- A soft conversion bridge paragraph may appear 1–2 times in the body only when it fits the section naturally
+- Do not append a conversion bridge to every paragraph or every H2 section
+- Do not repeat the same conversion sentence across multiple sections
+- The bridge must read as editorial guidance, not aggressive sales copy
+- Final CTA remains the required bottom banner block
+
 ### Intro Type Rotation (필수 — AI 패턴 방지)
 
 같은 허브 안의 글끼리 인트로 유형이 겹치지 않도록 4가지 유형을 돌아가며 사용한다.
@@ -157,6 +165,10 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - No keyword stuffing — keyword appears at most 3–4 times total in the body
 - No two articles within the same hub may share the same primary keyword (cannibalization prevention)
 - Long-tail keywords preferred over broad terms (e.g. "경복궁 오전 사진 촬영" over "경복궁 사진")
+- Primary Keyword must be a practical, search-like phrase that real users would likely type into a search bar
+- Do not use philosophical, interpretive, or overly abstract phrases as Primary Keyword
+- Avoid conceptual theme phrases such as "가상 배경" or "오전 오후 빛 차이" as the main keyword unless they match a real search intent
+- Prefer concrete intent-based queries such as "경복궁 야간개장", "AI 한복 프로필", or "서촌 데이트 코스"
 - Record the selected keyword in the session log alongside the file path
 
 ### Internal Link Rules (SEO — mandatory)
