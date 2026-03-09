@@ -227,7 +227,9 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - `![]()` 다음 줄부터 본문 단락을 작성한다
 - 본문 이미지는 raw HTML `<img>` 대신 MDX 마크다운 이미지 문법 `![alt](/images/...)`만 사용한다
 - Quick Summary, 함께 읽을 글(Related Guides) 섹션에는 삽입하지 않는다
-- 이미지 파일명과 alt 태그는 사용자가 직접 채운다 — 비워둔 채로 출력한다
+- 이미지 alt 태그는 비워두지 않는다 — 각 이미지의 실제 장면을 구체적으로 설명하고, 검색 의도 키워드 1개만 자연스럽게 포함한다
+- alt 태그는 접근성과 이미지 검색을 함께 고려해 작성하되, 키워드 나열식 문구나 반복 패턴은 금지한다
+- 이미지 파일명은 사용자가 직접 채워도 되지만, alt 태그는 Codex가 기본적으로 작성해 반영한다
 - 파일 위치: `public/images/hub/[hub-slug]/[파일명]-kr.webp` 또는 `-en.webp`
 - MDX 내 경로: `/images/hub/[hub-slug]/[파일명]-kr.webp`
 - 이미지 수: 글마다 3~7개 (H2 개수에 따라 결정)

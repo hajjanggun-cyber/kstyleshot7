@@ -7,40 +7,40 @@
 
 - 한글 링크: `https://kstyleshot.com/ko/hub/gyeongbokgung-hub`
 - 영어 링크: `https://kstyleshot.com/en/hub/gyeongbokgung-hub`
-- 한글 제목: `경복궁 여행 가이드 — 서울이 스스로를 기억하는 궁궐`
-- 영어 제목: `Gyeongbokgung Palace Travel Guide: Why It Matters`
+- 한글 제목: `경복궁 가볼만한곳 — 관람 코스부터 한복 무료입장까지`
+- 영어 제목: `Gyeongbokgung Palace Tour Guide for Seoul`
 - 한글 파일: `content/hub/ko/gyeongbokgung-hub.mdx`
 - 영어 파일: `content/hub/en/gyeongbokgung-hub.mdx`
 
 1. `gyeongbokgung-photo-guide` (작업중)
 - 한글 링크: `https://kstyleshot.com/ko/hub/gyeongbokgung-photo-guide`
 - 영어 링크: `https://kstyleshot.com/en/hub/gyeongbokgung-photo-guide`
-- 한글 제목: `경복궁 포토존 추천 — 전통 미학의 사진 명소 총정리`
-- 영어 제목: `Best Photo Spots in Gyeongbokgung: Visual Guide`
+- 한글 제목: `경복궁 한복 스냅 — 사진 명소 중심 핵심 동선`
+- 영어 제목: `Gyeongbokgung Hanbok Photo Shoot Guide`
 - 한글 파일: `content/hub/ko/gyeongbokgung-photo-guide.mdx`
 - 영어 파일: `content/hub/en/gyeongbokgung-photo-guide.mdx`
 
 2. `gyeongbokgung-light-timing-guide` (작업중)
 - 한글 링크: `https://kstyleshot.com/ko/hub/gyeongbokgung-light-timing-guide`
 - 영어 링크: `https://kstyleshot.com/en/hub/gyeongbokgung-light-timing-guide`
-- 한글 제목: `경복궁 오전 오후 사진 — 시간대별 빛과 그림자 가이드`
-- 영어 제목: `Best Time to Photograph Gyeongbokgung: Light Guide`
+- 한글 제목: `경복궁 야간개장 사진 — 시간대별 빛과 동선 가이드`
+- 영어 제목: `Gyeongbokgung Palace Night View Guide`
 - 한글 파일: `content/hub/ko/gyeongbokgung-light-timing-guide.mdx`
 - 영어 파일: `content/hub/en/gyeongbokgung-light-timing-guide.mdx`
 
 3. `gyeongbokgung-nearby-hanok-photo-spots`(작업중)
 - 한글 링크: `https://kstyleshot.com/ko/hub/gyeongbokgung-nearby-hanok-photo-spots`
 - 영어 링크: `https://kstyleshot.com/en/hub/gyeongbokgung-nearby-hanok-photo-spots`
-- 한글 제목: `경복궁 근처 한옥 포토존 — 숨겨진 골목 산책 5곳`
-- 영어 제목: `Hanok Photo Spots Near Gyeongbokgung: Alley Guide`
+- 한글 제목: `서촌 한옥 마을 코스 — 경복궁 근처 사진 명소 5곳`
+- 영어 제목: `Bukchon Hanok Village Photo Spots Near Gyeongbokgung`
 - 한글 파일: `content/hub/ko/gyeongbokgung-nearby-hanok-photo-spots.mdx`
 - 영어 파일: `content/hub/en/gyeongbokgung-nearby-hanok-photo-spots.mdx`
 
 4. `virtual-gyeongbokgung-background-guide`(작업중)
 - 한글 링크: `https://kstyleshot.com/ko/hub/virtual-gyeongbokgung-background-guide`
 - 영어 링크: `https://kstyleshot.com/en/hub/virtual-gyeongbokgung-background-guide`
-- 한글 제목: `경복궁 배경 프로필 사진 — 가상 전통 감성 완성 가이드`
-- 영어 제목: `Virtual Gyeongbokgung Background Photos: Seoul Mood`
+- 한글 제목: `AI 한복 프로필 — 경복궁 한복 합성 자연스럽게 하는 법`
+- 영어 제목: `AI Hanbok Generator for Virtual Hanbok Try-On`
 - 한글 파일: `content/hub/ko/virtual-gyeongbokgung-background-guide.mdx`
 - 영어 파일: `content/hub/en/virtual-gyeongbokgung-background-guide.mdx`
 
@@ -68,7 +68,7 @@ Updated: 2026-03-09
   - H2를 조금 더 검색형으로 조정하기
   - 포토존 글은 리스트형 구조 강화
   - 이미지 alt와 주변 문맥 보강
-  - 기존 글은 최대한 살리면서 문맥 가져가기 
+  - 기존 글은 최대한 살리면서 문맥 가져가기
 
 - 메인 키워드: 이 글이 대표로 가져갈 검색어 1개
   - 하위 키워드: 메인 키워드를 보조하면서 검색 의도를 넓혀주는 표현 3~5개
@@ -78,12 +78,11 @@ Updated: 2026-03-09
   예를 들어 경복궁 포토 가이드라면:
 
   - 메인 키워드
-      - KO: 경복궁 포토존 추천
-      - EN: Best photo spots in Gyeongbokgung Palace
+      - KO: 경복궁 한복 스냅
+      - EN: Gyeongbokgung Hanbok Photo Shoot
   - 하위 키워드
-      - KO: 경복궁 사진 명소, 경복궁 한복 사진, 경복궁 사진 구도, 경복궁 인생샷, 경복궁 촬영 포인트       
-      - EN: Gyeongbokgung Palace photography guide, hanbok photos in Gyeongbokgung, best angles in        
-        Gyeongbokgung Palace, Seoul palace photo spots, where to take photos in Gyeongbokgung
+      - KO: 경복궁 사진 명소, 근정전 포토존, 경복궁 한복 사진 포즈, 경복궁 인생샷, 경복궁 촬영 포인트
+      - EN: best photo spots in Gyeongbokgung, Korean traditional dress photo, Gyeongbokgung Instagram spots, best angles in Gyeongbokgung, where to take photos in Gyeongbokgung
 
   이걸 어디에 넣느냐가 중요합니다.
 
@@ -105,40 +104,40 @@ Updated: 2026-03-09
 
 - 한글 링크: `https://kstyleshot.com/ko/hub/gyeongbokgung-hub`
 - 영어 링크: `https://kstyleshot.com/en/hub/gyeongbokgung-hub`
-- 한글 제목: `경복궁 여행 가이드 — 서울이 스스로를 기억하는 궁궐`
-- 영어 제목: `Gyeongbokgung Palace Travel Guide: Why It Matters`
+- 한글 제목: `경복궁 가볼만한곳 — 관람 코스부터 한복 무료입장까지`
+- 영어 제목: `Gyeongbokgung Palace Tour Guide for Seoul`
 - 한글 파일: `content/hub/ko/gyeongbokgung-hub.mdx`
 - 영어 파일: `content/hub/en/gyeongbokgung-hub.mdx`
 
 1. `gyeongbokgung-photo-guide` (작업중)
 - 한글 링크: `https://kstyleshot.com/ko/hub/gyeongbokgung-photo-guide`
 - 영어 링크: `https://kstyleshot.com/en/hub/gyeongbokgung-photo-guide`
-- 한글 제목: `경복궁 포토존 추천 — 전통 미학의 사진 명소 총정리`
-- 영어 제목: `Best Photo Spots in Gyeongbokgung: Visual Guide`
+- 한글 제목: `경복궁 한복 스냅 — 사진 명소 중심 핵심 동선`
+- 영어 제목: `Gyeongbokgung Hanbok Photo Shoot Guide`
 - 한글 파일: `content/hub/ko/gyeongbokgung-photo-guide.mdx`
 - 영어 파일: `content/hub/en/gyeongbokgung-photo-guide.mdx`
 
 2. `gyeongbokgung-light-timing-guide` (작업중)
 - 한글 링크: `https://kstyleshot.com/ko/hub/gyeongbokgung-light-timing-guide`
 - 영어 링크: `https://kstyleshot.com/en/hub/gyeongbokgung-light-timing-guide`
-- 한글 제목: `경복궁 오전 오후 사진 — 시간대별 빛과 그림자 가이드`
-- 영어 제목: `Best Time to Photograph Gyeongbokgung: Light Guide`
+- 한글 제목: `경복궁 야간개장 사진 — 시간대별 빛과 동선 가이드`
+- 영어 제목: `Gyeongbokgung Palace Night View Guide`
 - 한글 파일: `content/hub/ko/gyeongbokgung-light-timing-guide.mdx`
 - 영어 파일: `content/hub/en/gyeongbokgung-light-timing-guide.mdx`
 
 3. `gyeongbokgung-nearby-hanok-photo-spots`(작업중)
 - 한글 링크: `https://kstyleshot.com/ko/hub/gyeongbokgung-nearby-hanok-photo-spots`
 - 영어 링크: `https://kstyleshot.com/en/hub/gyeongbokgung-nearby-hanok-photo-spots`
-- 한글 제목: `경복궁 근처 한옥 포토존 — 숨겨진 골목 산책 5곳`
-- 영어 제목: `Hanok Photo Spots Near Gyeongbokgung: Alley Guide`
+- 한글 제목: `서촌 한옥 마을 코스 — 경복궁 근처 사진 명소 5곳`
+- 영어 제목: `Bukchon Hanok Village Photo Spots Near Gyeongbokgung`
 - 한글 파일: `content/hub/ko/gyeongbokgung-nearby-hanok-photo-spots.mdx`
 - 영어 파일: `content/hub/en/gyeongbokgung-nearby-hanok-photo-spots.mdx`
 
 4. `virtual-gyeongbokgung-background-guide`(작업중)
 - 한글 링크: `https://kstyleshot.com/ko/hub/virtual-gyeongbokgung-background-guide`
 - 영어 링크: `https://kstyleshot.com/en/hub/virtual-gyeongbokgung-background-guide`
-- 한글 제목: `경복궁 배경 프로필 사진 — 가상 전통 감성 완성 가이드`
-- 영어 제목: `Virtual Gyeongbokgung Background Photos: Seoul Mood`
+- 한글 제목: `AI 한복 프로필 — 경복궁 한복 합성 자연스럽게 하는 법`
+- 영어 제목: `AI Hanbok Generator for Virtual Hanbok Try-On`
 - 한글 파일: `content/hub/ko/virtual-gyeongbokgung-background-guide.mdx`
 - 영어 파일: `content/hub/en/virtual-gyeongbokgung-background-guide.mdx`
 
@@ -294,6 +293,15 @@ Updated: 2026-03-09
 - Keep image files under `public/images/hub/[hub-slug]/`
 - Use `.webp` paths in MDX
 - Match locale suffix rules: KO `-kr.webp`, EN `-en.webp`
+
+### 6-1. If image alt text is edited
+
+- Do not leave body image alt text empty
+- Alt text must describe the actual scene first
+- Include only one natural search-intent keyword in each alt text
+- Do not write keyword-stuffed, repetitive, or label-only alt text
+- KO files use Korean alt text, EN files use English alt text
+- Current status: Gyeongbokgung hub and all four sub-articles already have alt text applied for both KO and EN
 
 ### 7. Structure rules that must remain valid
 

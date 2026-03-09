@@ -11,6 +11,28 @@ Updated At: 2026-03-08 KST
 ## 1. 글 작성 전 필수 — 반드시 먼저 읽을 것
 
 ```
+
+[2026-03-09 14:10 KST] 경복궁 허브 키워드 리프레이밍 수정 완료
+- content/hub/ko/gyeongbokgung-hub.mdx
+- keyword: 경복궁 가볼만한곳
+- content/hub/en/gyeongbokgung-hub.mdx
+- keyword: Gyeongbokgung Palace tour
+- content/hub/ko/gyeongbokgung-photo-guide.mdx
+- keyword: 경복궁 한복 스냅
+- content/hub/en/gyeongbokgung-photo-guide.mdx
+- keyword: Gyeongbokgung hanbok photo shoot
+- content/hub/ko/gyeongbokgung-light-timing-guide.mdx
+- keyword: 경복궁 야간개장 사진
+- content/hub/en/gyeongbokgung-light-timing-guide.mdx
+- keyword: Gyeongbokgung Palace night view
+- content/hub/ko/gyeongbokgung-nearby-hanok-photo-spots.mdx
+- keyword: 서촌 한옥 마을 코스
+- content/hub/en/gyeongbokgung-nearby-hanok-photo-spots.mdx
+- keyword: Bukchon Hanok Village photo spots
+- content/hub/ko/virtual-gyeongbokgung-background-guide.mdx
+- keyword: AI 한복 프로필
+- content/hub/en/virtual-gyeongbokgung-background-guide.mdx
+- keyword: AI Hanbok generator
 1. md-doc/google-seo-guide.md   ← Google 공식 SEO 기준 (필수)
 2. AGENTS.md                     ← 출력 스펙, 품질 기준 (필수)
 3. 이 파일(post-codex-command.md) ← 작성 순서 및 주제 목록

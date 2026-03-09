@@ -74,7 +74,7 @@ export function LocationFlow() {
         } else if (data.status === "failed" || data.status === "canceled") {
           clearInterval(interval);
         }
-      } catch {/* retry */}
+      } catch {/* retry */ }
     }, 3000);
 
     return () => clearInterval(interval);
@@ -95,7 +95,7 @@ export function LocationFlow() {
       .then((data: { predictionId?: string } | null) => {
         if (data?.predictionId) setBgRemovedPredictionId(data.predictionId);
       })
-      .catch(() => {/* ignore */});
+      .catch(() => {/* ignore */ });
   }, [outfitPreviewUrl, hairPreviewUrl, bgRemovedUrl, bgRemovedPredictionId, setBgRemovedPredictionId]);
 
   // Poll for BG removal result
@@ -116,7 +116,7 @@ export function LocationFlow() {
         } else if (data.status === "failed" || data.status === "canceled") {
           clearInterval(interval);
         }
-      } catch {/* retry */}
+      } catch {/* retry */ }
     }, 3000);
 
     return () => clearInterval(interval);
@@ -195,7 +195,7 @@ export function LocationFlow() {
           const data = await res.json() as { predictionId?: string };
           if (data.predictionId) setCompositePredictionId(data.predictionId);
         }
-      } catch {/* show done page anyway */}
+      } catch {/* show done page anyway */ }
     }
 
     pickLocation(chosen);
@@ -234,11 +234,11 @@ export function LocationFlow() {
           {/* Gradient fade */}
           <div className="lc-preview-fade" />
           {/* Avatar */}
-          {photoBlobUrl ? (
+          {(bgRemovedUrl || hairPreviewUrl || photoBlobUrl) ? (
             <img
               alt="Your styled avatar"
               className="lc-preview-avatar"
-              src={photoBlobUrl}
+              src={bgRemovedUrl || hairPreviewUrl || photoBlobUrl || ""}
             />
           ) : (
             <div className="lc-preview-avatar-ph">✦</div>
@@ -403,7 +403,7 @@ export function LocationFlow() {
       <div className="lc-bottom">
         <button
           className="up-next-btn up-next-btn--active"
-          disabled={isGenerating}
+          disabled={isGenerating || (!bgRemovedUrl && !!bgRemovedPredictionId)}
           onClick={handleGenerate}
           type="button"
         >
@@ -412,6 +412,8 @@ export function LocationFlow() {
               <span className="lc-gen-spinner" />
               {t("generating")}
             </>
+          ) : (!bgRemovedUrl && !!bgRemovedPredictionId) ? (
+            <>{lang === "ko" ? "인물 추출 중..." : "Extracting subject..."}</>
           ) : (
             <>{t("nextBtn")}</>
           )}

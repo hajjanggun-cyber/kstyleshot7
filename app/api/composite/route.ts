@@ -42,9 +42,9 @@ async function applyColorTemperature(
     .extract({ left: 0, top: regionTop, width: BG_W, height: regionH })
     .stats();
 
-  const r = Math.round(stats.channels[0].mean);
-  const g = Math.round(stats.channels[1].mean);
-  const b = Math.round(stats.channels[2].mean);
+  const r = stats.channels[0] ? Math.round(stats.channels[0].mean) : 255;
+  const g = stats.channels[1] ? Math.round(stats.channels[1].mean) : r;
+  const b = stats.channels[2] ? Math.round(stats.channels[2].mean) : r;
 
   const meta = await sharp(personBuffer).metadata();
   const W = meta.width ?? 512;
@@ -52,13 +52,13 @@ async function applyColorTemperature(
 
   // Solid color overlay at ~14% opacity — matches ambient color cast
   const overlay = await sharp({
-    create: { width: W, height: H, channels: 4, background: { r, g, b, alpha: 36 } },
+    create: { width: W, height: H, channels: 4, background: { r, g, b, alpha: 0.14 } },
   })
     .png()
     .toBuffer();
 
   return sharp(personBuffer)
-    .composite([{ input: overlay, blend: "over" }])
+    .composite([{ input: overlay, blend: "atop" }])
     .png()
     .toBuffer();
 }
