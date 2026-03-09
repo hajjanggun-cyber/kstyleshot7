@@ -35,6 +35,8 @@ export function LocationFlow() {
     outfit,
     hair,
     hairPreviewUrl,
+    hairPredictionId,
+    setHairPreviewUrl,
     outfitPreviewUrl,
     outfitPredictionId,
     setOutfitPreviewUrl,
@@ -53,6 +55,30 @@ export function LocationFlow() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDownloadingHair, setIsDownloadingHair] = useState(false);
   const [isDownloadingOutfit, setIsDownloadingOutfit] = useState(false);
+
+  // Poll for hair result in case OutfitFlow unmounted before polling completed
+  useEffect(() => {
+    if (hairPreviewUrl || !hairPredictionId) return;
+
+    let retries = 0;
+    const interval = setInterval(async () => {
+      retries += 1;
+      if (retries >= 40) { clearInterval(interval); return; }
+      try {
+        const res = await fetch(`/api/hair/poll?predictionId=${hairPredictionId}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          setHairPreviewUrl(data.outputUrl);
+          clearInterval(interval);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          clearInterval(interval);
+        }
+      } catch {/* retry */}
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [hairPreviewUrl, hairPredictionId, setHairPreviewUrl]);
 
   // Auto-start BG removal: outfit result → hair result (fallback when outfit synthesis bypassed)
   useEffect(() => {
