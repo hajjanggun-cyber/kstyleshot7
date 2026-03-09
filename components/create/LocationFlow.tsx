@@ -54,21 +54,23 @@ export function LocationFlow() {
   const [isDownloadingHair, setIsDownloadingHair] = useState(false);
   const [isDownloadingOutfit, setIsDownloadingOutfit] = useState(false);
 
-  // Auto-start BG removal as soon as outfit result is ready
+  // Auto-start BG removal: outfit result → hair result (fallback when outfit synthesis bypassed)
   useEffect(() => {
-    if (!outfitPreviewUrl || bgRemovedUrl || bgRemovedPredictionId) return;
+    if (bgRemovedUrl || bgRemovedPredictionId) return;
+    const sourceUrl = outfitPreviewUrl ?? hairPreviewUrl;
+    if (!sourceUrl) return;
 
     fetch("/api/bgremove/preview", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageUrl: outfitPreviewUrl }),
+      body: JSON.stringify({ imageUrl: sourceUrl }),
     })
       .then((res) => (res.ok ? res.json() : null))
       .then((data: { predictionId?: string } | null) => {
         if (data?.predictionId) setBgRemovedPredictionId(data.predictionId);
       })
       .catch(() => {/* ignore */});
-  }, [outfitPreviewUrl, bgRemovedUrl, bgRemovedPredictionId, setBgRemovedPredictionId]);
+  }, [outfitPreviewUrl, hairPreviewUrl, bgRemovedUrl, bgRemovedPredictionId, setBgRemovedPredictionId]);
 
   // Poll for BG removal result
   useEffect(() => {
