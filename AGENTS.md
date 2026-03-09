@@ -161,6 +161,10 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 ### Keyword Rules (SEO — mandatory)
 
 - Before writing, select one primary target keyword per language (KO and EN separately)
+- The title and primary keyword listed in `md-doc/kpop-blog-topics-300.md` are planning drafts, not locked final values
+- When drafting the real post, replace that draft keyword with the strongest practical search-intent keyword you can justify for the topic
+- If a higher-volume or more clickworthy real-user query fits the topic better, redesign the title around that keyword instead of mechanically preserving the planning title
+- Add a clear click hook to the final title, but keep it factual, legally safe, and aligned with the actual article scope
 - Place the target keyword naturally in: (1) title, (2) first paragraph, (3) at least one H2
 - No keyword stuffing — keyword appears at most 3–4 times total in the body
 - No two articles within the same hub may share the same primary keyword (cannibalization prevention)
@@ -261,7 +265,11 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 - 해당 허브의 모든 파일(허브 글 + 하위 글)을 읽는다
 - 허브 글의 "함께 읽을 글" / "Related Guides"에 모든 하위 글이 포함됐는지 확인하고 누락 시 추가
 - 각 하위 글 본문에 허브 글로의 역링크가 있는지 확인하고 누락 시 추가
+- **각 하위 글의 related panel에 같은 허브 내 다른 하위 글이 모두 포함됐는지 확인하고 누락 시 추가**
 - 존재하지 않는 파일로의 링크는 제거
+
+> 참고: 하위 글은 작성 순서상 나중에 쓴 글이 아직 없어서 related panel에서 빠질 수 있다.
+> 허브 묶음이 완료된 시점에 반드시 소급하여 모든 하위 글의 related panel을 업데이트한다.
 
 ### 2. 키워드 중복 확인
 - 해당 허브 내 모든 글의 타깃 키워드를 목록으로 정리
@@ -303,6 +311,7 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 
 **기술 스펙**
 - [ ] `hreflangSlug` matches the paired language file
+- [ ] KO/EN 짝 파일의 `publishedAt`가 동일한가
 
 ## Character Count Verification (mandatory)
 

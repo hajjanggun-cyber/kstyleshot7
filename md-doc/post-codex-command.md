@@ -1,692 +1,526 @@
-Updated At: 2026-03-08 KST
+Updated At: 2026-03-09 KST
+
+# K-Style Hub Unified Writing Command
+
+이 문서는 K-Style Hub 프로젝트의 단일 운영 문서다.
+허브 글 작성, 하위 글 작성, 기존 글 수정, 이미지 alt 보강, 내부 링크 점검, 키워드 분리, 품질 검수까지 모두 이 문서를 기준으로 실행한다.
+
+삭제 예정 문서:
+- `md-doc/now-posting-작업중.md`
+- `md-doc/now-sujung.md`
+
+위 두 문서의 실무 규칙은 이미 이 문서에 통합됐다.
 
 ---
 
-# Codex 페르소나 & 핵심 목표
+## 1. 목적
 
-너는 최고의 SEO 전문가이자 콘텐츠 전략 애널리스트다.
-이 프로젝트의 최우선 목표는 **SEO 검색 유입**이다.
-모든 결정의 기준은 "이 글이 실제로 검색 상단에 올라갈 수 있는가"다.
+이 프로젝트의 우선순위는 아래 순서다.
 
-## 1. 글 작성 전 필수 — 반드시 먼저 읽을 것
+1. 실제 검색 의도를 반영한 SEO 구조
+2. 허브와 하위 글의 키워드 분리
+3. 클릭 가능한 제목과 메타 설명
+4. 과장 없는 본문 품질과 읽기 쉬운 문단 구성
+5. 이미지 alt와 내부 링크 정리
+6. 하단 배너 중심의 전환 구조 유지
 
-```
+한 줄 원칙:
 
-[2026-03-09 14:10 KST] 경복궁 허브 키워드 리프레이밍 수정 완료
-- content/hub/ko/gyeongbokgung-hub.mdx
-- keyword: 경복궁 가볼만한곳
-- content/hub/en/gyeongbokgung-hub.mdx
-- keyword: Gyeongbokgung Palace tour
-- content/hub/ko/gyeongbokgung-photo-guide.mdx
-- keyword: 경복궁 한복 스냅
-- content/hub/en/gyeongbokgung-photo-guide.mdx
-- keyword: Gyeongbokgung hanbok photo shoot
-- content/hub/ko/gyeongbokgung-light-timing-guide.mdx
-- keyword: 경복궁 야간개장 사진
-- content/hub/en/gyeongbokgung-light-timing-guide.mdx
-- keyword: Gyeongbokgung Palace night view
-- content/hub/ko/gyeongbokgung-nearby-hanok-photo-spots.mdx
-- keyword: 서촌 한옥 마을 코스
-- content/hub/en/gyeongbokgung-nearby-hanok-photo-spots.mdx
-- keyword: Bukchon Hanok Village photo spots
-- content/hub/ko/virtual-gyeongbokgung-background-guide.mdx
-- keyword: AI 한복 프로필
-- content/hub/en/virtual-gyeongbokgung-background-guide.mdx
-- keyword: AI Hanbok generator
-1. md-doc/google-seo-guide.md   ← Google 공식 SEO 기준 (필수)
-2. AGENTS.md                     ← 출력 스펙, 품질 기준 (필수)
-3. 이 파일(post-codex-command.md) ← 작성 순서 및 주제 목록
-```
+- 검색 상단을 노리되 키워드 나열형 저품질 문서는 만들지 않는다.
+- 기존 글 수정 시에는 갈아엎지 않고, 메타·첫 문단·H2·alt 중심으로 최소 수정한다.
 
 ---
 
-## 2. 프롬프트 모음 — 상황에 맞게 골라 사용
+## 2. 프로젝트 컨텍스트
 
-### [A] 일반 세션 — 글 작성 (매번 기본값)
+- Site: `https://kstyleshot.com`
+- Routes:
+  - KO: `/ko/hub/[slug]`
+  - EN: `/en/hub/[slug]`
+- Content paths:
+  - `content/hub/ko/[slug].mdx`
+  - `content/hub/en/[slug].mdx`
+- Renderer:
+  - `app/[lang]/hub/[slug]/page.tsx`
+  - `components/hub/HubMdxPage.tsx`
 
-```
-md-doc/google-seo-guide.md와 AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
-
-다음 순서로 실행한다:
-1. [작업 진행 로그] 섹션을 확인해서 어디까지 완료됐는지 파악한다.
-2. [전체 작성 순서] 섹션에 따라 다음 1쌍(KO 1개 + EN 1개)을 작성한다.
-3. 단계를 절대 건너뛰지 않는다. 1단계 → 해당 허브 2단계 → 다음 1단계 순서 고정.
-4. content/hub/ko/ 디렉토리를 먼저 확인해서 이미 존재하는 파일은 건드리지 않는다.
-5. 작성 완료 후 [작업 진행 로그]에 아래 형식으로 반드시 기록한다.
-
-로그 기록 형식:
-[날짜 시간 KST]
-완료:
-- content/hub/ko/[slug].mdx
-- content/hub/en/[slug].mdx
-다음 세션 시작: [단계] — [번호 있으면 번호] [정확한 주제명]
-
-예시:
-다음 세션 시작: 1단계 — 남산 N서울타워 허브 글
-다음 세션 시작: 2단계 — 경복궁 하위 글 [001] 경복궁 포토존 완전 가이드
-다음 세션 시작: 3단계 — kpop-blog-topics-300.md [046]번부터
-```
-
-### [B] 허브 완료 후 — 내부 링크 & 키워드 & nextSlug 정리
-허브 1개의 모든 하위 글이 완료됐을 때 사용. [허브명]과 파일 목록을 실제 값으로 바꿔서 사용.
-
-```
-AGENTS.md와 md-doc/post-codex-command.md를 읽어라.
-
-[허브명] 허브의 완료 후 작업을 실행한다.
-
-대상 파일 (먼저 모두 읽는다):
-- content/hub/ko/[허브-slug].mdx
-- content/hub/en/[허브-slug].mdx
-- content/hub/ko/[하위글-slug-1].mdx
-- content/hub/en/[하위글-slug-1].mdx
-(해당 허브의 모든 KO/EN 파일)
-
-1. 내부 링크 정리:
-   - 허브 글의 "함께 읽을 글" / "Related Guides"에 모든 하위 글 포함 여부 확인, 누락 시 추가
-   - 각 하위 글 본문에 허브 글로의 역링크 확인, 누락 시 추가
-   - 존재하지 않는 파일로의 링크 제거
-
-2. 키워드 소급 적용:
-   - [전체 작성 순서] 섹션의 키워드 표를 확인한다
-   - 각 파일의 title과 첫 단락에 타깃 키워드가 자연스럽게 포함됐는지 확인
-   - 없으면 문장 흐름을 유지하며 추가 (title 60자, description 120~155자 유지)
-
-3. 키워드 중복 확인:
-   - 허브 내 모든 글의 타깃 키워드(KO/EN)를 목록으로 정리하여 보고
-   - 겹치는 키워드가 있으면 더 구체적인 롱테일로 수정
-
-4. nextSlug / nextTitle 채우기:
-   - 읽기 순서: 허브 글 → 하위 글 순서대로
-   - 각 파일 frontmatter에 nextSlug와 nextTitle 추가
-   - 마지막 하위 글의 nextSlug는 다음 허브의 허브 글로 연결
-
-5. 완료 후 [작업 진행 로그]에 기록:
-   "[날짜 시간 KST] [허브명] 허브 내부링크·키워드·nextSlug 정리 완료"
-```
+카테고리 고정값:
+- KO: `한국 명소 & 포토존`
+- EN: `Seoul Locations`
 
 ---
 
-## 4. 전체 작성 순서 — 3단계 (절대 건너뛰지 않는다)
+## 3. 단일 진실 규칙
 
-### 1단계: 허브 글
-
-아래 순서로 10개를 완성한다. 제목·소제목은 섹션 9·10을 따른다.
-
-| 순서 | 장소 | 타깃 키워드(KO) | 타깃 키워드(EN) | 상태 |
-|------|------|----------------|----------------|------|
-| 1 | 경복궁 | 경복궁 여행 가이드 | gyeongbokgung palace travel guide | ✅ 완료 |
-| 2 | 명동 | 명동 서울 여행 코스 | myeongdong seoul travel guide | ✅ 완료 |
-| 3 | 남산 N서울타워 | 남산 N서울타워 서울 야경 | n seoul tower night view guide | ✅ 완료 |
-| 4 | 홍대 | 홍대 서울 놀거리 | hongdae seoul neighborhood guide | ✅ 완료 |
-| 5 | 인사동 | 인사동 서울 전통거리 | insadong seoul cultural street | ⬜ 대기 |
-| 6 | 가로수길 | 가로수길 서울 패션 거리 | garosu-gil seoul fashion street | ⬜ 대기 |
-| 7 | 한강공원 | 한강공원 서울 피크닉 | hangang park seoul picnic guide | ⬜ 대기 |
-| 8 | 이태원 & 경리단길 | 이태원 경리단길 서울 밤거리 | itaewon gyeongnidan-gil seoul guide | ⬜ 대기 |
-| 9 | 잠실 롯데월드 | 잠실 롯데월드 서울 데이트 | jamsil lotte world seoul guide | ⬜ 대기 |
-| 10 | 대형 기획사 사옥 주변 | 서울 기획사 사옥 주변 팬투어 | seoul k-pop label hq area guide | ⬜ 대기 |
-
-### 2단계: 허브별 하위 글
-
-허브 글 발행 직후 해당 허브의 하위 글을 순서대로 작성한다.
-번호는 `kpop-blog-topics-300.md`의 주제 번호다.
-
-| 허브 | 하위 글 | 타깃 키워드(KO) | 타깃 키워드(EN) | 상태 |
-|------|---------|----------------|----------------|------|
-| 경복궁 | [001] 경복궁 포토존 완전 가이드 | 경복궁 포토존 추천 | best photo spots in gyeongbokgung | ✅ 완료 |
-| 경복궁 | [002] 경복궁 시간대별 빛과 그림자 | 경복궁 오전 오후 사진 | best time to photograph gyeongbokgung | ✅ 완료 |
-| 경복궁 | [003] 경복궁 근처 골목 산책 — 숨겨진 한옥 포토존 5곳 | 경복궁 근처 한옥 포토존 | hanok photo spots near gyeongbokgung | ✅ 완료 |
-| 경복궁 | [286] 가상 경복궁 배경 — 서울에 없어도 전통 감성 사진 완성하기 | 경복궁 배경 프로필 사진 | virtual gyeongbokgung background photos | ✅ 완료 |
-| 명동 | [010] 명동 네온사인 거리 — 야간 스트릿 스냅 촬영 가이드 | 명동 네온사인 야간 사진 | myeongdong neon street photography | ⬜ 대기 |
-| 명동 | [011] 명동 K-뷰티 쇼핑 지도 — 동선 효율 최강 루트 | 명동 K뷰티 쇼핑 동선 | myeongdong k-beauty shopping route | ⬜ 대기 |
-| 명동 | [217] 명동 & 홍대 길거리 음식 완전 정복 | 명동 홍대 길거리 음식 비교 | myeongdong vs hongdae street food | ⬜ 대기 |
-| 남산 N서울타워 | [004] 남산 N서울타워 야경 가이드 | 남산 N서울타워 야경 명소 | n seoul tower night view spots | ✅ 완료 |
-| 남산 N서울타워 | [005] 남산 케이블카에서 찍는 서울 감성 스냅 사진 | 남산 케이블카 스냅 사진 | namsan cable car photo tips | ✅ 완료 |
-| 홍대 | [006] 홍대 거리 포토존 — 버스킹 무대부터 벽화 골목까지 | 홍대 거리 포토존 추천 | best hongdae street photo spots | ✅ 완료 |
-| 홍대 | [007] 홍대 인디 감성 카페 — 이색 인테리어 포토존 TOP 7 | 홍대 감성 카페 포토존 | hongdae aesthetic cafes for photos | ✅ 완료 |
-| 홍대 | [050] K-스트릿 패션 완전 분석 — 홍대·성수동 스타일 해부 | 홍대 성수 스트릿 패션 차이 | hongdae vs seongsu street fashion | ✅ 완료 |
-| 인사동 | [012] 인사동 전통 감성 포토존 | 인사동 전통 감성 사진 스팟 | insadong traditional photo spots | ⬜ 대기 |
-| 인사동 | [013] 인사동 쌈지길 | 인사동 쌈지길 가는 법 | ssamziegil insadong guide | ⬜ 대기 |
-| 가로수길 | [015] 가로수길 하이엔드 카페 — 세련된 도시 감성 포토존 | 가로수길 카페 포토존 | garosu-gil cafe photo spots | ⬜ 대기 |
-| 한강공원 | [008] 한강공원 감성 피크닉 사진 완전 가이드 | 한강공원 피크닉 사진 구도 | hangang park picnic photo ideas | ⬜ 대기 |
-| 한강공원 | [009] 한강 야경 스팟 — 브릿지 뷰와 리플렉션 사진 찍는 법 | 한강 야경 다리 사진 | hangang bridge night photography | ⬜ 대기 |
-| 한강공원 | [224] 서울 자전거 투어 — 한강과 도심을 두 바퀴로 즐기는 방법 | 서울 한강 자전거 코스 | seoul bike route along hangang | ⬜ 대기 |
-| 이태원 & 경리단길 | [014] 이태원 & 경리단길 글로벌 감성 포토존 가이드 | 이태원 경리단길 포토존 | best photo spots in itaewon gyeongnidan | ⬜ 대기 |
-| 잠실 롯데월드 | [019] 잠실 롯데월드 어드벤처 — 판타지 감성 포토존 총정리 | 롯데월드 포토존 추천 | best photo spots at lotte world | ⬜ 대기 |
-| 잠실 롯데월드 | [020] 잠실 석촌호수 벚꽃 시즌 사진 가이드 | 석촌호수 벚꽃 사진 명소 | seokchon lake cherry blossom photo spots | ⬜ 대기 |
-| 잠실 롯데월드 | [216] 롯데월드 교복 대여 완전 가이드 | 롯데월드 교복 대여 방법 | lotte world school uniform rental guide | ⬜ 대기 |
-| 기획사 사옥 주변 | [022] 서울 생일 광고판 성지 — 지하철역 전광판 찾아가기 가이드 | 서울 생일 광고판 위치 | seoul birthday ad locations | ⬜ 대기 |
-| 기획사 사옥 주변 | [212] 기획사 주변 방문 전 꼭 알아야 할 팬 에티켓 10가지 | 기획사 주변 팬 에티켓 | fan etiquette near label offices | ⬜ 대기 |
-
-### 3단계: 나머지 스타일 글
-
-1·2단계 완료 후 `kpop-blog-topics-300.md`에서 아직 작성되지 않은 주제를 순서대로 작성한다.
+- 작성/수정 작업 전에는 이 문서를 먼저 읽는다.
+- `AGENTS.md`와 충돌하면 이 문서를 우선한다.
+- 오래된 예시 제목, 폐기된 프롬프트, 과거 임시 규칙은 따르지 않는다.
 
 ---
 
-## 3. 작업 진행 로그
+## 4. 문서 구조 규칙
 
-Codex는 매 파일 작성 완료 후 반드시 이 섹션에 기록한다.
-**기록이 없으면 다음 세션에서 처음부터 다시 시작한다.**
-로그를 보고 [전체 작성 순서]의 상태 표(⬜/✅)도 함께 업데이트한다.
-현재 기준 작업은 가장 마지막에 기록된 `다음 세션 시작` 1줄만 따른다.
-
-<!-- 로그 시작 -->
-
-[2026-03-06 19:09 KST]
-완료:
-- content/hub/ko/gyeongbokgung-hub.mdx
-- content/hub/en/gyeongbokgung-hub.mdx
-다음 세션 시작: 2단계 — 경복궁 하위 글 [001] 경복궁 포토존 완전 가이드
-
-[2026-03-06 19:55 KST]
-완료:
-- content/hub/ko/myeongdong-hub.mdx
-- content/hub/en/myeongdong-hub.mdx
-다음 세션 시작: 2단계 — 경복궁 하위 글 [001] 경복궁 포토존 완전 가이드
-
-[2026-03-06 20:00 KST]
-완료:
-- content/hub/ko/gyeongbokgung-photo-guide.mdx
-- content/hub/en/gyeongbokgung-photo-guide.mdx
-다음 세션 시작: 2단계 — 경복궁 하위 글 [002] 경복궁 시간대별 빛과 그림자
-
-[2026-03-06 20:08 KST]
-완료:
-- content/hub/ko/gyeongbokgung-light-timing-guide.mdx
-- content/hub/en/gyeongbokgung-light-timing-guide.mdx
-다음 세션 시작: 2단계 — 경복궁 하위 글 [003] 경복궁 근처 골목 산책 — 숨겨진 한옥 포토존 5곳
-
-[2026-03-06 20:16 KST]
-완료:
-- content/hub/ko/gyeongbokgung-nearby-hanok-photo-spots.mdx
-- content/hub/en/gyeongbokgung-nearby-hanok-photo-spots.mdx
-다음 세션 시작: 2단계 — 경복궁 하위 글 [286] 가상 경복궁 배경 — 서울에 없어도 전통 감성 사진 완성하기
-
-[2026-03-06 20:16 KST]
-완료:
-- content/hub/ko/virtual-gyeongbokgung-background-guide.mdx
-- content/hub/en/virtual-gyeongbokgung-background-guide.mdx
-다음 세션 시작: 1단계 — 남산 N서울타워 허브 글
-
-[2026-03-06 23:24 KST] 경복궁 허브 내부링크·키워드·nextSlug 정리 완료
-
-[2026-03-07 00:15 KST]
-완료:
-- content/hub/ko/myeongdong-neon-street-guide.mdx
-- keyword: 명동 네온사인 야간 사진
-- content/hub/en/myeongdong-neon-street-guide.mdx
-- keyword: myeongdong neon street photography
-다음 세션 시작: 2단계 - 명동 하위 글 [011] 명동 K-뷰티 쇼핑 지도
-
-[2026-03-07 00:27 KST]
-완료:
-- content/hub/ko/myeongdong-k-beauty-shopping-map.mdx
-- keyword: 명동 K뷰티 쇼핑 동선
-- content/hub/en/myeongdong-k-beauty-shopping-map.mdx
-- keyword: myeongdong k-beauty shopping route
-다음 세션 시작: 2단계 - 명동 하위 글 [217] 명동 & 홍대 길거리 음식 완전 정복
-
-[2026-03-07 00:43 KST]
-완료:
-- content/hub/ko/myeongdong-hongdae-street-food-guide.mdx
-- keyword: 명동 홍대 길거리 음식 비교
-- content/hub/en/myeongdong-hongdae-street-food-guide.mdx
-- keyword: myeongdong vs hongdae street food
-다음 세션 시작: 1단계 - 남산 N서울타워 허브 글
-
-[2026-03-07 00:45 KST] 명동 허브 내부링크·키워드·nextSlug 정리 완료
-
-[2026-03-07 02:45 KST]
-완료:
-- content/hub/ko/n-seoul-tower-hub.mdx
-- keyword: 남산 N서울타워 서울 야경
-- content/hub/en/n-seoul-tower-hub.mdx
-- keyword: n seoul tower night view guide
-다음 세션 시작: 2단계 - 남산 N서울타워 하위 글 [004] 남산 N서울타워 야경 가이드
-
-[2026-03-07 03:10 KST]
-완료:
-- content/hub/ko/n-seoul-tower-night-view-guide.mdx
-- keyword: 남산 N서울타워 야경 명소
-- content/hub/en/n-seoul-tower-night-view-guide.mdx
-- keyword: best n seoul tower night view spots
-다음 세션 시작: 2단계 - 남산 N서울타워 하위 글 [005] 남산 케이블카에서 찍는 서울 감성 스냅 사진
-
-[2026-03-07 15:20 KST]
-완료:
-- content/hub/ko/namsan-cable-car-photo-tips.mdx
-- keyword: 남산 케이블카 스냅 사진
-- content/hub/en/namsan-cable-car-photo-tips.mdx
-- keyword: namsan cable car photo tips
-다음 세션 시작: 1단계 - 홍대 허브 글
-
-[2026-03-07 15:20 KST] 남산 N서울타워 허브 내부링크·키워드·nextSlug 정리 완료
-
-[2026-03-08 00:00 KST]
-완료:
-- content/hub/ko/hongdae-hub.mdx
-- keyword: 홍대 서울 동네 가이드
-- content/hub/en/hongdae-hub.mdx
-- keyword: hongdae seoul neighborhood guide
-다음 세션 시작: 2단계 - 홍대 하위 글 [006] 홍대 거리 포토 스폿 추천
-
-[2026-03-08 01:17 KST]
-완료:
-- content/hub/ko/hongdae-street-photo-spots.mdx
-- keyword: 홍대 거리 포토존 추천
-- content/hub/en/hongdae-street-photo-spots.mdx
-- keyword: best hongdae street photo spots
-다음 세션 시작: 2단계 - 홍대 하위 글 [007] 홍대 인디 감성 카페 — 이색 인테리어 포토존 TOP 7
-
-[2026-03-08 01:34 KST]
-완료:
-- content/hub/ko/hongdae-aesthetic-cafes-for-photos.mdx
-- keyword: 홍대 감성 카페 포토존
-- content/hub/en/hongdae-aesthetic-cafes-for-photos.mdx
-- keyword: hongdae aesthetic cafes for photos
-다음 세션 시작: 2단계 - 홍대 하위 글 [050] K-스트릿 패션 완전 분석 — 홍대·성수동 스타일 해부
-
-[2026-03-08 02:17 KST]
-완료:
-- content/hub/ko/hongdae-vs-seongsu-street-fashion.mdx
-- keyword: 홍대 성수 스트릿 패션 차이
-- content/hub/en/hongdae-vs-seongsu-street-fashion.mdx
-- keyword: hongdae vs seongsu street fashion
-다음 세션 시작: 1단계 - 인사동 허브 글
-
-[2026-03-08 02:17 KST] 홍대 허브 내부 링크 정리 완료
-- 허브 Related Guides에 하위 글 3개([006], [007], [050]) 모두 반영
-- 하위 글 역링크 확인 완료
-- dead link 없음
-
-[2026-03-08 02:17 KST] 홍대 허브 키워드 중복 확인 완료
-- hongdae-hub: 홍대 서울 동네 가이드 / hongdae seoul neighborhood guide
-- [006]: 홍대 거리 포토존 추천 / best hongdae street photo spots
-- [007]: 홍대 감성 카페 포토존 / hongdae aesthetic cafes for photos
-- [050]: 홍대 성수 스트릿 패션 차이 / hongdae vs seongsu street fashion
-- 중복 없음
-
-<!-- 로그 끝 -->
-
----
-
-# 글 작성 참조 기준
-
----
-
-## 5. SEO 관점에서 반드시 들어가야 하는 질문
-
-허브 글은 아래 질문 6가지에 모두 답해야 한다. 하나라도 빠지면 허브 글이 아니다.
-
-1. 왜 이 장소가 유명해졌는가
-2. 왜 이 장소가 핫플이 되었는가
-3. 사람들이 이 장소를 어떤 의도로 찾는가
-4. 이 장소는 서울의 어떤 이미지를 대표하는가
-5. 이 장소는 어떤 시각적 무드를 만드는가
-6. 비슷한 다른 서울 장소와 무엇이 다른가
-
----
-
-## 6. 인트로 기준
-
-인트로는 반드시 3가지 역할을 해야 한다.
-
-1. 이 장소를 정의한다
-2. 사람들이 이 장소를 어떻게 단순하게 이해하는지 짚는다
-3. 이 글이 무엇을 더 깊게 설명하는지 말한다
-
-나쁜 인트로: "경복궁은 사진이 잘 나오는 장소다"
-좋은 인트로: 장소 정체성 제시 → 대중적 인식과 실제 의미의 차이 → 글의 핵심 질문
-
----
-
-### 인트로 유형 4가지 — 같은 허브 안에서 반드시 돌아가며 사용
-
-AI가 쓴 콘텐츠에서 가장 자주 탐지되는 패턴은 **같은 문장 구조 반복**이다.
-같은 허브의 글끼리 인트로 유형이 겹치면 독자도 식상하고 Google도 낮게 평가한다.
-아래 4가지 유형을 허브 내 글마다 돌아가며 쓴다.
-
-| 유형 | 한 줄 설명 | 실제 예시 |
-|------|-----------|----------|
-| **A. 질문형** | 독자가 실제로 검색할 법한 질문으로 시작한다 | "홍대에서 뭘 해야 할지 모르겠다면?" / "Wondering where to start in Hongdae?" |
-| **B. 숫자/통계형** | 구체적인 숫자, 규모, 사실로 시작한다 | "주말 하루 방문객 10만 명이 넘는 거리에서" / "Over 100,000 visitors pass through Hongdae on a single weekend." |
-| **C. 장면 묘사형** | 독자를 그 장소에 데려다 놓는 감각적 묘사 1–2문장 | "오후 6시, 홍대 걷고싶은거리에 버스킹 소리가 깔리기 시작한다." / "At 6 p.m., the first busking set of the evening fills Hongdae's main strip." |
-| **D. 직설형** | 장소에 대한 확신 있는 주장으로 바로 시작한다 | "홍대는 두 번 가야 보인다. 낮과 밤이 완전히 다른 동네다." / "Hongdae only makes sense the second time you visit." |
-
-**규칙:**
-- 같은 허브 내 두 글 이상 동일 유형 사용 금지
-- 인트로는 3문장 이내로 끝낸다
-- 유형과 무관하게 3가지 역할(정의→간극→이 글의 가치)은 유지한다
-
-**절대 금지 — 이 패턴은 쓰지 않는다:**
-- KO: "많은 사람은 [X]를 [Y]로 단순화하지만 실제로는~"
-- EN: "Many people think of [X] as [Y], but in reality~"
-- 이 패턴이 이미 같은 허브에 한 번이라도 쓰였으면 다음 글부터는 무조건 다른 유형을 써야 한다
-
----
-
-## 7. 허브 글 공통 구조
+모든 허브/하위 글은 아래 구조를 따른다.
 
 1. 인트로
-2. 이 장소가 서울에서 중요한 이유
-3. 유명해지거나 핫플이 된 배경
-4. 지금 사람들이 찾는 실제 이유
-5. 이 장소를 규정하는 시각적 정체성
-6. 비슷한 다른 서울 장소와의 차이
-7. 사진/스타일 무드에 주는 영향
-8. 함께 읽을 글
+2. H2 섹션들
+3. 빠른 요약 카드
+4. 같은 허브 내부 링크 패널
+5. 하단 CTA 배너
 
-설명 중심으로 쓰고, 필요할 때만 리스트를 쓴다.
+H2 규칙:
+- 모든 H2는 반드시 `## —` 로 시작
+- 하이픈 금지
 
----
+Quick Summary 규칙:
+- 일반 H2로 쓰지 않는다
+- 카드형 블록으로 유지한다
+- 라벨은 `빠른 요약` / `Quick Summary`
 
-## 8. 한글 / 영어 분리 원칙
+Related panel 규칙:
+- Quick Summary 아래에 둔다
+- KO 패널 기본 라벨:
+  - 섹션: `이어서 보면 좋은 글`
+  - 허브: `먼저 보기`
+  - 다음 하위 글: `다음 글`
+  - 추가 하위 글: `같이 보기`
 
-한글 글과 영어 글은 번역이 아니다. 같은 장소를 다른 검색 의도로 처음부터 새로 쓴다.
-
-| | 한글 글 | 영어 글 |
-|---|---------|---------|
-| 독자 | 한국 사용자 | 외국인 방문자 |
-| 초점 | 왜 핫해졌는지, 사회적 의미 | 서울 맥락 설명, 문화적 상징성 |
-| 비교 | 다른 지역과 체감 차이 | 외국인에게 낯선 배경 설명 |
-
----
-
-## 9. 허브 글 제목 10개
-
-### 1. 경복궁
-- KO: 경복궁이 서울에서 가장 상징적인 궁궐로 여겨지는 이유
-- EN: Why Gyeongbokgung Became the Most Symbolic Palace in Seoul
-
-### 2. 명동
-- KO: 명동이 서울에서 가장 유명한 상권 중 하나가 된 이유
-- EN: Why Myeongdong Became One of the Most Famous Districts in Seoul
-
-### 3. 남산 N서울타워
-- KO: 남산 N서울타워가 서울의 대표 랜드마크가 된 이유
-- EN: Why N Seoul Tower Became One of Seoul's Most Recognizable Landmarks
-
-### 4. 홍대
-- KO: 홍대가 서울의 대표적인 청년 문화 상권이 된 이유
-- EN: Why Hongdae Became One of Seoul's Strongest Youth Culture Districts
-
-### 5. 인사동
-- KO: 인사동이 여전히 서울의 전통적인 분위기를 대표하는 이유
-- EN: Why Insadong Still Represents Traditional Seoul for So Many Visitors
-
-### 6. 가로수길
-- KO: 가로수길이 서울의 대표 패션 거리로 자리 잡은 이유
-- EN: Why Garosu-gil Became One of Seoul's Best-Known Fashion Streets
-
-### 7. 한강공원
-- KO: 한강공원이 서울 사람들의 대표적인 일상 여가 공간이 된 이유
-- EN: Why Hangang Park Became One of Seoul's Essential Everyday Leisure Spaces
-
-### 8. 이태원 & 경리단길
-- KO: 이태원과 경리단길이 다른 서울 상권과 다르게 느껴지는 이유
-- EN: Why Itaewon and Gyeongnidan-gil Feel Different From Other Seoul Districts
-
-### 9. 잠실 롯데월드
-- KO: 잠실 롯데월드 일대가 서울의 대표 여가 공간으로 인식되는 이유
-- EN: Why Jamsil Lotte World Became One of Seoul's Most Recognizable Leisure Zones
-
-### 10. 대형 기획사 사옥 주변
-- KO: 서울의 대형 기획사 사옥 주변이 팬들에게 특별한 의미를 갖는 이유
-- EN: Why Seoul's K-pop Label HQ Areas Attract So Much Attention From Fans
+하단 CTA 규칙:
+- KO 이미지: `/visuals/blog/blog-bottom-banner-kr.webp`
+- EN 이미지: `/visuals/blog/blog-bottom-banner-en.webp`
+- KO 링크: `/ko`
+- EN 링크: `/en`
+- 본문 끝 배너는 항상 유지한다
 
 ---
 
-## 10. 허브 글 소제목
+## 5. 작성 규칙
 
-### 1. 경복궁
+### 5-1. 인트로 역할
 
-한글:
-1. 경복궁은 서울에서 무엇을 상징하는가
-2. 경복궁이 강한 상징성을 갖게 된 역사적 배경
-3. 사람들이 경복궁에서 실제로 기대하는 경험은 무엇인가
-4. 경복궁 이미지를 만드는 핵심 공간들
-5. 다른 궁궐과 비교했을 때 경복궁이 더 강하게 기억되는 이유
-6. 경복궁의 전통미와 대칭감이 사진 분위기에 주는 영향
-7. 함께 읽을 글
+인트로는 3문장 이내로 아래 3가지 역할을 해야 한다.
 
-영어:
-1. What Gyeongbokgung Represents in Seoul
-2. Why Gyeongbokgung Became So Symbolically Important
-3. What Visitors Actually Go to Gyeongbokgung to Experience
-4. The Key Spaces That Shape the Gyeongbokgung Image
-5. Why Gyeongbokgung Feels Different From Other Palace Areas
-6. How Gyeongbokgung's Heritage Mood Changes Visual Perception
-7. Related Guides
+1. 이 장소/주제를 정의한다
+2. 사람들이 단순하게 이해하는 지점을 짚는다
+3. 이 글이 무엇을 더 설명하는지 말한다
 
-### 2. 남산 N서울타워
+금지:
+- `많은 사람은 X를 Y로 단순화하지만 실제로는`
+- `Many people think of X as Y, but in reality`
 
-한글:
-1. 남산 N서울타워는 서울 이미지에서 무엇을 상징하는가
-2. 단순한 전망대가 아니라 랜드마크가 된 이유
-3. 사람들이 이곳에 실제로 가는 목적은 무엇인가
-4. 높이와 스카이라인이 이 장소 정체성의 중심인 이유
-5. 다른 서울 전망 명소와 비교했을 때 N서울타워의 차이
-6. 도시를 내려다보는 무드가 사진 기대감을 바꾸는 방식
-7. 함께 읽을 글
+같은 허브 안에서는 인트로 유형을 돌려 쓴다.
 
-영어:
-1. What N Seoul Tower Represents in the Seoul Image
-2. Why It Became a Landmark Rather Than Just an Observation Point
-3. What People Actually Go There For Today
-4. Why Height and Skyline Matter So Much to Its Identity
-5. How N Seoul Tower Differs From Other Seoul View Spots
-6. How Its City-Overlook Mood Changes Photo Expectations
-7. Related Guides
+- A 질문형
+- B 숫자/통계형
+- C 장면 묘사형
+- D 직설형
 
-### 3. 가로수길
+### 5-2. 본문 문체
 
-한글:
-1. 가로수길은 서울의 스트리트 패션 문화에서 무엇을 상징하는가
-2. 가로수길이 패션과 라이프스타일 거리로 자리 잡은 이유
-3. 사람들이 지금도 가로수길을 찾는 이유는 무엇인가
-4. 이 거리가 복잡함보다 정돈된 인상을 주는 이유
-5. 홍대나 성수와 비교했을 때 가로수길의 차이
-6. 가로수길의 패션 거리 이미지가 사진 분위기를 바꾸는 방식
-7. 함께 읽을 글
+- 설명 중심으로 쓴다
+- 필요할 때만 리스트 사용
+- 장식적인 문장보다 구체적인 장면, 동선, 비교 기준을 우선한다
+- 과한 굵게, 과한 불릿, 세일즈 문체 금지
 
-영어:
-1. What Garosu-gil Represents in Seoul Street Fashion Culture
-2. Why Garosu-gil Became a Known Fashion and Lifestyle Area
-3. What Kind of Visitor Still Searches for Garosu-gil
-4. Why the Street Reads as Polished Rather Than Chaotic
-5. How Garosu-gil Differs From Hongdae or Seongsu
-6. How Its Fashion-Street Identity Changes Portrait Mood
-7. Related Guides
+### 5-3. KO/EN 분리 원칙
 
-### 4. 홍대
+- KO와 EN은 번역하지 않는다
+- 같은 주제를 각 언어 검색 의도에 맞게 다시 쓴다
 
-한글:
-1. 홍대는 서울의 청년 문화에서 무엇을 상징하는가
-2. 홍대가 단순한 대학가를 넘어선 이유
-3. 사람들이 홍대에서 실제로 찾는 것은 무엇인가
-4. 거리의 에너지가 홍대 정체성에서 중요한 이유
-5. 더 정돈된 서울 상권과 비교했을 때 홍대의 차이
-6. 홍대 특유의 밀도와 움직임이 시각 무드에 주는 영향
-7. 함께 읽을 글
+KO 초점:
+- 왜 유명해졌는가
+- 한국 사용자 기준 체감 차이
+- 다른 서울 지역과 비교
 
-영어:
-1. What Hongdae Represents in Seoul Youth Culture
-2. Why Hongdae Became More Than Just a University Area
-3. What People Actually Look For in Hongdae Today
-4. Why Street Energy Matters to the Hongdae Identity
-5. How Hongdae Differs From More Polished Seoul Districts
-6. How Hongdae's Movement and Noise Affect Visual Mood
-7. Related Guides
-
-### 5. 한강공원
-
-한글:
-1. 한강공원은 서울의 일상에서 무엇을 상징하는가
-2. 강이라는 공간이 서울의 공공 이미지에서 중요한 이유
-3. 사람들이 한강공원에 가서 실제로 하는 일은 무엇인가
-4. 열린 공간감이 이 장소의 핵심인 이유
-5. 번화한 도심 상권과 비교했을 때 한강공원의 차이
-6. 강변의 여유로운 분위기가 사진 인상을 바꾸는 방식
-7. 함께 읽을 글
-
-영어:
-1. What Hangang Park Represents in Everyday Seoul Life
-2. Why the River Matters So Much to Seoul's Public Identity
-3. What People Actually Go to Hangang Park to Do
-4. Why Openness and Breathing Room Define the Space
-5. How Hangang Park Differs From Dense Urban Districts
-6. How Riverside Calm Changes Visual and Portrait Mood
-7. Related Guides
-
-### 6. 명동
-
-한글:
-1. 명동은 서울 방문 이미지에서 무엇을 상징하는가
-2. 명동이 일찍부터 전국적 인지도를 얻게 된 이유
-3. 지금 사람들이 명동에 실제로 가는 목적은 무엇인가
-4. 쇼핑과 뷰티가 여전히 명동 정체성의 중심인 이유
-5. 다른 서울 상권과 비교했을 때 명동의 차이
-6. 빽빽한 간판과 밝은 리듬감이 시각 무드에 주는 영향
-7. 함께 읽을 글
-
-영어:
-1. What Myeongdong Represents in the Seoul Visitor Imagination
-2. Why Myeongdong Became So Famous So Early
-3. What People Actually Go to Myeongdong For Today
-4. Why Shopping and Beauty Are Still Central to Its Identity
-5. How Myeongdong Differs From Other Seoul Commercial Areas
-6. How Dense Signage and Bright Rhythm Change Visual Mood
-7. Related Guides
-
-### 7. 인사동
-
-한글:
-1. 인사동은 서울의 전통적 이미지에서 무엇을 상징하는가
-2. 다른 지역이 변하는 동안 인사동이 계속 의미를 지닌 이유
-3. 사람들이 인사동에서 실제로 기대하는 것은 무엇인가
-4. 공예와 질감, 오래된 거리감이 이곳에서 중요한 이유
-5. 궁궐권이나 현대적 상권과 비교했을 때 인사동의 차이
-6. 인사동의 전통적 질감이 시각 분위기를 바꾸는 방식
-7. 함께 읽을 글
-
-영어:
-1. What Insadong Represents in the Idea of Traditional Seoul
-2. Why Insadong Stayed Relevant While Other Areas Changed
-3. What Visitors Actually Expect From Insadong
-4. Why Craft, Texture, and Old-Street Rhythm Matter Here
-5. How Insadong Differs From Palace Areas or Modern Shopping Streets
-6. How Insadong's Traditional Texture Changes Visual Mood
-7. Related Guides
-
-### 8. 이태원 & 경리단길
-
-한글:
-1. 이태원과 경리단길은 서울의 글로벌 이미지에서 무엇을 상징하는가
-2. 이 지역이 다른 상권과 다른 정체성을 갖게 된 이유
-3. 사람들이 이태원과 경리단길에서 실제로 찾는 것은 무엇인가
-4. 섞인 거리 문화가 이 지역을 규정하는 이유
-5. 홍대나 가로수길과 비교했을 때 이태원·경리단길의 차이
-6. 여러 층위의 나이트라이프 무드가 시각 해석을 바꾸는 방식
-7. 함께 읽을 글
-
-영어:
-1. What Itaewon and Gyeongnidan-gil Represent in Seoul's Global Image
-2. Why These Areas Developed a Different Identity From Other Districts
-3. What People Actually Go There For Today
-4. Why Mixed Street Culture Defines the Area
-5. How Itaewon and Gyeongnidan-gil Differ From Hongdae or Garosu-gil
-6. How Their Layered Nightlife Mood Changes Visual Interpretation
-7. Related Guides
-
-### 9. 잠실 롯데월드
-
-한글:
-1. 잠실 롯데월드 일대는 서울의 여가 문화에서 무엇을 상징하는가
-2. 단순한 놀이공원 공간을 넘어선 이유
-3. 사람들이 잠실 롯데월드 일대에서 실제로 찾는 것은 무엇인가
-4. 랜드마크 밀도가 잠실 이미지에서 중요한 이유
-5. 다른 데이트·가족형 지역과 비교했을 때 잠실의 차이
-6. 밝고 큰 구조감이 시각 분위기를 바꾸는 방식
-7. 함께 읽을 글
-
-영어:
-1. What Jamsil Lotte World Represents in Seoul Leisure Culture
-2. Why the Area Became More Than Just an Amusement Destination
-3. What People Actually Go There For Today
-4. Why Landmark Density Defines the Jamsil Image
-5. How Jamsil Differs From Other Seoul Date and Family Areas
-6. How Playful Scale and Bright Structure Change Visual Mood
-7. Related Guides
-
-### 10. 대형 기획사 사옥 주변
-
-한글:
-1. 대형 기획사 사옥 주변은 팬들에게 무엇을 상징하는가
-2. 평범한 오피스 권역이 목적지가 된 이유
-3. 사람들이 이곳에 가서 실제로 기대하는 감정과 경험은 무엇인가
-4. 건물 자체보다 업계의 기운이 더 중요하게 작동하는 이유
-5. 일반 상권과 비교했을 때 사옥 주변 권역의 차이
-6. 동경과 팬심의 무드가 시각 해석을 바꾸는 방식
-7. 함께 읽을 글
-
-영어:
-1. What K-pop Label HQ Areas Represent to Fans in Seoul
-2. Why These Office Zones Became Destination Spaces
-3. What People Actually Go There Hoping to Feel or See
-4. Why Industry Aura Matters More Than Architecture Alone
-5. How These Areas Differ From Standard Commercial Districts
-6. How Aspirational Fandom Mood Changes Visual Reading
-7. Related Guides
+EN 초점:
+- 서울 맥락에서 왜 중요한가
+- 외국인에게 낯선 배경 설명
+- what it is / why it matters / how to read it
 
 ---
 
-## 11. 기술 출력 스펙
+## 6. 수정 규칙
 
-### 파일 위치
+기존 글을 수정할 때는 아래 순서로만 손댄다.
 
-```
-content/hub/ko/[slug].mdx
-content/hub/en/[slug].mdx
-```
+1. `title`
+2. `description`
+3. 첫 문단
+4. H2 1~2개
+5. 이미지 alt
+6. 관련 글 패널 문구
 
-### 필수 frontmatter
+기본 원칙:
+- 본문을 갈아엎지 않는다
+- 기존 논지와 구조는 최대한 유지한다
+- 긴 문단만 선택적으로 2문단으로 나눈다
+- 과한 리라이팅 금지
+
+실무 한 줄:
+- 제목은 더 검색 친화적으로
+- 첫 문단은 키워드 더 선명하게
+- H2는 1~2개만 검색형으로
+- alt는 짧고 구체적으로
+
+---
+
+## 7. 키워드 규칙
+
+### 7-1. 메인 키워드
+
+각 글은 언어별로 메인 키워드 1개를 가진다.
+
+조건:
+- 실제 검색창에 들어갈 법한 표현
+- 추상적 테마 문구 금지
+- 철학적/감상적 표현 금지
+- 허브 안 다른 글과 중복 금지
+
+매우 중요:
+- 기존 문서나 과거 세션에 적혀 있던 제목을 고정값처럼 따르지 않는다.
+- 예전에 적어 둔 제목 예시는 참고 자료일 뿐이며, 검색 유입에 불리하면 그대로 사용하지 않는다.
+- `md-doc/kpop-blog-topics-300.md`의 제목과 메인 키워드는 기획용 가제일 뿐이며, 최종 고정값이 아니다.
+- 실제 글 작성 시에는 해당 주제에서 더 검색량이 높고 검색 의도가 강한 실사용 키워드로 메인 키워드를 다시 잡는다.
+- 최종 제목은 새 메인 키워드를 유지하되, 유저가 클릭할 이유가 보이도록 구체 효익이나 비교 포인트를 덧붙여 재설계한다.
+- 작업 시작 전에는 항상 메인 키워드와 보조 키워드를 먼저 다시 설계하고, 그 결과를 기준으로 `title`과 `description`을 새로 잡는다.
+- 제목이 이미 파일에 들어 있어도 검색 의도에 맞지 않으면 유지하지 않는다.
+- 판단 기준은 "실제 사용자가 검색창에 이렇게 칠까?"이며, 검색 의도가 약한 표현보다 검색형 문구를 우선한다.
+
+### 7-2. 보조 키워드
+
+각 글은 보조 키워드 3~5개를 가진다.
+
+역할:
+- 메인 키워드를 보조
+- 검색 의도 확장
+- H2, 첫 문단, 주변 문단, alt에 분산 반영
+
+### 7-3. 배치 규칙
+
+- 제목: 메인 키워드
+- 첫 문단: 메인 키워드 + 보조 키워드 1~2개
+- H2 1~2개: 보조 키워드 반영
+- 이미지 alt/주변 문맥: 장소형 보조 키워드 반영
+- 마무리/요약: 메인 키워드 1회 자연스럽게 회수 가능
+
+키워드 반복:
+- 메인 키워드는 본문에서 3~4회 이하
+- 억지 반복 금지
+
+제목/메타 재설계 원칙:
+- 기존 제목을 억지로 보존하지 않는다.
+- 먼저 메인 키워드와 보조 키워드 세트를 정한 뒤, 그 구조에 맞게 `title`과 `description`을 다시 설계한다.
+- 허브 글도 예외가 아니다. 허브는 하위 글과 겹치지 않는 상위 검색 의도로 제목을 다시 잡아야 한다.
+- 하위 글은 구체 롱테일 의도로 제목을 다시 잡아야 한다.
+
+---
+
+## 8. 허브와 하위 글 분리 규칙
+
+이 프로젝트에서 가장 중요한 SEO 규칙 중 하나는 허브와 하위 글의 역할 분리다.
+
+허브 글:
+- 상위 검색 의도 담당
+- 장소 전체의 상징성, 방문 흐름, 대표성, 비교 구조를 설명
+
+하위 글:
+- 구체 검색 의도 담당
+- 포토존, 시간대, 케이블카, 카페, 야경 포인트 같은 세부 주제 담당
+
+절대 금지:
+- 허브가 하위 글 메인 키워드를 빼앗는 것
+- 하위 글이 허브의 상위 의도를 다시 넓게 반복하는 것
+
+예시:
+- 허브: `남산 N서울타워 서울 야경 랜드마크`
+- 하위1: `남산 N서울타워 야경 명소`
+- 하위2: `남산 케이블카 스냅 사진`
+
+허브에서는 하위 키워드를 메인처럼 반복하지 않는다.
+하위 글 제목은 related panel이나 내부 링크에서만 세부 주제로 연결한다.
+
+---
+
+## 9. 이미지 및 alt 규칙
+
+### 9-1. 본문 이미지 문법
+
+- 각 H2 바로 아래 첫 줄에 `![]()` placeholder를 둘 수 있다
+- 최종 게시 시에는 반드시 `![alt](/images/...webp)`로 반영한다
+- raw HTML `<img>` 금지
+
+### 9-2. 이미지 경로
+
+- 저장 위치: `public/images/hub/[hub-slug]/`
+- MDX 경로: `/images/hub/[hub-slug]/[file]-kr.webp` 또는 `-en.webp`
+- 최종 경로는 항상 `.webp`
+
+### 9-3. alt 규칙
+
+- alt는 비워두지 않는다
+- 장면 설명 우선
+- 검색 의도 키워드 1개만 자연스럽게 포함 가능
+- 짧고 구체적으로 쓴다
+- 시적인 표현 금지
+- 추상적 감상 금지
+- 키워드 나열 금지
+- 반복 패턴 금지
+
+좋은 alt:
+- 실제 장면이 바로 떠오른다
+- 짧다
+- 키워드 1개가 자연스럽다
+
+나쁜 alt:
+- 추상적이다
+- 문학적이다
+- 검색어 덩어리처럼 보인다
+
+### 9-4. alt 수정 순서
+
+1. `![]()` 또는 기존 alt 확인
+2. 실제 `.webp` 경로 확인
+3. KO/EN 언어 맞춰 alt 작성
+4. 문맥과 과하게 충돌하지 않는지 점검
+
+---
+
+## 10. 내부 링크 규칙
+
+- 모든 하위 글은 본문에 허브 글 역링크를 포함한다
+- 허브 글 related panel에는 실제 존재하는 하위 글만 넣는다
+- dead link 금지
+- KO는 `/ko/hub/...`만
+- EN은 `/en/hub/...`만
+- Cross-language link 금지
+
+허브 완료 후 반드시:
+- 허브 related panel 누락 점검
+- 하위 글 역링크 점검
+- 키워드 중복 점검
+
+---
+
+## 11. CTA 규칙
+
+기본 규칙:
+- 하단 배너 CTA는 필수
+- 링크는 `/ko` 또는 `/en`
+
+soft conversion bridge:
+- 본문 중간에 1~2회만 제한적으로 허용 가능
+- 섹션 문맥과 정확히 맞아야 한다
+- 공격적 판매 문구 금지
+- 같은 문구 반복 금지
+- 최종 CTA는 여전히 하단 배너가 중심
+
+금지:
+- 모든 H2마다 CTA 삽입
+- `/create` 직접 유도 문구를 기본 규칙처럼 쓰는 것
+- 본문을 랜딩 페이지처럼 바꾸는 것
+
+---
+
+## 12. 법적/브랜드 안전 규칙
+
+금지:
+- 특정 아이돌 이름
+- 특정 그룹명
+- 기획사 상표명 직접 사용
+- 팬덤명
+- 곡명, 가사, 앨범명, 프로그램명
+- 특정 인물의 사적 동선이나 거주지성 정보
+- 사유지/비공개 구역 접근 묘사
+
+허용 시 주의:
+- 패션/뷰티 브랜드는 일반 상거래 정보 맥락에서만 허용
+- 특정 인물과 브랜드 연결 금지
+
+---
+
+## 13. frontmatter 규칙
+
+필수 필드:
 
 ```mdx
 ---
-slug: "gyeongbokgung-photo-guide"
+slug: "example-slug"
 lang: "ko"
 category: "한국 명소 & 포토존"
-title: "경복궁 포토존 완전 가이드 — 전통 미학의 사진 명소 총정리"
-description: "120~155자. 클릭 이유가 담긴 문장."
+title: "..."
+description: "..."
 publishedAt: "YYYY-MM-DD"
 readTime: "6분 읽기"
-headerGradient: "linear-gradient(135deg, #1a0a2e 0%, #f4258c 100%)"
-pullQuote: "소문자로 시작하는 인상적인 한 문장."
-hreflangSlug: "gyeongbokgung-photo-guide"
+headerGradient: "linear-gradient(...)"
+pullQuote: "..."
+hreflangSlug: "example-slug"
 ---
 ```
 
-### SEO 필드 기준
+EN은:
+- `lang: "en"`
+- `category: "Seoul Locations"`
+- `readTime: "6 Min Read"`
 
-| 필드 | 기준 |
-|------|------|
-| `title` | 60자 이하, 고유, 내용 정확 반영 |
-| `description` | 120–155자, 클릭 이유 포함 |
-| `hreflangSlug` | KO/EN 동일값 |
+규칙:
+- `title`: 60자 이하
+- `description`: 120~155자
+- `description` 첫 단어가 `title` 첫 단어와 같으면 안 됨
+- `description`은 title 풀어쓰기 금지
+- `hreflangSlug`는 KO/EN 동일
 
 ---
 
-## 12. 수정 프롬프트
+## 14. 품질 게이트
 
+최종 제출 전 반드시 점검:
+
+콘텐츠:
+- title 60자 이하
+- description 120~155자
+- description이 title 반복이 아닌가
+- 인트로 3역할 충족
+- 같은 허브 내 인트로 유형 중복 없는가
+- 패딩 문장 없는가
+
+키워드:
+- 메인 키워드가 title과 첫 문단에 있는가
+- 같은 허브 안 다른 글과 키워드 겹치지 않는가
+
+이미지:
+- body image alt 비어 있지 않은가
+- alt가 짧고 구체적인가
+- `.webp` 경로인가
+
+링크:
+- 하위 글이면 허브 역링크가 본문에 있는가
+- dead link 없는가
+- 언어 혼합 링크 없는가
+
+CTA:
+- 하단 배너 유지됐는가
+- 링크가 `/ko` 또는 `/en`인가
+
+법적:
+- 금지된 인물/그룹/기획사/저작권 표현이 없는가
+
+---
+
+## 15. 문자 수 검증
+
+수정 후 반드시 title과 description의 정확한 문자 수를 센다.
+
+보고 형식:
+
+```text
+title: [actual text] -> [N]자
+description: [actual text] -> [N]자
 ```
-AGENTS.md의 품질 체크리스트를 기준으로
-content/hub/ko/[slug].mdx 를 검토하고 아래 항목을 수정해:
 
-1. title이 60자를 넘으면 줄여라
-2. description이 120자 미만이면 보완해. 수정 후 글자수를 직접 세어 숫자를 보고해라.
-3. padding 문장(분량만 채우는 문장)을 제거해
-4. 특정 아이돌/그룹/기획사 상표명이 있으면 제거해
+추정 금지.
 
-수정 후 변경된 항목을 목록으로 보고해.
-```
+---
+
+## 16. 세션 운영 규칙
+
+- 기본 세션 단위: KO/EN 1쌍 또는 3쌍
+- 작업 전 현재 진행 상태 확인
+- 작업 후 진행 로그 업데이트
+- 허브 1개가 끝나면 내부 링크/키워드 중복 점검 수행
+
+---
+
+## 17. 현재 허브 키워드 맵
+
+### 완료 또는 진행 중 허브
+
+| 허브 | 허브 메인 키워드(KO) | 허브 메인 키워드(EN) | 상태 |
+|------|----------------------|----------------------|------|
+| 경복궁 | 경복궁 가볼만한곳 | Gyeongbokgung Palace tour guide | 완료 |
+| 명동 | 명동 서울 여행 코스 | Myeongdong Seoul travel guide | 완료 |
+| 남산 N서울타워 | 남산 N서울타워 서울 야경 랜드마크 | N Seoul Tower landmark guide | 완료 |
+| 홍대 | 홍대 서울 동네 가이드 | Hongdae Seoul neighborhood guide | 완료 |
+| 인사동 | 인사동 서울 전통거리 | Insadong Seoul cultural street | 허브 완료 |
+
+### 하위 글 키워드 예시
+
+남산 허브:
+- 허브: `남산 N서울타워 서울 야경 랜드마크`
+- 하위: `남산 N서울타워 야경 명소`
+- 하위: `남산 케이블카 스냅 사진`
+
+홍대 허브:
+- 허브: `홍대 서울 동네 가이드`
+- 하위: `홍대 거리 포토존 추천`
+- 하위: `홍대 감성 카페 포토존`
+- 하위: `홍대 성수 스트릿 패션 차이`
+
+명동 허브:
+- 허브: `명동 서울 여행 코스`
+- 하위: `명동 네온사인 야간 사진`
+- 하위: `명동 K뷰티 쇼핑 동선`
+- 하위: `명동 홍대 길거리 음식 비교`
+
+---
+
+## 18. 현재 작업 상태
+
+- 경복궁 허브 + 하위 글 완료
+- 명동 허브 + 하위 글 완료
+- 남산 N서울타워 허브 + 하위 글 완료
+- 홍대 허브 + 하위 글 완료
+- 인사동 허브 KO/EN 완료
+- 인사동 하위 글 KO/EN 완료 (사진명소, 쌈지길, 찻집)
+- 인사동 묶음 점검 완료 (related panel 소급 수정 포함)
+
+다음 우선순위:
+1. 가로수길 허브 작성
+2. 가로수길 하위 글 작성
+3. 한강공원 허브 작성
+4. 한강공원 하위 글 작성
+
+---
+
+## 19. 진행 로그
+
+이 섹션은 이후 세션마다 계속 누적한다.
+
+### 2026-03-09 최신 기준
+
+- 경복궁 묶음: alt 및 SEO 미세 수정 완료
+- 명동 묶음: alt 간결화 및 SEO 미세 수정 완료
+- 남산 묶음: 허브/하위 글 키워드 분리 및 SEO 미세 수정 완료
+- 홍대 묶음: alt 완료, KO SEO 미세 수정 완료
+- 인사동 허브 KO/EN: 허브형 키워드 기준 작성 및 수정 완료
+- 인사동 사진 명소 KO/EN: 실검색형 키워드 기준 신규 작성 완료
+- 인사동 쌈지길 KO/EN: 층별 동선 키워드 기준 신규 작성 완료
+- 인사동 찻집 KO/EN: 골목 산책 키워드 기준 신규 작성 완료
+- 인사동 묶음 점검: related panel 소급 수정(018/019 → [020] 카드 추가), KO hub publishedAt 날짜 수정 예정
+
+---
+
+## 20. 허브 완료 후 필수 점검
+
+허브 + 해당 하위 글이 모두 끝났다면 아래를 먼저 한다.
+
+1. 허브/하위 글 전부 읽기
+2. related panel 누락 확인
+3. 하위 글 역링크 확인
+4. dead link 제거
+5. 허브 내 키워드 중복 목록 점검
+6. 겹치면 더 구체적인 롱테일로 수정
+7. 필요 시 nextSlug / nextTitle 정리
+
+---
+
+## 21. 수정 작업용 한 줄 프롬프트
+
+기존 글 수정 시에는 아래 기준으로 본다.
+
+- 메인 키워드는 유지
+- title은 더 검색 친화적으로 미세 조정
+- description은 클릭 이유 중심으로 재작성
+- 첫 문단에 메인 키워드와 보조 키워드 1~2개 반영
+- H2는 1~2개만 더 검색형으로 조정
+- alt는 짧고 구체적으로 보정
+- 본문 나머지 구조와 논지는 유지
