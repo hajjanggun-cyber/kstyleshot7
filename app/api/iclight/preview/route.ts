@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readFile } from "fs/promises";
-import { join } from "path";
 
 import { startIcLightJob, uploadToReplicateFiles, ReplicateApiError } from "@/lib/replicate";
 
@@ -32,10 +30,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid backgroundPath" }, { status: 400 });
     }
 
-    // Read background from filesystem and upload to Replicate Files
-    // — works in all environments (local and production)
-    const bgFilePath = join(process.cwd(), "public", safeBgPath);
-    const bgBuffer = await readFile(bgFilePath);
+    // Fetch background from public CDN URL and upload to Replicate Files
+    const origin = new URL(request.url).origin;
+    const bgRes = await fetch(`${origin}${safeBgPath}`, { cache: "no-store" });
+    if (!bgRes.ok) {
+      return NextResponse.json({ error: "Failed to fetch background image" }, { status: 502 });
+    }
+    const bgBuffer = Buffer.from(await bgRes.arrayBuffer());
     const ext = safeBgPath.endsWith(".webp") ? "image/webp" : "image/png";
     const backgroundImageUrl = await uploadToReplicateFiles(bgBuffer, ext);
 

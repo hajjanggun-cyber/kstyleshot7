@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readFile } from "fs/promises";
-import { join } from "path";
 
 import { startFashnTryOnJob, FalApiError } from "@/lib/fal";
 
@@ -34,9 +32,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid garmentImagePath" }, { status: 400 });
     }
 
-    // Read garment from filesystem → base64 data URL
-    const filePath = join(process.cwd(), "public", safePath);
-    const fileBuffer = await readFile(filePath);
+    // Fetch garment from public CDN URL → base64 data URL
+    const origin = new URL(request.url).origin;
+    const garmentRes = await fetch(`${origin}${safePath}`, { cache: "no-store" });
+    if (!garmentRes.ok) {
+      return NextResponse.json({ error: "Failed to fetch garment image" }, { status: 502 });
+    }
+    const fileBuffer = Buffer.from(await garmentRes.arrayBuffer());
     const ext = safePath.split(".").pop()!;
     const mime = ext === "jpg" || ext === "jpeg" ? "image/jpeg" : ext === "png" ? "image/png" : "image/webp";
     const garmentDataUrl = `data:${mime};base64,${fileBuffer.toString("base64")}`;

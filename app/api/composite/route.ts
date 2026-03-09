@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readFile } from "fs/promises";
-import { join } from "path";
 import sharp from "sharp";
 
 import {
@@ -97,9 +95,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid backgroundPath" }, { status: 400 });
     }
 
-    // Load background from local filesystem
-    const bgFilePath = join(process.cwd(), "public", safeBgPath);
-    const bgRaw = await readFile(bgFilePath);
+    // Fetch background from public CDN URL
+    const origin = new URL(request.url).origin;
+    const bgRes = await fetch(`${origin}${safeBgPath}`, { cache: "no-store" });
+    if (!bgRes.ok) {
+      return NextResponse.json({ error: "Failed to fetch background image" }, { status: 502 });
+    }
+    const bgRaw = Buffer.from(await bgRes.arrayBuffer());
     const bgMeta = await sharp(bgRaw).metadata();
     const BG_W = bgMeta.width ?? 1024;
     const BG_H = bgMeta.height ?? 1024;
