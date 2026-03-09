@@ -248,11 +248,21 @@ export function DoneFlow() {
         </div>
       ) : null}
 
-      {/* ic-light loading state */}
+      {/* ic-light loading overlay */}
       {iclightLoading ? (
-        <div className="dn-iclight-loading">
-          <span className="ot-compare-spinner" />
-          <p>{lang === "ko" ? "AI 조명 보정 중… (~30초)" : "Applying AI lighting… (~30s)"}</p>
+        <div className="ot-synth-overlay">
+          <div className="ot-synth-ring" />
+          <div>
+            <p className="ot-synth-title">
+              {lang === "ko" ? "AI 조명 보정 중이에요" : "AI is applying lighting correction"}
+            </p>
+            <p className="ot-synth-sub">
+              {lang === "ko"
+                ? "피부톤과 배경이 자연스럽게 어우러지도록 보정하고 있어요.\n잠깐만 기다려 주세요."
+                : "Blending your skin tone and background naturally.\nUsually takes about 30 seconds."}
+            </p>
+          </div>
+          <p className="ot-synth-badge">✦ AI Processing</p>
         </div>
       ) : null}
 

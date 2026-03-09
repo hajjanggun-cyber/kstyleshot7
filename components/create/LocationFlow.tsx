@@ -53,6 +53,10 @@ export function LocationFlow() {
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isCompositing, setIsCompositing] = useState(false);
+  const [compositeError, setCompositeError] = useState(false);
+  const [compositeLocalPredId, setCompositeLocalPredId] = useState<string | null>(null);
+  const [pendingChosenId, setPendingChosenId] = useState<string | null>(null);
   const [isDownloadingHair, setIsDownloadingHair] = useState(false);
   const [isDownloadingOutfit, setIsDownloadingOutfit] = useState(false);
 
@@ -174,37 +178,111 @@ export function LocationFlow() {
     setSelectedId(id === selectedId ? null : id);
   }
 
+  // Poll for composite result, navigate when done
+  useEffect(() => {
+    if (!compositeLocalPredId || !isCompositing || !pendingChosenId) return;
+
+    let retries = 0;
+    const interval = setInterval(async () => {
+      retries += 1;
+      if (retries >= 40) {
+        clearInterval(interval);
+        setCompositeError(true);
+        setTimeout(() => {
+          pickLocation(pendingChosenId);
+          router.push(`/${lang}/create/done`);
+        }, 2000);
+        return;
+      }
+      try {
+        const res = await fetch(`/api/composite/poll?predictionId=${compositeLocalPredId}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          setCompositeUrl(data.outputUrl);
+          clearInterval(interval);
+          pickLocation(pendingChosenId);
+          router.push(`/${lang}/create/done`);
+        } else if (data.status === "failed" || data.status === "canceled") {
+          clearInterval(interval);
+          setCompositeError(true);
+          setTimeout(() => {
+            pickLocation(pendingChosenId);
+            router.push(`/${lang}/create/done`);
+          }, 2000);
+        }
+      } catch {/* retry */}
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [compositeLocalPredId, isCompositing, pendingChosenId]);
+
   async function handleGenerate() {
-    if (isGenerating) return;
-    setIsGenerating(true);
+    if (isGenerating || isCompositing) return;
     const chosen = selectedId ?? "demo-location";
     const bg = backgrounds.find((b) => b.id === chosen);
 
     setLocationChosen([chosen]);
     setStatus("composite_completed");
+    setPendingChosenId(chosen);
 
-    // If we have a BG-removed person + selected background → composite + flux enhance
-    if (bgRemovedUrl && bg?.fullUrl) {
-      try {
-        const res = await fetch("/api/composite", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ personUrl: bgRemovedUrl, backgroundPath: bg.fullUrl }),
-        });
-        if (res.ok) {
-          const data = await res.json() as { predictionId?: string };
-          if (data.predictionId) setCompositePredictionId(data.predictionId);
-        }
-      } catch {/* show done page anyway */ }
+    if (!bgRemovedUrl || !bg?.fullUrl) {
+      pickLocation(chosen);
+      router.push(`/${lang}/create/done`);
+      return;
     }
 
-    pickLocation(chosen);
-    router.push(`/${lang}/create/done`);
+    setIsGenerating(true);
+    setIsCompositing(true);
+
+    try {
+      const res = await fetch("/api/composite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ personUrl: bgRemovedUrl, backgroundPath: bg.fullUrl }),
+      });
+      if (res.ok) {
+        const data = await res.json() as { predictionId?: string };
+        if (data.predictionId) {
+          setCompositePredictionId(data.predictionId);
+          setCompositeLocalPredId(data.predictionId);
+          return; // polling useEffect will navigate
+        }
+      }
+    } catch {/* fall through */}
+
+    // API 실패 시 에러 표시 후 이동
+    setCompositeError(true);
+    setTimeout(() => {
+      pickLocation(chosen);
+      router.push(`/${lang}/create/done`);
+    }, 2000);
   }
 
 
   return (
     <div className="lc-root">
+      {/* Full-screen compositing overlay */}
+      {isCompositing && (
+        <div className="ot-synth-overlay">
+          {compositeError ? null : <div className="ot-synth-ring" />}
+          <div>
+            <p className="ot-synth-title">
+              {compositeError
+                ? (lang === "ko" ? "배경 합성에 실패했어요" : "Composite failed")
+                : (lang === "ko" ? "AI가 배경을 합성하는 중이에요" : "AI is compositing your background")}
+            </p>
+            <p className="ot-synth-sub">
+              {compositeError
+                ? (lang === "ko" ? "원본 사진으로 계속 진행합니다…" : "Continuing with your original photo…")
+                : (lang === "ko"
+                    ? "합성이 완료되면 자동으로 결과 페이지로 이동합니다.\n잠깐만 기다려 주세요."
+                    : "We'll take you to the result the moment it's ready.\nUsually takes about a minute.")}
+            </p>
+          </div>
+          <p className="ot-synth-badge">{compositeError ? "⚠ Error" : "✦ AI Processing"}</p>
+        </div>
+      )}
       {/* Nav */}
       <nav className="lc-nav">
         <Link className="lc-back-btn" href={`/${lang}/create/outfit`}>←</Link>
@@ -403,16 +481,11 @@ export function LocationFlow() {
       <div className="lc-bottom">
         <button
           className="up-next-btn up-next-btn--active"
-          disabled={isGenerating || (!bgRemovedUrl && !!bgRemovedPredictionId)}
+          disabled={isGenerating || isCompositing || (!bgRemovedUrl && !!bgRemovedPredictionId)}
           onClick={handleGenerate}
           type="button"
         >
-          {isGenerating ? (
-            <>
-              <span className="lc-gen-spinner" />
-              {t("generating")}
-            </>
-          ) : (!bgRemovedUrl && !!bgRemovedPredictionId) ? (
+          {(!bgRemovedUrl && !!bgRemovedPredictionId) ? (
             <>{lang === "ko" ? "인물 추출 중..." : "Extracting subject..."}</>
           ) : (
             <>{t("nextBtn")}</>
