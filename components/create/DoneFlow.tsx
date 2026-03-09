@@ -131,16 +131,28 @@ export function DoneFlow() {
     store.reset();
   }
 
+  function makeFilename(prefix: string, ext = "jpg"): string {
+    const now = new Date();
+    const y = now.getFullYear();
+    const mo = String(now.getMonth() + 1).padStart(2, "0");
+    const d = String(now.getDate()).padStart(2, "0");
+    const h = String(now.getHours()).padStart(2, "0");
+    const mi = String(now.getMinutes()).padStart(2, "0");
+    const s = String(now.getSeconds()).padStart(2, "0");
+    return `kstyleshot-${prefix}-${y}${mo}${d}-${h}${mi}${s}.${ext}`;
+  }
+
   async function handleDownload() {
     if (!resultUrl || downloading) return;
     setDownloading(true);
+    const prefix = store.iclightUrl ? "final" : "scene";
     try {
       const res = await fetch(resultUrl);
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "kstyleshot-result.jpg";
+      a.download = makeFilename(prefix);
       a.click();
       URL.revokeObjectURL(url);
     } catch {

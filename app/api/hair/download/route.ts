@@ -9,6 +9,7 @@ export const maxDuration = 15;
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const imageUrl = searchParams.get("url") ?? "";
+  const customFilename = searchParams.get("filename")?.replace(/[^a-zA-Z0-9.\-_]/g, "") ?? "";
 
   if (!imageUrl.startsWith("https://")) {
     return new Response("Invalid url", { status: 400 });
@@ -28,12 +29,13 @@ export async function GET(request: Request) {
 
   const contentType = upstream.headers.get("content-type") ?? "image/jpeg";
   const ext = contentType.includes("png") ? "png" : "jpg";
+  const filename = customFilename || `kstyleshot-hair.${ext}`;
 
   return new Response(upstream.body, {
     status: 200,
     headers: {
       "Content-Type": contentType,
-      "Content-Disposition": `attachment; filename="kstyleshot-hair.${ext}"`,
+      "Content-Disposition": `attachment; filename="${filename}"`,
       "Cache-Control": "no-store",
     },
   });

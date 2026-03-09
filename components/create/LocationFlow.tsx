@@ -8,10 +8,21 @@ import { useTranslations } from "next-intl";
 import { backgrounds } from "@/data/backgrounds";
 import { useCreateStore } from "@/store/createStore";
 
-async function downloadImage(proxyUrl: string) {
+function makeFilename(prefix: string, ext = "jpg"): string {
+  const now = new Date();
+  const y = now.getFullYear();
+  const mo = String(now.getMonth() + 1).padStart(2, "0");
+  const d = String(now.getDate()).padStart(2, "0");
+  const h = String(now.getHours()).padStart(2, "0");
+  const mi = String(now.getMinutes()).padStart(2, "0");
+  const s = String(now.getSeconds()).padStart(2, "0");
+  return `kstyleshot-${prefix}-${y}${mo}${d}-${h}${mi}${s}.${ext}`;
+}
+
+async function downloadImage(proxyUrl: string, filename: string) {
   const a = document.createElement("a");
-  a.href = proxyUrl;
-  a.download = "kstyleshot-hair.jpg";
+  a.href = `${proxyUrl}&filename=${encodeURIComponent(filename)}`;
+  a.download = filename;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -156,7 +167,7 @@ export function LocationFlow() {
     if (!hairPreviewUrl || isDownloadingHair) return;
     setIsDownloadingHair(true);
     try {
-      await downloadImage(`/api/hair/download?url=${encodeURIComponent(hairPreviewUrl)}`);
+      await downloadImage(`/api/hair/download?url=${encodeURIComponent(hairPreviewUrl)}`, makeFilename("hair"));
     } finally {
       setIsDownloadingHair(false);
     }
@@ -166,7 +177,7 @@ export function LocationFlow() {
     if (!outfitPreviewUrl || isDownloadingOutfit) return;
     setIsDownloadingOutfit(true);
     try {
-      await downloadImage(`/api/hair/download?url=${encodeURIComponent(outfitPreviewUrl)}`);
+      await downloadImage(`/api/hair/download?url=${encodeURIComponent(outfitPreviewUrl)}`, makeFilename("outfit"));
     } finally {
       setIsDownloadingOutfit(false);
     }

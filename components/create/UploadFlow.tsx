@@ -102,6 +102,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
   const [isPollingSession, setIsPollingSession] = useState(false);
   const [isPaidSessionReady, setIsPaidSessionReady] = useState(false);
   const [pollError, setPollError] = useState("");
+  const [faceWarning, setFaceWarning] = useState<"none" | "no_face" | "checking">("none");
 
   useEffect(() => {
     if (!checkoutIdFromUrl) {
@@ -194,13 +195,29 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
     });
   }
 
-  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+  async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file) return;
     revokeObjectUrl(photoBlobUrl);
     const nextBlobUrl = URL.createObjectURL(file);
     setPhotoBlobUrl(nextBlobUrl);
+    setFaceWarning("none");
     if (!checkoutIdFromUrl && allowDemoFlow) ensureDemoSession();
+
+    // Face detection (best effort — Chrome/Edge only, graceful fallback on other browsers)
+    if (!("FaceDetector" in window)) return;
+    setFaceWarning("checking");
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const detector = new (window as any).FaceDetector({ maxDetectedFaces: 1, fastMode: true });
+      const img = new Image();
+      img.src = nextBlobUrl;
+      await new Promise<void>((resolve) => { img.onload = () => resolve(); });
+      const faces = await detector.detect(img) as unknown[];
+      setFaceWarning(faces.length > 0 ? "none" : "no_face");
+    } catch {
+      setFaceWarning("none");
+    }
   }
 
   function handleContinue() {
@@ -305,6 +322,32 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
           onChange={handleFileChange}
           type="file"
         />
+
+        {/* Face detection feedback */}
+        {faceWarning === "checking" && (
+          <p className="up-face-checking">
+            {lang === "ko" ? "📷 사진 분석 중…" : "📷 Analyzing photo…"}
+          </p>
+        )}
+        {faceWarning === "no_face" && (
+          <div className="up-face-warning">
+            <p className="up-face-warning-title">
+              {lang === "ko" ? "⚠ 얼굴이 감지되지 않았어요" : "⚠ No face detected"}
+            </p>
+            <p className="up-face-warning-desc">
+              {lang === "ko"
+                ? "정면을 바라보는 얼굴 사진을 사용해주세요. 뒤통수·측면·사물 사진은 합성 품질이 크게 낮아질 수 있어요."
+                : "Please use a photo with a clearly visible front-facing face. Side, back, or object photos may result in poor synthesis quality."}
+            </p>
+            <button
+              className="up-face-retry-btn"
+              onClick={() => fileInputRef.current?.click()}
+              type="button"
+            >
+              {lang === "ko" ? "📸 다시 선택하기" : "📸 Choose another photo"}
+            </button>
+          </div>
+        )}
 
         {/* Photo Guide */}
         <div className="up-guide">
