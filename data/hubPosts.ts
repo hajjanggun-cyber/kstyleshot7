@@ -1,4 +1,4 @@
-export type CardType = "hero" | "square" | "tall" | "small" | "wide";
+export type CardType = "hero" | "half-hero" | "square" | "tall" | "small" | "wide";
 export type CategoryStyle = "pink" | "cyan" | "black-on-yellow" | "white-on-pink";
 
 export type HubPost = {
@@ -33,7 +33,7 @@ export const hubPosts: HubPost[] = [
   },
   {
     slug: "myeongdong-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "한국 명소 & 포토존",
     categoryStyle: "black-on-yellow",
     title: "명동\n핫플 가이드",
@@ -46,7 +46,7 @@ export const hubPosts: HubPost[] = [
   },
   {
     slug: "n-seoul-tower-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "한국 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "남산 N서울타워\n서울 야경 가이드",
@@ -55,6 +55,19 @@ export const hubPosts: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.8)",
     watermark: "남산",
+    cta: "읽기",
+  },
+  {
+    slug: "insadong-hub",
+    cardType: "hero",
+    category: "한국 명소 & 포토존",
+    categoryStyle: "white-on-pink",
+    title: "인사동\n전통거리 가이드",
+    subtitle: "서울의 오래된 시간이 걸어서 읽히는 거리",
+    bg: "linear-gradient(135deg, #4a2f1b 0%, #c58a48 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.8)",
+    watermark: "인사동",
     cta: "읽기",
   },
   {
@@ -141,7 +154,7 @@ export const hubPostsEn: HubPost[] = [
   },
   {
     slug: "myeongdong-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "Seoul Locations",
     categoryStyle: "black-on-yellow",
     title: "Myeongdong\nComplete Guide",
@@ -154,7 +167,7 @@ export const hubPostsEn: HubPost[] = [
   },
   {
     slug: "n-seoul-tower-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "Seoul Locations",
     categoryStyle: "white-on-pink",
     title: "N Seoul Tower\nNight View Guide",
@@ -163,6 +176,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.8)",
     watermark: "NAMSAN",
+    cta: "Read Now",
+  },
+  {
+    slug: "insadong-hub",
+    cardType: "hero",
+    category: "Seoul Locations",
+    categoryStyle: "white-on-pink",
+    title: "Insadong\nCultural Street",
+    subtitle: "Where traditional Seoul reads at walking speed",
+    bg: "linear-gradient(135deg, #4a2f1b 0%, #c58a48 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.8)",
+    watermark: "INSADONG",
     cta: "Read Now",
   },
   {

@@ -45,6 +45,34 @@ function HeroCard({ post, href }: { post: HubPost; href: string }) {
   );
 }
 
+/* ─── Half-hero card (2 per row) ──────────────── */
+function HalfHeroCard({ post, href }: { post: HubPost; href: string }) {
+  return (
+    <Link className="hf-half-hero" href={href} style={{ background: post.bg }}>
+      <div className="hf-hero-top">
+        <Badge label={post.category} style={post.categoryStyle} />
+        <span className="hf-hero-star">★</span>
+      </div>
+      {post.watermark && (
+        <span className="hf-hero-watermark" aria-hidden>
+          {post.watermark}
+        </span>
+      )}
+      <div className="hf-hero-body">
+        <h3 className="hf-hero-title" style={{ color: post.titleColor }}>
+          {post.title.split("\n").map((line, i) => (
+            <span key={i}>{line}<br /></span>
+          ))}
+        </h3>
+        <p className="hf-hero-sub" style={{ color: post.subtitleColor }}>
+          {post.subtitle}
+        </p>
+        {post.cta && <span className="hf-hero-cta">{post.cta}</span>}
+      </div>
+    </Link>
+  );
+}
+
 /* ─── Square card ─────────────────────────────── */
 function SquareCard({ post, href }: { post: HubPost; href: string }) {
   return (
@@ -199,8 +227,9 @@ export function HubFeed() {
       <div className="hf-grid">
         {posts.map((post) => {
           const href = `/${lang}/hub/${post.slug}`;
-          if (post.cardType === "hero")   return <HeroCard   href={href} key={post.slug} post={post} />;
-          if (post.cardType === "square") return <SquareCard href={href} key={post.slug} post={post} />;
+          if (post.cardType === "hero")      return <HeroCard     href={href} key={post.slug} post={post} />;
+          if (post.cardType === "half-hero") return <HalfHeroCard href={href} key={post.slug} post={post} />;
+          if (post.cardType === "square")    return <SquareCard   href={href} key={post.slug} post={post} />;
           if (post.cardType === "tall")   return <TallCard   href={href} key={post.slug} post={post} />;
           if (post.cardType === "small")  return <SmallCard  href={href} key={post.slug} post={post} />;
           if (post.cardType === "wide")   return <WideCard   href={href} key={post.slug} post={post} />;

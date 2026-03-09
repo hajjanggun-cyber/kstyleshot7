@@ -58,25 +58,25 @@ Role 표기:
 
 ### Gyeongbokgung Cluster
 
-### [001] Hub
+### [001] Hub [v]
 - KO: 경복궁 가볼만한곳 가이드 — 사진, 한복, 동선 한 번에
 - EN: Best Things to Do at Gyeongbokgung — Photos, Hanbok, Route
 - Keyword: KO `경복궁 가볼만한곳` | EN `best things to do at gyeongbokgung`
 - Subkeywords: KO `경복궁 관람 코스`, `광화문 궁궐 코스`, `서울 궁궐 추천` | EN `gyeongbokgung route`, `gwanghwamun palace itinerary`, `seoul palace guide`
 
-### [002] Sub [ ]
+### [002] Sub [v]
 - KO: 경복궁 사진 명소 가이드
 - EN: Best Photo Spots in Gyeongbokgung
 - Keyword: KO `경복궁 사진 명소` | EN `best photo spots in gyeongbokgung`
 - Subkeywords: KO `경복궁 포토존`, `근정전 사진`, `궁궐 인생샷` | EN `gyeongbokgung photo spots`, `geunjeongjeon view`, `palace photography tips`
 
-### [003] Sub [ ]
+### [003] Sub [v]
 - KO: 경복궁 한복 사진 잘 나오는 코스
 - EN: Gyeongbokgung Hanbok Photo Route
 - Keyword: KO `경복궁 한복 사진` | EN `gyeongbokgung hanbok photo route`
 - Subkeywords: KO `한복 대여 후 동선`, `경복궁 한복 포즈`, `광화문 한복 사진` | EN `hanbok route at gyeongbokgung`, `hanbok photo poses`, `palace hanbok photos`
 
-### [004] Sub [ ]
+### [004] Sub [v]
 - KO: 경복궁 오전 사진 촬영 시간 가이드
 - EN: Best Morning Time for Gyeongbokgung Photos
 - Keyword: KO `경복궁 오전 사진 촬영` | EN `best morning time for gyeongbokgung photos`
@@ -84,25 +84,25 @@ Role 표기:
 
 ### Namsan Cluster
 
-### [005] Hub
+### [005] Hub [v]
 - KO: 남산 N서울타워 가볼만한곳 가이드 — 야경, 케이블카, 산책 코스
 - EN: Best Things to Do at N Seoul Tower — Night View, Cable Car, Walk
 - Keyword: KO `남산 N서울타워 가볼만한곳` | EN `best things to do at n seoul tower`
 - Subkeywords: KO `서울 야경 명소`, `남산 전망대`, `서울 랜드마크 코스` | EN `seoul night view spot`, `namsan observatory`, `seoul landmark route`
 
-### [006] Sub [ ]
+### [006] Sub [v]
 - KO: 남산 케이블카 사진 포인트 정리
 - EN: Namsan Cable Car Photo Tips
 - Keyword: KO `남산 케이블카 사진` | EN `namsan cable car photo tips`
 - Subkeywords: KO `케이블카 창가 사진`, `남산 케이블카 야경`, `서울 케이블카 스냅` | EN `cable car window shots`, `namsan cable car at night`, `seoul cable car photos`
 
-### [007] Sub [ ]
+### [007] Sub [v]
 - KO: N서울타워 야경 명소 어디서 찍을까
 - EN: Where to Shoot the Best N Seoul Tower Night View
 - Keyword: KO `N서울타워 야경 명소` | EN `best n seoul tower night view spot`
 - Subkeywords: KO `남산 포토 스팟`, `타워 야경 구도`, `서울 스카이라인 사진` | EN `namsan photo points`, `tower framing`, `seoul skyline photos`
 
-### [008] Sub [ ]
+### [008] Sub [v]
 - KO: 남산 산책 코스와 야경 포인트
 - EN: Namsan Walking Route with Night View Stops
 - Keyword: KO `남산 산책 코스 야경` | EN `namsan walking route night view`
@@ -110,25 +110,25 @@ Role 표기:
 
 ### Hongdae Cluster
 
-### [009] Hub
+### [009] Hub [v]
 - KO: 홍대 놀거리 완벽 가이드 — 카페, 거리, 포토존 동선
 - EN: Best Things to Do in Hongdae — Cafes, Streets, Photo Spots
 - Keyword: KO `홍대 놀거리` | EN `best things to do in hongdae`
 - Subkeywords: KO `홍대 놀거리`, `홍대 거리 분위기`, `연남동 연결 코스` | EN `things to do in hongdae`, `hongdae street vibe`, `hongdae yeonnam route`
 
-### [010] Sub [ ]
+### [010] Sub [v]
 - KO: 홍대 거리 포토존 추천
 - EN: Best Hongdae Street Photo Spots
 - Keyword: KO `홍대 거리 포토존` | EN `best hongdae street photo spots`
 - Subkeywords: KO `홍대 벽화 골목`, `홍대 버스킹 거리`, `홍대 야간 사진` | EN `hongdae mural alleys`, `busking street hongdae`, `hongdae night shots`
 
-### [011] Sub [ ]
+### [011] Sub [v]
 - KO: 홍대 감성 카페 포토존 가이드
 - EN: Hongdae Aesthetic Cafe Photo Guide
 - Keyword: KO `홍대 감성 카페 포토존` | EN `hongdae aesthetic cafe photo guide`
 - Subkeywords: KO `홍대 카페 사진`, `홍대 카페 거리`, `연남 카페 투어` | EN `hongdae cafe photos`, `hongdae cafe street`, `yeonnam cafe route`
 
-### [012] Sub [ ]
+### [012] Sub [v]
 - KO: 홍대와 성수 스트릿 패션 차이
 - EN: Hongdae vs Seongsu Street Fashion Difference
 - Keyword: KO `홍대 성수 스트릿 패션 차이` | EN `hongdae vs seongsu street fashion`
@@ -136,25 +136,25 @@ Role 표기:
 
 ### Myeongdong Cluster
 
-### [013] Hub
+### [013] Hub [v]
 - KO: 명동 가볼만한곳 가이드 — 쇼핑, 야경, 먹거리 동선
 - EN: Best Things to Do in Myeongdong — Shopping, Night Views, Food
 - Keyword: KO `명동 가볼만한곳` | EN `best things to do in myeongdong`
 - Subkeywords: KO `명동 관광 코스`, `명동 쇼핑 거리`, `서울 중심 여행` | EN `myeongdong itinerary`, `myeongdong shopping street`, `central seoul trip`
 
-### [014] Sub [ ]
+### [014] Sub [v]
 - KO: 명동 네온사인 야간 사진 가이드
 - EN: Myeongdong Neon Street Photo Guide
 - Keyword: KO `명동 네온사인 야간 사진` | EN `myeongdong neon street photo guide`
 - Subkeywords: KO `명동 밤거리 사진`, `명동 스트릿 스냅`, `서울 네온 포토존` | EN `myeongdong night photos`, `myeongdong street snaps`, `seoul neon photo spots`
 
-### [015] Sub [ ]
+### [015] Sub [v]
 - KO: 명동 K뷰티 쇼핑 동선 가이드
 - EN: Myeongdong K-Beauty Shopping Route
 - Keyword: KO `명동 K뷰티 쇼핑 동선` | EN `myeongdong k-beauty shopping route`
 - Subkeywords: KO `명동 올리브영 코스`, `명동 화장품 쇼핑`, `명동 뷰티 편집숍` | EN `myeongdong beauty route`, `cosmetics shopping in myeongdong`, `olive young myeongdong route`
 
-### [016] Sub [ ]
+### [016] Sub [v]
 - KO: 명동과 홍대 길거리 음식 비교
 - EN: Myeongdong vs Hongdae Street Food Guide
 - Keyword: KO `명동 홍대 길거리 음식 비교` | EN `myeongdong vs hongdae street food guide`
@@ -162,10 +162,10 @@ Role 표기:
 
 ### Insadong Cluster
 
-### [017] Hub
-- KO: 인사동 가볼만한곳 가이드 — 전통거리, 찻집, 골목 산책
-- EN: Best Things to Do in Insadong — Tea Houses, Alleys, Traditional Street
-- Keyword: KO `인사동 가볼만한곳` | EN `best things to do in insadong`
+### [017] Hub [v]
+- KO: 인사동 서울 전통거리 가이드 — 골목 산책과 찻집 흐름
+- EN: Insadong Seoul Cultural Street Guide
+- Keyword: KO `인사동 서울 전통거리` | EN `insadong seoul cultural street guide`
 - Subkeywords: KO `인사동 골목 산책`, `인사동 찻집 거리`, `서울 전통거리 추천` | EN `insadong walking route`, `insadong tea houses`, `seoul traditional street guide`
 
 ### [018] Sub [v]

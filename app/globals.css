@@ -4638,6 +4638,7 @@ h2 {
 
 /* Shared card base */
 .hf-hero,
+.hf-half-hero,
 .hf-square,
 .hf-tall,
 .hf-small,
@@ -4652,6 +4653,7 @@ h2 {
 }
 
 .hf-hero:hover,
+.hf-half-hero:hover,
 .hf-square:hover,
 .hf-tall:hover,
 .hf-small:hover,
@@ -4731,6 +4733,27 @@ h2 {
   letter-spacing: 0.08em;
   width: fit-content;
   margin-top: 4px;
+}
+
+/* ── Half-hero card (2 per row, hero design) ── */
+.hf-half-hero {
+  grid-column: span 1;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+}
+.hf-half-hero .hf-hero-watermark {
+  font-size: 72px;
+}
+.hf-half-hero .hf-hero-title {
+  font-size: 26px;
+}
+.hf-half-hero .hf-hero-cta {
+  height: 30px;
+  padding: 0 14px;
+  font-size: 10px;
 }
 
 /* ── Square card ── */
