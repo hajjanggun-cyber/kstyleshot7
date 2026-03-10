@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
       status: result.status,
       outputUrl: result.outputUrl ?? undefined,
       rawStatus: result.rawStatus,
+      debug: result.debugPayload,
     });
   } catch (err) {
     if (err instanceof FalApiError) {
