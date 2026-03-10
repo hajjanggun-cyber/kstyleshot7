@@ -1,5 +1,5 @@
 const FAL_BASE = "https://queue.fal.run";
-const FAL_MODEL = "fal-ai/fashn/tryon/v1.6";
+const FAL_MODEL = "fal-ai/fashn/tryon/v1.5";
 
 function getFalAuthHeader(): string {
   const key = process.env.FAL_KEY?.trim();
