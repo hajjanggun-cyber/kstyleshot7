@@ -214,13 +214,13 @@ Role 표기:
 
 ### Han River Cluster
 
-### [025] Hub
+### [025] Hub [v]
 - KO: 한강공원 놀거리 가이드 — 피크닉, 야경, 데이트 코스
 - EN: Best Things to Do at Han River Park — Picnic, Night View, Date Route
 - Keyword: KO `한강공원 놀거리` | EN `best things to do at han river park`
 - Subkeywords: KO `한강 놀거리`, `한강 돗자리 코스`, `서울 피크닉 장소` | EN `things to do at han river`, `han river picnic setup`, `seoul picnic spots`
 
-### [026] Sub [ ]
+### [026] Sub [v]
 - KO: 한강 야경 사진 명소 정리
 - EN: Best Han River Night Photo Spots
 - Keyword: KO `한강 야경 사진 명소` | EN `best han river night photo spots`
