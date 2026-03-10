@@ -138,10 +138,9 @@ export function OutfitFlow() {
     const chosen = selectedId ?? "demo-outfit";
     const outfit = outfits.find((o) => o.id === chosen);
 
-    // hairPreviewUrl now contains full-body (normalizePhotoForAI adds top padding, not shrink)
-    // Fall back to photoBlobUrl if hair preview not ready
-    const sourceUrl = hairPreviewUrl ?? photoBlobUrl;
-    if (!sourceUrl || !outfit?.garmentImage) {
+    // FAL outfit synthesis needs full-body pose detection.
+    // hairPreviewUrl is portrait-only (hair AI output), so use original photoBlobUrl.
+    if (!photoBlobUrl || !outfit?.garmentImage) {
       navigateNext(chosen);
       return;
     }
@@ -151,14 +150,7 @@ export function OutfitFlow() {
     setPendingChosenId(chosen);
 
     try {
-      // Convert to dataURL — fetch blob first if cross-origin (Replicate URL)
-      let localUrl = sourceUrl;
-      let blobToRevoke: string | null = null;
-      if (sourceUrl.startsWith("http")) {
-        const blob = await fetch(sourceUrl).then((r) => r.blob());
-        localUrl = URL.createObjectURL(blob);
-        blobToRevoke = localUrl;
-      }
+      // photoBlobUrl is a local blob URL — draw to canvas to get dataURL
       const photoDataUrl = await new Promise<string>((resolve, reject) => {
         const img = new Image();
         img.onload = () => {
@@ -171,9 +163,8 @@ export function OutfitFlow() {
           resolve(canvas.toDataURL("image/jpeg", 0.92));
         };
         img.onerror = reject;
-        img.src = localUrl;
+        img.src = photoBlobUrl;
       });
-      if (blobToRevoke) URL.revokeObjectURL(blobToRevoke);
 
       const res = await fetch("/api/outfit/preview", {
         method: "POST",
