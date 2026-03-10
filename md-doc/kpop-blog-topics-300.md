@@ -59,26 +59,26 @@ Role 표기:
 ### Gyeongbokgung Cluster
 
 ### [001] Hub [v]
-- KO: 경복궁 가볼만한곳 가이드 — 사진, 한복, 동선 한 번에
-- EN: Best Things to Do at Gyeongbokgung — Photos, Hanbok, Route
+- KO: 경복궁 가볼만한곳 — 관람 코스부터 한복 무료입장까지
+- EN: Gyeongbokgung Palace Tour Guide — Route and Visit Basics
 - Keyword: KO `경복궁 가볼만한곳` | EN `best things to do at gyeongbokgung`
 - Subkeywords: KO `경복궁 관람 코스`, `광화문 궁궐 코스`, `서울 궁궐 추천` | EN `gyeongbokgung route`, `gwanghwamun palace itinerary`, `seoul palace guide`
 
 ### [002] Sub [v]
-- KO: 경복궁 사진 명소 가이드
-- EN: Best Photo Spots in Gyeongbokgung
+- KO: 경복궁 사진 명소 가이드 — 한복 스냅 핵심 동선
+- EN: Best Photo Spots in Gyeongbokgung — Hanbok Route Guide
 - Keyword: KO `경복궁 사진 명소` | EN `best photo spots in gyeongbokgung`
 - Subkeywords: KO `경복궁 포토존`, `근정전 사진`, `궁궐 인생샷` | EN `gyeongbokgung photo spots`, `geunjeongjeon view`, `palace photography tips`
 
 ### [003] Sub [v]
-- KO: 경복궁 한복 사진 잘 나오는 코스
-- EN: Gyeongbokgung Hanbok Photo Route
+- KO: 경복궁 사진 시간대 가이드 — 야간개장과 빛 변화
+- EN: Best Time to Photograph Gyeongbokgung — Light Guide
 - Keyword: KO `경복궁 한복 사진` | EN `gyeongbokgung hanbok photo route`
 - Subkeywords: KO `한복 대여 후 동선`, `경복궁 한복 포즈`, `광화문 한복 사진` | EN `hanbok route at gyeongbokgung`, `hanbok photo poses`, `palace hanbok photos`
 
 ### [004] Sub [v]
-- KO: 경복궁 오전 사진 촬영 시간 가이드
-- EN: Best Morning Time for Gyeongbokgung Photos
+- KO: 서촌 한옥 마을 코스 — 경복궁 근처 사진 명소 5곳
+- EN: Bukchon Hanok Village Photo Spots Near Gyeongbokgung
 - Keyword: KO `경복궁 오전 사진 촬영` | EN `best morning time for gyeongbokgung photos`
 - Subkeywords: KO `경복궁 빛 방향`, `경복궁 아침 사진`, `궁궐 한산한 시간` | EN `gyeongbokgung morning light`, `early palace photos`, `quiet time at gyeongbokgung`
 
@@ -1950,9 +1950,9 @@ Role 표기:
 - Keyword: KO `가상 서울 배경 사진` | EN `virtual seoul backdrop guide`
 - Subkeywords: KO `서울 배경 선택`, `배경별 무드`, `프로필 콘셉트` | EN `seoul backdrop selection`, `scene-based mood`, `profile concepts`
 
-### [292] Sub [ ]
-- KO: 가상 경복궁 배경 프로필 사진 가이드
-- EN: Virtual Gyeongbokgung Profile Photo Guide
+### [292] Sub [v]
+- KO: AI 한복 프로필 가이드 — 경복궁 배경 합성 기준
+- EN: AI Hanbok Generator Guide — Gyeongbokgung Background
 - Keyword: KO `가상 경복궁 배경 프로필 사진` | EN `virtual gyeongbokgung profile photo guide`
 - Subkeywords: KO `전통 무드 배경`, `궁궐 배경 프로필`, `한복 콘셉트` | EN `traditional palace backdrop`, `gyeongbokgung profile concept`, `hanbok-friendly background`
 
