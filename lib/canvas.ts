@@ -44,6 +44,54 @@ export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
   });
 }
 
+/**
+ * Extends portrait canvas downward by 80% and creates a white mask for the new area.
+ * Used to give flux-fill-pro room to generate the lower body.
+ * Returns { imageDataUrl, maskDataUrl } — both same size, JPEG.
+ */
+export async function createBodyExtendInputs(blobUrl: string): Promise<{
+  imageDataUrl: string;
+  maskDataUrl: string;
+}> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const W = img.naturalWidth;
+      const H = img.naturalHeight;
+      const extH = Math.round(H * 0.8); // 80% added below
+      const totalH = H + extH;
+
+      // Image canvas: original on top, black fill below
+      const imgCanvas = document.createElement("canvas");
+      imgCanvas.width = W;
+      imgCanvas.height = totalH;
+      const imgCtx = imgCanvas.getContext("2d");
+      if (!imgCtx) { reject(new Error("Canvas context unavailable")); return; }
+      imgCtx.fillStyle = "#000";
+      imgCtx.fillRect(0, 0, W, totalH);
+      imgCtx.drawImage(img, 0, 0, W, H);
+
+      // Mask canvas: black = preserve original, white = generate new
+      const maskCanvas = document.createElement("canvas");
+      maskCanvas.width = W;
+      maskCanvas.height = totalH;
+      const maskCtx = maskCanvas.getContext("2d");
+      if (!maskCtx) { reject(new Error("Canvas context unavailable")); return; }
+      maskCtx.fillStyle = "#000";
+      maskCtx.fillRect(0, 0, W, H);
+      maskCtx.fillStyle = "#fff";
+      maskCtx.fillRect(0, H, W, extH);
+
+      resolve({
+        imageDataUrl: imgCanvas.toDataURL("image/jpeg", 0.92),
+        maskDataUrl: maskCanvas.toDataURL("image/jpeg", 0.92),
+      });
+    };
+    img.onerror = reject;
+    img.src = blobUrl;
+  });
+}
+
 export async function loadImage(url: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();

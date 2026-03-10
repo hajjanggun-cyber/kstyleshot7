@@ -341,6 +341,53 @@ export async function startOutfitTryOnJob(input: {
   return predictionId;
 }
 
+/** Starts a Flux Fill Pro outpainting job to extend portrait to full body */
+export async function startBodyExtendJob(input: {
+  imageDataUrl: string;
+  maskDataUrl: string;
+}): Promise<string> {
+  assertReplicateEnv();
+
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/black-forest-labs/flux-fill-pro/predictions`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: getReplicateAuthHeader(),
+      "Content-Type": "application/json",
+      "Prefer": "respond-async",
+    },
+    body: JSON.stringify({
+      input: {
+        image: input.imageDataUrl,
+        mask: input.maskDataUrl,
+        prompt: "same person standing full body, legs and feet visible, fashion photography, natural standing pose",
+        steps: 50,
+        guidance: 60,
+        output_format: "jpg",
+        safety_tolerance: 5,
+      },
+    }),
+    cache: "no-store",
+  }).catch(() => {
+    throw new ReplicateApiError("Unable to reach Replicate body extend API.", 502);
+  });
+
+  const payload = await parseApiJson(response);
+  if (!response.ok) {
+    throw new ReplicateApiError(
+      extractApiErrorMessage(payload, `Replicate body extend failed with status ${response.status}.`),
+      response.status >= 400 && response.status < 500 ? 400 : 502
+    );
+  }
+
+  const predictionId = pickString(payload, ["id"]);
+  if (!predictionId) {
+    throw new ReplicateApiError("Replicate body extend prediction missing id.", 502);
+  }
+
+  return predictionId;
+}
+
 const BG_REMOVER_VERSION =
   "a029dff38972b5fda4ec5d75d7d1cd25aeff621d2cf4946a41055d7db66b80bc";
 
