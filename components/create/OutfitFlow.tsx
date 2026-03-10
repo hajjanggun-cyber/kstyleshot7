@@ -150,7 +150,17 @@ export function OutfitFlow() {
     setPendingChosenId(chosen);
 
     try {
-      const photoDataUrl = await normalizePhotoForAI(sourceUrl);
+      // hairPreviewUrl is a cross-origin URL — fetch as blob first to avoid tainted canvas
+      let localUrl = sourceUrl;
+      let blobToRevoke: string | null = null;
+      if (sourceUrl.startsWith("http")) {
+        const blob = await fetch(sourceUrl).then((r) => r.blob());
+        localUrl = URL.createObjectURL(blob);
+        blobToRevoke = localUrl;
+      }
+      const photoDataUrl = await normalizePhotoForAI(localUrl);
+      if (blobToRevoke) URL.revokeObjectURL(blobToRevoke);
+
       const res = await fetch("/api/outfit/preview", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
