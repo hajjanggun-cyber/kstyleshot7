@@ -15,6 +15,8 @@ type CreateActions = {
   setHairPredictionId: (id: string | null) => void;
   setHairResults: (results: StepResult[]) => void;
   pickHair: (id: string) => void;
+  setFullBodyUrl: (url: string | null) => void;
+  setFullBodyPredictionId: (id: string | null) => void;
   setOutfitChosen: (ids: string[]) => void;
   setOutfitPreviewUrl: (url: string | null) => void;
   setOutfitPredictionId: (id: string | null) => void;
@@ -64,6 +66,8 @@ export const useCreateStore = create<
     compositePredictionId: string | null;
     iclightUrl: string | null;
     iclightPredictionId: string | null;
+    fullBodyUrl: string | null;
+    fullBodyPredictionId: string | null;
   } & CreateActions
 >((set) => ({
   ...initialState,
@@ -78,6 +82,8 @@ export const useCreateStore = create<
   compositePredictionId: null,
   iclightUrl: null,
   iclightPredictionId: null,
+  fullBodyUrl: null,
+  fullBodyPredictionId: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
   setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
   setStatus: (status) => set({ status }),
@@ -113,6 +119,8 @@ export const useCreateStore = create<
   setCompositePredictionId: (id) => set({ compositePredictionId: id }),
   setIclightUrl: (url) => set({ iclightUrl: url }),
   setIclightPredictionId: (id) => set({ iclightPredictionId: id }),
+  setFullBodyUrl: (url) => set({ fullBodyUrl: url }),
+  setFullBodyPredictionId: (id) => set({ fullBodyPredictionId: id }),
   setOutfitResults: (results) =>
     set((state) => ({
       outfit: { ...state.outfit, results },
@@ -155,5 +163,7 @@ export const useCreateStore = create<
       compositePredictionId: null,
       iclightUrl: null,
       iclightPredictionId: null,
+      fullBodyUrl: null,
+      fullBodyPredictionId: null,
     })
 }));

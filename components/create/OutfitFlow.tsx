@@ -7,7 +7,6 @@ import { useTranslations } from "next-intl";
 
 import { outfits } from "@/data/outfits";
 import { useCreateStore } from "@/store/createStore";
-import { createBodyExtendInputs } from "@/lib/canvas";
 
 type Category = "stage" | "street" | "award";
 
@@ -47,13 +46,13 @@ export function OutfitFlow() {
     setOutfitPredictionId,
     pickOutfit,
     setStatus,
+    fullBodyUrl,
+    fullBodyPredictionId,
+    setFullBodyUrl,
   } = useCreateStore();
 
   const [activeCategory, setActiveCategory] = useState<Category>("stage");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [isExtendingBody, setIsExtendingBody] = useState(false);
-  const [bodyPredictionId, setBodyPredictionId] = useState<string | null>(null);
-  const [fullBodyUrl, setFullBodyUrl] = useState<string | null>(null);
   const [isSynthesizing, setIsSynthesizing] = useState(false);
   const [synthPredictionId, setSynthPredictionId] = useState<string | null>(null);
   const [pendingChosenId, setPendingChosenId] = useState<string | null>(null);
@@ -85,40 +84,29 @@ export function OutfitFlow() {
     return () => clearInterval(interval);
   }, [hairPreviewUrl, hairPredictionId, setHairPreviewUrl]);
 
-  // Poll Replicate for body extend result — when done, start outfit synthesis
+  // Background poll: body extend result — silently stores URL in store
   useEffect(() => {
-    if (!bodyPredictionId || !isExtendingBody) return;
+    if (fullBodyUrl || !fullBodyPredictionId) return;
 
     let retries = 0;
     const interval = setInterval(async () => {
       retries += 1;
-      if (retries >= 40) {
-        setIsExtendingBody(false);
-        setSynthError(true);
-        clearInterval(interval);
-        return;
-      }
+      if (retries >= 40) { clearInterval(interval); return; }
       try {
-        const res = await fetch(`/api/body/poll?predictionId=${bodyPredictionId}`);
+        const res = await fetch(`/api/body/poll?predictionId=${fullBodyPredictionId}`);
         if (!res.ok) return;
         const data = await res.json() as { status: string; outputUrl?: string };
         if (data.outputUrl) {
           setFullBodyUrl(data.outputUrl);
-          setIsExtendingBody(false);
           clearInterval(interval);
-          // Auto-start outfit synthesis with the generated full body
-          if (pendingChosenId) startOutfitSynth(data.outputUrl, pendingChosenId);
         } else if (data.status === "failed" || data.status === "canceled") {
-          setIsExtendingBody(false);
-          setSynthError(true);
           clearInterval(interval);
         }
       } catch { /* retry */ }
     }, 3000);
 
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bodyPredictionId, isExtendingBody, pendingChosenId]);
+  }, [fullBodyUrl, fullBodyPredictionId, setFullBodyUrl]);
 
   // Poll FAL.ai for outfit synthesis result
   useEffect(() => {
@@ -213,41 +201,6 @@ export function OutfitFlow() {
     }
   }
 
-  /** Checks if the photo contains a full body using MediaPipe PoseLandmarker */
-  async function isFullBodyPhoto(blobUrl: string): Promise<boolean> {
-    try {
-      const { PoseLandmarker, FilesetResolver } = await import("@mediapipe/tasks-vision");
-      const vision = await FilesetResolver.forVisionTasks(
-        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
-      );
-      const landmarker = await PoseLandmarker.createFromOptions(vision, {
-        baseOptions: {
-          modelAssetPath: "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
-          delegate: "GPU",
-        },
-        runningMode: "IMAGE",
-        numPoses: 1,
-      });
-      const img = new Image();
-      await new Promise<void>((res, rej) => {
-        img.onload = () => res();
-        img.onerror = rej;
-        img.src = blobUrl;
-      });
-      const result = landmarker.detect(img);
-      landmarker.close();
-      if (!result.landmarks.length) return false;
-      const landmarks = result.landmarks[0];
-      // Landmark 25 = left knee, 26 = right knee
-      const leftKnee = landmarks[25];
-      const rightKnee = landmarks[26];
-      return (leftKnee?.visibility ?? 0) > 0.5 || (rightKnee?.visibility ?? 0) > 0.5;
-    } catch {
-      // If pose detection fails, assume portrait and extend
-      return false;
-    }
-  }
-
   function navigateNext(chosen: string) {
     setOutfitChosen([chosen]);
     pickOutfit(chosen);
@@ -262,47 +215,15 @@ export function OutfitFlow() {
     setSelectedId(id === selectedId ? null : id);
   }
 
-  async function handleApply() {
+  function handleApply() {
     const chosen = selectedId ?? "demo-outfit";
     const outfit = outfits.find((o) => o.id === chosen);
     if (!photoBlobUrl || !outfit?.garmentImage) { navigateNext(chosen); return; }
 
     setSynthError(false);
     setPendingChosenId(chosen);
-
-    // If already extended body is cached, use it directly
-    if (fullBodyUrl) {
-      startOutfitSynth(fullBodyUrl, chosen);
-      return;
-    }
-
-    // Check if photo already shows full body
-    const fullBody = await isFullBodyPhoto(photoBlobUrl);
-    if (fullBody) {
-      startOutfitSynth(photoBlobUrl, chosen);
-      return;
-    }
-
-    // Portrait detected — extend body with Flux Fill Pro
-    setIsExtendingBody(true);
-    try {
-      const { imageDataUrl, maskDataUrl } = await createBodyExtendInputs(photoBlobUrl);
-      const res = await fetch("/api/body/extend", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageDataUrl, maskDataUrl }),
-      });
-      const data = await res.json() as { predictionId?: string; error?: string };
-      if (!res.ok || !data.predictionId) {
-        setIsExtendingBody(false);
-        setSynthError(true);
-        return;
-      }
-      setBodyPredictionId(data.predictionId);
-    } catch {
-      setIsExtendingBody(false);
-      setSynthError(true);
-    }
+    // Use extended full body if ready, otherwise fall back to original photo
+    startOutfitSynth(fullBodyUrl ?? photoBlobUrl, chosen);
   }
 
   if (!hair.chosen.length) {
@@ -325,24 +246,6 @@ export function OutfitFlow() {
 
   return (
     <div className="ot-root">
-      {/* Body extend overlay */}
-      {isExtendingBody && (
-        <div className="ot-synth-overlay">
-          <div className="ot-synth-ring" />
-          <div>
-            <p className="ot-synth-title">
-              {lang === "ko" ? "전신 이미지 준비 중" : "Preparing Full Body"}
-            </p>
-            <p className="ot-synth-sub">
-              {lang === "ko"
-                ? "상반신 사진에서 전신을 생성하고 있어요.\n잠깐만 기다려 주세요."
-                : "Generating full body from portrait.\nThis takes about 15–20 seconds."}
-            </p>
-          </div>
-          <p className="ot-synth-badge">✦ 1/2 Body Generation</p>
-        </div>
-      )}
-
       {/* Outfit synthesis overlay */}
       {isSynthesizing && (
         <div className="ot-synth-overlay">
@@ -516,14 +419,12 @@ export function OutfitFlow() {
       <div className="ot-bottom">
         <button
           className="up-next-btn up-next-btn--active"
-          disabled={isSynthesizing || isExtendingBody}
+          disabled={isSynthesizing}
           onClick={handleApply}
           type="button"
         >
-          {isExtendingBody
-            ? (lang === "ko" ? "전신 생성 중…" : "Generating body…")
-            : isSynthesizing
-              ? (lang === "ko" ? "합성 중…" : "Styling…")
+          {isSynthesizing
+            ? (lang === "ko" ? "합성 중…" : "Styling…")
               : t("nextBtn")}
         </button>
       </div>

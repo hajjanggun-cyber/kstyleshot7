@@ -9,7 +9,7 @@ import { hairStyles, HAIR_CATEGORIES } from "@/data/hairStyles";
 import type { HairCategory } from "@/types";
 import { hairColors } from "@/data/hairColors";
 import { useCreateStore } from "@/store/createStore";
-import { normalizePhotoForAI } from "@/lib/canvas";
+import { normalizePhotoForAI, createBodyExtendInputs } from "@/lib/canvas";
 
 export function HairFlow() {
   const params = useParams<{ lang: string }>();
@@ -17,7 +17,11 @@ export function HairFlow() {
   const lang = params.lang ?? "en";
   const t = useTranslations("flow.hair");
 
-  const { photoBlobUrl, setHairChosen, setHairColor, setHairPreviewUrl, setHairPredictionId, setStatus } = useCreateStore();
+  const {
+    photoBlobUrl,
+    setHairChosen, setHairColor, setHairPreviewUrl, setHairPredictionId, setStatus,
+    setFullBodyUrl, setFullBodyPredictionId,
+  } = useCreateStore();
 
   const [activeCategory, setActiveCategory] = useState<HairCategory>("daily");
   const [selectedStyleId, setSelectedStyleId] = useState<string | null>(null);
@@ -80,6 +84,47 @@ export function HairFlow() {
     }
 
     setIsSynthesizing(true);
+
+    // Background: detect pose and extend body if portrait — no UI, fire-and-forget
+    setFullBodyUrl(null);
+    setFullBodyPredictionId(null);
+    (async () => {
+      try {
+        const { PoseLandmarker, FilesetResolver } = await import("@mediapipe/tasks-vision");
+        const vision = await FilesetResolver.forVisionTasks(
+          "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+        );
+        const landmarker = await PoseLandmarker.createFromOptions(vision, {
+          baseOptions: {
+            modelAssetPath: "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
+            delegate: "GPU",
+          },
+          runningMode: "IMAGE",
+          numPoses: 1,
+        });
+        const img = new Image();
+        await new Promise<void>((res, rej) => { img.onload = () => res(); img.onerror = rej; img.src = photoBlobUrl; });
+        const result = landmarker.detect(img);
+        landmarker.close();
+        const landmarks = result.landmarks[0];
+        const leftKnee = landmarks?.[25];
+        const rightKnee = landmarks?.[26];
+        const isFullBody = (leftKnee?.visibility ?? 0) > 0.5 || (rightKnee?.visibility ?? 0) > 0.5;
+
+        if (!isFullBody) {
+          const { imageDataUrl, maskDataUrl } = await createBodyExtendInputs(photoBlobUrl);
+          const res = await fetch("/api/body/extend", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ imageDataUrl, maskDataUrl }),
+          });
+          const data = await res.json() as { predictionId?: string };
+          if (data.predictionId) setFullBodyPredictionId(data.predictionId);
+        } else {
+          setFullBodyUrl(photoBlobUrl); // already full body — store original
+        }
+      } catch {/* non-fatal background task */}
+    })();
 
     try {
       const photoDataUrl = await normalizePhotoForAI(photoBlobUrl);
