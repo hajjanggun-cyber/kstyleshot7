@@ -102,7 +102,7 @@ Role 표기:
 - Keyword: KO `N서울타워 야경 명소` | EN `best n seoul tower night view spot`
 - Subkeywords: KO `남산 포토 스팟`, `타워 야경 구도`, `서울 스카이라인 사진` | EN `namsan photo points`, `tower framing`, `seoul skyline photos`
 
-### [008] Sub [v]
+### [008] Sub [ ]
 - KO: 남산 산책 코스와 야경 포인트
 - EN: Namsan Walking Route with Night View Stops
 - Keyword: KO `남산 산책 코스 야경` | EN `namsan walking route night view`
