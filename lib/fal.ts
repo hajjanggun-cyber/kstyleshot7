@@ -1,5 +1,5 @@
-const FAL_BASE = "https://queue.fal.run";
-const FAL_MODEL = "fal-ai/fashn/tryon/v1.5";
+const FAL_SUBMIT_URL = "https://queue.fal.run/fal-ai/fashn/tryon/v1.5";
+const FAL_QUEUE_BASE = "https://queue.fal.run/fal-ai/fashn";
 
 function getFalAuthHeader(): string {
   const key = process.env.FAL_KEY?.trim();
@@ -16,13 +16,13 @@ export class FalApiError extends Error {
   }
 }
 
-/** Starts a FASHN v1.6 try-on job — returns request_id */
+/** Starts a FASHN v1.5 try-on job — returns request_id */
 export async function startFashnTryOnJob(input: {
   modelImageDataUrl: string;
   garmentImageDataUrl: string;
   clothType?: string;
 }): Promise<string> {
-  const res = await fetch(`${FAL_BASE}/${FAL_MODEL}`, {
+  const res = await fetch(FAL_SUBMIT_URL, {
     method: "POST",
     headers: {
       Authorization: getFalAuthHeader(),
@@ -64,7 +64,7 @@ export async function pollFashnJob(requestId: string): Promise<{
   debugPayload?: unknown;
 }> {
   const statusRes = await fetch(
-    `${FAL_BASE}/${FAL_MODEL}/requests/${requestId}/status`,
+    `${FAL_QUEUE_BASE}/requests/${requestId}/status`,
     {
       headers: { Authorization: getFalAuthHeader() },
       cache: "no-store",
@@ -82,7 +82,7 @@ export async function pollFashnJob(requestId: string): Promise<{
 
   // Fetch result
   const resultRes = await fetch(
-    `${FAL_BASE}/${FAL_MODEL}/requests/${requestId}`,
+    `${FAL_QUEUE_BASE}/requests/${requestId}`,
     {
       headers: { Authorization: getFalAuthHeader() },
       cache: "no-store",
