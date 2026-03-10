@@ -7,7 +7,6 @@ import { useTranslations } from "next-intl";
 
 import { outfits } from "@/data/outfits";
 import { useCreateStore } from "@/store/createStore";
-import { normalizePhotoForAI } from "@/lib/canvas";
 
 type Category = "stage" | "street" | "award";
 
@@ -139,8 +138,10 @@ export function OutfitFlow() {
     const chosen = selectedId ?? "demo-outfit";
     const outfit = outfits.find((o) => o.id === chosen);
 
-    const sourceUrl = hairPreviewUrl ?? photoBlobUrl;
-    if (!sourceUrl || !outfit?.garmentImage) {
+    // Use original photo for FAL outfit synthesis — FAL needs full-body pose detection.
+    // normalizePhotoForAI (85% scale + black border) breaks pose detection.
+    const modelUrl = photoBlobUrl;
+    if (!modelUrl || !outfit?.garmentImage) {
       navigateNext(chosen);
       return;
     }
@@ -150,16 +151,21 @@ export function OutfitFlow() {
     setPendingChosenId(chosen);
 
     try {
-      // hairPreviewUrl is a cross-origin URL — fetch as blob first to avoid tainted canvas
-      let localUrl = sourceUrl;
-      let blobToRevoke: string | null = null;
-      if (sourceUrl.startsWith("http")) {
-        const blob = await fetch(sourceUrl).then((r) => r.blob());
-        localUrl = URL.createObjectURL(blob);
-        blobToRevoke = localUrl;
-      }
-      const photoDataUrl = await normalizePhotoForAI(localUrl);
-      if (blobToRevoke) URL.revokeObjectURL(blobToRevoke);
+      // photoBlobUrl is a local blob — convert directly to dataURL
+      const photoDataUrl = await new Promise<string>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) { reject(new Error("no ctx")); return; }
+          ctx.drawImage(img, 0, 0);
+          resolve(canvas.toDataURL("image/jpeg", 0.92));
+        };
+        img.onerror = reject;
+        img.src = modelUrl;
+      });
 
       const res = await fetch("/api/outfit/preview", {
         method: "POST",
