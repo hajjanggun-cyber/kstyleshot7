@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 
 import { outfits } from "@/data/outfits";
 import { useCreateStore } from "@/store/createStore";
-// import { normalizePhotoForAI } from "@/lib/canvas"; // TODO: restore when Fal.ai approved
+import { normalizePhotoForAI } from "@/lib/canvas";
 
 type Category = "stage" | "street" | "award";
 
@@ -43,17 +43,18 @@ export function OutfitFlow() {
     hairPredictionId,
     setHairPreviewUrl,
     setOutfitChosen,
+    setOutfitPreviewUrl,
+    setOutfitPredictionId,
     pickOutfit,
     setStatus,
   } = useCreateStore();
 
   const [activeCategory, setActiveCategory] = useState<Category>("stage");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  // TODO: Fal.ai 승인 후 아래 state 복원
-  // const [isSynthesizing, setIsSynthesizing] = useState(false);
-  // const [synthPredictionId, setSynthPredictionId] = useState<string | null>(null);
-  // const [pendingChosenId, setPendingChosenId] = useState<string | null>(null);
-  // const [synthError, setSynthError] = useState(false);
+  const [isSynthesizing, setIsSynthesizing] = useState(false);
+  const [synthPredictionId, setSynthPredictionId] = useState<string | null>(null);
+  const [pendingChosenId, setPendingChosenId] = useState<string | null>(null);
+  const [synthError, setSynthError] = useState(false);
 
   // Poll Replicate for hair preview result
   useEffect(() => {
@@ -81,8 +82,44 @@ export function OutfitFlow() {
     return () => clearInterval(interval);
   }, [hairPreviewUrl, hairPredictionId, setHairPreviewUrl]);
 
-  // TODO: Fal.ai 승인 후 아래 polling useEffect 복원
-  // useEffect(() => { ... }, [synthPredictionId, isSynthesizing, pendingChosenId]);
+  // Poll FAL.ai for outfit synthesis result
+  useEffect(() => {
+    if (!synthPredictionId || !isSynthesizing) return;
+
+    let retries = 0;
+    const interval = setInterval(async () => {
+      retries += 1;
+      if (retries >= 40) {
+        setIsSynthesizing(false);
+        setSynthError(true);
+        clearInterval(interval);
+        return;
+      }
+      try {
+        const res = await fetch(`/api/outfit/poll?predictionId=${synthPredictionId}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; outputUrl?: string };
+        if (data.outputUrl) {
+          setOutfitPreviewUrl(data.outputUrl);
+          setOutfitPredictionId(synthPredictionId);
+          clearInterval(interval);
+          setIsSynthesizing(false);
+          if (pendingChosenId) {
+            navigateNext(pendingChosenId);
+          }
+        } else if (data.status === "failed") {
+          setSynthError(true);
+          setIsSynthesizing(false);
+          clearInterval(interval);
+        }
+      } catch {
+        // retry next tick
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [synthPredictionId, isSynthesizing, pendingChosenId]);
 
   function navigateNext(chosen: string) {
     setOutfitChosen([chosen]);
@@ -98,11 +135,42 @@ export function OutfitFlow() {
     setSelectedId(id === selectedId ? null : id);
   }
 
-  function handleApply() {
-    // TODO: Fal.ai 승인 후 의상 합성 API 호출 복원
-    // 현재는 승인 대기 중이므로 선택값만 저장하고 바로 다음 단계로 이동
+  async function handleApply() {
     const chosen = selectedId ?? "demo-outfit";
-    navigateNext(chosen);
+    const outfit = outfits.find((o) => o.id === chosen);
+
+    const sourceUrl = hairPreviewUrl ?? photoBlobUrl;
+    if (!sourceUrl || !outfit?.garmentImage) {
+      navigateNext(chosen);
+      return;
+    }
+
+    setSynthError(false);
+    setIsSynthesizing(true);
+    setPendingChosenId(chosen);
+
+    try {
+      const photoDataUrl = await normalizePhotoForAI(sourceUrl);
+      const res = await fetch("/api/outfit/preview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          photoDataUrl,
+          garmentImagePath: outfit.garmentImage,
+          clothType: outfit.clothType ?? "overall",
+        }),
+      });
+      const data = await res.json() as { predictionId?: string; error?: string };
+      if (!res.ok || !data.predictionId) {
+        setSynthError(true);
+        setIsSynthesizing(false);
+        return;
+      }
+      setSynthPredictionId(data.predictionId);
+    } catch {
+      setSynthError(true);
+      setIsSynthesizing(false);
+    }
   }
 
   if (!hair.chosen.length) {
@@ -125,7 +193,47 @@ export function OutfitFlow() {
 
   return (
     <div className="ot-root">
-      {/* TODO: Fal.ai 승인 후 합성 overlay 복원 */}
+      {/* Outfit synthesis overlay */}
+      {isSynthesizing && (
+        <div className="ot-synth-overlay">
+          <div className="ot-synth-ring" />
+          <div>
+            <p className="ot-synth-title">
+              {lang === "ko" ? "AI 의상 합성 중" : "AI Outfit Styling"}
+            </p>
+            <p className="ot-synth-sub">
+              {lang === "ko"
+                ? "fal-ai/fashn으로 의상을 입히는 중이에요.\n잠깐만 기다려 주세요."
+                : "Applying outfit with fal-ai/fashn.\nThis usually takes about a minute."}
+            </p>
+          </div>
+          <p className="ot-synth-badge">✦ AI Processing</p>
+        </div>
+      )}
+
+      {/* Error banner */}
+      {synthError && (
+        <div className="ot-synth-overlay">
+          <div>
+            <p className="ot-synth-title">
+              {lang === "ko" ? "의상 합성에 실패했어요" : "Outfit synthesis failed"}
+            </p>
+            <p className="ot-synth-sub">
+              {lang === "ko"
+                ? "다시 시도해주세요."
+                : "Please try again."}
+            </p>
+          </div>
+          <button
+            className="ot-synth-badge"
+            type="button"
+            onClick={() => { setSynthError(false); handleApply(); }}
+          >
+            {lang === "ko" ? "⟳ 재시도" : "⟳ Retry"}
+          </button>
+        </div>
+      )}
+
       {/* Nav */}
       <nav className="ot-nav">
         <Link className="ot-back-btn" href={`/${lang}/create/hair`}>←</Link>
@@ -258,10 +366,13 @@ export function OutfitFlow() {
       <div className="ot-bottom">
         <button
           className="up-next-btn up-next-btn--active"
+          disabled={isSynthesizing}
           onClick={handleApply}
           type="button"
         >
-          {t("nextBtn")}
+          {isSynthesizing
+            ? (lang === "ko" ? "합성 중…" : "Styling…")
+            : t("nextBtn")}
         </button>
       </div>
     </div>
