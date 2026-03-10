@@ -60,6 +60,7 @@ export async function startFashnTryOnJob(input: {
 export async function pollFashnJob(requestId: string): Promise<{
   status: "processing" | "succeeded" | "failed";
   outputUrl: string | null;
+  rawStatus?: string;
 }> {
   const statusRes = await fetch(
     `${FAL_BASE}/${FAL_MODEL}/requests/${requestId}/status`,
@@ -74,8 +75,8 @@ export async function pollFashnJob(requestId: string): Promise<{
   const statusPayload = await statusRes.json().catch(() => null);
   const rawStatus = statusPayload?.status as string | undefined;
 
-  if (rawStatus === "FAILED") return { status: "failed", outputUrl: null };
-  if (rawStatus !== "COMPLETED") return { status: "processing", outputUrl: null };
+  if (rawStatus === "FAILED") return { status: "failed", outputUrl: null, rawStatus };
+  if (rawStatus !== "COMPLETED") return { status: "processing", outputUrl: null, rawStatus };
 
   // Fetch result
   const resultRes = await fetch(
