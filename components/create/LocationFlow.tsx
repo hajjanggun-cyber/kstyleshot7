@@ -120,7 +120,11 @@ export function LocationFlow() {
     let retries = 0;
     const interval = setInterval(async () => {
       retries += 1;
-      if (retries >= 40) { clearInterval(interval); return; }
+      if (retries >= 40) {
+        clearInterval(interval);
+        setBgRemovedPredictionId(null); // unblock button on timeout
+        return;
+      }
       try {
         const res = await fetch(`/api/bgremove/poll?predictionId=${bgRemovedPredictionId}`);
         if (!res.ok) return;
@@ -130,12 +134,13 @@ export function LocationFlow() {
           clearInterval(interval);
         } else if (data.status === "failed" || data.status === "canceled") {
           clearInterval(interval);
+          setBgRemovedPredictionId(null); // unblock button on failure
         }
       } catch {/* retry */ }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [bgRemovedUrl, bgRemovedPredictionId, setBgRemovedUrl]);
+  }, [bgRemovedUrl, bgRemovedPredictionId, setBgRemovedUrl, setBgRemovedPredictionId]);
 
   // Poll for outfit try-on result
   useEffect(() => {
