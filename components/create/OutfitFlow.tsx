@@ -158,43 +158,46 @@ export function OutfitFlow() {
       // Convert cross-origin URL to dataURL if needed
       let localUrl = modelImageUrl;
       let blobToRevoke: string | null = null;
-      if (modelImageUrl.startsWith("http")) {
-        const blob = await fetch(modelImageUrl).then((r) => r.blob());
-        localUrl = URL.createObjectURL(blob);
-        blobToRevoke = localUrl;
-      }
-      const photoDataUrl = await new Promise<string>((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          const ctx = canvas.getContext("2d");
-          if (!ctx) { reject(new Error("no ctx")); return; }
-          ctx.drawImage(img, 0, 0);
-          resolve(canvas.toDataURL("image/jpeg", 0.92));
-        };
-        img.onerror = reject;
-        img.src = localUrl;
-      });
-      if (blobToRevoke) URL.revokeObjectURL(blobToRevoke);
+      try {
+        if (modelImageUrl.startsWith("http")) {
+          const blob = await fetch(modelImageUrl).then((r) => r.blob());
+          localUrl = URL.createObjectURL(blob);
+          blobToRevoke = localUrl;
+        }
+        const photoDataUrl = await new Promise<string>((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) { reject(new Error("no ctx")); return; }
+            ctx.drawImage(img, 0, 0);
+            resolve(canvas.toDataURL("image/jpeg", 0.92));
+          };
+          img.onerror = reject;
+          img.src = localUrl;
+        });
 
-      const res = await fetch("/api/outfit/preview", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          photoDataUrl,
-          garmentImagePath: outfit.garmentImage,
-          clothType: outfit.clothType ?? "overall",
-        }),
-      });
-      const data = await res.json() as { predictionId?: string; error?: string };
-      if (!res.ok || !data.predictionId) {
-        setSynthError(true);
-        setIsSynthesizing(false);
-        return;
+        const res = await fetch("/api/outfit/preview", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            photoDataUrl,
+            garmentImagePath: outfit.garmentImage,
+            clothType: outfit.clothType ?? "overall",
+          }),
+        });
+        const data = await res.json() as { predictionId?: string; error?: string };
+        if (!res.ok || !data.predictionId) {
+          setSynthError(true);
+          setIsSynthesizing(false);
+          return;
+        }
+        setSynthPredictionId(data.predictionId);
+      } finally {
+        if (blobToRevoke) URL.revokeObjectURL(blobToRevoke);
       }
-      setSynthPredictionId(data.predictionId);
     } catch {
       setSynthError(true);
       setIsSynthesizing(false);

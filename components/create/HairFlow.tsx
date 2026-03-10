@@ -123,7 +123,10 @@ export function HairFlow() {
         } else {
           setFullBodyUrl(photoBlobUrl); // already full body — store original
         }
-      } catch {/* non-fatal background task */}
+      } catch {
+        // Body extend failed — fall back to original photo so FAL still gets something
+        setFullBodyUrl(photoBlobUrl);
+      }
     })();
 
     try {

@@ -84,7 +84,7 @@ export async function createBodyExtendInputs(blobUrl: string): Promise<{
 
       resolve({
         imageDataUrl: imgCanvas.toDataURL("image/jpeg", 0.92),
-        maskDataUrl: maskCanvas.toDataURL("image/jpeg", 0.92),
+        maskDataUrl: maskCanvas.toDataURL("image/png"), // PNG: lossless — JPEG compression blurs mask edges
       });
     };
     img.onerror = reject;
