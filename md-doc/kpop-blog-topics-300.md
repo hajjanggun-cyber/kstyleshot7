@@ -59,26 +59,26 @@ Role 표기:
 ### Gyeongbokgung Cluster
 
 ### [001] Hub [v]
-- KO: 경복궁 가볼만한곳 — 관람 코스부터 한복 무료입장까지
-- EN: Gyeongbokgung Palace Tour Guide — Route and Visit Basics
+- KO: 경복궁 가볼만한곳 — 관람 코스부터 한복 무료입장까지 [rev-2026-03-10]
+- EN: Gyeongbokgung Palace Tour Guide — Route and Visit Basics [rev-2026-03-10]
 - Keyword: KO `경복궁 가볼만한곳` | EN `best things to do at gyeongbokgung`
 - Subkeywords: KO `경복궁 관람 코스`, `광화문 궁궐 코스`, `서울 궁궐 추천` | EN `gyeongbokgung route`, `gwanghwamun palace itinerary`, `seoul palace guide`
 
 ### [002] Sub [v]
-- KO: 경복궁 사진 명소 가이드 — 한복 스냅 핵심 동선
-- EN: Best Photo Spots in Gyeongbokgung — Hanbok Route Guide
+- KO: 경복궁 사진 명소 가이드 — 한복 스냅 핵심 동선 [rev-2026-03-10]
+- EN: Best Photo Spots in Gyeongbokgung — Hanbok Route Guide [rev-2026-03-10]
 - Keyword: KO `경복궁 사진 명소` | EN `best photo spots in gyeongbokgung`
 - Subkeywords: KO `경복궁 포토존`, `근정전 사진`, `궁궐 인생샷` | EN `gyeongbokgung photo spots`, `geunjeongjeon view`, `palace photography tips`
 
 ### [003] Sub [v]
-- KO: 경복궁 사진 시간대 가이드 — 야간개장과 빛 변화
-- EN: Best Time to Photograph Gyeongbokgung — Light Guide
+- KO: 경복궁 사진 시간대 가이드 — 야간개장과 빛 변화 [rev-2026-03-10]
+- EN: Best Time to Photograph Gyeongbokgung — Light Guide [rev-2026-03-10]
 - Keyword: KO `경복궁 한복 사진` | EN `gyeongbokgung hanbok photo route`
 - Subkeywords: KO `한복 대여 후 동선`, `경복궁 한복 포즈`, `광화문 한복 사진` | EN `hanbok route at gyeongbokgung`, `hanbok photo poses`, `palace hanbok photos`
 
 ### [004] Sub [v]
-- KO: 서촌 한옥 마을 코스 — 경복궁 근처 사진 명소 5곳
-- EN: Bukchon Hanok Village Photo Spots Near Gyeongbokgung
+- KO: 서촌 한옥 마을 코스 — 경복궁 근처 사진 명소 5곳 [rev-2026-03-10]
+- EN: Bukchon Hanok Village Photo Spots Near Gyeongbokgung [rev-2026-03-10]
 - Keyword: KO `경복궁 오전 사진 촬영` | EN `best morning time for gyeongbokgung photos`
 - Subkeywords: KO `경복궁 빛 방향`, `경복궁 아침 사진`, `궁궐 한산한 시간` | EN `gyeongbokgung morning light`, `early palace photos`, `quiet time at gyeongbokgung`
 
@@ -137,26 +137,26 @@ Role 표기:
 ### Myeongdong Cluster
 
 ### [013] Hub [v]
-- KO: 명동 가볼만한곳 가이드 — 쇼핑, 야경, 먹거리 동선
-- EN: Best Things to Do in Myeongdong — Shopping, Night Views, Food
+- KO: 명동 가볼만한곳 가이드 — 쇼핑, 야경, 먹거리 동선 [rev-2026-03-10]
+- EN: Best Things to Do in Myeongdong — Shopping, Night Views, Food [rev-2026-03-10]
 - Keyword: KO `명동 가볼만한곳` | EN `best things to do in myeongdong`
 - Subkeywords: KO `명동 관광 코스`, `명동 쇼핑 거리`, `서울 중심 여행` | EN `myeongdong itinerary`, `myeongdong shopping street`, `central seoul trip`
 
 ### [014] Sub [v]
-- KO: 명동 네온사인 야간 사진 가이드
-- EN: Myeongdong Neon Street Photo Guide
+- KO: 명동 네온사인 야간 사진 가이드 [rev-2026-03-10]
+- EN: Myeongdong Neon Street Photo Guide [rev-2026-03-10]
 - Keyword: KO `명동 네온사인 야간 사진` | EN `myeongdong neon street photo guide`
 - Subkeywords: KO `명동 밤거리 사진`, `명동 스트릿 스냅`, `서울 네온 포토존` | EN `myeongdong night photos`, `myeongdong street snaps`, `seoul neon photo spots`
 
 ### [015] Sub [v]
-- KO: 명동 K뷰티 쇼핑 동선 가이드
-- EN: Myeongdong K-Beauty Shopping Route
+- KO: 명동 K뷰티 쇼핑 동선 가이드 [rev-2026-03-10]
+- EN: Myeongdong K-Beauty Shopping Route [rev-2026-03-10]
 - Keyword: KO `명동 K뷰티 쇼핑 동선` | EN `myeongdong k-beauty shopping route`
 - Subkeywords: KO `명동 올리브영 코스`, `명동 화장품 쇼핑`, `명동 뷰티 편집숍` | EN `myeongdong beauty route`, `cosmetics shopping in myeongdong`, `olive young myeongdong route`
 
 ### [016] Sub [v]
-- KO: 명동과 홍대 길거리 음식 비교
-- EN: Myeongdong vs Hongdae Street Food Guide
+- KO: 명동과 홍대 길거리 음식 비교 [rev-2026-03-10]
+- EN: Myeongdong vs Hongdae Street Food Guide [rev-2026-03-10]
 - Keyword: KO `명동 홍대 길거리 음식 비교` | EN `myeongdong vs hongdae street food guide`
 - Subkeywords: KO `서울 길거리 음식`, `명동 먹거리`, `홍대 간식 코스` | EN `seoul street food comparison`, `myeongdong snacks`, `hongdae food route`
 
@@ -188,27 +188,27 @@ Role 표기:
 
 ### Garosu-gil Cluster
 
-### [021] Hub
-- KO: 가로수길 놀거리 가이드 — 카페, 쇼핑, 저녁 산책
-- EN: Best Things to Do in Garosu-gil — Cafes, Shopping, Evening Walk
+### [021] Hub [v]
+- KO: 가로수길 놀거리 가이드 — 카페 쇼핑 저녁 산책 [rev-2026-03-10]
+- EN: Best Things to Do in Garosu-gil — Cafes and Evening Walks [rev-2026-03-10]
 - Keyword: KO `가로수길 놀거리` | EN `best things to do in garosu-gil`
 - Subkeywords: KO `신사동 가로수길`, `가로수길 카페 거리`, `압구정 데이트 코스` | EN `sinsa garosu-gil`, `garosu-gil cafes`, `apgujeong date route`
 
-### [022] Sub [ ]
-- KO: 가로수길 카페 포토존 추천
-- EN: Best Cafe Photo Spots in Garosu-gil
+### [022] Sub [v]
+- KO: 가로수길 카페 포토존 추천 — 감성샷 잘 나오는 구간
+- EN: Best Cafe Photo Spots in Garosu-gil — Easy Aesthetic Route
 - Keyword: KO `가로수길 카페 포토존` | EN `best cafe photo spots in garosu-gil`
 - Subkeywords: KO `가로수길 브런치 카페`, `신사동 카페 사진`, `가로수길 감성샷` | EN `garosu-gil cafe photos`, `sinsa brunch cafes`, `garosu-gil aesthetic spots`
 
-### [023] Sub [ ]
-- KO: 가로수길 쇼핑 거리 산책 코스
-- EN: Garosu-gil Shopping Walk Guide
+### [023] Sub [v]
+- KO: 가로수길 쇼핑 거리 산책 코스 — 편집숍과 주말 동선
+- EN: Garosu-gil Shopping Walk Guide — Select Shops and Weekend Route
 - Keyword: KO `가로수길 쇼핑 거리` | EN `garosu-gil shopping walk guide`
 - Subkeywords: KO `신사동 편집숍`, `가로수길 매장 동선`, `가로수길 주말 코스` | EN `sinsa select shops`, `garosu-gil store route`, `weekend walk in garosu-gil`
 
-### [024] Sub [ ]
-- KO: 가로수길 저녁 산책과 분위기 포인트
-- EN: Garosu-gil Evening Walk and Mood Guide
+### [024] Sub [v]
+- KO: 가로수길 저녁 산책과 분위기 포인트 — 신사동 밤거리 무드
+- EN: Garosu-gil Evening Walk Guide — Sinsa Night Mood and Route
 - Keyword: KO `가로수길 저녁 산책` | EN `garosu-gil evening walk guide`
 - Subkeywords: KO `신사동 밤거리`, `가로수길 야간 분위기`, `압구정 저녁 코스` | EN `sinsa at night`, `garosu-gil evening vibe`, `apgujeong night route`
 
@@ -1951,8 +1951,8 @@ Role 표기:
 - Subkeywords: KO `서울 배경 선택`, `배경별 무드`, `프로필 콘셉트` | EN `seoul backdrop selection`, `scene-based mood`, `profile concepts`
 
 ### [292] Sub [v]
-- KO: AI 한복 프로필 가이드 — 경복궁 배경 합성 기준
-- EN: AI Hanbok Generator Guide — Gyeongbokgung Background
+- KO: AI 한복 프로필 가이드 — 경복궁 배경 합성 기준 [rev-2026-03-10]
+- EN: AI Hanbok Generator Guide — Gyeongbokgung Background [rev-2026-03-10]
 - Keyword: KO `가상 경복궁 배경 프로필 사진` | EN `virtual gyeongbokgung profile photo guide`
 - Subkeywords: KO `전통 무드 배경`, `궁궐 배경 프로필`, `한복 콘셉트` | EN `traditional palace backdrop`, `gyeongbokgung profile concept`, `hanbok-friendly background`
 

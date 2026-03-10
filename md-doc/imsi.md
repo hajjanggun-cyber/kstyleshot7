@@ -1,77 +1,109 @@
-# Completed Hub Post Links
+# image-webp-alt-prompt.md 보강 초안
 
 Updated At: 2026-03-10 KST
 
-## Korean
+## 목적
 
-### Gyeongbokgung
+기존 `image-webp-alt-prompt.md`의 방향은 유지하되, 아래 4가지를 더 명확히 강제한다.
 
-- [gyeongbokgung-hub](https://kstyleshot.com/ko/hub/gyeongbokgung-hub)
-- [gyeongbokgung-photo-guide](https://kstyleshot.com/ko/hub/gyeongbokgung-photo-guide)
-- [gyeongbokgung-light-timing-guide](https://kstyleshot.com/ko/hub/gyeongbokgung-light-timing-guide)
-- [gyeongbokgung-nearby-hanok-photo-spots](https://kstyleshot.com/ko/hub/gyeongbokgung-nearby-hanok-photo-spots)
-- [virtual-gyeongbokgung-background-guide](https://kstyleshot.com/ko/hub/virtual-gyeongbokgung-background-guide)
+1. alt 문장 구조 반복 방지
+2. 이미지 검색용 시각 질감 묘사 강화
+3. 보조 키워드 분산
+4. 글자 수 상한선 명시
 
-### N Seoul Tower
+---
 
-- [n-seoul-tower-hub](https://kstyleshot.com/ko/hub/n-seoul-tower-hub)
-- [n-seoul-tower-night-view-guide](https://kstyleshot.com/ko/hub/n-seoul-tower-night-view-guide)
-- [namsan-cable-car-photo-tips](https://kstyleshot.com/ko/hub/namsan-cable-car-photo-tips)
+## 1. Alt 문장 구조 반복 방지
 
-### Hongdae
+추가 권장 문구 초안:
 
-- [hongdae-hub](https://kstyleshot.com/ko/hub/hongdae-hub)
-- [hongdae-street-photo-spots](https://kstyleshot.com/ko/hub/hongdae-street-photo-spots)
-- [hongdae-aesthetic-cafes-for-photos](https://kstyleshot.com/ko/hub/hongdae-aesthetic-cafes-for-photos)
-- [hongdae-vs-seongsu-street-fashion](https://kstyleshot.com/ko/hub/hongdae-vs-seongsu-street-fashion)
+- 같은 글 안의 모든 이미지 alt를 같은 문법 구조로 반복하지 않는다.
+- `A를 담은 사진`, `A가 보이는 장면`, `A 풍경` 같은 동일 패턴을 연속 사용하지 않는다.
+- 이미지마다 문장 시작 방식과 핵심 묘사 순서를 바꾼다.
+- 어떤 alt는 장소부터, 어떤 alt는 빛부터, 어떤 alt는 재질이나 구도부터 시작해 구조를 분산한다.
 
-### Myeongdong
+금지 예시:
 
-- [myeongdong-hub](https://kstyleshot.com/ko/hub/myeongdong-hub)
-- [myeongdong-neon-street-guide](https://kstyleshot.com/ko/hub/myeongdong-neon-street-guide)
-- [myeongdong-k-beauty-shopping-map](https://kstyleshot.com/ko/hub/myeongdong-k-beauty-shopping-map)
-- [myeongdong-hongdae-street-food-guide](https://kstyleshot.com/ko/hub/myeongdong-hongdae-street-food-guide)
+- `경복궁의 풍경을 담은 사진`
+- `남산타워의 풍경을 담은 사진`
+- `홍대 거리의 풍경을 담은 사진`
 
-### Insadong
+의도:
 
-- [insadong-hub](https://kstyleshot.com/ko/hub/insadong-hub)
-- [insadong-photo-spots](https://kstyleshot.com/ko/hub/insadong-photo-spots)
-- [ssamziegil-insadong-photo-guide](https://kstyleshot.com/ko/hub/ssamziegil-insadong-photo-guide)
-- [insadong-tea-house-walking-guide](https://kstyleshot.com/ko/hub/insadong-tea-house-walking-guide)
+- 의미만 다른 복붙형 alt를 막고
+- 한 페이지 안에서도 사람이 직접 다르게 쓴 듯한 리듬을 만든다.
 
-## English
+---
 
-### Gyeongbokgung
+## 2. 시각 질감 묘사 강화
 
-- [gyeongbokgung-hub](https://kstyleshot.com/en/hub/gyeongbokgung-hub)
-- [gyeongbokgung-photo-guide](https://kstyleshot.com/en/hub/gyeongbokgung-photo-guide)
-- [gyeongbokgung-light-timing-guide](https://kstyleshot.com/en/hub/gyeongbokgung-light-timing-guide)
-- [gyeongbokgung-nearby-hanok-photo-spots](https://kstyleshot.com/en/hub/gyeongbokgung-nearby-hanok-photo-spots)
-- [virtual-gyeongbokgung-background-guide](https://kstyleshot.com/en/hub/virtual-gyeongbokgung-background-guide)
+추가 권장 문구 초안:
 
-### N Seoul Tower
+- alt는 단순 명사 나열이 아니라 실제로 보이는 시각 정보를 우선 묘사한다.
+- 가능하면 아래 요소 중 1~2개를 자연스럽게 포함한다:
+  - 빛/시간대: 아침빛, 초저녁 조명, 네온 빛, 창가 자연광
+  - 색감: 따뜻한 조명, 차분한 목재 톤, 붉은 네온, 부드러운 회색 하늘
+  - 재질: 나무 문틀, 한지 질감, 유리창 반사, 젖은 노면
+  - 거리/구도: 골목 초입, 창가 좌석, 비스듬한 쇼윈도, 테라스 앞 보행 구간
+- alt는 감상문처럼 쓰지 말고, 장면을 더 선명하게 읽게 만드는 구체 묘사로 쓴다.
 
-- [n-seoul-tower-hub](https://kstyleshot.com/en/hub/n-seoul-tower-hub)
-- [n-seoul-tower-night-view-guide](https://kstyleshot.com/en/hub/n-seoul-tower-night-view-guide)
-- [namsan-cable-car-photo-tips](https://kstyleshot.com/en/hub/namsan-cable-car-photo-tips)
+예시 방향:
 
-### Hongdae
+- `초저녁 조명이 켜진 가로수길 쇼윈도와 느린 보행 흐름`
+- `비 온 뒤 네온 빛이 번지는 명동 골목 노면 반사`
+- `창가 자연광이 들어오는 가로수길 카페 테이블과 거리 배경`
 
-- [hongdae-hub](https://kstyleshot.com/en/hub/hongdae-hub)
-- [hongdae-street-photo-spots](https://kstyleshot.com/en/hub/hongdae-street-photo-spots)
-- [hongdae-aesthetic-cafes-for-photos](https://kstyleshot.com/en/hub/hongdae-aesthetic-cafes-for-photos)
-- [hongdae-vs-seongsu-street-fashion](https://kstyleshot.com/en/hub/hongdae-vs-seongsu-street-fashion)
+의도:
 
-### Myeongdong
+- 이미지 검색 유입에 유리한 시각 단서를 늘리고
+- 접근성 품질도 함께 높인다.
 
-- [myeongdong-hub](https://kstyleshot.com/en/hub/myeongdong-hub)
-- [myeongdong-neon-street-guide](https://kstyleshot.com/en/hub/myeongdong-neon-street-guide)
-- [myeongdong-k-beauty-shopping-map](https://kstyleshot.com/en/hub/myeongdong-k-beauty-shopping-map)
-- [myeongdong-hongdae-street-food-guide](https://kstyleshot.com/en/hub/myeongdong-hongdae-street-food-guide)
+---
 
-### Insadong
+## 3. 보조 키워드 분산 규칙
 
-- [insadong-hub](https://kstyleshot.com/en/hub/insadong-hub)
-- [insadong-photo-spots](https://kstyleshot.com/en/hub/insadong-photo-spots)
-- [ssamziegil-insadong-photo-guide](https://kstyleshot.com/en/hub/ssamziegil-insadong-photo-guide)
-- [insadong-tea-house-walking-guide](https://kstyleshot.com/en/hub/insadong-tea-house-walking-guide)
+추가 권장 문구 초안:
+
+- 한 글의 여러 이미지 alt에 같은 메인 키워드를 반복하지 않는다.
+- 메인 키워드는 페이지 전체에서 제한적으로 쓰고, 이미지 alt에는 보조 키워드나 파생 표현을 분산한다.
+- 이미지마다 본문에 쓰인 보조 키워드 중 서로 다른 1개를 우선 매칭한다.
+- 예:
+  - 메인 키워드: `명동 네온사인 야간 사진`
+  - alt 분산 표현: `명동 밤거리`, `서울 네온 포토존`, `비 온 뒤 반사`, `야간 스트릿 스냅`
+
+추가 원칙:
+
+- 같은 허브 안에서도 alt 키워드가 매번 같은 단어로 반복되지 않게 한다.
+- 이미지 수가 많을수록 메인 키워드보다 보조 키워드 분산이 더 중요하다.
+
+의도:
+
+- 한 페이지 내부 이미지들이 서로 다른 검색 변형을 받쳐 주게 하고
+- 이미지 SEO의 과반복을 막는다.
+
+---
+
+## 4. 글자 수 상한선
+
+추가 권장 문구 초안:
+
+- alt는 짧고 구체적으로 작성한다.
+- 영문 alt는 가능하면 125자 이내를 기본 상한선으로 본다.
+- 한글 alt도 지나치게 길어지지 않게 한 문장 수준으로 유지한다.
+- 두 줄짜리 설명문이나 에세이형 alt는 금지한다.
+- 길어질 경우 감상 표현을 줄이고, 장소/빛/재질/구도 중 핵심 정보만 남긴다.
+
+의도:
+
+- 스크린리더 가독성과 검색엔진 해석 안정성을 함께 확보한다.
+
+---
+
+## 최종 권장 삽입 요약
+
+실제 `image-webp-alt-prompt.md`에 넣을 핵심은 아래 네 줄로 압축할 수 있다.
+
+- 같은 글 안에서 alt 문장 구조를 반복하지 말 것
+- alt마다 빛, 색감, 재질, 구도 중 1~2개를 구체적으로 드러낼 것
+- 메인 키워드 반복 대신 이미지별 보조 키워드를 분산 매칭할 것
+- 영문 alt는 가능하면 125자 이내, 한글도 한 문장 수준으로 짧게 유지할 것
