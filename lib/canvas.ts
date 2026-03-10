@@ -1,9 +1,10 @@
 /**
- * Normalizes a photo blob URL for AI synthesis:
- * 1. Fixes EXIF rotation (browser respects EXIF when loading <img>, canvas bakes it in)
- * 2. Scales image to 85% with 10% top padding so AI-generated hair isn't cropped
+ * Normalizes a photo blob URL for AI hair synthesis:
+ * - Adds 20% top padding by expanding the canvas upward (black fill)
+ * - Original image drawn at full size below the padding
+ * - Full body is preserved so outfit AI can detect body pose afterward
+ * - Downscales only if longest side exceeds MAX_DIMENSION
  */
-// Vercel body limit is 4.5MB. Keep base64 well under that.
 const MAX_DIMENSION = 1024;
 
 export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
@@ -15,8 +16,13 @@ export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
 
       // Downscale if either dimension exceeds MAX_DIMENSION
       const ratio = Math.min(1, MAX_DIMENSION / Math.max(origW, origH));
-      const W = Math.round(origW * ratio);
-      const H = Math.round(origH * ratio);
+      const drawW = Math.round(origW * ratio);
+      const drawH = Math.round(origH * ratio);
+
+      // Canvas is taller by 20% to give room above the head for new hair
+      const topPad = Math.round(drawH * 0.20);
+      const W = drawW;
+      const H = drawH + topPad;
 
       const canvas = document.createElement("canvas");
       canvas.width = W;
@@ -28,13 +34,8 @@ export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
       ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, W, H);
 
-      // Scale to 85%, center horizontally, 10% top padding → 5% bottom
-      const scale = 0.85;
-      const drawW = Math.round(W * scale);
-      const drawH = Math.round(H * scale);
-      const x = Math.round((W - drawW) / 2);
-      const y = Math.round(H * 0.10);
-      ctx.drawImage(img, x, y, drawW, drawH);
+      // Draw original image at full scaled size, starting after top padding
+      ctx.drawImage(img, 0, topPad, drawW, drawH);
 
       resolve(canvas.toDataURL("image/jpeg", 0.92));
     };
