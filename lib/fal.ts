@@ -1,5 +1,5 @@
 const FAL_SUBMIT_URL = "https://queue.fal.run/fal-ai/fashn/tryon/v1.5";
-const FAL_QUEUE_BASE = "https://queue.fal.run/fal-ai/fashn/tryon/v1.5";
+const FAL_QUEUE_BASE = "https://queue.fal.run/fal-ai/fashn";
 
 function getFalAuthHeader(): string {
   const key = process.env.FAL_KEY?.trim();
@@ -92,6 +92,9 @@ export async function pollFashnJob(requestId: string): Promise<{
   });
 
   const result = await resultRes.json().catch(() => null);
+  if (!resultRes.ok) {
+    return { status: "failed", outputUrl: null, rawStatus: "RESULT_FETCH_FAILED", debugPayload: { resultHttpStatus: resultRes.status, resultBody: result } };
+  }
   const outputUrl = (result?.images as Array<{ url: string }> | undefined)?.[0]?.url ?? null;
 
   return { status: "succeeded", outputUrl, debugPayload: { resultHttpStatus: resultRes.status, resultBody: result } };
