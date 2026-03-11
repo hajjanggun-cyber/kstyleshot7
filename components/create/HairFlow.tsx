@@ -112,14 +112,24 @@ export function HairFlow() {
         setIsGenerating(false);
         clearInterval(interval);
 
-
       } catch {
         // retry
       }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isGenerating, lang, predictionStates, selectedStyleIds, setHairChosen, setHairResults]);
+  }, [
+    isGenerating,
+    lang,
+    pickHair,
+    predictionStates,
+    router,
+    selectedStyleIds,
+    setHairChosen,
+    setHairPreviewUrl,
+    setHairResults,
+    setStatus,
+  ]);
 
   function toggleStyle(id: string) {
     setGenerationError("");

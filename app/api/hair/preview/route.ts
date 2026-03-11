@@ -1,5 +1,5 @@
 import { getRequestId, jsonError, jsonOk } from "@/lib/api-response";
-import { startHairPreviewJob } from "@/lib/replicate";
+import { ReplicateApiError, startHairPreviewJob } from "@/lib/replicate";
 
 // Just starts the job — no waiting. Stays well within Vercel Hobby 10s limit.
 export const maxDuration = 10;
@@ -29,6 +29,7 @@ export async function POST(request: Request) {
     return jsonOk(requestId, { ok: true, predictionId });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Hair preview failed.";
-    return jsonError(requestId, { status: 502, message });
+    const status = error instanceof ReplicateApiError ? error.status : 502;
+    return jsonError(requestId, { status, message });
   }
 }
