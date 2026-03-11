@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import type { ReactNode } from "react";
 import Link from "next/link";
@@ -50,7 +50,7 @@ export function CreateShell({
   const t = useTranslations("create.shell");
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "en";
-  const { status, orderId, sessionToken, photoBlobUrl, hair, outfit, location } = useCreateStore();
+  const { status, orderId, sessionToken, photoBlobUrl, hair, outfit } = useCreateStore();
   const stageVisual = {
     create: "/visuals/create/create.svg",
     upload: "/visuals/create/upload.svg",
@@ -93,10 +93,6 @@ export function CreateShell({
             <div className="meta-row">
               <span className="muted">{t("outfit")}</span>
               <strong>{outfit.picked || "-"}</strong>
-            </div>
-            <div className="meta-row">
-              <span className="muted">{t("backdrop")}</span>
-              <strong>{location.picked || "-"}</strong>
             </div>
           </div>
           {photoBlobUrl ? (
