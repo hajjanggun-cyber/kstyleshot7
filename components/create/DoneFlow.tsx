@@ -21,6 +21,7 @@ export function DoneFlow() {
   const store = useCreateStore();
 
   const [downloading, setDownloading] = useState(false);
+  const [downloadingHairId, setDownloadingHairId] = useState<string | null>(null);
   const [shareNotice, setShareNotice] = useState("");
   const [finalError, setFinalError] = useState(false);
 
@@ -67,6 +68,19 @@ export function DoneFlow() {
   const selectedReference =
     referenceTemplates.find((item) => item.id === store.outfit.chosen[0]) ?? null;
   const resultUrl = store.compositeUrl ?? store.hairPreviewUrl ?? store.photoBlobUrl ?? null;
+  const hairDownloadItems = store.hair.chosen
+    .map((id) => {
+      const result = store.hair.results.find((item) => item.id === id);
+      const style = hairStyles.find((item) => item.id === id);
+      return result
+        ? {
+            id,
+            name: style?.name ?? id,
+            imageUrl: result.blobUrl,
+          }
+        : null;
+    })
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   function clearAndReset() {
     revokeIfBlobUrl(store.photoBlobUrl);
@@ -96,6 +110,26 @@ export function DoneFlow() {
       URL.revokeObjectURL(url);
     } finally {
       setDownloading(false);
+    }
+  }
+
+  async function handleHairDownload(id: string, imageUrl: string) {
+    if (!imageUrl || downloadingHairId) {
+      return;
+    }
+
+    setDownloadingHairId(id);
+    try {
+      const res = await fetch(imageUrl);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `kstyleshot-hair-${id}.jpg`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } finally {
+      setDownloadingHairId(null);
     }
   }
 
@@ -184,6 +218,41 @@ export function DoneFlow() {
           {lang === "ko" ? "공유" : "Share"}
         </button>
       </div>
+
+      {hairDownloadItems.length > 0 ? (
+        <div className="dn-summary">
+          <div className="lc-section-head">
+            <h3 className="lc-section-title">
+              {lang === "ko" ? "선택한 헤어 2개 저장" : "Save the two hair options"}
+            </h3>
+          </div>
+          <div className="ot-grid">
+            {hairDownloadItems.map((item) => (
+              <div className="ot-card" key={item.id}>
+                <div
+                  className="ot-card-img"
+                  style={{ backgroundImage: `url(${item.imageUrl})`, height: 260 }}
+                />
+                <div className="ot-card-info">
+                  <div className="ot-card-name-row">
+                    <span className="ot-card-name">{item.name}</span>
+                  </div>
+                  <button
+                    className={`dn-btn dn-btn--download${downloadingHairId === item.id ? " dn-btn--loading" : ""}`}
+                    disabled={downloadingHairId !== null}
+                    onClick={() => handleHairDownload(item.id, item.imageUrl)}
+                    type="button"
+                  >
+                    {downloadingHairId === item.id
+                      ? lang === "ko" ? "저장 중..." : "Saving..."
+                      : lang === "ko" ? "헤어 저장" : "Save hair"}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       {shareNotice ? <p className="dn-notice">{shareNotice}</p> : null}
 

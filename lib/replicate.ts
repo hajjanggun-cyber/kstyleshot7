@@ -142,7 +142,8 @@ async function startPrediction(input: {
         haircut: input.haircut,
         hair_color: input.hairColor,
         input_image: input.photoDataUrl,
-        prompt: "change only the hair, keep the face identical, do not alter facial features"
+        prompt:
+          "Change only the hairstyle. Preserve the face completely. Keep the same skin tone, skin texture, eye shape, eyebrows, nose bridge, lips, jawline, face shape, and facial expression unchanged. Do not modify any facial feature or identity. The new hair must blend naturally with the forehead, temples, and hairline without harsh edges."
       }
     }),
     cache: "no-store"
@@ -535,6 +536,7 @@ export async function startFluxKontextProJob(input: {
         input_image: input.imageUrl,
         aspect_ratio: "match_input_image",
         output_format: "jpg",
+        output_quality: 95,
         safety_tolerance: 2,
         prompt_upsampling: false,
       },

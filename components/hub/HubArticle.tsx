@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-import type { HubArticle, ContentBlock } from "@/data/hubArticles";
+import type { ContentBlock, HubArticle as HubArticleType } from "@/data/hubArticles";
 
 function renderBlock(block: ContentBlock, idx: number) {
   switch (block.type) {
@@ -18,7 +18,7 @@ function renderBlock(block: ContentBlock, idx: number) {
         <ul className="ha-bullets" key={idx}>
           {block.items.map((item, i) => (
             <li className="ha-bullet-item" key={i}>
-              <span className="ha-bullet-star" aria-hidden>★</span>
+              <span className="ha-bullet-star" aria-hidden>✦</span>
               <span>
                 {item.label ? <strong className="ha-bullet-label">{item.label}: </strong> : null}
                 {item.text}
@@ -51,60 +51,66 @@ function renderBlock(block: ContentBlock, idx: number) {
   }
 }
 
+function HubMainButton({ lang }: { lang: string }) {
+  return (
+    <Link
+      className="ha-nav-hub"
+      href={`/${lang}/hub`}
+      aria-label={lang === "ko" ? "메인 허브로 이동" : "Go to main hub"}
+    >
+      <span className="ha-nav-hub-text">Hub</span>
+      <span className="ha-nav-hub-icon" aria-hidden>
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M6 14L14 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          <path
+            d="M7 6H14V13"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </Link>
+  );
+}
+
 type HubArticleProps = {
-  article: HubArticle;
+  article: HubArticleType;
 };
 
 export function HubArticle({ article }: HubArticleProps) {
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "en";
 
-  async function handleShare() {
-    const url = typeof window !== "undefined" ? window.location.href : "";
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: article.title, url });
-      } else {
-        await navigator.clipboard.writeText(url);
-      }
-    } catch {
-      // silent
-    }
-  }
-
   return (
     <div className="ha-root">
-      {/* Nav */}
       <nav className="ha-nav">
-        <Link className="ha-nav-back" href={`/${lang}/hub`} aria-label="Back">←</Link>
+        <Link className="ha-nav-back" href={`/${lang}/hub`} aria-label="Back">
+          ←
+        </Link>
         <span className="ha-nav-title">K-Insights</span>
-        <button className="ha-nav-share" onClick={handleShare} type="button" aria-label="Share">
-          ↗
-        </button>
+        <HubMainButton lang={lang} />
       </nav>
 
-      {/* Hero header */}
       <header className="ha-hero" style={{ background: article.headerGradient }}>
         <div className="ha-hero-badge">
-          {article.category} • {article.readTime}
+          {article.category} · {article.readTime}
         </div>
         <h1 className="ha-hero-title">{article.title}</h1>
       </header>
 
-      {/* Pull quote */}
       <section className="ha-quote-wrap">
         <div className="ha-quote-card">
-          <span className="ha-quote-mark" aria-hidden>❝</span>
+          <span className="ha-quote-mark" aria-hidden>"</span>
           <p className="ha-quote-text">{article.pullQuote}</p>
         </div>
       </section>
 
-      {/* Article body */}
       <article className="ha-body">
         {article.blocks.map((block, i) => renderBlock(block, i))}
       </article>
 
-      {/* Up Next */}
       {article.nextSlug && article.nextTitle ? (
         <div className="ha-next-wrap">
           <Link className="ha-next-card" href={`/${lang}/hub/${article.nextSlug}`}>
@@ -118,7 +124,6 @@ export function HubArticle({ article }: HubArticleProps) {
         </div>
       ) : null}
 
-      {/* Bottom nav */}
       <nav className="ha-bottom-nav">
         <Link className="ha-bnav-item" href={`/${lang}/hub`}>
           <span className="ha-bnav-icon">⌂</span>
@@ -129,15 +134,15 @@ export function HubArticle({ article }: HubArticleProps) {
           <span className="ha-bnav-label">Style AI</span>
         </Link>
         <Link className="ha-bnav-item ha-bnav-item--active" href={`/${lang}/hub`}>
-          <span className="ha-bnav-icon">📖</span>
+          <span className="ha-bnav-icon">▣</span>
           <span className="ha-bnav-label">Insights</span>
         </Link>
         <button className="ha-bnav-item" type="button">
-          <span className="ha-bnav-icon">📅</span>
+          <span className="ha-bnav-icon">◌</span>
           <span className="ha-bnav-label">Events</span>
         </button>
         <button className="ha-bnav-item" type="button">
-          <span className="ha-bnav-icon">👤</span>
+          <span className="ha-bnav-icon">◐</span>
           <span className="ha-bnav-label">Profile</span>
         </button>
       </nav>

@@ -5,13 +5,28 @@ import { ReplicateApiError, startFluxKontextProJob } from "@/lib/replicate";
 
 export const maxDuration = 20;
 
+function buildIdentityPreservationPrompt() {
+  return [
+    "Use the person in the base image exactly as-is.",
+    "Preserve the face, identity, ethnicity, hairstyle, hair color, bangs, facial structure, skin tone, skin undertone, skin texture, eye shape, nose, lips, and jawline with 100% fidelity.",
+    "Do not change the person, do not redesign the face, do not alter ethnicity or natural facial characteristics, and do not alter the hair in any way.",
+  ].join(" ");
+}
+
+function buildQualityPrompt() {
+  return [
+    "Match the person's lighting to the scene naturally.",
+    "Blend clothing, hair edges, and skin into the environment without artificial seams.",
+    "Keep natural skin texture and realistic detail.",
+    "Photorealistic Korean fashion editorial quality.",
+  ].join(" ");
+}
+
 function buildFinalPrompt(templatePrompt: string, negativePrompt: string): string {
   return [
-    "Keep the face and hairstyle from the base image exactly the same.",
-    "Do not change the person's identity, facial structure, hairstyle, or hair color.",
-    "Preserve the same person while applying the requested fashion scene.",
+    buildIdentityPreservationPrompt(),
     templatePrompt,
-    "Create a realistic Korean fashion editorial image with natural body proportions and clean detail.",
+    buildQualityPrompt(),
     `Avoid: ${negativePrompt}.`,
   ].join(" ");
 }
