@@ -28,7 +28,9 @@ function HeroCard({ post, href }: { post: HubPost; href: string }) {
     <Link className="hf-hero" href={href} style={{ background: post.bg }}>
       <div className="hf-hero-top">
         <Badge label={post.category} style={post.categoryStyle} />
-        <span className="hf-hero-star">✦</span>
+        <span className="hf-hero-star" aria-hidden>
+          ✦
+        </span>
       </div>
       {post.watermark ? <span className="hf-hero-watermark" aria-hidden>{post.watermark}</span> : null}
       <div className="hf-hero-body">
@@ -54,7 +56,9 @@ function HalfHeroCard({ post, href }: { post: HubPost; href: string }) {
     <Link className="hf-half-hero" href={href} style={{ background: post.bg }}>
       <div className="hf-hero-top">
         <Badge label={post.category} style={post.categoryStyle} />
-        <span className="hf-hero-star">✦</span>
+        <span className="hf-hero-star" aria-hidden>
+          ✦
+        </span>
       </div>
       {post.watermark ? <span className="hf-hero-watermark" aria-hidden>{post.watermark}</span> : null}
       <div className="hf-hero-body">
@@ -175,19 +179,30 @@ export function HubFeed() {
   const isKo = lang === "ko";
   const posts = isKo ? hubPosts : hubPostsEn;
   const chips = isKo ? FILTER_CHIPS_KO : FILTER_CHIPS_EN;
-  const [activeChip, setActiveChip] = useState(isKo ? "전체" : "All");
+  const [activeChip, setActiveChip] = useState(chips[0] ?? "All");
   const [search, setSearch] = useState("");
 
   return (
     <div className="hf-root">
       <header className="hf-header">
-        <Link
-          className="hf-header-home"
-          href={`/${lang}`}
-          aria-label={isKo ? "랜딩 페이지로 이동" : "Go to landing page"}
-        >
-          <span className="hf-header-icon">✦</span>
-          <h1 className="hf-header-title">K-Culture Hub</h1>
+        <Link className="hf-header-home" href={`/${lang}`} aria-label={isKo ? "랜딩 페이지로 이동" : "Go to landing page"}>
+          <span className="hf-header-icon" aria-hidden>
+            <span className="hf-header-icon-core">
+              <svg viewBox="0 0 24 24" fill="none" role="img" aria-hidden="true">
+                <path
+                  d="M6 17.5V6.5h2.4v4.35L13.3 6.5h3.05l-5 4.35 5.35 6.65h-3.1L9.9 12.9l-1.5 1.3v3.3H6Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </span>
+          <span className="hf-header-copy">
+            <span className="hf-header-kicker">HOME</span>
+            <span className="hf-header-title">KStyleShot</span>
+            <span className="hf-header-subtitle">
+              {isKo ? "Landing으로 돌아가기" : "Back to landing"}
+            </span>
+          </span>
         </Link>
         <div className="hf-lang-toggle">
           <Link className={`hf-lang-btn${isKo ? " hf-lang-btn--active" : ""}`} href="/ko/hub">
@@ -202,11 +217,13 @@ export function HubFeed() {
 
       <div className="hf-search-wrap">
         <div className="hf-search-box">
-          <span className="hf-search-icon">⌕</span>
+          <span className="hf-search-icon" aria-hidden>
+            ⌕
+          </span>
           <input
             className="hf-search-input"
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search 300+ Stories"
+            placeholder={isKo ? "스토리 검색" : "Search 300+ Stories"}
             type="text"
             value={search}
           />
@@ -242,19 +259,27 @@ export function HubFeed() {
       <div className="hf-nav">
         <nav className="hf-nav-pill">
           <Link className="hf-nav-item hf-nav-item--active" href={`/${lang}/hub`}>
-            <span className="hf-nav-icon">⌂</span>
+            <span className="hf-nav-icon" aria-hidden>
+              ◇
+            </span>
             <span className="hf-nav-label">Feed</span>
           </Link>
           <Link className="hf-nav-item" href={`/${lang}/create`}>
-            <span className="hf-nav-icon">✦</span>
+            <span className="hf-nav-icon" aria-hidden>
+              ✦
+            </span>
             <span className="hf-nav-label">AI Studio</span>
           </Link>
           <button className="hf-nav-item" type="button">
-            <span className="hf-nav-icon">◫</span>
+            <span className="hf-nav-icon" aria-hidden>
+              ⌂
+            </span>
             <span className="hf-nav-label">Map</span>
           </button>
           <button className="hf-nav-item" type="button">
-            <span className="hf-nav-icon">◐</span>
+            <span className="hf-nav-icon" aria-hidden>
+              ○
+            </span>
             <span className="hf-nav-label">Me</span>
           </button>
         </nav>
