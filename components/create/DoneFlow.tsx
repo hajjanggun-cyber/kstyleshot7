@@ -248,9 +248,15 @@ export function DoneFlow() {
           <div className="ot-grid">
             {hairDownloadItems.map((item) => (
               <div className="ot-card" key={item.id}>
-                <div
+                <img
+                  alt=""
                   className="ot-card-img"
-                  style={{ backgroundImage: `url(${item.imageUrl})`, height: 260 }}
+                  src={item.imageUrl}
+                  style={{
+                    height: 260,
+                    objectFit: "contain",
+                    objectPosition: "center top",
+                  }}
                 />
                 <div className="ot-card-info">
                   <div className="ot-card-name-row">

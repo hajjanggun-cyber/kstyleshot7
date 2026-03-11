@@ -517,9 +517,15 @@ export function HairFlow() {
                       transition: "all 180ms ease",
                     }}
                   >
-                    <div
+                    <img
+                      alt=""
                       className="ot-card-img"
-                      style={{ backgroundImage: `url(${result.blobUrl})`, height: 320 }}
+                      src={result.blobUrl}
+                      style={{
+                        height: 320,
+                        objectFit: "contain",
+                        objectPosition: "center top",
+                      }}
                     />
                     <div className="ot-card-info">
                       <div className="ot-card-name-row">
