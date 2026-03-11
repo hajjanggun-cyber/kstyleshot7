@@ -4,9 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-import { hubPosts, hubPostsEn, FILTER_CHIPS_KO, FILTER_CHIPS_EN, type HubPost } from "@/data/hubPosts";
+import {
+  FILTER_CHIPS_EN,
+  FILTER_CHIPS_KO,
+  hubPosts,
+  hubPostsEn,
+  type HubPost,
+} from "@/data/hubPosts";
 
-/* ─── Category badge ─────────────────────────── */
 function Badge({ label, style }: { label: string; style: HubPost["categoryStyle"] }) {
   const cls: Record<HubPost["categoryStyle"], string> = {
     pink: "hf-badge hf-badge--pink",
@@ -14,102 +19,103 @@ function Badge({ label, style }: { label: string; style: HubPost["categoryStyle"
     "black-on-yellow": "hf-badge hf-badge--yellow",
     "white-on-pink": "hf-badge hf-badge--glass",
   };
+
   return <span className={cls[style]}>{label}</span>;
 }
 
-/* ─── Hero card ───────────────────────────────── */
 function HeroCard({ post, href }: { post: HubPost; href: string }) {
   return (
     <Link className="hf-hero" href={href} style={{ background: post.bg }}>
       <div className="hf-hero-top">
         <Badge label={post.category} style={post.categoryStyle} />
-        <span className="hf-hero-star">★</span>
+        <span className="hf-hero-star">✦</span>
       </div>
-      {post.watermark && (
-        <span className="hf-hero-watermark" aria-hidden>
-          {post.watermark}
-        </span>
-      )}
+      {post.watermark ? <span className="hf-hero-watermark" aria-hidden>{post.watermark}</span> : null}
       <div className="hf-hero-body">
         <h3 className="hf-hero-title" style={{ color: post.titleColor }}>
           {post.title.split("\n").map((line, i) => (
-            <span key={i}>{line}<br /></span>
+            <span key={i}>
+              {line}
+              <br />
+            </span>
           ))}
         </h3>
         <p className="hf-hero-sub" style={{ color: post.subtitleColor }}>
           {post.subtitle}
         </p>
-        {post.cta && <span className="hf-hero-cta">{post.cta}</span>}
+        {post.cta ? <span className="hf-hero-cta">{post.cta}</span> : null}
       </div>
     </Link>
   );
 }
 
-/* ─── Half-hero card (2 per row) ──────────────── */
 function HalfHeroCard({ post, href }: { post: HubPost; href: string }) {
   return (
     <Link className="hf-half-hero" href={href} style={{ background: post.bg }}>
       <div className="hf-hero-top">
         <Badge label={post.category} style={post.categoryStyle} />
-        <span className="hf-hero-star">★</span>
+        <span className="hf-hero-star">✦</span>
       </div>
-      {post.watermark && (
-        <span className="hf-hero-watermark" aria-hidden>
-          {post.watermark}
-        </span>
-      )}
+      {post.watermark ? <span className="hf-hero-watermark" aria-hidden>{post.watermark}</span> : null}
       <div className="hf-hero-body">
         <h3 className="hf-hero-title" style={{ color: post.titleColor }}>
           {post.title.split("\n").map((line, i) => (
-            <span key={i}>{line}<br /></span>
+            <span key={i}>
+              {line}
+              <br />
+            </span>
           ))}
         </h3>
         <p className="hf-hero-sub" style={{ color: post.subtitleColor }}>
           {post.subtitle}
         </p>
-        {post.cta && <span className="hf-hero-cta">{post.cta}</span>}
+        {post.cta ? <span className="hf-hero-cta">{post.cta}</span> : null}
       </div>
     </Link>
   );
 }
 
-/* ─── Square card ─────────────────────────────── */
 function SquareCard({ post, href }: { post: HubPost; href: string }) {
   return (
     <Link className="hf-square" href={href} style={{ background: post.bg }}>
       <Badge label={post.category} style={post.categoryStyle} />
-      {post.watermark && (
+      {post.watermark ? (
         <span className="hf-square-watermark" aria-hidden style={{ color: post.titleColor }}>
           {post.watermark}
         </span>
-      )}
+      ) : null}
       <div className="hf-square-body">
         <h4 className="hf-square-title" style={{ color: post.titleColor }}>
           {post.title.split("\n").map((line, i) => (
-            <span key={i}>{line}<br /></span>
+            <span key={i}>
+              {line}
+              <br />
+            </span>
           ))}
         </h4>
-        {post.subtitle && (
+        {post.subtitle ? (
           <p className="hf-square-sub" style={{ color: post.subtitleColor }}>
             {post.subtitle}
           </p>
-        )}
+        ) : null}
       </div>
     </Link>
   );
 }
 
-/* ─── Tall card ───────────────────────────────── */
 function TallCard({ post, href }: { post: HubPost; href: string }) {
   return (
     <Link className="hf-tall" href={href} style={{ background: post.bg }}>
       <Badge label={post.category} style={post.categoryStyle} />
       <h4 className="hf-tall-title" style={{ color: post.titleColor }}>
         {post.title.split("\n").map((line, i) => (
-          <span key={i}>{line}<br /></span>
+          <span key={i}>
+            {line}
+            <br />
+          </span>
         ))}
       </h4>
-      {post.readers && (
+      {post.readers ? (
         <div className="hf-tall-footer">
           <div className="hf-tall-avatars">
             <span className="hf-tall-avatar" />
@@ -118,12 +124,11 @@ function TallCard({ post, href }: { post: HubPost; href: string }) {
           </div>
           <p className="hf-tall-readers">{post.readers}</p>
         </div>
-      )}
+      ) : null}
     </Link>
   );
 }
 
-/* ─── Small card ──────────────────────────────── */
 function SmallCard({ post, href }: { post: HubPost; href: string }) {
   return (
     <Link className="hf-small" href={href} style={{ background: post.bg }}>
@@ -136,14 +141,11 @@ function SmallCard({ post, href }: { post: HubPost; href: string }) {
       <h4 className="hf-small-title" style={{ color: post.titleColor }}>
         {post.title}
       </h4>
-      {post.watermarkIcon && (
-        <span className="hf-small-icon" aria-hidden>{post.watermarkIcon}</span>
-      )}
+      {post.watermarkIcon ? <span className="hf-small-icon" aria-hidden>{post.watermarkIcon}</span> : null}
     </Link>
   );
 }
 
-/* ─── Wide card ───────────────────────────────── */
 function WideCard({ post, href }: { post: HubPost; href: string }) {
   return (
     <Link className="hf-wide" href={href} style={{ background: post.bg }}>
@@ -153,16 +155,20 @@ function WideCard({ post, href }: { post: HubPost; href: string }) {
         </span>
         <h3 className="hf-wide-title" style={{ color: post.titleColor }}>
           {post.title.split("\n").map((line, i) => (
-            <span key={i}>{line}<br /></span>
+            <span key={i}>
+              {line}
+              <br />
+            </span>
           ))}
         </h3>
       </div>
-      <div className="hf-wide-arrow" style={{ color: post.titleColor }}>→</div>
+      <div className="hf-wide-arrow" style={{ color: post.titleColor }}>
+        →
+      </div>
     </Link>
   );
 }
 
-/* ─── Main feed ───────────────────────────────── */
 export function HubFeed() {
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "ko";
@@ -174,31 +180,29 @@ export function HubFeed() {
 
   return (
     <div className="hf-root">
-      {/* Header */}
       <header className="hf-header">
-        <span className="hf-header-icon">⊞</span>
-        <h1 className="hf-header-title">K-Culture Hub</h1>
+        <Link
+          className="hf-header-home"
+          href={`/${lang}`}
+          aria-label={isKo ? "랜딩 페이지로 이동" : "Go to landing page"}
+        >
+          <span className="hf-header-icon">✦</span>
+          <h1 className="hf-header-title">K-Culture Hub</h1>
+        </Link>
         <div className="hf-lang-toggle">
-          <Link
-            className={`hf-lang-btn${isKo ? " hf-lang-btn--active" : ""}`}
-            href="/ko/hub"
-          >
+          <Link className={`hf-lang-btn${isKo ? " hf-lang-btn--active" : ""}`} href="/ko/hub">
             KO
           </Link>
           <span className="hf-lang-divider">|</span>
-          <Link
-            className={`hf-lang-btn${!isKo ? " hf-lang-btn--active" : ""}`}
-            href="/en/hub"
-          >
+          <Link className={`hf-lang-btn${!isKo ? " hf-lang-btn--active" : ""}`} href="/en/hub">
             EN
           </Link>
         </div>
       </header>
 
-      {/* Search */}
       <div className="hf-search-wrap">
         <div className="hf-search-box">
-          <span className="hf-search-icon">🔍</span>
+          <span className="hf-search-icon">⌕</span>
           <input
             className="hf-search-input"
             onChange={(e) => setSearch(e.target.value)}
@@ -209,7 +213,6 @@ export function HubFeed() {
         </div>
       </div>
 
-      {/* Filter chips */}
       <div className="hf-chips">
         {chips.map((chip) => (
           <button
@@ -223,21 +226,19 @@ export function HubFeed() {
         ))}
       </div>
 
-      {/* Bento grid */}
       <div className="hf-grid">
         {posts.map((post) => {
           const href = `/${lang}/hub/${post.slug}`;
-          if (post.cardType === "hero")      return <HeroCard     href={href} key={post.slug} post={post} />;
+          if (post.cardType === "hero") return <HeroCard href={href} key={post.slug} post={post} />;
           if (post.cardType === "half-hero") return <HalfHeroCard href={href} key={post.slug} post={post} />;
-          if (post.cardType === "square")    return <SquareCard   href={href} key={post.slug} post={post} />;
-          if (post.cardType === "tall")   return <TallCard   href={href} key={post.slug} post={post} />;
-          if (post.cardType === "small")  return <SmallCard  href={href} key={post.slug} post={post} />;
-          if (post.cardType === "wide")   return <WideCard   href={href} key={post.slug} post={post} />;
+          if (post.cardType === "square") return <SquareCard href={href} key={post.slug} post={post} />;
+          if (post.cardType === "tall") return <TallCard href={href} key={post.slug} post={post} />;
+          if (post.cardType === "small") return <SmallCard href={href} key={post.slug} post={post} />;
+          if (post.cardType === "wide") return <WideCard href={href} key={post.slug} post={post} />;
           return null;
         })}
       </div>
 
-      {/* Bottom nav */}
       <div className="hf-nav">
         <nav className="hf-nav-pill">
           <Link className="hf-nav-item hf-nav-item--active" href={`/${lang}/hub`}>
@@ -249,11 +250,11 @@ export function HubFeed() {
             <span className="hf-nav-label">AI Studio</span>
           </Link>
           <button className="hf-nav-item" type="button">
-            <span className="hf-nav-icon">🗺</span>
+            <span className="hf-nav-icon">◫</span>
             <span className="hf-nav-label">Map</span>
           </button>
           <button className="hf-nav-item" type="button">
-            <span className="hf-nav-icon">👤</span>
+            <span className="hf-nav-icon">◐</span>
             <span className="hf-nav-label">Me</span>
           </button>
         </nav>

@@ -4499,9 +4499,18 @@ h2 {
   line-height: 1;
 }
 
+.hf-header-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  min-width: 0;
+  flex: 1;
+}
+
 .hf-header-title {
   flex: 1;
-  text-align: center;
+  text-align: left;
   font-size: 18px;
   font-weight: 900;
   letter-spacing: 0.06em;
