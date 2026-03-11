@@ -201,8 +201,8 @@ export function HairFlow() {
         return current.filter((item) => item !== id);
       }
 
-      if (current.length >= 2) {
-        return [...current.slice(1), id];
+      if (current.length >= 1) {
+        return [id];
       }
 
       return [...current, id];
@@ -210,7 +210,7 @@ export function HairFlow() {
   }
 
   async function handleGenerate() {
-    if (isGenerating || selectedStyleIds.length !== 2 || !photoBlobUrl) {
+    if (isGenerating || selectedStyleIds.length !== 1 || !photoBlobUrl) {
       return;
     }
 
@@ -344,8 +344,8 @@ export function HairFlow() {
             {selectedStyleIds.length > 0
               ? `${selectedStyleIds.length}${lang === "ko" ? "개 선택됨" : " selected"}`
               : lang === "ko"
-                ? "헤어 2개를 선택하세요"
-                : "Select 2 hairstyles"}
+                ? "헤어 1개를 선택하세요"
+                : "Select 1 hairstyle"}
           </p>
         </div>
         <div className="hr-strip-ai-badge">AI</div>
@@ -357,7 +357,7 @@ export function HairFlow() {
         <div className="hr-section-hd">
           <span className="hr-section-pill">{lang === "ko" ? "스타일" : "STYLE"}</span>
           <span className="hr-section-hint">
-            {lang === "ko" ? "최대 2개까지 선택" : "Choose up to 2"}
+            {lang === "ko" ? "1개만 선택" : "Choose 1"}
           </span>
         </div>
 
@@ -437,7 +437,7 @@ export function HairFlow() {
             textAlign: "center",
           }}>
             <p style={{ fontSize: 15, fontWeight: 700, color: "#f59e0b", margin: 0 }}>
-              {lang === "ko" ? "✨ 헤어 결과 2장이 완성되었어요!" : "✨ 2 hair results are ready!"}
+              {lang === "ko" ? "✨ 헤어 결과가 완성되었어요!" : "✨ Your hair result is ready!"}
             </p>
             <p style={{ fontSize: 13, color: "#f59e0bcc", margin: "4px 0 0" }}>
               {lang === "ko" ? "아래 사진 중 마음에 드는 1장을 눌러 다음 단계로 이동하세요." : "Tap a photo below to proceed to the next step."}
@@ -487,16 +487,16 @@ export function HairFlow() {
 
       <div className="hr-bottom">
         <button
-          className={`hr-cta${selectedStyleIds.length === 2 && !isGenerating ? " hr-cta--on" : ""}${isGenerating ? " hr-cta--loading" : ""}`}
+          className={`hr-cta${selectedStyleIds.length === 1 && !isGenerating ? " hr-cta--on" : ""}${isGenerating ? " hr-cta--loading" : ""}`}
           onClick={handleGenerate}
-          disabled={selectedStyleIds.length !== 2 || isGenerating}
+          disabled={selectedStyleIds.length !== 1 || isGenerating}
           type="button"
         >
           {isGenerating
             ? lang === "ko" ? "헤어를 정리하는 중..." : "Refining your hair..."
-            : selectedStyleIds.length === 2
-              ? lang === "ko" ? "헤어 2개 생성" : "Generate 2 previews"
-              : lang === "ko" ? "헤어 2개를 선택하세요" : "Select 2 hairstyles"}
+            : selectedStyleIds.length === 1
+              ? lang === "ko" ? "헤어 생성" : "Generate preview"
+              : lang === "ko" ? "헤어 1개를 선택하세요" : "Select 1 hairstyle"}
         </button>
       </div>
     </div>
