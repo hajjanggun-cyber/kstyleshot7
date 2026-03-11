@@ -232,7 +232,7 @@ Role 표기:
 - Keyword: KO `여의도 한강공원 피크닉` | EN `yeouido han river picnic guide`
 - Subkeywords: KO `한강 라면`, `여의도 돗자리 명소`, `한강 데이트 준비` | EN `ramyeon at han river`, `yeouido picnic spots`, `han river date prep`
 
-### [028] Sub [ ]
+### [028] Sub [v]
 - KO: 반포 한강공원 야경과 분수 포인트
 - EN: Banpo Han River Night View Guide
 - Keyword: KO `반포 한강공원 야경` | EN `banpo han river night view guide`
