@@ -111,13 +111,29 @@ export function HairFlow() {
         setResultCards(nextResults);
         setIsGenerating(false);
         clearInterval(interval);
+
+        if (TEST_DUPLICATE_FIRST_HAIR_ONLY && nextResults[0]) {
+          setHairPreviewUrl(nextResults[0].blobUrl);
+          pickHair(nextResults[0].id);
+          router.push(`/${lang}/create/outfit`);
+        }
       } catch {
         // retry
       }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isGenerating, lang, predictionStates, selectedStyleIds, setHairChosen, setHairResults]);
+  }, [
+    isGenerating,
+    lang,
+    pickHair,
+    predictionStates,
+    router,
+    selectedStyleIds,
+    setHairChosen,
+    setHairPreviewUrl,
+    setHairResults,
+  ]);
 
   function toggleStyle(id: string) {
     setGenerationError("");
@@ -309,30 +325,61 @@ export function HairFlow() {
       </div>
 
       {resultCards.length > 0 ? (
-        <div className="ot-grid" style={{ paddingBottom: 120 }}>
-          {resultCards.map((result) => (
-            <button
-              className="ot-card ot-card--selected"
-              key={result.id}
-              onClick={() => handlePickResult(result)}
-              type="button"
-            >
-              <div
-                className="ot-card-img"
-                style={{ backgroundImage: `url(${result.blobUrl})`, height: 320 }}
-              />
-              <div className="ot-card-info">
-                <div className="ot-card-name-row">
-                  <span className="ot-card-name">
-                    {hairStyles.find((style) => style.id === result.id)?.name ?? result.id}
-                  </span>
-                </div>
-                <span className="ot-card-sub">
-                  {lang === "ko" ? "이 결과로 최종 합성을 진행" : "Use this result as the base image"}
-                </span>
+        <div style={{ paddingBottom: 120 }}>
+          <div style={{
+            background: "linear-gradient(135deg, #f59e0b22, #f59e0b11)",
+            border: "1.5px solid #f59e0b88",
+            borderRadius: 12,
+            padding: "12px 16px",
+            margin: "0 0 16px 0",
+            textAlign: "center",
+          }}>
+            <p style={{ fontSize: 15, fontWeight: 700, color: "#f59e0b", margin: 0 }}>
+              {lang === "ko" ? "✨ 헤어 결과 2장이 완성되었어요!" : "✨ 2 hair results are ready!"}
+            </p>
+            <p style={{ fontSize: 13, color: "#f59e0bcc", margin: "4px 0 0" }}>
+              {lang === "ko" ? "아래 사진 중 마음에 드는 1장을 눌러 다음 단계로 이동하세요." : "Tap a photo below to proceed to the next step."}
+            </p>
+          </div>
+          <div className="ot-grid">
+            {resultCards.map((result) => (
+              <div key={result.id} style={{ position: "relative" }}>
+                <button
+                  className="ot-card"
+                  onClick={() => handlePickResult(result)}
+                  type="button"
+                  style={{ width: "100%" }}
+                >
+                  <div
+                    className="ot-card-img"
+                    style={{ backgroundImage: `url(${result.blobUrl})`, height: 320 }}
+                  />
+                  <div className="ot-card-info">
+                    <div className="ot-card-name-row">
+                      <span className="ot-card-name">
+                        {hairStyles.find((style) => style.id === result.id)?.name ?? result.id}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        marginTop: 8,
+                        background: "linear-gradient(135deg, #f59e0b, #ea580c)",
+                        color: "#fff",
+                        fontWeight: 700,
+                        fontSize: 14,
+                        borderRadius: 8,
+                        padding: "8px 0",
+                        textAlign: "center",
+                        letterSpacing: 0.3,
+                      }}
+                    >
+                      {lang === "ko" ? "이 사진으로 진행하기 →" : "Pick this photo →"}
+                    </div>
+                  </div>
+                </button>
               </div>
-            </button>
-          ))}
+            ))}
+          </div>
         </div>
       ) : null}
 

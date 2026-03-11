@@ -16,6 +16,11 @@ const naverVerification =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  icons: {
+    icon: [{ url: "/icon" }],
+    shortcut: [{ url: "/icon" }],
+    apple: [{ url: "/icon" }]
+  },
   title: {
     default: defaultTitle,
     template: "%s | kstyleshot"
