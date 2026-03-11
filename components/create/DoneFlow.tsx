@@ -14,6 +14,16 @@ function revokeIfBlobUrl(url: string | null) {
   }
 }
 
+function buildDownloadTimestamp() {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  const hh = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+  return `${yyyy}${mm}${dd}-${hh}${min}`;
+}
+
 export function DoneFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
@@ -114,7 +124,7 @@ export function DoneFlow() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "kstyleshot-final.jpg";
+      a.download = `kstyleshot-final-${buildDownloadTimestamp()}.jpg`;
       a.click();
       URL.revokeObjectURL(url);
     } finally {
@@ -134,7 +144,7 @@ export function DoneFlow() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `kstyleshot-hair-${id}.jpg`;
+      a.download = `kstyleshot-hair-${id}-${buildDownloadTimestamp()}.jpg`;
       a.click();
       URL.revokeObjectURL(url);
     } finally {

@@ -17,9 +17,9 @@ type HairPollState = {
   failed: boolean;
 };
 
-const TEST_DUPLICATE_FIRST_HAIR_ONLY = false;
 const HAIR_POLL_INTERVAL_MS = 3000;
 const HAIR_POLL_MAX_ATTEMPTS = 40;
+const MAX_HAIR_RESULTS = 2;
 
 export function HairFlow() {
   const params = useParams<{ lang: string }>();
@@ -41,14 +41,20 @@ export function HairFlow() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationError, setGenerationError] = useState("");
   const [resultCards, setResultCards] = useState<StepResult[]>([]);
+  const [pickedResultId, setPickedResultId] = useState<string | null>(null);
   const [predictionStates, setPredictionStates] = useState<HairPollState[]>([]);
   const [pollSeed, setPollSeed] = useState(0);
   const predictionStatesRef = useRef<HairPollState[]>([]);
+  const resultCardsRef = useRef<StepResult[]>([]);
   const pollAttemptRef = useRef(0);
 
   useEffect(() => {
     predictionStatesRef.current = predictionStates;
   }, [predictionStates]);
+
+  useEffect(() => {
+    resultCardsRef.current = resultCards;
+  }, [resultCards]);
 
   useEffect(() => {
     if (!isGenerating || predictionStatesRef.current.length === 0) {
@@ -69,24 +75,24 @@ export function HairFlow() {
     };
 
     const finalizeResults = (nextStates: HairPollState[]) => {
-      const nextResults: StepResult[] = TEST_DUPLICATE_FIRST_HAIR_ONLY
-        ? selectedStyleIds.map((styleId) => ({
-            id: styleId,
-            blobUrl: nextStates[0]?.outputUrl ?? "",
-            downloaded: false,
-            selected: false,
-          }))
-        : nextStates.map((state) => ({
-            id: state.id,
-            blobUrl: state.outputUrl ?? "",
-            predictionId: state.predictionId,
-            downloaded: false,
-            selected: false,
-          }));
+      const nextResults: StepResult[] = nextStates.map((state) => ({
+        id: state.id,
+        blobUrl: state.outputUrl ?? "",
+        downloaded: false,
+        selected: false,
+      }));
 
-      setHairChosen(selectedStyleIds);
-      setHairResults(nextResults);
-      setResultCards(nextResults);
+      const mergedResults = [
+        ...resultCardsRef.current,
+        ...nextResults.filter(
+          (nextResult) => !resultCardsRef.current.some((currentResult) => currentResult.id === nextResult.id)
+        ),
+      ].slice(0, MAX_HAIR_RESULTS);
+
+      setHairChosen(mergedResults.map((result) => result.id));
+      setHairResults(mergedResults);
+      setResultCards(mergedResults);
+      setSelectedStyleIds([]);
       setIsGenerating(false);
     };
 
@@ -145,18 +151,16 @@ export function HairFlow() {
         predictionStatesRef.current = nextStates;
         setPredictionStates(nextStates);
 
-        const hasFailure = nextStates.some((state) => state.failed);
-        if (hasFailure) {
+        if (nextStates.some((state) => state.failed)) {
           stopWithError(
             lang === "ko"
-              ? "Replicate 헤어 생성이 실패했습니다. 다른 스타일이나 사진으로 다시 시도해 주세요."
+              ? "Replicate 헤어 생성에 실패했습니다. 다른 사진이나 스타일로 다시 시도해 주세요."
               : "Replicate hair generation failed. Try a different photo or hairstyle."
           );
           return;
         }
 
-        const allCompleted = nextStates.every((state) => state.outputUrl);
-        if (allCompleted) {
+        if (nextStates.every((state) => state.outputUrl)) {
           finalizeResults(nextStates);
         }
       } catch (error) {
@@ -179,43 +183,46 @@ export function HairFlow() {
       cancelled = true;
       window.clearInterval(interval);
     };
-  }, [
-    isGenerating,
-    lang,
-    pollSeed,
-    selectedStyleIds,
-    setHairChosen,
-    setHairResults,
-    setStatus,
-  ]);
+  }, [isGenerating, lang, pollSeed, selectedStyleIds, setHairChosen, setHairResults, setStatus]);
+
+  const generatedStyleIds = new Set(resultCards.map((result) => result.id));
+  const selectedStyleId = selectedStyleIds[0] ?? null;
+  const hasOneResult = resultCards.length === 1;
+  const hasTwoResults = resultCards.length === 2;
+  const canGenerate =
+    selectedStyleIds.length === 1 &&
+    !isGenerating &&
+    resultCards.length < MAX_HAIR_RESULTS &&
+    (!selectedStyleId || !generatedStyleIds.has(selectedStyleId));
+  const canContinue = resultCards.some((result) => result.id === pickedResultId);
 
   function toggleStyle(id: string) {
     setGenerationError("");
-    setResultCards([]);
-    setPredictionStates([]);
-    setPollSeed(0);
-    predictionStatesRef.current = [];
-    pollAttemptRef.current = 0;
+
+    if (generatedStyleIds.has(id)) {
+      setGenerationError(
+        lang === "ko"
+          ? "이미 생성한 헤어입니다. 다른 스타일 1개를 선택해 비교해 주세요."
+          : "This hairstyle is already generated. Select one different style to compare."
+      );
+      return;
+    }
+
     setSelectedStyleIds((current) => {
       if (current.includes(id)) {
         return current.filter((item) => item !== id);
       }
 
-      if (current.length >= 1) {
-        return [id];
-      }
-
-      return [...current, id];
+      return [id];
     });
   }
 
   async function handleGenerate() {
-    if (isGenerating || selectedStyleIds.length !== 1 || !photoBlobUrl) {
+    if (!canGenerate || !photoBlobUrl || !selectedStyleId) {
       return;
     }
 
     setGenerationError("");
-    setResultCards([]);
     setPredictionStates([]);
     setPollSeed(0);
     predictionStatesRef.current = [];
@@ -230,44 +237,39 @@ export function HairFlow() {
         setHairColor(selectedColor.replicateValue);
       }
 
-      const selectedStyles = selectedStyleIds
-        .map((id) => hairStyles.find((style) => style.id === id))
-        .filter((style): style is NonNullable<typeof style> => Boolean(style));
+      const selectedStyle = hairStyles.find((style) => style.id === selectedStyleId);
+      if (!selectedStyle) {
+        throw new Error("missing_style");
+      }
 
-      const stylesToGenerate = TEST_DUPLICATE_FIRST_HAIR_ONLY
-        ? selectedStyles.slice(0, 1)
-        : selectedStyles;
+      const res = await fetch("/api/hair/preview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          photoDataUrl,
+          haircutName: selectedStyle.haircut,
+          hairColor: selectedColor?.replicateValue ?? "Black",
+        }),
+      });
 
-      const responses = await Promise.all(
-        stylesToGenerate.map(async (style) => {
-          const res = await fetch("/api/hair/preview", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              photoDataUrl,
-              haircutName: style.haircut,
-              hairColor: selectedColor?.replicateValue ?? "Black",
-            }),
-          });
+      if (!res.ok) {
+        const errorData = (await res.json().catch(() => ({}))) as { error?: string; message?: string };
+        throw new Error(errorData.error || errorData.message || "hair_preview_failed");
+      }
 
-          if (!res.ok) {
-            const errorData = (await res.json().catch(() => ({}))) as { error?: string; message?: string };
-            throw new Error(errorData.error || errorData.message || "hair_preview_failed");
-          }
+      const data = (await res.json()) as { predictionId?: string };
+      if (!data.predictionId) {
+        throw new Error("missing_prediction_id");
+      }
 
-          const data = (await res.json()) as { predictionId?: string };
-          if (!data.predictionId) {
-            throw new Error("missing_prediction_id");
-          }
-
-          return {
-            id: style.id,
-            predictionId: data.predictionId,
-            outputUrl: null,
-            failed: false,
-          } satisfies HairPollState;
-        })
-      );
+      const responses: HairPollState[] = [
+        {
+          id: selectedStyle.id,
+          predictionId: data.predictionId,
+          outputUrl: null,
+          failed: false,
+        },
+      ];
 
       predictionStatesRef.current = responses;
       setPredictionStates(responses);
@@ -279,29 +281,53 @@ export function HairFlow() {
         error instanceof Error && error.message && error.message !== "hair_preview_failed"
           ? error.message
           : lang === "ko"
-            ? "헤어 생성 시작에 실패했습니다."
+            ? "헤어 생성을 시작할 수 없습니다."
             : "Unable to start hair generation."
       );
     }
   }
 
-  async function handlePickResult(result: StepResult & { predictionId?: string }) {
+  function handlePickResult(result: StepResult) {
+    setPickedResultId(result.id);
     setHairPreviewUrl(result.blobUrl);
-    pickHair(result.id);
+  }
 
-    // ✅ Fire-and-forget call to the selection endpoint
+  async function handleContinue() {
+    const selectedResult = resultCards.find((result) => result.id === pickedResultId);
+    if (!selectedResult) {
+      return;
+    }
+
+    setHairPreviewUrl(selectedResult.blobUrl);
+    pickHair(selectedResult.id);
+
     fetch("/api/hair/select", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        hairId: result.id,
-        previewUrl: result.blobUrl,
-        predictionId: result.predictionId,
+        hairId: selectedResult.id,
+        previewUrl: selectedResult.blobUrl,
       }),
     }).catch(console.error);
 
     router.push(`/${lang}/create/outfit`);
   }
+
+  const resultHeadline = hasTwoResults
+    ? lang === "ko"
+      ? "사진 2개가 준비되었습니다"
+      : "Two hairstyle results are ready"
+    : lang === "ko"
+      ? "첫 번째 헤어 결과가 준비되었습니다"
+      : "Your first hairstyle result is ready";
+
+  const resultMessage = hasTwoResults
+    ? lang === "ko"
+      ? "사진 2개 중 하나를 선택하면 다음 단계로 이동합니다."
+      : "Choose one of the two results to continue to the next step."
+    : lang === "ko"
+      ? "마음에 들면 지금 결과를 선택해 다음으로 갈 수 있습니다. 비교하려면 헤어 1개를 더 선택하세요."
+      : "You can continue with this result now, or select one more hairstyle to compare.";
 
   return (
     <div className="hr-root">
@@ -311,23 +337,23 @@ export function HairFlow() {
           <div>
             <p className="ot-synth-title">
               {lang === "ko"
-                ? "얼굴선에 맞춰 헤어를 정교하게 맞추는 중"
+                ? "얼굴형과 분위기에 맞게 헤어를 정교하게 맞추는 중"
                 : "Refining the hairstyle to match your features"}
             </p>
             <p className="ot-synth-sub">
               {lang === "ko"
-                ? "원래 인상은 그대로 두고, 선택한 스타일만 자연스럽게 입히고 있어요.\n잠시만 기다려 주세요."
+                ? "원래 인상은 유지하면서 선택한 헤어만 자연스럽게 적용하고 있습니다.\n잠시만 기다려 주세요."
                 : "Keeping your original look intact while applying the selected style naturally.\nJust a moment."}
             </p>
           </div>
-          <p className="ot-synth-badge">
-            {lang === "ko" ? "헤어 완성 중" : "Hair in progress"}
-          </p>
+          <p className="ot-synth-badge">{lang === "ko" ? "헤어 생성 중" : "Hair in progress"}</p>
         </div>
       ) : null}
 
       <nav className="hr-nav">
-        <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
+        <Link className="hr-back-btn" href={`/${lang}/create/upload`}>
+          {"<-"}
+        </Link>
         <span className="hr-step-tag">STEP 2 / 4</span>
         <div className="hr-nav-right" />
       </nav>
@@ -341,11 +367,15 @@ export function HairFlow() {
         <div className="hr-strip-meta">
           <p className="hr-strip-kicker">{lang === "ko" ? "내 사진" : "MY PHOTO"}</p>
           <p className="hr-strip-val">
-            {selectedStyleIds.length > 0
-              ? `${selectedStyleIds.length}${lang === "ko" ? "개 선택됨" : " selected"}`
-              : lang === "ko"
-                ? "헤어 1개를 선택하세요"
-                : "Select 1 hairstyle"}
+            {resultCards.length > 0
+              ? lang === "ko"
+                ? `${resultCards.length}개 결과 준비됨`
+                : `${resultCards.length} result${resultCards.length > 1 ? "s" : ""} ready`
+              : selectedStyleIds.length > 0
+                ? `${selectedStyleIds.length}${lang === "ko" ? "개 선택됨" : " selected"}`
+                : lang === "ko"
+                  ? "헤어 1개를 선택하세요"
+                  : "Select 1 hairstyle"}
           </p>
         </div>
         <div className="hr-strip-ai-badge">AI</div>
@@ -357,7 +387,17 @@ export function HairFlow() {
         <div className="hr-section-hd">
           <span className="hr-section-pill">{lang === "ko" ? "스타일" : "STYLE"}</span>
           <span className="hr-section-hint">
-            {lang === "ko" ? "1개만 선택" : "Choose 1"}
+            {hasTwoResults
+              ? lang === "ko"
+                ? "비교 완료"
+                : "Comparison ready"
+              : hasOneResult
+                ? lang === "ko"
+                  ? "추가 1개 선택"
+                  : "Select 1 more"
+                : lang === "ko"
+                  ? "1개만 선택"
+                  : "Choose 1"}
           </span>
         </div>
 
@@ -379,12 +419,16 @@ export function HairFlow() {
         <div className="hr-grid">
           {hairStyles.filter((item) => item.category === activeCategory).map((style) => {
             const isSelected = selectedStyleIds.includes(style.id);
+            const isGenerated = generatedStyleIds.has(style.id);
             return (
               <button
                 className={`hr-card${isSelected ? " hr-card--sel" : ""}`}
+                disabled={isGenerated}
                 key={style.id}
                 onClick={() => toggleStyle(style.id)}
                 style={{
+                  opacity: isGenerated ? 0.5 : 1,
+                  cursor: isGenerated ? "not-allowed" : "pointer",
                   backgroundImage: style.thumbnail
                     ? `linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%),url(${style.thumbnail})`
                     : `linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%),${style.colorHint}`,
@@ -392,6 +436,23 @@ export function HairFlow() {
                 type="button"
               >
                 {isSelected ? <span className="hr-card-check" aria-hidden>✓</span> : null}
+                {isGenerated ? (
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: 10,
+                      right: 10,
+                      background: "rgba(0,0,0,0.68)",
+                      color: "#fff",
+                      borderRadius: 999,
+                      padding: "4px 8px",
+                      fontSize: 11,
+                      fontWeight: 700,
+                    }}
+                  >
+                    {lang === "ko" ? "생성됨" : "Ready"}
+                  </span>
+                ) : null}
                 <span className="hr-card-name">{style.name}</span>
               </button>
             );
@@ -417,9 +478,7 @@ export function HairFlow() {
                 type="button"
               >
                 <span className="hr-swatch" style={{ background: color.swatch }} />
-                <span className="hr-swatch-name">
-                  {lang === "ko" ? color.nameKo : color.nameEn}
-                </span>
+                <span className="hr-swatch-name">{lang === "ko" ? color.nameKo : color.nameEn}</span>
               </button>
             );
           })}
@@ -428,76 +487,137 @@ export function HairFlow() {
 
       {resultCards.length > 0 ? (
         <div style={{ paddingBottom: 120 }}>
-          <div style={{
-            background: "linear-gradient(135deg, #f59e0b22, #f59e0b11)",
-            border: "1.5px solid #f59e0b88",
-            borderRadius: 12,
-            padding: "12px 16px",
-            margin: "0 0 16px 0",
-            textAlign: "center",
-          }}>
-            <p style={{ fontSize: 15, fontWeight: 700, color: "#f59e0b", margin: 0 }}>
-              {lang === "ko" ? "✨ 헤어 결과가 완성되었어요!" : "✨ Your hair result is ready!"}
-            </p>
-            <p style={{ fontSize: 13, color: "#f59e0bcc", margin: "4px 0 0" }}>
-              {lang === "ko" ? "아래 사진 중 마음에 드는 1장을 눌러 다음 단계로 이동하세요." : "Tap a photo below to proceed to the next step."}
-            </p>
+          <div
+            style={{
+              background: "linear-gradient(135deg, #f59e0b22, #f59e0b11)",
+              border: "1.5px solid #f59e0b88",
+              borderRadius: 12,
+              padding: "14px 16px",
+              margin: "0 0 16px 0",
+              textAlign: "center",
+            }}
+          >
+            <p style={{ fontSize: 15, fontWeight: 700, color: "#f59e0b", margin: 0 }}>{resultHeadline}</p>
+            <p style={{ fontSize: 13, color: "#a16207", margin: "6px 0 0" }}>{resultMessage}</p>
           </div>
           <div className="ot-grid">
-            {resultCards.map((result) => (
-              <div key={result.id} style={{ position: "relative" }}>
-                <button
-                  className="ot-card"
-                  onClick={() => handlePickResult(result)}
-                  type="button"
-                  style={{ width: "100%" }}
-                >
-                  <div
-                    className="ot-card-img"
-                    style={{ backgroundImage: `url(${result.blobUrl})`, height: 320 }}
-                  />
-                  <div className="ot-card-info">
-                    <div className="ot-card-name-row">
-                      <span className="ot-card-name">
-                        {hairStyles.find((style) => style.id === result.id)?.name ?? result.id}
-                      </span>
-                    </div>
+            {resultCards.map((result) => {
+              const isPicked = pickedResultId === result.id;
+              return (
+                <div key={result.id} style={{ position: "relative" }}>
+                  <button
+                    className="ot-card"
+                    onClick={() => handlePickResult(result)}
+                    type="button"
+                    style={{
+                      width: "100%",
+                      border: isPicked ? "2px solid #f59e0b" : "2px solid transparent",
+                      boxShadow: isPicked ? "0 0 0 4px rgba(245, 158, 11, 0.14)" : "none",
+                      transform: isPicked ? "translateY(-2px)" : "none",
+                      transition: "all 180ms ease",
+                    }}
+                  >
                     <div
-                      style={{
-                        marginTop: 8,
-                        background: "linear-gradient(135deg, #f59e0b, #ea580c)",
-                        color: "#fff",
-                        fontWeight: 700,
-                        fontSize: 14,
-                        borderRadius: 8,
-                        padding: "8px 0",
-                        textAlign: "center",
-                        letterSpacing: 0.3,
-                      }}
-                    >
-                      {lang === "ko" ? "이 사진으로 진행하기 →" : "Pick this photo →"}
+                      className="ot-card-img"
+                      style={{ backgroundImage: `url(${result.blobUrl})`, height: 320 }}
+                    />
+                    <div className="ot-card-info">
+                      <div className="ot-card-name-row">
+                        <span className="ot-card-name">
+                          {hairStyles.find((style) => style.id === result.id)?.name ?? result.id}
+                        </span>
+                      </div>
+                      <div
+                        style={{
+                          marginTop: 8,
+                          background: isPicked
+                            ? "linear-gradient(135deg, #f59e0b, #ea580c)"
+                            : "rgba(255,255,255,0.08)",
+                          color: "#fff",
+                          fontWeight: 700,
+                          fontSize: 14,
+                          borderRadius: 8,
+                          padding: "8px 0",
+                          textAlign: "center",
+                          letterSpacing: 0.3,
+                        }}
+                      >
+                        {isPicked
+                          ? lang === "ko"
+                            ? "선택됨"
+                            : "Selected"
+                          : lang === "ko"
+                            ? "이 결과 선택"
+                            : "Select this result"}
+                      </div>
                     </div>
-                  </div>
-                </button>
-              </div>
-            ))}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : null}
 
-      <div className="hr-bottom">
-        <button
-          className={`hr-cta${selectedStyleIds.length === 1 && !isGenerating ? " hr-cta--on" : ""}${isGenerating ? " hr-cta--loading" : ""}`}
-          onClick={handleGenerate}
-          disabled={selectedStyleIds.length !== 1 || isGenerating}
-          type="button"
-        >
-          {isGenerating
-            ? lang === "ko" ? "헤어를 정리하는 중..." : "Refining your hair..."
-            : selectedStyleIds.length === 1
-              ? lang === "ko" ? "헤어 생성" : "Generate preview"
-              : lang === "ko" ? "헤어 1개를 선택하세요" : "Select 1 hairstyle"}
-        </button>
+      <div className="hr-bottom" style={{ display: "grid", gap: 12 }}>
+        {resultCards.length < MAX_HAIR_RESULTS ? (
+          <button
+            className={`hr-cta${canGenerate ? " hr-cta--on" : ""}${isGenerating ? " hr-cta--loading" : ""}`}
+            onClick={handleGenerate}
+            disabled={!canGenerate}
+            type="button"
+            style={
+              hasOneResult
+                ? {
+                    background: "#fff7ed",
+                    color: "#9a3412",
+                    border: "1px solid #fdba74",
+                  }
+                : undefined
+            }
+          >
+            {isGenerating
+              ? lang === "ko"
+                ? "헤어를 생성하는 중..."
+                : "Generating hair..."
+              : hasOneResult
+                ? lang === "ko"
+                  ? "추가 헤어 1개 생성"
+                  : "Generate 1 more"
+                : selectedStyleIds.length === 1
+                  ? lang === "ko"
+                    ? "헤어 생성"
+                    : "Generate preview"
+                  : lang === "ko"
+                    ? "헤어 1개를 선택하세요"
+                    : "Select 1 hairstyle"}
+          </button>
+        ) : null}
+
+        {resultCards.length > 0 ? (
+          <button
+            className={`hr-cta${canContinue ? " hr-cta--on" : ""}`}
+            disabled={!canContinue}
+            onClick={handleContinue}
+            type="button"
+          >
+            {hasTwoResults
+              ? canContinue
+                ? lang === "ko"
+                  ? "선택한 헤어로 다음 단계"
+                  : "Continue with selected hair"
+                : lang === "ko"
+                  ? "사진 2개 중 1개를 선택하세요"
+                  : "Select 1 of the 2 results"
+              : canContinue
+                ? lang === "ko"
+                  ? "이 헤어로 다음 단계"
+                  : "Continue with this hair"
+                : lang === "ko"
+                  ? "결과 사진 1개를 선택하세요"
+                  : "Select the result to continue"}
+          </button>
+        ) : null}
       </div>
     </div>
   );
