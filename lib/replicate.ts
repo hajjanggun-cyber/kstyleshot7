@@ -1,12 +1,14 @@
 export const HAIR_MODEL = "flux-kontext-apps/change-haircut";
 const REPLICATE_API_BASE_URL = process.env.REPLICATE_API_BASE_URL ?? "https://api.replicate.com";
 const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "Black";
+const HAIR_MODEL_VERSION = process.env.REPLICATE_HAIR_MODEL_VERSION?.trim() || "";
 
 type JsonRecord = Record<string, unknown>;
 
 type DecodedDataUrl = {
   mimeType: string;
   buffer: Buffer;
+  base64: string;
 };
 
 function isRecord(value: unknown): value is JsonRecord {
@@ -75,10 +77,15 @@ function decodeDataUrl(dataUrl: string): DecodedDataUrl {
     return {
       mimeType,
       buffer: Buffer.from(base64, "base64"),
+      base64,
     };
   } catch {
     throw new ReplicateApiError("Unable to decode image data URL.", 400);
   }
+}
+
+function toReplicateDataUri(decoded: DecodedDataUrl): string {
+  return `data:${decoded.mimeType};base64,${decoded.base64}`;
 }
 
 function assertReplicateEnv(): void {
@@ -140,6 +147,10 @@ function getHairPredictionEndpoint(): string {
     throw new ReplicateApiError(`Invalid HAIR_MODEL format: ${HAIR_MODEL}`, 500);
   }
 
+  if (HAIR_MODEL_VERSION) {
+    return `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/${owner}/${model}/versions/${HAIR_MODEL_VERSION}/predictions`;
+  }
+
   return `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/${owner}/${model}/predictions`;
 }
 
@@ -165,10 +176,7 @@ async function startPrediction(input: {
         haircut: input.haircut,
         hair_color: input.hairColor,
         input_image: input.inputImage,
-        aspect_ratio: "match_input_image",
-        output_format: "png",
-        safety_tolerance: 2,
-      }
+      },
     }),
     cache: "no-store"
   }).catch(() => {
@@ -303,10 +311,13 @@ export async function startHairPreviewJob(input: {
   }
 
   const decodedImage = decodeDataUrl(input.photoDataUrl);
-  const uploadedImageUrl = await uploadToReplicateFiles(decodedImage.buffer, decodedImage.mimeType);
+  const replicateInputImage =
+    decodedImage.buffer.byteLength < 1024 * 1024
+      ? toReplicateDataUri(decodedImage)
+      : await uploadToReplicateFiles(decodedImage.buffer, decodedImage.mimeType);
 
   const { predictionId } = await startPrediction({
-    inputImage: uploadedImageUrl,
+    inputImage: replicateInputImage,
     haircut: input.haircutName,
     hairColor: input.hairColor || DEFAULT_HAIR_COLOR,
     wait: false,
@@ -324,7 +335,8 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
   assertReplicateEnv();
 
   const form = new FormData();
-  form.append("content", new Blob([new Uint8Array(buffer)], { type: mimeType }), "composite.jpg");
+  const extension = mimeType.split("/")[1] || "bin";
+  form.append("content", new Blob([new Uint8Array(buffer)], { type: mimeType }), `input_image.${extension}`);
 
   const response = await fetch(`${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/files`, {
     method: "POST",

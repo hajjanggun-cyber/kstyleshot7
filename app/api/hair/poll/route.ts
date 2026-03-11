@@ -24,6 +24,7 @@ export async function GET(request: Request) {
       ok: true,
       status: prediction.status,
       outputUrl: prediction.outputUrl,
+      error: prediction.error,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Poll failed.";

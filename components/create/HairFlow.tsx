@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
@@ -18,6 +18,8 @@ type HairPollState = {
 };
 
 const TEST_DUPLICATE_FIRST_HAIR_ONLY = false;
+const HAIR_POLL_INTERVAL_MS = 3000;
+const HAIR_POLL_MAX_ATTEMPTS = 40;
 
 export function HairFlow() {
   const params = useParams<{ lang: string }>();
@@ -40,94 +42,148 @@ export function HairFlow() {
   const [generationError, setGenerationError] = useState("");
   const [resultCards, setResultCards] = useState<StepResult[]>([]);
   const [predictionStates, setPredictionStates] = useState<HairPollState[]>([]);
+  const predictionStatesRef = useRef<HairPollState[]>([]);
+  const pollAttemptRef = useRef(0);
+
+  useEffect(() => {
+    predictionStatesRef.current = predictionStates;
+  }, [predictionStates]);
 
   useEffect(() => {
     if (!isGenerating || predictionStates.length === 0) {
       return;
     }
 
-    let retries = 0;
-    const interval = setInterval(async () => {
-      retries += 1;
-      if (retries >= 40) {
-        clearInterval(interval);
-        setIsGenerating(false);
-        setGenerationError(lang === "ko" ? "헤어 생성 시간이 초과되었습니다." : "Hair generation timed out.");
+    pollAttemptRef.current = 0;
+    let cancelled = false;
+
+    const stopWithError = (message: string) => {
+      if (cancelled) {
+        return;
+      }
+
+      setIsGenerating(false);
+      setStatus("hair_selecting");
+      setGenerationError(message);
+    };
+
+    const finalizeResults = (nextStates: HairPollState[]) => {
+      const nextResults: StepResult[] = TEST_DUPLICATE_FIRST_HAIR_ONLY
+        ? selectedStyleIds.map((styleId) => ({
+            id: styleId,
+            blobUrl: nextStates[0]?.outputUrl ?? "",
+            downloaded: false,
+            selected: false,
+          }))
+        : nextStates.map((state) => ({
+            id: state.id,
+            blobUrl: state.outputUrl ?? "",
+            predictionId: state.predictionId,
+            downloaded: false,
+            selected: false,
+          }));
+
+      setHairChosen(selectedStyleIds);
+      setHairResults(nextResults);
+      setResultCards(nextResults);
+      setIsGenerating(false);
+    };
+
+    const tick = async () => {
+      if (cancelled) {
+        return;
+      }
+
+      pollAttemptRef.current += 1;
+      if (pollAttemptRef.current > HAIR_POLL_MAX_ATTEMPTS) {
+        stopWithError(lang === "ko" ? "헤어 생성 시간이 초과되었습니다." : "Hair generation timed out.");
         return;
       }
 
       try {
+        const currentStates = predictionStatesRef.current;
         const nextStates = await Promise.all(
-          predictionStates.map(async (state) => {
+          currentStates.map(async (state) => {
             if (state.outputUrl || state.failed) {
               return state;
             }
 
-            const res = await fetch(`/api/hair/poll?predictionId=${state.predictionId}`);
+            const res = await fetch(`/api/hair/poll?predictionId=${state.predictionId}`, {
+              cache: "no-store",
+            });
+            const data = (await res.json().catch(() => ({}))) as {
+              status?: string;
+              outputUrl?: string;
+              error?: string;
+              message?: string;
+            };
+
             if (!res.ok) {
-              return state;
+              throw new Error(data.error || data.message || "hair_poll_failed");
             }
 
-            const data = (await res.json()) as { status: string; outputUrl?: string };
+            if (data.status === "failed" || data.status === "canceled") {
+              return {
+                ...state,
+                failed: true,
+              };
+            }
+
             return {
               ...state,
               outputUrl: data.outputUrl ?? null,
-              failed: data.status === "failed" || data.status === "canceled",
+              failed: false,
             };
           })
         );
 
+        if (cancelled) {
+          return;
+        }
+
+        predictionStatesRef.current = nextStates;
         setPredictionStates(nextStates);
 
         const hasFailure = nextStates.some((state) => state.failed);
         if (hasFailure) {
-          clearInterval(interval);
-          setIsGenerating(false);
-          setGenerationError(lang === "ko" ? "헤어 생성 중 일부 결과가 실패했습니다." : "One of the hair generations failed.");
+          stopWithError(
+            lang === "ko"
+              ? "Replicate 헤어 생성이 실패했습니다. 다른 스타일이나 사진으로 다시 시도해 주세요."
+              : "Replicate hair generation failed. Try a different photo or hairstyle."
+          );
           return;
         }
 
         const allCompleted = nextStates.every((state) => state.outputUrl);
-        if (!allCompleted) {
-          return;
+        if (allCompleted) {
+          finalizeResults(nextStates);
         }
-
-        const nextResults: StepResult[] = TEST_DUPLICATE_FIRST_HAIR_ONLY
-          ? selectedStyleIds.map((styleId) => ({
-              id: styleId,
-              blobUrl: nextStates[0]?.outputUrl ?? "",
-              downloaded: false,
-              selected: false,
-            }))
-          : nextStates.map((state) => ({
-              id: state.id,
-              blobUrl: state.outputUrl ?? "",
-              predictionId: state.predictionId, // pass predictionId along
-              downloaded: false,
-              selected: false,
-            }));
-
-        setHairChosen(selectedStyleIds);
-        setHairResults(nextResults);
-        setResultCards(nextResults);
-        setIsGenerating(false);
-        clearInterval(interval);
-
-      } catch {
-        // retry
+      } catch (error) {
+        const message =
+          error instanceof Error && error.message !== "hair_poll_failed"
+            ? error.message
+            : lang === "ko"
+              ? "Replicate 상태 확인에 실패했습니다. 잠시 후 다시 시도해 주세요."
+              : "Unable to check Replicate job status. Please try again.";
+        stopWithError(message);
       }
-    }, 3000);
+    };
 
-    return () => clearInterval(interval);
+    void tick();
+    const interval = window.setInterval(() => {
+      void tick();
+    }, HAIR_POLL_INTERVAL_MS);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
   }, [
     isGenerating,
     lang,
-    pickHair,
     predictionStates,
-    router,
     selectedStyleIds,
     setHairChosen,
-    setHairPreviewUrl,
     setHairResults,
     setStatus,
   ]);
@@ -136,6 +192,8 @@ export function HairFlow() {
     setGenerationError("");
     setResultCards([]);
     setPredictionStates([]);
+    predictionStatesRef.current = [];
+    pollAttemptRef.current = 0;
     setSelectedStyleIds((current) => {
       if (current.includes(id)) {
         return current.filter((item) => item !== id);
@@ -157,6 +215,8 @@ export function HairFlow() {
     setGenerationError("");
     setResultCards([]);
     setPredictionStates([]);
+    predictionStatesRef.current = [];
+    pollAttemptRef.current = 0;
     setIsGenerating(true);
     setStatus("hair_processing");
 
@@ -206,11 +266,18 @@ export function HairFlow() {
         })
       );
 
+      predictionStatesRef.current = responses;
       setPredictionStates(responses);
     } catch (error) {
       setIsGenerating(false);
       setStatus("hair_selecting");
-      setGenerationError(lang === "ko" ? "헤어 생성 시작에 실패했습니다." : "Unable to start hair generation.");
+      setGenerationError(
+        error instanceof Error && error.message && error.message !== "hair_preview_failed"
+          ? error.message
+          : lang === "ko"
+            ? "헤어 생성 시작에 실패했습니다."
+            : "Unable to start hair generation."
+      );
     }
   }
 
