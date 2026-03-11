@@ -17,7 +17,7 @@ type HairPollState = {
   failed: boolean;
 };
 
-const TEST_DUPLICATE_FIRST_HAIR_ONLY = true;
+const TEST_DUPLICATE_FIRST_HAIR_ONLY = false;
 
 export function HairFlow() {
   const params = useParams<{ lang: string }>();
@@ -112,28 +112,14 @@ export function HairFlow() {
         setIsGenerating(false);
         clearInterval(interval);
 
-        if (TEST_DUPLICATE_FIRST_HAIR_ONLY && nextResults[0]) {
-          setHairPreviewUrl(nextResults[0].blobUrl);
-          pickHair(nextResults[0].id);
-          router.push(`/${lang}/create/outfit`);
-        }
+
       } catch {
         // retry
       }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [
-    isGenerating,
-    lang,
-    pickHair,
-    predictionStates,
-    router,
-    selectedStyleIds,
-    setHairChosen,
-    setHairPreviewUrl,
-    setHairResults,
-  ]);
+  }, [isGenerating, lang, predictionStates, selectedStyleIds, setHairChosen, setHairResults]);
 
   function toggleStyle(id: string) {
     setGenerationError("");

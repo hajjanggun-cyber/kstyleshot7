@@ -18,7 +18,17 @@ export function DoneFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
-  const store = useCreateStore();
+  const {
+    compositePredictionId,
+    compositeUrl,
+    setCompositeUrl,
+    setStatus,
+    hairPreviewUrl,
+    photoBlobUrl,
+    hair,
+    outfit,
+    reset,
+  } = useCreateStore();
 
   const [downloading, setDownloading] = useState(false);
   const [downloadingHairId, setDownloadingHairId] = useState<string | null>(null);
@@ -26,8 +36,7 @@ export function DoneFlow() {
   const [finalError, setFinalError] = useState(false);
 
   useEffect(() => {
-    const predId = store.compositePredictionId;
-    if (!predId || store.compositeUrl) {
+    if (!compositePredictionId || compositeUrl) {
       return;
     }
 
@@ -41,15 +50,15 @@ export function DoneFlow() {
       }
 
       try {
-        const res = await fetch(`/api/final/poll?predictionId=${predId}`);
+        const res = await fetch(`/api/final/poll?predictionId=${compositePredictionId}`);
         if (!res.ok) {
           return;
         }
 
         const data = (await res.json()) as { status: string; outputUrl?: string };
         if (data.outputUrl) {
-          store.setCompositeUrl(data.outputUrl);
-          store.setStatus("completed");
+          setCompositeUrl(data.outputUrl);
+          setStatus("completed");
           clearInterval(interval);
         } else if (data.status === "failed" || data.status === "canceled") {
           clearInterval(interval);
@@ -61,16 +70,16 @@ export function DoneFlow() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [store]);
+  }, [compositePredictionId, compositeUrl, setCompositeUrl, setStatus]);
 
   const hairName =
-    hairStyles.find((item) => item.id === store.hair.picked)?.name ?? store.hair.picked ?? "-";
+    hairStyles.find((item) => item.id === hair.picked)?.name ?? hair.picked ?? "-";
   const selectedReference =
-    referenceTemplates.find((item) => item.id === store.outfit.chosen[0]) ?? null;
-  const resultUrl = store.compositeUrl ?? store.hairPreviewUrl ?? store.photoBlobUrl ?? null;
-  const hairDownloadItems = store.hair.chosen
+    referenceTemplates.find((item) => item.id === outfit.chosen[0]) ?? null;
+  const resultUrl = compositeUrl ?? hairPreviewUrl ?? photoBlobUrl ?? null;
+  const hairDownloadItems = hair.chosen
     .map((id) => {
-      const result = store.hair.results.find((item) => item.id === id);
+      const result = hair.results.find((item) => item.id === id);
       const style = hairStyles.find((item) => item.id === id);
       return result
         ? {
@@ -83,9 +92,9 @@ export function DoneFlow() {
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   function clearAndReset() {
-    revokeIfBlobUrl(store.photoBlobUrl);
-    store.hair.results.forEach((result) => revokeIfBlobUrl(result.blobUrl));
-    store.reset();
+    revokeIfBlobUrl(photoBlobUrl);
+    hair.results.forEach((result) => revokeIfBlobUrl(result.blobUrl));
+    reset();
   }
 
   function handleTryAnother() {
