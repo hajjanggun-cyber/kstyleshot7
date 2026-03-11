@@ -10,15 +10,16 @@ export type JobStatus =
   | "outfit_selecting"
   | "outfit_processing"
   | "outfit_completed"
-  | "cutout_processing"
-  | "cutout_completed"
-  | "location_selecting"
-  | "composite_completed"
+  | "final_processing"
+  | "cutout_processing"   // legacy — kept for backward compat
+  | "cutout_completed"    // legacy
+  | "location_selecting"  // legacy
+  | "composite_completed" // legacy
   | "completed"
   | "failed"
   | "refunded";
 
-export type Step = "hair" | "outfit" | "cutout" | "location";
+export type Step = "hair" | "outfit";
 
 export type StepResult = {
   id: string;
@@ -41,7 +42,6 @@ export type CreateSessionState = {
   photoBlobUrl: string | null;
   hair: SelectionState;
   outfit: SelectionState;
-  location: SelectionState;
 };
 
 export type HairCategory = "daily" | "performance" | "trendy" | "special" | "premium";

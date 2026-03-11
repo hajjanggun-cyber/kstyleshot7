@@ -19,9 +19,9 @@ export function DoneFlow() {
   const router = useRouter();
   const lang = params.lang ?? "en";
   const {
-    compositePredictionId,
-    compositeUrl,
-    setCompositeUrl,
+    finalPredictionId,
+    finalImageUrl,
+    setFinalImageUrl,
     setStatus,
     hairPreviewUrl,
     photoBlobUrl,
@@ -36,7 +36,7 @@ export function DoneFlow() {
   const [finalError, setFinalError] = useState(false);
 
   useEffect(() => {
-    if (!compositePredictionId || compositeUrl) {
+    if (!finalPredictionId || finalImageUrl) {
       return;
     }
 
@@ -50,14 +50,14 @@ export function DoneFlow() {
       }
 
       try {
-        const res = await fetch(`/api/final/poll?predictionId=${compositePredictionId}`);
+        const res = await fetch(`/api/final/poll?predictionId=${finalPredictionId}`);
         if (!res.ok) {
           return;
         }
 
         const data = (await res.json()) as { status: string; outputUrl?: string };
         if (data.outputUrl) {
-          setCompositeUrl(data.outputUrl);
+          setFinalImageUrl(data.outputUrl);
           setStatus("completed");
           clearInterval(interval);
         } else if (data.status === "failed" || data.status === "canceled") {
@@ -70,13 +70,13 @@ export function DoneFlow() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [compositePredictionId, compositeUrl, setCompositeUrl, setStatus]);
+  }, [finalPredictionId, finalImageUrl, setFinalImageUrl, setStatus]);
 
   const hairName =
     hairStyles.find((item) => item.id === hair.picked)?.name ?? hair.picked ?? "-";
   const selectedReference =
     referenceTemplates.find((item) => item.id === outfit.chosen[0]) ?? null;
-  const resultUrl = compositeUrl ?? hairPreviewUrl ?? photoBlobUrl ?? null;
+  const resultUrl = finalImageUrl ?? hairPreviewUrl ?? photoBlobUrl ?? null;
   const hairDownloadItems = hair.chosen
     .map((id) => {
       const result = hair.results.find((item) => item.id === id);

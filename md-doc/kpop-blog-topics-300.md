@@ -226,7 +226,7 @@ Role 표기:
 - Keyword: KO `한강 야경 사진 명소` | EN `best han river night photo spots`
 - Subkeywords: KO `한강 다리 야경`, `반영 사진`, `서울 강변 야경` | EN `han river bridge views`, `reflection night photos`, `seoul river nightscape`
 
-### [027] Sub [ ]
+### [027] Sub [v]
 - KO: 여의도 한강공원 피크닉 준비 가이드
 - EN: Yeouido Han River Picnic Guide
 - Keyword: KO `여의도 한강공원 피크닉` | EN `yeouido han river picnic guide`

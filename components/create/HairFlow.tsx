@@ -102,6 +102,7 @@ export function HairFlow() {
           : nextStates.map((state) => ({
               id: state.id,
               blobUrl: state.outputUrl ?? "",
+              predictionId: state.predictionId, // pass predictionId along
               downloaded: false,
               selected: false,
             }));
@@ -213,9 +214,21 @@ export function HairFlow() {
     }
   }
 
-  function handlePickResult(result: StepResult) {
+  async function handlePickResult(result: StepResult & { predictionId?: string }) {
     setHairPreviewUrl(result.blobUrl);
     pickHair(result.id);
+
+    // ✅ Fire-and-forget call to the selection endpoint
+    fetch("/api/hair/select", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        hairId: result.id,
+        previewUrl: result.blobUrl,
+        predictionId: result.predictionId,
+      }),
+    }).catch(console.error);
+
     router.push(`/${lang}/create/outfit`);
   }
 

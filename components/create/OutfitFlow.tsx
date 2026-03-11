@@ -16,8 +16,8 @@ export function OutfitFlow() {
     hairPreviewUrl,
     setOutfitChosen,
     pickOutfit,
-    setCompositePredictionId,
-    setCompositeUrl,
+    setFinalPredictionId,
+    setFinalImageUrl,
     setStatus,
   } = useCreateStore();
 
@@ -32,7 +32,7 @@ export function OutfitFlow() {
 
     setIsSubmitting(true);
     setSubmitError("");
-    setCompositeUrl(null);
+    setFinalImageUrl(null);
 
     try {
       const res = await fetch("/api/final/render", {
@@ -51,8 +51,8 @@ export function OutfitFlow() {
 
       setOutfitChosen([selectedId]);
       pickOutfit(selectedId);
-      setStatus("composite_completed");
-      setCompositePredictionId(data.predictionId);
+      setStatus("final_processing");
+      setFinalPredictionId(data.predictionId);
       router.push(`/${lang}/create/done`);
     } catch {
       setSubmitError(lang === "ko" ? "최종 합성 시작에 실패했습니다." : "Unable to start the final render.");

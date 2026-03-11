@@ -15,22 +15,10 @@ type CreateActions = {
   setHairPredictionId: (id: string | null) => void;
   setHairResults: (results: StepResult[]) => void;
   pickHair: (id: string) => void;
-  setFullBodyUrl: (url: string | null) => void;
-  setFullBodyPredictionId: (id: string | null) => void;
   setOutfitChosen: (ids: string[]) => void;
-  setOutfitPreviewUrl: (url: string | null) => void;
-  setOutfitPredictionId: (id: string | null) => void;
-  setBgRemovedUrl: (url: string | null) => void;
-  setBgRemovedPredictionId: (id: string | null) => void;
-  setCompositeUrl: (url: string | null) => void;
-  setCompositePredictionId: (id: string | null) => void;
-  setIclightUrl: (url: string | null) => void;
-  setIclightPredictionId: (id: string | null) => void;
-  setOutfitResults: (results: StepResult[]) => void;
   pickOutfit: (id: string) => void;
-  setLocationChosen: (ids: string[]) => void;
-  setLocationResults: (results: StepResult[]) => void;
-  pickLocation: (id: string) => void;
+  setFinalImageUrl: (url: string | null) => void;
+  setFinalPredictionId: (id: string | null) => void;
   reset: () => void;
 };
 
@@ -50,7 +38,6 @@ const initialState: CreateSessionState = {
   photoBlobUrl: null,
   hair: createEmptySelection(),
   outfit: createEmptySelection(),
-  location: createEmptySelection()
 };
 
 export const useCreateStore = create<
@@ -58,38 +45,22 @@ export const useCreateStore = create<
     hairColor: string | null;
     hairPreviewUrl: string | null;
     hairPredictionId: string | null;
-    outfitPreviewUrl: string | null;
-    outfitPredictionId: string | null;
-    bgRemovedUrl: string | null;
-    bgRemovedPredictionId: string | null;
-    compositeUrl: string | null;
-    compositePredictionId: string | null;
-    iclightUrl: string | null;
-    iclightPredictionId: string | null;
-    fullBodyUrl: string | null;
-    fullBodyPredictionId: string | null;
+    finalImageUrl: string | null;
+    finalPredictionId: string | null;
   } & CreateActions
 >((set) => ({
   ...initialState,
   hairColor: null,
   hairPreviewUrl: null,
   hairPredictionId: null,
-  outfitPreviewUrl: null,
-  outfitPredictionId: null,
-  bgRemovedUrl: null,
-  bgRemovedPredictionId: null,
-  compositeUrl: null,
-  compositePredictionId: null,
-  iclightUrl: null,
-  iclightPredictionId: null,
-  fullBodyUrl: null,
-  fullBodyPredictionId: null,
+  finalImageUrl: null,
+  finalPredictionId: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
   setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
   setStatus: (status) => set({ status }),
   setPhotoBlobUrl: (photoBlobUrl) => set({ photoBlobUrl }),
   setHairChosen: (ids) =>
-    set((state) => ({
+    set(() => ({
       hair: { ...createEmptySelection(), chosen: ids.slice(0, 2) },
       status: "hair_selecting"
     })),
@@ -107,63 +78,26 @@ export const useCreateStore = create<
       status: "outfit_selecting"
     })),
   setOutfitChosen: (ids) =>
-    set((state) => ({
+    set(() => ({
       outfit: { ...createEmptySelection(), chosen: ids.slice(0, 2) },
       status: "outfit_selecting"
-    })),
-  setOutfitPreviewUrl: (url) => set({ outfitPreviewUrl: url }),
-  setOutfitPredictionId: (id) => set({ outfitPredictionId: id }),
-  setBgRemovedUrl: (url) => set({ bgRemovedUrl: url }),
-  setBgRemovedPredictionId: (id) => set({ bgRemovedPredictionId: id }),
-  setCompositeUrl: (url) => set({ compositeUrl: url }),
-  setCompositePredictionId: (id) => set({ compositePredictionId: id }),
-  setIclightUrl: (url) => set({ iclightUrl: url }),
-  setIclightPredictionId: (id) => set({ iclightPredictionId: id }),
-  setFullBodyUrl: (url) => set({ fullBodyUrl: url }),
-  setFullBodyPredictionId: (id) => set({ fullBodyPredictionId: id }),
-  setOutfitResults: (results) =>
-    set((state) => ({
-      outfit: { ...state.outfit, results },
-      status: "outfit_completed"
     })),
   pickOutfit: (id) =>
     set((state) => ({
       outfit: { ...state.outfit, picked: id },
-      status: "cutout_processing"
+      status: "final_processing"
     })),
-  setLocationChosen: (ids) =>
-    set((state) => ({
-      location: { ...createEmptySelection(), chosen: ids.slice(0, 2) },
-      status: "location_selecting"
-    })),
-  setLocationResults: (results) =>
-    set((state) => ({
-      location: { ...state.location, results },
-      status: "composite_completed"
-    })),
-  pickLocation: (id) =>
-    set((state) => ({
-      location: { ...state.location, picked: id },
-      status: "completed"
-    })),
+  setFinalImageUrl: (url) => set({ finalImageUrl: url }),
+  setFinalPredictionId: (id) => set({ finalPredictionId: id }),
   reset: () =>
     set({
       ...initialState,
       hair: createEmptySelection(),
       outfit: createEmptySelection(),
-      location: createEmptySelection(),
       hairColor: null,
       hairPreviewUrl: null,
       hairPredictionId: null,
-      outfitPreviewUrl: null,
-      outfitPredictionId: null,
-      bgRemovedUrl: null,
-      bgRemovedPredictionId: null,
-      compositeUrl: null,
-      compositePredictionId: null,
-      iclightUrl: null,
-      iclightPredictionId: null,
-      fullBodyUrl: null,
-      fullBodyPredictionId: null,
+      finalImageUrl: null,
+      finalPredictionId: null,
     })
 }));
