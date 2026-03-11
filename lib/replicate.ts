@@ -4,6 +4,11 @@ const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "
 
 type JsonRecord = Record<string, unknown>;
 
+type DecodedDataUrl = {
+  mimeType: string;
+  buffer: Buffer;
+};
+
 function isRecord(value: unknown): value is JsonRecord {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
@@ -56,6 +61,24 @@ function extractOutputUrl(payload: unknown): string | null {
   }
 
   return null;
+}
+
+function decodeDataUrl(dataUrl: string): DecodedDataUrl {
+  const match = dataUrl.match(/^data:([^;,]+);base64,(.+)$/);
+  if (!match) {
+    throw new ReplicateApiError("Invalid image data URL format.", 400);
+  }
+
+  const [, mimeType, base64] = match;
+
+  try {
+    return {
+      mimeType,
+      buffer: Buffer.from(base64, "base64"),
+    };
+  } catch {
+    throw new ReplicateApiError("Unable to decode image data URL.", 400);
+  }
 }
 
 function assertReplicateEnv(): void {
@@ -121,7 +144,7 @@ function getHairPredictionEndpoint(): string {
 }
 
 async function startPrediction(input: {
-  photoDataUrl: string;
+  inputImage: string;
   haircut: string;
   hairColor: string;
   wait?: boolean;
@@ -141,7 +164,7 @@ async function startPrediction(input: {
       input: {
         haircut: input.haircut,
         hair_color: input.hairColor,
-        input_image: input.photoDataUrl,
+        input_image: input.inputImage,
         aspect_ratio: "match_input_image",
         output_format: "png",
         safety_tolerance: 2,
@@ -259,7 +282,7 @@ export async function startHairVariantJobs(input: StartHairJobInput): Promise<Ha
   return Promise.all(
     input.variants.map((variant) =>
       startPrediction({
-        photoDataUrl: input.photoDataUrl,
+        inputImage: input.photoDataUrl,
         haircut: variant.haircut.trim(),
         hairColor: variant.hairColor?.trim() || DEFAULT_HAIR_COLOR
       })
@@ -279,8 +302,11 @@ export async function startHairPreviewJob(input: {
     throw new ReplicateApiError("photoDataUrl must be an image data URL.", 400);
   }
 
+  const decodedImage = decodeDataUrl(input.photoDataUrl);
+  const uploadedImageUrl = await uploadToReplicateFiles(decodedImage.buffer, decodedImage.mimeType);
+
   const { predictionId } = await startPrediction({
-    photoDataUrl: input.photoDataUrl,
+    inputImage: uploadedImageUrl,
     haircut: input.haircutName,
     hairColor: input.hairColor || DEFAULT_HAIR_COLOR,
     wait: false,

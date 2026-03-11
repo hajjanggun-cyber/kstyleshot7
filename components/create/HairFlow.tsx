@@ -187,7 +187,8 @@ export function HairFlow() {
           });
 
           if (!res.ok) {
-            throw new Error("hair_preview_failed");
+            const errorData = (await res.json().catch(() => ({}))) as { error?: string; message?: string };
+            throw new Error(errorData.error || errorData.message || "hair_preview_failed");
           }
 
           const data = (await res.json()) as { predictionId?: string };
@@ -205,7 +206,7 @@ export function HairFlow() {
       );
 
       setPredictionStates(responses);
-    } catch {
+    } catch (error) {
       setIsGenerating(false);
       setStatus("hair_selecting");
       setGenerationError(lang === "ko" ? "헤어 생성 시작에 실패했습니다." : "Unable to start hair generation.");
