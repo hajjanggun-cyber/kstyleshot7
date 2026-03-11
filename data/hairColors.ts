@@ -12,7 +12,7 @@ export const hairColors: HairColor[] = [
     nameKo: "자연블랙",
     nameEn: "Natural Black",
     swatch: "#1a1a1a",
-    replicateValue: "Natural Black",
+    replicateValue: "Black",
   },
   {
     id: "dark-brown",
@@ -40,13 +40,13 @@ export const hairColors: HairColor[] = [
     nameKo: "하이라이트",
     nameEn: "Highlight",
     swatch: "linear-gradient(135deg, #3b1f0d 50%, #d4a96a 50%)",
-    replicateValue: "Highlight",
+    replicateValue: "Golden Blonde",
   },
   {
     id: "ombre",
     nameKo: "옴브레 투톤",
     nameEn: "Ombre",
     swatch: "linear-gradient(180deg, #1a1a1a 0%, #9c6b3c 100%)",
-    replicateValue: "Ombre",
+    replicateValue: "Caramel",
   },
 ];
