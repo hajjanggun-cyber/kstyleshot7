@@ -42,6 +42,7 @@ export function HairFlow() {
   const [generationError, setGenerationError] = useState("");
   const [resultCards, setResultCards] = useState<StepResult[]>([]);
   const [predictionStates, setPredictionStates] = useState<HairPollState[]>([]);
+  const [pollSeed, setPollSeed] = useState(0);
   const predictionStatesRef = useRef<HairPollState[]>([]);
   const pollAttemptRef = useRef(0);
 
@@ -50,7 +51,7 @@ export function HairFlow() {
   }, [predictionStates]);
 
   useEffect(() => {
-    if (!isGenerating || predictionStates.length === 0) {
+    if (!isGenerating || predictionStatesRef.current.length === 0) {
       return;
     }
 
@@ -181,7 +182,7 @@ export function HairFlow() {
   }, [
     isGenerating,
     lang,
-    predictionStates,
+    pollSeed,
     selectedStyleIds,
     setHairChosen,
     setHairResults,
@@ -192,6 +193,7 @@ export function HairFlow() {
     setGenerationError("");
     setResultCards([]);
     setPredictionStates([]);
+    setPollSeed(0);
     predictionStatesRef.current = [];
     pollAttemptRef.current = 0;
     setSelectedStyleIds((current) => {
@@ -215,6 +217,7 @@ export function HairFlow() {
     setGenerationError("");
     setResultCards([]);
     setPredictionStates([]);
+    setPollSeed(0);
     predictionStatesRef.current = [];
     pollAttemptRef.current = 0;
     setIsGenerating(true);
@@ -268,6 +271,7 @@ export function HairFlow() {
 
       predictionStatesRef.current = responses;
       setPredictionStates(responses);
+      setPollSeed((current) => current + 1);
     } catch (error) {
       setIsGenerating(false);
       setStatus("hair_selecting");

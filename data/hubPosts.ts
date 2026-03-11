@@ -59,7 +59,7 @@ export const hubPosts: HubPost[] = [
   },
   {
     slug: "insadong-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "한국 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "인사동\n전통거리 가이드",
@@ -72,7 +72,7 @@ export const hubPosts: HubPost[] = [
   },
   {
     slug: "garosu-gil-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "한국 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "가로수길\n카페 가이드",
@@ -140,7 +140,7 @@ export const hubPostsEn: HubPost[] = [
   },
   {
     slug: "insadong-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "Seoul Locations",
     categoryStyle: "white-on-pink",
     title: "Insadong\nCultural Street",
@@ -153,7 +153,7 @@ export const hubPostsEn: HubPost[] = [
   },
   {
     slug: "garosu-gil-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "Seoul Locations",
     categoryStyle: "white-on-pink",
     title: "Garosu-gil\nCafe Guide",
