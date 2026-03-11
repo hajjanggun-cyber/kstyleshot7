@@ -224,6 +224,27 @@ export function HairFlow() {
 
   return (
     <div className="hr-root">
+      {isGenerating ? (
+        <div className="ot-synth-overlay">
+          <div className="ot-synth-ring" />
+          <div>
+            <p className="ot-synth-title">
+              {lang === "ko"
+                ? "얼굴선에 맞춰 헤어를 정교하게 맞추는 중"
+                : "Refining the hairstyle to match your features"}
+            </p>
+            <p className="ot-synth-sub">
+              {lang === "ko"
+                ? "원래 인상은 그대로 두고, 선택한 스타일만 자연스럽게 입히고 있어요.\n잠시만 기다려 주세요."
+                : "Keeping your original look intact while applying the selected style naturally.\nJust a moment."}
+            </p>
+          </div>
+          <p className="ot-synth-badge">
+            {lang === "ko" ? "헤어 완성 중" : "Hair in progress"}
+          </p>
+        </div>
+      ) : null}
+
       <nav className="hr-nav">
         <Link className="hr-back-btn" href={`/${lang}/create/upload`}>←</Link>
         <span className="hr-step-tag">STEP 2 / 4</span>
@@ -391,7 +412,7 @@ export function HairFlow() {
           type="button"
         >
           {isGenerating
-            ? lang === "ko" ? "헤어 2개 생성 중..." : "Generating hair previews..."
+            ? lang === "ko" ? "헤어를 정리하는 중..." : "Refining your hair..."
             : selectedStyleIds.length === 2
               ? lang === "ko" ? "헤어 2개 생성" : "Generate 2 previews"
               : lang === "ko" ? "헤어 2개를 선택하세요" : "Select 2 hairstyles"}

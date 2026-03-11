@@ -1,5 +1,37 @@
 =======
 
+Added At: 2026-03-11 14:49:52 KST
+
+=======
+
+# 추가 메모: 최종 합성에서 얼굴이 너무 크게 나올 때의 프롬프트 보정 방향
+
+- 현재 `close-up selfie`, `tightly framed from the chest up` 같은 문구는 얼굴을 크게 나오게 유도한다.
+- 배경 대비 얼굴 비율을 줄이고 싶으면 이 문구를 약하게 바꾸거나 제거해야 한다.
+- 대신 `waist-up selfie`, `upper-body selfie with more background visible`, `arm-extended smartphone selfie composition` 같은 문구를 쓰는 편이 낫다.
+- `the subject occupies only 35-45% of the frame`처럼 프레임 점유율을 직접 지시하는 것도 도움이 된다.
+- `show more of the palace background clearly`처럼 배경 노출량을 명시하면 보정 효과가 더 좋다.
+
+## 예시 보정 방향
+
+- 제거 또는 약화:
+  - `close-up selfie`
+  - `tightly framed from the chest up`
+
+- 추가 권장:
+  - `waist-up selfie`
+  - `more of the background visible`
+  - `the subject occupies about 35-45% of the frame`
+  - `camera held slightly farther from the subject`
+
+## 중요한 한계
+
+- 프롬프트만으로는 어느 정도까지만 보정 가능하다.
+- 베이스 이미지 자체가 이미 얼굴 위주 구도라면 최종 모델도 그 구도를 완전히 뒤집기 어렵다.
+- 따라서 1차 해결은 프롬프트 수정이 맞지만, 효과가 부족하면 베이스 이미지에 바깥 여백을 추가하는 방식까지 검토해야 한다.
+
+=======
+
 Updated At: 2026-03-09 23:59 KST
 
 =======

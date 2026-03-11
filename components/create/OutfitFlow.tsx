@@ -80,6 +80,27 @@ export function OutfitFlow() {
 
   return (
     <div className="ot-root">
+      {isSubmitting ? (
+        <div className="ot-synth-overlay">
+          <div className="ot-synth-ring" />
+          <div>
+            <p className="ot-synth-title">
+              {lang === "ko"
+                ? "선택한 무드로 화보를 완성하는 중"
+                : "Composing your final editorial look"}
+            </p>
+            <p className="ot-synth-sub">
+              {lang === "ko"
+                ? "헤어는 유지한 채 의상, 배경, 분위기를 한 장의 결과로 정리하고 있어요.\n잠시만 기다려 주세요."
+                : "Keeping your hair intact while styling the outfit, backdrop, and mood into one final image.\nJust a moment."}
+            </p>
+          </div>
+          <p className="ot-synth-badge">
+            {lang === "ko" ? "최종 화보 준비 중" : "Final render starting"}
+          </p>
+        </div>
+      ) : null}
+
       <nav className="ot-nav">
         <Link className="ot-back-btn" href={`/${lang}/create/hair`}>←</Link>
         <h2 className="ot-nav-title">{lang === "ko" ? "참조 이미지 선택" : "Choose a reference"}</h2>

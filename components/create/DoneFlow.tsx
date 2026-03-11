@@ -141,7 +141,11 @@ export function DoneFlow() {
           ) : (
             <div className="dn-result-ph">
               <span className="ot-compare-spinner" />
-              <p>{lang === "ko" ? "최종 화보를 생성하는 중..." : "Creating your final editorial..."}</p>
+              <p>
+                {lang === "ko"
+                  ? "헤어는 유지한 채 의상, 배경, 분위기를 화보 한 장으로 정리하는 중..."
+                  : "Keeping your hair intact while composing the outfit, backdrop, and mood into one final editorial..."}
+              </p>
             </div>
           )}
           <div className="dn-result-badge">
