@@ -11,7 +11,17 @@ export async function POST(request: Request) {
     return jsonError(requestId, { status: 503, message: "Replicate not configured." });
   }
 
-  const body = await request.json().catch(() => ({})) as Record<string, unknown>;
+  let body: Record<string, unknown>;
+
+  try {
+    body = (await request.json()) as Record<string, unknown>;
+  } catch {
+    return jsonError(requestId, {
+      status: 400,
+      message: "Invalid or oversized request body.",
+    });
+  }
+
   const photoDataUrl = typeof body.photoDataUrl === "string" ? body.photoDataUrl : "";
   const haircutName = typeof body.haircutName === "string" ? body.haircutName.trim() : "";
   const hairColor = typeof body.hairColor === "string" ? body.hairColor.trim() : "Random";

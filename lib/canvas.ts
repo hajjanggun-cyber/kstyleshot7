@@ -5,7 +5,7 @@
  * - Full body is preserved so outfit AI can detect body pose afterward
  * - Downscales only if longest side exceeds MAX_DIMENSION
  */
-const MAX_DIMENSION = 1024;
+const MAX_DIMENSION = 768;
 
 export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -37,7 +37,7 @@ export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
       // Draw original image at full scaled size, starting after top padding
       ctx.drawImage(img, 0, topPad, drawW, drawH);
 
-      resolve(canvas.toDataURL("image/jpeg", 0.92));
+      resolve(canvas.toDataURL("image/jpeg", 0.82));
     };
     img.onerror = reject;
     img.src = blobUrl;
