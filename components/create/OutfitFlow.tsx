@@ -1,246 +1,77 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
 
-import { outfits } from "@/data/outfits";
+import { referenceTemplates } from "@/data/referenceTemplates";
 import { useCreateStore } from "@/store/createStore";
-
-type Category = "stage" | "street" | "award";
-
-const CATEGORY_KEYS: { key: Category; labelKey: "cat1" | "cat2" | "cat3" }[] = [
-  { key: "stage", labelKey: "cat1" },
-  { key: "street", labelKey: "cat2" },
-  { key: "award", labelKey: "cat3" },
-];
-
-const COMPLETE_LOOK = [
-  {
-    title: "Visual Inspiration",
-    sub: 'How the selected outfit styles on stage',
-    color: "linear-gradient(160deg, #0a0a1a, #1a2a40, #0d2040)",
-  },
-  {
-    title: "Street Lookbook",
-    sub: "Mix & match with your current selection",
-    color: "linear-gradient(160deg, #1a3a1a, #2a5a30, #1a4020)",
-  },
-];
 
 export function OutfitFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
   const lang = params.lang ?? "en";
-  const t = useTranslations("flow.outfit");
-
   const {
-    photoBlobUrl,
     hair,
     hairPreviewUrl,
-    hairPredictionId,
-    setHairPreviewUrl,
     setOutfitChosen,
-    setOutfitPreviewUrl,
-    setOutfitPredictionId,
     pickOutfit,
+    setCompositePredictionId,
+    setCompositeUrl,
     setStatus,
-    fullBodyUrl,
-    fullBodyPredictionId,
-    setFullBodyUrl,
   } = useCreateStore();
 
-  const [activeCategory, setActiveCategory] = useState<Category>("stage");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [isSynthesizing, setIsSynthesizing] = useState(false);
-  const [synthPredictionId, setSynthPredictionId] = useState<string | null>(null);
-  const [pendingChosenId, setPendingChosenId] = useState<string | null>(null);
-  const [synthError, setSynthError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  // Poll Replicate for hair preview result
-  useEffect(() => {
-    if (hairPreviewUrl || !hairPredictionId) return;
+  async function handleGenerate() {
+    if (!selectedId || !hairPreviewUrl || isSubmitting) {
+      return;
+    }
 
-    let retries = 0;
-    const interval = setInterval(async () => {
-      retries += 1;
-      if (retries >= 40) { clearInterval(interval); return; }
-      try {
-        const res = await fetch(`/api/hair/poll?predictionId=${hairPredictionId}`);
-        if (!res.ok) return;
-        const data = await res.json() as { status: string; outputUrl?: string };
-        if (data.outputUrl) {
-          setHairPreviewUrl(data.outputUrl);
-          clearInterval(interval);
-        } else if (data.status === "failed" || data.status === "canceled") {
-          clearInterval(interval);
-        }
-      } catch {
-        // retry next tick
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [hairPreviewUrl, hairPredictionId, setHairPreviewUrl]);
-
-  // Background poll: body extend result — silently stores URL in store
-  useEffect(() => {
-    if (fullBodyUrl || !fullBodyPredictionId) return;
-
-    let retries = 0;
-    const interval = setInterval(async () => {
-      retries += 1;
-      if (retries >= 40) { clearInterval(interval); return; }
-      try {
-        const res = await fetch(`/api/body/poll?predictionId=${fullBodyPredictionId}`);
-        if (!res.ok) return;
-        const data = await res.json() as { status: string; outputUrl?: string };
-        if (data.outputUrl) {
-          setFullBodyUrl(data.outputUrl);
-          clearInterval(interval);
-        } else if (data.status === "failed" || data.status === "canceled") {
-          clearInterval(interval);
-        }
-      } catch { /* retry */ }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [fullBodyUrl, fullBodyPredictionId, setFullBodyUrl]);
-
-  // Poll FAL.ai for outfit synthesis result
-  useEffect(() => {
-    if (!synthPredictionId || !isSynthesizing) return;
-
-    let retries = 0;
-    const interval = setInterval(async () => {
-      retries += 1;
-      if (retries >= 40) {
-        setIsSynthesizing(false);
-        setSynthError(true);
-        clearInterval(interval);
-        return;
-      }
-      try {
-        const res = await fetch(`/api/outfit/poll?predictionId=${synthPredictionId}`);
-        if (!res.ok) return;
-        const data = await res.json() as { status: string; outputUrl?: string };
-        if (data.outputUrl) {
-          setOutfitPreviewUrl(data.outputUrl);
-          setOutfitPredictionId(synthPredictionId);
-          clearInterval(interval);
-          setIsSynthesizing(false);
-          if (pendingChosenId) {
-            navigateNext(pendingChosenId);
-          }
-        } else if (data.status === "failed") {
-          setSynthError(true);
-          setIsSynthesizing(false);
-          clearInterval(interval);
-        }
-      } catch {
-        // retry next tick
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [synthPredictionId, isSynthesizing, pendingChosenId]);
-
-  /** Called when full-body image is ready — submits to FAL outfit synthesis */
-  async function startOutfitSynth(modelImageUrl: string, chosen: string) {
-    const outfit = outfits.find((o) => o.id === chosen);
-    if (!outfit?.garmentImage) { navigateNext(chosen); return; }
-
-    setIsSynthesizing(true);
+    setIsSubmitting(true);
+    setSubmitError("");
+    setCompositeUrl(null);
 
     try {
-      // Convert cross-origin URL to dataURL if needed
-      let localUrl = modelImageUrl;
-      let blobToRevoke: string | null = null;
-      try {
-        if (modelImageUrl.startsWith("http")) {
-          const blob = await fetch(modelImageUrl).then((r) => r.blob());
-          localUrl = URL.createObjectURL(blob);
-          blobToRevoke = localUrl;
-        }
-        const photoDataUrl = await new Promise<string>((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            const ctx = canvas.getContext("2d");
-            if (!ctx) { reject(new Error("no ctx")); return; }
-            ctx.drawImage(img, 0, 0);
-            resolve(canvas.toDataURL("image/jpeg", 0.92));
-          };
-          img.onerror = reject;
-          img.src = localUrl;
-        });
+      const res = await fetch("/api/final/render", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          baseImageUrl: hairPreviewUrl,
+          referenceTemplateId: selectedId,
+        }),
+      });
 
-        const res = await fetch("/api/outfit/preview", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            photoDataUrl,
-            garmentImagePath: outfit.garmentImage,
-            clothType: outfit.clothType ?? "overall",
-          }),
-        });
-        const data = await res.json() as { predictionId?: string; error?: string };
-        if (!res.ok || !data.predictionId) {
-          setSynthError(true);
-          setIsSynthesizing(false);
-          return;
-        }
-        setSynthPredictionId(data.predictionId);
-      } finally {
-        if (blobToRevoke) URL.revokeObjectURL(blobToRevoke);
+      const data = (await res.json()) as { predictionId?: string; error?: string };
+      if (!res.ok || !data.predictionId) {
+        throw new Error(data.error || "final_render_failed");
       }
+
+      setOutfitChosen([selectedId]);
+      pickOutfit(selectedId);
+      setStatus("composite_completed");
+      setCompositePredictionId(data.predictionId);
+      router.push(`/${lang}/create/done`);
     } catch {
-      setSynthError(true);
-      setIsSynthesizing(false);
+      setSubmitError(lang === "ko" ? "최종 합성 시작에 실패했습니다." : "Unable to start the final render.");
+      setIsSubmitting(false);
     }
   }
 
-  function navigateNext(chosen: string) {
-    setOutfitChosen([chosen]);
-    pickOutfit(chosen);
-    setStatus("location_selecting");
-    router.push(`/${lang}/create/location`);
-  }
-
-  const filtered = outfits.filter((o) => o.category === activeCategory);
-  const selectedOutfit = outfits.find((o) => o.id === selectedId);
-
-  function handleSelect(id: string) {
-    setSelectedId(id === selectedId ? null : id);
-  }
-
-  function handleApply() {
-    const chosen = selectedId ?? "demo-outfit";
-    const outfit = outfits.find((o) => o.id === chosen);
-    if (!photoBlobUrl || !outfit?.garmentImage) { navigateNext(chosen); return; }
-
-    setSynthError(false);
-    setPendingChosenId(chosen);
-    // Use extended full body if ready, otherwise fall back to original photo
-    startOutfitSynth(fullBodyUrl ?? photoBlobUrl, chosen);
-  }
-
-  if (!hair.chosen.length) {
+  if (!hair.picked || !hairPreviewUrl) {
     return (
       <div className="ot-root">
         <nav className="ot-nav">
           <Link className="ot-back-btn" href={`/${lang}/create/hair`}>←</Link>
-          <h2 className="ot-nav-title">{t("navTitle")}</h2>
+          <h2 className="ot-nav-title">{lang === "ko" ? "참조 이미지 선택" : "Choose a reference"}</h2>
           <div className="ot-nav-spacer" />
         </nav>
         <div className="ot-missing">
-          <p>{t("noHair")}</p>
+          <p>{lang === "ko" ? "먼저 헤어 결과 1장을 선택해 주세요." : "Pick one hair result first."}</p>
           <Link className="ot-missing-link" href={`/${lang}/create/hair`}>
-            {t("goHair")}
+            {lang === "ko" ? "헤어로 이동" : "Go to hair"}
           </Link>
         </div>
       </div>
@@ -249,55 +80,12 @@ export function OutfitFlow() {
 
   return (
     <div className="ot-root">
-      {/* Outfit synthesis overlay */}
-      {isSynthesizing && (
-        <div className="ot-synth-overlay">
-          <div className="ot-synth-ring" />
-          <div>
-            <p className="ot-synth-title">
-              {lang === "ko" ? "AI 의상 합성 중" : "AI Outfit Styling"}
-            </p>
-            <p className="ot-synth-sub">
-              {lang === "ko"
-                ? "fal-ai/fashn으로 의상을 입히는 중이에요.\n잠깐만 기다려 주세요."
-                : "Applying outfit with fal-ai/fashn.\nThis usually takes about a minute."}
-            </p>
-          </div>
-          <p className="ot-synth-badge">✦ 2/2 AI Processing</p>
-        </div>
-      )}
-
-      {/* Error banner */}
-      {synthError && (
-        <div className="ot-synth-overlay">
-          <div>
-            <p className="ot-synth-title">
-              {lang === "ko" ? "의상 합성에 실패했어요" : "Outfit synthesis failed"}
-            </p>
-            <p className="ot-synth-sub">
-              {lang === "ko"
-                ? "다시 시도해주세요."
-                : "Please try again."}
-            </p>
-          </div>
-          <button
-            className="ot-synth-badge"
-            type="button"
-            onClick={() => { setSynthError(false); handleApply(); }}
-          >
-            {lang === "ko" ? "⟳ 재시도" : "⟳ Retry"}
-          </button>
-        </div>
-      )}
-
-      {/* Nav */}
       <nav className="ot-nav">
         <Link className="ot-back-btn" href={`/${lang}/create/hair`}>←</Link>
-        <h2 className="ot-nav-title">{t("navTitle")}</h2>
+        <h2 className="ot-nav-title">{lang === "ko" ? "참조 이미지 선택" : "Choose a reference"}</h2>
         <div className="ot-nav-spacer" />
       </nav>
 
-      {/* Progress dots — 3rd active */}
       <div className="ot-dots">
         <div className="ot-dot ot-dot--done" />
         <div className="ot-dot ot-dot--done" />
@@ -305,130 +93,64 @@ export function OutfitFlow() {
         <div className="ot-dot" />
       </div>
 
-      {/* Before / After comparison */}
+      {submitError ? <p className="up-error">{submitError}</p> : null}
+
       <div className="ot-compare">
-        <div className="ot-compare-card">
-          {photoBlobUrl ? (
-            <img className="ot-compare-img" src={photoBlobUrl} alt="Original" />
-          ) : (
-            <div className="ot-compare-placeholder">👤</div>
-          )}
-          <span className="ot-compare-label">{lang === "ko" ? "원본" : "Before"}</span>
-        </div>
-
-        <div className="ot-compare-arrow">→</div>
-
         <div className="ot-compare-card ot-compare-card--ai">
-          {hairPreviewUrl ? (
-            <img className="ot-compare-img" src={hairPreviewUrl} alt="AI Hair" />
-          ) : (
-            <div className="ot-compare-pending">
-              <span className="ot-compare-spinner" />
-              <span className="ot-compare-pending-txt">
-                {lang === "ko" ? "AI 합성 중" : "AI styling"}
-              </span>
-            </div>
-          )}
+          <img className="ot-compare-img" src={hairPreviewUrl} alt="Selected hair result" />
           <span className="ot-compare-label">
-            {hairPreviewUrl
-              ? (lang === "ko" ? "AI 헤어" : "AI Hair")
-              : (lang === "ko" ? "처리 중…" : "Processing…")}
+            {lang === "ko" ? "선택한 헤어 베이스" : "Selected hair base"}
           </span>
         </div>
       </div>
 
       <div className="ot-compare-sub">
-        <h2 className="ot-avatar-title">{t("avatarTitle")}</h2>
-        <p className="ot-avatar-sub">{t("avatarSub")}</p>
+        <h2 className="ot-avatar-title">
+          {lang === "ko" ? "장소와 포즈가 포함된 참조 이미지를 선택하세요" : "Select a reference image"}
+        </h2>
+        <p className="ot-avatar-sub">
+          {lang === "ko"
+            ? "선택한 카드에 연결된 프롬프트가 실행되고, 헤어 합성 결과는 그대로 유지됩니다."
+            : "The linked prompt will run while keeping the hair result as the base image."}
+        </p>
       </div>
 
-      {/* Sticky category tabs */}
-      <div className="ot-tabs-wrap">
-        <div className="ot-tabs">
-          {CATEGORY_KEYS.map((cat) => (
-            <button
-              className={`ot-tab${activeCategory === cat.key ? " ot-tab--active" : ""}`}
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              type="button"
-            >
-              {t(cat.labelKey)}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Outfit grid */}
       <div className="ot-grid">
-        {filtered.map((outfit) => {
-          const isSelected = selectedId === outfit.id;
+        {referenceTemplates.map((template) => {
+          const isSelected = selectedId === template.id;
           return (
             <button
               className={`ot-card${isSelected ? " ot-card--selected" : ""}`}
-              key={outfit.id}
-              onClick={() => handleSelect(outfit.id)}
+              key={template.id}
+              onClick={() => setSelectedId(template.id)}
               type="button"
             >
               <div
                 className="ot-card-img"
-                style={{
-                  backgroundImage: outfit.thumbnail
-                    ? `url(${outfit.thumbnail})`
-                    : outfit.colorHint,
-                }}
+                style={{ backgroundImage: `url(${template.thumbnailUrl})` }}
               />
               <div className="ot-card-info">
                 <div className="ot-card-name-row">
-                  <span className="ot-card-name">{outfit.name}</span>
-                  {isSelected ? (
-                    <span className="ot-card-check">✓</span>
-                  ) : null}
+                  <span className="ot-card-name">{template.title}</span>
+                  {isSelected ? <span className="ot-card-check">✓</span> : null}
                 </div>
-                <span className="ot-card-sub">{outfit.description}</span>
+                <span className="ot-card-sub">{template.subtitle}</span>
               </div>
-              {!isSelected ? (
-                <span className="ot-card-heart">♡</span>
-              ) : null}
             </button>
           );
         })}
       </div>
 
-      {/* Complete the Look */}
-      <div className="ot-complete">
-        <h3 className="ot-complete-title">
-          <span className="ot-complete-star">✦</span>
-          Complete the Look
-        </h3>
-        <div className="ot-complete-scroll">
-          {COMPLETE_LOOK.map((item, i) => (
-            <div className="ot-inspire-card" key={i}>
-              <div
-                className="ot-inspire-img"
-                style={{ backgroundImage: item.color }}
-              />
-              <p className="ot-inspire-name">{item.title}</p>
-              <p className="ot-inspire-sub">
-                {i === 0 && selectedOutfit
-                  ? `How the "${selectedOutfit.name}" outfit styles on stage`
-                  : item.sub}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Fixed bottom */}
       <div className="ot-bottom">
         <button
           className="up-next-btn up-next-btn--active"
-          disabled={isSynthesizing}
-          onClick={handleApply}
+          disabled={!selectedId || isSubmitting}
+          onClick={handleGenerate}
           type="button"
         >
-          {isSynthesizing
-            ? (lang === "ko" ? "합성 중…" : "Styling…")
-              : t("nextBtn")}
+          {isSubmitting
+            ? lang === "ko" ? "최종 합성 시작 중..." : "Starting final render..."
+            : lang === "ko" ? "이 스타일로 완성하기" : "Create with this style"}
         </button>
       </div>
     </div>

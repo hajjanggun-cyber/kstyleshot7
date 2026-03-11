@@ -1,7 +1,10 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { LocationFlow } from "@/components/create/LocationFlow";
+type LocationPageProps = {
+  params: Promise<{ lang: string }>;
+};
 
-export default function LocationPage() {
-  return <LocationFlow />;
+export default async function LocationPage({ params }: LocationPageProps) {
+  const { lang } = await params;
+  redirect(`/${lang}/create/outfit`);
 }

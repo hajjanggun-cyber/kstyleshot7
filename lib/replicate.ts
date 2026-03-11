@@ -516,6 +516,50 @@ export async function startFluxKontextJob(imageUrl: string, prompt: string): Pro
   return predictionId;
 }
 
+export async function startFluxKontextProJob(input: {
+  imageUrl: string;
+  prompt: string;
+}): Promise<string> {
+  assertReplicateEnv();
+
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/black-forest-labs/flux-kontext-pro/predictions`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: getReplicateAuthHeader(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      input: {
+        prompt: input.prompt,
+        input_image: input.imageUrl,
+        aspect_ratio: "match_input_image",
+        output_format: "jpg",
+        safety_tolerance: 2,
+        prompt_upsampling: false,
+      },
+    }),
+    cache: "no-store",
+  }).catch(() => {
+    throw new ReplicateApiError("Unable to reach Replicate Flux Kontext Pro API.", 502);
+  });
+
+  const payload = await parseApiJson(response);
+  if (!response.ok) {
+    throw new ReplicateApiError(
+      extractApiErrorMessage(payload, `Flux Kontext Pro job failed with status ${response.status}.`),
+      response.status >= 400 && response.status < 500 ? 400 : 502
+    );
+  }
+
+  const predictionId = pickString(payload, ["id"]);
+  if (!predictionId) {
+    throw new ReplicateApiError("Flux Kontext Pro response missing id.", 502);
+  }
+
+  return predictionId;
+}
+
 const IC_LIGHT_VERSION =
   "60015df78a8a795470da6494822982140d57b150b9ef14354e79302ff89f69e3";
 
