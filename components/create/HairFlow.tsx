@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import { hairColors } from "@/data/hairColors";
 import { HAIR_CATEGORIES, hairStyles } from "@/data/hairStyles";
+import { LoadingModal } from "@/components/create/LoadingModal";
 import { normalizePhotoForAI } from "@/lib/canvas";
 import { useCreateStore } from "@/store/createStore";
 import type { HairCategory, StepResult } from "@/types";
@@ -332,22 +333,20 @@ export function HairFlow() {
   return (
     <div className="hr-root">
       {isGenerating ? (
-        <div className="ot-synth-overlay">
-          <div className="ot-synth-ring" />
-          <div>
-            <p className="ot-synth-title">
-              {lang === "ko"
-                ? "얼굴형과 분위기에 맞게 헤어를 정교하게 맞추는 중"
-                : "Refining the hairstyle to match your features"}
-            </p>
-            <p className="ot-synth-sub">
-              {lang === "ko"
-                ? "원래 인상은 유지하면서 선택한 헤어만 자연스럽게 적용하고 있습니다.\n잠시만 기다려 주세요."
-                : "Keeping your original look intact while applying the selected style naturally.\nJust a moment."}
-            </p>
-          </div>
-          <p className="ot-synth-badge">{lang === "ko" ? "헤어 생성 중" : "Hair in progress"}</p>
-        </div>
+        <LoadingModal
+          badge={lang === "ko" ? "헤어 생성 중" : "Hair in progress"}
+          backdropImageUrl={photoBlobUrl}
+          description={
+            lang === "ko"
+              ? "업로드한 사진의 인상은 유지한 채, 선택한 헤어를 얼굴형과 분위기에 자연스럽게 맞추고 있습니다."
+              : "Keeping your uploaded look intact while fitting the selected hairstyle naturally to your face and mood."
+          }
+          title={
+            lang === "ko"
+              ? "선택한 헤어를 정교하게 맞추는 중"
+              : "Refining your selected hairstyle"
+          }
+        />
       ) : null}
 
       <nav className="hr-nav">

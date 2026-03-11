@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
+import { LoadingModal } from "@/components/create/LoadingModal";
 import { hairStyles } from "@/data/hairStyles";
 import { referenceTemplates } from "@/data/referenceTemplates";
 import { useCreateStore } from "@/store/createStore";
@@ -86,7 +87,9 @@ export function DoneFlow() {
     hairStyles.find((item) => item.id === hair.picked)?.name ?? hair.picked ?? "-";
   const selectedReference =
     referenceTemplates.find((item) => item.id === outfit.chosen[0]) ?? null;
-  const resultUrl = finalImageUrl ?? hairPreviewUrl ?? photoBlobUrl ?? null;
+  const basePreviewUrl = hairPreviewUrl ?? photoBlobUrl ?? null;
+  const resultUrl = finalImageUrl ?? basePreviewUrl;
+  const isFinalProcessing = Boolean(finalPredictionId) && !finalImageUrl && !finalError;
   const hairDownloadItems = hair.chosen
     .map((id) => {
       const result = hair.results.find((item) => item.id === id);
@@ -176,6 +179,23 @@ export function DoneFlow() {
 
   return (
     <div className="dn-root">
+      {isFinalProcessing ? (
+        <LoadingModal
+          badge={lang === "ko" ? "최종 합성 중" : "Final render in progress"}
+          backdropImageUrl={basePreviewUrl}
+          description={
+            lang === "ko"
+              ? "선택한 헤어와 참조 이미지를 바탕으로, 얼굴 각도와 장면 분위기를 맞춰 최종 이미지를 완성하고 있습니다."
+              : "Building the final image from your selected hair result and reference while aligning angle, lighting, and scene mood."
+          }
+          title={
+            lang === "ko"
+              ? "선택한 결과를 바탕으로 최종 이미지를 완성하는 중"
+              : "Finishing your final image from the selected result"
+          }
+        />
+      ) : null}
+
       <nav className="dn-nav">
         <h2 className="dn-nav-title">{lang === "ko" ? "최종 결과" : "Final Result"}</h2>
         <button className="dn-restart-btn" onClick={handleTryAnother} type="button">

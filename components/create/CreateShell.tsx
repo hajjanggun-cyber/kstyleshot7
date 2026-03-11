@@ -50,7 +50,9 @@ export function CreateShell({
   const t = useTranslations("create.shell");
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "en";
-  const { status, orderId, sessionToken, photoBlobUrl, hair, outfit } = useCreateStore();
+  const { status, orderId, sessionToken, photoBlobUrl, hairPreviewUrl, finalImageUrl, hair, outfit } =
+    useCreateStore();
+  const shellPreviewUrl = finalImageUrl ?? hairPreviewUrl ?? photoBlobUrl ?? null;
   const stageVisual = {
     create: "/visuals/create/create.svg",
     upload: "/visuals/create/upload.svg",
@@ -95,9 +97,9 @@ export function CreateShell({
               <strong>{outfit.picked || "-"}</strong>
             </div>
           </div>
-          {photoBlobUrl ? (
+          {shellPreviewUrl ? (
             <div className="preview-frame sidebar-preview">
-              <img alt={t("uploadedPreviewAlt")} src={photoBlobUrl} />
+              <img alt={t("uploadedPreviewAlt")} src={shellPreviewUrl} />
             </div>
           ) : (
             <div className="empty-state">{t("uploadPrompt")}</div>

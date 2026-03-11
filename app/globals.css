@@ -3484,6 +3484,104 @@ h2 {
   opacity: 0.8;
 }
 
+.create-loading-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.create-loading-modal__bg {
+  position: absolute;
+  inset: -4%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(28px) saturate(1.05) brightness(0.45);
+  transform: scale(1.08);
+}
+
+.create-loading-modal__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255, 184, 82, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(10, 8, 6, 0.54), rgba(10, 8, 6, 0.82));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.create-loading-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  padding: 28px 24px 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+  text-align: center;
+}
+
+.create-loading-modal__ring {
+  width: 64px;
+  height: 64px;
+  border: 4px solid rgba(255, 180, 60, 0.15);
+  border-top-color: #f4a825;
+  border-radius: 50%;
+  animation: ot-spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+.create-loading-modal__badge {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #f7b04f;
+  text-transform: uppercase;
+}
+
+.create-loading-modal__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.create-loading-modal__description {
+  margin: 0;
+  max-width: 320px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+@media (max-width: 640px) {
+  .create-loading-modal {
+    padding: 18px;
+  }
+
+  .create-loading-modal__panel {
+    border-radius: 24px;
+    padding: 24px 18px 20px;
+  }
+
+  .create-loading-modal__title {
+    font-size: 21px;
+  }
+}
+
 /* Fixed bottom */
 .ot-bottom {
   position: fixed;
