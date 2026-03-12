@@ -28,7 +28,8 @@
       "Bash(ls -la \"C:/Users/홈_메인/Desktop/11 11 실전코딩/k-pop/kstyleshot/public/backgrounds/\"*.png)",
       "Bash(ls -la \"C:/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/public/outfits/\"*.jpeg)",
       "Read(//c/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/{sum+=$5; count++} END {printf \"\"\"\"outfits: %d개, 평균 %.0fKB/n\"\"\"\", count, sum/count/**)",
-      "Bash(ls -la \"C:/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/public/backgrounds/\"*.png)"
+      "Bash(ls -la \"C:/Users/홈_메인/Desktop/11  11 실전코딩/k-pop/kstyleshot/public/backgrounds/\"*.png)",
+      "Bash(grep -r \"startOutfitTryOnJob\" \"/c/Users/수성길메인/Desktop/11  11 실전코딩/kpop-style/kstryletry\" --include=\"*.ts\" 2>/dev/null | head -5)"
     ]
   }
 }
