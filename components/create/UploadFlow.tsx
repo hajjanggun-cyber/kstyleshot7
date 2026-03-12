@@ -12,11 +12,11 @@ const SESSION_STORAGE_KEY = "kstyleshot.create.session";
 const POLL_INTERVAL_MS = 1500;
 // Tuned for upper-body portraits where the face is clear but shoulders still remain visible.
 const FACE_RATIO_TOO_CLOSE = 0.38;
-const FACE_RATIO_TOO_FAR = 0.08;
-const FACE_CENTER_X_MIN = 0.24;
-const FACE_CENTER_X_MAX = 0.76;
-const FACE_CENTER_Y_MIN = 0.16;
-const FACE_CENTER_Y_MAX = 0.64;
+const FACE_RATIO_TOO_FAR = 0.06;
+const FACE_CENTER_X_MIN = 0.20;
+const FACE_CENTER_X_MAX = 0.80;
+const FACE_CENTER_Y_MIN = 0.14;
+const FACE_CENTER_Y_MAX = 0.68;
 
 type StoredSession = {
   checkoutId: string;
@@ -49,6 +49,51 @@ function revokeObjectUrl(url: string | null) {
   if (url && url.startsWith("blob:")) {
     URL.revokeObjectURL(url);
   }
+}
+
+async function normalizeImageForDetection(file: File, fallbackUrl: string): Promise<HTMLCanvasElement> {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    throw new Error("Canvas 2D context is unavailable.");
+  }
+
+  const MAX_DIMENSION = 1280;
+
+  const drawScaled = (sourceWidth: number, sourceHeight: number, draw: () => void) => {
+    const scale = Math.min(1, MAX_DIMENSION / Math.max(sourceWidth, sourceHeight));
+    canvas.width = Math.max(1, Math.round(sourceWidth * scale));
+    canvas.height = Math.max(1, Math.round(sourceHeight * scale));
+    draw();
+  };
+
+  if (typeof createImageBitmap === "function") {
+    try {
+      const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+      drawScaled(bitmap.width, bitmap.height, () => {
+        context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      });
+      bitmap.close();
+      return canvas;
+    } catch {
+      // Fall through to HTMLImageElement loading below.
+    }
+  }
+
+  const img = new Image();
+  img.src = fallbackUrl;
+
+  await new Promise<void>((resolve, reject) => {
+    img.onload = () => resolve();
+    img.onerror = () => reject(new Error("Failed to load uploaded image."));
+  });
+
+  drawScaled(img.naturalWidth, img.naturalHeight, () => {
+    context.drawImage(img, 0, 0, canvas.width, canvas.height);
+  });
+
+  return canvas;
 }
 
 function readStoredSession(): StoredSession | null {
@@ -279,20 +324,15 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
       const detector = await FaceDetector.createFromOptions(vision, {
         baseOptions: {
           modelAssetPath:
-            "https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite",
+            "https://storage.googleapis.com/mediapipe-assets/face_detection_full_range.tflite",
           delegate: "GPU",
         },
         runningMode: "IMAGE",
-        minDetectionConfidence: 0.5,
+        minDetectionConfidence: 0.35,
       });
 
-      const img = new Image();
-      img.src = nextBlobUrl;
-      await new Promise<void>((resolve) => {
-        img.onload = () => resolve();
-      });
-
-      const result = detector.detect(img);
+      const normalizedCanvas = await normalizeImageForDetection(file, nextBlobUrl);
+      const result = detector.detect(normalizedCanvas);
       detector.close();
 
       if (result.detections.length === 0) {
@@ -301,7 +341,22 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
         return;
       }
 
-      const boundingBox = result.detections[0]?.boundingBox;
+      // Find the largest face by bounding box area
+      let largestDetection = result.detections[0];
+      let maxArea = 0;
+
+      for (const det of result.detections) {
+        const box = det.boundingBox;
+        if (box && box.width && box.height) {
+          const area = box.width * box.height;
+          if (area > maxArea) {
+            maxArea = area;
+            largestDetection = det;
+          }
+        }
+      }
+
+      const boundingBox = largestDetection.boundingBox;
       if (
         !boundingBox ||
         boundingBox.width === undefined ||
@@ -315,8 +370,8 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
       }
 
       const validation = validateFaceBox({
-        imageWidth: img.naturalWidth,
-        imageHeight: img.naturalHeight,
+        imageWidth: normalizedCanvas.width,
+        imageHeight: normalizedCanvas.height,
         width: boundingBox.width,
         height: boundingBox.height,
         originX: boundingBox.originX,

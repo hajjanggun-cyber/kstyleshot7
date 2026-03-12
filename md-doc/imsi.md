@@ -1,3 +1,7 @@
+
+반드시 날짜와 시간을 한국시간으로 기록한다. 
+기록은 반드시 최상단에 기록한다 
+아래와 위에 =========== 를 넣어서 이전 내용과 구별되게 한다.
 ========================================
 기록 시각: 2026-03-12 00:58:58 KST
 주제: 프론트엔드 상반신 검증 적용 방안 분석
@@ -223,3 +227,115 @@ Updated At: 2026-03-12 00:56 KST
 - 선택된 헤어 결과는 이후 단계 전체의 기준 이미지가 되어야 한다.
 - 사용자는 시스템이 자신의 마지막 확정 선택을 바탕으로 다음 결과를 만들어 간다고 느껴야 한다.
 - 이 흐름이 더 고급스럽고, 신뢰감이 높고, 프리미엄 제품 경험에 가깝다.
+========================================
+기록 시각: 2026-03-12 13:20 KST
+주제: 업로드 사진 얼굴 감지 방식과 조정 포인트 정리
+========================================
+
+## 현재 업로드 얼굴 감지 방식
+
+- 얼굴 감지는 서버가 아니라 클라이언트에서 즉시 수행된다.
+- 실제 로직은 `components/create/UploadFlow.tsx`에 있다.
+- 업로드 직후 `handleFileChange()`가 실행된다.
+- 여기서 `@mediapipe/tasks-vision`을 lazy import 한다.
+- `FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm")`로 wasm을 불러온다.
+- 이후 `FaceDetector.createFromOptions()`로 얼굴 검출기를 만든다.
+
+현재 핵심 설정:
+
+- 모델: `blaze_face_short_range`
+- delegate: `GPU`
+- runningMode: `IMAGE`
+- minDetectionConfidence: `0.5`
+
+얼굴을 찾으면 bounding box 기준으로 한 번 더 검증한다.
+
+현재 프레이밍 판정값:
+
+- `FACE_RATIO_TOO_CLOSE = 0.38`
+- `FACE_RATIO_TOO_FAR = 0.08`
+- `FACE_CENTER_X_MIN = 0.24`
+- `FACE_CENTER_X_MAX = 0.76`
+- `FACE_CENTER_Y_MIN = 0.16`
+- `FACE_CENTER_Y_MAX = 0.64`
+
+판정 순서:
+
+1. 검출 결과가 0개면 `no_face`
+2. 얼굴 면적 비율이 38% 초과면 `too_close`
+3. 얼굴 면적 비율이 8% 미만이면 `too_far`
+4. 얼굴 중심이 중앙 허용 범위를 벗어나면 `off_center`
+5. 모두 통과하면 `pass`
+
+다음 단계 버튼은 `faceWarning === "pass"`일 때만 활성화된다.
+
+## 지금 "정면인데도 아예 인식을 못함"이 발생할 가능성이 큰 지점
+
+### 1. short-range 모델이 너무 공격적일 수 있음
+
+- 현재 모델은 `blaze_face_short_range`다.
+- 이 모델은 카메라에 비교적 가까운 얼굴 감지에 유리하지만, 업로드 사진처럼 해상도와 촬영 조건이 제각각인 경우에는 놓칠 수 있다.
+- 특히 얼굴이 작거나 배경 대비가 약하면 `result.detections.length === 0`로 바로 떨어질 수 있다.
+
+### 2. `minDetectionConfidence: 0.5`가 높을 수 있음
+
+- 현재는 0.5 미만 검출을 모두 버린다.
+- 업로드 이미지 품질이 조금만 흔들려도 정면 얼굴이 `no_face`로 분류될 수 있다.
+- 첫 조정 후보는 `0.35 ~ 0.4` 수준이다.
+
+### 3. 업로드 사진에는 GPU delegate 고정이 꼭 이점이 아니다
+
+- 현재 `delegate: "GPU"` 고정이다.
+- 브라우저/기기 조합에 따라 GPU 경로가 불안정할 수 있다.
+- 다만 이 경우 현재 코드는 `catch`에서 오히려 `pass` 처리하므로, "감지를 못해서 막힘"의 직접 원인일 가능성은 `short_range + confidence`보다 낮다.
+
+### 4. 지금 구조는 첫 번째 얼굴만 본다
+
+- `result.detections[0]`만 사용한다.
+- 사진에 여러 얼굴이 있거나 첫 번째 박스가 원하는 얼굴이 아니면 오판정 가능성이 있다.
+
+## 권장 설정
+
+업로드 사진 기준으로는 아래 순서가 더 안전하다.
+
+### 우선 조정할 값
+
+- 모델을 `short_range`에서 `full_range` 계열로 검토
+- `minDetectionConfidence`를 `0.5`에서 `0.35` 또는 `0.4`로 낮춤
+- 첫 번째 얼굴 고정 대신 가장 큰 얼굴 박스를 선택
+
+### 프레이밍 기준값은 당장 크게 문제 아님
+
+- 지금 증상이 "정면인데 no_face"라면 ratio/center 임계값보다 검출기 단계가 먼저 의심된다.
+- ratio/center 값은 얼굴을 찾은 뒤의 2차 필터라서, 현재 문제의 1차 원인은 아니다.
+
+## 실무적으로 추천하는 설정안
+
+1차 권장안:
+
+- 모델: full-range face detector
+- `minDetectionConfidence: 0.35`
+- 여러 얼굴 중 가장 큰 얼굴 사용
+- ratio/center 기준은 일단 현행 유지
+
+2차 보정안:
+
+- `FACE_RATIO_TOO_FAR`를 `0.08`에서 `0.06`으로 완화
+- `FACE_CENTER_X_MIN/MAX`를 `0.24/0.76`에서 `0.20/0.80`으로 완화
+- `FACE_CENTER_Y_MIN/MAX`를 `0.16/0.64`에서 `0.14/0.68`으로 완화
+
+단, 현재 사용자 증상 기준으로는 2차 보정안보다 검출기 설정 조정이 우선이다.
+
+## 코드 기준 요약
+
+- 감지 시작: `components/create/UploadFlow.tsx`의 `handleFileChange()`
+- 박스 검증: 같은 파일의 `validateFaceBox()`
+- 다음 단계 잠금: 같은 파일의 `canContinue`와 `handleContinue()`
+
+## 결론
+
+- 지금 업로드 감지는 "업로드 후 클라이언트 MediaPipe 1회 검출 + 박스 비율/중앙 검증" 구조다.
+- 정면 사진인데 아예 못 잡는다면 가장 먼저 의심할 값은 `blaze_face_short_range`와 `minDetectionConfidence: 0.5`다.
+- 실전에서는 `full_range + confidence 0.35~0.4 + 가장 큰 얼굴 선택` 조합으로 바꾸는 것이 더 안정적이다.
+
+========================================
