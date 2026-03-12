@@ -134,3 +134,366 @@ Updated At: 2026-03-10 KST
 ## 5. 최종 한 줄 결론
 
 현재 `ui-flow.md`의 기획은 너무 무거운 "아이돌 의상 입히기 웹-포토샵"에 가깝습니다. 이를 다 집어던지고, 유저가 **미리 세팅된 예쁜 테마(프리셋)를 골라 15초 만에 자신의 K팝 화보 한 장을 뽑아가는 "실패율 0%의 K-style 결과물 생성기"**로 정의를 바꾸고, 뒤단은 **Fal.ai 또는 Replicate의 단일 Webhook 기반 FaceID 모델**로 통폐합하는 것만이 상용화의 유일한 답입니다.
+========================================
+기록 시각: 2026-03-12 14:05 KST
+주제: 배경 합성 구조 분석, 실제 프롬프트, 템플릿 방식에 대한 의견
+========================================
+
+## 1. 현재 배경 합성 구조
+
+현재 구조는 "배경 합성"이라는 이름과 달리, 전통적인 합성 파이프라인이 아니다.
+
+- 사용자가 업로드한 원본 사진으로 먼저 헤어 결과를 만든다.
+- 사용자가 헤어 결과 1개를 선택한다.
+- 이후 최종 단계에서는 그 선택된 헤어 결과 이미지 `hairPreviewUrl`만 `baseImageUrl`로 사용한다.
+- 이 이미지를 `app/api/final/render/route.ts`에서 `black-forest-labs/flux-kontext-pro`에 넣는다.
+- 여기서 의상, 배경, 조명, 무드까지 한 번에 다시 생성한다.
+
+즉 현재는:
+
+- 별도 배경 세그멘테이션 없음
+- 별도 배경 마스크 없음
+- 별도 인물/배경 합성 엔진 없음
+- "선택된 헤어 결과 + 템플릿 프롬프트" 기반의 1회 재생성 구조
+
+이 점이 중요하다.
+
+지금 시스템은 배경을 "붙이는" 것이 아니라, 최종 생성 모델이 배경까지 포함해서 다시 그리도록 하고 있다.
+
+## 2. 실제 호출 흐름
+
+### 프론트
+
+`components/create/OutfitFlow.tsx`
+
+- 사용자가 reference template 1개를 고른다.
+- `/api/final/render`로 아래 두 값만 보낸다.
+  - `baseImageUrl: hairPreviewUrl`
+  - `referenceTemplateId: selectedId`
+
+### 서버
+
+`app/api/final/render/route.ts`
+
+- `referenceTemplates`에서 템플릿을 찾는다.
+- `buildFinalPrompt(template.prompt, template.negativePrompt)`로 최종 프롬프트를 만든다.
+- `startFluxKontextProJob({ imageUrl, prompt })`를 호출한다.
+
+### 모델 입력
+
+`lib/replicate.ts`
+
+실제 Flux Kontext Pro 입력은 아래와 가깝다.
+
+- `input_image: hairPreviewUrl`
+- `prompt: 최종 조립 프롬프트`
+- `aspect_ratio: "match_input_image"`
+- `output_format: "jpg"`
+- `output_quality: 95`
+- `safety_tolerance: 2`
+- `prompt_upsampling: false`
+
+## 3. 실제 최종 프롬프트 구조
+
+최종 프롬프트는 아래 4개를 그냥 이어붙이는 구조다.
+
+### A. identity preservation prompt
+
+`app/api/final/render/route.ts`
+
+- `Use the person in the base image exactly as-is.`
+- `Preserve the face, identity, ethnicity, hairstyle, hair color, bangs, facial structure, skin tone, skin undertone, skin texture, eye shape, nose, lips, and jawline with 100% fidelity.`
+- `Do not change the person, do not redesign the face, do not alter ethnicity or natural facial characteristics, and do not alter the hair in any way.`
+
+### B. template prompt
+
+`data/referenceTemplates.ts`
+
+현재 템플릿 1:
+
+`Create a photorealistic close-up selfie portrait while keeping the face, ethnicity, hairstyle, hair color, bangs, and overall identity exactly the same as the base image. Maintain the same person and preserve facial structure, eyes, nose, lips, skin texture, skin undertone, and hair silhouette. Frame the image tightly from the chest up like a natural smartphone selfie. The subject should feel stylish, modern, and polished with a Seoul fashion editorial mood and idol-inspired styling, without changing the person's original ethnicity or natural facial characteristics. She is holding a trendy smartphone in one hand, and the decorative phone case and rear camera lenses are clearly visible to the viewer. Change the clothing to a chic and elegant traditional Korean Hanbok jeogori for a young idol, with refined fabric detail and delicate floral embroidery around the collar. Change the background to the courtyard of Gyeongbokgung Palace in Seoul during warm golden hour light. Add softly blurred tourists and visitors walking in the background. Keep the image realistic, premium, and natural like a real high-end selfie snapshot.`
+
+현재 템플릿 2:
+
+`Create a photorealistic smartphone selfie portrait while keeping the face, ethnicity, hairstyle, hair color, bangs, and overall identity exactly the same as the base image. Maintain the same person and preserve facial structure, eyes, nose, lips, skin texture, skin undertone, and hair silhouette. Frame the image from the upper body with slightly more background visible than a tight close-up. The subject should feel stylish, modern, and polished with a Seoul fashion editorial mood and idol-inspired styling, without changing the person's original ethnicity or natural facial characteristics. She is holding a trendy smartphone in one hand, and the decorative phone case and rear camera lenses are clearly visible to the viewer. Change the clothing to a chic and elegant traditional Korean Hanbok jeogori for a young idol, with refined fabric detail and delicate floral embroidery around the collar. Change the background to a different Gyeongbokgung Palace courtyard angle in Seoul during warm golden hour light, with more palace architecture visible behind her. Add softly blurred visitors in the background and give the pose a slightly angled, more candid selfie feel. Keep the image realistic, premium, and natural like a real high-end selfie snapshot.`
+
+### C. quality prompt
+
+- `Match the person's lighting to the scene naturally.`
+- `Blend clothing, hair edges, and skin into the environment without artificial seams.`
+- `Keep natural skin texture and realistic detail.`
+- `Photorealistic Korean fashion editorial quality.`
+
+### D. negative prompt
+
+현재 두 템플릿 공통:
+
+`different face, different hairstyle, different hair color, short hair, missing bangs, distorted face, deformed eyes, bad anatomy, extra fingers, bad hands, duplicate person, malformed clothing, blurry face, low detail, unrealistic phone, broken phone case, anime, cartoon, illustration, painting, oversaturated, plastic skin, airbrushed skin, wax figure`
+
+## 4. 왜 배경 합성이 약하게 느껴질 수 있는가
+
+현재 구조에서는 배경이 약한 것이 꽤 자연스럽다.
+
+이유는 다음과 같다.
+
+### 1. 모델이 "합성"이 아니라 "재생성"을 하고 있음
+
+- hair 결과 이미지를 입력으로 넣고 있지만,
+- 실제로는 배경만 교체하는 강한 인페인팅 구조가 아니다.
+- 모델이 인물, 의상, 배경, 조명을 함께 다시 해석해서 새 장면으로 뽑는다.
+
+즉 배경을 정확히 갈아끼우는 느낌보다,
+"원본 분위기를 참고한 새 편집 컷"에 가깝다.
+
+### 2. 배경 지시가 프롬프트 안에서 차지하는 비중이 낮음
+
+- 현재 프롬프트는 identity 보존 지시가 매우 강하다.
+- 헤어 보존 지시도 강하다.
+- 반면 배경 지시는 템플릿 본문 중 한두 문장이다.
+
+모델 입장에서는:
+
+- 사람을 망치면 안 됨
+- 헤어를 바꾸면 안 됨
+- 얼굴을 바꾸면 안 됨
+- 자연스럽게 보여야 함
+
+이 제약이 너무 강해서, 배경은 상대적으로 보수적으로 처리될 가능성이 높다.
+
+### 3. 입력 이미지의 기존 배경 흔적이 강하게 남아 있음
+
+- `input_image`가 이미 hair 결과 이미지다.
+- 그 안에는 기존 원본 사진의 배경 구조, 톤, 구도 흔적이 남아 있다.
+- 모델이 이를 강하게 참고하면 새 배경 지시가 약하게 먹을 수 있다.
+
+### 4. 템플릿 수가 적고 장면 조건이 좁다
+
+- 현재 reference template은 사실상 2개뿐이다.
+- 둘 다 같은 계열의 한복 + 경복궁 + 스마트폰 셀피 무드다.
+- 이 정도로는 배경 전환 품질의 차이나 안정성을 충분히 학습적으로 유도하기 어렵다.
+
+## 5. 템플릿으로 가는 것에 대한 내 의견
+
+내 의견은 다음과 같다.
+
+### 결론
+
+- 템플릿 방식 자체는 맞다.
+- 다만 "지금 수준의 템플릿 방식"은 아직 너무 얇다.
+- 현재 구조는 템플릿이라기보다 "긴 자연어 프롬프트 두 개를 고르는 UI"에 가깝다.
+
+### 왜 템플릿 방식이 맞는가
+
+- 사용자가 자유 입력으로 배경과 의상을 직접 쓰게 하면 품질 편차가 너무 커진다.
+- MVP에서는 결과 안정성이 자유도보다 중요하다.
+- 헤어까지 이미 한 번 생성한 상태라, 마지막 단계는 가능한 한 결과 범위를 좁혀야 한다.
+
+### 왜 지금 템플릿 방식은 약한가
+
+- 템플릿이 장면 구성 정보보다 문장 묘사에 의존한다.
+- 실제 배경 합성을 강하게 유도하는 구조적 제어가 없다.
+- 카메라 거리, 구도, 피사체 크기, 배경 깊이, 조명 방향 같은 핵심 조건이 명시적으로 분리돼 있지 않다.
+
+즉 "템플릿"이 아니라 "설명문"에 가깝다.
+
+### 내가 권하는 템플릿 방향
+
+템플릿을 유지하되 아래처럼 쪼개는 편이 낫다.
+
+- subject lock
+- camera framing
+- outfit description
+- background scene
+- lighting
+- mood
+- hard constraints
+- negative prompt
+
+예를 들어 `background scene`만 따로 강하게 두면,
+배경 지시가 다른 요소에 묻히지 않는다.
+
+### 더 나은 중기 방향
+
+- reference image + structured prompt 조합
+- 또는 배경만 따로 생성/교체하는 2단계 구조
+
+특히 "배경 합성"을 진짜 강하게 만들고 싶다면,
+지금처럼 최종 모델이 다 다시 그리는 구조보다
+"인물 고정 + 배경 교체" 쪽이 더 맞다.
+
+## 6. 실무 판단
+
+현재 구조는:
+
+- 헤어 결과 유지
+- 의상과 배경을 템플릿 기반으로 묶음 생성
+- 구현 난이도 낮음
+- MVP 속도 빠름
+
+대신 단점은:
+
+- 배경 통제력이 약함
+- 결과가 템플릿 썸네일과 다르게 나올 수 있음
+- 합성이라기보다 재생성 느낌이 남음
+
+## 7. 한 줄 판단
+
+현재 배경 합성이 약한 이유는 "배경을 별도로 합성하지 않고, 선택된 헤어 결과 한 장을 기반으로 최종 모델이 장면 전체를 다시 생성하기 때문"이다.
+
+템플릿 방식은 유지해도 되지만, 지금 형태 그대로면 배경 제어력이 약하므로 구조화된 템플릿 또는 배경 분리형 파이프라인으로 가는 것이 더 낫다.
+
+========================================
+========================================
+기록 시각: 2026-03-12 18:18 KST
+주제: 구조화된 템플릿 방식 1안과 2안 정리
+========================================
+
+## 결론 요약
+
+- 1안이 현재 제품 단계에서는 더 현실적이고 안정적이다.
+- 2안이 장기적으로는 더 좋은 그림이지만, 구현 난이도와 실패 리스크가 더 높다.
+- 지금 당장 상용 안정성을 올리려면 1안으로 먼저 가고, 이후 2안으로 확장하는 순서가 맞다.
+
+## 1안. 구조화된 템플릿 사진 위에 얼굴과 헤어만 강하게 주입
+
+### 구조
+
+- 템플릿 사진이 배경, 구도, 조명, 의상, 화면 비율을 거의 전부 결정한다.
+- 사용자 쪽에서는 얼굴 정체성과 헤어 결과만 최대한 보존한다.
+- 최종 생성은 "배경을 다시 상상하는 작업"이 아니라 "정해진 템플릿 장면 안에 인물 핵심 요소를 맞춰 넣는 작업"이 된다.
+
+### 장점
+
+- 결과가 템플릿 썸네일과 훨씬 비슷하게 나온다.
+- 배경 품질이 흔들릴 가능성이 크게 줄어든다.
+- 사용자가 기대한 결과와 실제 결과 차이가 줄어든다.
+- MVP에서 가장 중요한 "안정성" 측면에서 유리하다.
+
+### 단점
+
+- 얼굴 경계, 머리카락 가장자리, 목선, 피부톤, 조명 방향이 안 맞으면 바로 합성 티가 난다.
+- 템플릿 자체의 다양성이 부족하면 결과가 쉽게 반복적으로 보일 수 있다.
+- 의상까지 같이 자연스럽게 바꾸려면 단순 오버레이가 아니라 꽤 정교한 인페인트가 필요하다.
+
+### 내 의견
+
+- 지금 Kstyleshot 단계에서는 가장 먼저 검토할 안이다.
+- 특히 현재처럼 배경 재생성이 약하고 템플릿 재현성이 낮은 상황에서는 1안이 훨씬 제품답다.
+- 다만 "얼굴과 헤어만 복붙" 수준으로 가면 안 되고, 최소한 face lock + hair preservation + soft inpaint 수준은 있어야 한다.
+
+## 2안. 현재 구조를 유지하되 템플릿을 더 구조화해서 전체 장면 재생성
+
+### 구조
+
+- 지금처럼 선택된 헤어 결과 이미지를 `input_image`로 넣는다.
+- 다만 템플릿을 긴 자연어 설명문이 아니라 구조화된 블록으로 분해한다.
+- 예: `subject lock`, `camera framing`, `outfit`, `background scene`, `lighting`, `mood`, `hard constraints`, `negative`
+
+### 장점
+
+- 현재 코드와 흐름을 크게 바꾸지 않고 개선할 수 있다.
+- 구현 속도가 빠르다.
+- 모델이 장면 전체를 다시 그리기 때문에 합성 경계가 덜 어색할 수 있다.
+
+### 단점
+
+- 배경 통제력이 여전히 1안보다 약하다.
+- 템플릿과 결과가 어긋날 가능성이 계속 남는다.
+- 얼굴, 헤어, 배경, 의상을 동시에 맞추려는 충돌은 구조적으로 남아 있다.
+
+### 내 의견
+
+- 지금 구조를 급하게 개선해야 한다면 가장 현실적인 차선책이다.
+- 다만 이 안만으로는 "배경이 템플릿처럼 정확히 나온다" 수준까지 가기 어렵다.
+- 결과적으로는 1안보다 안정성 한계가 더 빨리 드러날 가능성이 높다.
+
+## 추천 순서
+
+1. 단기: 2안처럼 템플릿을 구조화해서 프롬프트 제어력을 먼저 올린다.
+2. 중기: 1안으로 넘어갈 수 있게 템플릿 이미지 중심 파이프라인을 설계한다.
+3. 장기: face lock / hair preservation / inpaint 기반으로 템플릿 사진 합성 완성도를 높인다.
+
+## 최종 판단
+
+- "배경 통제"가 가장 중요하면 1안이 더 낫다.
+- "빨리 개선"이 가장 중요하면 2안이 더 쉽다.
+- 제품 방향성 자체는 1안이 더 맞고, 실행 순서는 2안 선행 후 1안 전환이 가장 현실적이다.
+
+========================================
+========================================
+기록 시각: 2026-03-12 18:20 KST
+주제: 구조화된 템플릿 방식 1안과 2안 정리
+========================================
+
+## 결론 요약
+
+- 1안이 현재 제품 단계에서는 더 현실적이고 안정적이다.
+- 2안이 장기적으로는 더 좋은 그림이지만, 구현 난이도와 실패 리스크가 더 높다.
+- 지금 당장 상용 안정성을 올리려면 1안으로 먼저 가고, 이후 2안으로 확장하는 순서가 맞다.
+
+## 1안. 구조화된 템플릿 사진 위에 얼굴과 헤어만 강하게 주입
+
+### 구조
+
+- 템플릿 사진이 배경, 구도, 조명, 의상, 화면 비율을 거의 전부 결정한다.
+- 사용자 쪽에서는 얼굴 정체성과 헤어 결과만 최대한 보존한다.
+- 최종 생성은 "배경을 다시 상상하는 작업"이 아니라 "정해진 템플릿 장면 안에 인물 핵심 요소를 맞춰 넣는 작업"이 된다.
+
+### 장점
+
+- 결과가 템플릿 썸네일과 훨씬 비슷하게 나온다.
+- 배경 품질이 흔들릴 가능성이 크게 줄어든다.
+- 사용자가 기대한 결과와 실제 결과 차이가 줄어든다.
+- MVP에서 가장 중요한 "안정성" 측면에서 유리하다.
+
+### 단점
+
+- 얼굴 경계, 머리카락 가장자리, 목선, 피부톤, 조명 방향이 안 맞으면 바로 합성 티가 난다.
+- 템플릿 자체의 다양성이 부족하면 결과가 쉽게 반복적으로 보일 수 있다.
+- 의상까지 같이 자연스럽게 바꾸려면 단순 오버레이가 아니라 꽤 정교한 인페인트가 필요하다.
+
+### 내 의견
+
+- 지금 Kstyleshot 단계에서는 가장 먼저 검토할 안이다.
+- 특히 현재처럼 배경 재생성이 약하고 템플릿 재현성이 낮은 상황에서는 1안이 훨씬 제품답다.
+- 다만 "얼굴과 헤어만 복붙" 수준으로 가면 안 되고, 최소한 face lock + hair preservation + soft inpaint 수준은 있어야 한다.
+
+## 2안. 현재 구조를 유지하되 템플릿을 더 구조화해서 전체 장면 재생성
+
+### 구조
+
+- 지금처럼 선택된 헤어 결과 이미지를 `input_image`로 넣는다.
+- 다만 템플릿을 긴 자연어 설명문이 아니라 구조화된 블록으로 분해한다.
+- 예: `subject lock`, `camera framing`, `outfit`, `background scene`, `lighting`, `mood`, `hard constraints`, `negative`
+
+### 장점
+
+- 현재 코드와 흐름을 크게 바꾸지 않고 개선할 수 있다.
+- 구현 속도가 빠르다.
+- 모델이 장면 전체를 다시 그리기 때문에 합성 경계가 덜 어색할 수 있다.
+
+### 단점
+
+- 배경 통제력이 여전히 1안보다 약하다.
+- 템플릿과 결과가 어긋날 가능성이 계속 남는다.
+- 얼굴, 헤어, 배경, 의상을 동시에 맞추려는 충돌은 구조적으로 남아 있다.
+
+### 내 의견
+
+- 지금 구조를 급하게 개선해야 한다면 가장 현실적인 차선책이다.
+- 다만 이 안만으로는 "배경이 템플릿처럼 정확히 나온다" 수준까지 가기 어렵다.
+- 결과적으로는 1안보다 안정성 한계가 더 빨리 드러날 가능성이 높다.
+
+## 추천 순서
+
+1. 단기: 2안처럼 템플릿을 구조화해서 프롬프트 제어력을 먼저 올린다.
+2. 중기: 1안으로 넘어갈 수 있게 템플릿 이미지 중심 파이프라인을 설계한다.
+3. 장기: face lock / hair preservation / inpaint 기반으로 템플릿 사진 합성 완성도를 높인다.
+
+## 최종 판단
+
+- "배경 통제"가 가장 중요하면 1안이 더 낫다.
+- "빨리 개선"이 가장 중요하면 2안이 더 쉽다.
+- 제품 방향성 자체는 1안이 더 맞고, 실행 순서는 2안 선행 후 1안 전환이 가장 현실적이다.
+
+========================================

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -11,6 +11,34 @@ import {
   hubPostsEn,
   type HubPost,
 } from "@/data/hubPosts";
+
+function CardShell({
+  post,
+  href,
+  className,
+  style,
+  children,
+}: {
+  post: HubPost;
+  href: string;
+  className: string;
+  style: CSSProperties;
+  children: ReactNode;
+}) {
+  if (post.disabled) {
+    return (
+      <div aria-disabled="true" className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <Link className={className} href={href} style={style}>
+      {children}
+    </Link>
+  );
+}
 
 function Badge({ label, style }: { label: string; style: HubPost["categoryStyle"] }) {
   const cls: Record<HubPost["categoryStyle"], string> = {
@@ -25,7 +53,7 @@ function Badge({ label, style }: { label: string; style: HubPost["categoryStyle"
 
 function HeroCard({ post, href }: { post: HubPost; href: string }) {
   return (
-    <Link className="hf-hero" href={href} style={{ background: post.bg }}>
+    <CardShell className="hf-hero" href={href} post={post} style={{ background: post.bg }}>
       <div className="hf-hero-top">
         <Badge label={post.category} style={post.categoryStyle} />
         <span className="hf-hero-star" aria-hidden>
@@ -47,13 +75,13 @@ function HeroCard({ post, href }: { post: HubPost; href: string }) {
         </p>
         {post.cta ? <span className="hf-hero-cta">{post.cta}</span> : null}
       </div>
-    </Link>
+    </CardShell>
   );
 }
 
 function HalfHeroCard({ post, href }: { post: HubPost; href: string }) {
   return (
-    <Link className="hf-half-hero" href={href} style={{ background: post.bg }}>
+    <CardShell className="hf-half-hero" href={href} post={post} style={{ background: post.bg }}>
       <div className="hf-hero-top">
         <Badge label={post.category} style={post.categoryStyle} />
         <span className="hf-hero-star" aria-hidden>
@@ -75,13 +103,13 @@ function HalfHeroCard({ post, href }: { post: HubPost; href: string }) {
         </p>
         {post.cta ? <span className="hf-hero-cta">{post.cta}</span> : null}
       </div>
-    </Link>
+    </CardShell>
   );
 }
 
 function SquareCard({ post, href }: { post: HubPost; href: string }) {
   return (
-    <Link className="hf-square" href={href} style={{ background: post.bg }}>
+    <CardShell className="hf-square" href={href} post={post} style={{ background: post.bg }}>
       <Badge label={post.category} style={post.categoryStyle} />
       {post.watermark ? (
         <span className="hf-square-watermark" aria-hidden style={{ color: post.titleColor }}>
@@ -103,13 +131,13 @@ function SquareCard({ post, href }: { post: HubPost; href: string }) {
           </p>
         ) : null}
       </div>
-    </Link>
+    </CardShell>
   );
 }
 
 function TallCard({ post, href }: { post: HubPost; href: string }) {
   return (
-    <Link className="hf-tall" href={href} style={{ background: post.bg }}>
+    <CardShell className="hf-tall" href={href} post={post} style={{ background: post.bg }}>
       <Badge label={post.category} style={post.categoryStyle} />
       <h4 className="hf-tall-title" style={{ color: post.titleColor }}>
         {post.title.split("\n").map((line, i) => (
@@ -129,13 +157,13 @@ function TallCard({ post, href }: { post: HubPost; href: string }) {
           <p className="hf-tall-readers">{post.readers}</p>
         </div>
       ) : null}
-    </Link>
+    </CardShell>
   );
 }
 
 function SmallCard({ post, href }: { post: HubPost; href: string }) {
   return (
-    <Link className="hf-small" href={href} style={{ background: post.bg }}>
+    <CardShell className="hf-small" href={href} post={post} style={{ background: post.bg }}>
       <span
         className="hf-small-cat"
         style={{ color: post.categoryStyle === "cyan" ? "#ffffff" : "#f4258c" }}
@@ -146,13 +174,13 @@ function SmallCard({ post, href }: { post: HubPost; href: string }) {
         {post.title}
       </h4>
       {post.watermarkIcon ? <span className="hf-small-icon" aria-hidden>{post.watermarkIcon}</span> : null}
-    </Link>
+    </CardShell>
   );
 }
 
 function WideCard({ post, href }: { post: HubPost; href: string }) {
   return (
-    <Link className="hf-wide" href={href} style={{ background: post.bg }}>
+    <CardShell className="hf-wide" href={href} post={post} style={{ background: post.bg }}>
       <div>
         <span className="hf-wide-cat" style={{ color: post.titleColor }}>
           {post.category}
@@ -169,7 +197,7 @@ function WideCard({ post, href }: { post: HubPost; href: string }) {
       <div className="hf-wide-arrow" style={{ color: post.titleColor }}>
         →
       </div>
-    </Link>
+    </CardShell>
   );
 }
 

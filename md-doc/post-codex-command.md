@@ -140,7 +140,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[029] Hub`
+1. `[033] Hub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -887,3 +887,25 @@ description: [actual text] -> [N]자
 - H2는 1~2개만 더 검색형으로 조정
 - alt는 짧고 구체적으로 보정
 - 본문 나머지 구조와 논지는 유지
+
+---
+
+## 22. 2026-03-12 Update
+
+- 현재 작업 상태: 성수동 허브 KO/EN 작성 완료
+- 진행 로그: `seongsu-hub` KO/EN 게시용 MDX 작성, 허브 카드 연결, 다음 작성 대상은 `[030] Sub [ ]`
+
+## 23. 2026-03-12 Update
+
+- 현재 작업 상태: 성수동 팝업 스토어 가이드 KO/EN 작성 완료
+- 진행 로그: `seongsu-pop-up-store-guide` KO/EN 게시용 MDX 작성, `seongsu-hub` related panel 연결, 다음 작성 대상은 `[031] Sub [ ]`
+
+## 24. 2026-03-12 Update
+
+- 현재 작업 상태: 성수동 카페 거리 포토존 KO/EN 작성 완료
+- 진행 로그: `seongsu-cafe-photo-spots` KO/EN 게시용 MDX 작성, `seongsu-hub` related panel 연결, 다음 작성 대상은 `[032] Sub [ ]`
+
+## 25. 2026-03-12 Update
+
+- 현재 작업 상태: 성수동 공장 감성 골목 산책 KO/EN 작성 완료
+- 진행 로그: `seongsu-industrial-alley-walk-guide` KO/EN 게시용 MDX 작성, 성수동 묶음 4편 구조 완료, 다음 작성 대상은 `[033] Hub [ ]`

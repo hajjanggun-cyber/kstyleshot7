@@ -4,6 +4,7 @@ export type CategoryStyle = "pink" | "cyan" | "black-on-yellow" | "white-on-pink
 export type HubPost = {
   slug: string;
   cardType: CardType;
+  disabled?: boolean;
   category: string;
   categoryStyle: CategoryStyle;
   title: string;
@@ -21,10 +22,10 @@ export const hubPosts: HubPost[] = [
   {
     slug: "gyeongbokgung-hub",
     cardType: "hero",
-    category: "한국 명소 & 포토존",
+    category: "서울 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "경복궁\n가이드",
-    subtitle: "서울의 대표 궁궐을 가장 실용적으로 읽는 방법",
+    subtitle: "서울의 대표 궁궐을 가장 기본부터 읽는 방법",
     bg: "linear-gradient(135deg, #10243f 0%, #c08b3c 100%)",
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.8)",
@@ -34,7 +35,7 @@ export const hubPosts: HubPost[] = [
   {
     slug: "myeongdong-hub",
     cardType: "half-hero",
-    category: "한국 명소 & 포토존",
+    category: "서울 명소 & 포토존",
     categoryStyle: "black-on-yellow",
     title: "명동\n가이드",
     subtitle: "서울 상업 중심가를 빠르고 정확하게 읽는 동선",
@@ -47,7 +48,7 @@ export const hubPosts: HubPost[] = [
   {
     slug: "n-seoul-tower-hub",
     cardType: "half-hero",
-    category: "한국 명소 & 포토존",
+    category: "서울 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "남산 N서울타워\n가이드",
     subtitle: "서울 야경과 남산 동선을 함께 보는 기본 허브",
@@ -60,10 +61,10 @@ export const hubPosts: HubPost[] = [
   {
     slug: "insadong-hub",
     cardType: "half-hero",
-    category: "한국 명소 & 포토존",
+    category: "서울 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "인사동\n전통거리 가이드",
-    subtitle: "전통 서울이 걷는 속도로 읽히는 거리",
+    subtitle: "전통 서울을 걸으며 읽는 가장 기본적인 거리",
     bg: "linear-gradient(135deg, #4a2f1b 0%, #c58a48 100%)",
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.8)",
@@ -73,7 +74,7 @@ export const hubPosts: HubPost[] = [
   {
     slug: "garosu-gil-hub",
     cardType: "half-hero",
-    category: "한국 명소 & 포토존",
+    category: "서울 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "가로수길\n카페 가이드",
     subtitle: "카페, 쇼핑, 저녁 산책이 자연스럽게 이어지는 거리",
@@ -86,7 +87,7 @@ export const hubPosts: HubPost[] = [
   {
     slug: "han-river-park-hub",
     cardType: "hero",
-    category: "한국 명소 & 포토존",
+    category: "서울 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "한강공원\n놀거리 가이드",
     subtitle: "피크닉, 야경, 데이트 코스를 한 번에 읽는 서울 강변",
@@ -94,6 +95,19 @@ export const hubPosts: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.8)",
     watermark: "한강공원",
+    cta: "읽기",
+  },
+  {
+    slug: "seongsu-hub",
+    cardType: "hero",
+    category: "서울 명소 & 포토존",
+    categoryStyle: "white-on-pink",
+    title: "성수동\n가이드",
+    subtitle: "팝업, 카페, 골목 산책이 이어지는 서울 트렌드 거리",
+    bg: "linear-gradient(135deg, #2f2b38 0%, #d07a45 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "성수동",
     cta: "읽기",
   },
 ];
@@ -177,14 +191,27 @@ export const hubPostsEn: HubPost[] = [
     watermark: "HAN RIVER",
     cta: "Read Now",
   },
+  {
+    slug: "seongsu-hub",
+    cardType: "hero",
+    category: "Seoul Locations",
+    categoryStyle: "white-on-pink",
+    title: "Seongsu-dong\nGuide",
+    subtitle: "Pop-ups, cafes, and slower alley walks in one trend-heavy district",
+    bg: "linear-gradient(135deg, #2f2b38 0%, #d07a45 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "SEONGSU",
+    cta: "Read Now",
+  },
 ];
 
 export const FILTER_CHIPS_KO = [
   "전체",
-  "한국 명소 & 포토존",
+  "서울 명소 & 포토존",
   "가상 스타일 체험",
   "K-뷰티 & 헤어",
-  "K-스타일 패션",
+  "K-스타일 & 패션",
 ];
 
 export const FILTER_CHIPS_EN = [

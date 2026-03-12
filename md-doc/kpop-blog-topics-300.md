@@ -102,7 +102,7 @@ Role 표기:
 - Keyword: KO `N서울타워 야경 명소` | EN `best n seoul tower night view spot`
 - Subkeywords: KO `남산 포토 스팟`, `타워 야경 구도`, `서울 스카이라인 사진` | EN `namsan photo points`, `tower framing`, `seoul skyline photos`
 
-### [008] Sub [ ]
+### [008] Sub [v]
 - KO: 남산 산책 코스와 야경 포인트
 - EN: Namsan Walking Route with Night View Stops
 - Keyword: KO `남산 산책 코스 야경` | EN `namsan walking route night view`
@@ -240,25 +240,25 @@ Role 표기:
 
 ### Seongsu Cluster
 
-### [029] Hub
+### [029] Hub [v]
 - KO: 성수동 가볼만한곳 가이드 — 팝업, 카페, 골목 산책
 - EN: Best Things to Do in Seongsu-dong — Pop-Ups, Cafes, Alley Walks
 - Keyword: KO `성수동 가볼만한곳` | EN `best things to do in seongsu-dong`
 - Subkeywords: KO `성수동 놀거리`, `성수동 카페 거리`, `서울 트렌드 동네` | EN `things to do in seongsu`, `seongsu cafe street`, `trendy seoul neighborhood`
 
-### [030] Sub [ ]
+### [030] Sub [v]
 - KO: 성수동 팝업 스토어 거리 가이드
 - EN: Seongsu Pop-Up Store Guide
 - Keyword: KO `성수동 팝업 스토어` | EN `seongsu pop-up store guide`
 - Subkeywords: KO `성수동 팝업 일정`, `성수 브랜드 공간`, `서울 팝업 거리` | EN `seongsu pop-up route`, `brand spaces in seongsu`, `seoul pop-up district`
 
-### [031] Sub [ ]
+### [031] Sub [v]
 - KO: 성수동 카페 거리 포토존 추천
 - EN: Best Seongsu Cafe Photo Spots
 - Keyword: KO `성수동 카페 거리 포토존` | EN `best seongsu cafe photo spots`
 - Subkeywords: KO `성수 감성 카페`, `성수 사진 명소`, `서울 카페 스냅` | EN `seongsu aesthetic cafes`, `seongsu photo spots`, `seoul cafe photography`
 
-### [032] Sub [ ]
+### [032] Sub [v]
 - KO: 성수동 공장 감성 골목 산책
 - EN: Seongsu Industrial Alley Walk Guide
 - Keyword: KO `성수동 공장 감성 골목` | EN `seongsu industrial alley walk guide`
@@ -266,7 +266,7 @@ Role 표기:
 
 ### Bukchon Cluster
 
-### [033] Hub
+### [033] Hub [ ]
 - KO: 북촌 한옥마을 가볼만한곳 가이드 — 사진, 한복, 산책 코스
 - EN: Best Things to Do in Bukchon Hanok Village — Photos, Hanbok, Walks
 - Keyword: KO `북촌 한옥마을 가볼만한곳` | EN `best things to do in bukchon hanok village`
@@ -352,7 +352,7 @@ Role 표기:
 
 ### Core Wardrobe Cluster
 
-### [046] Hub
+### [046] Hub [ ]
 - KO: K패션 기본템 추천 — 실패 없는 데일리 코디 시작
 - EN: K-Fashion Wardrobe Essentials — Daily Outfit Basics That Work
 - Keyword: KO `K패션 기본템` | EN `k-fashion wardrobe essentials`
@@ -384,7 +384,7 @@ Role 표기:
 
 ### Concept Styling Cluster
 
-### [051] Hub
+### [051] Hub [ ]
 - KO: K패션 스타일 종류 총정리 — Y2K부터 걸크러시까지
 - EN: K-Fashion Style Types — From Y2K to Girl Crush
 - Keyword: KO `K패션 스타일 종류` | EN `k-fashion style types`
@@ -422,7 +422,7 @@ Role 표기:
 
 ### Seasonal Styling Cluster
 
-### [057] Hub
+### [057] Hub [ ]
 - KO: 계절별 K패션 코디 추천 — 봄, 여름, 가을, 겨울 룩 정리
 - EN: Seasonal K-Fashion Outfit Ideas — Spring to Winter Looks
 - Keyword: KO `계절별 K패션 코디` | EN `seasonal k-fashion outfit ideas`
@@ -454,7 +454,7 @@ Role 표기:
 
 ### Seoul Street Fashion Cluster
 
-### [062] Hub
+### [062] Hub [ ]
 - KO: 서울 스트릿 패션 트렌드 가이드 — 홍대와 성수 코디 차이
 - EN: Seoul Street Fashion Trends — Hongdae vs Seongsu Outfits
 - Keyword: KO `서울 스트릿 패션` | EN `seoul street fashion trends`
@@ -486,7 +486,7 @@ Role 표기:
 
 ### Fit and Body Type Cluster
 
-### [067] Hub
+### [067] Hub [ ]
 - KO: 체형별 코디 추천 — K스타일로 비율 좋아 보이게
 - EN: K-Style Outfit Ideas by Body Type — Better Proportion Tips
 - Keyword: KO `체형별 코디 추천` | EN `outfit ideas by body type`
@@ -518,7 +518,7 @@ Role 표기:
 
 ### Color and Fabric Cluster
 
-### [072] Hub
+### [072] Hub [ ]
 - KO: 옷 색 조합 잘하는 법 — K패션 컬러 매치 기본
 - EN: How to Match Colors in Outfits — K-Fashion Palette Basics
 - Keyword: KO `옷 색 조합` | EN `how to match colors in outfits`
@@ -550,7 +550,7 @@ Role 표기:
 
 ### Accessories and Shoes Cluster
 
-### [077] Hub
+### [077] Hub [ ]
 - KO: 패션 액세서리 추천 — 신발, 가방, 주얼리 코디 팁
 - EN: Fashion Accessories Guide — Shoes, Bags, Jewelry Tips
 - Keyword: KO `패션 액세서리 추천` | EN `fashion accessories guide`
@@ -582,7 +582,7 @@ Role 표기:
 
 ### Special Looks Cluster
 
-### [082] Hub
+### [082] Hub [ ]
 - KO: 데이트룩 코디 추천 — 특별한 날 바로 입는 K스타일
 - EN: K-Style Date Outfit Ideas — Easy Looks for Special Plans
 - Keyword: KO `데이트룩 코디 추천` | EN `k-style date outfit ideas`
@@ -614,7 +614,7 @@ Role 표기:
 
 ### Shopping and Trend Cluster
 
-### [087] Hub
+### [087] Hub [ ]
 - KO: 한국 패션 쇼핑 가이드 — 어디서 사고 무엇을 볼까
 - EN: Korean Fashion Shopping Guide — Where to Shop and What to Buy
 - Keyword: KO `한국 패션 쇼핑` | EN `korean fashion shopping guide`
@@ -646,7 +646,7 @@ Role 표기:
 
 ### Men and Genderless Cluster
 
-### [092] Hub
+### [092] Hub [ ]
 - KO: 남자 코디 추천 — K스타일로 깔끔하게 입는 법
 - EN: Men's Korean Outfit Ideas — Clean Everyday K-Style
 - Keyword: KO `남자 코디 추천` | EN `mens korean outfit ideas`
@@ -676,7 +676,7 @@ Role 표기:
 
 ### Skincare Basics Cluster
 
-### [096] Hub
+### [096] Hub [ ]
 - KO: K뷰티 스킨케어 순서 가이드 — 초보도 따라가기 쉬운 루틴
 - EN: K-Beauty Skincare Routine — The Easy Order for Beginners
 - Keyword: KO `K뷰티 스킨케어 순서` | EN `k-beauty skincare routine`
@@ -708,7 +708,7 @@ Role 표기:
 
 ### Base Makeup Cluster
 
-### [101] Hub
+### [101] Hub [ ]
 - KO: 베이스 메이크업 잘하는 법 — 무너짐 적은 K뷰티 피부 표현
 - EN: K-Beauty Base Makeup Tips — Smooth Skin That Lasts
 - Keyword: KO `베이스 메이크업 잘하는 법` | EN `k-beauty base makeup tips`
@@ -740,7 +740,7 @@ Role 표기:
 
 ### Eye Makeup Cluster
 
-### [106] Hub
+### [106] Hub [ ]
 - KO: 눈매 메이크업 가이드 — 애교살, 아이라인, 속눈썹 기본
 - EN: Eye Makeup Tips — Aegyo Sal, Liner, and Lashes
 - Keyword: KO `눈매 메이크업` | EN `eye makeup tips`
@@ -772,7 +772,7 @@ Role 표기:
 
 ### Lip and Cheek Cluster
 
-### [111] Hub
+### [111] Hub [ ]
 - KO: 립 메이크업 추천 — 그라데이션 립과 블러셔 조합
 - EN: Lip Makeup Guide — Gradient Lips and Blush Placement
 - Keyword: KO `립 메이크업 추천` | EN `lip makeup guide`
@@ -804,7 +804,7 @@ Role 표기:
 
 ### Haircut Cluster
 
-### [116] Hub
+### [116] Hub [ ]
 - KO: 한국 헤어컷 추천 — 허쉬컷, 레이어드컷, 앞머리 정리
 - EN: Korean Haircut Ideas — Hush Cut, Layers, and Bangs
 - Keyword: KO `한국 헤어컷 추천` | EN `korean haircut ideas`
@@ -836,7 +836,7 @@ Role 표기:
 
 ### Hair Color Cluster
 
-### [121] Hub
+### [121] Hub [ ]
 - KO: 염색 컬러 추천 — 피부톤에 맞는 한국 헤어컬러
 - EN: Hair Color Ideas by Skin Tone — Popular Korean Shades
 - Keyword: KO `염색 컬러 추천` | EN `hair color ideas by skin tone`
@@ -868,7 +868,7 @@ Role 표기:
 
 ### Hair Styling and Care Cluster
 
-### [126] Hub
+### [126] Hub [ ]
 - KO: 헤어 스타일링 방법 — 볼륨, 앞머리, 곱슬 관리 팁
 - EN: Hair Styling Tips — Volume, Bangs, and Frizz Control
 - Keyword: KO `헤어 스타일링 방법` | EN `hair styling tips`
@@ -900,7 +900,7 @@ Role 표기:
 
 ### Practical Beauty Cluster
 
-### [131] Hub
+### [131] Hub [ ]
 - KO: 올리브영 추천템과 한국 뷰티 쇼핑 가이드
 - EN: Olive Young Must-Buys and Korean Beauty Shopping Guide
 - Keyword: KO `올리브영 추천템` | EN `olive young must buys`
@@ -932,7 +932,7 @@ Role 표기:
 
 ### Skin Concerns Cluster
 
-### [136] Hub
+### [136] Hub [ ]
 - KO: 피부 고민별 스킨케어 가이드 — 여드름, 모공, 민감성 정리
 - EN: Skincare by Skin Concern — Acne, Pores, and Sensitivity
 - Keyword: KO `피부 고민별 스킨케어` | EN `skincare by skin concern`
@@ -968,7 +968,7 @@ Role 표기:
 
 ### Beginner Cluster
 
-### [141] Hub
+### [141] Hub [ ]
 - KO: K팝 입문 가이드 — 처음 덕질할 때 먼저 알아둘 것
 - EN: K-Pop Beginner Guide — What to Know First
 - Keyword: KO `K팝 입문` | EN `k-pop beginner guide`
@@ -1000,7 +1000,7 @@ Role 표기:
 
 ### Album and Photocard Cluster
 
-### [146] Hub
+### [146] Hub [ ]
 - KO: K팝 앨범 사는 법 — 포토카드와 버전 차이까지
 - EN: How to Buy K-Pop Albums — Versions and Photocards Explained
 - Keyword: KO `K팝 앨범 사는 법` | EN `how to buy k-pop albums`
@@ -1032,7 +1032,7 @@ Role 표기:
 
 ### Concert Cluster
 
-### [151] Hub
+### [151] Hub [ ]
 - KO: K팝 콘서트 준비물 가이드 — 응원봉부터 입장까지
 - EN: K-Pop Concert Checklist — From Lightstick to Entry
 - Keyword: KO `K팝 콘서트 준비물` | EN `k-pop concert checklist`
@@ -1064,7 +1064,7 @@ Role 표기:
 
 ### Fan Etiquette Cluster
 
-### [156] Hub
+### [156] Hub [ ]
 - KO: 팬활동 에티켓 가이드 — 현장과 온라인에서 지켜야 할 것
 - EN: Fan Etiquette Guide — What Matters Online and Offline
 - Keyword: KO `팬활동 에티켓` | EN `fan etiquette guide`
@@ -1096,7 +1096,7 @@ Role 표기:
 
 ### Fandom Language Cluster
 
-### [161] Hub
+### [161] Hub [ ]
 - KO: K팝 용어 정리 — 초보 팬이 헷갈리는 표현 한 번에
 - EN: K-Pop Terms Guide — Common Fandom Words Explained
 - Keyword: KO `K팝 용어 정리` | EN `k-pop terms guide`
@@ -1128,7 +1128,7 @@ Role 표기:
 
 ### Industry and Trend Cluster
 
-### [166] Hub
+### [166] Hub [ ]
 - KO: K팝 산업 구조 가이드 — 컴백, 콘셉트, 글로벌 확산 읽기
 - EN: K-Pop Industry Guide — Comebacks, Concepts, and Global Growth
 - Keyword: KO `K팝 산업 구조` | EN `k-pop industry guide`
@@ -1160,7 +1160,7 @@ Role 표기:
 
 ### Seoul Fan Culture Cluster
 
-### [171] Hub
+### [171] Hub [ ]
 - KO: 서울 팬문화 가이드 — 생일카페, 광고, 팝업 스토어 보는 법
 - EN: Seoul Fan Culture Guide — Cafes, Ads, and Pop-Ups
 - Keyword: KO `서울 팬문화` | EN `seoul fan culture guide`
@@ -1196,7 +1196,7 @@ Role 표기:
 
 ### Selfie Basics Cluster
 
-### [176] Hub
+### [176] Hub [ ]
 - KO: 셀카 잘 찍는 법 — 한국 감성 사진 기본부터
 - EN: How to Take Better Selfies — Korean Aesthetic Basics
 - Keyword: KO `셀카 잘 찍는 법` | EN `how to take better selfies`
@@ -1228,7 +1228,7 @@ Role 표기:
 
 ### Composition Cluster
 
-### [181] Hub
+### [181] Hub [ ]
 - KO: 사진 구도 잘 잡는 법 — 인생샷 만드는 기본 공식
 - EN: Photo Composition Tips — Easy Rules for Better Shots
 - Keyword: KO `사진 구도 잘 잡는 법` | EN `photo composition tips`
@@ -1260,7 +1260,7 @@ Role 표기:
 
 ### Lighting Cluster
 
-### [186] Hub
+### [186] Hub [ ]
 - KO: 사진 조명 활용법 — 자연광, 야간, 역광 한 번에
 - EN: Photo Lighting Tips — Natural Light, Night, and Backlight
 - Keyword: KO `사진 조명 활용법` | EN `photo lighting tips`
@@ -1292,7 +1292,7 @@ Role 표기:
 
 ### Mobile Camera Cluster
 
-### [191] Hub
+### [191] Hub [ ]
 - KO: 휴대폰 카메라 설정 추천 — 인생샷 잘 나오는 기본값
 - EN: Best Phone Camera Settings for Better Photos
 - Keyword: KO `휴대폰 카메라 설정 추천` | EN `best phone camera settings`
@@ -1324,7 +1324,7 @@ Role 표기:
 
 ### Editing Cluster
 
-### [196] Hub
+### [196] Hub [ ]
 - KO: 사진 보정하는 법 — 색감과 피부 표현 자연스럽게
 - EN: How to Edit Photos Naturally — Color and Skin Tips
 - Keyword: KO `사진 보정하는 법` | EN `how to edit photos naturally`
@@ -1356,7 +1356,7 @@ Role 표기:
 
 ### Location-Based Photography Cluster
 
-### [201] Hub
+### [201] Hub [ ]
 - KO: 장소별 사진 잘 찍는 법 — 한강, 카페, 야경별 촬영 팁
 - EN: Location Photo Tips — Han River, Cafes, and Night Shots
 - Keyword: KO `장소별 사진 잘 찍는 법` | EN `location photo tips`
@@ -1388,7 +1388,7 @@ Role 표기:
 
 ### Profile and Content Cluster
 
-### [206] Hub
+### [206] Hub [ ]
 - KO: 프로필 사진 잘 찍는 법 — SNS와 콘텐츠용으로 쓰기 좋은 구도
 - EN: How to Take Better Profile Photos — For Social Media and Content
 - Keyword: KO `프로필 사진 잘 찍는 법` | EN `how to take better profile photos`
@@ -1424,7 +1424,7 @@ Role 표기:
 
 ### First Trip Cluster
 
-### [211] Hub
+### [211] Hub [ ]
 - KO: 서울 여행 코스 3박 4일 — 처음 가는 사람용 일정 정리
 - EN: Seoul 3 Night 4 Day Itinerary — First-Time Visitor Guide
 - Keyword: KO `서울 3박 4일 여행 코스` | EN `seoul 3 night 4 day itinerary`
@@ -1456,7 +1456,7 @@ Role 표기:
 
 ### Transportation Cluster
 
-### [216] Hub
+### [216] Hub [ ]
 - KO: 서울 교통 이용법 — 지하철, T머니, 공항 이동 한 번에
 - EN: How to Get Around Seoul — Subway, T-Money, Airport
 - Keyword: KO `서울 교통 이용법` | EN `how to get around seoul`
@@ -1488,7 +1488,7 @@ Role 표기:
 
 ### Neighborhood Planning Cluster
 
-### [221] Hub
+### [221] Hub [ ]
 - KO: 서울 어디에 숙소 잡을까 — 홍대, 명동, 성수 비교
 - EN: Where to Stay in Seoul — Hongdae, Myeongdong, Seongsu
 - Keyword: KO `서울 어디에 숙소 잡을까` | EN `where to stay in seoul`
@@ -1520,7 +1520,7 @@ Role 표기:
 
 ### Food and Cafe Cluster
 
-### [226] Hub
+### [226] Hub [ ]
 - KO: 서울 맛집 카페 추천 — 여행 중 실패 적은 코스
 - EN: Seoul Food and Cafe Guide — Easy Picks for Travelers
 - Keyword: KO `서울 맛집 카페 추천` | EN `seoul food and cafe guide`
@@ -1552,7 +1552,7 @@ Role 표기:
 
 ### Concert Travel Cluster
 
-### [231] Hub
+### [231] Hub [ ]
 - KO: 콘서트 보러 서울 갈 때 여행 가이드 — 티켓, 숙소, 이동
 - EN: Seoul Concert Trip Guide — Tickets, Hotels, Transport
 - Keyword: KO `콘서트 보러 서울 갈 때` | EN `seoul concert trip guide`
@@ -1584,7 +1584,7 @@ Role 표기:
 
 ### Seasonal Planning Cluster
 
-### [236] Hub
+### [236] Hub [ ]
 - KO: 계절별 서울 여행 코스 — 봄부터 겨울까지 분위기별 추천
 - EN: Seasonal Seoul Itinerary — Spring to Winter Guide
 - Keyword: KO `계절별 서울 여행 코스` | EN `seasonal seoul itinerary`
@@ -1616,7 +1616,7 @@ Role 표기:
 
 ### Practical Travel Cluster
 
-### [241] Hub
+### [241] Hub [ ]
 - KO: 한국 여행 준비물 체크리스트 — 유심, 환급, 필수 앱 정리
 - EN: Korea Travel Checklist — SIM, Tax Refund, Essential Apps
 - Keyword: KO `한국 여행 준비물 체크리스트` | EN `korea travel checklist`
@@ -1652,7 +1652,7 @@ Role 표기:
 
 ### Fan Account Cluster
 
-### [246] Hub
+### [246] Hub [ ]
 - KO: 팬계정 키우는 법 — 인스타 운영과 콘텐츠 전략
 - EN: How to Grow a Fan Account — Instagram and Content Strategy
 - Keyword: KO `팬계정 키우는 법` | EN `how to grow a fan account`
@@ -1684,7 +1684,7 @@ Role 표기:
 
 ### Video and Editing Cluster
 
-### [251] Hub
+### [251] Hub [ ]
 - KO: 팬영상 편집 가이드 — 팬캠, 쇼츠, 챌린지 영상 시작법
 - EN: Fan Video Editing Guide — Fancams, Shorts, and Challenges
 - Keyword: KO `팬영상 편집` | EN `fan video editing guide`
@@ -1716,7 +1716,7 @@ Role 표기:
 
 ### Trading and Collection Cluster
 
-### [256] Hub
+### [256] Hub [ ]
 - KO: 포토카드 교환 가이드 — 거래, 보관, 사진 찍는 법
 - EN: Photocard Trading Guide — Trading, Storage, and Photos
 - Keyword: KO `포토카드 교환 가이드` | EN `photocard trading guide`
@@ -1748,7 +1748,7 @@ Role 표기:
 
 ### Community Etiquette Cluster
 
-### [261] Hub
+### [261] Hub [ ]
 - KO: 팬 커뮤니티 예절 가이드 — 온라인에서 실수 줄이는 법
 - EN: Fan Community Etiquette Guide — How to Avoid Common Mistakes Online
 - Keyword: KO `팬 커뮤니티 예절` | EN `fan community etiquette guide`
@@ -1780,7 +1780,7 @@ Role 표기:
 
 ### Creative Content Cluster
 
-### [266] Hub
+### [266] Hub [ ]
 - KO: 팬 콘텐츠 만드는 법 — 블로그, 무드보드, 플레이리스트
 - EN: How to Create Fan Content — Blogs, Mood Boards, Playlists
 - Keyword: KO `팬 콘텐츠 만드는 법` | EN `how to create fan content`
@@ -1812,7 +1812,7 @@ Role 표기:
 
 ### Event Planning Cluster
 
-### [271] Hub
+### [271] Hub [ ]
 - KO: 팬 이벤트 기획 가이드 — 스트리밍 파티와 생일 서포트 준비
 - EN: Fan Event Planning Guide — Streaming Parties and Birthday Support
 - Keyword: KO `팬 이벤트 기획` | EN `fan event planning guide`
@@ -1848,7 +1848,7 @@ Role 표기:
 
 ### AI Profile Cluster
 
-### [276] Hub
+### [276] Hub [ ]
 - KO: AI 프로필 사진 만들기 — K스타일 셀카 변환 가이드
 - EN: AI K-Style Profile Photo Guide — Turn Selfies into Better Profiles
 - Keyword: KO `AI 프로필 사진 만들기` | EN `ai k-style profile photo guide`
@@ -1880,7 +1880,7 @@ Role 표기:
 
 ### Virtual Fashion Cluster
 
-### [281] Hub
+### [281] Hub [ ]
 - KO: 가상 피팅 하는 법 — K패션 스타일을 미리 입어보기
 - EN: How to Use Virtual Try-On for K-Fashion
 - Keyword: KO `가상 피팅 하는 법` | EN `how to use virtual try-on for k-fashion`
@@ -1912,7 +1912,7 @@ Role 표기:
 
 ### Virtual Hair and Beauty Cluster
 
-### [286] Hub
+### [286] Hub [ ]
 - KO: 가상 헤어 체험 가이드 — 자르기 전 스타일 미리보기
 - EN: Virtual Hair Try-On Guide — Preview Styles Before Cutting
 - Keyword: KO `가상 헤어 체험` | EN `virtual hair try-on guide`
@@ -1944,7 +1944,7 @@ Role 표기:
 
 ### Seoul Backdrop Cluster
 
-### [291] Hub
+### [291] Hub [ ]
 - KO: 가상 서울 배경 사진 가이드 — 경복궁, 홍대, 한강 무드 선택
 - EN: Virtual Seoul Backdrop Guide — Palace, Street, and River Moods
 - Keyword: KO `가상 서울 배경 사진` | EN `virtual seoul backdrop guide`
@@ -1976,7 +1976,7 @@ Role 표기:
 
 ### Output and Sharing Cluster
 
-### [296] Hub
+### [296] Hub [ ]
 - KO: 가상 스타일링 사진 활용법 — 화질, 굿즈, 포트폴리오 정리
 - EN: How to Use Virtual Styling Photos — Quality, Goods, Portfolio
 - Keyword: KO `가상 스타일링 사진 활용법` | EN `how to use virtual styling photos`

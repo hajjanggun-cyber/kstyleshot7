@@ -14,6 +14,7 @@ export type ArticleFrontmatter = {
   headerGradient: string;
   pullQuote: string;
   hreflangSlug: string;
+  ogImage?: string;
   authorName?: string;
   authorRole?: string;
   aiGenerated?: boolean;
