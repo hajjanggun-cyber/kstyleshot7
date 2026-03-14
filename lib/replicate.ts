@@ -1,5 +1,4 @@
 export const HAIR_MODEL = "flux-kontext-apps/change-haircut";
-export const FACE_SWAP_VERSION = process.env.REPLICATE_FACE_SWAP_VERSION?.trim() || "d1d6ea8c8be89d664a07a457526f7128109dee7030fdac424788d762c71ed111";
 const REPLICATE_API_BASE_URL = process.env.REPLICATE_API_BASE_URL ?? "https://api.replicate.com";
 const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "Black";
 const HAIR_MODEL_VERSION = process.env.REPLICATE_HAIR_MODEL_VERSION?.trim() || "";
@@ -299,28 +298,6 @@ export async function startHairVariantJobs(input: StartHairJobInput): Promise<Ha
   );
 }
 
-/** Starts a single hair prediction without waiting — returns predictionId only. */
-/** Starts a hair job from a plain image URL (e.g. face-swap output). No data URL conversion needed. */
-export async function startHairFinalJob(input: {
-  imageUrl: string;
-  haircutName: string;
-  hairColor: string;
-}): Promise<string> {
-  assertReplicateEnv();
-
-  if (!input.haircutName.trim()) {
-    throw new ReplicateApiError("haircutName is required.", 400);
-  }
-
-  const { predictionId } = await startPrediction({
-    inputImage: input.imageUrl,
-    haircut: input.haircutName.trim(),
-    hairColor: input.hairColor.trim() || DEFAULT_HAIR_COLOR,
-    wait: false,
-  });
-
-  return predictionId;
-}
 
 export async function startHairPreviewJob(input: {
   photoDataUrl: string;
@@ -385,13 +362,41 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
   return url;
 }
 
-export async function startFluxKontextProJob(input: {
-  imageUrl: string;
-  prompt: string;
+
+const NANO_BANANA_BASE_PROMPT = `The first image shows a person with a specific face and hairstyle.
+The second image shows a K-pop outfit or costume.
+The third image shows a background scene and location.
+
+Place the person from the first image into the location from the third image.
+Dress the person in the outfit shown in the second image.
+Keep the person's exact face, skin tone, and hairstyle from the first image completely unchanged.
+
+Show the full body from head to shoes, including the complete outfit and footwear.
+The person is standing naturally in the center of the frame.
+Camera is positioned at a slight distance, as if a friend is taking the photo.
+The composition should feel like a professional travel photo or fashion editorial shot, not a selfie.
+
+Match the background, lighting, and atmosphere of the third image exactly.
+Blend the person naturally into the background so the lighting, shadows, and color tones are fully consistent.
+The person should appear as if they were originally photographed in that location.
+
+The result should look like a natural photorealistic kpop idol photoshoot.
+Do not alter the face. Do not alter the hairstyle.`;
+
+/** Starts a nano-banana-pro job combining a hair-styled selfie, outfit image, and background scene. Returns predictionId. */
+export async function startNanaBananaJob(input: {
+  hairPreviewUrl: string;    // image 1: hair-styled selfie (HTTPS URL)
+  outfitImageUrl: string;    // image 2: outfit/costume (HTTPS URL)
+  backgroundImageUrl: string; // image 3: background scene (HTTPS URL)
+  sceneDescription?: string; // optional scene-specific context appended to base prompt
 }): Promise<string> {
   assertReplicateEnv();
 
-  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/black-forest-labs/flux-kontext-pro/predictions`;
+  const prompt = input.sceneDescription
+    ? `${NANO_BANANA_BASE_PROMPT}\n${input.sceneDescription}`
+    : NANO_BANANA_BASE_PROMPT;
+
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/google/nano-banana-pro/predictions`;
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -400,80 +405,29 @@ export async function startFluxKontextProJob(input: {
     },
     body: JSON.stringify({
       input: {
-        prompt: input.prompt,
-        input_image: input.imageUrl,
-        aspect_ratio: "match_input_image",
+        prompt,
+        image_input: [input.hairPreviewUrl, input.outfitImageUrl, input.backgroundImageUrl],
+        resolution: "2K",
         output_format: "jpg",
-        output_quality: 95,
-        safety_tolerance: 2,
-        prompt_upsampling: false,
+        safety_filter_level: "block_only_high",
       },
     }),
     cache: "no-store",
   }).catch(() => {
-    throw new ReplicateApiError("Unable to reach Replicate Flux Kontext Pro API.", 502);
+    throw new ReplicateApiError("Unable to reach Replicate nano-banana-pro API.", 502);
   });
 
   const payload = await parseApiJson(response);
   if (!response.ok) {
     throw new ReplicateApiError(
-      extractApiErrorMessage(payload, `Flux Kontext Pro job failed with status ${response.status}.`),
+      extractApiErrorMessage(payload, `nano-banana-pro job failed with status ${response.status}.`),
       response.status >= 400 && response.status < 500 ? 400 : 502
     );
   }
 
   const predictionId = pickString(payload, ["id"]);
   if (!predictionId) {
-    throw new ReplicateApiError("Flux Kontext Pro response missing id.", 502);
-  }
-
-  return predictionId;
-}
-
-/** Starts a face-swap job — user selfie face onto template body. Returns predictionId. */
-export async function startFaceSwapJob(input: {
-  inputImageUrl: string;  // 템플릿 이미지 (한복 경복궁 등)
-  swapImageUrl: string;   // 사용자 셀카 (얼굴 소스) — data URL 또는 HTTPS URL
-}): Promise<string> {
-  assertReplicateEnv();
-
-  // Replicate face-swap 모델은 HTTPS URL만 지원 — data URL이면 Files API에 먼저 업로드
-  let swapUrl = input.swapImageUrl;
-  if (swapUrl.startsWith("data:image/")) {
-    const decoded = decodeDataUrl(swapUrl);
-    swapUrl = await uploadToReplicateFiles(decoded.buffer, decoded.mimeType);
-  }
-
-  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/predictions`;
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      Authorization: getReplicateAuthHeader(),
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      version: FACE_SWAP_VERSION,
-      input: {
-        input_image: input.inputImageUrl,
-        swap_image: swapUrl,
-      },
-    }),
-    cache: "no-store",
-  }).catch(() => {
-    throw new ReplicateApiError("Unable to reach Replicate face-swap API.", 502);
-  });
-
-  const payload = await parseApiJson(response);
-  if (!response.ok) {
-    throw new ReplicateApiError(
-      extractApiErrorMessage(payload, `Face-swap job failed with status ${response.status}.`),
-      response.status >= 400 && response.status < 500 ? 400 : 502
-    );
-  }
-
-  const predictionId = pickString(payload, ["id"]);
-  if (!predictionId) {
-    throw new ReplicateApiError("Face-swap response missing id.", 502);
+    throw new ReplicateApiError("nano-banana-pro response missing id.", 502);
   }
 
   return predictionId;

@@ -18,8 +18,7 @@ type CreateActions = {
   pickHair: (id: string) => void;
   setOutfitChosen: (ids: string[]) => void;
   pickOutfit: (id: string) => void;
-  setFaceSwapImageUrl: (url: string | null) => void;
-  setFaceSwapPredictionId: (id: string | null) => void;
+  setBackgroundId: (id: string | null) => void;
   setFinalImageUrl: (url: string | null) => void;
   setFinalPredictionId: (id: string | null) => void;
   reset: () => void;
@@ -49,8 +48,7 @@ export const useCreateStore = create<
     hairColor: string | null;
     hairPreviewUrl: string | null;
     hairPredictionId: string | null;
-    faceSwapImageUrl: string | null;
-    faceSwapPredictionId: string | null;
+    backgroundId: string | null;
     finalImageUrl: string | null;
     finalPredictionId: string | null;
   } & CreateActions
@@ -59,8 +57,7 @@ export const useCreateStore = create<
   hairColor: null,
   hairPreviewUrl: null,
   hairPredictionId: null,
-  faceSwapImageUrl: null,
-  faceSwapPredictionId: null,
+  backgroundId: null,
   finalImageUrl: null,
   finalPredictionId: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
@@ -88,7 +85,7 @@ export const useCreateStore = create<
     })),
   setOutfitChosen: (ids) =>
     set(() => ({
-      outfit: { ...createEmptySelection(), chosen: ids.slice(0, 2) },
+      outfit: { ...createEmptySelection(), chosen: ids.slice(0, 1) },
       status: "outfit_selecting"
     })),
   pickOutfit: (id) =>
@@ -96,8 +93,7 @@ export const useCreateStore = create<
       outfit: { ...state.outfit, picked: id },
       status: "final_processing"
     })),
-  setFaceSwapImageUrl: (url) => set({ faceSwapImageUrl: url }),
-  setFaceSwapPredictionId: (id) => set({ faceSwapPredictionId: id }),
+  setBackgroundId: (id) => set({ backgroundId: id }),
   setFinalImageUrl: (url) => set({ finalImageUrl: url }),
   setFinalPredictionId: (id) => set({ finalPredictionId: id }),
   reset: () =>
@@ -108,8 +104,7 @@ export const useCreateStore = create<
       hairColor: null,
       hairPreviewUrl: null,
       hairPredictionId: null,
-      faceSwapImageUrl: null,
-      faceSwapPredictionId: null,
+      backgroundId: null,
       finalImageUrl: null,
       finalPredictionId: null,
     })

@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import { LoadingModal } from "@/components/create/LoadingModal";
 import { hairStyles } from "@/data/hairStyles";
+import { outfitTemplates } from "@/data/outfits";
 import { referenceTemplates } from "@/data/referenceTemplates";
 import { useCreateStore } from "@/store/createStore";
 
@@ -38,6 +39,7 @@ export function DoneFlow() {
     photoBlobUrl,
     hair,
     outfit,
+    backgroundId,
     reset,
   } = useCreateStore();
 
@@ -85,8 +87,10 @@ export function DoneFlow() {
 
   const hairName =
     hairStyles.find((item) => item.id === hair.picked)?.name ?? hair.picked ?? "-";
-  const selectedReference =
-    referenceTemplates.find((item) => item.id === outfit.chosen[0]) ?? null;
+  const selectedOutfit =
+    outfitTemplates.find((item) => item.id === outfit.chosen[0]) ?? null;
+  const selectedBackground =
+    referenceTemplates.find((item) => item.id === backgroundId) ?? null;
   const basePreviewUrl = hairPreviewUrl ?? photoBlobUrl ?? null;
   const resultUrl = finalImageUrl ?? basePreviewUrl;
   const isFinalProcessing = Boolean(finalPredictionId) && !finalImageUrl && !finalError;
@@ -237,8 +241,14 @@ export function DoneFlow() {
           </div>
           <div className="dn-chip">
             <div>
-              <p className="dn-chip-label">{lang === "ko" ? "선택한 레퍼런스" : "Reference"}</p>
-              <p className="dn-chip-val">{selectedReference?.title ?? "-"}</p>
+              <p className="dn-chip-label">{lang === "ko" ? "의상" : "Outfit"}</p>
+              <p className="dn-chip-val">{selectedOutfit?.title ?? "-"}</p>
+            </div>
+          </div>
+          <div className="dn-chip">
+            <div>
+              <p className="dn-chip-label">{lang === "ko" ? "배경" : "Background"}</p>
+              <p className="dn-chip-val">{selectedBackground?.title ?? "-"}</p>
             </div>
           </div>
         </div>
@@ -303,7 +313,7 @@ export function DoneFlow() {
 
       <div className="dn-hashtags">
         <Link className="dn-hashtag" href={`/${lang}/create/outfit`}>
-          {lang === "ko" ? "다른 레퍼런스 선택" : "Choose another reference"}
+          {lang === "ko" ? "다른 스타일 선택" : "Choose another style"}
         </Link>
       </div>
     </div>
