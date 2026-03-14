@@ -209,6 +209,16 @@ export function HubFeed() {
   const chips = isKo ? FILTER_CHIPS_KO : FILTER_CHIPS_EN;
   const [activeChip, setActiveChip] = useState(chips[0] ?? "All");
   const [search, setSearch] = useState("");
+  const normalizedSearch = search.trim().toLowerCase();
+  const filteredPosts = posts.filter((post) => {
+    const chipMatches = activeChip === chips[0] || post.category === activeChip;
+
+    if (!chipMatches) return false;
+    if (!normalizedSearch) return true;
+
+    const haystack = [post.title, post.subtitle, post.category].filter(Boolean).join(" ").toLowerCase();
+    return haystack.includes(normalizedSearch);
+  });
 
   return (
     <div className="hf-root">
@@ -272,7 +282,7 @@ export function HubFeed() {
       </div>
 
       <div className="hf-grid">
-        {posts.map((post) => {
+        {filteredPosts.map((post) => {
           const href = `/${lang}/hub/${post.slug}`;
           if (post.cardType === "hero") return <HeroCard href={href} key={post.slug} post={post} />;
           if (post.cardType === "half-hero") return <HalfHeroCard href={href} key={post.slug} post={post} />;
