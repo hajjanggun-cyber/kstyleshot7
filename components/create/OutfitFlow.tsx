@@ -4,9 +4,26 @@ import { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
-import { outfitTemplates } from "@/data/outfits";
-import { referenceTemplates } from "@/data/referenceTemplates";
+import { outfitTemplates, type OutfitCategory } from "@/data/outfits";
+import { referenceTemplates, type BackgroundCategory } from "@/data/referenceTemplates";
 import { useCreateStore } from "@/store/createStore";
+
+type Step = "outfit" | "background";
+
+const OUTFIT_CATEGORIES: { id: OutfitCategory; label: string }[] = [
+  { id: "stage", label: "K-POP 무대" },
+  { id: "hanbok", label: "한복 퓨전" },
+  { id: "korean", label: "한국 캐주얼" },
+  { id: "street", label: "스트릿" },
+];
+
+const BG_CATEGORIES: { id: BackgroundCategory; label: string }[] = [
+  { id: "hanbok", label: "한복" },
+  { id: "stage", label: "무대" },
+  { id: "street", label: "스트릿" },
+  { id: "park", label: "공원" },
+  { id: "seoul", label: "서울" },
+];
 
 async function blobUrlToDataUrl(blobUrl: string): Promise<string> {
   const response = await fetch(blobUrl);
@@ -34,6 +51,9 @@ export function OutfitFlow() {
     setStatus,
   } = useCreateStore();
 
+  const [step, setStep] = useState<Step>("outfit");
+  const [outfitCategory, setOutfitCategory] = useState<OutfitCategory>("stage");
+  const [bgCategory, setBgCategory] = useState<BackgroundCategory>("hanbok");
   const [selectedOutfitId, setSelectedOutfitId] = useState<string | null>(null);
   const [selectedBgId, setSelectedBgId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -57,6 +77,11 @@ export function OutfitFlow() {
         </div>
       </div>
     );
+  }
+
+  function handleSelectOutfit(id: string) {
+    setSelectedOutfitId(id);
+    setTimeout(() => setStep("background"), 300);
   }
 
   async function handleSubmit() {
@@ -100,57 +125,54 @@ export function OutfitFlow() {
     }
   }
 
-  const canSubmit = Boolean(selectedOutfitId && selectedBgId && !submitting);
+  // 의상 선택 단계
+  if (step === "outfit") {
+    const filtered = outfitTemplates.filter((o) => o.category === outfitCategory);
+    return (
+      <div className="ot-root">
+        <nav className="ot-nav">
+          <Link className="ot-back-btn" href={`/${lang}/create/hair`}>{"<-"}</Link>
+          <h2 className="ot-nav-title">{lang === "ko" ? "의상 선택" : "Choose outfit"}</h2>
+          <div className="ot-nav-spacer" />
+        </nav>
 
-  return (
-    <div className="ot-root">
-      <nav className="ot-nav">
-        <Link className="ot-back-btn" href={`/${lang}/create/hair`}>{"<-"}</Link>
-        <h2 className="ot-nav-title">{lang === "ko" ? "스타일 선택" : "Choose style"}</h2>
-        <div className="ot-nav-spacer" />
-      </nav>
-
-      <div className="ot-dots">
-        <div className="ot-dot ot-dot--done" />
-        <div className="ot-dot ot-dot--done" />
-        <div className="ot-dot ot-dot--active" />
-        <div className="ot-dot" />
-      </div>
-
-      {error ? <p className="up-error">{error}</p> : null}
-
-      {/* 헤어 미리보기 */}
-      <div className="ot-compare">
-        <div className="ot-compare-card ot-compare-card--ai">
-          <img alt="Selected hair result" className="ot-compare-img" src={sourceImageUrl} />
-          <span className="ot-compare-label">
-            {lang === "ko" ? "선택된 헤어 결과" : "Selected hair result"}
-          </span>
+        <div className="ot-dots">
+          <div className="ot-dot ot-dot--done" />
+          <div className="ot-dot ot-dot--done" />
+          <div className="ot-dot ot-dot--active" />
+          <div className="ot-dot" />
         </div>
-      </div>
 
-      {/* 의상 선택 */}
-      <div className="ot-compare-sub">
-        <h2 className="ot-avatar-title">
-          {lang === "ko" ? "1. 의상을 선택하세요" : "1. Select an outfit"}
-        </h2>
-      </div>
-
-      {outfitTemplates.length === 0 ? (
-        <div className="ot-missing" style={{ margin: "0 16px 24px" }}>
-          <p style={{ fontSize: 14, color: "#888" }}>
-            {lang === "ko" ? "의상 이미지 준비 중입니다." : "Outfit images coming soon."}
-          </p>
+        <div className="ot-compare">
+          <div className="ot-compare-card ot-compare-card--ai">
+            <img alt="Selected hair result" className="ot-compare-img" src={sourceImageUrl} />
+            <span className="ot-compare-label">
+              {lang === "ko" ? "선택된 헤어 결과" : "Selected hair result"}
+            </span>
+          </div>
         </div>
-      ) : (
+
+        <div className="hf-tabs">
+          {OUTFIT_CATEGORIES.map((cat) => (
+            <button
+              className={`hf-tab${outfitCategory === cat.id ? " hf-tab--active" : ""}`}
+              key={cat.id}
+              onClick={() => setOutfitCategory(cat.id)}
+              type="button"
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
         <div className="ot-grid">
-          {outfitTemplates.map((outfit) => {
+          {filtered.map((outfit) => {
             const isSelected = selectedOutfitId === outfit.id;
             return (
               <button
                 className={`ot-card${isSelected ? " ot-card--selected" : ""}`}
                 key={outfit.id}
-                onClick={() => setSelectedOutfitId(outfit.id)}
+                onClick={() => handleSelectOutfit(outfit.id)}
                 type="button"
               >
                 <div className="ot-card-img" style={{ backgroundImage: `url(${outfit.thumbnailUrl})` }} />
@@ -165,17 +187,44 @@ export function OutfitFlow() {
             );
           })}
         </div>
-      )}
+      </div>
+    );
+  }
 
-      {/* 배경 선택 */}
-      <div className="ot-compare-sub">
-        <h2 className="ot-avatar-title">
-          {lang === "ko" ? "2. 배경을 선택하세요" : "2. Select a background"}
-        </h2>
+  // 배경 선택 단계
+  const filteredBg = referenceTemplates.filter((b) => b.category === bgCategory);
+  return (
+    <div className="ot-root">
+      <nav className="ot-nav">
+        <button className="ot-back-btn" onClick={() => setStep("outfit")} type="button">{"<-"}</button>
+        <h2 className="ot-nav-title">{lang === "ko" ? "배경 선택" : "Choose background"}</h2>
+        <div className="ot-nav-spacer" />
+      </nav>
+
+      <div className="ot-dots">
+        <div className="ot-dot ot-dot--done" />
+        <div className="ot-dot ot-dot--done" />
+        <div className="ot-dot ot-dot--done" />
+        <div className="ot-dot ot-dot--active" />
+      </div>
+
+      {error ? <p className="up-error">{error}</p> : null}
+
+      <div className="hf-tabs">
+        {BG_CATEGORIES.map((cat) => (
+          <button
+            className={`hf-tab${bgCategory === cat.id ? " hf-tab--active" : ""}`}
+            key={cat.id}
+            onClick={() => setBgCategory(cat.id)}
+            type="button"
+          >
+            {cat.label}
+          </button>
+        ))}
       </div>
 
       <div className="ot-grid">
-        {referenceTemplates.map((bg) => {
+        {filteredBg.map((bg) => {
           const isSelected = selectedBgId === bg.id;
           return (
             <button
@@ -199,8 +248,8 @@ export function OutfitFlow() {
 
       <div className="ot-bottom">
         <button
-          className={`up-next-btn${canSubmit ? " up-next-btn--active" : ""}`}
-          disabled={!canSubmit}
+          className={`up-next-btn${selectedBgId && !submitting ? " up-next-btn--active" : ""}`}
+          disabled={!selectedBgId || submitting}
           onClick={handleSubmit}
           type="button"
         >
