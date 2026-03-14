@@ -110,6 +110,19 @@ export const hubPosts: HubPost[] = [
     watermark: "성수동",
     cta: "읽기",
   },
+  {
+    slug: "bukchon-hanok-village-hub",
+    cardType: "half-hero",
+    category: "서울 명소 & 포토존",
+    categoryStyle: "white-on-pink",
+    title: "북촌 한옥마을\n가이드",
+    subtitle: "사진, 한복, 산책 코스를 함께 읽는 서울 전통 동네",
+    bg: "linear-gradient(135deg, #2f3547 0%, #c08b63 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "북촌",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -202,6 +215,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "SEONGSU",
+    cta: "Read Now",
+  },
+  {
+    slug: "bukchon-hanok-village-hub",
+    cardType: "half-hero",
+    category: "Seoul Locations",
+    categoryStyle: "white-on-pink",
+    title: "Bukchon Hanok\nVillage Guide",
+    subtitle: "Photos, hanbok walks, and a quieter traditional Seoul route",
+    bg: "linear-gradient(135deg, #2f3547 0%, #c08b63 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "BUKCHON",
     cta: "Read Now",
   },
 ];

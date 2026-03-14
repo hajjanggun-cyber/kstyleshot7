@@ -266,25 +266,25 @@ Role 표기:
 
 ### Bukchon Cluster
 
-### [033] Hub [ ]
+### [033] Hub [v]
 - KO: 북촌 한옥마을 가볼만한곳 가이드 — 사진, 한복, 산책 코스
 - EN: Best Things to Do in Bukchon Hanok Village — Photos, Hanbok, Walks
 - Keyword: KO `북촌 한옥마을 가볼만한곳` | EN `best things to do in bukchon hanok village`
 - Subkeywords: KO `북촌 산책 코스`, `안국 한옥마을`, `서울 전통 동네` | EN `bukchon walking route`, `anguk hanok village`, `seoul hanok neighborhood`
 
-### [034] Sub [ ]
+### [034] Sub [v]
 - KO: 북촌 한옥 사진 명소 정리
 - EN: Best Bukchon Hanok Photo Spots
 - Keyword: KO `북촌 한옥 사진 명소` | EN `best bukchon hanok photo spots`
 - Subkeywords: KO `북촌 골목 사진`, `한옥 배경 사진`, `안국 포토존` | EN `bukchon alley photos`, `hanok background shots`, `anguk photo spots`
 
-### [035] Sub [ ]
+### [035] Sub [v]
 - KO: 북촌 한복 사진 동선 가이드
 - EN: Bukchon Hanbok Photo Route
 - Keyword: KO `북촌 한복 사진 동선` | EN `bukchon hanbok photo route`
 - Subkeywords: KO `북촌 한복 코스`, `안국 한복 대여`, `북촌 포즈 추천` | EN `hanbok route in bukchon`, `anguk hanbok rental`, `bukchon poses`
 
-### [036] Sub [ ]
+### [036] Sub [v]
 - KO: 북촌과 서촌 산책 코스 차이
 - EN: Bukchon vs Seochon Walking Guide
 - Keyword: KO `북촌 서촌 산책 코스 차이` | EN `bukchon vs seochon walking guide`
