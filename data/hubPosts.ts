@@ -123,6 +123,19 @@ export const hubPosts: HubPost[] = [
     watermark: "북촌",
     cta: "읽기",
   },
+  {
+    slug: "seoul-photo-spot-guide",
+    cardType: "half-hero",
+    category: "서울 명소 & 포토존",
+    categoryStyle: "white-on-pink",
+    title: "서울 포토존 추천\n허브",
+    subtitle: "한옥, 거리, 공원, 야경, 계절 포토존을 한 번에 읽는 서울 산책·사진 허브",
+    bg: "linear-gradient(135deg, #24334a 0%, #d98a5b 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "서울 포토존",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -228,6 +241,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "BUKCHON",
+    cta: "Read Now",
+  },
+  {
+    slug: "seoul-photo-spot-guide",
+    cardType: "half-hero",
+    category: "Seoul Locations",
+    categoryStyle: "white-on-pink",
+    title: "Seoul Photo Spot\nGuide Hub",
+    subtitle: "A Seoul walk and photo hub covering hanok alleys, streets, parks, night views, and seasons",
+    bg: "linear-gradient(135deg, #24334a 0%, #d98a5b 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "SEOUL PHOTO",
     cta: "Read Now",
   },
 ];
