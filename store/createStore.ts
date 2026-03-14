@@ -9,6 +9,7 @@ type CreateActions = {
   setSession: (input: { orderId: string; sessionToken: string; status: JobStatus }) => void;
   setStatus: (status: JobStatus) => void;
   setPhotoBlobUrl: (blobUrl: string | null) => void;
+  setPhotoDataUrl: (dataUrl: string | null) => void;
   setHairChosen: (ids: string[]) => void;
   setHairColor: (color: string) => void;
   setHairPreviewUrl: (url: string | null) => void;
@@ -17,6 +18,8 @@ type CreateActions = {
   pickHair: (id: string) => void;
   setOutfitChosen: (ids: string[]) => void;
   pickOutfit: (id: string) => void;
+  setFaceSwapImageUrl: (url: string | null) => void;
+  setFaceSwapPredictionId: (id: string | null) => void;
   setFinalImageUrl: (url: string | null) => void;
   setFinalPredictionId: (id: string | null) => void;
   reset: () => void;
@@ -36,6 +39,7 @@ const initialState: CreateSessionState = {
   sessionToken: "",
   status: "payment_pending",
   photoBlobUrl: null,
+  photoDataUrl: null,
   hair: createEmptySelection(),
   outfit: createEmptySelection(),
 };
@@ -45,6 +49,8 @@ export const useCreateStore = create<
     hairColor: string | null;
     hairPreviewUrl: string | null;
     hairPredictionId: string | null;
+    faceSwapImageUrl: string | null;
+    faceSwapPredictionId: string | null;
     finalImageUrl: string | null;
     finalPredictionId: string | null;
   } & CreateActions
@@ -53,12 +59,15 @@ export const useCreateStore = create<
   hairColor: null,
   hairPreviewUrl: null,
   hairPredictionId: null,
+  faceSwapImageUrl: null,
+  faceSwapPredictionId: null,
   finalImageUrl: null,
   finalPredictionId: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
   setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
   setStatus: (status) => set({ status }),
   setPhotoBlobUrl: (photoBlobUrl) => set({ photoBlobUrl }),
+  setPhotoDataUrl: (photoDataUrl) => set({ photoDataUrl }),
   setHairChosen: (ids) =>
     set(() => ({
       hair: { ...createEmptySelection(), chosen: ids.slice(0, 2) },
@@ -87,6 +96,8 @@ export const useCreateStore = create<
       outfit: { ...state.outfit, picked: id },
       status: "final_processing"
     })),
+  setFaceSwapImageUrl: (url) => set({ faceSwapImageUrl: url }),
+  setFaceSwapPredictionId: (id) => set({ faceSwapPredictionId: id }),
   setFinalImageUrl: (url) => set({ finalImageUrl: url }),
   setFinalPredictionId: (id) => set({ finalPredictionId: id }),
   reset: () =>
@@ -97,6 +108,8 @@ export const useCreateStore = create<
       hairColor: null,
       hairPreviewUrl: null,
       hairPredictionId: null,
+      faceSwapImageUrl: null,
+      faceSwapPredictionId: null,
       finalImageUrl: null,
       finalPredictionId: null,
     })

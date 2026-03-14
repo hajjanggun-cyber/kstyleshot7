@@ -1,4 +1,5 @@
 export const HAIR_MODEL = "flux-kontext-apps/change-haircut";
+export const FACE_SWAP_VERSION = process.env.REPLICATE_FACE_SWAP_VERSION?.trim() || "d1d6ea8c8be89d664a07a457526f7128109dee7030fdac424788d762c71ed111";
 const REPLICATE_API_BASE_URL = process.env.REPLICATE_API_BASE_URL ?? "https://api.replicate.com";
 const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "Black";
 const HAIR_MODEL_VERSION = process.env.REPLICATE_HAIR_MODEL_VERSION?.trim() || "";
@@ -402,6 +403,55 @@ export async function startFluxKontextProJob(input: {
   const predictionId = pickString(payload, ["id"]);
   if (!predictionId) {
     throw new ReplicateApiError("Flux Kontext Pro response missing id.", 502);
+  }
+
+  return predictionId;
+}
+
+/** Starts a face-swap job — user selfie face onto template body. Returns predictionId. */
+export async function startFaceSwapJob(input: {
+  inputImageUrl: string;  // 템플릿 이미지 (한복 경복궁 등)
+  swapImageUrl: string;   // 사용자 셀카 (얼굴 소스) — data URL 또는 HTTPS URL
+}): Promise<string> {
+  assertReplicateEnv();
+
+  // Replicate face-swap 모델은 HTTPS URL만 지원 — data URL이면 Files API에 먼저 업로드
+  let swapUrl = input.swapImageUrl;
+  if (swapUrl.startsWith("data:image/")) {
+    const decoded = decodeDataUrl(swapUrl);
+    swapUrl = await uploadToReplicateFiles(decoded.buffer, decoded.mimeType);
+  }
+
+  const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/predictions`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: getReplicateAuthHeader(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      version: FACE_SWAP_VERSION,
+      input: {
+        input_image: input.inputImageUrl,
+        swap_image: swapUrl,
+      },
+    }),
+    cache: "no-store",
+  }).catch(() => {
+    throw new ReplicateApiError("Unable to reach Replicate face-swap API.", 502);
+  });
+
+  const payload = await parseApiJson(response);
+  if (!response.ok) {
+    throw new ReplicateApiError(
+      extractApiErrorMessage(payload, `Face-swap job failed with status ${response.status}.`),
+      response.status >= 400 && response.status < 500 ? 400 : 502
+    );
+  }
+
+  const predictionId = pickString(payload, ["id"]);
+  if (!predictionId) {
+    throw new ReplicateApiError("Face-swap response missing id.", 502);
   }
 
   return predictionId;
