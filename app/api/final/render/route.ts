@@ -43,14 +43,19 @@ export async function POST(request: NextRequest) {
 
     const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "").replace(/\/$/, "");
 
-    // Upload hair preview (data URL) to Replicate Files API → HTTPS URL
-    const match = hairPreviewDataUrl.match(/^data:([^;,]+);base64,(.+)$/);
-    if (!match) {
-      return NextResponse.json({ error: "hairPreviewDataUrl is not a valid data URL" }, { status: 400 });
+    // If already an HTTPS URL, use directly. Otherwise upload data URL to Replicate Files API.
+    let hairImageUrl: string;
+    if (hairPreviewDataUrl.startsWith("https://")) {
+      hairImageUrl = hairPreviewDataUrl;
+    } else {
+      const match = hairPreviewDataUrl.match(/^data:([^;,]+);base64,(.+)$/);
+      if (!match) {
+        return NextResponse.json({ error: "hairPreviewDataUrl must be an HTTPS URL or data URL" }, { status: 400 });
+      }
+      const [, mimeType, base64] = match;
+      const buffer = Buffer.from(base64, "base64");
+      hairImageUrl = await uploadToReplicateFiles(buffer, mimeType);
     }
-    const [, mimeType, base64] = match;
-    const buffer = Buffer.from(base64, "base64");
-    const hairImageUrl = await uploadToReplicateFiles(buffer, mimeType);
 
     const outfitImageUrl = `${appUrl}${outfitTemplate.imageUrl}`;
     const backgroundImageUrl = `${appUrl}${bgTemplate.templateImageUrl}`;
