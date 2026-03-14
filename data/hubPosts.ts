@@ -99,7 +99,7 @@ export const hubPosts: HubPost[] = [
   },
   {
     slug: "seongsu-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "서울 명소 & 포토존",
     categoryStyle: "white-on-pink",
     title: "성수동\n가이드",
@@ -206,7 +206,7 @@ export const hubPostsEn: HubPost[] = [
   },
   {
     slug: "seongsu-hub",
-    cardType: "hero",
+    cardType: "half-hero",
     category: "Seoul Locations",
     categoryStyle: "white-on-pink",
     title: "Seongsu-dong\nGuide",
