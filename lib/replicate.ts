@@ -367,28 +367,33 @@ const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `The first ima
 The second image shows a K-pop outfit or costume.
 The third image shows a background scene and location.
 
+### [CRITICAL PRIORITY: 100% IDENTITY MATCH - ABSOLUTE]
+- The goal is NOT to create a new character or a stylized idol version.
+- Copy and Paste the exact face from the first reference image.
+- Strictly maintain the EXACT facial structure, eye shape, eyelid lines, nose bridge width, and lip contours of the person in the first image, including all micro-asymmetry and unique facial details.
+- DO NOT beautify, DO NOT apply any style-specific makeup, and DO NOT smooth the skin texture.
+- Retain the natural skin tone, pores, and fine lines precisely as they appear in the original photo.
+- The person's face must be 1:1 identical to the original reference, with no distortion, morphing, or generalization.
+
 [COMPOSITION & STYLE]
 - Place the person from the first image into the location from the third image.
 - Dress the person in the outfit shown in the second image.
 - Show the full body from head to shoes, standing naturally in the center of the frame.
 - The composition is a professional fashion editorial shot with a 35mm lens perspective.
 
-[IDENTITY PRESERVATION - DO NOT ALTER]
-- Keep the person's exact face, skin tone, and hairstyle from the first image 100% unchanged.
-- The facial structure and hair texture must remain identical to the original reference.
-
-[SEAMLESS OPTICAL INTEGRATION]
+[SEAMLESS OPTICAL INTEGRATION - DEEP FOCUS MODE]
 - Match the lighting, color temperature, and atmospheric shadows of the third image exactly.
-- Apply "Global Illumination": The light source from the background must naturally wrap around the subject's body.
-- Create "Contact Shadows": Generate realistic, soft ambient occlusion shadows where the shoes meet the ground to prevent a floating effect.
+- Apply "Global Illumination": The specific color temperature from the background must naturally wrap around the subject's body.
+- Create "Contact Shadows": Generate realistic, precise ambient occlusion shadows precisely under the soles of the shoes where they contact the pavement to ensure the subject is firmly grounded.
 - Match "Image Grain": Synchronize the digital noise and film grain between the subject and the background for a unified texture.
-- Use a "Natural Depth of Field": Apply a subtle bokeh effect to the background while keeping the subject in razor-sharp focus.
+- Use a F8.0 or higher aperture setting for deep depth of field: Ensure both the subject and the background are in focus, with only a very subtle, natural fall-off in the furthest distance.
+- Align the sharpness level of the subject with the resolution and texture details of the background.
 
 [SCENE DESCRIPTION]
 ${sceneDescription}
 
 [FINAL OUTPUT QUALITY]
-The result must be a flawless, photorealistic K-pop idol photoshoot where the subject appears as if they were originally captured on-site with a professional camera.`;
+The result must be a flawless, photorealistic photoshoot. Treat the first image as an unchangeable master reference for the face. The priority is the exact 1:1 reproduction of the person's face from the reference image, seamlessly blended into the background with realistic grounding shadows and consistent deep-focus optics.`;
 
 /** Starts a nano-banana-pro job combining a hair-styled selfie, outfit image, and background scene. Returns predictionId. */
 export async function startNanaBananaJob(input: {
