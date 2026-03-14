@@ -363,25 +363,32 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
 }
 
 
-const NANO_BANANA_BASE_PROMPT = `The first image shows a person with a specific face and hairstyle.
+const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `The first image shows a person with a specific face and hairstyle.
 The second image shows a K-pop outfit or costume.
 The third image shows a background scene and location.
 
-Place the person from the first image into the location from the third image.
-Dress the person in the outfit shown in the second image.
-Keep the person's exact face, skin tone, and hairstyle from the first image completely unchanged.
+[COMPOSITION & STYLE]
+- Place the person from the first image into the location from the third image.
+- Dress the person in the outfit shown in the second image.
+- Show the full body from head to shoes, standing naturally in the center of the frame.
+- The composition is a professional fashion editorial shot with a 35mm lens perspective.
 
-Show the full body from head to shoes, including the complete outfit and footwear.
-The person is standing naturally in the center of the frame.
-Camera is positioned at a slight distance, as if a friend is taking the photo.
-The composition should feel like a professional travel photo or fashion editorial shot, not a selfie.
+[IDENTITY PRESERVATION - DO NOT ALTER]
+- Keep the person's exact face, skin tone, and hairstyle from the first image 100% unchanged.
+- The facial structure and hair texture must remain identical to the original reference.
 
-Match the background, lighting, and atmosphere of the third image exactly.
-Blend the person naturally into the background so the lighting, shadows, and color tones are fully consistent.
-The person should appear as if they were originally photographed in that location.
+[SEAMLESS OPTICAL INTEGRATION]
+- Match the lighting, color temperature, and atmospheric shadows of the third image exactly.
+- Apply "Global Illumination": The light source from the background must naturally wrap around the subject's body.
+- Create "Contact Shadows": Generate realistic, soft ambient occlusion shadows where the shoes meet the ground to prevent a floating effect.
+- Match "Image Grain": Synchronize the digital noise and film grain between the subject and the background for a unified texture.
+- Use a "Natural Depth of Field": Apply a subtle bokeh effect to the background while keeping the subject in razor-sharp focus.
 
-The result should look like a natural photorealistic kpop idol photoshoot.
-Do not alter the face. Do not alter the hairstyle.`;
+[SCENE DESCRIPTION]
+${sceneDescription}
+
+[FINAL OUTPUT QUALITY]
+The result must be a flawless, photorealistic K-pop idol photoshoot where the subject appears as if they were originally captured on-site with a professional camera.`;
 
 /** Starts a nano-banana-pro job combining a hair-styled selfie, outfit image, and background scene. Returns predictionId. */
 export async function startNanaBananaJob(input: {
@@ -392,9 +399,9 @@ export async function startNanaBananaJob(input: {
 }): Promise<string> {
   assertReplicateEnv();
 
-  const prompt = input.sceneDescription
-    ? `${NANO_BANANA_BASE_PROMPT}\n${input.sceneDescription}`
-    : NANO_BANANA_BASE_PROMPT;
+  const prompt = NANO_BANANA_PROMPT_TEMPLATE(
+    input.sceneDescription ?? "The scene is a stylish and atmospheric K-pop photoshoot location with professional lighting."
+  );
 
   const endpoint = `${REPLICATE_API_BASE_URL.replace(/\/$/, "")}/v1/models/google/nano-banana-pro/predictions`;
   const response = await fetch(endpoint, {

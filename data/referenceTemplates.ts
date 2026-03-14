@@ -18,7 +18,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "전통 한복 배경",
     thumbnailUrl: "/templates/background/hanbok-3.jpeg",
     templateImageUrl: "/templates/background/hanbok-3.jpeg",
-    sceneDescription: "The scene features a traditional Korean hanbok setting with authentic cultural atmosphere.",
+    sceneDescription: "The subject is standing at a traditional Korean palace gate area in the late afternoon. Warm golden-hour sunlight casts long, soft shadows across stone-paved ground. The air feels calm and ceremonial, with a rich amber glow wrapping around stone walls and wooden eaves.",
     category: "hanbok",
   },
   {
@@ -27,7 +27,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "전통 한복 배경",
     thumbnailUrl: "/templates/background/hanbok-4.jpeg",
     templateImageUrl: "/templates/background/hanbok-4.jpeg",
-    sceneDescription: "The scene features a traditional Korean hanbok setting with soft natural lighting.",
+    sceneDescription: "The subject is standing in a traditional Korean cultural courtyard at bright midday. Soft, even daylight diffuses from a clear blue sky overhead, illuminating vivid hanbok colors with no harsh shadows. The atmosphere is clean, crisp, and timeless.",
     category: "hanbok",
   },
 
@@ -38,7 +38,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "K-POP 공연 무대",
     thumbnailUrl: "/templates/background/stage-1.jpeg",
     templateImageUrl: "/templates/background/stage-1.jpeg",
-    sceneDescription: "The scene is a K-pop idol performance stage with dramatic lighting and concert atmosphere.",
+    sceneDescription: "The subject is standing on a grand K-pop concert arena stage at night. Dramatic neon spotlights and laser beams cut through thick atmospheric haze, creating bold rings of colored light. The air is electric and charged with the energy of a packed stadium crowd.",
     category: "stage",
   },
   {
@@ -47,7 +47,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "K-POP 공연 무대",
     thumbnailUrl: "/templates/background/stage-2.jpeg",
     templateImageUrl: "/templates/background/stage-2.jpeg",
-    sceneDescription: "The scene is a K-pop concert stage with vibrant stage lighting.",
+    sceneDescription: "The subject is performing on a vibrant K-pop concert stage at night, surrounded by a massive LED backdrop pulsing with colorful light. Stage fog rolls across the floor and dynamic colored beams create a high-energy, cinematic atmosphere.",
     category: "stage",
   },
   {
@@ -56,7 +56,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "K-POP 공연 무대",
     thumbnailUrl: "/templates/background/stage-3.jpeg",
     templateImageUrl: "/templates/background/stage-3.jpeg",
-    sceneDescription: "The scene is a K-pop idol stage performance setting with professional lighting.",
+    sceneDescription: "The subject stands center-stage during a prime-time evening K-pop performance. Crisp white key lights combined with accent color spots illuminate the figure sharply against a dark, dramatic background. The mood is polished and professional.",
     category: "stage",
   },
   {
@@ -65,7 +65,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "K-POP 공연 무대",
     thumbnailUrl: "/templates/background/stage-4.jpeg",
     templateImageUrl: "/templates/background/stage-4.jpeg",
-    sceneDescription: "The scene is a grand K-pop concert stage with colorful lighting effects.",
+    sceneDescription: "The subject is at the center of a spectacular grand concert stage at night, with multi-colored lighting effects, theatrical fog, and confetti. The atmosphere is euphoric and larger-than-life, as if captured during the peak moment of a major K-pop event.",
     category: "stage",
   },
 
@@ -76,7 +76,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "한국 도심 스트릿",
     thumbnailUrl: "/templates/background/street-1.jpeg",
     templateImageUrl: "/templates/background/street-1.jpeg",
-    sceneDescription: "The scene is a Korean urban street with a fashionable street style atmosphere.",
+    sceneDescription: "The subject is standing on a trendy Seoul street in a fashionable district during bright afternoon daylight. Clear natural sunlight reflects off glass storefronts, creating a fresh, modern urban atmosphere with a lively street energy.",
     category: "street",
   },
   {
@@ -85,7 +85,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "한국 도심 스트릿",
     thumbnailUrl: "/templates/background/street-2.jpeg",
     templateImageUrl: "/templates/background/street-2.jpeg",
-    sceneDescription: "The scene is a trendy Korean street fashion district with natural daylight.",
+    sceneDescription: "The subject is posed on a stylish Korean urban street in the early afternoon, surrounded by boutique shops and modern architecture. The light is soft and even with a slight overcast sky, giving a cool, clean editorial feel.",
     category: "street",
   },
   {
@@ -94,7 +94,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "K-POP 스트릿 패션",
     thumbnailUrl: "/templates/background/street-3.jpeg",
     templateImageUrl: "/templates/background/street-3.jpeg",
-    sceneDescription: "The scene is a K-pop girl group street fashion setting in an urban environment.",
+    sceneDescription: "The subject is standing in a vibrant K-pop entertainment street district during late afternoon golden hour. Warm amber sunlight streams between buildings, casting a cinematic glow on the sidewalk and creating long, dramatic shadows.",
     category: "street",
   },
   {
@@ -103,7 +103,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "K-POP 스트릿 패션",
     thumbnailUrl: "/templates/background/street-4.jpeg",
     templateImageUrl: "/templates/background/street-4.jpeg",
-    sceneDescription: "The scene is a stylish K-pop street fashion location with urban backdrop.",
+    sceneDescription: "The subject is at a trendy Seoul fashion corridor in the fresh morning light. Cool, slightly blue-toned natural light fills the street, with colorful storefronts and a calm urban energy that feels effortlessly chic.",
     category: "street",
   },
 
@@ -114,7 +114,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "한국 공원 야외",
     thumbnailUrl: "/templates/background/park-1.jpeg",
     templateImageUrl: "/templates/background/park-1.jpeg",
-    sceneDescription: "The scene is a Korean style park picnic setting with lush greenery and soft natural light.",
+    sceneDescription: "The subject is in a lush Korean park on a clear spring afternoon. Soft, dappled sunlight filters through the canopy of green trees, casting gentle leaf-shadow patterns on the grass. A light breeze and fresh air create a bright, relaxed outdoor atmosphere.",
     category: "park",
   },
   {
@@ -123,7 +123,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "한국 공원 야외",
     thumbnailUrl: "/templates/background/park-2.jpeg",
     templateImageUrl: "/templates/background/park-2.jpeg",
-    sceneDescription: "The scene is a casual Korean park picnic atmosphere with bright outdoor lighting.",
+    sceneDescription: "The subject is standing in a bright and cheerful Korean outdoor park on a sunny midday. Vivid green grass stretches across the foreground under a clear blue sky, with strong natural sunlight creating a vibrant, energetic casual atmosphere.",
     category: "park",
   },
 
@@ -134,7 +134,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "서울 남산 야경",
     thumbnailUrl: "/templates/background/namsan-1.jpeg",
     templateImageUrl: "/templates/background/namsan-1.jpeg",
-    sceneDescription: "The scene is Namsan N Seoul Tower area with a beautiful Seoul cityscape backdrop.",
+    sceneDescription: "The subject is at the Namsan N Seoul Tower observation area during golden hour at sunset. Warm amber and rose-toned light washes over the iconic tower and the sprawling Seoul skyline behind it. The evening air is clear and crisp, with the city beginning to light up below.",
     category: "seoul",
   },
   {
@@ -143,7 +143,7 @@ export const referenceTemplates: ReferenceTemplate[] = [
     subtitle: "로맨틱 K드라마 분위기",
     thumbnailUrl: "/templates/background/kdrama-1.jpeg",
     templateImageUrl: "/templates/background/kdrama-1.jpeg",
-    sceneDescription: "The scene has a romantic and feminine K-drama lead character style with elegant surroundings.",
+    sceneDescription: "The subject is in a romantic, elegant outdoor setting reminiscent of a K-drama filming location during blue-hour twilight. The sky transitions from deep indigo to soft violet, while warm interior lighting glows from nearby windows, creating a dreamy, cinematic atmosphere.",
     category: "seoul",
   },
 ];
