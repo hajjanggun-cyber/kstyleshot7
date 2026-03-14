@@ -300,6 +300,28 @@ export async function startHairVariantJobs(input: StartHairJobInput): Promise<Ha
 }
 
 /** Starts a single hair prediction without waiting — returns predictionId only. */
+/** Starts a hair job from a plain image URL (e.g. face-swap output). No data URL conversion needed. */
+export async function startHairFinalJob(input: {
+  imageUrl: string;
+  haircutName: string;
+  hairColor: string;
+}): Promise<string> {
+  assertReplicateEnv();
+
+  if (!input.haircutName.trim()) {
+    throw new ReplicateApiError("haircutName is required.", 400);
+  }
+
+  const { predictionId } = await startPrediction({
+    inputImage: input.imageUrl,
+    haircut: input.haircutName.trim(),
+    hairColor: input.hairColor.trim() || DEFAULT_HAIR_COLOR,
+    wait: false,
+  });
+
+  return predictionId;
+}
+
 export async function startHairPreviewJob(input: {
   photoDataUrl: string;
   haircutName: string;

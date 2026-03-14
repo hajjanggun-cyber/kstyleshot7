@@ -40,6 +40,7 @@ export type CreateSessionState = {
   sessionToken: string;
   status: JobStatus;
   photoBlobUrl: string | null;
+  photoDataUrl: string | null;
   hair: SelectionState;
   outfit: SelectionState;
 };
