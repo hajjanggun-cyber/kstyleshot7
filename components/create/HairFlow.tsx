@@ -266,7 +266,7 @@ export function HairFlow() {
         body: JSON.stringify({
           photoDataUrl,
           haircutName: selectedStyle.haircut,
-          hairColor: selectedColor?.replicateValue ?? "Black",
+          hairColor: selectedColor?.replicateValue ?? "No change",
         }),
       });
 
