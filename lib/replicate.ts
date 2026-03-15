@@ -382,33 +382,35 @@ const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `The first ima
 The second image shows a K-pop outfit or costume.
 The third image shows a background scene and location.
 
-### [CRITICAL PRIORITY: 100% IDENTITY MATCH - ABSOLUTE]
-- The goal is NOT to create a new character or a stylized idol version.
-- Copy and Paste the exact face from the first reference image.
-- Strictly maintain the EXACT facial structure, eye shape, eyelid lines, nose bridge width, and lip contours of the person in the first image, including all micro-asymmetry and unique facial details.
-- DO NOT beautify, DO NOT apply any style-specific makeup, and DO NOT smooth the skin texture.
-- Retain the natural skin tone, pores, and fine lines precisely as they appear in the original photo.
-- The person's face must be 1:1 identical to the original reference, with no distortion, morphing, or generalization.
+### [CRITICAL PRIORITY: IDEALIZED IDOL IDENTITY MATCH]
+- The goal is to capture the core likeness of the person in the first reference image, but in an idealized, K-Pop idol aesthetic.
+- Copy the essential facial structure, eye shape, and nose bridge width from the first image.
+- Strictly improve the appearance: Apply "natural K-Pop idol makeup" to enhance features.
+- Ensure the person looks flawless and sophisticated, exactly like a 20-year-old Korean idol in a professional beauty commercial.
+- Smooth the skin texture to a "glass skin" finish, subtly correcting micro-asymmetry and minimizing pores and fine lines.
+- Brighten and naturalize the skin tone, creating a flawless and luminous complexion.
+- The person's face must be instantly recognizable as the master reference, but dramatically enhanced for beauty.
 
-[COMPOSITION & STYLE]
-- Place the person from the first image into the location from the third image.
-- Dress the person in the outfit shown in the second image.
-- Show the full body from head to shoes, standing naturally in the center of the frame.
-- The composition is a professional fashion editorial shot with a 35mm lens perspective.
+[COMPOSITION & STYLE: IDOL SELFIE - MEDIUM CLOSE-UP]
+- Set the scene as a spontaneous idol selfie.
+- Frame the subject in a "medium close-up", showing from the head to the chest.
+- Position the person centrally, looking directly and confidently into the camera.
+- The hand holding the phone must be partially visible in the frame, angled as if taking the selfie.
+- The composition is a "point-and-shoot" selfie captured with a 24mm wide-angle lens perspective, ensuring natural distortion and a close-up feel.
 
-[SEAMLESS OPTICAL INTEGRATION - DEEP FOCUS MODE]
+[SEAMLESS OPTICAL INTEGRATION - SHALLOW FOCUS MODE]
 - Match the lighting, color temperature, and atmospheric shadows of the third image exactly.
 - Apply "Global Illumination": The specific color temperature from the background must naturally wrap around the subject's body.
-- Create "Contact Shadows": Generate realistic, precise ambient occlusion shadows precisely under the soles of the shoes where they contact the pavement to ensure the subject is firmly grounded.
+- Create realistic "Contact Shadows": Generate subtle occlusion shadows under the person's hands and chin where appropriate.
 - Match "Image Grain": Synchronize the digital noise and film grain between the subject and the background for a unified texture.
-- Use a F8.0 or higher aperture setting for deep depth of field: Ensure both the subject and the background are in focus, with only a very subtle, natural fall-off in the furthest distance.
-- Align the sharpness level of the subject with the resolution and texture details of the background.
+- Use an F1.8 or lower aperture setting (shallow depth of field): The person must be in incredibly sharp focus, while the background is rendered in a beautiful, soft "bokeh" effect.
+- The background (the location from the third image) should be visible and recognizable but significantly blurred to make the person the central focus.
 
 [SCENE DESCRIPTION]
 ${sceneDescription}
 
 [FINAL OUTPUT QUALITY]
-The result must be a flawless, photorealistic photoshoot. Treat the first image as an unchangeable master reference for the face. The priority is the exact 1:1 reproduction of the person's face from the reference image, seamlessly blended into the background with realistic grounding shadows and consistent deep-focus optics.`;
+The result must be a flawless, photorealistic professional beauty commercial still. Treat the first image as the recognizable master reference for identity, but with the specific command to idealize, enhance, and beautify the subject. The priority is a sophisticated, flawless idol look, seamlessly blended into the softly blurred background with a genuine selfie-style composition.`;
 
 /** Starts a nano-banana-pro job combining a hair-styled selfie, outfit image, and background scene. Returns predictionId. */
 export async function startNanaBananaJob(input: {
