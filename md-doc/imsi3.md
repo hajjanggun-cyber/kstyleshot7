@@ -1,6 +1,48 @@
+업데이트 시각: 2026-03-15 19:31 (한국시간)
+
+## 4:5 통일 메모
+
+- 방향: 사용자 입력부터 헤어 합성, 헤어 결과, 최종 합성까지 전부 `4:5` 기준으로 통일하는 것이 맞음
+- 이유:
+  - 단계마다 비율이 다르면 크롭 기준이 계속 바뀜
+  - 헤어 결과에서 괜찮던 구도가 최종 합성에서 다시 잘릴 수 있음
+  - 사용자는 같은 이미지가 이어진다는 느낌보다, 단계마다 결과가 흔들린다고 느끼게 됨
+  - 세로형 인물 중심 서비스 특성상 `4:5`가 가장 실용적임
+- 원칙:
+  - 업로드 직후부터 `4:5` 안전 프레임 사용
+  - 헤어 모델 입력 이미지도 `4:5`
+  - 헤어 결과 저장/미리보기도 `4:5`
+  - 최종 합성도 `4:5`
+  - 프론트 카드 비율도 `4:5`
+- 현재 상태:
+  - 최종 합성 `nano-banana-pro`는 `aspect_ratio: "4:5"` 명시됨
+  - 헤어 합성 `change-haircut`은 현재 `aspect_ratio`를 보내지 않음
+  - 즉, 현재는 모든 단계가 `4:5`로 통일된 상태는 아님
+
+## Hair Replicate Check
+
+- Model: `flux-kontext-apps/change-haircut`
+- Current request does not send a separate natural-language prompt.
+- Current input payload only sends:
+  - `haircut`
+  - `hair_color`
+  - `input_image`
+- Current defaults in code:
+  - `hair_color`: `No change`
+  - `haircut`: selected style value from UI
+- Not currently sent:
+  - `gender`
+  - `aspect_ratio`
+  - `output_format`
+  - `seed`
+  - `safety_tolerance`
+- Source:
+  - `lib/replicate.ts`
+  - `components/create/HairFlow.tsx`
+
 # Hair Flow UI Wireframe Proposal
 
-Updated At: 2026-03-15 KST
+Updated At: 2026-03-15 18:12 KST
 
 ## Goal
 

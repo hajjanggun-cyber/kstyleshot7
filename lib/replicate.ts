@@ -2,6 +2,11 @@ export const HAIR_MODEL = "flux-kontext-apps/change-haircut";
 const REPLICATE_API_BASE_URL = process.env.REPLICATE_API_BASE_URL ?? "https://api.replicate.com";
 const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "No change";
 const HAIR_MODEL_VERSION = process.env.REPLICATE_HAIR_MODEL_VERSION?.trim() || "";
+const DEFAULT_HAIR_GENDER = "female";
+const DEFAULT_HAIR_ASPECT_RATIO = "4:5";
+const DEFAULT_HAIR_OUTPUT_FORMAT = "jpg";
+const DEFAULT_HAIR_SAFETY_TOLERANCE = 2;
+const DEFAULT_HAIR_SEED = 42;
 
 type JsonRecord = Record<string, unknown>;
 
@@ -158,6 +163,11 @@ async function startPrediction(input: {
   inputImage: string;
   haircut: string;
   hairColor: string;
+  gender?: string;
+  aspectRatio?: string;
+  outputFormat?: string;
+  safetyTolerance?: number;
+  seed?: number;
   wait?: boolean;
 }): Promise<{ predictionId: string; outputUrl: string | null }> {
   const endpoint = getHairPredictionEndpoint();
@@ -175,6 +185,11 @@ async function startPrediction(input: {
       input: {
         haircut: input.haircut,
         hair_color: input.hairColor,
+        gender: input.gender || DEFAULT_HAIR_GENDER,
+        aspect_ratio: input.aspectRatio || DEFAULT_HAIR_ASPECT_RATIO,
+        output_format: input.outputFormat || DEFAULT_HAIR_OUTPUT_FORMAT,
+        safety_tolerance: input.safetyTolerance ?? DEFAULT_HAIR_SAFETY_TOLERANCE,
+        seed: input.seed ?? DEFAULT_HAIR_SEED,
         input_image: input.inputImage,
       },
     }),
@@ -292,7 +307,7 @@ export async function startHairVariantJobs(input: StartHairJobInput): Promise<Ha
       startPrediction({
         inputImage: input.photoDataUrl,
         haircut: variant.haircut.trim(),
-        hairColor: variant.hairColor?.trim() || DEFAULT_HAIR_COLOR
+        hairColor: variant.hairColor?.trim() || DEFAULT_HAIR_COLOR,
       })
     )
   );
