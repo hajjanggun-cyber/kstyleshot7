@@ -42,7 +42,7 @@ export const hairStyles: HairStyle[] = [
   {
     id: "half-up-half-down",
     name: "Half-Up Half-Down",
-    haircut: "Half-Up Half-Down",
+    haircut: "Half-Up, Half-Down",
     thumbnail: "/templates/hairstyles/2 Signature/Half-Up Half-Down.jpg",
     tags: ["half-up", "soft"],
     category: "performance",

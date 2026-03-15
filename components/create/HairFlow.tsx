@@ -292,15 +292,13 @@ export function HairFlow() {
       predictionStatesRef.current = responses;
       setPredictionStates(responses);
       setPollSeed((current) => current + 1);
-    } catch (error) {
+    } catch {
       setIsGenerating(false);
       setStatus("hair_selecting");
       setGenerationError(
-        error instanceof Error && error.message && error.message !== "hair_preview_failed"
-          ? error.message
-          : lang === "ko"
-            ? "헤어 생성을 시작할 수 없습니다."
-            : "Unable to start hair generation."
+        lang === "ko"
+          ? "헤어 생성을 시작할 수 없습니다. 다시 시도해 주세요."
+          : "Unable to start hair generation. Please try again."
       );
     }
   }
@@ -587,7 +585,7 @@ export function HairFlow() {
           <div className="hr-section-hd">
             <span className="hr-section-pill">{lang === "ko" ? "컬러" : "COLOR"}</span>
             <span className="hr-section-hint">
-              {lang === "ko" ? "선택 안 하면 AI가 결정" : "Optional"}
+              {lang === "ko" ? "미선택시 현재 헤어 컬러가 유지됩니다" : "No selection keeps the original color"}
             </span>
           </div>
           <div className="hr-color-rail">
@@ -636,8 +634,8 @@ export function HairFlow() {
                   : "Generate 1 more"
                 : selectedStyleIds.length === 1
                   ? lang === "ko"
-                    ? "헤어 생성"
-                    : "Generate preview"
+                  ? "첫번째 헤어생성"
+                    : "Generate first hairstyle"
                   : lang === "ko"
                     ? "헤어 1개를 선택하세요"
                     : "Select 1 hairstyle"}
