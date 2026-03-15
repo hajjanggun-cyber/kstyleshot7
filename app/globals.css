@@ -3345,6 +3345,59 @@ h2 {
   padding: 16px;
 }
 
+.ot-grid--airy {
+  padding-top: 10px;
+}
+
+.ot-filter-shell {
+  padding: 8px 16px 0;
+}
+
+.ot-filter-rail {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.ot-filter-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.ot-chip {
+  flex: 0 0 auto;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 245, 235, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)),
+    rgba(31, 25, 21, 0.72);
+  color: rgba(251, 242, 232, 0.74);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.ot-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 247, 240, 0.92);
+}
+
+.ot-chip--active {
+  border-color: rgba(255, 214, 179, 0.3);
+  background:
+    linear-gradient(180deg, rgba(255, 232, 213, 0.96), rgba(244, 224, 206, 0.92)),
+    rgba(246, 233, 219, 0.96);
+  color: #22170f;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
 .ot-card {
   position: relative;
   display: flex;
@@ -3360,10 +3413,23 @@ h2 {
   overflow: hidden;
 }
 
+.ot-card--editorial {
+  background: linear-gradient(180deg, rgba(255, 248, 240, 0.08), rgba(255, 248, 240, 0.03));
+  border: 1px solid rgba(255, 240, 228, 0.12);
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+}
+
+.ot-card--editorial:hover {
+  border-color: rgba(255, 227, 198, 0.22);
+  transform: translateY(-2px);
+}
+
 .ot-card--selected {
-  border-color: #f48c25;
-  background: rgba(244, 140, 37, 0.14);
-  box-shadow: 0 0 18px rgba(244, 140, 37, 0.25);
+  border-color: rgba(255, 218, 189, 0.46);
+  background: linear-gradient(180deg, rgba(255, 241, 229, 0.15), rgba(255, 235, 217, 0.08));
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.22);
 }
 
 .ot-card-img {
@@ -3393,6 +3459,21 @@ h2 {
   color: #f1ede8;
 }
 
+.ot-card-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 242, 230, 0.94);
+  color: #24170f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .ot-card-check {
   width: 22px;
   height: 22px;
@@ -3418,6 +3499,59 @@ h2 {
   right: 18px;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.5);
+}
+
+.ot-choice-panel {
+  margin: 4px 16px 24px;
+  padding: 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 239, 224, 0.14);
+  background:
+    radial-gradient(circle at top left, rgba(255, 222, 191, 0.16), transparent 38%),
+    linear-gradient(180deg, rgba(255, 249, 242, 0.1), rgba(255, 249, 242, 0.04)),
+    rgba(30, 22, 18, 0.94);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+}
+
+.ot-choice-copy {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.ot-choice-title {
+  margin: 0;
+  color: #fff7ef;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.ot-choice-sub {
+  margin: 0;
+  color: rgba(255, 241, 230, 0.7);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.ot-choice-cta {
+  width: 100%;
+  min-height: 52px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff3e8, #f5ddcb);
+  color: #25170f;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+}
+
+.ot-choice-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
 }
 
 /* Complete the Look */
