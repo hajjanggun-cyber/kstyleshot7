@@ -319,7 +319,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
       const { FaceDetector, FilesetResolver } = await import("@mediapipe/tasks-vision");
 
       const vision = await FilesetResolver.forVisionTasks(
-        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.32/wasm"
       );
       const detector = await FaceDetector.createFromOptions(vision, {
         baseOptions: {
