@@ -1,3 +1,33 @@
+업데이트 시각: 2026-03-15 19:52 (한국시간)
+
+## 헤어스타일 매핑 정리
+
+- 원칙:
+  - 웹앱 표시명과 API 호출용 `haircut` 값은 다를 수 있음
+  - API에는 실제 파일명 기준 헤어 이름을 그대로 보냄
+  - 웹앱에는 사용자 친화적인 표시명을 따로 보여줌
+
+- `1 Natural`
+  - 표시명 `Soft Waves` -> API `Soft Waves`
+  - 표시명 `Straight` -> API `Straight`
+
+- `2 Signature`
+  - 표시명 `Glamorous Waves` -> API `Glamorous Waves`
+  - 표시명 `Half-Up Half-Down` -> API `Half-Up Half-Down`
+  - 표시명 `Half-Up Top Knot` -> API `Half-Up Top Knot`
+  - 표시명 `Pigtails` -> API `Pigtails`
+  - 표시명 `Side-Swept Bangs` -> API `Side-Swept Bangs`
+
+- `3 Ponytail`
+  - 표시명 `High Ponytail` -> API `High Ponytail`
+  - 표시명 `Low Ponytail` -> API `Low Ponytail`
+
+- `4 Short`
+  - 표시명 `Textured Bob` -> API `Lob`
+  - 표시명 `French Bob` -> API `A-Line Bob`
+  - 표시명 `Layered Bob` -> API `Angled Bob`
+  - 표시명 `Classic Bob` -> API `Pageboy`
+
 업데이트 시각: 2026-03-15 19:31 (한국시간)
 
 ## 4:5 통일 메모
