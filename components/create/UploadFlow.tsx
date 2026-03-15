@@ -318,13 +318,10 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
     try {
       const { FaceDetector, FilesetResolver } = await import("@mediapipe/tasks-vision");
 
-      const vision = await FilesetResolver.forVisionTasks(
-        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.32/wasm"
-      );
+      const vision = await FilesetResolver.forVisionTasks("/wasm");
       const detector = await FaceDetector.createFromOptions(vision, {
         baseOptions: {
-          modelAssetPath:
-            "https://storage.googleapis.com/mediapipe-assets/face_detection_full_range.tflite",
+          modelAssetPath: "/wasm/face_detection_short_range.tflite",
           delegate: "GPU",
         },
         runningMode: "IMAGE",
