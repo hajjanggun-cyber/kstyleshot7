@@ -1,10 +1,41 @@
 # K-Style Blog Content Strategy
 ## 300 SEO-First Topic Map — Korean & English Pairs
 
-Updated At: 2026-03-09 KST
+Updated At: 2026-03-15 KST
 
 이 문서는 `K-Style Hub` 전체 카테고리의 허브 구조, SEO 제목, 메인 키워드, 보조 키워드를 한 번에 관리하기 위한 기준 문서다.
 실제 작성 우선순위는 반드시 `md-doc/post-codex-command.md`를 따른다.
+
+---
+
+## 0. Highest-Priority Keywords
+
+이 10개는 현재 뷰티/헤어/가상체험 클러스터에서 가장 우선순위가 높은 핵심 키워드다.
+
+### Core Hub Keywords
+
+- `korean skincare routine`
+- `korean makeup`
+- `korean hairstyle`
+- `korean hair color`
+- `k-beauty routine`
+
+### High-Traffic Supporting Keywords
+
+- `glass skin`
+- `gradient lip`
+- `monolid makeup`
+
+### Service SEO Keywords
+
+- `virtual hairstyle`
+- `ai hairstyle`
+
+운영 원칙:
+
+- Core Hub Keywords는 허브 글 중심으로 사용한다.
+- High-Traffic Supporting Keywords는 허브 보조 키워드와 서브 글 메인 키워드로 사용한다.
+- Service SEO Keywords는 서비스 글, CTA, 도구 소개 글에 집중 배치한다.
 
 ---
 
@@ -14,6 +45,7 @@ Updated At: 2026-03-09 KST
 - 특정 앨범명, 곡명, 가사, 방송 프로그램명 금지
 - 특정 인물과 브랜드, 장소, 사유지를 연결하는 표현 금지
 - 일반 상거래 맥락의 브랜드 정보는 허용하되, 인물 연상형 제목 금지
+- 특정 브랜드명은 원칙적으로 제목과 메인 키워드에서 제외하고 일반 카테고리명으로 치환
 - 제목은 검색형 문구로 잡되, 저작권물이나 초상권 연상 표현 없이 구성
 
 ---
@@ -27,6 +59,18 @@ Updated At: 2026-03-09 KST
 - 메인 키워드는 본문 전체에서 3~4회 이하로 제한한다.
 - 보조 키워드는 첫 문단, H2, 이미지 alt, 요약 문맥에 분산 배치한다.
 - KO와 EN은 번역이 아니라 서로 다른 검색 의도로 다시 설계한다.
+- 같은 코어 키워드를 사이트 전체 글에 반복 삽입하지 말고 허브/서브/서비스 역할에 맞춰 분배한다.
+- 허브 글은 `코어 키워드 1개 + 보조 키워드 2~4개` 구조를 기본으로 한다.
+- 서브 글은 `롱테일 메인 키워드 1개 + 연관 보조 키워드 2~3개` 구조를 기본으로 한다.
+- 서비스 연결 글은 `service SEO keyword 1개 + 전환 의도 키워드 2~3개` 구조를 기본으로 한다.
+
+### Category 3 and 8 Keyword Deployment
+
+- `[096]` Skincare Hub: `korean skincare routine`
+- `[106]` Eye Makeup Hub: `korean makeup` or `korean eye makeup`
+- `[116]` Hair Hub: `korean hairstyle`
+- `[121]` Hair Color Hub: `korean hair color`
+- `[286]` Virtual Hair Hub: `virtual hairstyle`
 
 Role 표기:
 - `Hub`: 상위 허브 글
@@ -152,7 +196,7 @@ Role 표기:
 - KO: 명동 K뷰티 쇼핑 동선 가이드 [rev-2026-03-10]
 - EN: Myeongdong K-Beauty Shopping Route [rev-2026-03-10]
 - Keyword: KO `명동 K뷰티 쇼핑 동선` | EN `myeongdong k-beauty shopping route`
-- Subkeywords: KO `명동 올리브영 코스`, `명동 화장품 쇼핑`, `명동 뷰티 편집숍` | EN `myeongdong beauty route`, `cosmetics shopping in myeongdong`, `olive young myeongdong route`
+- Subkeywords: KO `명동 뷰티 스토어 코스`, `명동 화장품 쇼핑`, `명동 뷰티 편집숍` | EN `myeongdong beauty route`, `cosmetics shopping in myeongdong`, `best beauty stores in myeongdong`
 
 ### [016] Sub [v]
 - KO: 명동과 홍대 길거리 음식 비교 [rev-2026-03-10]
@@ -292,55 +336,55 @@ Role 표기:
 
 ### Additional Seoul Photo Guides
 
-### [037] Hub [ ]
+### [037] Hub [v]
 - KO: 서울 포토존 추천
 - EN: Seoul Photo Spot Guide
 - Keyword: KO `서울 포토존 추천` | EN `seoul photo spot guide`
 - Subkeywords: KO `서울 사진 명소`, `서울 감성 스팟`, `서울 인생샷 장소` | EN `seoul photo spots`, `seoul aesthetic locations`, `best places for photos in seoul`
 
-### [038] Sub [ ]
+### [038] Sub [v]
 - KO: 이태원 경리단길 산책 가이드
 - EN: Itaewon and Gyeongnidan-gil Walk Guide
 - Keyword: KO `이태원 경리단길 산책` | EN `itaewon and gyeongnidan-gil walk guide`
 - Subkeywords: KO `이태원 골목 코스`, `경리단길 카페`, `서울 이국적 거리` | EN `itaewon alley route`, `gyeongnidan cafes`, `international street in seoul`
 
-### [039] Sub [ ]
+### [039] Sub [v]
 - KO: 서촌 데이트 코스와 골목 사진 포인트
 - EN: Seochon Date Route and Photo Spots
 - Keyword: KO `서촌 데이트 코스` | EN `seochon date route and photo spots`
 - Subkeywords: KO `서촌 골목 산책`, `통인시장 근처 코스`, `경복궁 서촌 연결` | EN `seochon walk`, `route near tongin market`, `gyeongbokgung seochon itinerary`
 
-### [040] Sub [ ]
+### [040] Sub [v]
 - KO: 익선동 한옥 골목 사진 가이드
 - EN: Ikseon-dong Hanok Alley Photo Guide
 - Keyword: KO `익선동 한옥 골목 사진` | EN `ikseon-dong hanok alley photo guide`
 - Subkeywords: KO `익선동 카페 사진`, `종로3가 감성 골목`, `익선동 야간 분위기` | EN `ikseondong cafe photos`, `jongno3ga alley vibe`, `ikseon-dong at night`
 
-### [041] Sub [ ]
+### [041] Sub [v]
 - KO: 을지로 노포 감성 사진 명소
 - EN: Euljiro Retro Photo Spot Guide
 - Keyword: KO `을지로 노포 감성 사진` | EN `euljiro retro photo spot guide`
 - Subkeywords: KO `을지로 골목 감성`, `뉴트로 사진`, `을지로 야간 스냅` | EN `euljiro retro alleys`, `newtro photos`, `euljiro night snaps`
 
-### [042] Sub [ ]
+### [042] Sub [v]
 - KO: 서울숲 피크닉과 사진 명소 가이드
 - EN: Seoul Forest Picnic and Photo Guide
 - Keyword: KO `서울숲 피크닉 사진 명소` | EN `seoul forest picnic and photo guide`
 - Subkeywords: KO `서울숲 산책`, `성수 서울숲 코스`, `도심 공원 사진` | EN `seoul forest walk`, `seongsu seoul forest route`, `city park photography`
 
-### [043] Sub [ ]
+### [043] Sub [v]
 - KO: 잠실 석촌호수 사진 명소 가이드
 - EN: Seokchon Lake Photo Spot Guide
 - Keyword: KO `석촌호수 사진 명소` | EN `seokchon lake photo spot guide`
 - Subkeywords: KO `잠실 호수 산책`, `석촌호수 벚꽃`, `잠실 데이트 코스` | EN `jamsil lake walk`, `seokchon blossom photos`, `jamsil date route`
 
-### [044] Sub [ ]
+### [044] Sub [v]
 - KO: 낙산공원 성곽길 야경 가이드
 - EN: Naksan Park Night View Guide
 - Keyword: KO `낙산공원 야경 가이드` | EN `naksan park night view guide`
 - Subkeywords: KO `성곽길 사진`, `혜화 야경 코스`, `서울 성벽 산책` | EN `city wall photos`, `hyehwa night route`, `seoul wall walk`
 
-### [045] Sub [ ]
+### [045] Sub [v]
 - KO: 서울 벚꽃 사진 명소 추천
 - EN: Best Cherry Blossom Photo Spots in Seoul
 - Keyword: KO `서울 벚꽃 사진 명소` | EN `best cherry blossom photo spots in seoul`
@@ -621,9 +665,9 @@ Role 표기:
 - Subkeywords: KO `무신사 쇼핑`, `서울 쇼핑몰`, `디자이너 브랜드` | EN `musinsa shopping`, `seoul fashion stores`, `korean designer brands`
 
 ### [088] Sub [ ]
-- KO: 올리브영과 무신사 쇼핑 차이 정리
-- EN: Olive Young vs Musinsa Shopping Guide
-- Keyword: KO `올리브영 무신사 차이` | EN `olive young vs musinsa shopping guide`
+- KO: 한국 뷰티 스토어와 패션 스토어 쇼핑 차이 정리
+- EN: Korean Beauty Store vs Fashion Store Shopping Guide
+- Keyword: KO `한국 뷰티 스토어 패션 스토어 차이` | EN `korean beauty store vs fashion store shopping guide`
 - Subkeywords: KO `패션 뷰티 쇼핑`, `플랫폼 비교`, `한국 쇼핑 앱` | EN `fashion vs beauty shopping`, `platform comparison`, `korean shopping apps`
 
 ### [089] Sub [ ]
@@ -677,16 +721,16 @@ Role 표기:
 ### Skincare Basics Cluster
 
 ### [096] Hub [ ]
-- KO: K뷰티 스킨케어 순서 가이드 — 초보도 따라가기 쉬운 루틴
-- EN: K-Beauty Skincare Routine — The Easy Order for Beginners
-- Keyword: KO `K뷰티 스킨케어 순서` | EN `k-beauty skincare routine`
-- Subkeywords: KO `유리알 피부`, `기초 순서`, `한국 스킨케어` | EN `glass skin routine`, `layering skincare`, `korean skincare steps`
+- KO: 한국 스킨케어 루틴 완벽 가이드
+- EN: Complete Korean Skincare Routine Guide for Clear Skin
+- Keyword: KO `한국 스킨케어 루틴` | EN `korean skincare routine`
+- Subkeywords: KO `K뷰티 루틴`, `한국 스킨케어 단계`, `글라스 스킨` | EN `k-beauty routine`, `korean skincare steps`, `glass skin routine`
 
 ### [097] Sub [ ]
-- KO: 글라스 스킨 만드는 스킨케어 순서
-- EN: How to Build a Glass Skin Routine
-- Keyword: KO `글라스 스킨 스킨케어 순서` | EN `how to build a glass skin routine`
-- Subkeywords: KO `수분 레이어링`, `광채 피부`, `기초 제품 순서` | EN `hydration layering`, `dewy skin routine`, `product order`
+- KO: 글라스 스킨 만드는 한국 스킨케어 루틴
+- EN: How to Get Glass Skin: Korean Skincare Routine
+- Keyword: KO `글라스 스킨 만드는 방법` | EN `how to get glass skin`
+- Subkeywords: KO `글라스 스킨`, `수분 레이어링`, `한국 스킨케어 루틴` | EN `glass skin`, `hydration layering`, `korean skincare routine`
 
 ### [098] Sub [ ]
 - KO: 저자극 스킨케어 루틴 가이드
@@ -709,16 +753,16 @@ Role 표기:
 ### Base Makeup Cluster
 
 ### [101] Hub [ ]
-- KO: 베이스 메이크업 잘하는 법 — 무너짐 적은 K뷰티 피부 표현
-- EN: K-Beauty Base Makeup Tips — Smooth Skin That Lasts
-- Keyword: KO `베이스 메이크업 잘하는 법` | EN `k-beauty base makeup tips`
-- Subkeywords: KO `쿠션 메이크업`, `광채 피부 표현`, `파운데이션 밀착` | EN `cushion foundation`, `dewy base makeup`, `long-lasting base`
+- KO: 한국 베이스 메이크업 가이드
+- EN: Korean Base Makeup Guide for Natural Skin Look
+- Keyword: KO `한국 베이스 메이크업` | EN `korean base makeup`
+- Subkeywords: KO `쿠션 파운데이션`, `광채 피부 표현`, `무너지지 않는 베이스` | EN `cushion foundation`, `dewy skin makeup`, `long-lasting base makeup`
 
 ### [102] Sub [ ]
 - KO: 쿠션 파운데이션 고르는 법
-- EN: How to Choose a Cushion Foundation
-- Keyword: KO `쿠션 파운데이션 고르는 법` | EN `how to choose a cushion foundation`
-- Subkeywords: KO `피부 타입별 쿠션`, `세미매트 쿠션`, `광채 쿠션` | EN `cushions by skin type`, `semi-matte cushion`, `glow cushion`
+- EN: How to Choose Cushion Foundation for Natural Makeup
+- Keyword: KO `쿠션 파운데이션 고르는 법` | EN `cushion foundation`
+- Subkeywords: KO `피부 타입별 쿠션`, `자연스러운 메이크업`, `광채 쿠션` | EN `choose cushion foundation`, `natural makeup`, `glow cushion`
 
 ### [103] Sub [ ]
 - KO: 세미매트 베이스 메이크업 가이드
@@ -741,10 +785,10 @@ Role 표기:
 ### Eye Makeup Cluster
 
 ### [106] Hub [ ]
-- KO: 눈매 메이크업 가이드 — 애교살, 아이라인, 속눈썹 기본
-- EN: Eye Makeup Tips — Aegyo Sal, Liner, and Lashes
-- Keyword: KO `눈매 메이크업` | EN `eye makeup tips`
-- Subkeywords: KO `아이라인`, `애교살`, `속눈썹 연출` | EN `eyeliner guide`, `aegyo sal`, `lash styling`
+- KO: 한국 아이 메이크업 가이드
+- EN: Korean Eye Makeup Guide for Natural Eye Looks
+- Keyword: KO `한국 아이 메이크업` | EN `korean eye makeup`
+- Subkeywords: KO `한국 메이크업`, `애교살`, `무쌍 메이크업` | EN `korean makeup`, `aegyo sal`, `monolid makeup`
 
 ### [107] Sub [ ]
 - KO: 애교살 메이크업 자연스럽게 하는 법
@@ -753,10 +797,10 @@ Role 표기:
 - Subkeywords: KO `눈밑 볼륨`, `애교살 펜슬`, `눈매 확장` | EN `under-eye fullness`, `aegyo sal pencil`, `eye-brightening makeup`
 
 ### [108] Sub [ ]
-- KO: 무쌍 눈매 메이크업 가이드
-- EN: Makeup Guide for Monolid Eyes
-- Keyword: KO `무쌍 눈매 메이크업` | EN `makeup guide for monolid eyes`
-- Subkeywords: KO `점막 아이라인`, `음영 섀도`, `눈매 또렷하게` | EN `tightline eyeliner`, `soft contour shadow`, `defining monolid eyes`
+- KO: 무쌍 눈 메이크업 방법
+- EN: Makeup Tips for Monolid Eyes
+- Keyword: KO `무쌍 메이크업` | EN `monolid makeup`
+- Subkeywords: KO `무쌍 눈매 메이크업`, `점막 아이라인`, `한국 아이 메이크업` | EN `monolid eye makeup`, `tightline eyeliner`, `korean eye makeup`
 
 ### [109] Sub [ ]
 - KO: 번지지 않는 아이라이너 그리는 법
@@ -773,16 +817,16 @@ Role 표기:
 ### Lip and Cheek Cluster
 
 ### [111] Hub [ ]
-- KO: 립 메이크업 추천 — 그라데이션 립과 블러셔 조합
-- EN: Lip Makeup Guide — Gradient Lips and Blush Placement
-- Keyword: KO `립 메이크업 추천` | EN `lip makeup guide`
-- Subkeywords: KO `그라데이션 립`, `블러셔 위치`, `웜톤 립` | EN `gradient lip makeup`, `blush placement`, `lip shades by tone`
+- KO: 한국 립 메이크업 가이드
+- EN: Korean Lip Makeup Guide for Natural Lip Looks
+- Keyword: KO `한국 립 메이크업` | EN `korean lip makeup`
+- Subkeywords: KO `그라데이션 립`, `블러셔 위치`, `웜톤 립` | EN `gradient lip`, `blush placement`, `lip shades by tone`
 
 ### [112] Sub [ ]
-- KO: 그라데이션 립 하는 법
-- EN: How to Do Gradient Lips
-- Keyword: KO `그라데이션 립 하는 법` | EN `how to do gradient lips`
-- Subkeywords: KO `틴트 블렌딩`, `입술 중앙 발색`, `K뷰티 립 메이크업` | EN `tint blending`, `soft center lip`, `korean lip makeup`
+- KO: 그라데이션 립 메이크업 방법
+- EN: How to Do Gradient Lip Makeup
+- Keyword: KO `그라데이션 립 하는 법` | EN `gradient lip`
+- Subkeywords: KO `그라데이션 립`, `틴트 블렌딩`, `한국 립 메이크업` | EN `gradient lip makeup`, `tint blending`, `korean lip makeup`
 
 ### [113] Sub [ ]
 - KO: 웜톤 립 추천 컬러 가이드
@@ -805,26 +849,26 @@ Role 표기:
 ### Haircut Cluster
 
 ### [116] Hub [ ]
-- KO: 한국 헤어컷 추천 — 허쉬컷, 레이어드컷, 앞머리 정리
-- EN: Korean Haircut Ideas — Hush Cut, Layers, and Bangs
-- Keyword: KO `한국 헤어컷 추천` | EN `korean haircut ideas`
-- Subkeywords: KO `허쉬컷`, `레이어드컷`, `앞머리 추천` | EN `hush cut`, `layered haircut`, `korean bangs guide`
+- KO: 한국 인기 헤어컷 가이드
+- EN: Popular Korean Haircuts and Hairstyle Guide
+- Keyword: KO `한국 헤어스타일` | EN `korean hairstyle`
+- Subkeywords: KO `한국 헤어컷`, `허쉬컷`, `레이어드컷` | EN `korean haircut`, `hush cut`, `korean hair trends`
 
 ### [117] Sub [ ]
-- KO: 허쉬컷 잘 어울리는 얼굴형
-- EN: Who Looks Best with a Hush Cut
-- Keyword: KO `허쉬컷 얼굴형` | EN `who looks best with a hush cut`
-- Subkeywords: KO `중단발 허쉬컷`, `허쉬컷 스타일링`, `층 많은 커트` | EN `medium hush cut`, `hush cut styling`, `layered haircut look`
+- KO: 허쉬컷이 어울리는 얼굴형
+- EN: Who Looks Best with Hush Cut Hairstyles
+- Keyword: KO `허쉬컷 얼굴형` | EN `hush cut`
+- Subkeywords: KO `중단발 허쉬컷`, `허쉬컷 스타일링`, `레이어드 헤어컷` | EN `who suits a hush cut`, `hush cut styling`, `layered haircut look`
 
 ### [118] Sub [ ]
-- KO: 레이어드컷 관리 쉬운 길이 추천
-- EN: Best Layered Hair Length for Easy Styling
-- Keyword: KO `레이어드컷 관리 쉬운 길이` | EN `best layered hair length for easy styling`
-- Subkeywords: KO `중단발 레이어드`, `긴머리 레이어드`, `드라이 쉬운 커트` | EN `medium layered cut`, `long layered hair`, `low-maintenance haircut`
+- KO: 관리 쉬운 레이어드컷 추천
+- EN: Easy Korean Layered Haircuts to Maintain
+- Keyword: KO `레이어드컷` | EN `korean layered haircut`
+- Subkeywords: KO `중단발 레이어드`, `긴머리 레이어드`, `드라이 쉬운 커트` | EN `easy layered haircut`, `medium layered cut`, `low-maintenance haircut`
 
 ### [119] Sub [ ]
-- KO: 시스루뱅과 커튼뱅 차이 정리
-- EN: See-Through Bangs vs Curtain Bangs
+- KO: 시스루뱅 vs 커튼뱅 차이
+- EN: See-Through Bangs vs Curtain Bangs Guide
 - Keyword: KO `시스루뱅 커튼뱅 차이` | EN `see-through bangs vs curtain bangs`
 - Subkeywords: KO `앞머리 추천`, `얼굴형별 앞머리`, `가벼운 뱅 스타일` | EN `bangs guide`, `bangs by face shape`, `light fringe styles`
 
@@ -837,15 +881,15 @@ Role 표기:
 ### Hair Color Cluster
 
 ### [121] Hub [ ]
-- KO: 염색 컬러 추천 — 피부톤에 맞는 한국 헤어컬러
-- EN: Hair Color Ideas by Skin Tone — Popular Korean Shades
-- Keyword: KO `염색 컬러 추천` | EN `hair color ideas by skin tone`
-- Subkeywords: KO `애쉬 브라운`, `웜톤 염색`, `탈색 없이 염색` | EN `ash brown hair`, `tone-based hair color`, `low-bleach color ideas`
+- KO: 한국 헤어컬러 추천 가이드
+- EN: Best Korean Hair Color Ideas Guide
+- Keyword: KO `한국 헤어컬러` | EN `korean hair color`
+- Subkeywords: KO `한국 염색`, `피부톤별 헤어컬러`, `애쉬 브라운` | EN `korean hair dye`, `hair color for skin tone`, `ash brown hair`
 
 ### [122] Sub [ ]
-- KO: 피부톤별 염색 컬러 추천
-- EN: Hair Color Guide by Skin Tone
-- Keyword: KO `피부톤별 염색 컬러 추천` | EN `hair color guide by skin tone`
+- KO: 피부톤별 헤어컬러 추천
+- EN: Hair Color Ideas for Different Skin Tones
+- Keyword: KO `피부톤별 헤어컬러` | EN `hair color for skin tone`
 - Subkeywords: KO `웜톤 염색`, `쿨톤 염색`, `퍼스널 컬러 헤어` | EN `warm tone hair color`, `cool tone hair dye`, `personal color hair`
 
 ### [123] Sub [ ]
@@ -901,15 +945,15 @@ Role 표기:
 ### Practical Beauty Cluster
 
 ### [131] Hub [ ]
-- KO: 올리브영 추천템과 한국 뷰티 쇼핑 가이드
-- EN: Olive Young Must-Buys and Korean Beauty Shopping Guide
-- Keyword: KO `올리브영 추천템` | EN `olive young must buys`
-- Subkeywords: KO `올리브영 쇼핑`, `헤어숍 주문`, `여행용 뷰티` | EN `olive young shopping`, `salon phrases in korea`, `travel beauty guide`
+- KO: 한국 뷰티 쇼핑 가이드
+- EN: Korean Beauty Shopping Guide for Travelers
+- Keyword: KO `한국 뷰티 쇼핑 가이드` | EN `korean beauty shopping guide`
+- Subkeywords: KO `한국 뷰티 스토어`, `헤어숍 주문`, `여행용 뷰티` | EN `korean beauty stores`, `salon phrases in korea`, `travel beauty guide`
 
 ### [132] Sub [ ]
-- KO: 올리브영 스킨케어 쇼핑 리스트
-- EN: Olive Young Skincare Shopping Guide
-- Keyword: KO `올리브영 스킨케어 쇼핑` | EN `olive young skincare shopping guide`
+- KO: 한국 스킨케어 쇼핑 리스트
+- EN: Korean Skincare Shopping Guide
+- Keyword: KO `한국 스킨케어 쇼핑` | EN `korean skincare shopping guide`
 - Subkeywords: KO `입문템`, `재구매템`, `기초 쇼핑 동선` | EN `beginner skincare picks`, `repurchase items`, `beauty shopping route`
 
 ### [133] Sub [ ]
@@ -1913,10 +1957,10 @@ Role 표기:
 ### Virtual Hair and Beauty Cluster
 
 ### [286] Hub [ ]
-- KO: 가상 헤어 체험 가이드 — 자르기 전 스타일 미리보기
-- EN: Virtual Hair Try-On Guide — Preview Styles Before Cutting
-- Keyword: KO `가상 헤어 체험` | EN `virtual hair try-on guide`
-- Subkeywords: KO `가상 헤어컬러`, `앞머리 테스트`, `메이크업 시뮬레이션` | EN `virtual hair color`, `bang preview`, `makeup simulation`
+- KO: 가상 헤어 체험 가이드
+- EN: Virtual Hairstyle Try-On Guide
+- Keyword: KO `가상 헤어 체험` | EN `virtual hairstyle`
+- Subkeywords: KO `AI 헤어스타일`, `가상 헤어컬러`, `앞머리 가상 체험` | EN `ai hairstyle`, `virtual hair color`, `virtual bang try on`
 
 ### [287] Sub [ ]
 - KO: 머리 자르기 전 허쉬컷 가상 체험하기
@@ -1928,7 +1972,7 @@ Role 표기:
 - KO: 피부톤에 맞는 가상 헤어컬러 찾기
 - EN: Find Hair Colors Virtually by Skin Tone
 - Keyword: KO `피부톤 가상 헤어컬러` | EN `find hair colors virtually by skin tone`
-- Subkeywords: KO `웜톤 염색`, `쿨톤 염색`, `염색 전 시뮬레이션` | EN `warm tone hair colors`, `cool tone colors`, `before-dye preview`
+- Subkeywords: KO `가상 헤어컬러`, `웜톤 염색`, `염색 전 시뮬레이션` | EN `virtual hair color`, `warm tone hair colors`, `before-dye preview`
 
 ### [289] Sub [ ]
 - KO: 가상 메이크업으로 프로필 메이크업 테스트하기
@@ -1940,7 +1984,7 @@ Role 표기:
 - KO: 앞머리 스타일 가상으로 먼저 보는 법
 - EN: How to Preview Bang Styles Virtually
 - Keyword: KO `앞머리 스타일 가상 보기` | EN `how to preview bang styles virtually`
-- Subkeywords: KO `시스루뱅 테스트`, `커튼뱅 비교`, `컷 전 확인` | EN `see-through bangs preview`, `curtain bangs comparison`, `before-cut check`
+- Subkeywords: KO `앞머리 가상 체험`, `시스루뱅 테스트`, `컷 전 확인` | EN `virtual bang try on`, `see-through bangs preview`, `before-cut check`
 
 ### Seoul Backdrop Cluster
 

@@ -140,7 +140,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[037] Guide [ ]`
+1. `[096] Hub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -201,9 +201,14 @@ Updated At: 2026-03-10 KST
   - `app/[lang]/hub/[slug]/page.tsx`
   - `components/hub/HubMdxPage.tsx`
 
-카테고리 고정값:
-- KO: `한국 명소 & 포토존`
-- EN: `Seoul Locations`
+카테고리 값 규칙:
+- category 값은 반드시 `md-doc/kpop-blog-topics-300.md`의 해당 항목 카테고리 값을 따른다
+- KO/EN 카테고리명은 각 언어에 맞는 페어 값을 그대로 사용한다
+
+예:
+- KO: `한국 명소 & 포토존` / EN: `Seoul Locations`
+- KO: `K-뷰티 & 헤어` / EN: `K-Beauty & Hair`
+- KO: `가상 스타일 체험` / EN: `Virtual Style Experience`
 
 파일 경로:
 - KO: `content/hub/ko/[slug].mdx`
@@ -235,6 +240,11 @@ Updated At: 2026-03-10 KST
 4. 빠른 요약 카드
 5. 같은 허브 내부 링크 패널
 6. 하단 CTA 배너
+
+카테고리별 초반 실용 정보 block 기준:
+- 장소형/방문형/촬영형 글은 위치, 이동, 시간, 추천 동선 중심으로 설계한다
+- 뷰티/헤어형 글은 피부 타입, 얼굴형, 톤, 사용 순서, 선택 기준 중심으로 설계한다
+- 가상 체험형 글은 사용 시점, 테스트 항목, 미리보기 포인트, CTA 연결 중심으로 설계한다
 
 H2 규칙:
 - 모든 H2는 반드시 `## —` 로 시작
@@ -274,16 +284,16 @@ Quick Summary와 Related panel에는 본문 이미지를 넣지 않는다.
 
 ```mdx
 ---
-slug: "gyeongbokgung-photo-guide"
+slug: "korean-skincare-routine-guide"
 lang: "en"
-category: "Seoul Locations"
-title: "Gyeongbokgung Palace Photo Guide — Traditional Aesthetics for Modern Shots"
-description: "A complete photo guide to Gyeongbokgung Palace. Best spots, light timing, and framing tips for capturing Seoul's most iconic royal grounds."
-publishedAt: "2026-03-06"
+category: "K-Beauty & Hair"
+title: "Complete Korean Skincare Routine Guide for Clear Skin"
+description: "Build a practical Korean skincare routine with the right order, product roles, and beginner-friendly tips for clearer, more balanced skin."
+publishedAt: "2026-03-15"
 readTime: "6 Min Read"
 headerGradient: "linear-gradient(135deg, #1a0a2e 0%, #f4258c 100%)"
-pullQuote: "gyeongbokgung is not just a backdrop. It is a visual argument for why Seoul cannot be summarized."
-hreflangSlug: "gyeongbokgung-photo-guide"
+pullQuote: "clear skin starts when the routine makes sense, not when the shelf gets crowded."
+hreflangSlug: "korean-skincare-routine-guide"
 ---
 ```
 
@@ -305,9 +315,10 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 
 필드 규칙:
 - `lang`는 `ko` 또는 `en`
-- KO 카테고리는 반드시 `한국 명소 & 포토존`
-- EN 카테고리는 반드시 `Seoul Locations`
-- KO에서 `서울 명소 & 포토존` 사용 금지
+- KO category는 해당 토픽의 KO 카테고리명과 일치해야 한다
+- EN category는 해당 토픽의 EN 카테고리명과 일치해야 한다
+- category 값은 반드시 `md-doc/kpop-blog-topics-300.md`의 category 정의를 기준으로 한다
+- 임의 번역 카테고리명 사용 금지
 - `publishedAt`는 ISO 날짜 `YYYY-MM-DD`
 - KO/EN 짝 파일은 `publishedAt`를 동일하게 맞춘다
 - `title`은 고유해야 하며 60자 이하여야 한다
@@ -334,6 +345,8 @@ hreflangSlug: "gyeongbokgung-photo-guide"
 금지:
 - `많은 사람은 X를 Y로 단순화하지만 실제로는`
 - `Many people think of X as Y, but in reality`
+- `~하는 사람은 보통 X 같지만, 실제로는` 및 모든 변형 — "실제로는"을 포함한 인트로 패턴 전면 금지
+- `People often expect X, but` / `People usually think X, but` / `People usually want X, but` 변형 포함
 
 같은 허브 안에서는 인트로 유형을 돌려 쓴다.
 
@@ -799,8 +812,14 @@ description: [actual text] -> [N]자
 명동 허브:
 - 허브: `명동 서울 여행 코스`
 - 하위: `명동 네온사인 야간 사진`
-- 하위: `명동 K뷰티 쇼핑 동선`
+- 하위: `명동 K뷰티 쇼핑 동선 가이드`
 - 하위: `명동 홍대 길거리 음식 비교`
+
+뷰티 허브:
+- 허브: `한국 스킨케어 루틴 완벽 가이드`
+- 하위: `글라스 스킨 만드는 한국 스킨케어 루틴`
+- 하위: `쿠션 파운데이션 고르는 방법`
+- 하위: `한국 마스크팩 고르는 방법`
 
 ---
 
@@ -823,9 +842,28 @@ description: [actual text] -> [N]자
 - 반포 한강공원 야경 가이드 KO/EN 완료
 
 - 북촌 한옥마을 허브 KO/EN 완료
+- 북촌 한옥 사진 명소 KO/EN 완료
+- 북촌 한복 사진 동선 KO/EN 완료
+- 북촌 서촌 산책 코스 차이 KO/EN 완료
+
+- 서울 포토존 추천 허브 KO/EN 완료
+- 이태원 경리단길 산책 가이드 KO/EN 완료
+- 서촌 데이트 코스 골목 사진 포인트 KO/EN 완료
+- 익선동 한옥 골목 사진 가이드 KO/EN 완료
+- 을지로 노포 감성 사진 명소 KO/EN 완료
+- 서울숲 피크닉과 사진 명소 가이드 KO/EN 완료
+- 낙산공원 성곽길 야경 가이드 KO/EN 완료
+- 서울 벚꽃 사진 명소 추천 KO/EN 완료
+- 서울 포토존 추천 총정리 KO/EN 완료
 
 다음 우선순위:
-1. 북촌 서촌 산책 코스 차이 KO/EN 작성
+1. [096] Hub 작성
+2. [097] Sub 작성
+3. [101] Hub 작성
+
+전환 메모:
+- 서울 명소 묶음 기록은 히스토리로 유지한다
+- 다음 작성 사이클부터는 `K-뷰티 & 헤어`와 `가상 스타일 체험` 클러스터를 우선한다
 
 ---
 
@@ -943,4 +981,48 @@ description: [actual text] -> [N]자
 ## 29. 2026-03-14 Update
 
 - 현재 작업 상태: 북촌과 서촌 산책 코스 차이 KO/EN 작성 완료
-- 진행 로그: `bukchon-vs-seochon-walking-guide` KO/EN 게시용 MDX 작성, 북촌 허브 백링크와 북촌/인사동 비교용 related panel 연결, 다음 작성 대상은 `[037] Guide [ ]`
+ - 진행 로그: `bukchon-vs-seochon-walking-guide` KO/EN 게시용 MDX 작성, 북촌 허브 백링크와 북촌/인사동 비교용 related panel 연결, 다음 작성 대상은 `[037] Hub [ ]`
+
+## 30. 2026-03-14 Update
+
+- 현재 작업 상태: 서울 포토존 추천 허브 KO/EN 작성 완료
+- 진행 로그: `seoul-photo-spot-guide` KO/EN 게시용 MDX 작성, 서울 사진 명소 상위 허브 구조 정리, 다음 작성 대상은 `[038] Sub [ ]`
+
+## 31. 2026-03-14 Update
+
+- 현재 작업 상태: 이태원 경리단길 산책 가이드 KO/EN 작성 완료
+- 진행 로그: `itaewon-gyeongnidan-walk-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 본문 백링크 연결, 다음 작성 대상은 `[039] Sub [ ]`
+
+## 32. 2026-03-14 Update
+
+- 현재 작업 상태: 서촌 데이트 코스와 골목 사진 포인트 KO/EN 작성 완료
+- 진행 로그: `seochon-date-route-photo-spots` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 북촌-서촌 비교 글과의 연결 반영, 다음 작성 대상은 `[040] Sub [ ]`
+
+## 33. 2026-03-14 Update
+
+- 현재 작업 상태: 익선동 한옥 골목 사진 가이드 KO/EN 작성 완료
+- 진행 로그: `ikseon-dong-hanok-alley-photo-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 북촌·인사동 사진 글과의 연결 반영, 다음 작성 대상은 `[041] Sub [ ]`
+
+## 34. 2026-03-14 Update
+
+- 현재 작업 상태: 을지로 노포 감성 사진 명소 KO/EN 작성 완료
+- 진행 로그: `euljiro-retro-photo-spot-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 홍대·이태원 거리형 글과의 연결 반영, 다음 작성 대상은 `[042] Sub [ ]`
+
+## 35. 2026-03-14 Update
+
+- 현재 작업 상태: 서울숲 피크닉과 사진 명소 가이드 KO/EN 작성 완료
+- 진행 로그: `seoul-forest-picnic-photo-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 성수·한강 피크닉 글과의 연결 반영, 다음 작성 대상은 `[043] Sub [ ]`
+## 36. 2026-03-14 Update
+
+- 현재 작업 상태: 낙산공원 성곽길 야경 가이드 KO/EN 작성 완료
+- 진행 로그: `naksan-park-night-view-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 서촌·익선동 글과의 연결 반영, 다음 작성 대상은 `[044] Sub [ ]`
+
+## 37. 2026-03-14 Update
+
+- 현재 작업 상태: 서울 벚꽃 사진 명소 추천 KO/EN 작성 완료
+- 진행 로그: `seoul-cherry-blossom-photo-spots` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 서울숲·여의도 한강 글과의 연결 반영, 다음 작성 대상은 `[045] Sub [ ]`
+
+## 38. 2026-03-14 Update
+
+- 현재 작업 상태: 서울 포토존 추천 총정리 KO/EN 작성 완료
+- 진행 로그: `seoul-photo-spot-recommendations` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 이태원·서울숲 글과의 연결 반영, 다음 작성 대상은 `[046] Hub [ ]`
