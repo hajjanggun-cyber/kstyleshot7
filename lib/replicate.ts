@@ -419,6 +419,7 @@ export async function startNanaBananaJob(input: {
       input: {
         prompt,
         image_input: [input.hairPreviewUrl, input.outfitImageUrl, input.backgroundImageUrl],
+        aspect_ratio: "4:5",
         resolution: "2K",
         output_format: "jpg",
         safety_filter_level: "block_only_high",
