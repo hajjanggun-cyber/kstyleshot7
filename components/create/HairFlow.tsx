@@ -547,7 +547,7 @@ export function HairFlow() {
                               opacity: isGenerated ? 0.5 : 1,
                               cursor: isGenerated ? "not-allowed" : "pointer",
                               backgroundImage: style.thumbnail
-                                ? `linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%),url(${style.thumbnail})`
+                                ? `linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%),url("${encodeURI(style.thumbnail)}")`
                                 : `linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%),${style.colorHint}`,
                             }}
                             type="button"
