@@ -1,9 +1,9 @@
 /**
  * Normalizes a photo blob URL for AI hair synthesis:
- * - Adds 20% top padding by expanding the canvas upward (black fill)
- * - Original image drawn at full size below the padding
- * - Full body is preserved so outfit AI can detect body pose afterward
- * - Downscales only if longest side exceeds MAX_DIMENSION
+ * - Scales down so the longest side does not exceed MAX_DIMENSION
+ * - Crops to 4:5 portrait ratio, anchored at the top (preserves face/upper-body area)
+ * - If the scaled image is shorter than 4:5, fills the bottom with black (never the top)
+ * - No artificial top padding — adding black above the face was pushing the head down
  */
 const MAX_DIMENSION = 768;
 
@@ -14,28 +14,33 @@ export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
       const origW = img.naturalWidth;
       const origH = img.naturalHeight;
 
-      // Downscale if either dimension exceeds MAX_DIMENSION
-      const ratio = Math.min(1, MAX_DIMENSION / Math.max(origW, origH));
-      const drawW = Math.round(origW * ratio);
-      const drawH = Math.round(origH * ratio);
+      // Scale so longest side = MAX_DIMENSION
+      const scale = Math.min(1, MAX_DIMENSION / Math.max(origW, origH));
+      const scaledW = Math.round(origW * scale);
+      const scaledH = Math.round(origH * scale);
 
-      // Canvas is taller by 20% to give room above the head for new hair
-      const topPad = Math.round(drawH * 0.20);
-      const W = drawW;
-      const H = drawH + topPad;
+      // Target canvas: 4:5 portrait
+      const targetW = scaledW;
+      const targetH = Math.round(targetW * 1.25);
 
       const canvas = document.createElement("canvas");
-      canvas.width = W;
-      canvas.height = H;
+      canvas.width = targetW;
+      canvas.height = targetH;
       const ctx = canvas.getContext("2d");
       if (!ctx) { reject(new Error("Canvas context unavailable")); return; }
 
-      // Black background
+      // Black background (covers bottom fill when image is too short)
       ctx.fillStyle = "#000000";
-      ctx.fillRect(0, 0, W, H);
+      ctx.fillRect(0, 0, targetW, targetH);
 
-      // Draw original image at full scaled size, starting after top padding
-      ctx.drawImage(img, 0, topPad, drawW, drawH);
+      if (scaledH >= targetH) {
+        // Image taller than 4:5: top-crop — keep the face/upper-body region
+        const srcH = Math.round(targetH / scale);
+        ctx.drawImage(img, 0, 0, origW, Math.min(srcH, origH), 0, 0, targetW, targetH);
+      } else {
+        // Image shorter than 4:5: draw at top, black fills bottom
+        ctx.drawImage(img, 0, 0, targetW, scaledH);
+      }
 
       resolve(canvas.toDataURL("image/jpeg", 0.82));
     };
