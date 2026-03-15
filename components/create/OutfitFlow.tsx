@@ -57,7 +57,9 @@ export function OutfitFlow() {
   const [outfitFilter, setOutfitFilter] = useState<OutfitFilter>("all");
   const [bgCategory, setBgCategory] = useState<BackgroundCategory>("hanbok");
   const [selectedOutfitId, setSelectedOutfitId] = useState<string | null>(null);
+  const [confirmOutfitId, setConfirmOutfitId] = useState<string | null>(null);
   const [selectedBgId, setSelectedBgId] = useState<string | null>(null);
+  const [confirmBgId, setConfirmBgId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
@@ -91,7 +93,14 @@ export function OutfitFlow() {
   }
 
   function handleSelectOutfit(id: string) {
-    setSelectedOutfitId(id);
+    setConfirmOutfitId(id);
+  }
+
+  function handleConfirmOutfit() {
+    if (!confirmOutfitId) return;
+    setSelectedOutfitId(confirmOutfitId);
+    setConfirmOutfitId(null);
+    setStep("background");
   }
 
   function handleMoveToBackground() {
@@ -102,8 +111,9 @@ export function OutfitFlow() {
     setStep("background");
   }
 
-  async function handleSubmit() {
-    if (!selectedOutfitId || !selectedBgId || submitting) return;
+  async function handleSubmit(bgIdOverride?: string) {
+    const bgId = bgIdOverride ?? selectedBgId;
+    if (!selectedOutfitId || !bgId || submitting) return;
 
     setError("");
     setSubmitting(true);
@@ -120,7 +130,7 @@ export function OutfitFlow() {
         body: JSON.stringify({
           hairPreviewDataUrl,
           outfitTemplateId: selectedOutfitId,
-          backgroundTemplateId: selectedBgId,
+          backgroundTemplateId: bgId,
         }),
       });
 
@@ -131,7 +141,7 @@ export function OutfitFlow() {
 
       setOutfitChosen([selectedOutfitId]);
       pickOutfit(selectedOutfitId);
-      setBackgroundId(selectedBgId);
+      setBackgroundId(bgId);
       setFinalPredictionId(data.predictionId);
       setStatus("final_processing");
       router.push(`/${lang}/create/done`);
@@ -147,9 +157,92 @@ export function OutfitFlow() {
     }
   }
 
+  const confirmOutfit = outfitTemplates.find((o) => o.id === confirmOutfitId) ?? null;
+  const confirmBg = referenceTemplates.find((b) => b.id === confirmBgId) ?? null;
+
   if (step === "outfit") {
     return (
       <div className="ot-root ot-root--selection">
+        {confirmOutfit ? (
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.72)",
+              zIndex: 100,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "0 24px",
+            }}
+            onClick={() => setConfirmOutfitId(null)}
+          >
+            <div
+              style={{
+                background: "#1a1a1a",
+                borderRadius: 16,
+                padding: "24px 20px",
+                width: "100%",
+                maxWidth: 360,
+                textAlign: "center",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  aspectRatio: "3/4",
+                  backgroundImage: `url(${confirmOutfit.thumbnailUrl})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center top",
+                  borderRadius: 10,
+                  marginBottom: 16,
+                }}
+              />
+              <p style={{ fontSize: 16, fontWeight: 700, color: "#fff", margin: "0 0 6px" }}>
+                {confirmOutfit.title}
+              </p>
+              <p style={{ fontSize: 13, color: "#aaa", margin: "0 0 20px" }}>
+                {lang === "ko" ? "이 의상으로 선택하시겠습니까?" : "Select this outfit?"}
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <button
+                  style={{
+                    padding: "12px 0",
+                    borderRadius: 8,
+                    border: "1px solid #444",
+                    background: "transparent",
+                    color: "#ccc",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setConfirmOutfitId(null)}
+                  type="button"
+                >
+                  {lang === "ko" ? "취소" : "Cancel"}
+                </button>
+                <button
+                  style={{
+                    padding: "12px 0",
+                    borderRadius: 8,
+                    border: "none",
+                    background: "linear-gradient(135deg, #f59e0b, #ea580c)",
+                    color: "#fff",
+                    fontSize: 14,
+                    fontWeight: 700,
+                    cursor: "pointer",
+                  }}
+                  onClick={handleConfirmOutfit}
+                  type="button"
+                >
+                  {lang === "ko" ? "선택" : "Select"}
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
         <nav className="ot-nav">
           <Link className="ot-back-btn" href={`/${lang}/create/hair`}>{"<-"}</Link>
           <h2 className="ot-nav-title">{lang === "ko" ? "의상 선택" : "Choose outfit"}</h2>
@@ -215,27 +308,6 @@ export function OutfitFlow() {
           })}
         </div>
 
-        {selectedOutfit ? (
-          <div className="ot-choice-panel">
-            <div className="ot-choice-copy">
-              <p className="ot-choice-title">
-                {lang === "ko" ? "이 의상으로 할게요" : "This is the one."}
-              </p>
-              <p className="ot-choice-sub">
-                {lang === "ko"
-                  ? "선택한 의상으로 배경을 고르러 갈게요."
-                  : "Let's find the perfect backdrop for this look."}
-              </p>
-            </div>
-            <button
-              className="ot-choice-cta"
-              onClick={handleMoveToBackground}
-              type="button"
-            >
-              {lang === "ko" ? "다음  배경 선택" : "Next  Choose Location"}
-            </button>
-          </div>
-        ) : null}
       </div>
     );
   }
@@ -274,6 +346,93 @@ export function OutfitFlow() {
         </div>
       </div>
 
+      {confirmBg ? (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.72)",
+            zIndex: 100,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 24px",
+          }}
+          onClick={() => setConfirmBgId(null)}
+        >
+          <div
+            style={{
+              background: "#1a1a1a",
+              borderRadius: 16,
+              padding: "24px 20px",
+              width: "100%",
+              maxWidth: 360,
+              textAlign: "center",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              style={{
+                width: "100%",
+                aspectRatio: "3/4",
+                backgroundImage: `url(${confirmBg.thumbnailUrl})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                borderRadius: 10,
+                marginBottom: 16,
+              }}
+            />
+            <p style={{ fontSize: 16, fontWeight: 700, color: "#fff", margin: "0 0 6px" }}>
+              {confirmBg.title}
+            </p>
+            <p style={{ fontSize: 13, color: "#aaa", margin: "0 0 20px" }}>
+              {lang === "ko" ? "이 배경으로 선택하시겠습니까?" : "Select this background?"}
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <button
+                style={{
+                  padding: "12px 0",
+                  borderRadius: 8,
+                  border: "1px solid #444",
+                  background: "transparent",
+                  color: "#ccc",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                }}
+                onClick={() => setConfirmBgId(null)}
+                type="button"
+              >
+                {lang === "ko" ? "취소" : "Cancel"}
+              </button>
+              <button
+                style={{
+                  padding: "12px 0",
+                  borderRadius: 8,
+                  border: "none",
+                  background: "linear-gradient(135deg, #f59e0b, #ea580c)",
+                  color: "#fff",
+                  fontSize: 14,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  const id = confirmBgId;
+                  setSelectedBgId(id);
+                  setConfirmBgId(null);
+                  void handleSubmit(id ?? undefined);
+                }}
+                type="button"
+              >
+                {submitting
+                  ? lang === "ko" ? "합성 시작 중..." : "Starting..."
+                  : lang === "ko" ? "선택 및 합성 시작" : "Select & Start"}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <div className="ot-grid">
         {filteredBg.map((bg) => {
           const isSelected = selectedBgId === bg.id;
@@ -281,7 +440,7 @@ export function OutfitFlow() {
             <button
               className={`ot-card${isSelected ? " ot-card--selected" : ""}`}
               key={bg.id}
-              onClick={() => setSelectedBgId(bg.id)}
+              onClick={() => setConfirmBgId(bg.id)}
               type="button"
             >
               <div className="ot-card-img" style={{ backgroundImage: `url(${bg.thumbnailUrl})` }} />
@@ -295,23 +454,6 @@ export function OutfitFlow() {
             </button>
           );
         })}
-      </div>
-
-      <div className="ot-bottom">
-        <button
-          className={`up-next-btn${selectedBgId && !submitting ? " up-next-btn--active" : ""}`}
-          disabled={!selectedBgId || submitting}
-          onClick={handleSubmit}
-          type="button"
-        >
-          {submitting
-            ? lang === "ko"
-              ? "합성 시작 중..."
-              : "Starting render..."
-            : lang === "ko"
-              ? "합성 시작"
-              : "Start render"}
-        </button>
       </div>
     </div>
   );
