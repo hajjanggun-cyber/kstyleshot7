@@ -266,28 +266,6 @@
       "resultDetail": "Mock outfit output",
       "continue": "Continue to backgrounds"
     },
-    "location": {
-      "shellTitle": "Choose 2 backdrops",
-      "shellDescription": "Pick two Seoul backdrops, generate composites, then select the final winner.",
-      "missingOutfitTitle": "Outfit step required",
-      "missingOutfitDescription": "A selected outfit is required before background compositing.",
-      "missingOutfitBody": "Finish the outfit step first. This page expects a selected cutout-ready outfit.",
-      "goOutfit": "Go to outfit",
-      "mockTitle": "Cutout/composite status",
-      "mockBadge": "SIMULATED",
-      "mockDescription": "Transparent cutout and final composite are currently mocked. Wire real cutout provider before production release.",
-      "selectorTitle": "Choose 2 backdrops",
-      "selectorDescription": "Pick two Seoul backdrops, then generate two composite previews and keep one.",
-      "compositing": "Compositing...",
-      "generate": "Create composite previews",
-      "processingTitle": "Compositing local previews",
-      "processingDescription": "Simulating the final browser-side canvas composite stage.",
-      "resultTitle": "Composite preview results",
-      "resultDescription": "Choose the final background result before finishing the flow.",
-      "resultEmpty": "Select two backgrounds and click create composite previews.",
-      "resultDetail": "Mock composite output",
-      "continue": "Finish and review"
-    },
     "donePage": {
       "title": "You look amazing",
       "description": "Download your final image or clear local data to start a new session."
