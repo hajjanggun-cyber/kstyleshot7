@@ -363,30 +363,35 @@ Role 표기:
 ### [041] Sub [v]
 - KO: 을지로 노포 감성 사진 명소
 - EN: Euljiro Retro Photo Spot Guide
+- Link: KO `/ko/hub/euljiro-retro-photo-spot-guide` | EN `/en/hub/euljiro-retro-photo-spot-guide`
 - Keyword: KO `을지로 노포 감성 사진` | EN `euljiro retro photo spot guide`
 - Subkeywords: KO `을지로 골목 감성`, `뉴트로 사진`, `을지로 야간 스냅` | EN `euljiro retro alleys`, `newtro photos`, `euljiro night snaps`
 
 ### [042] Sub [v]
 - KO: 서울숲 피크닉과 사진 명소 가이드
 - EN: Seoul Forest Picnic and Photo Guide
+- Link: KO `/ko/hub/seoul-forest-picnic-photo-guide` | EN `/en/hub/seoul-forest-picnic-photo-guide`
 - Keyword: KO `서울숲 피크닉 사진 명소` | EN `seoul forest picnic and photo guide`
 - Subkeywords: KO `서울숲 산책`, `성수 서울숲 코스`, `도심 공원 사진` | EN `seoul forest walk`, `seongsu seoul forest route`, `city park photography`
 
 ### [043] Sub [v]
 - KO: 잠실 석촌호수 사진 명소 가이드
 - EN: Seokchon Lake Photo Spot Guide
+- Link: KO `/ko/hub/seokchon-lake-photo-spot-guide` | EN `/en/hub/seokchon-lake-photo-spot-guide`
 - Keyword: KO `석촌호수 사진 명소` | EN `seokchon lake photo spot guide`
 - Subkeywords: KO `잠실 호수 산책`, `석촌호수 벚꽃`, `잠실 데이트 코스` | EN `jamsil lake walk`, `seokchon blossom photos`, `jamsil date route`
 
 ### [044] Sub [v]
 - KO: 낙산공원 성곽길 야경 가이드
 - EN: Naksan Park Night View Guide
+- Link: KO `/ko/hub/naksan-park-night-view-guide` | EN `/en/hub/naksan-park-night-view-guide`
 - Keyword: KO `낙산공원 야경 가이드` | EN `naksan park night view guide`
 - Subkeywords: KO `성곽길 사진`, `혜화 야경 코스`, `서울 성벽 산책` | EN `city wall photos`, `hyehwa night route`, `seoul wall walk`
 
 ### [045] Sub [v]
 - KO: 서울 벚꽃 사진 명소 추천
 - EN: Best Cherry Blossom Photo Spots in Seoul
+- Link: KO `/ko/hub/seoul-cherry-blossom-photo-spots` | EN `/en/hub/seoul-cherry-blossom-photo-spots`
 - Keyword: KO `서울 벚꽃 사진 명소` | EN `best cherry blossom photo spots in seoul`
 - Subkeywords: KO `서울 봄 포토존`, `벚꽃 산책 코스`, `봄 데이트 스팟` | EN `seoul spring photo spots`, `cherry blossom routes`, `spring date spots in seoul`
 

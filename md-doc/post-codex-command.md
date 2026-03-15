@@ -852,6 +852,7 @@ description: [actual text] -> [N]자
 - 익선동 한옥 골목 사진 가이드 KO/EN 완료
 - 을지로 노포 감성 사진 명소 KO/EN 완료
 - 서울숲 피크닉과 사진 명소 가이드 KO/EN 완료
+- 잠실 석촌호수 사진 명소 가이드 KO/EN 완료
 - 낙산공원 성곽길 야경 가이드 KO/EN 완료
 - 서울 벚꽃 사진 명소 추천 KO/EN 완료
 - 서울 포토존 추천 총정리 KO/EN 완료
@@ -1026,3 +1027,8 @@ description: [actual text] -> [N]자
 
 - 현재 작업 상태: 서울 포토존 추천 총정리 KO/EN 작성 완료
 - 진행 로그: `seoul-photo-spot-recommendations` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 이태원·서울숲 글과의 연결 반영, 다음 작성 대상은 `[046] Hub [ ]`
+
+## 39. 2026-03-15 Update
+
+- 현재 작업 상태: 잠실 석촌호수 사진 명소 가이드 KO/EN 작성 완료
+- 진행 로그: `seokchon-lake-photo-spot-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 서울 벚꽃·서울숲 글과의 연결 반영, 누락 상태였던 `[043] Sub [v]` 링크 갱신 완료
