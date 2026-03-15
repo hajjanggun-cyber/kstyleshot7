@@ -26,6 +26,29 @@ function buildDownloadTimestamp() {
   return `${yyyy}${mm}${dd}-${hh}${min}`;
 }
 
+const FINAL_PROGRESS_ROTATION_MS = 9000;
+
+const FINAL_PROGRESS_MESSAGES = {
+  ko: [
+    "헤어 스타일을 맞추는 중",
+    "의상을 자연스럽게 입히는 중",
+    "배경 장면을 불러오는 중",
+    "조명과 질감을 다듬는 중",
+    "전체 장면의 균형을 맞추는 중",
+    "당신만의 장면을 마무리하는 중",
+    "거의 다 됐어요, 조금만 더요",
+  ],
+  en: [
+    "Fitting your hair style to the scene",
+    "Styling your outfit just right",
+    "Placing you into the background",
+    "Refining the light and texture",
+    "Balancing the whole scene together",
+    "Putting the final touches on your look",
+    "Almost there just a few more seconds",
+  ],
+} as const;
+
 export function DoneFlow() {
   const params = useParams<{ lang: string }>();
   const router = useRouter();
@@ -47,6 +70,7 @@ export function DoneFlow() {
   const [downloadingHairId, setDownloadingHairId] = useState<string | null>(null);
   const [shareNotice, setShareNotice] = useState("");
   const [finalError, setFinalError] = useState(false);
+  const [progressMessageIndex, setProgressMessageIndex] = useState(0);
 
   useEffect(() => {
     if (!finalPredictionId || finalImageUrl) {
@@ -85,6 +109,20 @@ export function DoneFlow() {
     return () => clearInterval(interval);
   }, [finalPredictionId, finalImageUrl, setFinalImageUrl, setStatus]);
 
+  useEffect(() => {
+    if (!finalPredictionId || finalImageUrl || finalError) {
+      setProgressMessageIndex(0);
+      return;
+    }
+
+    const messages = lang === "ko" ? FINAL_PROGRESS_MESSAGES.ko : FINAL_PROGRESS_MESSAGES.en;
+    const interval = window.setInterval(() => {
+      setProgressMessageIndex((current) => Math.min(current + 1, messages.length - 1));
+    }, FINAL_PROGRESS_ROTATION_MS);
+
+    return () => window.clearInterval(interval);
+  }, [finalError, finalImageUrl, finalPredictionId, lang]);
+
   const hairName =
     hairStyles.find((item) => item.id === hair.picked)?.name ?? hair.picked ?? "-";
   const selectedOutfit =
@@ -94,6 +132,8 @@ export function DoneFlow() {
   const basePreviewUrl = hairPreviewUrl ?? photoBlobUrl ?? null;
   const resultUrl = finalImageUrl ?? basePreviewUrl;
   const isFinalProcessing = Boolean(finalPredictionId) && !finalImageUrl && !finalError;
+  const progressMessages = lang === "ko" ? FINAL_PROGRESS_MESSAGES.ko : FINAL_PROGRESS_MESSAGES.en;
+  const activeProgressMessage = progressMessages[progressMessageIndex] ?? progressMessages[0];
   const hairDownloadItems = hair.chosen
     .map((id) => {
       const result = hair.results.find((item) => item.id === id);
@@ -185,17 +225,18 @@ export function DoneFlow() {
     <div className="dn-root">
       {isFinalProcessing ? (
         <LoadingModal
-          badge={lang === "ko" ? "최종 합성 중" : "Final render in progress"}
+          badge={lang === "ko" ? "장면 생성 중" : "Creating Your Scene"}
           backdropImageUrl={basePreviewUrl}
           description={
             lang === "ko"
-              ? "선택한 헤어와 참조 이미지를 바탕으로, 얼굴 각도와 장면 분위기를 맞춰 최종 이미지를 완성하고 있습니다."
-              : "Building the final image from your selected hair result and reference while aligning angle, lighting, and scene mood."
+              ? "헤어, 의상, 배경을 하나의 자연스러운 장면으로\n완성하는 데 약 1분~1분 30초 정도 걸려요."
+              : "We're blending your hair, outfit, and background\ninto one seamless scene - this usually takes about 1 to 1.5 minutes."
           }
+          progressMessage={activeProgressMessage}
           title={
             lang === "ko"
-              ? "선택한 결과를 바탕으로 최종 이미지를 완성하는 중"
-              : "Finishing your final image from the selected result"
+              ? "선택한 스타일로 장면을 만들고 있어요"
+              : "Putting your style into the scene"
           }
         />
       ) : null}
