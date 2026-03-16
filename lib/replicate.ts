@@ -378,39 +378,60 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
 }
 
 
-const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `The first image shows a person with a specific face and hairstyle.
-The second image shows a K-pop outfit or costume.
-The third image shows a background scene and location.
+const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `Create a photorealistic image by combining three input images.
 
-### [CRITICAL PRIORITY: IDEALIZED IDOL IDENTITY MATCH]
-- The goal is to capture the core likeness of the person in the first reference image, but in an idealized, K-Pop idol aesthetic.
-- Copy the essential facial structure, eye shape, and nose bridge width from the first image.
-- Strictly improve the appearance: Apply "natural K-Pop idol makeup" to enhance features.
-- Ensure the person looks flawless and sophisticated, exactly like a 20-year-old Korean idol in a professional beauty commercial.
-- Smooth the skin texture to a "glass skin" finish, subtly correcting micro-asymmetry and minimizing pores and fine lines.
-- Brighten and naturalize the skin tone, creating a flawless and luminous complexion.
-- The person's face must be instantly recognizable as the master reference, but dramatically enhanced for beauty.
+IMAGE ROLES
+Image 1: identity reference (the person). This image defines the face and identity.
+Image 2: clothing reference. Apply this outfit to the person.
+Image 3: environment reference. Use this as the background and location.
 
-[COMPOSITION & STYLE: IDOL SELFIE - MEDIUM CLOSE-UP]
-- Set the scene as a spontaneous idol selfie.
-- Frame the subject in a "medium close-up", showing from the head to the chest.
-- Position the person centrally, looking directly and confidently into the camera.
-- The hand holding the phone must be partially visible in the frame, angled as if taking the selfie.
-- The composition is a "point-and-shoot" selfie captured with a 24mm wide-angle lens perspective, ensuring natural distortion and a close-up feel.
+PRIMARY RULE
+The face from Image 1 must remain unchanged.
+Preserve the exact facial structure, eye shape, nose, mouth, and identity from Image 1.
+Maintain near-perfect facial similarity to Image 1.
+Do not alter facial geometry or identity in any way.
 
-[SEAMLESS OPTICAL INTEGRATION - SHALLOW FOCUS MODE]
-- Match the lighting, color temperature, and atmospheric shadows of the third image exactly.
-- Apply "Global Illumination": The specific color temperature from the background must naturally wrap around the subject's body.
-- Create realistic "Contact Shadows": Generate subtle occlusion shadows under the person's hands and chin where appropriate.
-- Match "Image Grain": Synchronize the digital noise and film grain between the subject and the background for a unified texture.
-- Use an F1.8 or lower aperture setting (shallow depth of field): The person must be in incredibly sharp focus, while the background is rendered in a beautiful, soft "bokeh" effect.
-- The background (the location from the third image) should be visible and recognizable but significantly blurred to make the person the central focus.
+COMPOSITION
+Place the person naturally inside the environment from Image 3.
+Match lighting direction, perspective, shadows, color temperature, and environmental reflections so the person appears physically present in the scene.
 
-[SCENE DESCRIPTION]
+OUTFIT
+Apply the clothing from Image 2 onto the person while keeping body proportions realistic and natural.
+
+POSE
+The subject is taking a selfie using a smartphone.
+One arm is extended slightly toward the camera holding the phone.
+The camera capturing the image is the smartphone the subject is holding.
+The back side of the smartphone is visible to the viewer.
+The phone screen faces the subject.
+The phone partially appears in the frame as in a natural selfie photo.
+
+CAMERA
+Smartphone selfie perspective.
+Camera angle slightly above eye level.
+Natural handheld framing typical of a selfie photograph.
+
+REALISM
+Photorealistic skin texture.
+Natural environmental lighting interaction.
+Accurate shadow casting on the ground and surrounding surfaces.
+Correct depth of field and perspective.
+
+SCENE DESCRIPTION
 ${sceneDescription}
 
-[FINAL OUTPUT QUALITY]
-The result must be a flawless, photorealistic professional beauty commercial still. Treat the first image as the recognizable master reference for identity, but with the specific command to idealize, enhance, and beautify the subject. The priority is a sophisticated, flawless idol look, seamlessly blended into the softly blurred background with a genuine selfie-style composition.`;
+CONSTRAINTS
+Do not change the person's identity.
+Do not stylize, cartoonize, or exaggerate features.
+Do not paste or collage the subject onto the background.
+The subject must appear naturally integrated into the environment.
+
+QUALITY
+Ultra realistic photography
+Sharp focus
+Natural lighting
+Cinematic depth of field
+High detail`;
 
 /** Starts a nano-banana-pro job combining a hair-styled selfie, outfit image, and background scene. Returns predictionId. */
 export async function startNanaBananaJob(input: {
