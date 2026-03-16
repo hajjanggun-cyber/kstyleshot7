@@ -35,7 +35,9 @@
       "Bash(cd:*)",
       "Bash(which magick:*)",
       "Bash(ls \"C:\\\\Users\\\\홈_메인\\\\Desktop\\\\11  11 실전코딩\\\\k-pop\\\\kstyleshot\\\\content\\\\hub\\\\ko\\\\\" | grep -E \"seongsu-hub|han-river-night\")",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(grep:*)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }
