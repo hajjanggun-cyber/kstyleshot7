@@ -380,20 +380,23 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
 
 const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `Create a photorealistic image by combining three input images.
 
-IMAGE ROLES
-Image 1: identity reference (the person). This image defines the face and identity.
-Image 2: clothing reference. Apply this outfit to the person.
-Image 3: environment reference. Use this as the background and location.
-
-PRIMARY RULE
+CRITICAL RULES
 The face from Image 1 must remain unchanged.
 Preserve the exact facial structure, eye shape, nose, mouth, and identity from Image 1.
 Maintain near-perfect facial similarity to Image 1.
 Do not alter facial geometry or identity in any way.
 
+The person must be naturally integrated into the environment from Image 3.
+Match lighting direction, perspective, shadows, color temperature, and environmental reflections so the subject appears physically present in the scene.
+The result must look like a real photograph taken in that location.
+
+IMAGE ROLES
+Image 1: identity reference (the person). This image defines the face and identity.
+Image 2: clothing reference. Apply this outfit to the person.
+Image 3: environment reference. Use this as the background and location.
+
 COMPOSITION
 Place the person naturally inside the environment from Image 3.
-Match lighting direction, perspective, shadows, color temperature, and environmental reflections so the person appears physically present in the scene.
 
 OUTFIT
 Apply the clothing from Image 2 onto the person while keeping body proportions realistic and natural.
@@ -401,15 +404,25 @@ Apply the clothing from Image 2 onto the person while keeping body proportions r
 POSE
 The subject is taking a selfie using a smartphone.
 One arm is extended slightly toward the camera holding the phone.
-The camera capturing the image is the smartphone the subject is holding.
-The back side of the smartphone is visible to the viewer.
-The phone screen faces the subject.
-The phone partially appears in the frame as in a natural selfie photo.
+
+The back side of the smartphone is facing the viewer.
+The smartphone screen is facing the subject.
+
+The rear of the phone is visible in the image.
+The front screen of the phone must not be visible.
+
+The smartphone is partially visible inside the frame near the edge of the image like a natural selfie photo.
 
 CAMERA
-Smartphone selfie perspective.
+The viewer camera is the smartphone the subject is holding.
+This image is captured from the perspective of the smartphone selfie camera.
 Camera angle slightly above eye level.
 Natural handheld framing typical of a selfie photograph.
+
+GAZE
+The subject is looking directly into the smartphone camera lens while taking the selfie.
+Clear eye contact with the phone camera.
+The subject's gaze follows the smartphone camera position.
 
 REALISM
 Photorealistic skin texture.
