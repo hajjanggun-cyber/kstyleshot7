@@ -54,3 +54,8 @@ export function getAllArticles(lang: string): ArticleFrontmatter[] {
     .map((slug) => getMdxArticle(lang, slug)?.frontmatter)
     .filter(Boolean) as ArticleFrontmatter[];
 }
+
+export function getFirstImageSrc(content: string): string | null {
+  const match = content.match(/!\[[^\]]*]\((\/images\/[^)\s]+)\)/);
+  return match?.[1] ?? null;
+}

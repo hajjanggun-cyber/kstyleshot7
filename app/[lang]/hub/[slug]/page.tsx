@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { HubArticle } from "@/components/hub/HubArticle";
 import { HubMdxPage } from "@/components/hub/HubMdxPage";
 import { hubArticles } from "@/data/hubArticles";
-import { getMdxArticle } from "@/lib/mdx";
+import { getFirstImageSrc, getMdxArticle } from "@/lib/mdx";
 import { buildLocaleAlternatesAbsolute, getSiteUrl } from "@/lib/seo";
 
 type ArticlePageProps = {
@@ -19,6 +19,9 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     const { frontmatter: fm } = mdx;
     const canonical = `${getSiteUrl()}/${lang}/hub/${slug}`;
     const authors = fm.authorName ? [fm.authorName] : undefined;
+    const firstImageSrc = getFirstImageSrc(mdx.content);
+    const articleImage = fm.ogImage ?? (firstImageSrc ? `${getSiteUrl()}${firstImageSrc}` : undefined);
+
     return {
       title: fm.title,
       description: fm.description,
@@ -35,7 +38,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
         type: "article",
         publishedTime: fm.publishedAt,
         authors,
-        images: fm.ogImage ? [{ url: fm.ogImage }] : undefined,
+        images: articleImage ? [{ url: articleImage }] : undefined,
       },
     };
   }
@@ -51,11 +54,12 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { lang, slug } = await params;
 
-  // MDX file takes priority (new content)
   const mdx = getMdxArticle(lang, slug);
   if (mdx) {
     const { frontmatter: fm } = mdx;
     const canonical = `${getSiteUrl()}/${lang}/hub/${slug}`;
+    const firstImageSrc = getFirstImageSrc(mdx.content);
+    const articleImage = fm.ogImage ?? (firstImageSrc ? `${getSiteUrl()}${firstImageSrc}` : undefined);
     const breadcrumbHomeLabel = lang === "ko" ? "홈" : "Home";
     const breadcrumbHubLabel = lang === "ko" ? "허브" : "Hub";
     const structuredData = {
@@ -68,7 +72,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           datePublished: fm.publishedAt,
           url: canonical,
           inLanguage: lang === "ko" ? "ko-KR" : "en-US",
-          image: fm.ogImage ? [fm.ogImage] : undefined,
+          image: articleImage ? [articleImage] : undefined,
           author: fm.authorName
             ? {
                 "@type": "Person",
@@ -83,13 +87,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               "@type": "ListItem",
               position: 1,
               name: breadcrumbHomeLabel,
-              item: getSiteUrl() + `/${lang}`,
+              item: `${getSiteUrl()}/${lang}`,
             },
             {
               "@type": "ListItem",
               position: 2,
               name: breadcrumbHubLabel,
-              item: getSiteUrl() + `/${lang}/hub`,
+              item: `${getSiteUrl()}/${lang}/hub`,
             },
             {
               "@type": "ListItem",
@@ -101,6 +105,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         },
       ],
     };
+
     return (
       <>
         <script
@@ -112,7 +117,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     );
   }
 
-  // Fallback: legacy TypeScript article data
   const legacy = hubArticles[slug];
   if (!legacy) notFound();
 

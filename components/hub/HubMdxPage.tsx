@@ -1,46 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import fs from "fs/promises";
+import path from "path";
+import sharp from "sharp";
 
 import type { ArticleFrontmatter } from "@/lib/mdx";
 
-const mdxComponents = {
-  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2 className="ha-heading" {...props} />
-  ),
-  p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p className="ha-paragraph" {...props} />
-  ),
-  ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className="ha-bullets" {...props} />
-  ),
-  li: (props: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className="ha-bullet-item" {...props} />
-  ),
-  strong: (props: React.HTMLAttributes<HTMLElement>) => (
-    <strong className="ha-bullet-label" {...props} />
-  ),
-  hr: () => <hr className="ha-divider" />,
-  a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <Link className="ha-inline-link" href={href ?? "#"} {...props}>
-      {children}
-    </Link>
-  ),
-  img: ({ src, alt }: { src?: string; alt?: string }) => {
-    if (!src) return null;
-    return (
-      <Image
-        className="ha-media"
-        src={src}
-        alt={alt ?? ""}
-        width={0}
-        height={0}
-        sizes="(max-width: 768px) 100vw, 800px"
-        style={{ width: "100%", height: "auto" }}
-      />
-    );
-  },
-};
+const imageSizeCache = new Map<string, { width: number; height: number }>();
+
+async function getImageDimensions(src: string): Promise<{ width: number; height: number }> {
+  const cached = imageSizeCache.get(src);
+  if (cached) return cached;
+
+  if (!src.startsWith("/")) {
+    const fallback = { width: 800, height: 450 };
+    imageSizeCache.set(src, fallback);
+    return fallback;
+  }
+
+  const filePath = path.join(process.cwd(), "public", src.replace(/^\/+/, ""));
+  try {
+    const buffer = await fs.readFile(filePath);
+    const metadata = await sharp(buffer).metadata();
+    const size = {
+      width: metadata.width ?? 800,
+      height: metadata.height ?? 450,
+    };
+    imageSizeCache.set(src, size);
+    return size;
+  } catch {
+    const fallback = { width: 800, height: 450 };
+    imageSizeCache.set(src, fallback);
+    return fallback;
+  }
+}
 
 type HubMdxPageProps = {
   frontmatter: ArticleFrontmatter;
@@ -73,6 +67,50 @@ function HubMainButton({ lang }: { lang: string }) {
 }
 
 export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps) {
+  const firstImageSrc = content.match(/!\[[^\]]*]\((\/images\/[^)\s]+)\)/)?.[1] ?? null;
+  const mdxComponents = {
+    h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h2 className="ha-heading" {...props} />
+    ),
+    p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
+      <p className="ha-paragraph" {...props} />
+    ),
+    ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
+      <ul className="ha-bullets" {...props} />
+    ),
+    li: (props: React.HTMLAttributes<HTMLLIElement>) => (
+      <li className="ha-bullet-item" {...props} />
+    ),
+    strong: (props: React.HTMLAttributes<HTMLElement>) => (
+      <strong className="ha-bullet-label" {...props} />
+    ),
+    hr: () => <hr className="ha-divider" />,
+    a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+      <Link className="ha-inline-link" href={href ?? "#"} {...props}>
+        {children}
+      </Link>
+    ),
+    img: async ({ src, alt }: { src?: string; alt?: string }) => {
+      if (!src) return null;
+      const { width, height } = await getImageDimensions(src);
+      const isPriority = src === firstImageSrc;
+      return (
+        <Image
+          className="ha-media"
+          src={src}
+          alt={alt ?? ""}
+          width={width}
+          height={height}
+          sizes="(max-width: 768px) 100vw, 800px"
+          priority={isPriority}
+          fetchPriority={isPriority ? "high" : undefined}
+          loading={isPriority ? "eager" : "lazy"}
+          style={{ width: "100%", height: "auto" }}
+        />
+      );
+    },
+  };
+
   return (
     <div className="ha-root">
       <nav className="ha-nav">
@@ -113,6 +151,10 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
         </div>
       </section>
 
+      <article className="ha-body">
+        <MDXRemote source={content} components={mdxComponents} />
+      </article>
+
       <div className="ha-mid-cta">
         <a
           href={`/${lang}`}
@@ -125,10 +167,6 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           />
         </a>
       </div>
-
-      <article className="ha-body">
-        <MDXRemote source={content} components={mdxComponents} />
-      </article>
 
       {frontmatter.nextSlug && frontmatter.nextTitle ? (
         <div className="ha-next-wrap">

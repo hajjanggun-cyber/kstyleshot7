@@ -140,7 +140,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[096] Hub [ ]`
+1. `[099] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -858,8 +858,9 @@ description: [actual text] -> [N]자
 - 서울 포토존 추천 총정리 KO/EN 완료
 
 다음 우선순위:
-1. [096] Hub 작성
-2. [097] Sub 작성
+0. 순한 스킨케어 루틴 KO/EN 완료
+1. [099] Sub 작성
+2. [100] Sub 작성
 3. [101] Hub 작성
 
 전환 메모:
@@ -1032,3 +1033,15 @@ description: [actual text] -> [N]자
 
 - 현재 작업 상태: 잠실 석촌호수 사진 명소 가이드 KO/EN 작성 완료
 - 진행 로그: `seokchon-lake-photo-spot-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 서울 벚꽃·서울숲 글과의 연결 반영, 누락 상태였던 `[043] Sub [v]` 링크 갱신 완료
+## 40. 2026-03-16 Update
+
+- 현재 작업 상태: 한국 스킨케어 루틴 허브 KO/EN 작성 완료
+- 진행 로그: `korean-skincare-routine-guide` KO/EN 게시용 MDX 작성, `data/hubPosts.ts` 허브 카드 추가, `md-doc/kpop-blog-topics-300.md`의 `[096] Hub [v]` 반영, 다음 작성 대상은 `[097] Sub [ ]`
+## 41. 2026-03-16 Update
+
+- 현재 작업 상태: 글래스 스킨 루틴 KO/EN 작성 완료
+- 진행 로그: `how-to-get-glass-skin` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크 반영, `md-doc/kpop-blog-topics-300.md`의 `[097] Sub [v]` 반영, 다음 작성 대상은 `[098] Sub [ ]`
+## 42. 2026-03-16 Update
+
+- 현재 작업 상태: 순한 스킨케어 루틴 KO/EN 작성 완료
+- 진행 로그: `gentle-skincare-routine-guide` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크와 `how-to-get-glass-skin` 연결 반영, `md-doc/kpop-blog-topics-300.md`의 `[098] Sub [v]` 반영, 다음 작성 대상은 `[099] Sub [ ]`
