@@ -8,11 +8,14 @@ const nextConfig = {
   serverExternalPackages: ["sharp", "@mediapipe/tasks-vision"],
   experimental: {
     outputFileTracingExcludes: {
-      "**": [
-        "./public/images/hub/**",
-        "./public/wasm/**",
-        "./node_modules/@img/sharp-libvips-linuxmusl-x64/**",
-        "./node_modules/@img/sharp-libvips-linux-x64/**",
+      "/[lang]/hub/[slug]": [
+        "public/images/**",
+        "public/wasm/**",
+        "node_modules/@img/**",
+      ],
+      "/[lang]/hub": [
+        "public/images/**",
+        "node_modules/@img/**",
       ],
     },
   },
