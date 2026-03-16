@@ -6,7 +6,6 @@ const DEFAULT_HAIR_GENDER = "female";
 const DEFAULT_HAIR_ASPECT_RATIO = "4:5";
 const DEFAULT_HAIR_OUTPUT_FORMAT = "jpg";
 const DEFAULT_HAIR_SAFETY_TOLERANCE = 2;
-const DEFAULT_HAIR_SEED = 42;
 
 type JsonRecord = Record<string, unknown>;
 
@@ -167,7 +166,6 @@ async function startPrediction(input: {
   aspectRatio?: string;
   outputFormat?: string;
   safetyTolerance?: number;
-  seed?: number;
   wait?: boolean;
 }): Promise<{ predictionId: string; outputUrl: string | null }> {
   const endpoint = getHairPredictionEndpoint();
@@ -189,7 +187,6 @@ async function startPrediction(input: {
         aspect_ratio: input.aspectRatio || DEFAULT_HAIR_ASPECT_RATIO,
         output_format: input.outputFormat || DEFAULT_HAIR_OUTPUT_FORMAT,
         safety_tolerance: input.safetyTolerance ?? DEFAULT_HAIR_SAFETY_TOLERANCE,
-        seed: input.seed ?? DEFAULT_HAIR_SEED,
         input_image: input.inputImage,
       },
     }),
