@@ -136,6 +136,19 @@ export const hubPosts: HubPost[] = [
     watermark: "서울 포토존",
     cta: "읽기",
   },
+  {
+    slug: "korean-skincare-routine-guide",
+    cardType: "half-hero",
+    category: "K-뷰티 & 헤어",
+    categoryStyle: "white-on-pink",
+    title: "한국 스킨케어\n루틴 가이드",
+    subtitle: "피부 상태에 맞는 단계 순서를 먼저 잡는 K-뷰티 허브",
+    bg: "linear-gradient(135deg, #7a3b2e 0%, #f0b38a 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "스킨케어",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -256,22 +269,35 @@ export const hubPostsEn: HubPost[] = [
     watermark: "SEOUL PHOTO",
     cta: "Read Now",
   },
+  {
+    slug: "korean-skincare-routine-guide",
+    cardType: "half-hero",
+    category: "K-Beauty",
+    categoryStyle: "white-on-pink",
+    title: "Korean Skincare\nRoutine Guide",
+    subtitle: "A practical K-beauty hub for step order, skin needs, and routine balance",
+    bg: "linear-gradient(135deg, #7a3b2e 0%, #f0b38a 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "SKINCARE",
+    cta: "Read Now",
+  },
 ];
 
 export const FILTER_CHIPS_KO = [
   "전체",
   "서울 명소 & 포토존",
-  "가상 스타일 체험",
   "K-뷰티 & 헤어",
   "K-스타일 & 패션",
+  "가상 스타일 체험",
 ];
 
 export const FILTER_CHIPS_EN = [
   "All",
   "Seoul Locations",
-  "Virtual Style",
   "K-Beauty",
   "K-Fashion",
+  "Virtual Style",
 ];
 
 /** @deprecated use FILTER_CHIPS_KO / FILTER_CHIPS_EN */

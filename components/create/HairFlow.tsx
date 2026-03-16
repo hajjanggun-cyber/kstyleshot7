@@ -457,9 +457,9 @@ export function HairFlow() {
                       className="ot-card-img"
                       src={result.blobUrl}
                       style={{
-                        height: 320,
-                        objectFit: "contain",
-                        objectPosition: "center top",
+                        aspectRatio: "4/5",
+                        height: "auto",
+                        objectFit: "cover",
                       }}
                     />
                     <div className="ot-card-info">
