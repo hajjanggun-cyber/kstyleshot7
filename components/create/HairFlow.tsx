@@ -206,7 +206,7 @@ export function HairFlow() {
   const hasTwoResults = resultCards.length === 2;
   const isFirstHairGeneration = resultCards.length === 0;
   const showStylePicker = !hasTwoResults;
-  const showColorPicker = false;
+  const showColorPicker = true;
   const canGenerate =
     selectedStyleIds.length === 1 &&
     !isGenerating &&
@@ -261,7 +261,7 @@ export function HairFlow() {
         body: JSON.stringify({
           photoDataUrl,
           haircutName: selectedStyle.haircut,
-          hairColor: "No change",
+          hairColor: hairColors.find((c) => c.id === selectedColorId)?.replicateValue ?? "No change",
         }),
       });
 
