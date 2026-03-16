@@ -191,7 +191,7 @@ export function OutfitFlow() {
               <div
                 style={{
                   width: "100%",
-                  aspectRatio: "3/4",
+                  aspectRatio: "4/5",
                   backgroundImage: `url(${confirmOutfit.thumbnailUrl})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center top",
@@ -374,7 +374,7 @@ export function OutfitFlow() {
             <div
               style={{
                 width: "100%",
-                aspectRatio: "3/4",
+                aspectRatio: "4/5",
                 backgroundImage: `url(${confirmBg.thumbnailUrl})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
