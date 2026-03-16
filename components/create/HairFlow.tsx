@@ -30,7 +30,6 @@ export function HairFlow() {
     photoBlobUrl,
     faceBoundingBox,
     setHairChosen,
-    setHairColor,
     setHairPreviewUrl,
     setHairResults,
     pickHair,
@@ -207,7 +206,7 @@ export function HairFlow() {
   const hasTwoResults = resultCards.length === 2;
   const isFirstHairGeneration = resultCards.length === 0;
   const showStylePicker = !hasTwoResults;
-  const showColorPicker = !hasTwoResults;
+  const showColorPicker = false;
   const canGenerate =
     selectedStyleIds.length === 1 &&
     !isGenerating &&
@@ -251,11 +250,6 @@ export function HairFlow() {
 
     try {
       const photoDataUrl = await normalizePhotoForAI(photoBlobUrl, faceBoundingBox);
-      const selectedColor = hairColors.find((item) => item.id === selectedColorId);
-      if (selectedColor) {
-        setHairColor(selectedColor.replicateValue);
-      }
-
       const selectedStyle = hairStyles.find((style) => style.id === selectedStyleId);
       if (!selectedStyle) {
         throw new Error("missing_style");
@@ -267,7 +261,7 @@ export function HairFlow() {
         body: JSON.stringify({
           photoDataUrl,
           haircutName: selectedStyle.haircut,
-          hairColor: selectedColor?.replicateValue ?? "No change",
+          hairColor: "No change",
         }),
       });
 

@@ -2,9 +2,9 @@ export const HAIR_MODEL = "flux-kontext-apps/change-haircut";
 const REPLICATE_API_BASE_URL = process.env.REPLICATE_API_BASE_URL ?? "https://api.replicate.com";
 const DEFAULT_HAIR_COLOR = process.env.REPLICATE_DEFAULT_HAIR_COLOR?.trim() || "No change";
 const HAIR_MODEL_VERSION = process.env.REPLICATE_HAIR_MODEL_VERSION?.trim() || "";
-const DEFAULT_HAIR_GENDER = "female";
-const DEFAULT_HAIR_ASPECT_RATIO = "4:5";
-const DEFAULT_HAIR_OUTPUT_FORMAT = "jpg";
+const DEFAULT_HAIR_GENDER = "none";
+const DEFAULT_HAIR_ASPECT_RATIO = "match_input_image";
+const DEFAULT_HAIR_OUTPUT_FORMAT = "png";
 const DEFAULT_HAIR_SAFETY_TOLERANCE = 2;
 
 type JsonRecord = Record<string, unknown>;
