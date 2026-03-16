@@ -28,6 +28,7 @@ export function HairFlow() {
   const lang = params.lang ?? "en";
   const {
     photoBlobUrl,
+    faceBoundingBox,
     setHairChosen,
     setHairColor,
     setHairPreviewUrl,
@@ -249,7 +250,7 @@ export function HairFlow() {
     setStatus("hair_processing");
 
     try {
-      const photoDataUrl = await normalizePhotoForAI(photoBlobUrl);
+      const photoDataUrl = await normalizePhotoForAI(photoBlobUrl, faceBoundingBox);
       const selectedColor = hairColors.find((item) => item.id === selectedColorId);
       if (selectedColor) {
         setHairColor(selectedColor.replicateValue);

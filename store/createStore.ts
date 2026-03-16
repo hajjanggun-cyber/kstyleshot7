@@ -10,6 +10,7 @@ type CreateActions = {
   setStatus: (status: JobStatus) => void;
   setPhotoBlobUrl: (blobUrl: string | null) => void;
   setPhotoDataUrl: (dataUrl: string | null) => void;
+  setFaceBoundingBox: (box: { x: number; y: number; w: number; h: number } | null) => void;
   setHairChosen: (ids: string[]) => void;
   setHairColor: (color: string) => void;
   setHairPreviewUrl: (url: string | null) => void;
@@ -51,6 +52,7 @@ export const useCreateStore = create<
     backgroundId: string | null;
     finalImageUrl: string | null;
     finalPredictionId: string | null;
+    faceBoundingBox: { x: number; y: number; w: number; h: number } | null;
   } & CreateActions
 >((set) => ({
   ...initialState,
@@ -60,11 +62,13 @@ export const useCreateStore = create<
   backgroundId: null,
   finalImageUrl: null,
   finalPredictionId: null,
+  faceBoundingBox: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
   setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
   setStatus: (status) => set({ status }),
   setPhotoBlobUrl: (photoBlobUrl) => set({ photoBlobUrl }),
   setPhotoDataUrl: (photoDataUrl) => set({ photoDataUrl }),
+  setFaceBoundingBox: (faceBoundingBox) => set({ faceBoundingBox }),
   setHairChosen: (ids) =>
     set(() => ({
       hair: { ...createEmptySelection(), chosen: ids.slice(0, 2) },

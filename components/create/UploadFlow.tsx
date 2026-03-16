@@ -200,6 +200,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
     setPhotoBlobUrl,
     setSession,
     setStatus,
+    setFaceBoundingBox,
   } = useCreateStore();
 
   const lang = params.lang ?? "en";
@@ -373,6 +374,14 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
         height: boundingBox.height,
         originX: boundingBox.originX,
         originY: boundingBox.originY,
+      });
+
+      // Save normalized face box (0–1) for use in hair synthesis framing
+      setFaceBoundingBox({
+        x: boundingBox.originX / normalizedCanvas.width,
+        y: boundingBox.originY / normalizedCanvas.height,
+        w: boundingBox.width / normalizedCanvas.width,
+        h: boundingBox.height / normalizedCanvas.height,
       });
 
       setFaceWarning(validation.state);

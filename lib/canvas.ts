@@ -1,13 +1,18 @@
 /**
  * Normalizes a photo blob URL for AI hair synthesis:
  * - Scales down so the longest side does not exceed MAX_DIMENSION
- * - Crops to 4:5 portrait ratio, anchored at the top (preserves face/upper-body area)
- * - If the scaled image is shorter than 4:5, fills the bottom with black (never the top)
- * - No artificial top padding — adding black above the face was pushing the head down
+ * - Crops to 4:5 portrait ratio
+ * - If faceBoundingBox is provided, positions crop so eyes land at ~33% from top
+ *   (gives headroom for hair above, and shows upper-body below)
+ * - Falls back to top-anchored crop when no face data is available
+ * - Fills bottom with black if image is shorter than the crop window
  */
 const MAX_DIMENSION = 768;
 
-export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
+export async function normalizePhotoForAI(
+  blobUrl: string,
+  faceBoundingBox?: { x: number; y: number; w: number; h: number } | null
+): Promise<string> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
@@ -29,17 +34,31 @@ export async function normalizePhotoForAI(blobUrl: string): Promise<string> {
       const ctx = canvas.getContext("2d");
       if (!ctx) { reject(new Error("Canvas context unavailable")); return; }
 
-      // Black background (covers bottom fill when image is too short)
+      // Black background (covers any unfilled region)
       ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, targetW, targetH);
 
-      if (scaledH >= targetH) {
-        // Image taller than 4:5: top-crop — keep the face/upper-body region
-        const srcH = Math.round(targetH / scale);
-        ctx.drawImage(img, 0, 0, origW, Math.min(srcH, origH), 0, 0, targetW, targetH);
+      // Determine vertical crop offset in original image pixels
+      let srcOffsetY = 0;
+      if (faceBoundingBox) {
+        // Estimate eye position: ~22% down from top of the face bounding box
+        const eyeYNorm = faceBoundingBox.y + faceBoundingBox.h * 0.22;
+        const eyeYScaled = eyeYNorm * scaledH;
+        // Place eyes at 33% from the top of the output — leaves headroom for hair above
+        const cropYScaled = eyeYScaled - 0.33 * targetH;
+        srcOffsetY = Math.max(0, cropYScaled / scale);
+      }
+
+      const availableSrcH = origH - srcOffsetY;
+      const neededSrcH = targetH / scale;
+
+      if (availableSrcH >= neededSrcH) {
+        // Enough image below the crop offset: draw the exact window
+        ctx.drawImage(img, 0, srcOffsetY, origW, neededSrcH, 0, 0, targetW, targetH);
       } else {
-        // Image shorter than 4:5: draw at top, black fills bottom
-        ctx.drawImage(img, 0, 0, targetW, scaledH);
+        // Image runs out before the window is full: draw what remains, black fills rest
+        const drawH = Math.round(availableSrcH * scale);
+        ctx.drawImage(img, 0, srcOffsetY, origW, availableSrcH, 0, 0, targetW, drawH);
       }
 
       resolve(canvas.toDataURL("image/jpeg", 0.82));
