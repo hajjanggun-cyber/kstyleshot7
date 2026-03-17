@@ -5950,7 +5950,10 @@ h2 {
 }
 
 .ha-bottom-banner {
-  margin: 22px 0 6px;
+  max-width: 680px;
+  width: 100%;
+  padding: 0 16px;
+  margin: 22px auto 6px;
 }
 
 .ha-bottom-banner a {
