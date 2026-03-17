@@ -151,10 +151,6 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
         </div>
       </section>
 
-      <article className="ha-body">
-        <MDXRemote source={content} components={mdxComponents} />
-      </article>
-
       <div className="ha-mid-cta">
         <a
           href={`/${lang}`}
@@ -167,6 +163,10 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           />
         </a>
       </div>
+
+      <article className="ha-body">
+        <MDXRemote source={content} components={mdxComponents} />
+      </article>
 
       {frontmatter.nextSlug && frontmatter.nextTitle ? (
         <div className="ha-next-wrap">
@@ -182,6 +182,19 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           </Link>
         </div>
       ) : null}
+
+      <div className="ha-bottom-banner">
+        <a
+          href={`/${lang}`}
+          aria-label={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
+        >
+          <img
+            src={lang === "ko" ? "/visuals/blog/blog-bottom-banner-kr.webp" : "/visuals/blog/blog-bottom-banner-en.webp"}
+            alt={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
+            loading="lazy"
+          />
+        </a>
+      </div>
 
       <nav className="ha-bottom-nav">
         <Link className="ha-bnav-item" href={`/${lang}/hub`}>
