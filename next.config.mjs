@@ -6,6 +6,19 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   reactStrictMode: true,
   serverExternalPackages: ["sharp", "@mediapipe/tasks-vision"],
+  experimental: {
+    outputFileTracingExcludes: {
+      "/[lang]/hub/[slug]": [
+        "public/images/**",
+        "public/wasm/**",
+        "node_modules/@img/**",
+      ],
+      "/[lang]/hub": [
+        "public/images/**",
+        "node_modules/@img/**",
+      ],
+    },
+  },
   async rewrites() {
     return [
       {
