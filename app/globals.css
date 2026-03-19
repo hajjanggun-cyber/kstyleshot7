@@ -2284,6 +2284,51 @@ h2 {
   opacity: 0.9;
 }
 
+.intro-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.intro-price-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.intro-price-old {
+  font-size: 13px;
+  color: #888;
+  text-decoration: line-through;
+  line-height: 1;
+}
+
+.intro-price-new {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.intro-price-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f48c25;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.intro-cta-row .intro-cta {
+  flex: 1;
+}
+
+.intro-cta--loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 /* =============================================
    HAIR FLOW (step3) — hr-* prefix
    ============================================= */

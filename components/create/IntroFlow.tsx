@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -42,6 +43,25 @@ export function IntroFlow() {
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "ko";
   const isKo = lang === "ko";
+  const [loading, setLoading] = useState(false);
+
+  async function handleStart() {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ locale: lang }),
+      });
+      const data = (await res.json()) as { checkoutUrl?: string };
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      }
+    } catch {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="intro-root">
@@ -104,9 +124,25 @@ export function IntroFlow() {
 
       {/* Fixed CTA */}
       <div className="intro-bottom">
-        <Link className="intro-cta" href={`/${lang}/create/upload`}>
-          {isKo ? "시작하기 →" : "Get Started →"}
-        </Link>
+        <div className="intro-cta-row">
+          <div className="intro-price-wrap">
+            <span className="intro-price-old">$3.99</span>
+            <span className="intro-price-new">$2.99</span>
+            <span className="intro-price-badge">
+              {isKo ? "이벤트 중" : "On Sale"}
+            </span>
+          </div>
+          <button
+            className={`intro-cta${loading ? " intro-cta--loading" : ""}`}
+            disabled={loading}
+            onClick={() => void handleStart()}
+            type="button"
+          >
+            {loading
+              ? (isKo ? "연결 중..." : "Loading...")
+              : (isKo ? "시작하기 →" : "Get Started →")}
+          </button>
+        </div>
       </div>
     </div>
   );
