@@ -87,11 +87,12 @@ function parseSignatureHeader(signatureHeader: string): string[] {
 function createWebhookDigest(body: string, webhookId: string, timestamp: string): string {
   assertPolarWebhookEnv();
 
-  const encodedSecret = Buffer.from(process.env.POLAR_WEBHOOK_SECRET ?? "", "utf8").toString(
-    "base64"
-  );
+  const raw = process.env.POLAR_WEBHOOK_SECRET ?? "";
+  // Polar/Svix secrets are stored as "whsec_<base64>" — decode to raw bytes
+  const base64Part = raw.startsWith("whsec_") ? raw.slice(6) : raw;
+  const secretBytes = Buffer.from(base64Part, "base64");
 
-  return createHmac("sha256", encodedSecret)
+  return createHmac("sha256", secretBytes)
     .update(`${webhookId}.${timestamp}.${body}`)
     .digest("base64");
 }
@@ -302,6 +303,7 @@ export function extractPaidOrder(input: unknown): {
     pickString(input, [["id"], ["eventId"]]) ?? `order.paid:${orderId}:${checkoutId}`;
 
   const customerEmail = pickString(input, [
+    ["data", "customer", "email"],
     ["data", "order", "customer", "email"],
     ["data", "order", "billing_email"],
     ["data", "checkout", "customer_email"],
