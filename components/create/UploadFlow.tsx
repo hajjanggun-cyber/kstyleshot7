@@ -23,6 +23,7 @@ type StoredSession = {
   orderId: string;
   sessionToken: string;
   status: JobStatus;
+  customerEmail?: string | null;
 };
 
 type FaceWarningState =
@@ -229,6 +230,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
         orderId: cachedSession.orderId,
         sessionToken: cachedSession.sessionToken,
         status: cachedSession.status,
+        customerEmail: cachedSession.customerEmail,
       });
       setIsPaidSessionReady(true);
       removeCheckoutIdFromUrl();
@@ -263,6 +265,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
             orderId: payload.orderId,
             sessionToken: payload.sessionToken,
             status: payload.status,
+            customerEmail: payload.customerEmail,
           });
           setSession({
             orderId: payload.orderId,
