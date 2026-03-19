@@ -24,10 +24,11 @@ Updated At: 2026-03-09 KST
 - 모든 카테고리는 먼저 `허브 글`을 잡고, 하위 글은 롱테일 검색 의도로 분리한다.
 - 허브 글은 상위 의도, 비교, 입문, 구조 설명을 맡는다.
 - 하위 글은 포토존, 쇼핑 동선, 스타일링, 예약, 촬영, 제품 선택처럼 구체 의도를 맡는다.
-- 메인 키워드는 제목, 첫 문단, H2 중 최소 1곳에 자연스럽게 들어간다.
+- 메인 키워드는 **제목(H1) 무조건 포함** + **첫 문단 100단어 이내 무조건 포함** + **H2 중 1곳 이상 포함** — 이 세 조건을 모두 충족해야 한다.
 - 메인 키워드는 본문 전체에서 3~4회 이하로 제한한다.
 - 보조 키워드는 첫 문단, H2, 이미지 alt, 요약 문맥에 분산 배치한다.
 - KO와 EN은 번역이 아니라 서로 다른 검색 의도로 다시 설계한다.
+- 모든 Sub 포스트 본문 내에는 반드시 상위 Hub 포스트로 향하는 앵커 텍스트 내부 링크를 1개 이상 삽입한다.
 
 Role 표기:
 - `Hub`: 상위 허브 글
@@ -72,14 +73,14 @@ Role 표기:
 - Subkeywords: KO `경복궁 포토존`, `근정전 사진`, `궁궐 인생샷` | EN `gyeongbokgung photo spots`, `geunjeongjeon view`, `palace photography tips`
 
 ### [003] Sub [v]
-- KO: 경복궁 사진 시간대 가이드 — 야간개장과 빛 변화 [rev-2026-03-10]
-- EN: Best Time to Photograph Gyeongbokgung — Light Guide [rev-2026-03-10]
+- KO: 경복궁 한복 사진 가이드 — 시간대와 야간개장 빛 변화 [rev-2026-03-10]
+- EN: Gyeongbokgung Hanbok Photo Guide — Best Light and Timing [rev-2026-03-10]
 - Keyword: KO `경복궁 한복 사진` | EN `gyeongbokgung hanbok photo route`
 - Subkeywords: KO `한복 대여 후 동선`, `경복궁 한복 포즈`, `광화문 한복 사진` | EN `hanbok route at gyeongbokgung`, `hanbok photo poses`, `palace hanbok photos`
 
 ### [004] Sub [v]
-- KO: 서촌 한옥 마을 코스 — 경복궁 근처 사진 명소 5곳 [rev-2026-03-10]
-- EN: Bukchon Hanok Village Photo Spots Near Gyeongbokgung [rev-2026-03-10]
+- KO: 경복궁 오전 사진 촬영 가이드 — 아침 빛과 한산한 시간대 [rev-2026-03-10]
+- EN: Best Morning Photography at Gyeongbokgung — Light and Quiet Hours [rev-2026-03-10]
 - Keyword: KO `경복궁 오전 사진 촬영` | EN `best morning time for gyeongbokgung photos`
 - Subkeywords: KO `경복궁 빛 방향`, `경복궁 아침 사진`, `궁궐 한산한 시간` | EN `gyeongbokgung morning light`, `early palace photos`, `quiet time at gyeongbokgung`
 
@@ -590,7 +591,7 @@ Role 표기:
 - Subkeywords: KO `입문템`, `재구매템`, `기초 쇼핑 동선` | EN `beginner skincare picks`, `repurchase items`, `beauty shopping route`
 
 ### [083] Sub [ ]
-- KO: 한국 헤어숍에서 원하는 스타일 말하는 법
+- KO: 한국 헤어숍 주문하는 법 — 원하는 스타일 말하기
 - EN: How to Ask for a Hairstyle in Korea
 - Keyword: KO `한국 헤어숍 주문하는 법` | EN `how to ask for a hairstyle in korea`
 - Subkeywords: KO `미용실 영어`, `컷트 주문`, `염색 상담` | EN `salon phrases`, `haircut requests`, `color consultation`
@@ -634,7 +635,7 @@ Role 표기:
 - Subkeywords: KO `기초 순서`, `면도 후 진정`, `지성 피부 관리` | EN `basic skincare steps`, `post-shave care`, `oily skin routine`
 
 ### [090] Sub [ ]
-- KO: 선크림 고를 때 꼭 보는 기준
+- KO: 선크림 고르는 법 — 성분과 피부 궁합 기준
 - EN: How to Choose the Right Sunscreen
 - Keyword: KO `선크림 고르는 법` | EN `how to choose the right sunscreen`
 - Subkeywords: KO `유기자차 무기자차`, `백탁 없는 선크림`, `메이크업 궁합` | EN `chemical vs mineral sunscreen`, `no white cast sunscreen`, `makeup-friendly SPF`
@@ -888,7 +889,7 @@ Role 표기:
 - Subkeywords: KO `꾸안꾸 코디`, `후드 집업`, `와이드 팬츠` | EN `effortless layered looks`, `zip hoodie styling`, `wide pants outfits`
 
 ### [129] Sub [ ]
-- KO: 데이트룩으로 좋은 미니멀 코디
+- KO: 미니멀 데이트룩 코디 가이드 — 카페 데이트 스타일
 - EN: Minimal Date Outfit Guide
 - Keyword: KO `미니멀 데이트룩 코디` | EN `minimal date outfit guide`
 - Subkeywords: KO `깔끔한 코디`, `카페 데이트룩`, `뉴트럴 컬러` | EN `clean outfit styling`, `cafe date looks`, `neutral color outfits`
@@ -920,7 +921,7 @@ Role 표기:
 - Subkeywords: KO `패션 뷰티 쇼핑`, `플랫폼 비교`, `한국 쇼핑 앱` | EN `fashion vs beauty shopping`, `platform comparison`, `korean shopping apps`
 
 ### [134] Sub [ ]
-- KO: 한국 디자이너 브랜드 입문 가이드
+- KO: 한국 디자이너 브랜드 추천 — 입문자를 위한 가이드
 - EN: Korean Designer Brand Guide
 - Keyword: KO `한국 디자이너 브랜드 추천` | EN `korean designer brand guide`
 - Subkeywords: KO `로컬 브랜드`, `서울 브랜드 숍`, `디자이너 편집숍` | EN `local fashion labels`, `seoul brand stores`, `designer shops`
@@ -1078,7 +1079,7 @@ Role 표기:
 - Subkeywords: KO `하자 고지`, `포장 방법`, `거래 예의` | EN `condition disclosure`, `safe packaging`, `trade manners`
 
 ### [158] Sub [ ]
-- KO: 팬사인회 응모 전 알아야 할 기본
+- KO: 팬사인회 응모 방법 — 기본부터 확인 사항까지
 - EN: Fan Sign Event Entry Basics
 - Keyword: KO `팬사인회 응모 방법` | EN `fan sign event entry basics`
 - Subkeywords: KO `응모 수량`, `추첨 구조`, `준비 서류` | EN `entry mechanics`, `album quantity strategy`, `documents needed`
@@ -1116,7 +1117,7 @@ Role 표기:
 - Subkeywords: KO `럭드 이벤트`, `오프라인 특전`, `추첨 구매` | EN `lucky draw events`, `store benefits`, `purchase-based draws`
 
 ### [164] Sub [ ]
-- KO: 공구 뜻과 공동구매 참여 방법
+- KO: 공동구매 참여 방법 — 공구 뜻부터 정산까지
 - EN: Group Order Guide for K-Pop Goods
 - Keyword: KO `공동구매 참여 방법` | EN `group order guide for k-pop goods`
 - Subkeywords: KO `공구 의미`, `배송 분배`, `정산 방식` | EN `group order basics`, `shipping split`, `payment structure`
@@ -1136,7 +1137,7 @@ Role 표기:
 - Subkeywords: KO `글로벌 확장`, `콘셉트 전략`, `팬 참여 구조` | EN `global expansion`, `concept strategy`, `fan participation`
 
 ### [167] Sub [ ]
-- KO: 월드투어가 어떻게 운영되는지 이해하기
+- KO: K팝 월드투어 구조 이해하기 — 투어 기획과 도시 선정
 - EN: How K-Pop World Tours Work
 - Keyword: KO `K팝 월드투어 구조` | EN `how k-pop world tours work`
 - Subkeywords: KO `해외 투어 일정`, `지역 선정`, `공연 운영` | EN `tour routing`, `city selection`, `show logistics`
@@ -1254,7 +1255,7 @@ Role 표기:
 - Subkeywords: KO `보행 장면`, `간판 활용`, `원근감 구도` | EN `walking shots`, `signboard framing`, `depth in street photos`
 
 ### [185] Sub [ ]
-- KO: 지하철 사진 찍을 때 지켜야 할 구도와 매너
+- KO: 지하철 사진 매너와 구도 가이드 — 공공장소 촬영 주의사항
 - EN: Subway Photo Composition and Etiquette Guide
 - Keyword: KO `지하철 사진 매너` | EN `subway photo composition and etiquette guide`
 - Subkeywords: KO `공공장소 촬영`, `타인 프라이버시`, `대칭 플랫폼 사진` | EN `public-space photography`, `privacy in transit`, `platform symmetry shots`
@@ -1344,7 +1345,7 @@ Role 표기:
 - Subkeywords: KO `밝은 피드 색감`, `과노출 방지`, `깔끔한 보정` | EN `clean feed colors`, `avoid overexposure`, `bright edit style`
 
 ### [199] Sub [ ]
-- KO: 피부 보정 앱 고를 때 보는 기준
+- KO: 피부 보정 앱 추천 — 자연스럽게 고르는 기준
 - EN: How to Choose a Skin Retouch App
 - Keyword: KO `피부 보정 앱 추천` | EN `how to choose a skin retouch app`
 - Subkeywords: KO `과한 보정 피하기`, `질감 유지`, `셀카 보정` | EN `natural retouching`, `preserving texture`, `selfie editing apps`
@@ -1496,9 +1497,9 @@ Role 표기:
 - Subkeywords: KO `홍대 명동 성수`, `숙소 위치 선택`, `지역별 분위기` | EN `hongdae myeongdong seongsu`, `where to stay`, `district comparison`
 
 ### [222] Sub [ ]
-- KO: 홍대 명동 성수 어디에 숙소 잡을까
+- KO: 홍대 명동 성수 숙소 비교 — 어디에 잡아야 할까
 - EN: Best Area to Stay in Seoul Guide
-- Keyword: KO `서울 어디에 숙소 잡을까` | EN `best area to stay in seoul guide`
+- Keyword: KO `홍대 명동 성수 숙소 비교` | EN `best area to stay in seoul guide`
 - Subkeywords: KO `홍대 숙소`, `명동 숙소`, `성수 숙소` | EN `stay in hongdae`, `stay in myeongdong`, `stay in seongsu`
 
 ### [223] Sub [ ]
@@ -1566,7 +1567,7 @@ Role 표기:
 - Subkeywords: KO `예매 사이트`, `회원가입`, `결제 준비` | EN `ticketing sites`, `account setup`, `payment prep`
 
 ### [233] Sub [ ]
-- KO: 공연장 들어가기 전 준비 체크리스트
+- KO: 공연장 입장 준비 체크리스트 — 신분증부터 모바일 티켓까지
 - EN: Concert Venue Entry Checklist
 - Keyword: KO `공연장 입장 준비` | EN `concert venue entry checklist`
 - Subkeywords: KO `신분증 확인`, `모바일 티켓`, `입장 시간` | EN `id check`, `mobile tickets`, `entry timing`
@@ -1642,7 +1643,7 @@ Role 표기:
 - Subkeywords: KO `출국 전 준비`, `환전`, `예약 확인` | EN `before-you-go checklist`, `currency exchange`, `booking confirmations`
 
 ### [245] Sub [ ]
-- KO: 여행 중 분실과 도난 대처 가이드
+- KO: 한국 여행 분실 도난 대처 가이드 — 지갑 폰 신고 방법
 - EN: Lost and Stolen Items Guide in Korea
 - Keyword: KO `한국 여행 분실 도난 대처` | EN `lost and stolen items guide in korea`
 - Subkeywords: KO `지갑 분실`, `휴대폰 분실`, `경찰 신고` | EN `lost wallet`, `lost phone`, `reporting procedures`
@@ -1666,7 +1667,7 @@ Role 표기:
 - Subkeywords: KO `아이디 정하기`, `첫 게시물`, `피드 톤` | EN `account naming`, `first posts`, `feed style`
 
 ### [248] Sub [ ]
-- KO: 팬 계정 팔로워 늘리는 콘텐츠 구조
+- KO: 팬 계정 팔로워 늘리기 — 콘텐츠 구조와 업로드 전략
 - EN: How to Grow a Fan Account Faster
 - Keyword: KO `팬 계정 팔로워 늘리기` | EN `how to grow a fan account faster`
 - Subkeywords: KO `릴스 활용`, `업로드 빈도`, `해시태그 정리` | EN `reels strategy`, `posting frequency`, `hashtag workflow`
@@ -1678,7 +1679,7 @@ Role 표기:
 - Subkeywords: KO `주간 업로드 계획`, `시즌별 주제`, `일정 관리` | EN `weekly schedule`, `theme planning`, `posting calendar`
 
 ### [250] Sub [ ]
-- KO: 알림 설정으로 소식 놓치지 않는 법
+- KO: 팬계정 알림 설정 — 소식 놓치지 않는 SNS 세팅법
 - EN: Notification Setup Guide for Fan Accounts
 - Keyword: KO `팬계정 알림 설정` | EN `notification setup guide for fan accounts`
 - Subkeywords: KO `SNS 알림 관리`, `정보 수집`, `앱별 알림 설정` | EN `social media alerts`, `update tracking`, `app settings`
@@ -1742,7 +1743,7 @@ Role 표기:
 - Subkeywords: KO `앨범 정리함`, `포스터 보관`, `작은 굿즈 분류` | EN `album storage`, `poster keeping`, `small merch sorting`
 
 ### [260] Sub [ ]
-- KO: 포토카드 사진 예쁘게 찍는 법
+- KO: 포토카드 사진 잘 찍는 법 — 반사 줄이고 자연광 활용
 - EN: How to Photograph Photocards Better
 - Keyword: KO `포토카드 사진 잘 찍는 법` | EN `how to photograph photocards better`
 - Subkeywords: KO `반사 줄이기`, `자연광 촬영`, `정리샷 구도` | EN `reducing glare`, `natural light setup`, `flat lay composition`
@@ -1774,7 +1775,7 @@ Role 표기:
 - Subkeywords: KO `실시간 소통`, `알림 계정`, `스레드 정리` | EN `live posting`, `alert accounts`, `thread organization`
 
 ### [265] Sub [ ]
-- KO: 밈과 밈 계정 문화를 이해하는 법
+- KO: K팝 밈 문화 이해하기 — 밈 계정과 팬덤 유머
 - EN: Understanding K-Pop Meme Culture Online
 - Keyword: KO `K팝 밈 문화` | EN `understanding k-pop meme culture online`
 - Subkeywords: KO `커뮤니티 유머`, `밈 계정`, `밈 소비 방식` | EN `fandom humor`, `meme accounts`, `shared references`
@@ -1952,8 +1953,8 @@ Role 표기:
 - Subkeywords: KO `서울 배경 선택`, `배경별 무드`, `프로필 콘셉트` | EN `seoul backdrop selection`, `scene-based mood`, `profile concepts`
 
 ### [292] Sub [v]
-- KO: AI 한복 프로필 가이드 — 경복궁 배경 합성 기준 [rev-2026-03-10]
-- EN: AI Hanbok Generator Guide — Gyeongbokgung Background [rev-2026-03-10]
+- KO: 가상 경복궁 배경 프로필 사진 가이드 — AI 한복 합성 기준 [rev-2026-03-10]
+- EN: Virtual Gyeongbokgung Profile Photo Guide — AI Hanbok Backdrop [rev-2026-03-10]
 - Keyword: KO `가상 경복궁 배경 프로필 사진` | EN `virtual gyeongbokgung profile photo guide`
 - Subkeywords: KO `전통 무드 배경`, `궁궐 배경 프로필`, `한복 콘셉트` | EN `traditional palace backdrop`, `gyeongbokgung profile concept`, `hanbok-friendly background`
 

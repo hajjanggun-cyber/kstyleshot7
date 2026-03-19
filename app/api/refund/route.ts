@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { getJobFromRequest, saveJob } from "@/lib/jobs";
-import { PolarApiError, createPolarRefund } from "@/lib/polar";
+import { createPolarRefund } from "@/lib/polar";
 import { getRedis } from "@/lib/redis";
 
 export const maxDuration = 20;
@@ -17,8 +17,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: true, alreadyRequested: true });
     }
 
-    await createPolarRefund(job.orderId);
-
+    // Always mark as refunded in DB regardless of Polar API result
     const redis = getRedis();
     await saveJob(redis, {
       ...job,
@@ -27,11 +26,18 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     });
 
+    // Attempt Polar refund — log failure but do not block the response
+    try {
+      await createPolarRefund(job.orderId);
+    } catch (polarErr) {
+      console.error("[refund] Polar API refund failed — marked in DB, manual follow-up required", {
+        orderId: job.orderId,
+        error: polarErr instanceof Error ? polarErr.message : String(polarErr),
+      });
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
-    if (err instanceof PolarApiError) {
-      return NextResponse.json({ error: err.message }, { status: err.status });
-    }
     console.error("[refund]", err);
     return NextResponse.json({ error: "Refund failed" }, { status: 500 });
   }
