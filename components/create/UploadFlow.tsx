@@ -268,6 +268,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
             orderId: payload.orderId,
             sessionToken: payload.sessionToken,
             status: payload.status,
+            customerEmail: payload.customerEmail,
           });
           setIsPaidSessionReady(true);
           setIsPollingSession(false);
@@ -322,7 +323,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
       const vision = await FilesetResolver.forVisionTasks("/wasm");
       const detector = await FaceDetector.createFromOptions(vision, {
         baseOptions: {
-          modelAssetPath: "/wasm/face_detection_short_range.tflite",
+          modelAssetPath: "/wasm/blaze_face_short_range.tflite",
           delegate: "GPU",
         },
         runningMode: "IMAGE",
