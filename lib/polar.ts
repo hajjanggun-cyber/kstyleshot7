@@ -273,6 +273,7 @@ export function extractPaidOrder(input: unknown): {
   eventId: string;
   orderId: string;
   checkoutId: string;
+  customerEmail: string | null;
 } | null {
   if (!isSupportedPaymentEvent(input)) {
     return null;
@@ -300,11 +301,43 @@ export function extractPaidOrder(input: unknown): {
   const eventId =
     pickString(input, [["id"], ["eventId"]]) ?? `order.paid:${orderId}:${checkoutId}`;
 
+  const customerEmail = pickString(input, [
+    ["data", "order", "customer", "email"],
+    ["data", "order", "billing_email"],
+    ["data", "checkout", "customer_email"],
+    ["data", "customer_email"],
+    ["data", "email"]
+  ]);
+
   return {
     eventId,
     orderId,
-    checkoutId
+    checkoutId,
+    customerEmail
   };
+}
+
+export async function createPolarRefund(polarOrderId: string): Promise<void> {
+  assertPolarCheckoutEnv();
+
+  const response = await fetch(`${POLAR_API_BASE_URL.replace(/\/$/, "")}/v1/refunds`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.POLAR_ACCESS_TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ order_id: polarOrderId, reason: "other" })
+  }).catch(() => {
+    throw new PolarApiError("Unable to reach Polar refund API.", 502);
+  });
+
+  if (!response.ok) {
+    const payload = await parsePolarJson(response).catch(() => null);
+    const message =
+      pickString(payload, [["detail"], ["error"], ["message"]]) ??
+      `Polar refund failed with status ${response.status}.`;
+    throw new PolarApiError(message, response.status >= 400 && response.status < 500 ? 400 : 502);
+  }
 }
 
 export function createSessionToken(): string {
@@ -315,6 +348,7 @@ export function createConfirmedJob(input: {
   orderId: string;
   checkoutId: string;
   sessionToken: string;
+  customerEmail?: string | null;
   now?: Date;
 }): KVJob {
   const now = input.now ?? new Date();
@@ -325,6 +359,7 @@ export function createConfirmedJob(input: {
     orderId: input.orderId,
     checkoutId: input.checkoutId,
     sessionToken: input.sessionToken,
+    customerEmail: input.customerEmail ?? null,
     status: "payment_confirmed",
     currentStep: null,
     selectedStyles: {

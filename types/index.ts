@@ -38,6 +38,7 @@ export type CreateSessionState = {
   orderId: string;
   checkoutId: string;
   sessionToken: string;
+  customerEmail: string | null;
   status: JobStatus;
   photoBlobUrl: string | null;
   photoDataUrl: string | null;
@@ -85,6 +86,7 @@ export type KVJob = {
   orderId: string;
   checkoutId: string;
   sessionToken: string;
+  customerEmail: string | null;
   status: JobStatus;
   currentStep: Step | null;
   selectedStyles: {
@@ -130,4 +132,5 @@ export type SessionStatusResponse =
       status: JobStatus;
       orderId: string;
       sessionToken: string;
+      customerEmail: string | null;
     };

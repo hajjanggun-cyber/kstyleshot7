@@ -85,7 +85,8 @@ export async function POST(request: Request) {
     const job = createConfirmedJob({
       orderId: paidOrder.orderId,
       checkoutId: paidOrder.checkoutId,
-      sessionToken
+      sessionToken,
+      customerEmail: paidOrder.customerEmail
     });
     const ttlSeconds = getCheckoutTtlSeconds();
 

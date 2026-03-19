@@ -64,11 +64,17 @@ export function DoneFlow() {
     outfit,
     backgroundId,
     reset,
+    sessionToken,
+    customerEmail,
   } = useCreateStore();
 
   const [downloading, setDownloading] = useState(false);
   const [downloadingHairId, setDownloadingHairId] = useState<string | null>(null);
   const [shareNotice, setShareNotice] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailSending, setEmailSending] = useState(false);
+  const [emailNotice, setEmailNotice] = useState("");
+  const [refundTriggered, setRefundTriggered] = useState(false);
   const [finalError, setFinalError] = useState(false);
   const [progressMessageIndex, setProgressMessageIndex] = useState(0);
 
@@ -221,6 +227,77 @@ export function DoneFlow() {
     setTimeout(() => setShareNotice(""), 2500);
   }
 
+  // Auto-send email when all 3 images are ready
+  useEffect(() => {
+    if (!finalImageUrl || emailSent || emailSending || !customerEmail || !sessionToken) return;
+
+    const hairImages = hair.results
+      .filter((r) => hair.chosen.includes(r.id))
+      .slice(0, 2);
+
+    if (hairImages.length < 2) return;
+
+    async function sendResultEmail() {
+      setEmailSending(true);
+      try {
+        const toBase64 = (url: string): Promise<string> =>
+          fetch(url)
+            .then((r) => r.blob())
+            .then(
+              (blob) =>
+                new Promise<string>((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = () => resolve(reader.result as string);
+                  reader.onerror = reject;
+                  reader.readAsDataURL(blob);
+                })
+            );
+
+        const [hair1Base64, hair2Base64, finalBase64] = await Promise.all([
+          toBase64(hairImages[0].blobUrl),
+          toBase64(hairImages[1].blobUrl),
+          toBase64(finalImageUrl!),
+        ]);
+
+        const res = await fetch("/api/email/send", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionToken}`,
+          },
+          body: JSON.stringify({ hair1Base64, hair2Base64, finalBase64 }),
+        });
+
+        if (res.ok) {
+          setEmailSent(true);
+          setEmailNotice(lang === "ko" ? "결과 이메일이 발송되었습니다." : "Results emailed successfully.");
+        } else {
+          setEmailNotice(lang === "ko" ? "이메일 발송에 실패했습니다." : "Email delivery failed.");
+        }
+      } catch {
+        setEmailNotice(lang === "ko" ? "이메일 발송 오류가 발생했습니다." : "Email send error.");
+      } finally {
+        setEmailSending(false);
+      }
+    }
+
+    void sendResultEmail();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finalImageUrl]);
+
+  // Auto-refund on final render failure
+  useEffect(() => {
+    if (!finalError || refundTriggered || !sessionToken) return;
+
+    setRefundTriggered(true);
+    fetch("/api/refund", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${sessionToken}` },
+    }).catch(() => {
+      // Fire-and-forget — server logs any failures
+    });
+  }, [finalError, refundTriggered, sessionToken]);
+
   return (
     <div className="dn-root">
       {isFinalProcessing ? (
@@ -351,6 +428,39 @@ export function DoneFlow() {
       ) : null}
 
       {shareNotice ? <p className="dn-notice">{shareNotice}</p> : null}
+
+      <div className="dn-summary">
+        <div className="lc-section-head">
+          <h3 className="lc-section-title">
+            {lang === "ko" ? "결과 이메일 발송" : "Result Email"}
+          </h3>
+        </div>
+        {emailSending ? (
+          <p style={{ fontSize: 13, color: "#7ec8e3", margin: "0 0 8px" }}>
+            {lang === "ko" ? "이메일 발송 중..." : "Sending email..."}
+          </p>
+        ) : emailSent ? (
+          <p style={{ fontSize: 13, color: "#5dd68c", margin: "0 0 8px" }}>
+            {lang === "ko"
+              ? `결제 시 입력한 이메일로 발송되었습니다.`
+              : `Sent to your checkout email address.`}
+          </p>
+        ) : emailNotice ? (
+          <p style={{ fontSize: 13, color: "#f08080", margin: "0 0 8px" }}>{emailNotice}</p>
+        ) : null}
+        <p style={{ fontSize: 12, color: "#6a8099", lineHeight: 1.7, margin: 0 }}>
+          {lang === "ko"
+            ? "결과 이미지(헤어 2장 + 최종 합성 1장)는 결제 시 입력하신 이메일 주소로 자동 발송됩니다.\n잘못된 이메일 주소로 인한 미수신은 환불 사유에 해당하지 않습니다."
+            : "Result images (2 hair + 1 final composite) are automatically sent to the email address provided at checkout.\nDelivery failure due to an incorrect email address is not eligible for a refund."}
+        </p>
+        {finalError ? (
+          <p style={{ fontSize: 12, color: "#f0c040", lineHeight: 1.7, marginTop: 8 }}>
+            {lang === "ko"
+              ? "리포트 생성에 실패하여 자동 환불이 처리됩니다."
+              : "Report generation failed. An automatic refund has been initiated."}
+          </p>
+        ) : null}
+      </div>
 
       <div className="dn-hashtags">
         <Link className="dn-hashtag" href={`/${lang}/create/outfit`}>

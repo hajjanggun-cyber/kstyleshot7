@@ -39,7 +39,8 @@ export async function GET(request: Request) {
       ready: true,
       orderId: job.orderId,
       sessionToken: job.sessionToken,
-      status: job.status
+      status: job.status,
+      customerEmail: job.customerEmail ?? null
     };
 
     logApiEvent("info", {
