@@ -339,7 +339,7 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
       const detector = await FaceDetector.createFromOptions(vision, {
         baseOptions: {
           modelAssetPath: "/wasm/blaze_face_short_range.tflite",
-          delegate: "GPU",
+          delegate: "CPU",
         },
         runningMode: "IMAGE",
         minDetectionConfidence: 0.35,
