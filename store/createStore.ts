@@ -6,7 +6,7 @@ import type { CreateSessionState, JobStatus, StepResult } from "@/types";
 
 type CreateActions = {
   setCheckout: (checkoutId: string) => void;
-  setSession: (input: { orderId: string; sessionToken: string; status: JobStatus }) => void;
+  setSession: (input: { orderId: string; sessionToken: string; status: JobStatus; customerEmail?: string | null }) => void;
   setStatus: (status: JobStatus) => void;
   setPhotoBlobUrl: (blobUrl: string | null) => void;
   setPhotoDataUrl: (dataUrl: string | null) => void;
@@ -37,6 +37,7 @@ const initialState: CreateSessionState = {
   orderId: "",
   checkoutId: "",
   sessionToken: "",
+  customerEmail: null,
   status: "payment_pending",
   photoBlobUrl: null,
   photoDataUrl: null,
@@ -64,7 +65,7 @@ export const useCreateStore = create<
   finalPredictionId: null,
   faceBoundingBox: null,
   setCheckout: (checkoutId) => set({ checkoutId }),
-  setSession: ({ orderId, sessionToken, status }) => set({ orderId, sessionToken, status }),
+  setSession: ({ orderId, sessionToken, status, customerEmail }) => set({ orderId, sessionToken, status, customerEmail: customerEmail ?? null }),
   setStatus: (status) => set({ status }),
   setPhotoBlobUrl: (photoBlobUrl) => set({ photoBlobUrl }),
   setPhotoDataUrl: (photoDataUrl) => set({ photoDataUrl }),
