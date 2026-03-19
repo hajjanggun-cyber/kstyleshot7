@@ -89,7 +89,7 @@ function createWebhookDigest(body: string, webhookId: string, timestamp: string)
 
   const raw = process.env.POLAR_WEBHOOK_SECRET ?? "";
   // Polar/Svix secrets are stored as "whsec_<base64>" — decode to raw bytes
-  const base64Part = raw.startsWith("whsec_") ? raw.slice(6) : raw;
+  const base64Part = raw.startsWith("whsec_") ? raw.slice(6) : raw.startsWith("polar_whs_") ? raw.slice(10) : raw;
   const secretBytes = Buffer.from(base64Part, "base64");
 
   return createHmac("sha256", secretBytes)
