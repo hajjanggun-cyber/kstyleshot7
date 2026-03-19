@@ -10,6 +10,7 @@ import { useCreateStore } from "@/store/createStore";
 
 const SESSION_STORAGE_KEY = "kstyleshot.create.session";
 const POLL_INTERVAL_MS = 1500;
+const POLL_TIMEOUT_MS = 45 * 1000;
 // Tuned for upper-body portraits where the face is clear but shoulders still remain visible.
 const FACE_RATIO_TOO_CLOSE = 0.38;
 const FACE_RATIO_TOO_FAR = 0.06;
@@ -210,6 +211,8 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
   const [isPollingSession, setIsPollingSession] = useState(false);
   const [isPaidSessionReady, setIsPaidSessionReady] = useState(false);
   const [pollError, setPollError] = useState("");
+  const [isPollTimedOut, setIsPollTimedOut] = useState(false);
+  const pollStartRef = useRef<number | null>(null);
   const [faceWarning, setFaceWarning] = useState<FaceWarningState>("none");
   const [faceRatio, setFaceRatio] = useState<number | null>(null);
 
@@ -218,6 +221,8 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
       setPollError("");
       setIsPollingSession(false);
       setIsPaidSessionReady(false);
+      setIsPollTimedOut(false);
+      pollStartRef.current = null;
       return;
     }
 
@@ -241,6 +246,13 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
     let timer: ReturnType<typeof setTimeout> | null = null;
 
     const pollSession = async () => {
+      if (!pollStartRef.current) pollStartRef.current = Date.now();
+      if (Date.now() - pollStartRef.current > POLL_TIMEOUT_MS) {
+        setIsPollingSession(false);
+        setIsPollTimedOut(true);
+        return;
+      }
+
       setIsPollingSession(true);
       setPollError("");
 
@@ -503,7 +515,14 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
           <p className="up-head-sub">{tf("sub")}</p>
         </div>
 
-        {pollError ? <p className="up-error">{pollError}</p> : null}
+        {isPollTimedOut ? (
+          <div className="up-error">
+            <p>{lang === "ko" ? "결제 확인이 지연되고 있습니다. 잠시 후 다시 시도해 주세요." : "Payment confirmation is taking longer than expected. Please try again."}</p>
+            <button className="up-retry-btn" onClick={() => window.location.reload()} type="button">
+              {lang === "ko" ? "다시 시도" : "Try again"}
+            </button>
+          </div>
+        ) : pollError ? <p className="up-error">{pollError}</p> : null}
 
         {photoBlobUrl ? (
           <div className="up-preview-wrap">
