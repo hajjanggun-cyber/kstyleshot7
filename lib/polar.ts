@@ -319,6 +319,46 @@ export function extractPaidOrder(input: unknown): {
   };
 }
 
+export async function fetchPolarCheckoutOrder(checkoutId: string): Promise<{
+  orderId: string;
+  customerEmail: string | null;
+} | null> {
+  assertPolarCheckoutEnv();
+
+  const response = await fetch(
+    `${POLAR_API_BASE_URL.replace(/\/$/, "")}/v1/checkouts/${encodeURIComponent(checkoutId)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.POLAR_ACCESS_TOKEN}`
+      }
+    }
+  ).catch(() => null);
+
+  if (!response || !response.ok) return null;
+
+  const payload = await parsePolarJson(response).catch(() => null);
+  if (!isRecord(payload)) return null;
+
+  const status = pickString(payload, [["status"]]);
+  if (status !== "succeeded") return null;
+
+  const orderId = pickString(payload, [
+    ["order", "id"],
+    ["orderId"]
+  ]);
+
+  if (!orderId) return null;
+
+  const customerEmail = pickString(payload, [
+    ["customer", "email"],
+    ["customer_email"],
+    ["order", "customer", "email"],
+    ["order", "billing_email"]
+  ]);
+
+  return { orderId, customerEmail };
+}
+
 export async function createPolarRefund(polarOrderId: string): Promise<void> {
   assertPolarCheckoutEnv();
 
