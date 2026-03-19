@@ -372,13 +372,13 @@ Role 표기:
 - Keyword: KO `저자극 스킨케어 루틴` | EN `gentle skincare routine guide`
 - Subkeywords: KO `민감성 피부`, `진정 제품`, `아침 저녁 루틴` | EN `sensitive skin routine`, `soothing products`, `am pm skincare`
 
-### [049] Sub [ ]
+### [049] Sub [v]
 - KO: 토너패드 사용법 제대로 정리
 - EN: How to Use Toner Pads Properly
 - Keyword: KO `토너패드 사용법` | EN `how to use toner pads properly`
 - Subkeywords: KO `닦토 방법`, `진정 패드`, `각질 케어` | EN `wipe toner method`, `calming pads`, `gentle exfoliation`
 
-### [050] Sub [ ]
+### [050] Sub [v]
 - KO: 한국 마스크팩 고르는 법
 - EN: How to Choose Korean Sheet Masks
 - Keyword: KO `한국 마스크팩 고르는 법` | EN `how to choose korean sheet masks`

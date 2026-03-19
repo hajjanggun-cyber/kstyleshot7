@@ -140,7 +140,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[049] Sub [ ]`
+1. `[051] Hub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -857,11 +857,17 @@ description: [actual text] -> [N]자
 - 서울 벚꽃 사진 명소 추천 KO/EN 완료
 - 서울 포토존 추천 총정리 KO/EN 완료
 
+- 한국 스킨케어 루틴 허브 KO/EN 완료
+- 글래스 스킨 루틴 KO/EN 완료
+- 순한 스킨케어 루틴 KO/EN 완료
+- 토너패드 사용법 KO/EN 완료
+- 한국 마스크팩 고르는 법 KO/EN 완료
+
 다음 우선순위:
-0. 순한 스킨케어 루틴 KO/EN 완료
-1. [049] Sub 작성
-2. [050] Sub 작성
-3. [051] Hub 작성
+0. 한국 마스크팩 고르는 법 KO/EN 완료
+1. [051] Hub 작성
+2. [052] Sub 작성
+3. [053] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
@@ -1045,3 +1051,11 @@ description: [actual text] -> [N]자
 
 - 현재 작업 상태: 순한 스킨케어 루틴 KO/EN 작성 완료
 - 진행 로그: `gentle-skincare-routine-guide` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크와 `how-to-get-glass-skin` 연결 반영, `md-doc/kpop-blog-topics-300.md`의 `[048] Sub [v]` 반영, 다음 작성 대상은 `[049] Sub [ ]`
+## 43. 2026-03-19 Update
+
+- 현재 작업 상태: 토너패드 사용법 KO/EN 작성 완료
+- 진행 로그: `toner-pad-usage-guide` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크와 `gentle-skincare-routine-guide` 및 `how-to-get-glass-skin` 연결 반영, `md-doc/kpop-blog-topics-300.md`의 `[049] Sub [v]` 반영, 다음 작성 대상은 `[050] Sub [ ]`
+## 44. 2026-03-19 Update
+
+- 현재 작업 상태: 한국 마스크팩 고르는 법 KO/EN 작성 완료
+- 진행 로그: `korean-sheet-mask-guide` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크와 `gentle-skincare-routine-guide` 및 `toner-pad-usage-guide` 연결 반영, `md-doc/kpop-blog-topics-300.md`의 `[050] Sub [v]` 반영, 다음 작성 대상은 `[051] Hub [ ]`
