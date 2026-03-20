@@ -149,6 +149,19 @@ export const hubPosts: HubPost[] = [
     watermark: "스킨케어",
     cta: "읽기",
   },
+  {
+    slug: "k-beauty-base-makeup-tips",
+    cardType: "half-hero",
+    category: "K-뷰티 & 헤어",
+    categoryStyle: "white-on-pink",
+    title: "베이스 메이크업\n가이드",
+    subtitle: "쿠션, 광채, 지속력을 피부 타입 기준으로 묶어 보는 K-뷰티 허브",
+    bg: "linear-gradient(135deg, #7c4d42 0%, #f3c7a6 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "베이스",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -280,6 +293,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "SKINCARE",
+    cta: "Read Now",
+  },
+  {
+    slug: "k-beauty-base-makeup-tips",
+    cardType: "half-hero",
+    category: "K-Beauty",
+    categoryStyle: "white-on-pink",
+    title: "K-Beauty Base\nMakeup Tips",
+    subtitle: "A practical hub for cushion foundation, glow balance, and longer-wear skin makeup",
+    bg: "linear-gradient(135deg, #7c4d42 0%, #f3c7a6 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "BASE",
     cta: "Read Now",
   },
 ];

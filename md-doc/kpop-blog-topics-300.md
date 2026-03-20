@@ -386,7 +386,7 @@ Role 표기:
 
 ### Base Makeup Cluster
 
-### [051] Hub [ ]
+### [051] Hub [v]
 - KO: 베이스 메이크업 잘하는 법 — 무너짐 적은 K뷰티 피부 표현
 - EN: K-Beauty Base Makeup Tips — Smooth Skin That Lasts
 - Keyword: KO `베이스 메이크업 잘하는 법` | EN `k-beauty base makeup tips`
