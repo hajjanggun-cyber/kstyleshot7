@@ -251,7 +251,7 @@ export function HairFlow() {
       const photoDataUrl = await new Promise<string>((resolve, reject) => {
         const img = new Image();
         img.onload = () => {
-          const MAX_EDGE = 768;
+          const MAX_EDGE = 1024;
           const scale = Math.min(1, MAX_EDGE / Math.max(img.width, img.height));
           const w = Math.max(1, Math.round(img.width * scale));
           const h = Math.max(1, Math.round(img.height * scale));
@@ -261,7 +261,7 @@ export function HairFlow() {
           const ctx = canvas.getContext("2d");
           if (!ctx) { reject(new Error("Canvas context unavailable")); return; }
           ctx.drawImage(img, 0, 0, w, h);
-          resolve(canvas.toDataURL("image/jpeg", 0.82));
+          resolve(canvas.toDataURL("image/jpeg", 0.90));
         };
         img.onerror = reject;
         img.src = URL.createObjectURL(photoBlob);

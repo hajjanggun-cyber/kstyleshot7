@@ -60,7 +60,7 @@ async function normalizeImageForDetection(file: File, fallbackUrl: string): Prom
     throw new Error("Canvas 2D context is unavailable.");
   }
 
-  const MAX_DIMENSION = 1280;
+  const MAX_DIMENSION = 1024;
 
   const drawScaled = (sourceWidth: number, sourceHeight: number, draw: () => void) => {
     const scale = Math.min(1, MAX_DIMENSION / Math.max(sourceWidth, sourceHeight));
