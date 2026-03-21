@@ -6,7 +6,14 @@ import { routing } from "@/i18n/routing";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
-const LOCALIZED_STATIC_SUFFIXES = ["", "/terms", "/privacy", "/refund-policy", "/cookie-policy"];
+const LOCALIZED_STATIC_SUFFIXES: { suffix: string; changeFreq: "weekly" | "monthly"; priority: number }[] = [
+  { suffix: "",                 changeFreq: "weekly",  priority: 1   },
+  { suffix: "/hub",             changeFreq: "weekly",  priority: 0.9 },
+  { suffix: "/terms",           changeFreq: "monthly", priority: 0.8 },
+  { suffix: "/privacy",         changeFreq: "monthly", priority: 0.8 },
+  { suffix: "/refund-policy",   changeFreq: "monthly", priority: 0.8 },
+  { suffix: "/cookie-policy",   changeFreq: "monthly", priority: 0.8 },
+];
 
 function withAlternates(entry: SitemapEntry, languages: Record<string, string>): SitemapEntry {
   return {
@@ -21,21 +28,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const entries: MetadataRoute.Sitemap = [];
 
-  for (const suffix of LOCALIZED_STATIC_SUFFIXES) {
+  // Static pages — KO + EN each submitted as separate entries
+  for (const { suffix, changeFreq, priority } of LOCALIZED_STATIC_SUFFIXES) {
     const languages = buildLocaleAlternatesAbsolute((locale) => `/${locale}${suffix}`);
-    const canonicalUrl = languages[routing.defaultLocale];
-
-    entries.push(
-      withAlternates(
-        {
-          url: canonicalUrl,
-          lastModified: now,
-          changeFrequency: suffix ? "monthly" : "weekly",
-          priority: suffix ? 0.8 : 1
-        },
-        languages
-      )
-    );
+    for (const locale of routing.locales) {
+      entries.push(
+        withAlternates(
+          {
+            url: toAbsoluteUrl(`/${locale}${suffix}`),
+            lastModified: now,
+            changeFrequency: changeFreq,
+            priority,
+          },
+          languages
+        )
+      );
+    }
   }
 
   // Hub MDX articles — one entry per locale URL (KO + EN each indexed separately)
