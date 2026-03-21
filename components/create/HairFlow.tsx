@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { hairColors } from "@/data/hairColors";
 import { HAIR_CATEGORIES, hairStyles } from "@/data/hairStyles";
 import { LoadingModal } from "@/components/create/LoadingModal";
+import { useBlockNavigation } from "@/lib/useBlockNavigation";
 import { useCreateStore } from "@/store/createStore";
 import type { StepResult } from "@/types";
 
@@ -37,6 +38,7 @@ export function HairFlow() {
   const [selectedStyleIds, setSelectedStyleIds] = useState<string[]>([]);
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  useBlockNavigation(isGenerating);
   const [isStylePickerOpen, setIsStylePickerOpen] = useState(true);
   const [generationError, setGenerationError] = useState("");
   const [resultCards, setResultCards] = useState<StepResult[]>([]);

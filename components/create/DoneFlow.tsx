@@ -7,6 +7,7 @@ import { LoadingModal } from "@/components/create/LoadingModal";
 import { hairStyles } from "@/data/hairStyles";
 import { outfitTemplates } from "@/data/outfits";
 import { referenceTemplates } from "@/data/referenceTemplates";
+import { useBlockNavigation } from "@/lib/useBlockNavigation";
 import { useCreateStore } from "@/store/createStore";
 
 function revokeIfBlobUrl(url: string | null) {
@@ -137,6 +138,7 @@ export function DoneFlow() {
   const basePreviewUrl = hairPreviewUrl ?? photoBlobUrl ?? null;
   const resultUrl = finalImageUrl ?? basePreviewUrl;
   const isFinalProcessing = Boolean(finalPredictionId) && !finalImageUrl && !finalError;
+  useBlockNavigation(isFinalProcessing);
   const progressMessages = lang === "ko" ? FINAL_PROGRESS_MESSAGES.ko : FINAL_PROGRESS_MESSAGES.en;
   const activeProgressMessage = progressMessages[progressMessageIndex] ?? progressMessages[0];
   const hairDownloadItems = hair.chosen
