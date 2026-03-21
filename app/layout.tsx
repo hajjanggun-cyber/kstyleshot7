@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Script from "next/script";
 import type { ReactNode } from "react";
 
@@ -80,7 +81,8 @@ type RootLayoutProps = {
   children: ReactNode;
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const lang = (await headers()).get("x-next-intl-locale") ?? "ko";
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -99,7 +101,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   ];
 
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Q3QEDGYL0D"

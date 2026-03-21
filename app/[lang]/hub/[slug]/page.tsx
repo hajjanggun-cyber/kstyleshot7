@@ -5,7 +5,7 @@ import { HubArticle } from "@/components/hub/HubArticle";
 import { HubMdxPage } from "@/components/hub/HubMdxPage";
 import { hubArticles } from "@/data/hubArticles";
 import { getFirstImageSrc, getMdxArticle } from "@/lib/mdx";
-import { buildLocaleAlternatesAbsolute, getSiteUrl } from "@/lib/seo";
+import { SITE_NAME, buildLocaleAlternatesAbsolute, getSiteUrl } from "@/lib/seo";
 
 type ArticlePageProps = {
   params: Promise<{ lang: string; slug: string }>;
@@ -35,10 +35,18 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
         title: fm.title,
         description: fm.description,
         url: canonical,
+        siteName: SITE_NAME,
+        locale: lang === "ko" ? "ko_KR" : "en_US",
         type: "article",
         publishedTime: fm.publishedAt,
         authors,
         images: articleImage ? [{ url: articleImage }] : undefined,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: fm.title,
+        description: fm.description,
+        images: articleImage ? [articleImage] : undefined,
       },
     };
   }

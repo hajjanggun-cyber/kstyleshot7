@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { getAllSlugs } from "@/lib/mdx";
+import { getAllSlugs, getMdxArticle } from "@/lib/mdx";
 import { buildLocaleAlternatesAbsolute, toAbsoluteUrl } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
 
@@ -42,6 +42,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const locale of routing.locales) {
     const slugs = getAllSlugs(locale);
     for (const slug of slugs) {
+      const article = getMdxArticle(locale, slug);
+      const lastModified = article?.frontmatter.publishedAt
+        ? new Date(article.frontmatter.publishedAt)
+        : now;
       const languages = buildLocaleAlternatesAbsolute(
         (l) => `/${l}/hub/${slug}`
       );
@@ -50,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         withAlternates(
           {
             url: canonicalUrl,
-            lastModified: now,
+            lastModified,
             changeFrequency: "monthly",
             priority: 0.7,
           },
