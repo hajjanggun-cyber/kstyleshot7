@@ -379,19 +379,30 @@ const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `Create a phot
 
 IDENTITY
 Preserve the face and identity from Image 1 exactly. Do not alter bone structure, nose, or mouth.
+Preserve the hairstyle and hair color from Image 1 exactly.
 Redirect eye gaze toward the camera so the subject makes direct eye contact with the viewer.
+Natural relaxed expression with a slight smile.
 
 IMAGE ROLES
-Image 1: the person (face and identity reference).
+Image 1: the person (face, hair, and identity reference).
 Image 2: clothing reference. Dress the person in this outfit.
 Image 3: environment reference. Place the person in this scene.
 
 POSE
 Natural standing pose, facing the camera. Camera angle slightly above eye level.
+Hands must have exactly five fingers each with natural proportions.
+
+OUTFIT
+Clothing should drape naturally on the body with realistic wrinkles and fabric weight.
+
+SKIN
+Skin tone must be uniform across face, neck, and exposed body.
+Photorealistic skin texture with natural pores and subtle highlights.
 
 LIGHTING
 Apply the lighting conditions from Image 3 onto the subject's skin and clothing.
 Match light direction, color temperature, shadows, and environmental reflections from the scene.
+Apply unified color grading across subject and environment.
 
 SCENE
 ${sceneDescription}
@@ -399,7 +410,8 @@ ${sceneDescription}
 CONSTRAINTS
 Do not stylize, cartoonize, or exaggerate features.
 Do not collage — the subject must appear physically present in the scene.
-Photorealistic skin texture, accurate shadows, natural depth of field.`;
+No visible edge artifacts between subject and background.
+Accurate shadows, natural depth of field, cinematic detail.`;
 
 /** Starts a nano-banana-pro job combining a hair-styled selfie, outfit image, and background scene. Returns predictionId. */
 export async function startNanaBananaJob(input: {
