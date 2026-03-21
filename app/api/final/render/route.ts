@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+
 import { outfitTemplates } from "@/data/outfits";
 import { referenceTemplates } from "@/data/referenceTemplates";
 import { ReplicateApiError, startNanaBananaJob, uploadToReplicateFiles } from "@/lib/replicate";
@@ -7,6 +9,15 @@ import { ReplicateApiError, startNanaBananaJob, uploadToReplicateFiles } from "@
 export const maxDuration = 20;
 
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+  const rateLimit = await checkRateLimit(ip, "final-render", 5);
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: `Too many requests. Retry after ${rateLimit.retryAfterSeconds}s.` },
+      { status: 429 }
+    );
+  }
+
   try {
     const body = (await request.json()) as {
       hairPreviewDataUrl?: unknown;

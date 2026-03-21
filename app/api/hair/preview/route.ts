@@ -1,4 +1,5 @@
 import { getRequestId, jsonError, jsonOk } from "@/lib/api-response";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { ReplicateApiError, startHairPreviewJob } from "@/lib/replicate";
 
 // Just starts the job — no waiting. Stays well within Vercel Hobby 10s limit.
@@ -6,6 +7,15 @@ export const maxDuration = 10;
 
 export async function POST(request: Request) {
   const requestId = getRequestId(request);
+
+  const ip = getClientIp(request);
+  const rateLimit = await checkRateLimit(ip, "hair-preview", 20);
+  if (!rateLimit.allowed) {
+    return jsonError(requestId, {
+      status: 429,
+      message: `Too many requests. Retry after ${rateLimit.retryAfterSeconds}s.`,
+    });
+  }
 
   if (!process.env.REPLICATE_API_TOKEN?.trim()) {
     return jsonError(requestId, { status: 503, message: "Replicate not configured." });
