@@ -19,16 +19,16 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // /blog/en/[slug] → /en/hub/[slug]
+      // /blog/en/[slug] → /en/hub (blog slugs no longer exist)
       {
         source: "/blog/en/:slug",
-        destination: "/en/hub/:slug",
+        destination: "/en/hub",
         permanent: true,
       },
-      // /blog/ko/[slug] → /ko/hub/[slug]
+      // /blog/ko/[slug] → /ko/hub (blog slugs no longer exist)
       {
         source: "/blog/ko/:slug",
-        destination: "/ko/hub/:slug",
+        destination: "/ko/hub",
         permanent: true,
       },
       // /blog/en/category/[cat] → /en/hub
