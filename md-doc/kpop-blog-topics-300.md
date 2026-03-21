@@ -521,10 +521,10 @@ Role 표기:
 - Subkeywords: KO `애쉬 브라운`, `웜톤 염색`, `탈색 없이 염색` | EN `ash brown hair`, `tone-based hair color`, `low-bleach color ideas`
 
 ### [072] Sub [ ]
-- KO: 피부톤별 염색 컬러 추천
-- EN: Hair Color Guide by Skin Tone
-- Keyword: KO `피부톤별 염색 컬러 추천` | EN `hair color guide by skin tone`
-- Subkeywords: KO `웜톤 염색`, `쿨톤 염색`, `퍼스널 컬러 헤어` | EN `warm tone hair color`, `cool tone hair dye`, `personal color hair`
+- KO: 퍼스널 컬러 4계절 타입별 염색 가이드 — 봄여름가을겨울 추천 색상
+- EN: Personal Color Hair Dye Guide — Best Shades by Spring Summer Autumn Winter Type
+- Keyword: KO `퍼스널 컬러 염색` | EN `personal color hair dye guide`
+- Subkeywords: KO `봄웜 염색`, `겨울쿨 염색`, `퍼스널 컬러 헤어컬러` | EN `spring warm hair color`, `winter cool hair dye`, `seasonal color hair guide`
 
 ### [073] Sub [ ]
 - KO: 애쉬 브라운 염색 유지 팁
@@ -1105,10 +1105,10 @@ Role 표기:
 - Subkeywords: KO `덕질 용어`, `입문 단어`, `커뮤니티 표현` | EN `fandom slang`, `starter terms`, `community language`
 
 ### [162] Sub [ ]
-- KO: 덕질 용어 초보자용 정리
-- EN: Beginner K-Pop Slang Guide
-- Keyword: KO `덕질 용어 정리` | EN `beginner k-pop slang guide`
-- Subkeywords: KO `입덕`, `최애`, `차애` | EN `stan slang`, `bias terms`, `starter fandom words`
+- KO: K팝 팬덤 은어 완전 정리 — 입덕, 최애, 차애, 총공부터 탈덕까지
+- EN: K-Pop Fandom Slang Glossary — Bias, Stan, Comeback and Community Terms
+- Keyword: KO `K팝 팬덤 은어` | EN `k-pop fandom slang glossary`
+- Subkeywords: KO `입덕 뜻`, `총공 뜻`, `탈덕 뜻` | EN `what is bias in kpop`, `stan culture terms`, `kpop community slang explained`
 
 ### [163] Sub [ ]
 - KO: 럭키드로우 뜻과 참여 방식 정리
@@ -1433,10 +1433,10 @@ Role 표기:
 - Subkeywords: KO `처음 서울 여행`, `동선 짜기`, `지역별 일정` | EN `first seoul trip`, `itinerary planning`, `district-based route`
 
 ### [212] Sub [ ]
-- KO: 서울 첫 여행 코스 짜는 법
-- EN: How to Plan Your First Seoul Trip
-- Keyword: KO `서울 첫 여행 코스` | EN `how to plan your first seoul trip`
-- Subkeywords: KO `초보 여행자`, `서울 핵심 지역`, `일정 압축` | EN `first-time visitor route`, `essential seoul areas`, `planning basics`
+- KO: 서울 1박 2일 여행 코스 — 짧게 핵심만 도는 동선
+- EN: Seoul 1 Night 2 Day Itinerary — Short Trip Core Route
+- Keyword: KO `서울 1박 2일 여행 코스` | EN `seoul 1 night 2 day itinerary`
+- Subkeywords: KO `서울 단기 여행`, `1박 핵심 동선`, `주말 서울 여행` | EN `short seoul trip`, `weekend seoul route`, `2 day seoul plan`
 
 ### [213] Sub [ ]
 - KO: 서울 혼자 여행하기 좋은 코스
@@ -1497,10 +1497,10 @@ Role 표기:
 - Subkeywords: KO `홍대 명동 성수`, `숙소 위치 선택`, `지역별 분위기` | EN `hongdae myeongdong seongsu`, `where to stay`, `district comparison`
 
 ### [222] Sub [ ]
-- KO: 홍대 명동 성수 숙소 비교 — 어디에 잡아야 할까
-- EN: Best Area to Stay in Seoul Guide
-- Keyword: KO `홍대 명동 성수 숙소 비교` | EN `best area to stay in seoul guide`
-- Subkeywords: KO `홍대 숙소`, `명동 숙소`, `성수 숙소` | EN `stay in hongdae`, `stay in myeongdong`, `stay in seongsu`
+- KO: 서울 호텔 vs 에어비앤비 선택 가이드 — 여행 목적과 예산별 추천
+- EN: Seoul Hotel vs Airbnb Guide — Which to Choose by Trip Type and Budget
+- Keyword: KO `서울 호텔 에어비앤비 비교` | EN `seoul hotel vs airbnb guide`
+- Subkeywords: KO `서울 숙소 예산`, `에어비앤비 장단점`, `호텔 추천 기준` | EN `seoul accommodation budget`, `airbnb pros cons seoul`, `hotel selection criteria`
 
 ### [223] Sub [ ]
 - KO: 서울 도보 여행 코스 추천
@@ -1637,10 +1637,10 @@ Role 표기:
 - Subkeywords: KO `영수증 보관`, `공항 환급`, `즉시 환급 매장` | EN `receipt handling`, `airport refund`, `instant refund stores`
 
 ### [244] Sub [ ]
-- KO: 한국 여행 체크리스트 총정리
-- EN: Korea Travel Checklist Guide
-- Keyword: KO `한국 여행 체크리스트` | EN `korea travel checklist guide`
-- Subkeywords: KO `출국 전 준비`, `환전`, `예약 확인` | EN `before-you-go checklist`, `currency exchange`, `booking confirmations`
+- KO: 한국 여행 짐 싸는 법 — 계절별 필수품과 빼도 되는 것 정리
+- EN: Korea Travel Packing Guide — What to Bring and What to Leave Behind by Season
+- Keyword: KO `한국 여행 짐 싸기` | EN `korea travel packing guide`
+- Subkeywords: KO `한국 여행 캐리어`, `계절별 짐`, `기내 반입 주의` | EN `korea packing list`, `seasonal travel essentials`, `carry-on restrictions korea`
 
 ### [245] Sub [ ]
 - KO: 한국 여행 분실 도난 대처 가이드 — 지갑 폰 신고 방법
@@ -1763,10 +1763,10 @@ Role 표기:
 - Subkeywords: KO `영어 댓글`, `시차 고려`, `커뮤니티 참여` | EN `replying in english`, `time zone awareness`, `community participation`
 
 ### [263] Sub [ ]
-- KO: 팬 커뮤니티 SNS 예절 기본 정리
-- EN: Social Media Etiquette for Fan Communities
-- Keyword: KO `팬 커뮤니티 SNS 예절` | EN `social media etiquette for fan communities`
-- Subkeywords: KO `출처 표기`, `사진 재업 규칙`, `민감한 주제` | EN `crediting sources`, `repost manners`, `sensitive topics`
+- KO: 팬 콘텐츠 퍼갈 때 출처 표기 방법 — 인스타, X, 유튜브별 규칙
+- EN: How to Credit Fan Content Properly — Rules for Instagram X and YouTube
+- Keyword: KO `팬 콘텐츠 출처 표기 방법` | EN `how to credit fan content properly`
+- Subkeywords: KO `사진 재업 출처`, `팬캠 저작권`, `유튜브 크레딧` | EN `fan photo repost rules`, `fancam copyright`, `youtube content credit`
 
 ### [264] Sub [ ]
 - KO: X에서 팬계정 운영할 때 주의할 점
@@ -1889,10 +1889,10 @@ Role 표기:
 - Subkeywords: KO `의상 시뮬레이션`, `체형별 착장`, `스타일 테스트` | EN `virtual outfit try-on`, `body-type styling`, `testing looks`
 
 ### [282] Sub [ ]
-- KO: 가상 피팅으로 옷 스타일 테스트하는 법
-- EN: How to Test Outfits with Virtual Try-On
-- Keyword: KO `가상 피팅 옷 스타일 테스트` | EN `how to test outfits with virtual try-on`
-- Subkeywords: KO `룩 비교`, `코디 미리보기`, `사진 기반 착장` | EN `compare outfits`, `style preview`, `photo-based fitting`
+- KO: 온라인 쇼핑 전 가상 피팅으로 사이즈 실패 줄이는 법
+- EN: How to Reduce Wrong-Size Orders with Virtual Try-On Before Online Shopping
+- Keyword: KO `온라인 쇼핑 가상 피팅 사이즈` | EN `virtual try-on online shopping size guide`
+- Subkeywords: KO `사이즈 오류 줄이기`, `반품 줄이는 법`, `체형별 가상 착장` | EN `reduce size mistakes`, `avoid returns online shopping`, `body type virtual fitting`
 
 ### [283] Sub [ ]
 - KO: 체형별 가상 스타일링 활용 가이드
