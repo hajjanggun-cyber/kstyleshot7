@@ -392,25 +392,25 @@ Role 표기:
 - Keyword: KO `베이스 메이크업 잘하는 법` | EN `k-beauty base makeup tips`
 - Subkeywords: KO `쿠션 메이크업`, `광채 피부 표현`, `파운데이션 밀착` | EN `cushion foundation`, `dewy base makeup`, `long-lasting base`
 
-### [052] Sub [ ]
+### [052] Sub [v]
 - KO: 쿠션 파운데이션 고르는 법
 - EN: How to Choose a Cushion Foundation
 - Keyword: KO `쿠션 파운데이션 고르는 법` | EN `how to choose a cushion foundation`
 - Subkeywords: KO `피부 타입별 쿠션`, `세미매트 쿠션`, `광채 쿠션` | EN `cushions by skin type`, `semi-matte cushion`, `glow cushion`
 
-### [053] Sub [ ]
+### [053] Sub [v]
 - KO: 세미매트 베이스 메이크업 가이드
 - EN: Semi-Matte Base Makeup Guide
 - Keyword: KO `세미매트 베이스 메이크업` | EN `semi-matte base makeup guide`
 - Subkeywords: KO `무너짐 적은 베이스`, `보송 피부`, `여름 메이크업` | EN `long-wear base`, `soft matte skin`, `summer makeup base`
 
-### [054] Sub [ ]
+### [054] Sub [v]
 - KO: 여름 지속력 메이크업 가이드
 - EN: Long-Lasting Summer Makeup Guide
 - Keyword: KO `여름 지속력 메이크업` | EN `long-lasting summer makeup guide`
 - Subkeywords: KO `땀에도 안 무너지는 메이크업`, `픽서 사용법`, `유분 관리` | EN `sweat-proof makeup`, `setting spray tips`, `oil control`
 
-### [055] Sub [ ]
+### [055] Sub [v]
 - KO: 겨울 광채 메이크업 가이드
 - EN: Winter Glow Makeup Guide
 - Keyword: KO `겨울 광채 메이크업` | EN `winter glow makeup guide`

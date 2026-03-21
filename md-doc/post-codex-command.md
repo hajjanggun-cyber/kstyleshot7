@@ -140,7 +140,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[052] Sub [ ]`
+1. `[056] Hub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -842,6 +842,11 @@ description: [actual text] -> [N]자
 - 한강 야경 사진 명소 KO/EN 완료
 - 여의도 한강공원 피크닉 가이드 KO/EN 완료
 - 반포 한강공원 야경 가이드 KO/EN 완료
+- 베이스 메이크업 허브 KO/EN 완료
+- 쿠션 파운데이션 고르는 법 KO/EN 완료
+- 세미매트 베이스 메이크업 가이드 KO/EN 완료
+- 여름 지속력 메이크업 가이드 KO/EN 완료
+- 겨울 광채 메이크업 가이드 KO/EN 완료
 
 - 북촌 한옥마을 허브 KO/EN 완료
 - 북촌 한옥 사진 명소 KO/EN 완료
@@ -908,6 +913,38 @@ description: [actual text] -> [N]자
 - 여의도 한강공원 피크닉 가이드 KO/EN: 시작 지점, 돗자리 구간, 한강 라면 타이밍 기준 신규 작성 완료
 - 반포 한강공원 야경 가이드 KO/EN: 반포대교, 달빛무지개분수, 세빛섬 야간 동선 기준 신규 작성 완료
 - 한강공원 묶음 점검: 허브 related panel, 하위 글 상호 링크, nextSlug 흐름 정리 완료
+
+### 2026-03-21 최신 기준
+
+- 베이스 메이크업 허브 KO/EN: `k-beauty-base-makeup-tips` 게시용 MDX 작성 완료
+- 쿠션 파운데이션 고르는 법 KO/EN: `how-to-choose-a-cushion-foundation` 게시용 MDX 작성 완료
+- 베이스 메이크업 묶음 점검: 허브 본문 백링크, related panel, nextSlug 흐름 1차 정리 완료
+- 세미매트 베이스 메이크업 가이드 KO/EN: `semi-matte-base-makeup-guide` 게시용 MDX 작성 완료
+- 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 2편 기준으로 정리 완료
+- 여름 지속력 메이크업 가이드 KO/EN: `long-lasting-summer-makeup-guide` 게시용 MDX 작성 완료
+- 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 3편 기준으로 확장 완료
+- 겨울 광채 메이크업 가이드 KO/EN: `winter-glow-makeup-guide` 게시용 MDX 작성 완료
+- 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 4편 구조로 완료
+
+## 28. 2026-03-21 Update
+
+- 현재 작업 상태: 쿠션 파운데이션 고르는 법 KO/EN 작성 완료
+- 진행 로그: `how-to-choose-a-cushion-foundation` KO/EN 게시용 MDX 작성, `k-beauty-base-makeup-tips` 허브 연결, 다음 작성 대상은 `[053] Sub [ ]`
+
+## 29. 2026-03-21 Update
+
+- 현재 작업 상태: 세미매트 베이스 메이크업 가이드 KO/EN 작성 완료
+- 진행 로그: `semi-matte-base-makeup-guide` KO/EN 게시용 MDX 작성, 베이스 메이크업 허브 및 `[052]` 내부 연결 정리, 다음 작성 대상은 `[054] Sub [ ]`
+
+## 30. 2026-03-21 Update
+
+- 현재 작업 상태: 여름 지속력 메이크업 가이드 KO/EN 작성 완료
+- 진행 로그: `long-lasting-summer-makeup-guide` KO/EN 게시용 MDX 작성, 베이스 메이크업 허브 및 `[053]` 내부 연결 정리, 다음 작성 대상은 `[055] Sub [ ]`
+
+## 31. 2026-03-21 Update
+
+- 현재 작업 상태: 겨울 광채 메이크업 가이드 KO/EN 작성 완료
+- 진행 로그: `winter-glow-makeup-guide` KO/EN 게시용 MDX 작성, 베이스 메이크업 클러스터 4편 구조 및 허브 related panel 정리 완료, 다음 작성 대상은 `[056] Hub [ ]`
 
 ---
 
