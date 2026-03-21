@@ -3,8 +3,11 @@ import { Resend } from "resend";
 
 import { getJobFromRequest } from "@/lib/jobs";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_ADDRESS = process.env.RESEND_FROM_EMAIL ?? "KStyleShot <noreply@kstylewshot.com>";
+
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,7 +37,7 @@ export async function POST(request: NextRequest) {
     const toBuffer = (b64: string) =>
       Buffer.from(b64.replace(/^data:image\/\w+;base64,/, ""), "base64");
 
-    const { error } = await resend.emails.send({
+    const { error } = await getResend().emails.send({
       from: FROM_ADDRESS,
       to: job.customerEmail,
       subject: "Your K-StyleShot Results",
