@@ -1,175 +1,242 @@
-# 현재 미해결 문제: 헤어 프리뷰 첫 번째 결과 이상
+# KStyleShot 문제점 기록
 
-## 증상
-사용자가 헤어스타일을 선택하면 두 가지 결과 이미지가 생성되는데, **첫 번째 결과**에서 다음 두 가지 문제가 동시에 발생합니다:
+작성일: 2026-03-22
 
-1. **얼굴 왜곡이 심함** — 원본 사진과 얼굴이 크게 달라짐
-2. **헤어스타일이 선택한 것과 다름** — 선택한 스타일이 적용되지 않음
+## 1. 결제 없이 생성 API 호출 가능
 
-두 번째 결과는 정상적으로 나옵니다.
+확인 파일:
 
-## 기술 스택
-- Next.js 앱 (Vercel 배포)
-- 헤어 스타일 변환: Replicate API (`flux-kontext-apps/change-haircut` 모델)
-- 사용자 사진 → Replicate Files API에 업로드 → URL로 모델 호출
-- 두 개의 헤어 결과를 `Promise.all`로 병렬 생성
+- `app/api/final/render/route.ts`
+- `app/api/hair/preview/route.ts`
+- `app/api/hair/select/route.ts`
 
-## 현재 코드 흐름
+문제:
 
-```
-사용자 사진 (원본, 압축 없음)
-  → FileReader로 data URL 변환
-  → /api/hair/preview POST 요청
-  → Replicate Files API에 업로드 → URL 획득
-  → Replicate change-haircut 모델 호출 (predictionId 반환)
-  → 프론트에서 3초 간격 폴링 → 결과 이미지 URL 수신
-```
+- 결제 완료 세션 검증 없이 생성 API가 호출된다.
+- 현재 구조상 누구나 직접 요청을 보내 AI 생성 기능을 사용할 수 있다.
+- `hair/select`에는 세션 검증 TODO가 남아 있다.
 
-## 시도한 것들
-- 압축 이미지(768px JPEG 0.82) → 원본 이미지로 변경: **효과 없음**
-- base64 직접 전송 → Replicate Files API 업로드로 변경: **두 번째 결과는 개선됨, 첫 번째는 여전히 문제**
+영향:
 
-## 질문
-왜 첫 번째 결과만 얼굴 왜곡과 스타일 불일치가 발생하는가? 두 번째는 정상인데 첫 번째만 이상한 원인은?
+- 유료 기능 우회
+- Replicate 비용 유출
+- 서비스 남용 가능
+
+심각도:
+
+- 매우 높음
 
 ---
 
-# 헤어 프리뷰 얼굴 왜곡 원인 및 수정 (이전 기록)
+## 2. checkoutId만으로 sessionToken 노출 가능
 
-## 변경사항 두 가지
+확인 파일:
 
-1. **원본 사진 그대로 전송** — 기존 768px JPEG 0.82 압축 제거, 원본 이미지 그대로 사용
-2. **항상 Replicate Files API로 업로드** — 기존 base64 직접 전송 대신, Replicate 서버에 먼저 업로드 후 URL로 모델 호출
+- `app/api/session/status/route.ts`
 
-## 테스트 결과
+문제:
 
-- 1번(압축 제거)은 얼굴 왜곡과 무관
-- **2번(base64 → Files API)이 핵심 원인** — base64 직접 전송 시 첫 번째 헤어 결과에서 얼굴 왜곡 발생, Files API URL 전송으로 교체 후 정상
+- 인증 없이 `checkoutId`만으로 세션 상태를 조회할 수 있다.
+- 경우에 따라 서버가 Polar API를 다시 조회해 새 `sessionToken`을 발급한다.
+- 응답에 `sessionToken`, `orderId`, `customerEmail`이 포함된다.
 
----
+영향:
 
-# Polar Webhook 401 문제
+- 세션 탈취 가능성
+- 고객 이메일 노출 가능성
+- 후속 보호 API 악용 가능성
 
-## 환경
-- Next.js 앱 (Vercel Hobby 배포, iad1 리전)
-- Polar.sh 결제 연동
-- Webhook URL: `https://www.kstyleshot.com/api/webhooks/polar`
+심각도:
 
-## 증상
-Polar가 `order.paid` 이벤트 발생 시 webhook을 전송하면 항상 **401** 반환.
-
-Vercel 로그 메시지:
-```
-{"message":"Webhook verification failed: No matching signature found","status":401}
-```
-
-## 현재 코드 (`lib/polar.ts`)
-
-```typescript
-import { Webhook, WebhookVerificationError as StdWebhookVerificationError } from "standardwebhooks";
-
-export function verifyPolarWebhookSignature(input: {
-  body: string;
-  headers: Headers;
-}): void {
-  assertPolarWebhookEnv();
-
-  const rawSecret = process.env.POLAR_WEBHOOK_SECRET!;
-  // polar_whs_ 프리픽스를 whsec_ 로 변환 (standardwebhooks 호환)
-  const normalizedSecret = rawSecret.startsWith("polar_whs_")
-    ? "whsec_" + rawSecret.slice(10)
-    : rawSecret;
-
-  try {
-    const wh = new Webhook(normalizedSecret);
-    wh.verify(input.body, {
-      "webhook-id": input.headers.get("webhook-id") ?? "",
-      "webhook-timestamp": input.headers.get("webhook-timestamp") ?? "",
-      "webhook-signature": input.headers.get("webhook-signature") ?? "",
-    });
-  } catch (error) {
-    if (error instanceof StdWebhookVerificationError) {
-      throw new PolarApiError(`Webhook verification failed: ${error.message}`, 401);
-    }
-    throw error;
-  }
-}
-```
-
-## Route Handler (`app/api/webhooks/polar/route.ts`)
-
-```typescript
-export async function POST(request: Request) {
-  const requestId = getRequestId(request);
-  const body = await request.text();  // raw body
-  let event: unknown;
-
-  try {
-    verifyPolarWebhookSignature({ body, headers: request.headers });
-    event = parseWebhookEvent(body);
-  } catch (error) {
-    // 401 반환
-  }
-}
-```
-
-## 확인된 사항
-1. `standardwebhooks` 라이브러리 로컬 테스트: `polar_whs_` → `whsec_` 변환 후 `new Webhook()` 정상 생성, key length = 32 bytes ✓
-2. Vercel 환경변수 `POLAR_WEBHOOK_SECRET`에 Polar webhook signing secret 설정 완료
-3. Polar webhook endpoint: `https://www.kstyleshot.com/api/webhooks/polar` (Enabled 상태)
-4. Next.js middleware: `/api/` 경로 제외 (`matcher: ["/((?!api|_next|.*\\..*).*)"]`) ✓
-5. 에러는 항상 "No matching signature found" — timestamp 문제나 헤더 누락 아님
-6. 새 결제를 해도 동일한 401 발생
-
-## 질문
-- `polar_whs_` 형식의 Polar webhook signing secret을 `standardwebhooks` 라이브러리로 올바르게 검증하는 방법은?
-- Polar의 signing 방식이 Standard Webhooks 스펙과 다른 점이 있는가?
-- `body = await request.text()`로 읽은 값과 Polar가 서명한 body가 다를 수 있는 경우가 있는가?
+- 매우 높음
 
 ---
 
-## 추가 분석 (공식 SDK 소스 확인)
+## 3. 현재 빌드 실패
 
-공식 `@polar-sh/sdk/webhooks`의 `validateEvent` 소스:
+확인 결과:
 
-```typescript
-const validateEvent = (body, headers, secret) => {
-    const base64Secret = Buffer.from(secret, "utf-8").toString("base64");
-    const webhook = new Webhook(base64Secret);
-    // webhook.verify(body, headers)
-};
-```
+- `npm run typecheck` 실패
+- `npm run build` 실패
 
-**핵심 발견:**
-- `polar_whs_XXXX` 전체 문자열을 UTF-8로 읽어 base64로 변환한 뒤 `standardwebhooks.Webhook`에 전달
-- `Webhook`은 `whsec_` 프리픽스가 없으면 base64 디코딩 → 원래 `polar_whs_XXXX` 바이트를 HMAC 키로 사용
-- 즉 **Polar 서버도 `polar_whs_XXXX` 전체 문자열(52바이트)을 HMAC 키**로 서명
-- `polar_whs_` 제거 후 base64 디코딩하면 32바이트 → 키 불일치 → 401
+직접 원인:
 
-**결론:** `standardwebhooks.Webhook("whsec_XXXX")` 방식은 틀림. 반드시 `validateEvent(body, headers, "polar_whs_XXXX")` 그대로 사용해야 함.
+- `app/api/email/send/route.ts`에서 `resend` 모듈 import
+- 하지만 현재 설치 상태에서 `resend`가 실제로 잡히지 않음
 
-## 현재 적용된 최종 코드
+확인 메시지:
 
-```typescript
-import { validateEvent, WebhookVerificationError as PolarWebhookVerificationError } from "@polar-sh/sdk/webhooks";
+- `Cannot find module 'resend' or its corresponding type declarations.`
+- `Module not found: Can't resolve 'resend'`
 
-export function verifyPolarWebhookSignature(input: {
-  body: string;
-  headers: Headers;
-}): void {
-  assertPolarWebhookEnv();
+영향:
 
-  try {
-    validateEvent(input.body, {
-      "webhook-id": input.headers.get("webhook-id") ?? "",
-      "webhook-timestamp": input.headers.get("webhook-timestamp") ?? "",
-      "webhook-signature": input.headers.get("webhook-signature") ?? "",
-    }, process.env.POLAR_WEBHOOK_SECRET!);
-  } catch (error) {
-    if (error instanceof PolarWebhookVerificationError) {
-      throw new PolarApiError(`Webhook verification failed: ${error.message}`, 401);
-    }
-    throw error;
-  }
-}
-```
+- 프로덕션 배포 불가
+- CI/CD 실패 가능성
+
+심각도:
+
+- 매우 높음
+
+---
+
+## 4. 한글 인코딩 광범위 파손
+
+확인 파일 예시:
+
+- `app/[lang]/page.tsx`
+- `app/[lang]/hub/layout.tsx`
+- `components/common/SiteHeader.tsx`
+- `components/common/SiteFooter.tsx`
+- `components/hub/HubMdxPage.tsx`
+- `app/[lang]/terms/page.tsx`
+- `app/[lang]/privacy/page.tsx`
+- `app/[lang]/refund-policy/page.tsx`
+
+문제:
+
+- title, description, 버튼 문구, aria-label, alt 텍스트, 법률 문서 한글이 깨져 있다.
+
+영향:
+
+- 검색 결과 스니펫 품질 저하
+- 클릭률 하락 가능성
+- 접근성 저하
+- 브랜드 신뢰도 하락
+
+심각도:
+
+- 매우 높음
+
+---
+
+## 5. 오타 도메인 혼용
+
+확인 문자열:
+
+- `kstylewshot.com`
+
+문제:
+
+- 실제 서비스 도메인은 `kstyleshot.com`인데 오타 도메인이 메일, 문서, 코드에 남아 있다.
+
+영향:
+
+- 브랜드 신뢰 저하
+- 잘못된 링크 생성 가능성
+- SEO 신호 혼선 가능성
+
+심각도:
+
+- 높음
+
+---
+
+## 6. SEO용 리다이렉트 전략 문제
+
+확인 파일:
+
+- `next.config.mjs`
+
+문제:
+
+- 예전 블로그 URL들을 관련 없는 허브 메인으로 301 리다이렉트하고 있다.
+- `/blog/en/:slug* -> /en/hub`
+- `/blog/ko/:slug* -> /ko/hub`
+- `/blog/rss.xml -> /en/hub`
+
+영향:
+
+- Google이 soft 404처럼 볼 수 있음
+- 기존 링크 자산 손실 가능성
+- 정확한 페이지 신호 전달 실패
+
+심각도:
+
+- 높음
+
+---
+
+## 7. 운영 정보 노출 API 존재
+
+확인 파일:
+
+- `app/api/system/readiness/route.ts`
+- `lib/env-readiness.ts`
+
+문제:
+
+- 어떤 env가 준비됐는지 외부에 공개 응답으로 노출한다.
+- 비밀값 자체는 아니지만 공격자 정찰에는 충분하다.
+
+영향:
+
+- 공격 표면 파악 용이
+- 내부 운영 상태 추정 가능
+
+심각도:
+
+- 중간 이상
+
+---
+
+## 8. 보안 헤더 미구성
+
+확인 결과:
+
+다음 항목 구성이 코드상 확인되지 않았다.
+
+- `Content-Security-Policy`
+- `X-Frame-Options`
+- `Referrer-Policy`
+- `Strict-Transport-Security`
+
+영향:
+
+- 보안 기본 방어선 약함
+
+심각도:
+
+- 중간 이상
+
+---
+
+## 9. Next 16 경고 존재
+
+확인 결과:
+
+- `middleware` 파일 규약이 deprecated 상태
+- Next 메시지: `Please use "proxy" instead.`
+
+영향:
+
+- 즉시 장애는 아니지만 추후 호환성 이슈 가능
+
+심각도:
+
+- 중간
+
+---
+
+## 총평
+
+좋은 점:
+
+- `robots.ts`, `sitemap.ts`, canonical host 정리, hreflang 대체 링크, 구조화 데이터 등 SEO 기본 골격은 일부 갖춰져 있다.
+- App Router, 다국어 구조, MDX 허브 구조 자체는 확장 가능하게 짜여 있다.
+
+핵심 판단:
+
+- 보안: 위험
+- 빌드 안정성: 위험
+- SEO 품질: 위험
+- 구조: 기본 뼈대는 있으나 운영 완성도 부족
+
+지금 가장 먼저 고쳐야 할 순서:
+
+1. 생성 API 전부 세션 검증 추가
+2. `session/status` 토큰 노출 차단
+3. `resend` 문제 해결 후 빌드 복구
+4. 한글 인코딩 전수 수정
+5. 오타 도메인 정리
+6. 리다이렉트 정책 보정
