@@ -323,10 +323,7 @@ export async function startHairPreviewJob(input: {
   }
 
   const decodedImage = decodeDataUrl(input.photoDataUrl);
-  const replicateInputImage =
-    decodedImage.buffer.byteLength < 1024 * 1024
-      ? toReplicateDataUri(decodedImage)
-      : await uploadToReplicateFiles(decodedImage.buffer, decodedImage.mimeType);
+  const replicateInputImage = await uploadToReplicateFiles(decodedImage.buffer, decodedImage.mimeType);
 
   const { predictionId } = await startPrediction({
     inputImage: replicateInputImage,
