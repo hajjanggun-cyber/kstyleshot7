@@ -1,4 +1,5 @@
-import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
+import { randomUUID } from "node:crypto";
+import { validateEvent, WebhookVerificationError } from "@polar-sh/sdk/webhooks";
 
 import type { KVJob, Locale } from "@/types";
 
@@ -8,7 +9,6 @@ const requiredWebhookVars = ["POLAR_WEBHOOK_SECRET"] as const;
 const POLAR_API_BASE_URL = process.env.POLAR_API_BASE_URL ?? "https://api.polar.sh";
 const CHECKOUT_TTL_SECONDS = 60 * 60 * 24;
 const WEBHOOK_EVENT_TTL_SECONDS = 60 * 60 * 24 * 7;
-const WEBHOOK_MAX_AGE_SECONDS = 60 * 5;
 
 type JsonRecord = Record<string, unknown>;
 
@@ -49,53 +49,7 @@ function pickString(value: unknown, paths: ReadonlyArray<readonly string[]>): st
   return null;
 }
 
-function toUnixSeconds(date: Date): number {
-  return Math.floor(date.getTime() / 1000);
-}
 
-function parseWebhookTimestamp(rawTimestamp: string): number {
-  const numeric = Number(rawTimestamp);
-  if (!Number.isFinite(numeric) || numeric <= 0) {
-    throw new PolarApiError("Invalid webhook timestamp.", 401);
-  }
-
-  return numeric > 1_000_000_000_000 ? Math.floor(numeric / 1000) : Math.floor(numeric);
-}
-
-function parseSignatureHeader(signatureHeader: string): string[] {
-  return signatureHeader
-    .split(/\s+/)
-    .flatMap((entry) => {
-      const trimmed = entry.trim();
-      if (!trimmed) {
-        return [];
-      }
-
-      if (trimmed.startsWith("v1,")) {
-        return [trimmed.slice(3)];
-      }
-
-      if (trimmed.startsWith("v1=")) {
-        return [trimmed.slice(3)];
-      }
-
-      return [trimmed];
-    })
-    .filter(Boolean);
-}
-
-function createWebhookDigest(body: string, webhookId: string, timestamp: string): string {
-  assertPolarWebhookEnv();
-
-  const raw = process.env.POLAR_WEBHOOK_SECRET ?? "";
-  // Polar/Svix secrets are stored as "whsec_<base64>" — decode to raw bytes
-  const base64Part = raw.startsWith("whsec_") ? raw.slice(6) : raw.startsWith("polar_whs_") ? raw.slice(10) : raw;
-  const secretBytes = Buffer.from(base64Part, "base64");
-
-  return createHmac("sha256", secretBytes)
-    .update(`${webhookId}.${timestamp}.${body}`)
-    .digest("base64");
-}
 
 async function parsePolarJson(response: Response): Promise<unknown> {
   const text = await response.text();
@@ -228,37 +182,21 @@ export function verifyPolarWebhookSignature(input: {
   body: string;
   headers: Headers;
 }): void {
-  const webhookId = input.headers.get("webhook-id");
-  const webhookSignature = input.headers.get("webhook-signature");
-  const webhookTimestamp = input.headers.get("webhook-timestamp");
+  assertPolarWebhookEnv();
 
-  if (!webhookId || !webhookSignature || !webhookTimestamp) {
-    throw new PolarApiError("Missing Polar webhook signature headers.", 401);
-  }
+  const webhookHeaders = {
+    "webhook-id": input.headers.get("webhook-id") ?? "",
+    "webhook-timestamp": input.headers.get("webhook-timestamp") ?? "",
+    "webhook-signature": input.headers.get("webhook-signature") ?? "",
+  };
 
-  const signedAt = parseWebhookTimestamp(webhookTimestamp);
-  const now = toUnixSeconds(new Date());
-
-  if (Math.abs(now - signedAt) > WEBHOOK_MAX_AGE_SECONDS) {
-    throw new PolarApiError("Polar webhook timestamp is too old.", 401);
-  }
-
-  const expectedDigest = createWebhookDigest(input.body, webhookId, webhookTimestamp);
-  const expectedBytes = Buffer.from(expectedDigest, "utf8");
-  const signatures = parseSignatureHeader(webhookSignature);
-
-  const isValid = signatures.some((signature) => {
-    const actualBytes = Buffer.from(signature, "utf8");
-
-    if (actualBytes.length !== expectedBytes.length) {
-      return false;
+  try {
+    validateEvent(input.body, webhookHeaders, process.env.POLAR_WEBHOOK_SECRET!);
+  } catch (error) {
+    if (error instanceof WebhookVerificationError) {
+      throw new PolarApiError("Invalid Polar webhook signature.", 401);
     }
-
-    return timingSafeEqual(expectedBytes, actualBytes);
-  });
-
-  if (!isValid) {
-    throw new PolarApiError("Invalid Polar webhook signature.", 401);
+    throw error;
   }
 }
 

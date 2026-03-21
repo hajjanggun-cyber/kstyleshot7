@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -496,9 +495,6 @@ export function UploadFlow({ checkoutIdFromUrl = "", allowDemoFlow = false }: Up
   return (
     <div className="up-root">
       <nav className="up-nav">
-        <Link className="up-back-btn" href={`/${lang}`}>
-          {"<-"}
-        </Link>
         <h2 className="up-nav-title">{tf("navTitle")}</h2>
       </nav>
 
