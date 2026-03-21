@@ -19,47 +19,54 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // /blog/en/[slug] → /en/hub (blog slugs no longer exist)
+      // /hub/[slug] (no locale) → /ko/hub/[slug]
       {
-        source: "/blog/en/:slug",
-        destination: "/en/hub",
-        permanent: true,
+        source: "/hub/:slug*",
+        destination: "/ko/hub/:slug*",
+        statusCode: 301,
       },
-      // /blog/ko/[slug] → /ko/hub (blog slugs no longer exist)
-      {
-        source: "/blog/ko/:slug",
-        destination: "/ko/hub",
-        permanent: true,
-      },
-      // /blog/en/category/[cat] → /en/hub
-      {
-        source: "/blog/en/category/:cat",
-        destination: "/en/hub",
-        permanent: true,
-      },
-      // /blog/ko/category/[cat] → /ko/hub
-      {
-        source: "/blog/ko/category/:cat",
-        destination: "/ko/hub",
-        permanent: true,
-      },
-      // /blog/en → /en/hub
+      // NOTE: More specific rules MUST come before general slug rules
+      // /blog/en → /en/hub (exact match first)
       {
         source: "/blog/en",
         destination: "/en/hub",
-        permanent: true,
+        statusCode: 301,
       },
-      // /blog/ko → /ko/hub
+      // /blog/ko → /ko/hub (exact match first)
       {
         source: "/blog/ko",
         destination: "/ko/hub",
-        permanent: true,
+        statusCode: 301,
       },
-      // /blog/rss.xml → /ko/hub (fallback)
+      // /blog/rss.xml → /en/hub
       {
         source: "/blog/rss.xml",
+        destination: "/en/hub",
+        statusCode: 301,
+      },
+      // /blog/en/category/[cat] → /en/hub (category before slug!)
+      {
+        source: "/blog/en/category/:cat",
+        destination: "/en/hub",
+        statusCode: 301,
+      },
+      // /blog/ko/category/[cat] → /ko/hub (category before slug!)
+      {
+        source: "/blog/ko/category/:cat",
         destination: "/ko/hub",
-        permanent: true,
+        statusCode: 301,
+      },
+      // /blog/en/[slug] → /en/hub (general slug rule — must come LAST)
+      {
+        source: "/blog/en/:slug*",
+        destination: "/en/hub",
+        statusCode: 301,
+      },
+      // /blog/ko/[slug] → /ko/hub (general slug rule — must come LAST)
+      {
+        source: "/blog/ko/:slug*",
+        destination: "/ko/hub",
+        statusCode: 301,
       },
     ];
   },
