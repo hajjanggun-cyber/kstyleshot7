@@ -72,9 +72,9 @@ const nextConfig = {
       // EN: topic-specific slug → closest hub article
       { source: "/blog/en/:slug(winter-color-.+)",   destination: "/en/hub/winter-glow-makeup-guide",         statusCode: 301 },
       { source: "/blog/en/:slug(best-summer-selfie.+|clean-summer-.+)", destination: "/en/hub/long-lasting-summer-makeup-guide", statusCode: 301 },
-      { source: "/blog/en/:slug((reduce-shine|best-low-effort-base|make-thin-hair|hair-volume|k-style-curtain-bangs|center-part|k-style-hair|simple-brow|best-wispy-bang|how-to-match-hair|how-soft-layers).+)", destination: "/en/hub/k-beauty-base-makeup-tips", statusCode: 301 },
-      { source: "/blog/en/:slug((use-window-light|avoid-flat-lighting|best-distance|why-eye-level|best-upper-body|best-front-camera|best-front-selfie|riverfront-backdrops|best-night-city|best-spring-background).+)", destination: "/en/hub/seoul-photo-spot-guide", statusCode: 301 },
-      { source: "/blog/en/:slug((tone-on-tone|clean-neutral-outfit|why-knit-layers|why-hongdae-and-seongsu).+)", destination: "/en/hub/hongdae-vs-seongsu-street-fashion", statusCode: 301 },
+      { source: "/blog/en/:slug((?:reduce-shine|best-low-effort-base|make-thin-hair|hair-volume|k-style-curtain-bangs|center-part|k-style-hair|simple-brow|best-wispy-bang|how-to-match-hair|how-soft-layers).+)", destination: "/en/hub/k-beauty-base-makeup-tips", statusCode: 301 },
+      { source: "/blog/en/:slug((?:use-window-light|avoid-flat-lighting|best-distance|why-eye-level|best-upper-body|best-front-camera|best-front-selfie|riverfront-backdrops|best-night-city|best-spring-background).+)", destination: "/en/hub/seoul-photo-spot-guide", statusCode: 301 },
+      { source: "/blog/en/:slug((?:tone-on-tone|clean-neutral-outfit|why-knit-layers|why-hongdae-and-seongsu).+)", destination: "/en/hub/hongdae-vs-seongsu-street-fashion", statusCode: 301 },
 
       // ── KO: location-specific slug → matching hub article ──────────────
       { source: "/blog/ko/:slug(gyeongbokgung-.+)", destination: "/ko/hub/gyeongbokgung-hub", statusCode: 301 },
@@ -92,9 +92,9 @@ const nextConfig = {
       // KO: topic-specific slug → closest hub article
       { source: "/blog/ko/:slug(winter-color-.+)",   destination: "/ko/hub/winter-glow-makeup-guide",          statusCode: 301 },
       { source: "/blog/ko/:slug(clean-summer-.+)",   destination: "/ko/hub/long-lasting-summer-makeup-guide",  statusCode: 301 },
-      { source: "/blog/ko/:slug((what-to-remove|why-light-base|make-thin-hair|make-hush-cut|add-volume-to-flat|k-style-bangs|easiest-way-to-keep-glow|choose-hair-based).+)", destination: "/ko/hub/k-beauty-base-makeup-tips", statusCode: 301 },
-      { source: "/blog/ko/:slug((window-light|why-camera-distance|chin-angle|selfie-framing|best-front-selfie|best-necklines|first-fix|why-one-good-selfie).+)", destination: "/ko/hub/seoul-photo-spot-guide", statusCode: 301 },
-      { source: "/blog/ko/:slug((most-reliable-layering|why-knit-layering|why-fall-layering|spring-k-style|easiest-way-to-shift|keep-hair-volume).+)", destination: "/ko/hub/hongdae-vs-seongsu-street-fashion", statusCode: 301 },
+      { source: "/blog/ko/:slug((?:what-to-remove|why-light-base|make-thin-hair|make-hush-cut|add-volume-to-flat|k-style-bangs|easiest-way-to-keep-glow|choose-hair-based).+)", destination: "/ko/hub/k-beauty-base-makeup-tips", statusCode: 301 },
+      { source: "/blog/ko/:slug((?:window-light|why-camera-distance|chin-angle|selfie-framing|best-front-selfie|best-necklines|first-fix|why-one-good-selfie).+)", destination: "/ko/hub/seoul-photo-spot-guide", statusCode: 301 },
+      { source: "/blog/ko/:slug((?:most-reliable-layering|why-knit-layering|why-fall-layering|spring-k-style|easiest-way-to-shift|keep-hair-volume).+)", destination: "/ko/hub/hongdae-vs-seongsu-street-fashion", statusCode: 301 },
 
       // /blog/en/[slug] → /en/hub (catch-all — must come LAST)
       {
