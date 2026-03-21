@@ -6,7 +6,6 @@ import { useParams, useRouter } from "next/navigation";
 import { hairColors } from "@/data/hairColors";
 import { HAIR_CATEGORIES, hairStyles } from "@/data/hairStyles";
 import { LoadingModal } from "@/components/create/LoadingModal";
-import { normalizePhotoForAI } from "@/lib/canvas";
 import { useCreateStore } from "@/store/createStore";
 import type { StepResult } from "@/types";
 
@@ -248,7 +247,13 @@ export function HairFlow() {
     setStatus("hair_processing");
 
     try {
-      const photoDataUrl = await normalizePhotoForAI(photoBlobUrl, faceBoundingBox);
+      const photoBlob = await fetch(photoBlobUrl).then((r) => r.blob());
+      const photoDataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(photoBlob);
+      });
       const selectedStyle = hairStyles.find((style) => style.id === selectedStyleId);
       if (!selectedStyle) {
         throw new Error("missing_style");
