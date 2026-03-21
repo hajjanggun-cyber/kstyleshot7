@@ -199,7 +199,7 @@ export function verifyPolarWebhookSignature(input: {
     });
   } catch (error) {
     if (error instanceof StdWebhookVerificationError) {
-      throw new PolarApiError("Invalid Polar webhook signature.", 401);
+      throw new PolarApiError(`Webhook verification failed: ${error.message}`, 401);
     }
     throw error;
   }
