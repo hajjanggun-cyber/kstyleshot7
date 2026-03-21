@@ -205,18 +205,24 @@ export function DoneFlow() {
   }
 
   async function handleShare() {
-    const payload = {
-      title: "My K-StyleShot Result",
-      text: "Check out my K-style portrait.",
-      url: typeof window !== "undefined" ? window.location.origin : "",
-    };
-
     try {
-      if (navigator.share) {
-        await navigator.share(payload);
+      if (finalImageUrl && navigator.share && navigator.canShare) {
+        const blob = await fetch(finalImageUrl).then((r) => r.blob());
+        const file = new File([blob], "kstyleshot-result.jpg", { type: blob.type || "image/jpeg" });
+        const payload = { files: [file], title: "My K-StyleShot Result", text: "Check out my K-style portrait." };
+
+        if (navigator.canShare(payload)) {
+          await navigator.share(payload);
+          setShareNotice(lang === "ko" ? "공유되었습니다." : "Shared.");
+        } else {
+          await navigator.share({ title: "My K-StyleShot Result", text: "Check out my K-style portrait.", url: window.location.origin });
+          setShareNotice(lang === "ko" ? "공유되었습니다." : "Shared.");
+        }
+      } else if (navigator.share) {
+        await navigator.share({ title: "My K-StyleShot Result", text: "Check out my K-style portrait.", url: window.location.origin });
         setShareNotice(lang === "ko" ? "공유되었습니다." : "Shared.");
       } else {
-        await navigator.clipboard.writeText(payload.url);
+        await navigator.clipboard.writeText(window.location.origin);
         setShareNotice(lang === "ko" ? "링크가 복사되었습니다." : "Link copied.");
       }
     } catch {
