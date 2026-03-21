@@ -1,6 +1,18 @@
+import type { Metadata } from "next";
+import { toAbsoluteUrl, buildLocaleAlternatesAbsolute } from "@/lib/seo";
+
 type RefundPolicyPageProps = {
   params: Promise<{ lang: string }>;
 };
+
+export async function generateMetadata({ params }: RefundPolicyPageProps): Promise<Metadata> {
+  const { lang } = await params;
+  const canonical = toAbsoluteUrl(`/${lang}/refund-policy`);
+  const languages = buildLocaleAlternatesAbsolute((l) => `/${l}/refund-policy`);
+  return {
+    alternates: { canonical, languages },
+  };
+}
 
 export default async function RefundPolicyPage({ params }: RefundPolicyPageProps) {
   const { lang } = await params;

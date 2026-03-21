@@ -1,6 +1,18 @@
+import type { Metadata } from "next";
+import { toAbsoluteUrl, buildLocaleAlternatesAbsolute } from "@/lib/seo";
+
 type PrivacyPageProps = {
   params: Promise<{ lang: string }>;
 };
+
+export async function generateMetadata({ params }: PrivacyPageProps): Promise<Metadata> {
+  const { lang } = await params;
+  const canonical = toAbsoluteUrl(`/${lang}/privacy`);
+  const languages = buildLocaleAlternatesAbsolute((l) => `/${l}/privacy`);
+  return {
+    alternates: { canonical, languages },
+  };
+}
 
 export default async function PrivacyPage({ params }: PrivacyPageProps) {
   const { lang } = await params;

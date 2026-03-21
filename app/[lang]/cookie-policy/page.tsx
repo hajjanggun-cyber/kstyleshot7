@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { toAbsoluteUrl, buildLocaleAlternatesAbsolute } from "@/lib/seo";
 
 type CookiePolicyPageProps = {
   params: Promise<{ lang: string }>;
 };
+
+export async function generateMetadata({ params }: CookiePolicyPageProps): Promise<Metadata> {
+  const { lang } = await params;
+  const canonical = toAbsoluteUrl(`/${lang}/cookie-policy`);
+  const languages = buildLocaleAlternatesAbsolute((l) => `/${l}/cookie-policy`);
+  return {
+    alternates: { canonical, languages },
+  };
+}
 
 export default async function CookiePolicyPage({ params }: CookiePolicyPageProps) {
   const { lang } = await params;

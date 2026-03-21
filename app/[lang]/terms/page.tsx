@@ -1,6 +1,18 @@
+import type { Metadata } from "next";
+import { toAbsoluteUrl, buildLocaleAlternatesAbsolute } from "@/lib/seo";
+
 type TermsPageProps = {
   params: Promise<{ lang: string }>;
 };
+
+export async function generateMetadata({ params }: TermsPageProps): Promise<Metadata> {
+  const { lang } = await params;
+  const canonical = toAbsoluteUrl(`/${lang}/terms`);
+  const languages = buildLocaleAlternatesAbsolute((l) => `/${l}/terms`);
+  return {
+    alternates: { canonical, languages },
+  };
+}
 
 export default async function TermsPage({ params }: TermsPageProps) {
   const { lang } = await params;
