@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { validateEvent, WebhookVerificationError } from "@polar-sh/sdk/webhooks";
+import { Webhook, WebhookVerificationError as StdWebhookVerificationError } from "standardwebhooks";
 
 import type { KVJob, Locale } from "@/types";
 
@@ -184,16 +184,21 @@ export function verifyPolarWebhookSignature(input: {
 }): void {
   assertPolarWebhookEnv();
 
-  const webhookHeaders = {
-    "webhook-id": input.headers.get("webhook-id") ?? "",
-    "webhook-timestamp": input.headers.get("webhook-timestamp") ?? "",
-    "webhook-signature": input.headers.get("webhook-signature") ?? "",
-  };
+  const rawSecret = process.env.POLAR_WEBHOOK_SECRET!;
+  // polar_whs_ and whsec_ both store base64-encoded key — normalize to whsec_ for standardwebhooks
+  const normalizedSecret = rawSecret.startsWith("polar_whs_")
+    ? "whsec_" + rawSecret.slice(10)
+    : rawSecret;
 
   try {
-    validateEvent(input.body, webhookHeaders, process.env.POLAR_WEBHOOK_SECRET!);
+    const wh = new Webhook(normalizedSecret);
+    wh.verify(input.body, {
+      "webhook-id": input.headers.get("webhook-id") ?? "",
+      "webhook-timestamp": input.headers.get("webhook-timestamp") ?? "",
+      "webhook-signature": input.headers.get("webhook-signature") ?? "",
+    });
   } catch (error) {
-    if (error instanceof WebhookVerificationError) {
+    if (error instanceof StdWebhookVerificationError) {
       throw new PolarApiError("Invalid Polar webhook signature.", 401);
     }
     throw error;
