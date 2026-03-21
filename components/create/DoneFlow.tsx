@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
 import { LoadingModal } from "@/components/create/LoadingModal";
@@ -162,7 +161,7 @@ export function DoneFlow() {
 
   function handleTryAnother() {
     clearAndReset();
-    router.push(`/${lang}/create/upload`);
+    router.push(`/${lang}`);
   }
 
   async function handleDownload() {
@@ -462,11 +461,6 @@ export function DoneFlow() {
         ) : null}
       </div>
 
-      <div className="dn-hashtags">
-        <Link className="dn-hashtag" href={`/${lang}/create/outfit`}>
-          {lang === "ko" ? "다른 스타일 선택" : "Choose another style"}
-        </Link>
-      </div>
     </div>
   );
 }

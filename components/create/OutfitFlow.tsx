@@ -78,7 +78,7 @@ export function OutfitFlow() {
     return (
       <div className="ot-root">
         <nav className="ot-nav">
-          <Link className="ot-back-btn" href={`/${lang}/create/hair`}>{"<-"}</Link>
+          <div className="ot-nav-spacer" />
           <h2 className="ot-nav-title">{lang === "ko" ? "스타일 선택" : "Choose style"}</h2>
           <div className="ot-nav-spacer" />
         </nav>
@@ -244,7 +244,7 @@ export function OutfitFlow() {
         ) : null}
 
         <nav className="ot-nav">
-          <Link className="ot-back-btn" href={`/${lang}/create/hair`}>{"<-"}</Link>
+          <div className="ot-nav-spacer" />
           <h2 className="ot-nav-title">{lang === "ko" ? "의상 선택" : "Choose outfit"}</h2>
           <div className="ot-nav-spacer" />
         </nav>

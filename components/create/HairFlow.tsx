@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
 import { hairColors } from "@/data/hairColors";
@@ -382,9 +381,7 @@ export function HairFlow() {
       ) : null}
 
       <nav className="hr-nav">
-        <Link className="hr-back-btn" href={`/${lang}/create/upload`}>
-          {"<-"}
-        </Link>
+        <div className="hr-nav-left" />
         <span className="hr-step-tag">STEP 2 / 4</span>
         <div className="hr-nav-right" />
       </nav>
