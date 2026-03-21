@@ -299,10 +299,13 @@ export async function startHairVariantJobs(input: StartHairJobInput): Promise<Ha
     throw new ReplicateApiError("Each hair variant must include a non-empty haircut.", 400);
   }
 
+  const decodedImage = decodeDataUrl(input.photoDataUrl);
+  const replicateInputImage = await uploadToReplicateFiles(decodedImage.buffer, decodedImage.mimeType);
+
   return Promise.all(
     input.variants.map((variant) =>
       startPrediction({
-        inputImage: input.photoDataUrl,
+        inputImage: replicateInputImage,
         haircut: variant.haircut.trim(),
         hairColor: variant.hairColor?.trim() || DEFAULT_HAIR_COLOR,
       })
