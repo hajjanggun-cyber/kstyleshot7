@@ -3,7 +3,7 @@ import { Resend } from "resend";
 
 import { getJobFromRequest } from "@/lib/jobs";
 
-const FROM_ADDRESS = process.env.RESEND_FROM_EMAIL ?? "KStyleShot <noreply@kstylewshot.com>";
+const FROM_ADDRESS = process.env.RESEND_FROM_EMAIL ?? "KStyleShot <noreply@kstyleshot.com>";
 
 function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
     <tr>
       <td style="padding:24px;border-top:1px solid #1e3050;">
         <p style="margin:0;font-size:12px;color:#4a6080;line-height:1.6;">
-          This email was sent by KStyleShot · <a href="https://www.kstylewshot.com" style="color:#4a6080;">kstylewshot.com</a>
+          This email was sent by KStyleShot · <a href="https://www.kstyleshot.com" style="color:#4a6080;">kstyleshot.com</a>
         </p>
       </td>
     </tr>
