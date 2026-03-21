@@ -8,7 +8,7 @@ const intlMiddleware = createMiddleware(routing);
 const ROOT_DOMAIN = "kstyleshot.com";
 const WWW_DOMAIN = `www.${ROOT_DOMAIN}`;
 
-export default function proxy(request: NextRequest) {
+export default function middleware(request: NextRequest) {
   const { nextUrl } = request;
 
   if (nextUrl.hostname === ROOT_DOMAIN) {
