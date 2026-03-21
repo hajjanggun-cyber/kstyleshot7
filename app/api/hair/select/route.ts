@@ -1,11 +1,13 @@
 import { getRequestId, jsonError, jsonOk } from "@/lib/api-response";
+import { getJobFromRequest } from "@/lib/jobs";
 
-// A lightweight endpoint to confirm the selected hair.
-// In MVP, this acts mainly as a webhook or session-validation step.
-// Once server-side session persistence (e.g. Vercel KV) is added,
-// the selected hair ID and generating prediction base should be saved here.
 export async function POST(request: Request) {
   const requestId = getRequestId(request);
+
+  const job = await getJobFromRequest(request);
+  if (!job) {
+    return jsonError(requestId, { status: 401, message: "Unauthorized." });
+  }
 
   let body: Record<string, unknown>;
 
@@ -23,8 +25,6 @@ export async function POST(request: Request) {
   if (typeof hairId !== "string" || !hairId.trim()) {
     return jsonError(requestId, { status: 400, message: "hairId is required." });
   }
-
-  // TODO: Add session verification and store the chosen hair result to DB/KV
 
   return jsonOk(requestId, {
     ok: true,

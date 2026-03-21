@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { getJobFromRequest } from "@/lib/jobs";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 import { outfitTemplates } from "@/data/outfits";
@@ -9,6 +10,11 @@ import { ReplicateApiError, startNanaBananaJob, uploadToReplicateFiles } from "@
 export const maxDuration = 20;
 
 export async function POST(request: NextRequest) {
+  const job = await getJobFromRequest(request);
+  if (!job) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const ip = getClientIp(request);
   const rateLimit = await checkRateLimit(ip, "final-render", 5);
   if (!rateLimit.allowed) {

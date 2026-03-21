@@ -1,4 +1,5 @@
 import { getRequestId, jsonError, jsonOk } from "@/lib/api-response";
+import { getJobFromRequest } from "@/lib/jobs";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { ReplicateApiError, startHairPreviewJob } from "@/lib/replicate";
 
@@ -7,6 +8,11 @@ export const maxDuration = 10;
 
 export async function POST(request: Request) {
   const requestId = getRequestId(request);
+
+  const job = await getJobFromRequest(request);
+  if (!job) {
+    return jsonError(requestId, { status: 401, message: "Unauthorized." });
+  }
 
   const ip = getClientIp(request);
   const rateLimit = await checkRateLimit(ip, "hair-preview", 20);

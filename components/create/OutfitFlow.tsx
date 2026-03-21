@@ -46,6 +46,7 @@ export function OutfitFlow() {
     hair,
     hairPreviewUrl,
     photoBlobUrl,
+    sessionToken,
     setOutfitChosen,
     pickOutfit,
     setBackgroundId,
@@ -126,7 +127,7 @@ export function OutfitFlow() {
 
       const res = await fetch("/api/final/render", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${sessionToken}` },
         body: JSON.stringify({
           hairPreviewDataUrl,
           outfitTemplateId: selectedOutfitId,

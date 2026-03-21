@@ -28,6 +28,7 @@ export function HairFlow() {
   const {
     photoBlobUrl,
     faceBoundingBox,
+    sessionToken,
     setHairChosen,
     setHairPreviewUrl,
     setHairResults,
@@ -275,7 +276,7 @@ export function HairFlow() {
 
       const res = await fetch("/api/hair/preview", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${sessionToken}` },
         body: JSON.stringify({
           photoDataUrl,
           haircutName: selectedStyle.haircut,
@@ -332,7 +333,7 @@ export function HairFlow() {
 
     fetch("/api/hair/select", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${sessionToken}` },
       body: JSON.stringify({
         hairId: selectedResult.id,
         previewUrl: selectedResult.blobUrl,

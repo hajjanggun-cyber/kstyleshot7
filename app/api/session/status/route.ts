@@ -53,7 +53,7 @@ export async function GET(request: Request) {
             orderId: job.orderId,
             sessionToken: job.sessionToken,
             status: job.status,
-            customerEmail: job.customerEmail ?? null
+            customerEmail: job.customerEmail ? "registered" : null
           };
           return jsonOk(requestId, ready);
         }
