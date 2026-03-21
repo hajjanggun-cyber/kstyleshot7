@@ -377,71 +377,29 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
 
 const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `Create a photorealistic image by combining three input images.
 
-CRITICAL RULES
-The face from Image 1 must remain unchanged.
-Preserve the exact facial structure, eye shape, nose, mouth, and identity from Image 1.
-Maintain near-perfect facial similarity to Image 1.
-Do not alter facial geometry or identity in any way.
-
-The person must be naturally integrated into the environment from Image 3.
-Match lighting direction, perspective, shadows, color temperature, and environmental reflections so the subject appears physically present in the scene.
-The result must look like a real photograph taken in that location.
+IDENTITY
+Preserve the face and identity from Image 1 exactly. Do not alter bone structure, nose, or mouth.
+Redirect eye gaze toward the camera so the subject makes direct eye contact with the viewer.
 
 IMAGE ROLES
-Image 1: identity reference (the person). This image defines the face and identity.
-Image 2: clothing reference. Apply this outfit to the person.
-Image 3: environment reference. Use this as the background and location.
-
-COMPOSITION
-Place the person naturally inside the environment from Image 3.
-
-OUTFIT
-Apply the clothing from Image 2 onto the person while keeping body proportions realistic and natural.
+Image 1: the person (face and identity reference).
+Image 2: clothing reference. Dress the person in this outfit.
+Image 3: environment reference. Place the person in this scene.
 
 POSE
-The subject is taking a selfie using a smartphone.
-One arm is extended slightly toward the camera holding the phone.
+Natural standing pose, facing the camera. Camera angle slightly above eye level.
 
-The back side of the smartphone is facing the viewer.
-The smartphone screen is facing the subject.
+LIGHTING
+Apply the lighting conditions from Image 3 onto the subject's skin and clothing.
+Match light direction, color temperature, shadows, and environmental reflections from the scene.
 
-The rear of the phone is visible in the image.
-The front screen of the phone must not be visible.
-
-The smartphone is partially visible inside the frame near the edge of the image like a natural selfie photo.
-
-CAMERA
-The viewer camera is the smartphone the subject is holding.
-This image is captured from the perspective of the smartphone selfie camera.
-Camera angle slightly above eye level.
-Natural handheld framing typical of a selfie photograph.
-
-GAZE
-The subject is looking directly into the smartphone camera lens while taking the selfie.
-Clear eye contact with the phone camera.
-The subject's gaze follows the smartphone camera position.
-
-REALISM
-Photorealistic skin texture.
-Natural environmental lighting interaction.
-Accurate shadow casting on the ground and surrounding surfaces.
-Correct depth of field and perspective.
-
-SCENE DESCRIPTION
+SCENE
 ${sceneDescription}
 
 CONSTRAINTS
-Do not change the person's identity.
 Do not stylize, cartoonize, or exaggerate features.
-Do not paste or collage the subject onto the background.
-The subject must appear naturally integrated into the environment.
-
-QUALITY
-Ultra realistic photography
-Sharp focus
-Natural lighting
-Cinematic depth of field
-High detail`;
+Do not collage — the subject must appear physically present in the scene.
+Photorealistic skin texture, accurate shadows, natural depth of field.`;
 
 /** Starts a nano-banana-pro job combining a hair-styled selfie, outfit image, and background scene. Returns predictionId. */
 export async function startNanaBananaJob(input: {
