@@ -77,6 +77,7 @@ export function DoneFlow() {
   const [refundTriggered, setRefundTriggered] = useState(false);
   const [finalError, setFinalError] = useState(false);
   const [progressMessageIndex, setProgressMessageIndex] = useState(0);
+  const [backToast, setBackToast] = useState("");
 
   useEffect(() => {
     if (!finalPredictionId || finalImageUrl) {
@@ -139,6 +140,26 @@ export function DoneFlow() {
   const resultUrl = finalImageUrl ?? basePreviewUrl;
   const isFinalProcessing = Boolean(finalPredictionId) && !finalImageUrl && !finalError;
   useBlockNavigation(isFinalProcessing);
+
+  // After final image is ready, redirect to home on back button press
+  useEffect(() => {
+    if (!finalImageUrl) return;
+
+    window.history.pushState(null, "", window.location.href);
+
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href);
+      setBackToast(lang === "ko" ? "홈 화면으로 이동합니다." : "Returning to home.");
+      setTimeout(() => {
+        clearAndReset();
+        router.replace(`/${lang}`);
+      }, 800);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finalImageUrl]);
   const progressMessages = lang === "ko" ? FINAL_PROGRESS_MESSAGES.ko : FINAL_PROGRESS_MESSAGES.en;
   const activeProgressMessage = progressMessages[progressMessageIndex] ?? progressMessages[0];
   const hairDownloadItems = hair.chosen
@@ -318,6 +339,27 @@ export function DoneFlow() {
 
   return (
     <div className="dn-root">
+      {backToast ? (
+        <div
+          style={{
+            position: "fixed",
+            top: 24,
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 9999,
+            background: "rgba(26, 26, 46, 0.95)",
+            padding: "12px 24px",
+            borderRadius: 10,
+            color: "#7ec8e3",
+            fontSize: 14,
+            fontWeight: 500,
+            boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+          }}
+        >
+          {backToast}
+        </div>
+      ) : null}
+
       {isFinalProcessing ? (
         <LoadingModal
           badge={lang === "ko" ? "장면 생성 중" : "Creating Your Scene"}
