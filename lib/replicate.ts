@@ -375,43 +375,37 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
 }
 
 
-const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `Create a photorealistic image by combining three input images.
+const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `The first image shows a person with a specific face and hairstyle.
+The second image shows a K-pop outfit or costume.
+The third image shows a background scene and location.
 
-IDENTITY
-Preserve the face and identity from Image 1 exactly. Do not alter bone structure, nose, or mouth.
-Preserve the hairstyle and hair color from Image 1 exactly.
-Redirect eye gaze toward the camera so the subject makes direct eye contact with the viewer.
-Natural relaxed expression with a slight smile.
+### [CRITICAL PRIORITY: 100% IDENTITY MATCH - ABSOLUTE]
+- The goal is NOT to create a new character or a stylized idol version.
+- Copy and Paste the exact face from the first reference image.
+- Strictly maintain the EXACT facial structure, eye shape, eyelid lines, nose bridge width, and lip contours of the person in the first image, including all micro-asymmetry and unique facial details.
+- DO NOT beautify, DO NOT apply any style-specific makeup, and DO NOT smooth the skin texture.
+- Retain the natural skin tone, pores, and fine lines precisely as they appear in the original photo.
+- The person's face must be 1:1 identical to the original reference, with no distortion, morphing, or generalization.
 
-IMAGE ROLES
-Image 1: the person (face, hair, and identity reference).
-Image 2: clothing reference. Dress the person in this outfit.
-Image 3: environment reference. Place the person in this scene.
+[COMPOSITION & STYLE]
+- Place the person from the first image into the location from the third image.
+- Dress the person in the outfit shown in the second image.
+- Show the full body from head to shoes, standing naturally in the center of the frame.
+- The composition is a professional fashion editorial shot with a 35mm lens perspective.
 
-POSE
-Natural standing pose, facing the camera. Camera angle slightly above eye level.
-Hands must have exactly five fingers each with natural proportions.
+[SEAMLESS OPTICAL INTEGRATION - DEEP FOCUS MODE]
+- Match the lighting, color temperature, and atmospheric shadows of the third image exactly.
+- Apply "Global Illumination": The specific color temperature from the background must naturally wrap around the subject's body.
+- Create "Contact Shadows": Generate realistic, precise ambient occlusion shadows precisely under the soles of the shoes where they contact the pavement to ensure the subject is firmly grounded.
+- Match "Image Grain": Synchronize the digital noise and film grain between the subject and the background for a unified texture.
+- Use a F8.0 or higher aperture setting for deep depth of field: Ensure both the subject and the background are in focus, with only a very subtle, natural fall-off in the furthest distance.
+- Align the sharpness level of the subject with the resolution and texture details of the background.
 
-OUTFIT
-Clothing should drape naturally on the body with realistic wrinkles and fabric weight.
-
-SKIN
-Skin tone must be uniform across face, neck, and exposed body.
-Photorealistic skin texture with natural pores and subtle highlights.
-
-LIGHTING
-Apply the lighting conditions from Image 3 onto the subject's skin and clothing.
-Match light direction, color temperature, shadows, and environmental reflections from the scene.
-Apply unified color grading across subject and environment.
-
-SCENE
+[SCENE DESCRIPTION]
 ${sceneDescription}
 
-CONSTRAINTS
-Do not stylize, cartoonize, or exaggerate features.
-Do not collage — the subject must appear physically present in the scene.
-No visible edge artifacts between subject and background.
-Accurate shadows, natural depth of field, cinematic detail.`;
+[FINAL OUTPUT QUALITY]
+The result must be a flawless, photorealistic photoshoot. Treat the first image as an unchangeable master reference for the face. The priority is the exact 1:1 reproduction of the person's face from the reference image, seamlessly blended into the background with realistic grounding shadows and consistent deep-focus optics.`;
 
 /** Starts a nano-banana-pro job combining a hair-styled selfie, outfit image, and background scene. Returns predictionId. */
 export async function startNanaBananaJob(input: {
