@@ -108,6 +108,12 @@ const nextConfig = {
         destination: "/ko/hub",
         statusCode: 301,
       },
+      // /blog/[slug] (no locale) → /ko/hub (catch-all — must come LAST of all)
+      {
+        source: "/blog/:slug*",
+        destination: "/ko/hub",
+        statusCode: 301,
+      },
     ];
   },
   async rewrites() {
