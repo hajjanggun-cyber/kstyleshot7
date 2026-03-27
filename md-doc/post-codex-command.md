@@ -140,7 +140,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[056] Hub [ ]`
+1. `[061] Hub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -847,6 +847,11 @@ description: [actual text] -> [N]자
 - 세미매트 베이스 메이크업 가이드 KO/EN 완료
 - 여름 지속력 메이크업 가이드 KO/EN 완료
 - 겨울 광채 메이크업 가이드 KO/EN 완료
+- 눈매 메이크업 허브 KO/EN 완료
+- 애교살 메이크업 KO/EN 완료
+- 무쌍 눈매 메이크업 KO/EN 완료
+- 번지지 않는 아이라이너 KO/EN 완료
+- 속눈썹 컬 오래 가는 방법 KO/EN 완료
 
 - 북촌 한옥마을 허브 KO/EN 완료
 - 북촌 한옥 사진 명소 KO/EN 완료
@@ -871,10 +876,10 @@ description: [actual text] -> [N]자
 - 한국 마스크팩 고르는 법 KO/EN 완료
 
 다음 우선순위:
-0. 한국 마스크팩 고르는 법 KO/EN 완료
-1. [051] Hub 작성
-2. [052] Sub 작성
-3. [053] Sub 작성
+0. 속눈썹 컬 오래 가는 방법 KO/EN 완료
+1. [061] Hub 작성
+2. [062] Sub 작성
+3. [063] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
@@ -925,6 +930,24 @@ description: [actual text] -> [N]자
 - 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 3편 기준으로 확장 완료
 - 겨울 광채 메이크업 가이드 KO/EN: `winter-glow-makeup-guide` 게시용 MDX 작성 완료
 - 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 4편 구조로 완료
+
+### 2026-03-27 최신 기준
+
+- 눈매 메이크업 허브 KO/EN: `eye-makeup-tips` 게시용 MDX 작성 완료
+- 눈매 메이크업 허브: 애교살, 아이라인, 속눈썹 기본 구조를 허브형 키워드 기준으로 작성 완료
+- 눈매 메이크업 허브: 본문 이미지 없이 Quick Summary, 하단 CTA, 관련 패널 형식 점검 완료
+- 애교살 메이크업 KO/EN: `natural-aegyo-sal-makeup-guide` 게시용 MDX 작성 완료
+- 애교살 메이크업: 허브 본문 백링크와 데일리 눈밑 볼륨 기준 중심으로 하위 글 작성 완료
+- 눈매 메이크업 허브: 첫 하위 글 연결에 맞춰 related panel과 next card 갱신 완료
+- 무쌍 눈매 메이크업 KO/EN: `monolid-eye-makeup-guide` 게시용 MDX 작성 완료
+- 무쌍 눈매 메이크업: 점막 아이라인, 음영 섀도, 속눈썹 방향 기준으로 하위 글 작성 완료
+- 눈매 메이크업 묶음: 허브 related panel과 이전 하위 글 next card를 2편 기준으로 갱신 완료
+- 번지지 않는 아이라이너 KO/EN: `smudge-proof-eyeliner-guide` 게시용 MDX 작성 완료
+- 번지지 않는 아이라이너: 점막 라인, 픽싱 파우더, 여름 아이메이크업 기준으로 하위 글 작성 완료
+- 눈매 메이크업 묶음: 허브 related panel과 이전 하위 글 next card를 3편 기준으로 갱신 완료
+- 속눈썹 컬 오래 가는 방법 KO/EN: `how-to-make-lash-curl-last-longer` 게시용 MDX 작성 완료
+- 속눈썹 컬 오래 가는 방법: 뷰러 사용법, 마스카라 픽싱, 습도 기준으로 하위 글 작성 완료
+- 눈매 메이크업 묶음: 허브 related panel과 이전 하위 글 next card를 4편 완성 기준으로 갱신 완료
 
 ## 28. 2026-03-21 Update
 

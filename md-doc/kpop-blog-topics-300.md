@@ -418,31 +418,31 @@ Role 표기:
 
 ### Eye Makeup Cluster
 
-### [056] Hub [ ]
+### [056] Hub [v]
 - KO: 눈매 메이크업 가이드 — 애교살, 아이라인, 속눈썹 기본
 - EN: Eye Makeup Tips — Aegyo Sal, Liner, and Lashes
 - Keyword: KO `눈매 메이크업` | EN `eye makeup tips`
 - Subkeywords: KO `아이라인`, `애교살`, `속눈썹 연출` | EN `eyeliner guide`, `aegyo sal`, `lash styling`
 
-### [057] Sub [ ]
+### [057] Sub [v]
 - KO: 애교살 메이크업 자연스럽게 하는 법
 - EN: How to Do Natural Aegyo Sal Makeup
 - Keyword: KO `애교살 메이크업` | EN `how to do natural aegyo sal makeup`
 - Subkeywords: KO `눈밑 볼륨`, `애교살 펜슬`, `눈매 확장` | EN `under-eye fullness`, `aegyo sal pencil`, `eye-brightening makeup`
 
-### [058] Sub [ ]
+### [058] Sub [v]
 - KO: 무쌍 눈매 메이크업 가이드
 - EN: Makeup Guide for Monolid Eyes
 - Keyword: KO `무쌍 눈매 메이크업` | EN `makeup guide for monolid eyes`
 - Subkeywords: KO `점막 아이라인`, `음영 섀도`, `눈매 또렷하게` | EN `tightline eyeliner`, `soft contour shadow`, `defining monolid eyes`
 
-### [059] Sub [ ]
+### [059] Sub [v]
 - KO: 번지지 않는 아이라이너 그리는 법
 - EN: How to Keep Eyeliner from Smudging
 - Keyword: KO `번지지 않는 아이라이너` | EN `how to keep eyeliner from smudging`
 - Subkeywords: KO `점막 라인`, `픽싱 파우더`, `여름 아이메이크업` | EN `waterline eyeliner`, `setting powder`, `summer eye makeup`
 
-### [060] Sub [ ]
+### [060] Sub [v]
 - KO: 속눈썹 컬 오래 가는 방법
 - EN: How to Make Lash Curl Last Longer
 - Keyword: KO `속눈썹 컬 오래 가는 방법` | EN `how to make lash curl last longer`
