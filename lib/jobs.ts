@@ -11,6 +11,7 @@ const MIN_JOB_TTL_SECONDS = 60;
 export function normalizeJob(job: KVJob): KVJob {
   return {
     ...job,
+    finalPredictionId: job.finalPredictionId ?? null,
     generatedResults: {
       hair: job.generatedResults?.hair ?? [],
       outfit: job.generatedResults?.outfit ?? [],

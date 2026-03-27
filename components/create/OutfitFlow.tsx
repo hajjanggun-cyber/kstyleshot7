@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
@@ -47,12 +47,23 @@ export function OutfitFlow() {
     hairPreviewUrl,
     photoBlobUrl,
     sessionToken,
+    finalPredictionId,
     setOutfitChosen,
     pickOutfit,
     setBackgroundId,
     setFinalPredictionId,
     setStatus,
   } = useCreateStore();
+
+  // 뒤로가기로 재진입 시 (finalPredictionId가 이미 설정된 상태) → done으로 복귀
+  // 단, handleSubmit 직후의 정상 흐름에서는 router.push('/done')이 이미 실행되므로
+  // 마운트 시점에만 체크하여 이중 내비게이션 방지
+  useEffect(() => {
+    if (useCreateStore.getState().finalPredictionId) {
+      router.replace(`/${lang}/create/done`);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [step, setStep] = useState<Step>("outfit");
   const [outfitFilter, setOutfitFilter] = useState<OutfitFilter>("all");

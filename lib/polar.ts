@@ -366,6 +366,7 @@ export function createConfirmedJob(input: {
       outfit: 0,
       cutout: 0
     },
+    finalPredictionId: null,
     failReason: null,
     refundRequested: false,
     createdAt: timestamp,

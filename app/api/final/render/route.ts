@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getJobFromRequest } from "@/lib/jobs";
+import { getJobFromRequest, saveJob } from "@/lib/jobs";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { getRedis } from "@/lib/redis";
 
 import { outfitTemplates } from "@/data/outfits";
 import { referenceTemplates } from "@/data/referenceTemplates";
@@ -13,6 +14,10 @@ export async function POST(request: NextRequest) {
   const job = await getJobFromRequest(request);
   if (!job) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (job.finalPredictionId) {
+    return NextResponse.json({ predictionId: job.finalPredictionId });
   }
 
   const ip = getClientIp(request);
@@ -83,6 +88,9 @@ export async function POST(request: NextRequest) {
       backgroundImageUrl,
       sceneDescription: bgTemplate.sceneDescription,
     });
+
+    const redis = getRedis();
+    await saveJob(redis, { ...job, finalPredictionId: predictionId });
 
     return NextResponse.json({ predictionId });
   } catch (error) {

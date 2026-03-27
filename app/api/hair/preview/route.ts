@@ -1,6 +1,7 @@
 import { getRequestId, jsonError, jsonOk } from "@/lib/api-response";
-import { getJobFromRequest } from "@/lib/jobs";
+import { getJobFromRequest, saveJob } from "@/lib/jobs";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { getRedis } from "@/lib/redis";
 import { ReplicateApiError, startHairPreviewJob } from "@/lib/replicate";
 
 // Just starts the job — no waiting. Stays well within Vercel Hobby 10s limit.
@@ -12,6 +13,10 @@ export async function POST(request: Request) {
   const job = await getJobFromRequest(request);
   if (!job) {
     return jsonError(requestId, { status: 401, message: "Unauthorized." });
+  }
+
+  if ((job.attempts?.hair ?? 0) >= 2) {
+    return jsonError(requestId, { status: 403, message: "Hair generation limit reached for this session." });
   }
 
   const ip = getClientIp(request);
@@ -51,6 +56,12 @@ export async function POST(request: Request) {
 
   try {
     const predictionId = await startHairPreviewJob({ photoDataUrl, haircutName, hairColor });
+
+    const redis = getRedis();
+    await saveJob(redis, {
+      ...job,
+      attempts: { ...job.attempts, hair: (job.attempts?.hair ?? 0) + 1 },
+    });
 
     return jsonOk(requestId, { ok: true, predictionId });
   } catch (error) {

@@ -115,6 +115,7 @@ export type KVJob = {
     outfit: number;
     cutout: number;
   };
+  finalPredictionId: string | null;
   failReason: string | null;
   refundRequested: boolean;
   createdAt: string;

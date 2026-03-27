@@ -42,7 +42,11 @@ export function HairFlow() {
   useBlockNavigation(isGenerating);
   const [isStylePickerOpen, setIsStylePickerOpen] = useState(true);
   const [generationError, setGenerationError] = useState("");
-  const [resultCards, setResultCards] = useState<StepResult[]>([]);
+  const [resultCards, setResultCards] = useState<StepResult[]>(() =>
+    useCreateStore.getState().hair.results.length > 0
+      ? useCreateStore.getState().hair.results
+      : []
+  );
   const [pickedResultId, setPickedResultId] = useState<string | null>(null);
   const [predictionStates, setPredictionStates] = useState<HairPollState[]>([]);
   const [pollSeed, setPollSeed] = useState(0);
