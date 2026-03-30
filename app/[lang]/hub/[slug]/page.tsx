@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { HubArticle } from "@/components/hub/HubArticle";
 import { HubMdxPage } from "@/components/hub/HubMdxPage";
 import { hubArticles } from "@/data/hubArticles";
-import { getFirstImageSrc, getMdxArticle } from "@/lib/mdx";
+import { getAllArticles, getFirstImageSrc, getMdxArticle } from "@/lib/mdx";
 import { SITE_NAME, buildLocaleAlternatesAbsolute, getSiteUrl } from "@/lib/seo";
 
 type ArticlePageProps = {
@@ -70,6 +70,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     const articleImage = fm.ogImage ?? (firstImageSrc ? `${getSiteUrl()}${firstImageSrc}` : undefined);
     const breadcrumbHomeLabel = lang === "ko" ? "홈" : "Home";
     const breadcrumbHubLabel = lang === "ko" ? "허브" : "Hub";
+    const relatedArticles = getAllArticles(lang)
+      .filter((a) => a.category === fm.category && a.slug !== slug)
+      .slice(0, 3)
+      .map((a) => `${getSiteUrl()}/${lang}/hub/${a.slug}`);
+
     const structuredData = {
       "@context": "https://schema.org",
       "@graph": [
@@ -87,6 +92,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 name: fm.authorName,
               }
             : undefined,
+          ...(relatedArticles.length > 0 && { relatedLink: relatedArticles }),
         },
         {
           "@type": "BreadcrumbList",

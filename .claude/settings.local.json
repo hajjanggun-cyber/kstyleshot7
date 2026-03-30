@@ -40,7 +40,8 @@
       "mcp__ide__getDiagnostics",
       "Read(//tmp/**)",
       "Bash(\"c:/Users/수성길메인/Desktop/11  11 실전코딩/kpop-style/kstryletry/.env.local\")",
-      "Bash(xargs cat:*)"
+      "Bash(xargs cat:*)",
+      "Bash(npx next:*)"
     ]
   }
 }

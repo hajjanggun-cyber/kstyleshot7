@@ -381,5 +381,11 @@
       "title": "쿠키 정책",
       "description": "최소 세션/분석 정책을 여기에 문서화하세요."
     }
+  },
+  "cookieConsent": {
+    "message": "분석 및 사용자 경험 개선을 위해 쿠키를 사용합니다.",
+    "accept": "동의",
+    "decline": "거부",
+    "learnMore": "자세히 보기"
   }
 }

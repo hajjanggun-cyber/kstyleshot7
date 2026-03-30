@@ -3,6 +3,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { CookieConsent } from "@/components/common/CookieConsent";
 import { DisclaimerBox } from "@/components/common/DisclaimerBox";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { SiteHeader } from "@/components/common/SiteHeader";
@@ -38,6 +39,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           <DisclaimerBox />
         </div>
         <SiteFooter />
+        <CookieConsent />
       </div>
     </NextIntlClientProvider>
   );

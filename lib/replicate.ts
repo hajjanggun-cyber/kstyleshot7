@@ -375,7 +375,8 @@ export async function uploadToReplicateFiles(buffer: Buffer, mimeType: string): 
 }
 
 
-const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) => `The first image shows a person with a specific face and hairstyle.
+// Source of truth: md-doc/prompt_nanobanan.md
+const NANO_BANANA_BASE_PROMPT = `The first image shows a person with a specific face and hairstyle.
 The second image shows a K-pop outfit or costume.
 The third image shows a background scene and location.
 
@@ -399,7 +400,10 @@ The third image shows a background scene and location.
 - Create "Contact Shadows": Generate realistic, precise ambient occlusion shadows precisely under the soles of the shoes where they contact the pavement to ensure the subject is firmly grounded.
 - Match "Image Grain": Synchronize the digital noise and film grain between the subject and the background for a unified texture.
 - Use a F8.0 or higher aperture setting for deep depth of field: Ensure both the subject and the background are in focus, with only a very subtle, natural fall-off in the furthest distance.
-- Align the sharpness level of the subject with the resolution and texture details of the background.
+- Align the sharpness level of the subject with the resolution and texture details of the background.`;
+
+const NANO_BANANA_PROMPT_TEMPLATE = (sceneDescription: string) =>
+  `${NANO_BANANA_BASE_PROMPT}
 
 [SCENE DESCRIPTION]
 ${sceneDescription}

@@ -381,5 +381,11 @@
       "title": "Cookie Policy",
       "description": "Document the minimal session and analytics policy here."
     }
+  },
+  "cookieConsent": {
+    "message": "We use cookies for analytics and to improve your experience.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "learnMore": "Learn more"
   }
 }

@@ -65,6 +65,35 @@ export async function generateMetadata({
 }
 
 /* Hub section uses its own full-screen layout — no global SiteHeader */
-export default function HubLayout({ children }: HubLayoutProps) {
-  return <div className="hf-shell">{children}</div>;
+export default async function HubLayout({ children, params }: HubLayoutProps) {
+  const { lang } = await params;
+  const safeLang = lang === "en" ? "en" : "ko";
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: safeLang === "ko" ? "홈" : "Home",
+        item: `${getSiteUrl()}/${safeLang}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: safeLang === "ko" ? "허브" : "Hub",
+        item: `${getSiteUrl()}/${safeLang}/hub`,
+      },
+    ],
+  };
+
+  return (
+    <div className="hf-shell">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
+      {children}
+    </div>
+  );
 }
