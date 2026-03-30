@@ -450,7 +450,7 @@ Role 표기:
 
 ### Lip and Cheek Cluster
 
-### [061] Hub [ ]
+### [061] Hub [v]
 - KO: 립 메이크업 추천 — 그라데이션 립과 블러셔 조합
 - EN: Lip Makeup Guide — Gradient Lips and Blush Placement
 - Keyword: KO `립 메이크업 추천` | EN `lip makeup guide`

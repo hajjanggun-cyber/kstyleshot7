@@ -140,7 +140,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[061] Hub [ ]`
+1. `[062] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -852,6 +852,7 @@ description: [actual text] -> [N]자
 - 무쌍 눈매 메이크업 KO/EN 완료
 - 번지지 않는 아이라이너 KO/EN 완료
 - 속눈썹 컬 오래 가는 방법 KO/EN 완료
+- 립 메이크업 허브 KO/EN 완료
 
 - 북촌 한옥마을 허브 KO/EN 완료
 - 북촌 한옥 사진 명소 KO/EN 완료
@@ -876,10 +877,10 @@ description: [actual text] -> [N]자
 - 한국 마스크팩 고르는 법 KO/EN 완료
 
 다음 우선순위:
-0. 속눈썹 컬 오래 가는 방법 KO/EN 완료
-1. [061] Hub 작성
-2. [062] Sub 작성
-3. [063] Sub 작성
+0. 립 메이크업 허브 KO/EN 완료
+1. [062] Sub 작성
+2. [063] Sub 작성
+3. [064] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
@@ -929,6 +930,8 @@ description: [actual text] -> [N]자
 - 여름 지속력 메이크업 가이드 KO/EN: `long-lasting-summer-makeup-guide` 게시용 MDX 작성 완료
 - 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 3편 기준으로 확장 완료
 - 겨울 광채 메이크업 가이드 KO/EN: `winter-glow-makeup-guide` 게시용 MDX 작성 완료
+- 립 메이크업 허브 KO/EN: `lip-makeup-guide` 게시용 MDX 작성 완료
+- 립 메이크업 허브: 그라데이션 립, 웜톤/쿨톤 립, 블러셔 위치 연결 구조 기준으로 허브 본문 작성 완료
 - 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 4편 구조로 완료
 
 ### 2026-03-27 최신 기준

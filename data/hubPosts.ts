@@ -175,6 +175,19 @@ export const hubPosts: HubPost[] = [
     watermark: "눈매",
     cta: "읽기",
   },
+  {
+    slug: "lip-makeup-guide",
+    cardType: "half-hero",
+    category: "K-뷰티 & 헤어",
+    categoryStyle: "white-on-pink",
+    title: "립 메이크업\n가이드",
+    subtitle: "그라데이션 립과 블러셔 균형을 함께 읽는 K-뷰티 허브",
+    bg: "linear-gradient(135deg, #8a3f52 0%, #f4b6a8 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "립",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -332,6 +345,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "EYES",
+    cta: "Read Now",
+  },
+  {
+    slug: "lip-makeup-guide",
+    cardType: "half-hero",
+    category: "K-Beauty",
+    categoryStyle: "white-on-pink",
+    title: "Lip Makeup\nGuide",
+    subtitle: "A practical hub for gradient lips, blush balance, and shade direction",
+    bg: "linear-gradient(135deg, #8a3f52 0%, #f4b6a8 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "LIPS",
     cta: "Read Now",
   },
 ];
