@@ -140,7 +140,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[062] Sub [ ]`
+1. `[066] Hub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -853,6 +853,10 @@ description: [actual text] -> [N]자
 - 번지지 않는 아이라이너 KO/EN 완료
 - 속눈썹 컬 오래 가는 방법 KO/EN 완료
 - 립 메이크업 허브 KO/EN 완료
+- 그라데이션 립 KO/EN 완료
+- 웜톤 립 추천 KO/EN 완료
+- 쿨톤 립 추천 KO/EN 완료
+- 얼굴형별 블러셔 위치 KO/EN 완료
 
 - 북촌 한옥마을 허브 KO/EN 완료
 - 북촌 한옥 사진 명소 KO/EN 완료
@@ -877,10 +881,10 @@ description: [actual text] -> [N]자
 - 한국 마스크팩 고르는 법 KO/EN 완료
 
 다음 우선순위:
-0. 립 메이크업 허브 KO/EN 완료
-1. [062] Sub 작성
-2. [063] Sub 작성
-3. [064] Sub 작성
+0. 립 메이크업 묶음 KO/EN 완료
+1. [066] Hub 작성
+2. [067] Sub 작성
+3. [068] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
@@ -951,6 +955,14 @@ description: [actual text] -> [N]자
 - 속눈썹 컬 오래 가는 방법 KO/EN: `how-to-make-lash-curl-last-longer` 게시용 MDX 작성 완료
 - 속눈썹 컬 오래 가는 방법: 뷰러 사용법, 마스카라 픽싱, 습도 기준으로 하위 글 작성 완료
 - 눈매 메이크업 묶음: 허브 related panel과 이전 하위 글 next card를 4편 완성 기준으로 갱신 완료
+- 그라데이션 립 KO/EN: `how-to-do-gradient-lips` 게시용 MDX 작성 완료
+- 그라데이션 립: 틴트 블렌딩, 입술 중앙 발색, 경계 흐리기 기준으로 첫 하위 글 작성 완료
+- 웜톤 립 추천 KO/EN: `best-lip-colors-for-warm-tones` 게시용 MDX 작성 완료
+- 웜톤 립 추천: 코랄 립, 브릭 립, 가을 웜 메이크업 기준으로 컬러 선택 흐름 정리 완료
+- 쿨톤 립 추천 KO/EN: `best-lip-colors-for-cool-tones` 게시용 MDX 작성 완료
+- 쿨톤 립 추천: 로즈 립, 플럼 립, 겨울 쿨 메이크업 기준으로 대비 선택 흐름 정리 완료
+- 얼굴형별 블러셔 위치 KO/EN: `best-blush-placement-by-face-shape` 게시용 MDX 작성 완료
+- 얼굴형별 블러셔 위치: 광대 블러셔, 중안부 단축 메이크업, 얼굴형별 치크 배치 기준 정리 완료
 
 ## 28. 2026-03-21 Update
 

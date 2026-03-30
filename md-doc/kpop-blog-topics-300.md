@@ -456,25 +456,25 @@ Role 표기:
 - Keyword: KO `립 메이크업 추천` | EN `lip makeup guide`
 - Subkeywords: KO `그라데이션 립`, `블러셔 위치`, `웜톤 립` | EN `gradient lip makeup`, `blush placement`, `lip shades by tone`
 
-### [062] Sub [ ]
+### [062] Sub [v]
 - KO: 그라데이션 립 하는 법
 - EN: How to Do Gradient Lips
 - Keyword: KO `그라데이션 립 하는 법` | EN `how to do gradient lips`
 - Subkeywords: KO `틴트 블렌딩`, `입술 중앙 발색`, `K뷰티 립 메이크업` | EN `tint blending`, `soft center lip`, `korean lip makeup`
 
-### [063] Sub [ ]
+### [063] Sub [v]
 - KO: 웜톤 립 추천 컬러 가이드
 - EN: Best Lip Colors for Warm Tones
 - Keyword: KO `웜톤 립 추천` | EN `best lip colors for warm tones`
 - Subkeywords: KO `코랄 립`, `브릭 립`, `가을 웜 메이크업` | EN `coral lip shades`, `brick lip colors`, `warm tone makeup`
 
-### [064] Sub [ ]
+### [064] Sub [v]
 - KO: 쿨톤 립 추천 컬러 가이드
 - EN: Best Lip Colors for Cool Tones
 - Keyword: KO `쿨톤 립 추천` | EN `best lip colors for cool tones`
 - Subkeywords: KO `로즈 립`, `플럼 립`, `겨울 쿨 메이크업` | EN `rose lip colors`, `plum lip shades`, `cool tone makeup`
 
-### [065] Sub [ ]
+### [065] Sub [v]
 - KO: 얼굴형별 블러셔 위치 정리
 - EN: Best Blush Placement by Face Shape
 - Keyword: KO `얼굴형별 블러셔 위치` | EN `best blush placement by face shape`
