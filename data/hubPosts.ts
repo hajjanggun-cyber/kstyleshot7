@@ -162,6 +162,19 @@ export const hubPosts: HubPost[] = [
     watermark: "베이스",
     cta: "읽기",
   },
+  {
+    slug: "eye-makeup-tips",
+    cardType: "half-hero",
+    category: "K-뷰티 & 헤어",
+    categoryStyle: "white-on-pink",
+    title: "눈매 메이크업\n가이드",
+    subtitle: "애교살, 아이라인, 속눈썹 기본을 묶어 보는 K-뷰티 허브",
+    bg: "linear-gradient(135deg, #5a3448 0%, #f1b6c8 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "눈매",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -306,6 +319,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "BASE",
+    cta: "Read Now",
+  },
+  {
+    slug: "eye-makeup-tips",
+    cardType: "half-hero",
+    category: "K-Beauty",
+    categoryStyle: "white-on-pink",
+    title: "Eye Makeup\nTips",
+    subtitle: "A practical hub for aegyo sal, eyeliner basics, and longer-lasting lashes",
+    bg: "linear-gradient(135deg, #5a3448 0%, #f1b6c8 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "EYES",
     cta: "Read Now",
   },
 ];
