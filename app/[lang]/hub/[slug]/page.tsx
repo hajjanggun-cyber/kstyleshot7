@@ -4,12 +4,23 @@ import { notFound } from "next/navigation";
 import { HubArticle } from "@/components/hub/HubArticle";
 import { HubMdxPage } from "@/components/hub/HubMdxPage";
 import { hubArticles } from "@/data/hubArticles";
-import { getAllArticles, getFirstImageSrc, getMdxArticle } from "@/lib/mdx";
+import { routing } from "@/i18n/routing";
+import { getAllArticles, getAllSlugs, getFirstImageSrc, getMdxArticle } from "@/lib/mdx";
 import { SITE_NAME, buildLocaleAlternatesAbsolute, getSiteUrl } from "@/lib/seo";
 
 type ArticlePageProps = {
   params: Promise<{ lang: string; slug: string }>;
 };
+
+export function generateStaticParams() {
+  const params: { lang: string; slug: string }[] = [];
+  for (const locale of routing.locales) {
+    for (const slug of getAllSlugs(locale)) {
+      params.push({ lang: locale, slug });
+    }
+  }
+  return params;
+}
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { lang, slug } = await params;
@@ -92,6 +103,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 name: fm.authorName,
               }
             : undefined,
+          publisher: {
+            "@type": "Organization",
+            name: SITE_NAME,
+            url: getSiteUrl(),
+          },
           ...(relatedArticles.length > 0 && { relatedLink: relatedArticles }),
         },
         {

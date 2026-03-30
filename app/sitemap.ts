@@ -54,8 +54,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const lastModified = article?.frontmatter.publishedAt
         ? new Date(article.frontmatter.publishedAt)
         : now;
+      const hreflangSlug = article?.frontmatter.hreflangSlug ?? slug;
       const languages = buildLocaleAlternatesAbsolute(
-        (l) => `/${l}/hub/${slug}`
+        (l) => `/${l}/hub/${hreflangSlug}`
       );
       const canonicalUrl = toAbsoluteUrl(`/${locale}/hub/${slug}`);
       entries.push(

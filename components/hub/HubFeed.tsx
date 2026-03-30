@@ -2,15 +2,8 @@
 
 import { useState, type CSSProperties, type ReactNode } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
-import {
-  FILTER_CHIPS_EN,
-  FILTER_CHIPS_KO,
-  hubPosts,
-  hubPostsEn,
-  type HubPost,
-} from "@/data/hubPosts";
+import { type HubPost } from "@/data/hubPosts";
 
 function CardShell({
   post,
@@ -201,12 +194,18 @@ function WideCard({ post, href }: { post: HubPost; href: string }) {
   );
 }
 
-export function HubFeed() {
-  const params = useParams<{ lang: string }>();
-  const lang = params.lang ?? "ko";
+export function HubFeed({
+  initialPosts,
+  initialChips,
+  lang,
+}: {
+  initialPosts: HubPost[];
+  initialChips: string[];
+  lang: string;
+}) {
   const isKo = lang === "ko";
-  const posts = isKo ? hubPosts : hubPostsEn;
-  const chips = isKo ? FILTER_CHIPS_KO : FILTER_CHIPS_EN;
+  const posts = initialPosts;
+  const chips = initialChips;
   const [activeChip, setActiveChip] = useState(chips[0] ?? "All");
   const [search, setSearch] = useState("");
   const normalizedSearch = search.trim().toLowerCase();
