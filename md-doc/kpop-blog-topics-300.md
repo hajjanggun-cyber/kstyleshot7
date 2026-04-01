@@ -482,7 +482,7 @@ Role 표기:
 
 ### Haircut Cluster
 
-### [066] Hub [ ]
+### [066] Hub [v]
 - KO: 한국 헤어컷 추천 — 허쉬컷, 레이어드컷, 앞머리 정리
 - EN: Korean Haircut Ideas — Hush Cut, Layers, and Bangs
 - Keyword: KO `한국 헤어컷 추천` | EN `korean haircut ideas`

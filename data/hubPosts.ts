@@ -188,6 +188,19 @@ export const hubPosts: HubPost[] = [
     watermark: "립",
     cta: "읽기",
   },
+  {
+    slug: "korean-haircut-ideas",
+    cardType: "half-hero",
+    category: "K-뷰티 & 헤어",
+    categoryStyle: "white-on-pink",
+    title: "한국 헤어컷\n추천 가이드",
+    subtitle: "허쉬컷, 레이어드컷, 앞머리 선택을 함께 읽는 헤어 허브",
+    bg: "linear-gradient(135deg, #49342d 0%, #d8a07a 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "헤어컷",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -358,6 +371,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "LIPS",
+    cta: "Read Now",
+  },
+  {
+    slug: "korean-haircut-ideas",
+    cardType: "half-hero",
+    category: "K-Beauty",
+    categoryStyle: "white-on-pink",
+    title: "Korean Haircut\nIdeas",
+    subtitle: "A practical hub for hush cuts, layers, and better bang choices",
+    bg: "linear-gradient(135deg, #49342d 0%, #d8a07a 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "HAIRCUT",
     cta: "Read Now",
   },
 ];
