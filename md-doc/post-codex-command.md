@@ -181,7 +181,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[067] Sub [ ]`
+1. `[068] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -947,10 +947,10 @@ description: [actual text] -> [N]자
 - 한국 마스크팩 고르는 법 KO/EN 완료
 
 다음 우선순위:
-0. 한국 헤어컷 추천 허브 KO/EN 완료
-1. [067] Sub 작성
-2. [068] Sub 작성
-3. [069] Sub 작성
+0. 허쉬컷 얼굴형 KO/EN 완료
+1. [068] Sub 작성
+2. [069] Sub 작성
+3. [070] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
@@ -1036,6 +1036,10 @@ description: [actual text] -> [N]자
 - 한국 헤어컷 추천 허브: 허쉬컷, 레이어드컷, 길이 관리, 앞머리 선택, 미용실 상담 흐름 기준으로 신규 작성 완료
 - 허브 카드 반영: `data/hubPosts.ts`에 한국 헤어컷 추천 허브 KO/EN 카드 추가 완료
 - 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[066] Hub [v]` 반영, 다음 작성 대상 `[067] Sub [ ]`로 갱신
+- 허쉬컷 얼굴형 KO/EN: `who-looks-best-with-a-hush-cut` 게시용 MDX 작성 완료
+- 허쉬컷 얼굴형: 광대 폭, 턱선 길이, 숱 많은 머리, 손질 난이도 기준으로 하위 글 작성 완료
+- 헤어컷 허브 갱신: `korean-haircut-ideas` KO/EN related panel에 첫 하위 글 연결 반영 완료
+- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[067] Sub [v]` 반영, 다음 작성 대상 `[068] Sub [ ]`로 갱신
 
 ## 28. 2026-03-21 Update
 

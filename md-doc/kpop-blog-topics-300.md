@@ -488,7 +488,7 @@ Role 표기:
 - Keyword: KO `한국 헤어컷 추천` | EN `korean haircut ideas`
 - Subkeywords: KO `허쉬컷`, `레이어드컷`, `앞머리 추천` | EN `hush cut`, `layered haircut`, `korean bangs guide`
 
-### [067] Sub [ ]
+### [067] Sub [v]
 - KO: 허쉬컷 잘 어울리는 얼굴형
 - EN: Who Looks Best with a Hush Cut
 - Keyword: KO `허쉬컷 얼굴형` | EN `who looks best with a hush cut`
