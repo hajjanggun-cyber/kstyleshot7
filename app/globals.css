@@ -5743,10 +5743,28 @@ h2 {
   margin: 0;
 }
 
-.ha-hero-author {
+.ha-hero-meta {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.ha-hero-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ha-hero-meta-sep {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.ha-hero-date {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .ha-author-avatar {

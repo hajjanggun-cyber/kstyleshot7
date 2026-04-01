@@ -13,6 +13,12 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <nav className="site-footer-nav">
+          <Link href={`/${lang}/about`}>
+            {lang === "ko" ? "소개" : "About"}
+          </Link>
+          <Link href={`/${lang}/contact`}>
+            {lang === "ko" ? "문의하기" : "Contact"}
+          </Link>
           <Link href={`/${lang}/terms`}>{t("terms")}</Link>
           <Link href={`/${lang}/privacy`}>
             {lang === "ko" ? "개인정보처리방침" : "Privacy Policy"}

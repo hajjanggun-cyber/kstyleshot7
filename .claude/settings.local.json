@@ -41,7 +41,14 @@
       "Read(//tmp/**)",
       "Bash(\"c:/Users/수성길메인/Desktop/11  11 실전코딩/kpop-style/kstryletry/.env.local\")",
       "Bash(xargs cat:*)",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Bash(wc -w \"/c/Users/수성길메인/Desktop/11  11 실전코딩/kpop-style/kstryletry/content/hub/ko/\"*.mdx)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(mkdir -p \"C:\\\\Users\\\\수성길메인\\\\Desktop\\\\11  11 실전코딩\\\\kpop-style\\\\kstryletry\\\\app\\\\[lang]\\\\about\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\수성길메인\\\\Desktop\\\\11  11 실전코딩\\\\kpop-style\\\\kstryletry\\\\app\\\\[lang]\\\\contact\")",
+      "Bash(wc -w content/hub/ko/*.mdx)",
+      "Read(//c/Users/수성길메인/Desktop/11  11 실전코딩/kpop-style/kstryletry/**)",
+      "Bash(wc -w content/hub/en/*.mdx)"
     ]
   }
 }

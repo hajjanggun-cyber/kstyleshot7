@@ -140,6 +140,22 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           {frontmatter.category} · {frontmatter.readTime}
         </div>
         <h1 className="ha-hero-title">{frontmatter.title}</h1>
+        <div className="ha-hero-meta">
+          <span className="ha-hero-author">
+            {frontmatter.authorName ?? (lang === "ko" ? "K-StyleShot 에디토리얼팀" : "K-StyleShot Editorial Team")}
+          </span>
+          {frontmatter.publishedAt ? (
+            <>
+              <span className="ha-hero-meta-sep" aria-hidden>·</span>
+              <time className="ha-hero-date" dateTime={frontmatter.publishedAt}>
+                {new Date(frontmatter.publishedAt).toLocaleDateString(
+                  lang === "ko" ? "ko-KR" : "en-US",
+                  { year: "numeric", month: "long", day: "numeric" }
+                )}
+              </time>
+            </>
+          ) : null}
+        </div>
       </header>
 
       <section className="ha-quote-wrap">
