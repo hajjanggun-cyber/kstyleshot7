@@ -225,14 +225,14 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           <span className="ha-bnav-icon">▣</span>
           <span className="ha-bnav-label">Insights</span>
         </Link>
-        <button className="ha-bnav-item" type="button">
+        <Link className="ha-bnav-item" href={`/${lang}/about`}>
           <span className="ha-bnav-icon">◌</span>
-          <span className="ha-bnav-label">Events</span>
-        </button>
-        <button className="ha-bnav-item" type="button">
+          <span className="ha-bnav-label">About</span>
+        </Link>
+        <Link className="ha-bnav-item" href={`/${lang}/contact`}>
           <span className="ha-bnav-icon">◐</span>
-          <span className="ha-bnav-label">Profile</span>
-        </button>
+          <span className="ha-bnav-label">Contact</span>
+        </Link>
       </nav>
     </div>
   );

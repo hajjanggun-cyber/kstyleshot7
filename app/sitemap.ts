@@ -13,6 +13,8 @@ const LOCALIZED_STATIC_SUFFIXES: { suffix: string; changeFreq: "weekly" | "month
   { suffix: "/privacy",         changeFreq: "monthly", priority: 0.8 },
   { suffix: "/refund-policy",   changeFreq: "monthly", priority: 0.8 },
   { suffix: "/cookie-policy",   changeFreq: "monthly", priority: 0.8 },
+  { suffix: "/about",           changeFreq: "monthly", priority: 0.7 },
+  { suffix: "/contact",         changeFreq: "monthly", priority: 0.7 },
 ];
 
 function withAlternates(entry: SitemapEntry, languages: Record<string, string>): SitemapEntry {

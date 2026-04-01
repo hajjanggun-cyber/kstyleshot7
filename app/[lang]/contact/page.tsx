@@ -48,7 +48,9 @@ export default async function ContactPage({ params }: ContactPageProps) {
             <h2>콘텐츠 오류 제보 및 업데이트 요청</h2>
             <p>
               블로그 가이드(서울 명소, K-뷰티, K-패션)에서 오류를 발견하거나, 폐점·변경된
-              정보를 알고 계신 경우 <strong>kstylewshot.com</strong>을 통해 알려주세요.
+              정보를 알고 계신 경우{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로
+              알려주세요.
             </p>
             <p>제보 내용은 검토 후 해당 가이드에 반영합니다.</p>
           </section>
@@ -57,8 +59,17 @@ export default async function ContactPage({ params }: ContactPageProps) {
             <h2>콘텐츠 협업 및 제안</h2>
             <p>
               K-뷰티 브랜드, 서울 로컬 비즈니스, 여행 관련 협업 제안은{" "}
-              <strong>kstylewshot.com</strong>을 통해 문의해주세요. 저희 에디토리얼
-              기준에 맞는 경우 검토합니다.
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로
+              문의해주세요. 저희 에디토리얼 기준에 맞는 경우 검토합니다.
+            </p>
+          </section>
+
+          <section>
+            <h2>일반 문의</h2>
+            <p>
+              그 외 문의사항은{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로
+              연락해주세요. 영업일 기준 1~2일 내에 답변드립니다.
             </p>
           </section>
 
@@ -103,7 +114,8 @@ export default async function ContactPage({ params }: ContactPageProps) {
             <h2>Content Corrections & Update Requests</h2>
             <p>
               If you find an error in one of our guides — a closed location, changed pricing, or
-              outdated information — please let us know via <strong>kstylewshot.com</strong>.
+              outdated information — please email us at{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>.
             </p>
             <p>All reports are reviewed and reflected in the relevant guide.</p>
           </section>
@@ -112,8 +124,18 @@ export default async function ContactPage({ params }: ContactPageProps) {
             <h2>Collaboration Inquiries</h2>
             <p>
               For K-beauty brand partnerships, Seoul local business features, or travel
-              collaboration proposals, reach out via <strong>kstylewshot.com</strong>. We review
+              collaboration proposals, reach out at{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>. We review
               inquiries that align with our editorial standards.
+            </p>
+          </section>
+
+          <section>
+            <h2>General Contact</h2>
+            <p>
+              For all other inquiries, you can reach us directly at{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>. We typically
+              respond within 1–2 business days.
             </p>
           </section>
 

@@ -71,10 +71,21 @@ export default async function AboutPage({ params }: AboutPageProps) {
           <section>
             <h2>에디토리얼팀</h2>
             <p>
-              K-StyleShot 콘텐츠는 서울에 거주하거나 서울을 자주 방문하는 K-뷰티·여행
-              콘텐츠 크리에이터들이 작성합니다. 팀원들은 케이팝 씬, 서울 카페·팝업 문화,
-              K-뷰티 루틴에 깊이 관여해온 배경을 가지고 있습니다.
+              K-StyleShot 가이드는 서울에 거주하며 K-뷰티, 서울 명소, K-팝 문화를 직접
+              경험해온 작가들이 작성합니다.
             </p>
+            <ul>
+              <li>
+                <strong>김소연 (Soyeon Kim)</strong> — K-뷰티·스킨케어 담당. 5년 이상 K-뷰티
+                루틴을 직접 테스트하고 기록해왔으며, 베이스 메이크업, 피부 준비 단계, 눈·립
+                메이크업 기법을 전문으로 다룹니다.
+              </li>
+              <li>
+                <strong>조미래 (Mirae Jo)</strong> — 서울 여행·라이프스타일 담당. 홍대,
+                북촌, 성수, 인사동 등 서울 주요 지역을 직접 방문하며 포토스팟, 도보 루트,
+                동네 가이드를 작성합니다.
+              </li>
+            </ul>
             <p>
               콘텐츠에 오류가 있거나 업데이트가 필요한 정보를 발견하시면{" "}
               <a href={`/${lang}/contact`}>문의 페이지</a>를 통해 알려주세요. 검토 후
@@ -140,10 +151,21 @@ export default async function AboutPage({ params }: AboutPageProps) {
           <section>
             <h2>Our Team</h2>
             <p>
-              K-StyleShot content is written by K-beauty and lifestyle content creators who live
-              in or regularly visit Seoul. Team members have backgrounds in the K-pop scene,
-              Seoul café and pop-up culture, and K-beauty routines.
+              K-StyleShot guides are written by Seoul-based writers with direct experience in
+              K-beauty routines, Seoul neighborhoods, and K-pop culture.
             </p>
+            <ul>
+              <li>
+                <strong>Soyeon Kim</strong> — K-beauty and skincare writer. Has tested and
+                documented K-beauty routines for over five years, with a focus on base makeup,
+                skin prep, and eye and lip techniques suited for everyday wear.
+              </li>
+              <li>
+                <strong>Mirae Jo</strong> — Seoul travel and lifestyle writer. Covers Seoul photo
+                spots, walking routes, and neighborhood guides from regular on-the-ground visits
+                across Hongdae, Bukchon, Seongsu, and beyond.
+              </li>
+            </ul>
             <p>
               If you spot an error or outdated information in any of our guides, please let us
               know via our <a href={`/${lang}/contact`}>contact page</a>. We review and update
