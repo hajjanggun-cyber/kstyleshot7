@@ -167,19 +167,6 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
         </div>
       </section>
 
-      <div className="ha-mid-cta">
-        <a
-          href={`/${lang}`}
-          aria-label={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
-        >
-          <img
-            src={lang === "ko" ? "/visuals/blog/blog-bottom-banner-kr.webp" : "/visuals/blog/blog-bottom-banner-en.webp"}
-            alt={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
-            loading="lazy"
-          />
-        </a>
-      </div>
-
       <article className="ha-body">
         <MDXRemote source={content} components={mdxComponents} />
       </article>
@@ -199,41 +186,20 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
         </div>
       ) : null}
 
-      <div className="ha-bottom-banner">
-        <a
-          href={`/${lang}`}
-          aria-label={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
-        >
-          <img
-            src={lang === "ko" ? "/visuals/blog/blog-bottom-banner-kr.webp" : "/visuals/blog/blog-bottom-banner-en.webp"}
-            alt={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
-            loading="lazy"
-          />
-        </a>
-      </div>
-
-      <nav className="ha-bottom-nav">
-        <Link className="ha-bnav-item" href={`/${lang}/hub`}>
-          <span className="ha-bnav-icon">⌂</span>
-          <span className="ha-bnav-label">Home</span>
-        </Link>
-        <Link className="ha-bnav-item" href={`/${lang}/create`}>
-          <span className="ha-bnav-icon">✦</span>
-          <span className="ha-bnav-label">Style AI</span>
-        </Link>
-        <Link className="ha-bnav-item ha-bnav-item--active" href={`/${lang}/hub`}>
-          <span className="ha-bnav-icon">▣</span>
-          <span className="ha-bnav-label">Insights</span>
-        </Link>
-        <Link className="ha-bnav-item" href={`/${lang}/about`}>
-          <span className="ha-bnav-icon">◌</span>
-          <span className="ha-bnav-label">About</span>
-        </Link>
-        <Link className="ha-bnav-item" href={`/${lang}/contact`}>
-          <span className="ha-bnav-icon">◐</span>
-          <span className="ha-bnav-label">Contact</span>
-        </Link>
-      </nav>
+      {frontmatter.slug?.endsWith("-hub") ? (
+        <div className="ha-bottom-banner">
+          <a
+            href={`/${lang}`}
+            aria-label={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
+          >
+            <img
+              src={lang === "ko" ? "/visuals/blog/blog-bottom-banner-kr.webp" : "/visuals/blog/blog-bottom-banner-en.webp"}
+              alt={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
+              loading="lazy"
+            />
+          </a>
+        </div>
+      ) : null}
     </div>
   );
 }
