@@ -201,6 +201,19 @@ export const hubPosts: HubPost[] = [
     watermark: "헤어컷",
     cta: "읽기",
   },
+  {
+    slug: "hair-color-ideas-by-skin-tone",
+    cardType: "half-hero",
+    category: "K-뷰티 & 헤어",
+    categoryStyle: "white-on-pink",
+    title: "염색 컬러\n추천 가이드",
+    subtitle: "피부 톤, 탈색 여부, 퇴색 방향을 함께 읽는 헤어 컬러 허브",
+    bg: "linear-gradient(135deg, #4a352d 0%, #c68b66 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "헤어컬러",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -384,6 +397,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "HAIRCUT",
+    cta: "Read Now",
+  },
+  {
+    slug: "hair-color-ideas-by-skin-tone",
+    cardType: "half-hero",
+    category: "K-Beauty",
+    categoryStyle: "white-on-pink",
+    title: "Hair Color\nIdeas by Skin Tone",
+    subtitle: "A practical hub for undertone-based shades, ash brown upkeep, and lower-bleach color direction",
+    bg: "linear-gradient(135deg, #4a352d 0%, #c68b66 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "HAIR COLOR",
     cta: "Read Now",
   },
 ];

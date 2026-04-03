@@ -494,13 +494,13 @@ Role 표기:
 - Keyword: KO `허쉬컷 얼굴형` | EN `who looks best with a hush cut`
 - Subkeywords: KO `중단발 허쉬컷`, `허쉬컷 스타일링`, `층 많은 커트` | EN `medium hush cut`, `hush cut styling`, `layered haircut look`
 
-### [068] Sub [ ]
+### [068] Sub [v]
 - KO: 레이어드컷 관리 쉬운 길이 추천
 - EN: Best Layered Hair Length for Easy Styling
 - Keyword: KO `레이어드컷 관리 쉬운 길이` | EN `best layered hair length for easy styling`
 - Subkeywords: KO `중단발 레이어드`, `긴머리 레이어드`, `드라이 쉬운 커트` | EN `medium layered cut`, `long layered hair`, `low-maintenance haircut`
 
-### [069] Sub [ ]
+### [069] Sub [v]
 - KO: 시스루뱅과 커튼뱅 차이 정리
 - EN: See-Through Bangs vs Curtain Bangs
 - Keyword: KO `시스루뱅 커튼뱅 차이` | EN `see-through bangs vs curtain bangs`
@@ -514,7 +514,7 @@ Role 표기:
 
 ### Hair Color Cluster
 
-### [071] Hub [ ]
+### [071] Hub [v]
 - KO: 염색 컬러 추천 — 피부톤에 맞는 한국 헤어컬러
 - EN: Hair Color Ideas by Skin Tone — Popular Korean Shades
 - Keyword: KO `염색 컬러 추천` | EN `hair color ideas by skin tone`
