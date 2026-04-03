@@ -520,7 +520,7 @@ Role 표기:
 - Keyword: KO `염색 컬러 추천` | EN `hair color ideas by skin tone`
 - Subkeywords: KO `애쉬 브라운`, `웜톤 염색`, `탈색 없이 염색` | EN `ash brown hair`, `tone-based hair color`, `low-bleach color ideas`
 
-### [072] Sub [ ]
+### [072] Sub [v]
 - KO: 퍼스널 컬러 4계절 타입별 염색 가이드 — 봄여름가을겨울 추천 색상
 - EN: Personal Color Hair Dye Guide — Best Shades by Spring Summer Autumn Winter Type
 - Keyword: KO `퍼스널 컬러 염색` | EN `personal color hair dye guide`

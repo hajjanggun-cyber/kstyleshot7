@@ -280,7 +280,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[072] Sub [ ]`
+1. `[073] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -1341,3 +1341,7 @@ description: [actual text] -> [N]자
 
 - 현재 작업 상태: 한국 마스크팩 고르는 법 KO/EN 작성 완료
 - 진행 로그: `korean-sheet-mask-guide` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크와 `gentle-skincare-routine-guide` 및 `toner-pad-usage-guide` 연결 반영, `md-doc/kpop-blog-topics-300.md`의 `[050] Sub [v]` 반영, 다음 작성 대상은 `[051] Hub [ ]`
+## 45. 2026-04-03 Update
+
+- ?꾩옱 ?묒뾽 ?곹깭: `personal-color-hair-dye-guide` KO/EN ?묒꽦 ?꾨즺
+- 吏꾪뻾 濡쒓렇: `personal-color-hair-dye-guide` KO/EN 寃뚯떆??MDX ?묒꽦, `hair-color-ideas-by-skin-tone` KO/EN related panel ?곌껐 諛섏쁺, `md-doc/kpop-blog-topics-300.md`??`[072] Sub [v]` 諛섏쁺, ?ㅼ쓬 ?묒꽦 ??곸? `[073] Sub [ ]`
