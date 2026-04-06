@@ -186,6 +186,7 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
         </div>
       ) : null}
 
+      {/* 하단 배너 — AdSense 승인 후 아래 주석 해제
       {frontmatter.slug?.endsWith("-hub") ? (
         <div className="ha-bottom-banner">
           <a
@@ -200,6 +201,7 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           </a>
         </div>
       ) : null}
+      */}
     </div>
   );
 }

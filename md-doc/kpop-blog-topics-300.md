@@ -526,13 +526,13 @@ Role 표기:
 - Keyword: KO `퍼스널 컬러 염색` | EN `personal color hair dye guide`
 - Subkeywords: KO `봄웜 염색`, `겨울쿨 염색`, `퍼스널 컬러 헤어컬러` | EN `spring warm hair color`, `winter cool hair dye`, `seasonal color hair guide`
 
-### [073] Sub [ ]
+### [073] Sub [v]
 - KO: 애쉬 브라운 염색 유지 팁
 - EN: How to Maintain Ash Brown Hair
 - Keyword: KO `애쉬 브라운 염색 유지` | EN `how to maintain ash brown hair`
 - Subkeywords: KO `탈색모 관리`, `컬러 샴푸`, `물 빠짐 방지` | EN `bleached hair care`, `color shampoo tips`, `fade prevention`
 
-### [074] Sub [ ]
+### [074] Sub [v]
 - KO: 탈색 없이 예쁜 브라운 염색 고르기
 - EN: Best Brown Hair Colors Without Bleach
 - Keyword: KO `탈색 없이 브라운 염색` | EN `best brown hair colors without bleach`
@@ -2019,9 +2019,9 @@ Role 표기:
 3. 한강공원 허브
 
 현재 바로 쓰기 좋은 다음 페어:
-- KO: `인사동 전통 감성 포토존 가이드`
-- EN: `Insadong Traditional Photo Spots Guide`
-- Main keyword: KO `인사동 전통 감성 포토존` | EN `insadong traditional photo spots guide`
+- KO: `얼굴 밝아 보이는 헤어컬러 추천`
+- EN: `Hair Colors That Brighten Your Face`
+- Main keyword: KO `얼굴 밝아 보이는 헤어컬러` | EN `hair colors that brighten your face`
 
 ---
 
