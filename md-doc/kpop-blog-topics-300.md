@@ -538,7 +538,7 @@ Role 표기:
 - Keyword: KO `탈색 없이 브라운 염색` | EN `best brown hair colors without bleach`
 - Subkeywords: KO `초코 브라운`, `자연스러운 염색`, `직장인 염색` | EN `chocolate brown hair`, `natural hair color`, `office-friendly dye`
 
-### [075] Sub [ ]
+### [075] Sub [v]
 - KO: 얼굴 밝아 보이는 헤어컬러 추천
 - EN: Hair Colors That Brighten Your Face
 - Keyword: KO `얼굴 밝아 보이는 헤어컬러` | EN `hair colors that brighten your face`
@@ -546,31 +546,31 @@ Role 표기:
 
 ### Hair Styling and Care Cluster
 
-### [076] Hub [ ]
+### [076] Hub [v]
 - KO: 헤어 스타일링 방법 — 볼륨, 앞머리, 곱슬 관리 팁
 - EN: Hair Styling Tips — Volume, Bangs, and Frizz Control
 - Keyword: KO `헤어 스타일링 방법` | EN `hair styling tips`
 - Subkeywords: KO `뿌리 볼륨`, `앞머리 손질`, `고데기 스타일` | EN `root volume styling`, `bang styling`, `curling iron tips`
 
-### [077] Sub [ ]
+### [077] Sub [v]
 - KO: 뿌리 볼륨 살리는 드라이 방법
 - EN: How to Add Root Volume at Home
 - Keyword: KO `뿌리 볼륨 드라이` | EN `how to add root volume at home`
 - Subkeywords: KO `정수리 볼륨`, `롤빗 드라이`, `납작한 머리` | EN `crown lift`, `round brush blowout`, `flat hair fix`
 
-### [078] Sub [ ]
+### [078] Sub [v]
 - KO: 앞머리 손질 하루 종일 유지하는 법
 - EN: How to Keep Bangs in Place All Day
 - Keyword: KO `앞머리 손질 유지하는 법` | EN `how to keep bangs in place all day`
 - Subkeywords: KO `시스루뱅 고정`, `앞머리 롤`, `유분 관리` | EN `bang setting tips`, `hair roller for bangs`, `oil control around forehead`
 
-### [079] Sub [ ]
+### [079] Sub [v]
 - KO: 곱슬머리 장마철 관리 가이드
 - EN: Humid Weather Hair Care Guide
 - Keyword: KO `곱슬머리 장마철 관리` | EN `humid weather hair care guide`
 - Subkeywords: KO `부스스함 잡기`, `헤어 에센스`, `습기 관리` | EN `frizz control`, `hair essence tips`, `humidity-proof styling`
 
-### [080] Sub [ ]
+### [080] Sub [v]
 - KO: 탈색모 헤어 에센스 고르는 법
 - EN: Best Hair Essence for Bleached Hair
 - Keyword: KO `탈색모 헤어 에센스` | EN `best hair essence for bleached hair`

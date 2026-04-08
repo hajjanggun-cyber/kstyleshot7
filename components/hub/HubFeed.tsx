@@ -209,6 +209,7 @@ export function HubFeed({
   const [activeChip, setActiveChip] = useState(chips[0] ?? "All");
   const [search, setSearch] = useState("");
   const normalizedSearch = search.trim().toLowerCase();
+  const featuredBottomPost = posts.find((post) => post.slug === "hair-styling-tips");
   const filteredPosts = posts.filter((post) => {
     const chipMatches = activeChip === chips[0] || post.category === activeChip;
 
@@ -292,6 +293,25 @@ export function HubFeed({
           return null;
         })}
       </div>
+
+      {featuredBottomPost ? (
+        <section className="hf-bottom-section" aria-labelledby="hf-bottom-title">
+          <div className="hf-bottom-head">
+            <span className="hf-bottom-kicker">{isKo ? "맨 아래 추천 허브" : "Bottom Spotlight"}</span>
+            <h2 className="hf-bottom-title" id="hf-bottom-title">
+              {isKo ? "76번 허브 바로 가기" : "Go Straight to Hub 76"}
+            </h2>
+            <p className="hf-bottom-copy">
+              {isKo
+                ? "헤어 스타일링 방법 허브를 하단 카드 섹션으로 한 번 더 배치했습니다."
+                : "The hair styling hub is repeated here as a dedicated bottom card section."}
+            </p>
+          </div>
+          <div className="hf-bottom-grid">
+            <HalfHeroCard href={`/${lang}/hub/${featuredBottomPost.slug}`} post={featuredBottomPost} />
+          </div>
+        </section>
+      ) : null}
 
       <div className="hf-nav">
         <nav className="hf-nav-pill">

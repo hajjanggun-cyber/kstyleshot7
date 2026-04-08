@@ -280,7 +280,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[075] Sub [ ]`
+1. `[079] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -1030,6 +1030,9 @@ description: [actual text] -> [N]자
 - 쿨톤 립 추천 KO/EN 완료
 - 얼굴형별 블러셔 위치 KO/EN 완료
 - 한국 헤어컷 추천 허브 KO/EN 완료
+- 헤어 스타일링 방법 허브 KO/EN 완료
+- 곱슬머리 장마철 관리 가이드 KO/EN 완료
+- 탈색모 헤어 에센스 고르는 법 KO/EN 완료
 
 - 북촌 한옥마을 허브 KO/EN 완료
 - 북촌 한옥 사진 명소 KO/EN 완료
@@ -1070,6 +1073,7 @@ description: [actual text] -> [N]자
 - 현재 작업 상태: `best-layered-hair-length-for-easy-styling` KO/EN 작성 완료
 - 현재 작업 상태: `see-through-bangs-vs-curtain-bangs` KO/EN 작성 완료
 - 현재 작업 상태: `hair-color-ideas-by-skin-tone` KO/EN 작성 완료
+- 현재 작업 상태: `hair-styling-tips` KO/EN 작성 완료
 
 ## 19. 진행 로그
 
@@ -1345,3 +1349,18 @@ description: [actual text] -> [N]자
 
 - ?꾩옱 ?묒뾽 ?곹깭: `personal-color-hair-dye-guide` KO/EN ?묒꽦 ?꾨즺
 - 吏꾪뻾 濡쒓렇: `personal-color-hair-dye-guide` KO/EN 寃뚯떆??MDX ?묒꽦, `hair-color-ideas-by-skin-tone` KO/EN related panel ?곌껐 諛섏쁺, `md-doc/kpop-blog-topics-300.md`??`[072] Sub [v]` 諛섏쁺, ?ㅼ쓬 ?묒꽦 ??곸? `[073] Sub [ ]`
+### 2026-04-08 Latest Update
+
+- Current status: `hair-colors-that-brighten-your-face` KO/EN completed
+- Topic map status updated: `[075] Sub [v]`
+- Current status: `hair-styling-tips` KO/EN completed
+- Topic map status updated: `[076] Hub [v]`
+- Current status: `how-to-add-root-volume-at-home` KO/EN completed
+- Topic map status updated: `[077] Sub [v]`
+- Current status: `how-to-keep-bangs-in-place-all-day` KO/EN completed
+- Topic map status updated: `[078] Sub [v]`
+- Current status: `humid-weather-hair-care-guide` KO/EN completed
+- Topic map status updated: `[079] Sub [v]`
+- Current status: `best-hair-essence-for-bleached-hair` KO/EN completed
+- Topic map status updated: `[080] Sub [v]`
+- Next writing target updated to `[081] Hub [ ]`

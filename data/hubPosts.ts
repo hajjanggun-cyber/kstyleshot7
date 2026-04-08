@@ -214,6 +214,19 @@ export const hubPosts: HubPost[] = [
     watermark: "헤어컬러",
     cta: "읽기",
   },
+  {
+    slug: "hair-styling-tips",
+    cardType: "half-hero",
+    category: "K-뷰티 & 헤어",
+    categoryStyle: "white-on-pink",
+    title: "헤어 스타일링\n방법 허브",
+    subtitle: "뿌리 볼륨, 앞머리 손질, 곱슬 관리를 순서대로 읽는 헤어 허브",
+    bg: "linear-gradient(135deg, #5a3d35 0%, #d39a72 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "헤어 스타일링",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -410,6 +423,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "HAIR COLOR",
+    cta: "Read Now",
+  },
+  {
+    slug: "hair-styling-tips",
+    cardType: "half-hero",
+    category: "K-Beauty",
+    categoryStyle: "white-on-pink",
+    title: "Hair Styling\nTips",
+    subtitle: "A practical hub for root volume, bang hold, frizz control, and smarter heat-tool order",
+    bg: "linear-gradient(135deg, #5a3d35 0%, #d39a72 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "HAIR STYLING",
     cta: "Read Now",
   },
 ];
