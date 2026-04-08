@@ -210,7 +210,11 @@ export function HubFeed({
   const [search, setSearch] = useState("");
   const normalizedSearch = search.trim().toLowerCase();
   const featuredBottomPost = posts.find((post) => post.slug === "hair-styling-tips");
+  const featuredBottomPost2 = posts.find((post) => post.slug === "korean-skincare-routine-guide");
   const filteredPosts = posts.filter((post) => {
+    if (post.slug === "hair-styling-tips") return false;
+    if (post.slug === "korean-skincare-routine-guide") return false;
+
     const chipMatches = activeChip === chips[0] || post.category === activeChip;
 
     if (!chipMatches) return false;
@@ -294,21 +298,21 @@ export function HubFeed({
         })}
       </div>
 
-      {featuredBottomPost ? (
+      {(featuredBottomPost || featuredBottomPost2) ? (
         <section className="hf-bottom-section" aria-labelledby="hf-bottom-title">
           <div className="hf-bottom-head">
-            <span className="hf-bottom-kicker">{isKo ? "맨 아래 추천 허브" : "Bottom Spotlight"}</span>
+            <span className="hf-bottom-kicker">{isKo ? "추천 허브" : "Featured Hubs"}</span>
             <h2 className="hf-bottom-title" id="hf-bottom-title">
-              {isKo ? "76번 허브 바로 가기" : "Go Straight to Hub 76"}
+              {isKo ? "인기 허브 바로 가기" : "Go Straight to Top Hubs"}
             </h2>
-            <p className="hf-bottom-copy">
-              {isKo
-                ? "헤어 스타일링 방법 허브를 하단 카드 섹션으로 한 번 더 배치했습니다."
-                : "The hair styling hub is repeated here as a dedicated bottom card section."}
-            </p>
           </div>
           <div className="hf-bottom-grid">
-            <HalfHeroCard href={`/${lang}/hub/${featuredBottomPost.slug}`} post={featuredBottomPost} />
+            {featuredBottomPost2 ? (
+              <HalfHeroCard href={`/${lang}/hub/${featuredBottomPost2.slug}`} post={featuredBottomPost2} />
+            ) : null}
+            {featuredBottomPost ? (
+              <HalfHeroCard href={`/${lang}/hub/${featuredBottomPost.slug}`} post={featuredBottomPost} />
+            ) : null}
           </div>
         </section>
       ) : null}
