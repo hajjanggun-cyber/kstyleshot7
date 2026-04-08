@@ -209,12 +209,7 @@ export function HubFeed({
   const [activeChip, setActiveChip] = useState(chips[0] ?? "All");
   const [search, setSearch] = useState("");
   const normalizedSearch = search.trim().toLowerCase();
-  const featuredBottomPost = posts.find((post) => post.slug === "hair-styling-tips");
-  const featuredBottomPost2 = posts.find((post) => post.slug === "korean-skincare-routine-guide");
   const filteredPosts = posts.filter((post) => {
-    if (post.slug === "hair-styling-tips") return false;
-    if (post.slug === "korean-skincare-routine-guide") return false;
-
     const chipMatches = activeChip === chips[0] || post.category === activeChip;
 
     if (!chipMatches) return false;
@@ -298,18 +293,6 @@ export function HubFeed({
         })}
       </div>
 
-      {(featuredBottomPost || featuredBottomPost2) ? (
-        <section className="hf-bottom-section" aria-labelledby="hf-bottom-title">
-          <div className="hf-bottom-grid">
-            {featuredBottomPost2 ? (
-              <HalfHeroCard href={`/${lang}/hub/${featuredBottomPost2.slug}`} post={featuredBottomPost2} />
-            ) : null}
-            {featuredBottomPost ? (
-              <HalfHeroCard href={`/${lang}/hub/${featuredBottomPost.slug}`} post={featuredBottomPost} />
-            ) : null}
-          </div>
-        </section>
-      ) : null}
 
       <div className="hf-nav">
         <nav className="hf-nav-pill">
