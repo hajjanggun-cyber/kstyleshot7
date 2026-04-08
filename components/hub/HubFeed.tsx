@@ -300,12 +300,6 @@ export function HubFeed({
 
       {(featuredBottomPost || featuredBottomPost2) ? (
         <section className="hf-bottom-section" aria-labelledby="hf-bottom-title">
-          <div className="hf-bottom-head">
-            <span className="hf-bottom-kicker">{isKo ? "추천 허브" : "Featured Hubs"}</span>
-            <h2 className="hf-bottom-title" id="hf-bottom-title">
-              {isKo ? "인기 허브 바로 가기" : "Go Straight to Top Hubs"}
-            </h2>
-          </div>
           <div className="hf-bottom-grid">
             {featuredBottomPost2 ? (
               <HalfHeroCard href={`/${lang}/hub/${featuredBottomPost2.slug}`} post={featuredBottomPost2} />
