@@ -227,6 +227,19 @@ export const hubPosts: HubPost[] = [
     watermark: "헤어 스타일링",
     cta: "읽기",
   },
+  {
+    slug: "olive-young-must-buys-guide",
+    cardType: "half-hero",
+    category: "K-뷰티 & 헤어",
+    categoryStyle: "white-on-pink",
+    title: "올리브영\n추천템 가이드",
+    subtitle: "스킨케어, 여행 파우치, 헤어숍 상담까지 묶어 보는 쇼핑 허브",
+    bg: "linear-gradient(135deg, #6b4a3c 0%, #f2b38f 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "올리브영",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -436,6 +449,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "HAIR STYLING",
+    cta: "Read Now",
+  },
+  {
+    slug: "olive-young-must-buys-guide",
+    cardType: "half-hero",
+    category: "K-Beauty",
+    categoryStyle: "white-on-pink",
+    title: "Olive Young\nMust-Buys Guide",
+    subtitle: "A practical shopping hub for skincare, travel beauty, and salon prep",
+    bg: "linear-gradient(135deg, #6b4a3c 0%, #f2b38f 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "OLIVE YOUNG",
     cta: "Read Now",
   },
 ];

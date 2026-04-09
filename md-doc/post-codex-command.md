@@ -280,7 +280,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[079] Sub [ ]`
+1. `[086] Hub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -1031,6 +1031,7 @@ description: [actual text] -> [N]자
 - 얼굴형별 블러셔 위치 KO/EN 완료
 - 한국 헤어컷 추천 허브 KO/EN 완료
 - 헤어 스타일링 방법 허브 KO/EN 완료
+- 올리브영 추천템과 한국 뷰티 쇼핑 가이드 KO/EN 완료
 - 곱슬머리 장마철 관리 가이드 KO/EN 완료
 - 탈색모 헤어 에센스 고르는 법 KO/EN 완료
 
@@ -1057,14 +1058,14 @@ description: [actual text] -> [N]자
 - 한국 마스크팩 고르는 법 KO/EN 완료
 
 다음 우선순위:
-0. 허쉬컷 얼굴형 KO/EN 완료
-1. [068] Sub 작성
-2. [069] Sub 작성
-3. [070] Sub 작성
+1. [082] Sub 작성
+2. [083] Sub 작성
+3. [084] Sub 작성
+4. [085] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
-- 다음 작성 사이클부터는 `K-뷰티 & 헤어`와 `가상 스타일 체험` 클러스터를 우선한다
+- 현재 작성 사이클은 `Practical Beauty Cluster`를 우선하고, 이후 `가상 스타일 체험` 클러스터로 넘어간다
 
 ---
 
@@ -1364,3 +1365,21 @@ description: [actual text] -> [N]자
 - Current status: `best-hair-essence-for-bleached-hair` KO/EN completed
 - Topic map status updated: `[080] Sub [v]`
 - Next writing target updated to `[081] Hub [ ]`
+### 2026-04-09 Latest Update
+
+- Current status: `olive-young-must-buys-guide` KO/EN completed
+- Topic map status updated: `[081] Hub [v]`
+- Hub card added: `data/hubPosts.ts` updated for KO/EN
+- Next writing target updated to `[082] Sub [ ]`
+- Current status: `olive-young-skincare-shopping-guide` KO/EN completed
+- Topic map status updated: `[082] Sub [v]`
+- Next writing target updated to `[083] Sub [ ]`
+- Current status: `how-to-ask-for-a-hairstyle-in-korea` KO/EN completed
+- Topic map status updated: `[083] Sub [v]`
+- Next writing target updated to `[084] Sub [ ]`
+- Current status: `travel-k-beauty-pouch-guide` KO/EN completed
+- Topic map status updated: `[084] Sub [v]`
+- Next writing target updated to `[085] Sub [ ]`
+- Current status: `makeup-tips-for-better-photos` KO/EN completed
+- Topic map status updated: `[085] Sub [v]`
+- Next writing target updated to `[086] Hub [ ]`

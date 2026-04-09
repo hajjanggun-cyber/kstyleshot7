@@ -578,31 +578,31 @@ Role 표기:
 
 ### Practical Beauty Cluster
 
-### [081] Hub [ ]
+### [081] Hub [v]
 - KO: 올리브영 추천템과 한국 뷰티 쇼핑 가이드
 - EN: Olive Young Must-Buys and Korean Beauty Shopping Guide
 - Keyword: KO `올리브영 추천템` | EN `olive young must buys`
 - Subkeywords: KO `올리브영 쇼핑`, `헤어숍 주문`, `여행용 뷰티` | EN `olive young shopping`, `salon phrases in korea`, `travel beauty guide`
 
-### [082] Sub [ ]
+### [082] Sub [v]
 - KO: 올리브영 스킨케어 쇼핑 리스트
 - EN: Olive Young Skincare Shopping Guide
 - Keyword: KO `올리브영 스킨케어 쇼핑` | EN `olive young skincare shopping guide`
 - Subkeywords: KO `입문템`, `재구매템`, `기초 쇼핑 동선` | EN `beginner skincare picks`, `repurchase items`, `beauty shopping route`
 
-### [083] Sub [ ]
+### [083] Sub [v]
 - KO: 한국 헤어숍 주문하는 법 — 원하는 스타일 말하기
 - EN: How to Ask for a Hairstyle in Korea
 - Keyword: KO `한국 헤어숍 주문하는 법` | EN `how to ask for a hairstyle in korea`
 - Subkeywords: KO `미용실 영어`, `컷트 주문`, `염색 상담` | EN `salon phrases`, `haircut requests`, `color consultation`
 
-### [084] Sub [ ]
+### [084] Sub [v]
 - KO: 여행용 K-뷰티 파우치 꾸리는 법
 - EN: Travel K-Beauty Pouch Guide
 - Keyword: KO `여행용 K뷰티 파우치` | EN `travel k-beauty pouch guide`
 - Subkeywords: KO `소분 용기`, `미니 제품`, `비행기 화장품` | EN `travel-size beauty`, `mini products`, `carry-on skincare`
 
-### [085] Sub [ ]
+### [085] Sub [v]
 - KO: 사진 잘 나오는 메이크업 가이드
 - EN: Makeup Tips for Better Photos
 - Keyword: KO `사진 잘 나오는 메이크업` | EN `makeup tips for better photos`
