@@ -105,6 +105,7 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           priority={isPriority}
           fetchPriority={isPriority ? "high" : undefined}
           loading={isPriority ? "eager" : "lazy"}
+          unoptimized
           style={{ width: "100%", height: "auto" }}
         />
       );
