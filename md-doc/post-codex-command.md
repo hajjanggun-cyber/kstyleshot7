@@ -280,7 +280,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[086] Hub [ ]`
+1. `[097] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -1034,6 +1034,8 @@ description: [actual text] -> [N]자
 - 올리브영 추천템과 한국 뷰티 쇼핑 가이드 KO/EN 완료
 - 곱슬머리 장마철 관리 가이드 KO/EN 완료
 - 탈색모 헤어 에센스 고르는 법 KO/EN 완료
+- 와이드 팬츠 K-스타일 코디 KO/EN 완료
+- 크롭 니트 미니스커트 코디 KO/EN 완료
 
 - 북촌 한옥마을 허브 KO/EN 완료
 - 북촌 한옥 사진 명소 KO/EN 완료
@@ -1058,10 +1060,10 @@ description: [actual text] -> [N]자
 - 한국 마스크팩 고르는 법 KO/EN 완료
 
 다음 우선순위:
-1. [082] Sub 작성
-2. [083] Sub 작성
-3. [084] Sub 작성
-4. [085] Sub 작성
+1. [095] Sub 작성
+2. [096] Hub 작성
+3. [097] Sub 작성
+4. [098] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
@@ -1075,6 +1077,15 @@ description: [actual text] -> [N]자
 - 현재 작업 상태: `see-through-bangs-vs-curtain-bangs` KO/EN 작성 완료
 - 현재 작업 상태: `hair-color-ideas-by-skin-tone` KO/EN 작성 완료
 - 현재 작업 상태: `hair-styling-tips` KO/EN 작성 완료
+
+- 피부 고민별 스킨케어 허브 KO/EN 완료
+- 남자 피부관리 루틴 입문 가이드 KO/EN 완료
+- 선크림 고르는 법 KO/EN 완료
+
+ - `k-fashion-wardrobe-essentials` KO/EN 완료
+ - `oversized-blazer-outfit-guide` KO/EN 완료
+ - `k-style-layered-necklace-guide` KO/EN 완료
+ - `k-fashion-style-types` KO/EN 완료
 
 ## 19. 진행 로그
 
@@ -1383,3 +1394,44 @@ description: [actual text] -> [N]자
 - Current status: `makeup-tips-for-better-photos` KO/EN completed
 - Topic map status updated: `[085] Sub [v]`
 - Next writing target updated to `[086] Hub [ ]`
+### 2026-04-10 Latest Update
+
+- Current status: `skincare-by-skin-concern` KO/EN completed
+- Topic map status updated: `[086] Hub [v]`
+- Hub card added: `data/hubPosts.ts` updated for KO/EN
+- Next writing target updated to `[087] Sub [ ]`
+- Current status: `beginner-mens-skincare-routine-guide` KO/EN completed
+- Topic map status updated: `[089] Sub [v]`
+- Current status: `how-to-choose-the-right-sunscreen` KO/EN completed
+- Topic map status updated: `[090] Sub [v]`
+- Current status: `makeup-tips-for-acne-prone-skin` KO/EN completed
+- Topic map status updated: `[087] Sub [v]`
+- Next writing target updated to `[088] Sub [ ]`
+- Current status: `best-primer-for-large-pores` KO/EN completed
+- Topic map status updated: `[088] Sub [v]`
+- Current status: `beginner-mens-skincare-routine-guide` KO/EN completed
+- Topic map status updated: `[089] Sub [v]`
+- Current status: `how-to-choose-the-right-sunscreen` KO/EN completed
+- Topic map status updated: `[090] Sub [v]`
+- Next writing target updated to `[091] Hub [ ]`
+### 2026-04-11 Latest Update
+
+- Current status: `wide-leg-pants-k-style-outfit-ideas` KO/EN completed
+- Topic map status updated: `[093] Sub [v]`
+- Current status: `crop-knit-and-mini-skirt-outfit-guide` KO/EN completed
+- Topic map status updated: `[094] Sub [v]`
+- Fashion cluster integration: `k-fashion-wardrobe-essentials` and `oversized-blazer-outfit-guide` related panels updated to include the new sub-guides
+- Next writing target updated to `[095] Sub [ ]`
+- Current status: `k-fashion-wardrobe-essentials` KO/EN completed
+- Topic map status updated: `[091] Hub [v]`
+- Hub card added: `data/hubPosts.ts` updated for KO/EN
+- Next writing target updated to `[092] Sub [ ]`
+- Current status: `oversized-blazer-outfit-guide` KO/EN completed
+- Topic map status updated: `[092] Sub [v]`
+- Next writing target updated to `[093] Sub [ ]`
+- Current status: `k-style-layered-necklace-guide` KO/EN completed
+- Topic map status updated: `[095] Sub [v]`
+- Current status: `k-fashion-style-types` KO/EN completed
+- Topic map status updated: `[096] Hub [v]`
+- Hub card added: `data/hubPosts.ts` updated for KO/EN
+- Next writing target updated to `[097] Sub [ ]`
