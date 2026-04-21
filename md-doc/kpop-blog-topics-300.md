@@ -506,7 +506,7 @@ Role 표기:
 - Keyword: KO `시스루뱅 커튼뱅 차이` | EN `see-through bangs vs curtain bangs`
 - Subkeywords: KO `앞머리 추천`, `얼굴형별 앞머리`, `가벼운 뱅 스타일` | EN `bangs guide`, `bangs by face shape`, `light fringe styles`
 
-### [070] Sub [ ]
+### [070] Sub [v]
 - KO: 처피뱅이 어울리는 사람 가이드
 - EN: Choppy Bangs Face Shape Guide
 - Keyword: KO `처피뱅 어울리는 얼굴형` | EN `choppy bangs face shape guide`
@@ -646,31 +646,31 @@ Role 표기:
 
 ### Core Wardrobe Cluster
 
-### [091] Hub [v]
+### [091] Hub [ ]
 - KO: K패션 기본템 추천 — 실패 없는 데일리 코디 시작
 - EN: K-Fashion Wardrobe Essentials — Daily Outfit Basics That Work
 - Keyword: KO `K패션 기본템` | EN `k-fashion wardrobe essentials`
 - Subkeywords: KO `기본템 추천`, `한국 여자 코디`, `옷장 정리` | EN `wardrobe basics`, `korean outfit staples`, `closet essentials`
 
-### [092] Sub [v]
+### [092] Sub [ ]
 - KO: 오버핏 블레이저 코디 가이드
 - EN: Oversized Blazer Outfit Guide
 - Keyword: KO `오버핏 블레이저 코디` | EN `oversized blazer outfit guide`
 - Subkeywords: KO `블레이저 핏`, `출근룩 코디`, `미니멀 재킷` | EN `blazer styling`, `work outfit ideas`, `minimal jacket looks`
 
-### [093] Sub [v]
+### [093] Sub [ ]
 - KO: 와이드 팬츠 K-스타일 코디법
 - EN: Wide-Leg Pants K-Style Outfit Ideas
 - Keyword: KO `와이드 팬츠 코디` | EN `wide-leg pants k-style outfit ideas`
 - Subkeywords: KO `하체 커버 코디`, `스트릿 팬츠 코디`, `캐주얼 룩` | EN `wide pants styling`, `streetwear pants`, `casual korean outfits`
 
-### [094] Sub [v]
+### [094] Sub [ ]
 - KO: 크롭 니트와 미니스커트 코디
 - EN: Crop Knit and Mini Skirt Outfit Guide
 - Keyword: KO `크롭 니트 미니스커트 코디` | EN `crop knit and mini skirt outfit guide`
 - Subkeywords: KO `하이틴 코디`, `가을 데이트룩`, `니트 코디` | EN `high-teen styling`, `fall date outfits`, `knit top looks`
 
-### [095] Sub [v]
+### [095] Sub [ ]
 - KO: 레이어드 목걸이 K-스타일 연출법
 - EN: K-Style Layered Necklace Guide
 - Keyword: KO `레이어드 목걸이 코디` | EN `k-style layered necklace guide`
@@ -678,19 +678,19 @@ Role 표기:
 
 ### Concept Styling Cluster
 
-### [096] Hub [v]
+### [096] Hub [ ]
 - KO: K패션 스타일 종류 총정리 — Y2K부터 걸크러시까지
 - EN: K-Fashion Style Types — From Y2K to Girl Crush
 - Keyword: KO `K패션 스타일 종류` | EN `k-fashion style types`
 - Subkeywords: KO `컨셉별 코디`, `한국 트렌드 룩`, `무드별 스타일링` | EN `concept outfits`, `korean trend looks`, `mood-based styling`
 
-### [097] Sub [ ]
+### [097] Sub [v]
 - KO: Y2K 패션 코디 가이드
 - EN: Y2K K-Fashion Outfit Guide
 - Keyword: KO `Y2K 패션 코디` | EN `y2k k-fashion outfit guide`
 - Subkeywords: KO `청키 스니커즈`, `로우라이즈 코디`, `레트로 무드` | EN `chunky sneakers`, `low-rise outfit ideas`, `retro styling`
 
-### [098] Sub [ ]
+### [098] Sub [v]
 - KO: 걸크러시 스타일 코디 가이드
 - EN: Girl Crush Style Outfit Guide
 - Keyword: KO `걸크러시 스타일 코디` | EN `girl crush style outfit guide`
@@ -2009,20 +2009,6 @@ Role 표기:
 - Subkeywords: KO `크리에이터 포트폴리오`, `결과물 정리`, `비포 애프터 구성` | EN `creator portfolio`, `organizing outputs`, `before-and-after layout`
 
 ---
-
-### 2026-04-11 Latest Update
-
-- Current status: `k-fashion-wardrobe-essentials` KO/EN completed
-- Topic map status updated: `[091] Hub [v]`
-- Hub card added: `data/hubPosts.ts` updated for KO/EN
-- Current status: `oversized-blazer-outfit-guide` KO/EN completed
-- Topic map status updated: `[092] Sub [v]`
-- Current status: `k-style-layered-necklace-guide` KO/EN completed
-- Topic map status updated: `[095] Sub [v]`
-- Current status: `k-fashion-style-types` KO/EN completed
-- Topic map status updated: `[096] Hub [v]`
-- Hub card added: `data/hubPosts.ts` updated for KO/EN
-- Next writing target updated to `[097] Sub [ ]`
 
 ## 12. Immediate Writing Priority Snapshot
 

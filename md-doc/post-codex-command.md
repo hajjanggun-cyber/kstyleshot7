@@ -280,7 +280,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[097] Sub [ ]`
+1. `[099] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -1060,14 +1060,14 @@ description: [actual text] -> [N]자
 - 한국 마스크팩 고르는 법 KO/EN 완료
 
 다음 우선순위:
-1. [095] Sub 작성
-2. [096] Hub 작성
-3. [097] Sub 작성
-4. [098] Sub 작성
+1. [099] Sub 작성
+2. [100] Sub 작성
+3. [101] Sub 작성
+4. [102] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
-- 현재 작성 사이클은 `Practical Beauty Cluster`를 우선하고, 이후 `가상 스타일 체험` 클러스터로 넘어간다
+- 현재 작성 사이클은 `K-Fashion Style Types` 클러스터를 우선한다
 
 ---
 
@@ -1435,3 +1435,8 @@ description: [actual text] -> [N]자
 - Topic map status updated: `[096] Hub [v]`
 - Hub card added: `data/hubPosts.ts` updated for KO/EN
 - Next writing target updated to `[097] Sub [ ]`
+- Current status: `y2k-k-fashion-outfit-guide` KO/EN completed
+- Topic map status updated: `[097] Sub [v]`
+- Current status: `girl-crush-style-outfit-guide` KO/EN completed
+- Topic map status updated: `[098] Sub [v]`
+- Next writing target updated to `[099] Sub [ ]`
