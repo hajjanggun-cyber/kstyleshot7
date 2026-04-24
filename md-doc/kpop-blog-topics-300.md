@@ -646,31 +646,31 @@ Role 표기:
 
 ### Core Wardrobe Cluster
 
-### [091] Hub [ ]
+### [091] Hub [v]
 - KO: K패션 기본템 추천 — 실패 없는 데일리 코디 시작
 - EN: K-Fashion Wardrobe Essentials — Daily Outfit Basics That Work
 - Keyword: KO `K패션 기본템` | EN `k-fashion wardrobe essentials`
 - Subkeywords: KO `기본템 추천`, `한국 여자 코디`, `옷장 정리` | EN `wardrobe basics`, `korean outfit staples`, `closet essentials`
 
-### [092] Sub [ ]
+### [092] Sub [v]
 - KO: 오버핏 블레이저 코디 가이드
 - EN: Oversized Blazer Outfit Guide
 - Keyword: KO `오버핏 블레이저 코디` | EN `oversized blazer outfit guide`
 - Subkeywords: KO `블레이저 핏`, `출근룩 코디`, `미니멀 재킷` | EN `blazer styling`, `work outfit ideas`, `minimal jacket looks`
 
-### [093] Sub [ ]
+### [093] Sub [v]
 - KO: 와이드 팬츠 K-스타일 코디법
 - EN: Wide-Leg Pants K-Style Outfit Ideas
 - Keyword: KO `와이드 팬츠 코디` | EN `wide-leg pants k-style outfit ideas`
 - Subkeywords: KO `하체 커버 코디`, `스트릿 팬츠 코디`, `캐주얼 룩` | EN `wide pants styling`, `streetwear pants`, `casual korean outfits`
 
-### [094] Sub [ ]
+### [094] Sub [v]
 - KO: 크롭 니트와 미니스커트 코디
 - EN: Crop Knit and Mini Skirt Outfit Guide
 - Keyword: KO `크롭 니트 미니스커트 코디` | EN `crop knit and mini skirt outfit guide`
 - Subkeywords: KO `하이틴 코디`, `가을 데이트룩`, `니트 코디` | EN `high-teen styling`, `fall date outfits`, `knit top looks`
 
-### [095] Sub [ ]
+### [095] Sub [v]
 - KO: 레이어드 목걸이 K-스타일 연출법
 - EN: K-Style Layered Necklace Guide
 - Keyword: KO `레이어드 목걸이 코디` | EN `k-style layered necklace guide`
@@ -678,7 +678,7 @@ Role 표기:
 
 ### Concept Styling Cluster
 
-### [096] Hub [ ]
+### [096] Hub [v]
 - KO: K패션 스타일 종류 총정리 — Y2K부터 걸크러시까지
 - EN: K-Fashion Style Types — From Y2K to Girl Crush
 - Keyword: KO `K패션 스타일 종류` | EN `k-fashion style types`
@@ -696,13 +696,13 @@ Role 표기:
 - Keyword: KO `걸크러시 스타일 코디` | EN `girl crush style outfit guide`
 - Subkeywords: KO `올블랙 코디`, `강한 실루엣`, `부츠 코디` | EN `all-black looks`, `bold silhouettes`, `boots styling`
 
-### [099] Sub [ ]
+### [099] Sub [v]
 - KO: 하이틴 교복룩 코디 가이드
 - EN: High Teen School Look Guide
 - Keyword: KO `하이틴 교복룩 코디` | EN `high teen school look guide`
 - Subkeywords: KO `플리츠 스커트`, `가디건 코디`, `캠퍼스룩` | EN `pleated skirt outfits`, `cardigan styling`, `campus-inspired looks`
 
-### [100] Sub [ ]
+### [100] Sub [v]
 - KO: 페어리코어 코디 입문 가이드
 - EN: Fairycore Outfit Guide
 - Keyword: KO `페어리코어 코디` | EN `fairycore outfit guide`

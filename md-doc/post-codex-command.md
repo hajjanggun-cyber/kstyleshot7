@@ -280,7 +280,7 @@ Updated At: 2026-03-10 KST
 
 현재 바로 써야 할 다음 글:
 
-1. `[099] Sub [ ]`
+1. `[101] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -1036,6 +1036,8 @@ description: [actual text] -> [N]자
 - 탈색모 헤어 에센스 고르는 법 KO/EN 완료
 - 와이드 팬츠 K-스타일 코디 KO/EN 완료
 - 크롭 니트 미니스커트 코디 KO/EN 완료
+- 하이틴 교복룩 코디 KO/EN 완료
+- 페어리코어 코디 KO/EN 완료
 
 - 북촌 한옥마을 허브 KO/EN 완료
 - 북촌 한옥 사진 명소 KO/EN 완료
@@ -1060,10 +1062,10 @@ description: [actual text] -> [N]자
 - 한국 마스크팩 고르는 법 KO/EN 완료
 
 다음 우선순위:
-1. [099] Sub 작성
-2. [100] Sub 작성
-3. [101] Sub 작성
-4. [102] Sub 작성
+1. [101] Sub 작성
+2. [102] Hub 작성
+3. [103] Sub 작성
+4. [104] Sub 작성
 
 전환 메모:
 - 서울 명소 묶음 기록은 히스토리로 유지한다
@@ -1440,3 +1442,12 @@ description: [actual text] -> [N]자
 - Current status: `girl-crush-style-outfit-guide` KO/EN completed
 - Topic map status updated: `[098] Sub [v]`
 - Next writing target updated to `[099] Sub [ ]`
+### 2026-04-24 Latest Update
+
+- Current status: `high-teen-school-look-guide` KO/EN completed
+- Topic map status updated: `[099] Sub [v]`
+- Hub card added: `data/hubPosts.ts` updated for KO/EN
+- Current status: `fairycore-outfit-guide` KO/EN completed
+- Topic map status updated: `[100] Sub [v]`
+- Hub card added: `data/hubPosts.ts` updated for KO/EN
+- Next writing target updated to `[101] Sub [ ]`
