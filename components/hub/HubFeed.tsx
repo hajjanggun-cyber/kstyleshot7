@@ -206,6 +206,8 @@ export function HubFeed({
   const isKo = lang === "ko";
   const posts = initialPosts;
   const chips = initialChips;
+  const featuredPosts = posts.slice(0, 4);
+  const bottomShelfPosts = posts.filter((post) => post.cardType === "hero" || post.cardType === "half-hero").slice(0, 6);
   const [activeChip, setActiveChip] = useState(chips[0] ?? "All");
   const [search, setSearch] = useState("");
   const normalizedSearch = search.trim().toLowerCase();
@@ -222,7 +224,7 @@ export function HubFeed({
   return (
     <div className="hf-root">
       <header className="hf-header">
-        <Link className="hf-header-home" href={`/${lang}`} aria-label={isKo ? "랜딩 페이지로 이동" : "Go to landing page"}>
+        <Link className="hf-header-home" href={`/${lang}`} aria-label={isKo ? "홈으로 이동" : "Go to home page"}>
           <span className="hf-header-icon" aria-hidden>
             <span className="hf-header-icon-core">
               <svg viewBox="0 0 24 24" fill="none" role="img" aria-hidden="true">
@@ -237,7 +239,7 @@ export function HubFeed({
             <span className="hf-header-kicker">HOME</span>
             <span className="hf-header-title">KStyleShot</span>
             <span className="hf-header-subtitle">
-              {isKo ? "Landing으로 돌아가기" : "Back to landing"}
+              {isKo ? "홈으로 돌아가기" : "Back to home"}
             </span>
           </span>
         </Link>
@@ -252,6 +254,48 @@ export function HubFeed({
         </div>
       </header>
 
+      <section className="hf-featured" aria-label={isKo ? "추천 대표 가이드" : "Featured core guides"}>
+        <div className="hf-featured-head">
+          <div>
+            <p className="hf-featured-kicker">{isKo ? "추천 가이드" : "Editorial Guides"}</p>
+            <h2 className="hf-featured-title">
+              {isKo ? "먼저 읽기 좋은 대표 가이드" : "Start with These Core Guides"}
+            </h2>
+          </div>
+          <p className="hf-featured-copy">
+            {isKo
+              ? "서울 여행, K-뷰티, K-패션처럼 자주 찾는 주제를 기준으로 대표 가이드를 먼저 묶었습니다."
+              : "This shelf groups core Seoul, K-beauty, and K-fashion guides around common reader intents."}
+          </p>
+        </div>
+
+        <div className="hf-featured-scroll">
+          {featuredPosts.map((post) => (
+            <Link
+              className="hf-featured-card"
+              href={`/${lang}/hub/${post.slug}`}
+              key={post.slug}
+              style={{ background: post.bg }}
+            >
+              <Badge label={post.category} style={post.categoryStyle} />
+              <div className="hf-featured-body">
+                <h3 className="hf-featured-card-title" style={{ color: post.titleColor }}>
+                  {post.title.replace(/\n/g, " ")}
+                </h3>
+                {post.subtitle ? (
+                  <p className="hf-featured-card-sub" style={{ color: post.subtitleColor }}>
+                    {post.subtitle}
+                  </p>
+                ) : null}
+              </div>
+              <span className="hf-featured-cta" style={{ color: post.titleColor }}>
+                {post.cta ?? (isKo ? "읽기" : "Read")}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <div className="hf-search-wrap">
         <div className="hf-search-box">
           <span className="hf-search-icon" aria-hidden>
@@ -260,7 +304,7 @@ export function HubFeed({
           <input
             className="hf-search-input"
             onChange={(e) => setSearch(e.target.value)}
-            placeholder={isKo ? "스토리 검색" : "Search 300+ Stories"}
+            placeholder={isKo ? "가이드 검색" : "Search guides"}
             type="text"
             value={search}
           />
@@ -293,6 +337,47 @@ export function HubFeed({
         })}
       </div>
 
+      <section className="hf-bottom-section" aria-label={isKo ? "대표 가이드 더 보기" : "More core guides"}>
+        <div className="hf-bottom-head">
+          <div>
+            <p className="hf-bottom-kicker">{isKo ? "주요 주제" : "Core Guides"}</p>
+            <h2 className="hf-bottom-title">
+              {isKo ? "주제별로 다시 보는 대표 가이드" : "Reopen the Main Guide Clusters"}
+            </h2>
+          </div>
+          <p className="hf-bottom-copy">
+            {isKo
+              ? "목록을 내려본 뒤에도 서울 명소와 뷰티 루틴처럼 핵심 주제로 다시 돌아갈 수 있게 정리했습니다."
+              : "After browsing the list, this shelf keeps the main Seoul and beauty clusters easy to reopen."}
+          </p>
+        </div>
+
+        <div className="hf-bottom-grid">
+          {bottomShelfPosts.map((post) => (
+            <Link
+              className="hf-featured-card"
+              href={`/${lang}/hub/${post.slug}`}
+              key={`bottom-${post.slug}`}
+              style={{ background: post.bg }}
+            >
+              <Badge label={post.category} style={post.categoryStyle} />
+              <div className="hf-featured-body">
+                <h3 className="hf-featured-card-title" style={{ color: post.titleColor }}>
+                  {post.title.replace(/\n/g, " ")}
+                </h3>
+                {post.subtitle ? (
+                  <p className="hf-featured-card-sub" style={{ color: post.subtitleColor }}>
+                    {post.subtitle}
+                  </p>
+                ) : null}
+              </div>
+              <span className="hf-featured-cta" style={{ color: post.titleColor }}>
+                {post.cta ?? (isKo ? "읽기" : "Read")}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <div className="hf-nav">
         <nav className="hf-nav-pill">
@@ -300,26 +385,14 @@ export function HubFeed({
             <span className="hf-nav-icon" aria-hidden>
               ◇
             </span>
-            <span className="hf-nav-label">Feed</span>
+            <span className="hf-nav-label">{isKo ? "가이드" : "Guides"}</span>
           </Link>
-          <Link className="hf-nav-item" href={`/${lang}/create`}>
-            <span className="hf-nav-icon" aria-hidden>
-              ✦
-            </span>
-            <span className="hf-nav-label">AI Studio</span>
-          </Link>
-          <button className="hf-nav-item" type="button">
+          <Link className="hf-nav-item" href={`/${lang}`}>
             <span className="hf-nav-icon" aria-hidden>
               ⌂
             </span>
-            <span className="hf-nav-label">Map</span>
-          </button>
-          <button className="hf-nav-item" type="button">
-            <span className="hf-nav-icon" aria-hidden>
-              ○
-            </span>
-            <span className="hf-nav-label">Me</span>
-          </button>
+            <span className="hf-nav-label">{isKo ? "홈" : "Home"}</span>
+          </Link>
         </nav>
       </div>
     </div>

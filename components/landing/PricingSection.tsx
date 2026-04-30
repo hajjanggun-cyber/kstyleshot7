@@ -19,7 +19,8 @@ export function PricingSection() {
           <p className="lp-pricing-note muted">{t("note")}</p>
         </div>
         <div className="lp-pricing-right">
-          <span className="lp-pricing-badge">$3.99</span>
+          <span className="lp-pricing-badge">$2.99</span>
+          <span className="muted">$3.99 regular price</span>
           <Link className="lp-cta-btn lp-cta-btn--sm" href={`/${lang}/create/upload`}>
             Try now →
           </Link>

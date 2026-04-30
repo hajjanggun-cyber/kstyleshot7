@@ -29,7 +29,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
         <>
           <section>
             <h2>1. 서비스 개요</h2>
-            <p>K-StyleShot(이하 &quot;서비스&quot;, &quot;당사&quot;)은 AI 기술을 활용하여 사용자의 사진에 K-스타일 헤어, 의상, 배경을 합성하는 1회성 AI 포트레이트 서비스입니다. 본 서비스는 <strong>kstylewshot.com</strong>을 통해 제공됩니다. 본 약관에 동의하지 않는 경우 서비스를 이용하실 수 없습니다.</p>
+            <p>K-StyleShot(이하 &quot;서비스&quot;, &quot;당사&quot;)은 AI 기술을 활용하여 사용자의 사진에 K-스타일 헤어, 의상, 배경을 합성하는 1회성 AI 포트레이트 서비스입니다. 본 서비스는 <strong>kstyleshot.com</strong>을 통해 제공됩니다. 본 약관에 동의하지 않는 경우 서비스를 이용하실 수 없습니다.</p>
           </section>
 
           <section>
@@ -45,7 +45,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
             <h2>3. 결제 및 이용</h2>
             <p>본 서비스는 <strong>1회 결제(One-time payment)</strong> 방식으로 운영됩니다. 결제는 Polar(polar.sh)를 통해 처리되며, 결제 완료 후 1회 세션이 제공됩니다.</p>
             <ul>
-              <li>결제 금액: $2.99 USD (이벤트 기간 적용 가격)</li>
+              <li>결제 금액: $2.99 USD (정가 $3.99 USD, 이벤트 기간 적용 가격)</li>
               <li>결제 통화: USD</li>
               <li>결제 처리: Polar(polar.sh)</li>
               <li>세션 유효기간: 결제 후 24시간</li>
@@ -95,7 +95,13 @@ export default async function TermsPage({ params }: TermsPageProps) {
 
           <section>
             <h2>9. 분쟁 해결</h2>
-            <p>본 약관과 관련된 분쟁은 먼저 당사 고객센터(<strong>kstylewshot.com</strong>)를 통해 해결을 시도합니다. EU 거주자는 소재 국가의 법원에서 소를 제기할 권리가 있습니다. 미국 캘리포니아 거주자는 CCPA에 따른 권리 행사 및 분쟁 해결 절차를 이용할 수 있습니다. 대한민국 거주자의 경우 대한민국 법원이 관할권을 가집니다.</p>
+            <p>
+              본 약관과 관련된 분쟁은 먼저 당사 고객센터{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>을 통해
+              해결을 시도합니다. EU 거주자는 소재 국가의 법원에서 소를 제기할 권리가 있습니다.
+              미국 캘리포니아 거주자는 CCPA에 따른 권리 행사 및 분쟁 해결 절차를 이용할 수
+              있습니다. 대한민국 거주자의 경우 대한민국 법원이 관할권을 가집니다.
+            </p>
           </section>
 
           <section>
@@ -110,14 +116,17 @@ export default async function TermsPage({ params }: TermsPageProps) {
 
           <section>
             <h2>12. 문의</h2>
-            <p>서비스 이용 관련 문의: <strong>kstylewshot.com</strong>을 통해 연락주세요.</p>
+            <p>
+              서비스 이용 관련 문의:{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로 연락주세요.
+            </p>
           </section>
         </>
       ) : (
         <>
           <section>
             <h2>1. Service Overview</h2>
-            <p>K-StyleShot (&quot;the Service&quot;, &quot;we&quot;, &quot;us&quot;) is a one-time AI portrait service that uses AI technology to composite K-style hair, outfits, and backgrounds onto user-uploaded photos. The Service is provided through <strong>kstylewshot.com</strong>. By using the Service, you agree to these Terms. If you do not agree, you may not use the Service.</p>
+            <p>K-StyleShot (&quot;the Service&quot;, &quot;we&quot;, &quot;us&quot;) is a one-time AI portrait service that uses AI technology to composite K-style hair, outfits, and backgrounds onto user-uploaded photos. The Service is provided through <strong>kstyleshot.com</strong>. By using the Service, you agree to these Terms. If you do not agree, you may not use the Service.</p>
           </section>
 
           <section>
@@ -133,7 +142,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
             <h2>3. Payment & Access</h2>
             <p>This Service operates on a <strong>one-time payment</strong> basis. Payments are processed through Polar (polar.sh). Upon successful payment, one session is granted.</p>
             <ul>
-              <li>Price: $2.99 USD (promotional pricing)</li>
+              <li>Price: $2.99 USD (regular price $3.99 USD, promotional pricing)</li>
               <li>Currency: USD</li>
               <li>Payment processor: Polar (polar.sh)</li>
               <li>Session validity: 24 hours after payment</li>
@@ -183,7 +192,13 @@ export default async function TermsPage({ params }: TermsPageProps) {
 
           <section>
             <h2>9. Dispute Resolution</h2>
-            <p>Disputes arising from these Terms should first be directed to our support channel at <strong>kstylewshot.com</strong>. EU residents retain the right to bring proceedings before the courts of their country of residence. California residents may exercise their rights under the CCPA through applicable dispute resolution procedures. Nothing in these Terms limits your statutory consumer rights under applicable local law.</p>
+            <p>
+              Disputes arising from these Terms should first be directed to{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>. EU residents retain the
+              right to bring proceedings before the courts of their country of residence. California residents
+              may exercise their rights under the CCPA through applicable dispute resolution procedures. Nothing
+              in these Terms limits your statutory consumer rights under applicable local law.
+            </p>
           </section>
 
           <section>
@@ -198,7 +213,10 @@ export default async function TermsPage({ params }: TermsPageProps) {
 
           <section>
             <h2>12. Contact</h2>
-            <p>For inquiries: please contact us through <strong>kstylewshot.com</strong>.</p>
+            <p>
+              For inquiries: please email{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>.
+            </p>
           </section>
         </>
       )}

@@ -1,0 +1,48 @@
+export const ADSENSE_REVIEW_HUB_SLUGS = [
+  "gyeongbokgung-hub",
+  "gyeongbokgung-photo-guide",
+  "gyeongbokgung-light-timing-guide",
+  "myeongdong-hub",
+  "n-seoul-tower-hub",
+  "n-seoul-tower-night-view-guide",
+  "insadong-hub",
+  "ssamziegil-insadong-photo-guide",
+  "garosu-gil-hub",
+  "garosu-gil-cafe-photo-spots",
+  "han-river-park-hub",
+  "yeouido-han-river-picnic-guide",
+  "banpo-han-river-night-view-guide",
+  "seongsu-hub",
+  "seongsu-pop-up-store-guide",
+  "seongsu-cafe-photo-spots",
+  "bukchon-hanok-village-hub",
+  "bukchon-hanok-photo-spots",
+  "bukchon-hanbok-photo-route",
+  "seoul-photo-spot-guide",
+  "seoul-cherry-blossom-photo-spots",
+  "seoul-forest-picnic-photo-guide",
+  "seokchon-lake-photo-spot-guide",
+  "euljiro-retro-photo-spot-guide",
+  "hongdae-hub",
+  "hongdae-street-photo-spots",
+  "hongdae-aesthetic-cafes-for-photos",
+  "korean-skincare-routine-guide",
+  "k-beauty-base-makeup-tips",
+  "winter-glow-makeup-guide",
+  "toner-pad-usage-guide",
+  "how-to-choose-a-cushion-foundation",
+  "semi-matte-base-makeup-guide",
+  "long-lasting-summer-makeup-guide",
+  "how-to-get-glass-skin",
+  "korean-sheet-mask-guide",
+  "hair-styling-tips",
+  "olive-young-must-buys-guide",
+  "skincare-by-skin-concern",
+  "high-teen-school-look-guide",
+] as const;
+
+const ADSENSE_REVIEW_HUB_SLUG_SET = new Set<string>(ADSENSE_REVIEW_HUB_SLUGS);
+
+export function isAdsenseReviewHubSlug(slug: string): boolean {
+  return ADSENSE_REVIEW_HUB_SLUG_SET.has(slug);
+}

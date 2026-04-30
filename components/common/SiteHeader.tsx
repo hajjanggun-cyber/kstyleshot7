@@ -32,7 +32,7 @@ export function SiteHeader({ lang }: SiteHeaderProps) {
           <Link href={`/${lang}/create/upload`}>{t("create")}</Link>
         </nav>
         <Link className="mobile-hub-btn" href={`/${lang}/hub`}>
-          {lang === "ko" ? "블로그 허브" : "Blog Hub"}
+          {lang === "ko" ? "가이드 허브" : "Guide Hub"}
         </Link>
         <div className="lang-toggle" role="group" aria-label="Language">
           <Link

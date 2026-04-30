@@ -59,7 +59,10 @@ export default async function RefundPolicyPage({ params }: RefundPolicyPageProps
 
           <section>
             <h2>5. 환불 처리 방법</h2>
-            <p>환불은 결제에 사용한 Polar 계정을 통해 처리됩니다. 자동 환불 외 환불 요청은 <strong>kstylewshot.com</strong>을 통해 문의하시기 바랍니다.</p>
+            <p>
+              환불은 결제에 사용한 Polar 계정을 통해 처리됩니다. 자동 환불 외 환불 요청은{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로 문의하시기 바랍니다.
+            </p>
           </section>
 
           <section>
@@ -103,7 +106,11 @@ export default async function RefundPolicyPage({ params }: RefundPolicyPageProps
 
           <section>
             <h2>5. Refund Process</h2>
-            <p>Refunds are processed through the Polar account used for payment. For refund requests beyond automatic refunds, please contact us through <strong>kstylewshot.com</strong>.</p>
+            <p>
+              Refunds are processed through the Polar account used for payment. For refund requests beyond
+              automatic refunds, please email{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>.
+            </p>
           </section>
 
           <section>

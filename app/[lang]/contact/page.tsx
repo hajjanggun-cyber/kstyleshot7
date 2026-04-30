@@ -34,7 +34,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
             <h2>서비스 문의 (결제·환불·기술 지원)</h2>
             <p>
               AI 포트레이트 서비스 이용, 결제 오류, 환불 요청 등 서비스 관련 문의는{" "}
-              <strong>kstylewshot.com</strong>의 고객 지원 채널을 이용해주세요.
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로 보내주세요.
             </p>
             <ul>
               <li>결제 완료 후 결과를 받지 못한 경우</li>
@@ -100,7 +100,8 @@ export default async function ContactPage({ params }: ContactPageProps) {
             <h2>Service Support (Payments, Refunds, Technical Issues)</h2>
             <p>
               For AI portrait service inquiries — payment errors, refund requests, or technical
-              issues — please use the support channel at <strong>kstylewshot.com</strong>.
+              issues — email{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>.
             </p>
             <ul>
               <li>Did not receive results after payment</li>

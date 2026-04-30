@@ -98,7 +98,10 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
               <li><strong>반대권:</strong> 정당한 이익에 근거한 처리에 대한 반대</li>
               <li><strong>자동화 결정 거부권:</strong> 자동화된 의사결정의 적용 거부</li>
             </ul>
-            <p>권리 행사 요청: <strong>kstylewshot.com</strong> 문의 채널을 통해 접수 (1개월 이내 처리)</p>
+            <p>
+              권리 행사 요청: <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>
+              으로 접수 (1개월 이내 처리)
+            </p>
             <p>EU 거주자는 소재지 국가의 감독기관(DPA)에 불만을 제기할 권리가 있습니다.</p>
           </section>
 
@@ -126,7 +129,9 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           <section>
             <h2>11. 개인정보 보호책임자</h2>
             <p>개인정보 처리에 관한 문의, 불만 처리, 권리 행사 요청은 아래로 연락해 주시기 바랍니다:</p>
-            <p>문의처: <strong>kstylewshot.com</strong></p>
+            <p>
+              문의처: <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>
+            </p>
           </section>
 
           <section>
@@ -207,7 +212,10 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
               <li><strong>Right to object:</strong> Object to processing based on legitimate interests</li>
               <li><strong>Rights related to automated decision-making:</strong> Not to be subject to solely automated decisions</li>
             </ul>
-            <p>To exercise your rights, contact us through <strong>kstylewshot.com</strong>. We will respond within one month.</p>
+            <p>
+              To exercise your rights, email us at{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>. We will respond within one month.
+            </p>
             <p>EU residents have the right to lodge a complaint with their local supervisory authority (DPA).</p>
           </section>
 
@@ -235,7 +243,9 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           <section>
             <h2>11. Data Controller Contact</h2>
             <p>For inquiries, complaints, or to exercise your rights, please contact us through:</p>
-            <p><strong>kstylewshot.com</strong></p>
+            <p>
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>
+            </p>
           </section>
 
           <section>

@@ -14,6 +14,17 @@ const googleVerification =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? process.env.GOOGLE_SITE_VERIFICATION;
 const naverVerification =
   process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION ?? process.env.NAVER_SITE_VERIFICATION;
+const adsenseClient = normalizeAdsenseClient(
+  process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT ?? process.env.GOOGLE_ADSENSE_CLIENT
+);
+
+function normalizeAdsenseClient(raw: string | undefined): string | null {
+  if (!raw) return null;
+  const value = raw.trim();
+  if (/^ca-pub-\d+$/.test(value)) return value;
+  if (/^pub-\d+$/.test(value)) return `ca-${value}`;
+  return null;
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -102,6 +113,15 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang={lang} suppressHydrationWarning>
+      <head>
+        {adsenseClient ? (
+          <script
+            async
+            crossOrigin="anonymous"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+          />
+        ) : null}
+      </head>
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Q3QEDGYL0D"
