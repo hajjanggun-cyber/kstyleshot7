@@ -1,7 +1,8 @@
 
 
 
-Updated At: 2026-03-10 KST
+Updated At: 2026-04-30 KST
+Updated By: Codex GPT-5.5 xhigh
 
 # K-Style Hub Unified Writing Command
 
@@ -21,18 +22,51 @@ Updated At: 2026-03-10 KST
 포스팅 작업을 시작할 때는 아래 순서만 먼저 본다.
 
 1. `## 0. Start Here`
-2. `## 0-A. Critical Constraints`
-2. `## 0-1. Next Writing Targets`
-3. `## 0-2. Completion Update Rules`
-4. `## 5. Frontmatter 규칙`
-5. `## 7. Google SEO 규칙`
-6. `## 15. 품질 게이트`
+2. `## 0-B. Google 공식 참고 문서`
+3. `## 0-A. Critical Constraints`
+4. `## 0-1. Next Writing Targets`
+5. `## 0-2. Completion Update Rules`
+6. `## 5. Frontmatter 규칙`
+7. `## 7. Google SEO 규칙`
+8. `## 15. 품질 게이트`
 
 작업 중 판단이 흔들리면:
 - 다음에 무엇을 써야 하는지: `## 0-1. Next Writing Targets`
 - 완료 후 무엇을 갱신해야 하는지: `## 0-2. Completion Update Rules`
 - 제목, 키워드, 본문 SEO 기준: `## 7. Google SEO 규칙`
 - 형식 검수: `## 5. Frontmatter 규칙`, `## 15. 품질 게이트`
+
+---
+
+## 0-B. Google 공식 참고 문서
+
+글 작성, 수정, AdSense 재검토 대응 시 아래 Google 공식 문서를 우선 참고한다.
+이 링크들은 "AI 티를 숨기는 방법"이 아니라, Google이 요구하는 사용자 가치·고유성·신뢰·대량 생성 방지 기준을 확인하기 위한 기준 문서다.
+
+- AdSense 페이지 준비 기준:
+  - https://support.google.com/adsense/answer/7299563
+  - 적용 포인트: unique content, clear navigation, good user experience, original and relevant content.
+- AdSense 참여 자격:
+  - https://support.google.com/adsense/answer/9724
+  - 적용 포인트: 사이트 소유권, 정책 준수, 본인 콘텐츠의 품질과 독창성.
+- AdSense "site not ready" 대응:
+  - https://support.google.com/adsense/answer/12176698
+  - 적용 포인트: ad code/접근성/정책/콘텐츠 가치 문제를 콘텐츠 수정과 별도로 점검.
+- Google Search helpful content:
+  - https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+  - 적용 포인트: people-first content, original information, substantial value, Who/How/Why, E-E-A-T self-assessment.
+- Google Search 생성형 AI 콘텐츠 가이드:
+  - https://developers.google.com/search/docs/fundamentals/using-gen-ai-content
+  - 적용 포인트: AI 사용 자체가 문제가 아니라, 사용자 가치 없이 대량 생성된 콘텐츠가 문제다.
+- Google Search spam policies / scaled content abuse:
+  - https://developers.google.com/search/docs/essentials/spam-policies#scaled-content-abuse
+  - 적용 포인트: 검색 순위 조작 목적의 대량·비독창·저가치 페이지 생성 금지.
+
+운영 해석:
+- Google에는 선호 글자 수가 없다. KO 3,500자 / EN 900 words는 이 프로젝트의 내부 최소 하한선이다.
+- sitemap에서 제외해도 공개 URL, 내부 링크, 과거 색인, 외부 링크를 통해 Google이 페이지를 발견할 수 있다.
+- "AI 패턴 감지 회피"가 목표가 아니다. 목표는 사람이 읽어도 도움이 되는 고유 정보와 검증 가능한 기준을 넣는 것이다.
+- 직접 경험이 없는 내용을 직접 경험처럼 쓰지 않는다. 대신 공개 정보, 실제 사용 조건, 관찰 가능한 기준, 실패 신호를 명확히 쓴다.
 
 ---
 
@@ -93,7 +127,7 @@ Updated At: 2026-03-10 KST
 [DO]
 - KO/EN 짝 글이 모두 끝난 뒤 `md-doc/kpop-blog-topics-300.md` 상태를 갱신한다
 - 완료된 항목은 원래 형식을 유지한 채 `Sub [ ]`를 `Sub [v]`, `Hub`를 `Hub [v]`로 바꾼다
-- 완료 후 `## 18. 현재 작업 상태`와 `## 19. 진행 로그`도 함께 업데이트한다
+- 완료 후 `md-doc/kpop-blog-topics-300.md`의 topic 상태와 진행 로그를 함께 업데이트한다
 
 [NOT]
 - KO 또는 EN 한쪽만 완료된 상태에서 완료 체크 금지
@@ -123,6 +157,8 @@ Updated At: 2026-03-10 KST
 [DO]
 - 글 작성 단계에서는 이미지 없이 본문, SEO, 내부 링크, alt 초안까지만 처리한다
 - 본문 이미지 삽입은 항상 사용자가 마지막 단계에서 직접 처리한다
+- Codex는 이미지가 필요한 글에 대해 "필요 이미지/시각 자료 brief"를 남긴다
+- brief에는 이미지 위치 후보, 장면/표/비교 자료 종류, alt 초안, 재사용 금지 여부를 포함한다
 
 [NOT]
 - Codex가 본문 이미지 마크업을 넣는 행위 절대 금지
@@ -134,13 +170,17 @@ Updated At: 2026-03-10 KST
 예외:
 - 사용자가 현재 글의 이미지 삽입을 위해 직접 추가한 파일은 위 금지 대상에서 제외한다
 
-### [C8] Content Depth — AdSense 통과 기준
+### [C8] Content Depth — 내부 최소 품질 하한선
 
 [DO]
 - KO 글: frontmatter·##·-·!·<·빈 줄 제외 순수 본문 최소 3,500자
+- 신규 KO 글은 가능한 경우 4,000자 이상을 기본 목표로 잡는다
 - KO 글: 실질 정보가 충분하면 5,000자를 넘어도 된다 — 상한선 없음
 - EN 글: 동일 기준 순수 본문 최소 900 words
+- 신규 EN 글은 가능한 경우 1,100 words 이상을 기본 목표로 잡는다
 - EN 글: 실질 정보가 충분하면 1,200 words를 넘어도 된다 — 상한선 없음
+- 위 글자 수는 Google 공식 기준이 아니라 이 프로젝트의 내부 하한선이다
+- 글자 수를 채우는 것만으로 AdSense 통과 기준을 충족했다고 판단하지 않는다
 - 각 H2 섹션은 다른 섹션에 없는 새로운 정보를 반드시 포함한다
 - 구체적 관찰, 계절·시간·피부타입별 차이, 실패 사례, 비교 기준처럼
   다른 사이트에서 찾기 어려운 내용을 섹션당 1개 이상 포함한다
@@ -151,7 +191,7 @@ Updated At: 2026-03-10 KST
 - 섹션 마지막에 해당 섹션 내용을 요약하는 문장 추가 금지
 - 섹션 제목이나 불릿 내용을 바로 아래 산문에서 다시 풀어쓰는 것 금지
 - 추상적 연결 문장으로 단락을 채우는 것 금지
-- AI가 자주 생성하는 마무리 표현 절대 금지:
+- 템플릿형 마무리 표현 절대 금지:
   "결국", "따라서", "이런 이유로", "정리하자면", "핵심은",
   "중요한 것은", "마지막으로", "요약하면", "이 차이 때문에",
   "그래서 이 방식이", "결론적으로", "In conclusion", "Overall",
@@ -175,9 +215,11 @@ Updated At: 2026-03-10 KST
 - 같은 예시, 같은 비교 구조, 같은 결론을 다른 글에서 재사용 금지
 - KO 글의 본문을 그대로 번역해 EN 글로 사용하는 것 금지
 
-### [C10] AI 패턴 절대 금지 — AdSense "가치 없는 콘텐츠" 거절 직접 원인
+### [C10] 대량 생성형 저품질 신호 방지 — AdSense "가치 없는 콘텐츠" 대응
 
-이 섹션은 구글 애드센스가 "가치 없는 콘텐츠"로 거절한 원인이 된 패턴 목록이다.
+이 섹션은 구글 애드센스가 "가치 없는 콘텐츠"로 거절할 수 있는 저품질 신호 목록이다.
+Google은 AI 사용 자체를 금지하지 않는다.
+문제는 사용자에게 새 가치가 없는 대량 생성형 문서, 반복 템플릿, 검증되지 않은 일반론이다.
 아래 항목은 단순 권고가 아니라 **글 생성 시 위반 즉시 재작성 대상**이다.
 
 ---
@@ -210,7 +252,7 @@ Updated At: 2026-03-10 KST
   ## 이유는 무엇일까
   ## 왜 일관성에 더 잘 반응할까
   ```
-  → 이 패턴이 글 전체에 걸쳐 나타나면 AI 생성 신호로 감지된다
+  → 이 패턴이 글 전체에 걸쳐 나타나면 대량 생성형 템플릿 신호로 보일 수 있다
 
 [DO]
 - H2 유형을 혼합한다: 의문형 / 서술형 / 명사형 / 조건형을 섞는다
@@ -247,12 +289,14 @@ Updated At: 2026-03-10 KST
 #### [C10-4] 경험 신호 없는 서술 — 절대 금지
 
 [NOT]
-- 글 전체에 1인칭 관찰이 단 한 건도 없는 것 금지
-- "직접 방문 기반으로 작성"이라고 About에 적혀 있는데 글 본문에 현장 관찰이 없는 것 금지
+- 실제 방문·사용·테스트가 없는데 1인칭 경험처럼 쓰는 것 금지
+- "직접 방문 기반으로 작성"이라고 About에 적혀 있는데 글 본문이 공개 정보 재조합뿐인 상태 금지
 - 모든 문장이 "~경우가 많다", "~할 수 있다", "~편이다" 같은 비단정 추측 어미로만 끝나는 것 금지
 
 [DO]
-- 글당 최소 1개 이상의 현장 관찰 또는 직접 경험 신호를 포함한다
+- 직접 경험이 있으면 글당 최소 1개 이상의 구체적인 현장 관찰 또는 사용 관찰을 포함한다
+- 직접 경험이 없으면 1인칭을 쓰지 말고, 공개적으로 검증 가능한 정보와 실제 선택 기준을 넣는다
+- 검증 가능한 정보는 시간, 비용, 출구, 이동 순서, 성분명, 사용량, 모발 레벨, 제품 제형, 실패 신호처럼 독자가 바로 판단할 수 있는 항목이어야 한다
 - 허용 예 (장소 글):
   - "광화문 방향 입구는 오전 9시 개장 직후 30분이 가장 한산하다"
   - "경회루 쪽은 오후 3시 이후 빛이 정면에서 들어와 역광이 줄어든다"
@@ -271,7 +315,8 @@ Updated At: 2026-03-10 KST
 - [ ] H2 제목이 의문형·서술형·명사형 혼합인가 (의문형이 절반 미만인가)
 - [ ] 뷰티 글이라면 성분명이 최소 3개 이상 본문에 등장하는가
 - [ ] 장소 글이라면 숫자(시간·요금·출구·소요 시간 등)가 최소 3개 이상인가
-- [ ] 글 전체에서 현장 관찰 또는 직접 경험 신호가 최소 1개 이상인가
+- [ ] 직접 경험이 있는 글이라면 구체 관찰이 최소 1개 이상인가
+- [ ] 직접 경험이 없는 글이라면 1인칭 경험 표현 없이 검증 가능한 선택 기준이 충분한가
 - [ ] "~경우가 많다"가 글 전체에서 4회 이하인가
 
 ---
@@ -297,10 +342,12 @@ Updated At: 2026-03-10 KST
 1. 생성된 KO/EN 파일 확인
 2. frontmatter 확인
 3. 내부 링크와 related panel 확인
-4. 이미지 경로와 alt 확인
+4. 이미지 상태 확인
+   - Codex 글 작성 단계: 필요한 이미지/시각 자료 brief가 남았는지 확인
+   - 사용자가 이미지 삽입 완료 후: 이미지 경로와 alt 확인
 5. `## 15. 품질 게이트` 점검
 6. `md-doc/kpop-blog-topics-300.md` 상태 업데이트
-7. `## 18. 현재 작업 상태`와 `## 19. 진행 로그` 업데이트
+7. `md-doc/kpop-blog-topics-300.md`의 현재 작업 상태와 진행 로그 업데이트
 
 `md-doc/kpop-blog-topics-300.md` 업데이트 규칙:
 - `Sub [ ]`는 완료 시 `Sub [v]`로 바꾼다
@@ -375,8 +422,8 @@ Updated At: 2026-03-10 KST
 모든 허브/하위 글은 아래 구조를 따른다.
 
 1. 인트로
-2. H2 섹션 (초반 구간 어딘가에 실용 정보 Bullet 필수 포함)
-3. H2 섹션 (본문 50~70% 지점 어딘가에 Mid-CTA 필수 포함)
+2. H2 섹션 (장소형/방문형/촬영형은 초반 구간 어딘가에 실용 정보 Bullet 필수 포함)
+3. H2 섹션 (본문 50~70% 지점 어딘가에 Mid-CTA 삽입 가능성 검토)
 4. 빠른 요약 카드
 5. 같은 허브 내부 링크 패널
 6. 하단 CTA 배너
@@ -387,8 +434,8 @@ Updated At: 2026-03-10 KST
 - 가상 체험형 글은 사용 시점, 테스트 항목, 미리보기 포인트, CTA 연결 중심으로 설계한다
 
 H2 규칙:
-- 모든 H2는 반드시 `## —` 로 시작
-- 하이픈 금지
+- 모든 H2는 반드시 `## `로 시작한다
+- `## —`, `## -`, 장식용 대시, 반복 기호로 H2를 시작하지 않는다
 - H2는 검색자 문장처럼 읽혀야 한다
 - 설명형 문어체만 반복하지 말고 질문형, 판단형, 선택형 문장을 섞는다
 - 키워드를 억지로 끼워 넣은 제목보다 “실제 사용자가 이렇게 검색할까?”에 가까운 문장을 우선한다
@@ -642,6 +689,10 @@ Quick Summary 분산 원칙:
 ### 7-5. Google SEO 품질 원칙
 
 - E-E-A-T 관점에서 구체 관찰, 현장성, 비교 기준을 넣는다
+- 글 또는 사이트 차원에서 Who/How/Why가 설명되어야 한다
+  - Who: 누가 운영·검수하는 콘텐츠인지
+  - How: 어떤 기준으로 조사·작성·이미지 선정·검수했는지
+  - Why: 검색자에게 어떤 실질 문제를 해결해 주기 위해 작성했는지
 - 문단마다 정보 목적이 분명해야 한다
 - 같은 의미를 다른 표현으로 반복해 길이만 늘리지 않는다
 - 허브 글과 하위 글은 서로 다른 검색 의도를 담당하게 설계한다
@@ -656,11 +707,22 @@ Quick Summary 분산 원칙:
 - "다른 사이트에서도 찾을 수 있는 일반론"만 있는 섹션은 삭제하거나
   구체적 관찰로 교체한다
 
-AI 패턴 감지 방지:
+대량 생성형 저품질 신호 방지:
 - 문장 길이를 반드시 섞는다 (짧은 문장 10자 이내 + 긴 문장 40자 이상 혼재)
-- 한 파일 안에서 같은 형용사·부사를 3회 이상 사용하지 않는다
+- 같은 형용사·부사를 기계적으로 반복하지 않는다
+- 반복 점검 우선 대상: `좋습니다`, `중요합니다`, `경우가 많`, `편이`, `works best`, `often`, `usually`
 - H2마다 문단 수가 달라야 한다 (1개, 2개, 3개, 4개 불균등 배분)
 - 섹션 결론 단락이 섹션 제목의 재진술이면 삭제한다
+
+### 7-6. AdSense 재검토 노출 규칙
+
+- sitemap 제출 대상은 AdSense 재검토 표면을 정리하는 보조 수단일 뿐이다
+- sitemap에서 제외된 공개 URL도 내부 링크, 과거 색인, 외부 링크를 통해 Google이 발견할 수 있다
+- 얇은 글을 sitemap에서 뺀 것만으로 "품질 리스크가 사라졌다"고 판단하지 않는다
+- 대표 심사 글은 길이, 고유 정보, 이미지/시각 자료, 내부 링크, 작성 기준이 모두 맞아야 한다
+- 공개 상태로 남길 글은 장기적으로 최소 품질 하한선을 충족시키거나, 관련 허브/상위 글로 병합할지 검토한다
+- noindex, 삭제, 병합, sitemap 제외 같은 색인 정책 변경은 사용자 승인 없이 적용하지 않는다
+- 재심사 직전에는 `robots.txt`, `ads.txt`, `sitemap.xml`, 대표 hub/feed 노출 목록, AdSense head script 또는 verification meta를 함께 확인한다
 
 ---
 
@@ -678,6 +740,8 @@ AI 패턴 감지 방지:
 기본 원칙:
 - 본문을 갈아엎지 않는다
 - 기존 논지와 구조는 최대한 유지한다
+- 단, AdSense 저품질 대응, 얇은 콘텐츠 보강, 대량 생성형 반복 패턴 제거 작업에서는 본문 구조와 H2를 더 넓게 수정할 수 있다
+- 이 경우에도 기존 글의 검색 의도와 내부 링크 관계는 유지한다
 - 긴 문단만 선택적으로 2문단으로 나눈다
 - 과한 리라이팅 금지
 
@@ -742,6 +806,8 @@ AI 패턴 감지 방지:
 - 글 작성 단계에서 Codex가 본문 이미지를 넣는 행위는 절대 금지한다
 - 이미지 삽입 작업은 항상 사용자만 직접 한다
 - Codex는 글 작성, 수정, SEO, 내부 링크, alt 초안까지만 담당하고 본문 이미지 마크업은 절대 추가하지 않는다
+- Codex는 이미지 삽입이 필요한 글의 끝이나 작업 로그에 "필요 이미지/시각 자료 brief"를 남긴다
+- brief는 실제 이미지 경로를 만들지 않고, 필요한 장면·비교표·단계표·alt 초안만 적는다
 - 프로젝트 최상위 폴더와 모든 하위 폴더를 포함한 저장소 전체의 기존 사진 파일은 글 작성 과정에서 어떤 형태로도 사용하지 않는다
 - 단, 사용자가 현재 글의 이미지 삽입을 위해 직접 추가한 파일은 예외로 보고 사용자가 직접 삽입할 수 있다
 - 이미지 삽입은 허브와 하위 글의 본문, 내부 링크, related panel 정리가 끝난 뒤 마지막 단계에서만 사용자가 처리한다
@@ -839,14 +905,15 @@ soft conversion bridge:
 - 같은 문구 반복 금지
 - 최종 CTA는 여전히 하단 배너가 중심
 
-필수 Mid-CTA (본문 중간 전환 링크):
+Mid-CTA 검토 규칙 (본문 중간 전환 링크):
 - 장소형, 방문형, 촬영형 글에서는 mid-CTA 텍스트 링크를 반드시 검토한다
 - 문맥상 어색하지 않다면 본문 중간에 1회 넣는 것을 기본값으로 본다
 - 기본 개수는 글당 최대 1개다
 - 위치는 보통 전체 글의 50~70% 지점을 우선 검토한다
 - 광고나 다른 전환 요소가 함께 들어갈 수 있으므로 mid-CTA를 여러 개 중첩하지 않는다
-- "수익형 연결"이 가능한 글인데도 아무 mid-CTA 없이 끝내지 않도록 먼저 삽입 가능 지점을 찾는다
+- 사용자 흐름상 자연스러운 연결이 가능한 글이면 먼저 삽입 가능 지점을 찾는다
 - mid-CTA는 결제 유도 문구를 노골적으로 밀어붙이는 것이 아니라, 본문 주제에서 결과물/서비스로 자연스럽게 넘어가는 한 줄 연결이어야 한다
+- AdSense 재검토 대응 중에는 판매성 문구처럼 보이면 mid-CTA를 생략하고 작업 로그에 생략 이유를 남긴다
 - 위치는 전체 글의 중간 이후 구간을 우선 검토하되, 모든 글에서 같은 위치로 고정하지 않는다
 - Quick Summary 직전 고정 삽입 금지
 - 같은 문장 템플릿을 여러 글에서 반복하지 않는다
@@ -864,12 +931,13 @@ soft conversion bridge:
 
 - 기본 세션 단위: KO 3개 + EN 3개 또는 KO/EN 1쌍
 - 각 KO 글은 같은 `hreflangSlug`의 EN 글과 짝을 이뤄야 한다
-- 작업 전 현재 진행 상태와 진행 로그를 확인한다
-- 작업 후 진행 로그를 업데이트한다
+- 작업 전 `md-doc/kpop-blog-topics-300.md`의 현재 작업 상태와 진행 로그를 확인한다
+- 작업 후 `md-doc/kpop-blog-topics-300.md`의 진행 로그를 업데이트한다
 - 포스팅 완료 후 `md-doc/kpop-blog-topics-300.md`에서 해당 주제의 완료 표시를 갱신한다
 - KO/EN 짝 글이 모두 완료된 뒤에만 `md-doc/kpop-blog-topics-300.md`를 완료 처리한다
 - 완료 표시는 `### [번호] Sub [ ]` 또는 `### [번호] Hub` 상태를 실제 완료 형식에 맞게 `### [번호] Sub [v]`, `### [번호] Hub [v]`로 바꿔 반영한다
-- 완료 체크는 글 파일 생성, 내부 링크, 이미지 경로, frontmatter, KO/EN 짝 파일 확인까지 끝난 뒤 마지막 단계에서 반영한다
+- Codex 글 작성 완료 체크는 글 파일 생성, frontmatter, 내부 링크, related panel, 품질 게이트, 이미지/시각 자료 brief, KO/EN 짝 파일 확인 뒤 반영한다
+- 사용자가 이미지 삽입까지 완료한 최종 게시 체크는 이미지 경로, alt, 중복 이미지, 깨진 경로까지 확인한 뒤 반영한다
 - 허브 1개가 끝나면 내부 링크, related panel, 키워드 중복 점검을 수행한다
 
 우선순위:
@@ -894,20 +962,24 @@ soft conversion bridge:
 AdSense 콘텐츠 품질 체크 (제출 전 필수):
 - KO 순수 본문 3,500자 이상인가 (frontmatter·##·-·!·< 제외)
 - EN 순수 본문 900 words 이상인가
+- 글자 수 기준을 "통과 보장"으로 오해하지 않았는가
 - 각 H2 섹션이 다른 섹션에 없는 새 정보를 담고 있는가
 - 같은 허브 내 다른 글과 본문 논점이 중복되지 않는가
-- AI 마무리 표현("결국", "따라서", "정리하자면" 등)이 없는가
+- 템플릿형 마무리 표현("결국", "따라서", "정리하자면" 등)이 없는가
 - H2마다 문단 수가 균일하지 않은가 (2문단 고정 패턴 금지)
 - 섹션 결론 단락이 섹션 제목을 단순 재진술하지 않는가
 - 4문장 이상 비슷한 길이의 문장이 연속되지 않는가
 
-[C10] AI 패턴 체크 (애드센스 거절 원인 — 반드시 확인):
+[C10] 대량 생성형 저품질 신호 체크 (애드센스 거절 원인 — 반드시 확인):
 - "편이 ~합니다" 계열 표현이 글 전체에서 2회 이하인가
 - H2 제목이 의문형("~할까")으로 절반 이상 통일되어 있지 않은가
 - 뷰티 글이라면 성분명(센텔라, 나이아신아마이드, 히알루론산 등)이 최소 3개 이상 있는가
 - 장소 글이라면 숫자 정보(시간·요금·출구·도보 분 등)가 최소 3개 이상 있는가
-- 글 전체에 현장 관찰 또는 직접 경험 신호가 최소 1개 이상 있는가
+- 직접 경험이 있는 글이라면 구체 관찰이 최소 1개 이상인가
+- 직접 경험이 없는 글이라면 1인칭 경험 표현 없이 검증 가능한 선택 기준을 충분히 넣었는가
 - "~경우가 많다" 표현이 글 전체에서 4회 이하인가
+- "누가/어떻게/왜 만들었는지"가 사이트 소개 또는 글의 품질과 모순되지 않는가
+- 공개 글이 sitemap에서 빠졌더라도 내부 링크로 계속 강하게 노출되는 얇은 글이 아닌가
 
 키워드:
 - 메인 키워드가 title과 첫 문단에 있는가
@@ -924,6 +996,8 @@ AdSense 콘텐츠 품질 체크 (제출 전 필수):
 - body image alt 비어 있지 않은가
 - alt가 짧고 구체적인가
 - `.webp` 경로인가
+- Codex 작성 단계라면 실제 이미지 마크업 대신 필요한 이미지/시각 자료 brief를 남겼는가
+- 사용자가 이미지를 삽입한 뒤에는 깨진 경로, 중복 이미지, 재사용 이미지가 없는가
 
 링크:
 - 하위 글이면 허브 역링크가 본문에 있는가
@@ -936,7 +1010,8 @@ CTA:
 - 링크가 `/ko` 또는 `/en`인가
 - 장소형, 방문형, 촬영형 글이라면 본문 초반 실용 정보 bullet list가 있는가
 - 장소형, 방문형, 촬영형 글이라면 mid-CTA를 검토했고 문맥상 자연스러운 경우 1회 반영했는가
-- 수익형 연결이 가능한 글인데도 mid-CTA를 아무 근거 없이 생략하지 않았는가
+- 사용자 흐름상 자연스러운 연결이 가능한 글인데도 mid-CTA를 아무 근거 없이 생략하지 않았는가
+- AdSense 재검토 대응 중 판매성 문구처럼 보이는 mid-CTA는 생략하고 이유를 남겼는가
 
 법적:
 - 금지된 인물/그룹/기획사/저작권 표현이 없는가
@@ -997,219 +1072,24 @@ description: [actual text] -> [N]자
 
 ---
 
-## 18. 현재 작업 상태
+## 18. 작업 상태 단일 원본
 
-- 경복궁 허브 + 하위 글 완료
-- 명동 허브 + 하위 글 완료
-- 남산 N서울타워 허브 + 하위 글 완료
-- 홍대 허브 + 하위 글 완료
-- 인사동 허브 KO/EN 완료
-- 인사동 하위 글 KO/EN 완료 (사진명소, 쌈지길, 찻집)
-- 인사동 묶음 점검 완료 (related panel 소급 수정 포함)
-- 가로수길 허브 KO/EN 완료
-- 가로수길 카페 포토존 KO/EN 완료
-- 가로수길 쇼핑 거리 산책 KO/EN 완료
-- 가로수길 저녁 산책 KO/EN 완료
-- 한강공원 허브 KO/EN 완료
-- 한강 야경 사진 명소 KO/EN 완료
-- 여의도 한강공원 피크닉 가이드 KO/EN 완료
-- 반포 한강공원 야경 가이드 KO/EN 완료
-- 베이스 메이크업 허브 KO/EN 완료
-- 쿠션 파운데이션 고르는 법 KO/EN 완료
-- 세미매트 베이스 메이크업 가이드 KO/EN 완료
-- 여름 지속력 메이크업 가이드 KO/EN 완료
-- 겨울 광채 메이크업 가이드 KO/EN 완료
-- 눈매 메이크업 허브 KO/EN 완료
-- 애교살 메이크업 KO/EN 완료
-- 무쌍 눈매 메이크업 KO/EN 완료
-- 번지지 않는 아이라이너 KO/EN 완료
-- 속눈썹 컬 오래 가는 방법 KO/EN 완료
-- 립 메이크업 허브 KO/EN 완료
-- 그라데이션 립 KO/EN 완료
-- 웜톤 립 추천 KO/EN 완료
-- 쿨톤 립 추천 KO/EN 완료
-- 얼굴형별 블러셔 위치 KO/EN 완료
-- 한국 헤어컷 추천 허브 KO/EN 완료
-- 헤어 스타일링 방법 허브 KO/EN 완료
-- 올리브영 추천템과 한국 뷰티 쇼핑 가이드 KO/EN 완료
-- 곱슬머리 장마철 관리 가이드 KO/EN 완료
-- 탈색모 헤어 에센스 고르는 법 KO/EN 완료
-- 와이드 팬츠 K-스타일 코디 KO/EN 완료
-- 크롭 니트 미니스커트 코디 KO/EN 완료
-- 하이틴 교복룩 코디 KO/EN 완료
-- 페어리코어 코디 KO/EN 완료
+현재 작업 상태, 완료 로그, AdSense 감사/보강 진행 상황은 `md-doc/kpop-blog-topics-300.md`에서만 관리한다.
+이 문서에는 과거 완료 로그를 누적하지 않는다.
 
-- 북촌 한옥마을 허브 KO/EN 완료
-- 북촌 한옥 사진 명소 KO/EN 완료
-- 북촌 한복 사진 동선 KO/EN 완료
-- 북촌 서촌 산책 코스 차이 KO/EN 완료
+작업 시작 전 확인:
+- `md-doc/kpop-blog-topics-300.md`의 topic `[ ]` / `[v]` 상태
+- `## 12. Current Work Status Source`
+- `## 13. AdSense Low Value Content Audit & Progress Log`
 
-- 서울 포토존 추천 허브 KO/EN 완료
-- 이태원 경리단길 산책 가이드 KO/EN 완료
-- 서촌 데이트 코스 골목 사진 포인트 KO/EN 완료
-- 익선동 한옥 골목 사진 가이드 KO/EN 완료
-- 을지로 노포 감성 사진 명소 KO/EN 완료
-- 서울숲 피크닉과 사진 명소 가이드 KO/EN 완료
-- 잠실 석촌호수 사진 명소 가이드 KO/EN 완료
-- 낙산공원 성곽길 야경 가이드 KO/EN 완료
-- 서울 벚꽃 사진 명소 추천 KO/EN 완료
-- 서울 포토존 추천 총정리 KO/EN 완료
-
-- 한국 스킨케어 루틴 허브 KO/EN 완료
-- 글래스 스킨 루틴 KO/EN 완료
-- 순한 스킨케어 루틴 KO/EN 완료
-- 토너패드 사용법 KO/EN 완료
-- 한국 마스크팩 고르는 법 KO/EN 완료
-
-다음 우선순위:
-1. [101] Sub 작성
-2. [102] Hub 작성
-3. [103] Sub 작성
-4. [104] Sub 작성
-
-전환 메모:
-- 서울 명소 묶음 기록은 히스토리로 유지한다
-- 현재 작성 사이클은 `K-Fashion Style Types` 클러스터를 우선한다
+작업 완료 후 갱신:
+- 완료한 topic의 `[ ]` / `[v]` 상태
+- 같은 파일의 AdSense/진행 로그
+- 필요 이미지/시각 자료 brief
 
 ---
 
-### 2026-04-03 Update
-
-- 현재 작업 상태: `best-layered-hair-length-for-easy-styling` KO/EN 작성 완료
-- 현재 작업 상태: `see-through-bangs-vs-curtain-bangs` KO/EN 작성 완료
-- 현재 작업 상태: `hair-color-ideas-by-skin-tone` KO/EN 작성 완료
-- 현재 작업 상태: `hair-styling-tips` KO/EN 작성 완료
-
-- 피부 고민별 스킨케어 허브 KO/EN 완료
-- 남자 피부관리 루틴 입문 가이드 KO/EN 완료
-- 선크림 고르는 법 KO/EN 완료
-
- - `k-fashion-wardrobe-essentials` KO/EN 완료
- - `oversized-blazer-outfit-guide` KO/EN 완료
- - `k-style-layered-necklace-guide` KO/EN 완료
- - `k-fashion-style-types` KO/EN 완료
-
-## 19. 진행 로그
-
-이 섹션은 이후 세션마다 계속 누적한다.
-
-### 2026-03-09 최신 기준
-
-- 경복궁 묶음: alt 및 SEO 미세 수정 완료
-- 명동 묶음: alt 간결화 및 SEO 미세 수정 완료
-- 남산 묶음: 허브/하위 글 키워드 분리 및 SEO 미세 수정 완료
-- 홍대 묶음: alt 완료, KO SEO 미세 수정 완료
-- 인사동 허브 KO/EN: 허브형 키워드 기준 작성 및 수정 완료
-- 인사동 사진 명소 KO/EN: 실검색형 키워드 기준 신규 작성 완료
-- 인사동 쌈지길 KO/EN: 층별 동선 키워드 기준 신규 작성 완료
-- 인사동 찻집 KO/EN: 골목 산책 키워드 기준 신규 작성 완료
-- 인사동 묶음 점검: related panel 소급 수정(018/019 → [020] 카드 추가), KO hub publishedAt 날짜 수정 예정
-
-### 2026-03-10 최신 기준
-
-- 가로수길 허브 KO/EN: 실검색형 키워드 기준 신규 작성 완료
-- 가로수길 허브: 실용 정보 bullet, mid-CTA 1회, 패턴 분산 규칙 반영 완료
-- 가로수길 카페 포토존 KO/EN: 창가/테라스/골목 포토존 기준 신규 작성 완료
-- 가로수길 쇼핑 거리 산책 KO/EN: 편집숍 흐름, 주말 산책 시간대 기준 신규 작성 완료
-- 가로수길 저녁 산책 KO/EN: 초저녁 무드, 데이트 산책 리듬 기준 신규 작성 완료
-- 한강공원 허브 KO/EN: 피크닉, 야경, 데이트 코스 역할 분리 기준 신규 작성 완료
-- 한강 야경 사진 명소 KO/EN: 반포·여의도 야경 포인트와 반사 기준 중심 신규 작성 완료
-
-### 2026-03-11 최신 기준
-
-- 여의도 한강공원 피크닉 가이드 KO/EN: 시작 지점, 돗자리 구간, 한강 라면 타이밍 기준 신규 작성 완료
-- 반포 한강공원 야경 가이드 KO/EN: 반포대교, 달빛무지개분수, 세빛섬 야간 동선 기준 신규 작성 완료
-- 한강공원 묶음 점검: 허브 related panel, 하위 글 상호 링크, nextSlug 흐름 정리 완료
-
-### 2026-03-21 최신 기준
-
-- 베이스 메이크업 허브 KO/EN: `k-beauty-base-makeup-tips` 게시용 MDX 작성 완료
-- 쿠션 파운데이션 고르는 법 KO/EN: `how-to-choose-a-cushion-foundation` 게시용 MDX 작성 완료
-- 베이스 메이크업 묶음 점검: 허브 본문 백링크, related panel, nextSlug 흐름 1차 정리 완료
-- 세미매트 베이스 메이크업 가이드 KO/EN: `semi-matte-base-makeup-guide` 게시용 MDX 작성 완료
-- 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 2편 기준으로 정리 완료
-- 여름 지속력 메이크업 가이드 KO/EN: `long-lasting-summer-makeup-guide` 게시용 MDX 작성 완료
-- 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 3편 기준으로 확장 완료
-- 겨울 광채 메이크업 가이드 KO/EN: `winter-glow-makeup-guide` 게시용 MDX 작성 완료
-- 립 메이크업 허브 KO/EN: `lip-makeup-guide` 게시용 MDX 작성 완료
-- 립 메이크업 허브: 그라데이션 립, 웜톤/쿨톤 립, 블러셔 위치 연결 구조 기준으로 허브 본문 작성 완료
-- 베이스 메이크업 묶음 점검: 허브 related panel을 동일 클러스터 하위 글 4편 구조로 완료
-
-### 2026-03-27 최신 기준
-
-- 눈매 메이크업 허브 KO/EN: `eye-makeup-tips` 게시용 MDX 작성 완료
-- 눈매 메이크업 허브: 애교살, 아이라인, 속눈썹 기본 구조를 허브형 키워드 기준으로 작성 완료
-- 눈매 메이크업 허브: 본문 이미지 없이 Quick Summary, 하단 CTA, 관련 패널 형식 점검 완료
-- 애교살 메이크업 KO/EN: `natural-aegyo-sal-makeup-guide` 게시용 MDX 작성 완료
-- 애교살 메이크업: 허브 본문 백링크와 데일리 눈밑 볼륨 기준 중심으로 하위 글 작성 완료
-- 눈매 메이크업 허브: 첫 하위 글 연결에 맞춰 related panel과 next card 갱신 완료
-- 무쌍 눈매 메이크업 KO/EN: `monolid-eye-makeup-guide` 게시용 MDX 작성 완료
-- 무쌍 눈매 메이크업: 점막 아이라인, 음영 섀도, 속눈썹 방향 기준으로 하위 글 작성 완료
-- 눈매 메이크업 묶음: 허브 related panel과 이전 하위 글 next card를 2편 기준으로 갱신 완료
-- 번지지 않는 아이라이너 KO/EN: `smudge-proof-eyeliner-guide` 게시용 MDX 작성 완료
-- 번지지 않는 아이라이너: 점막 라인, 픽싱 파우더, 여름 아이메이크업 기준으로 하위 글 작성 완료
-- 눈매 메이크업 묶음: 허브 related panel과 이전 하위 글 next card를 3편 기준으로 갱신 완료
-- 속눈썹 컬 오래 가는 방법 KO/EN: `how-to-make-lash-curl-last-longer` 게시용 MDX 작성 완료
-- 속눈썹 컬 오래 가는 방법: 뷰러 사용법, 마스카라 픽싱, 습도 기준으로 하위 글 작성 완료
-- 눈매 메이크업 묶음: 허브 related panel과 이전 하위 글 next card를 4편 완성 기준으로 갱신 완료
-- 그라데이션 립 KO/EN: `how-to-do-gradient-lips` 게시용 MDX 작성 완료
-- 그라데이션 립: 틴트 블렌딩, 입술 중앙 발색, 경계 흐리기 기준으로 첫 하위 글 작성 완료
-- 웜톤 립 추천 KO/EN: `best-lip-colors-for-warm-tones` 게시용 MDX 작성 완료
-- 웜톤 립 추천: 코랄 립, 브릭 립, 가을 웜 메이크업 기준으로 컬러 선택 흐름 정리 완료
-- 쿨톤 립 추천 KO/EN: `best-lip-colors-for-cool-tones` 게시용 MDX 작성 완료
-- 쿨톤 립 추천: 로즈 립, 플럼 립, 겨울 쿨 메이크업 기준으로 대비 선택 흐름 정리 완료
-- 얼굴형별 블러셔 위치 KO/EN: `best-blush-placement-by-face-shape` 게시용 MDX 작성 완료
-- 얼굴형별 블러셔 위치: 광대 블러셔, 중안부 단축 메이크업, 얼굴형별 치크 배치 기준 정리 완료
-
-### 2026-04-01 최신 기준
-
-- 한국 헤어컷 추천 허브 KO/EN: `korean-haircut-ideas` 게시용 MDX 작성 완료
-- 한국 헤어컷 추천 허브: 허쉬컷, 레이어드컷, 길이 관리, 앞머리 선택, 미용실 상담 흐름 기준으로 신규 작성 완료
-- 허브 카드 반영: `data/hubPosts.ts`에 한국 헤어컷 추천 허브 KO/EN 카드 추가 완료
-- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[066] Hub [v]` 반영, 다음 작성 대상 `[067] Sub [ ]`로 갱신
-- 허쉬컷 얼굴형 KO/EN: `who-looks-best-with-a-hush-cut` 게시용 MDX 작성 완료
-- 허쉬컷 얼굴형: 광대 폭, 턱선 길이, 숱 많은 머리, 손질 난이도 기준으로 하위 글 작성 완료
-- 헤어컷 허브 갱신: `korean-haircut-ideas` KO/EN related panel에 첫 하위 글 연결 반영 완료
-- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[067] Sub [v]` 반영, 다음 작성 대상 `[068] Sub [ ]`로 갱신
-
-### 2026-04-03 최신 기준
-
-- 레이어드컷 관리 쉬운 길이 KO/EN: `best-layered-hair-length-for-easy-styling` 게시용 MDX 작성 완료
-- 레이어드컷 관리 쉬운 길이: 중단발, 쇄골 아래, 긴 길이 차이와 모발량, 묶는 빈도, 드라이 시간 기준으로 하위 글 작성 완료
-- 헤어컷 묶음 갱신: `korean-haircut-ideas` 및 `who-looks-best-with-a-hush-cut` KO/EN related panel에 `best-layered-hair-length-for-easy-styling` 연결 반영 완료
-- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[068] Sub [v]` 반영, 다음 작성 대상 `[069] Sub [ ]`로 갱신
-- 시스루뱅과 커튼뱅 차이 KO/EN: `see-through-bangs-vs-curtain-bangs` 게시용 MDX 작성 완료
-- 시스루뱅과 커튼뱅 차이: 이마 폭, 가르마 습관, 얼굴 옆선 정리, 손질 시간 기준으로 하위 글 작성 완료
-- 헤어컷 묶음 갱신: `korean-haircut-ideas` 및 `best-layered-hair-length-for-easy-styling` KO/EN related panel에 `see-through-bangs-vs-curtain-bangs` 연결 반영 완료
-- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[069] Sub [v]` 반영, 다음 작성 대상 `[070] Sub [ ]`로 갱신
-- 헤어 컬러 허브 KO/EN: `hair-color-ideas-by-skin-tone` 게시용 MDX 작성 완료
-- 헤어 컬러 허브: 피부 톤, 탈색 허용 범위, 퇴색 방향, 애쉬 브라운 흐름 기준으로 허브 본문 작성 완료
-- 허브 카드 반영: `data/hubPosts.ts`에 `hair-color-ideas-by-skin-tone` KO/EN 카드 추가 완료
-- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[071] Hub [v]` 반영, 다음 작성 대상 `[072] Sub [ ]`로 갱신
-
-## 28. 2026-03-21 Update
-
-- 현재 작업 상태: 쿠션 파운데이션 고르는 법 KO/EN 작성 완료
-- 진행 로그: `how-to-choose-a-cushion-foundation` KO/EN 게시용 MDX 작성, `k-beauty-base-makeup-tips` 허브 연결, 다음 작성 대상은 `[053] Sub [ ]`
-
-## 29. 2026-03-21 Update
-
-- 현재 작업 상태: 세미매트 베이스 메이크업 가이드 KO/EN 작성 완료
-- 진행 로그: `semi-matte-base-makeup-guide` KO/EN 게시용 MDX 작성, 베이스 메이크업 허브 및 `[052]` 내부 연결 정리, 다음 작성 대상은 `[054] Sub [ ]`
-
-## 30. 2026-03-21 Update
-
-- 현재 작업 상태: 여름 지속력 메이크업 가이드 KO/EN 작성 완료
-- 진행 로그: `long-lasting-summer-makeup-guide` KO/EN 게시용 MDX 작성, 베이스 메이크업 허브 및 `[053]` 내부 연결 정리, 다음 작성 대상은 `[055] Sub [ ]`
-
-## 31. 2026-03-21 Update
-
-- 현재 작업 상태: 겨울 광채 메이크업 가이드 KO/EN 작성 완료
-- 진행 로그: `winter-glow-makeup-guide` KO/EN 게시용 MDX 작성, 베이스 메이크업 클러스터 4편 구조 및 허브 related panel 정리 완료, 다음 작성 대상은 `[056] Hub [ ]`
-
----
-
-## 20. 허브 완료 후 필수 점검
+## 19. 허브 완료 후 필수 점검
 
 허브 + 해당 하위 글이 모두 끝났다면 아래를 먼저 한다.
 
@@ -1225,7 +1105,7 @@ description: [actual text] -> [N]자
 
 ---
 
-## 21. 수정 작업용 한 줄 프롬프트
+## 20. 수정 작업용 한 줄 프롬프트
 
 기존 글 수정 시에는 아래 기준으로 본다.
 
@@ -1236,218 +1116,3 @@ description: [actual text] -> [N]자
 - H2는 1~2개만 더 검색형으로 조정
 - alt는 짧고 구체적으로 보정
 - 본문 나머지 구조와 논지는 유지
-
----
-
-## 22. 2026-03-12 Update
-
-- 현재 작업 상태: 성수동 허브 KO/EN 작성 완료
-- 진행 로그: `seongsu-hub` KO/EN 게시용 MDX 작성, 허브 카드 연결, 다음 작성 대상은 `[030] Sub [ ]`
-
-## 23. 2026-03-12 Update
-
-- 현재 작업 상태: 성수동 팝업 스토어 가이드 KO/EN 작성 완료
-- 진행 로그: `seongsu-pop-up-store-guide` KO/EN 게시용 MDX 작성, `seongsu-hub` related panel 연결, 다음 작성 대상은 `[031] Sub [ ]`
-
-## 24. 2026-03-12 Update
-
-- 현재 작업 상태: 성수동 카페 거리 포토존 KO/EN 작성 완료
-- 진행 로그: `seongsu-cafe-photo-spots` KO/EN 게시용 MDX 작성, `seongsu-hub` related panel 연결, 다음 작성 대상은 `[032] Sub [ ]`
-
-## 25. 2026-03-12 Update
-
-- 현재 작업 상태: 성수동 공장 감성 골목 산책 KO/EN 작성 완료
-- 진행 로그: `seongsu-industrial-alley-walk-guide` KO/EN 게시용 MDX 작성, 성수동 묶음 4편 구조 완료, 다음 작성 대상은 `[033] Hub [ ]`
-### 2026-03-14 최신 기준
-
-- 북촌 한옥마을 허브 KO/EN: `bukchon-hanok-village-hub` 게시용 MDX 작성 완료
-- 북촌 한옥마을 허브: 실사용 정보 bullet, 사진/한복/산책 검색 의도 분리, mid-CTA 1회 반영 완료
-- 허브 카드 반영: `data/hubPosts.ts`에 북촌 허브 KO/EN 카드 추가 완료
-- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[033] Hub [v]` 반영, 다음 작성 대상 `[034] Sub [ ]`로 갱신
-- 북촌 한옥 사진 명소 KO/EN: `bukchon-hanok-photo-spots` 게시용 MDX 작성 완료
-- 북촌 한옥 사진 명소: 안국 시작 포인트, 골목 배경, 지붕선 타이밍, 인물/풍경 분리 촬영 기준 정리 완료
-- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[034] Sub [v]` 반영, 다음 작성 대상 `[035] Sub [ ]`로 갱신
-- 북촌 한복 사진 동선 KO/EN: `bukchon-hanbok-photo-route` 게시용 MDX 작성 완료
-- 북촌 한복 사진 동선: 안국 시작 포인트, 담장형 골목, 궁궐형과의 차이, 첫 방문 추천 코스 정리 완료
-- 진행 상태 갱신: `md-doc/kpop-blog-topics-300.md`의 `[035] Sub [v]` 반영, 다음 작성 대상 `[036] Sub [ ]`로 갱신
-
-## 26. 2026-03-14 Update
-
-- 현재 작업 상태: 북촌 한옥마을 허브 KO/EN 작성 완료
-- 진행 로그: `bukchon-hanok-village-hub` KO/EN 게시용 MDX 작성, 허브 카드 연결, 다음 작성 대상은 `[034] Sub [ ]`
-
-## 27. 2026-03-14 Update
-
-- 현재 작업 상태: 북촌 한옥 사진 명소 KO/EN 작성 완료
-- 진행 로그: `bukchon-hanok-photo-spots` KO/EN 게시용 MDX 작성, 북촌 허브 본문 백링크 연결, 다음 작성 대상은 `[035] Sub [ ]`
-
-## 28. 2026-03-14 Update
-
-- 현재 작업 상태: 북촌 한복 사진 동선 KO/EN 작성 완료
-- 진행 로그: `bukchon-hanbok-photo-route` KO/EN 게시용 MDX 작성, 북촌 허브 및 사진 명소 글과의 연결 반영, 다음 작성 대상은 `[036] Sub [ ]`
-
-## 29. 2026-03-14 Update
-
-- 현재 작업 상태: 북촌과 서촌 산책 코스 차이 KO/EN 작성 완료
- - 진행 로그: `bukchon-vs-seochon-walking-guide` KO/EN 게시용 MDX 작성, 북촌 허브 백링크와 북촌/인사동 비교용 related panel 연결, 다음 작성 대상은 `[037] Hub [ ]`
-
-## 30. 2026-03-14 Update
-
-- 현재 작업 상태: 서울 포토존 추천 허브 KO/EN 작성 완료
-- 진행 로그: `seoul-photo-spot-guide` KO/EN 게시용 MDX 작성, 서울 사진 명소 상위 허브 구조 정리, 다음 작성 대상은 `[038] Sub [ ]`
-
-## 31. 2026-03-14 Update
-
-- 현재 작업 상태: 이태원 경리단길 산책 가이드 KO/EN 작성 완료
-- 진행 로그: `itaewon-gyeongnidan-walk-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 본문 백링크 연결, 다음 작성 대상은 `[039] Sub [ ]`
-
-## 32. 2026-03-14 Update
-
-- 현재 작업 상태: 서촌 데이트 코스와 골목 사진 포인트 KO/EN 작성 완료
-- 진행 로그: `seochon-date-route-photo-spots` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 북촌-서촌 비교 글과의 연결 반영, 다음 작성 대상은 `[040] Sub [ ]`
-
-## 33. 2026-03-14 Update
-
-- 현재 작업 상태: 익선동 한옥 골목 사진 가이드 KO/EN 작성 완료
-- 진행 로그: `ikseon-dong-hanok-alley-photo-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 북촌·인사동 사진 글과의 연결 반영, 다음 작성 대상은 `[041] Sub [ ]`
-
-## 34. 2026-03-14 Update
-
-- 현재 작업 상태: 을지로 노포 감성 사진 명소 KO/EN 작성 완료
-- 진행 로그: `euljiro-retro-photo-spot-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 홍대·이태원 거리형 글과의 연결 반영, 다음 작성 대상은 `[042] Sub [ ]`
-
-## 35. 2026-03-14 Update
-
-- 현재 작업 상태: 서울숲 피크닉과 사진 명소 가이드 KO/EN 작성 완료
-- 진행 로그: `seoul-forest-picnic-photo-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 성수·한강 피크닉 글과의 연결 반영, 다음 작성 대상은 `[043] Sub [ ]`
-## 36. 2026-03-14 Update
-
-- 현재 작업 상태: 낙산공원 성곽길 야경 가이드 KO/EN 작성 완료
-- 진행 로그: `naksan-park-night-view-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 서촌·익선동 글과의 연결 반영, 다음 작성 대상은 `[044] Sub [ ]`
-
-## 37. 2026-03-14 Update
-
-- 현재 작업 상태: 서울 벚꽃 사진 명소 추천 KO/EN 작성 완료
-- 진행 로그: `seoul-cherry-blossom-photo-spots` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 서울숲·여의도 한강 글과의 연결 반영, 다음 작성 대상은 `[045] Sub [ ]`
-
-## 38. 2026-03-14 Update
-
-- 현재 작업 상태: 서울 포토존 추천 총정리 KO/EN 작성 완료
-- 진행 로그: `seoul-photo-spot-recommendations` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 이태원·서울숲 글과의 연결 반영, 다음 작성 대상은 `[046] Hub [ ]`
-
-## 39. 2026-03-15 Update
-
-- 현재 작업 상태: 잠실 석촌호수 사진 명소 가이드 KO/EN 작성 완료
-- 진행 로그: `seokchon-lake-photo-spot-guide` KO/EN 게시용 MDX 작성, 서울 포토존 허브 및 서울 벚꽃·서울숲 글과의 연결 반영, 누락 상태였던 `[043] Sub [v]` 링크 갱신 완료
-## 40. 2026-03-16 Update
-
-- 현재 작업 상태: 한국 스킨케어 루틴 허브 KO/EN 작성 완료
-- 진행 로그: `korean-skincare-routine-guide` KO/EN 게시용 MDX 작성, `data/hubPosts.ts` 허브 카드 추가, `md-doc/kpop-blog-topics-300.md`의 `[046] Hub [v]` 반영, 다음 작성 대상은 `[047] Sub [ ]`
-## 41. 2026-03-16 Update
-
-- 현재 작업 상태: 글래스 스킨 루틴 KO/EN 작성 완료
-- 진행 로그: `how-to-get-glass-skin` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크 반영, `md-doc/kpop-blog-topics-300.md`의 `[047] Sub [v]` 반영, 다음 작성 대상은 `[048] Sub [ ]`
-## 42. 2026-03-16 Update
-
-- 현재 작업 상태: 순한 스킨케어 루틴 KO/EN 작성 완료
-- 진행 로그: `gentle-skincare-routine-guide` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크와 `how-to-get-glass-skin` 연결 반영, `md-doc/kpop-blog-topics-300.md`의 `[048] Sub [v]` 반영, 다음 작성 대상은 `[049] Sub [ ]`
-## 43. 2026-03-19 Update
-
-- 현재 작업 상태: 토너패드 사용법 KO/EN 작성 완료
-- 진행 로그: `toner-pad-usage-guide` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크와 `gentle-skincare-routine-guide` 및 `how-to-get-glass-skin` 연결 반영, `md-doc/kpop-blog-topics-300.md`의 `[049] Sub [v]` 반영, 다음 작성 대상은 `[050] Sub [ ]`
-## 44. 2026-03-19 Update
-
-- 현재 작업 상태: 한국 마스크팩 고르는 법 KO/EN 작성 완료
-- 진행 로그: `korean-sheet-mask-guide` KO/EN 게시용 MDX 작성, 본문에 `korean-skincare-routine-guide` 허브 백링크와 `gentle-skincare-routine-guide` 및 `toner-pad-usage-guide` 연결 반영, `md-doc/kpop-blog-topics-300.md`의 `[050] Sub [v]` 반영, 다음 작성 대상은 `[051] Hub [ ]`
-## 45. 2026-04-03 Update
-
-- ?꾩옱 ?묒뾽 ?곹깭: `personal-color-hair-dye-guide` KO/EN ?묒꽦 ?꾨즺
-- 吏꾪뻾 濡쒓렇: `personal-color-hair-dye-guide` KO/EN 寃뚯떆??MDX ?묒꽦, `hair-color-ideas-by-skin-tone` KO/EN related panel ?곌껐 諛섏쁺, `md-doc/kpop-blog-topics-300.md`??`[072] Sub [v]` 諛섏쁺, ?ㅼ쓬 ?묒꽦 ??곸? `[073] Sub [ ]`
-### 2026-04-08 Latest Update
-
-- Current status: `hair-colors-that-brighten-your-face` KO/EN completed
-- Topic map status updated: `[075] Sub [v]`
-- Current status: `hair-styling-tips` KO/EN completed
-- Topic map status updated: `[076] Hub [v]`
-- Current status: `how-to-add-root-volume-at-home` KO/EN completed
-- Topic map status updated: `[077] Sub [v]`
-- Current status: `how-to-keep-bangs-in-place-all-day` KO/EN completed
-- Topic map status updated: `[078] Sub [v]`
-- Current status: `humid-weather-hair-care-guide` KO/EN completed
-- Topic map status updated: `[079] Sub [v]`
-- Current status: `best-hair-essence-for-bleached-hair` KO/EN completed
-- Topic map status updated: `[080] Sub [v]`
-- Next writing target updated to `[081] Hub [ ]`
-### 2026-04-09 Latest Update
-
-- Current status: `olive-young-must-buys-guide` KO/EN completed
-- Topic map status updated: `[081] Hub [v]`
-- Hub card added: `data/hubPosts.ts` updated for KO/EN
-- Next writing target updated to `[082] Sub [ ]`
-- Current status: `olive-young-skincare-shopping-guide` KO/EN completed
-- Topic map status updated: `[082] Sub [v]`
-- Next writing target updated to `[083] Sub [ ]`
-- Current status: `how-to-ask-for-a-hairstyle-in-korea` KO/EN completed
-- Topic map status updated: `[083] Sub [v]`
-- Next writing target updated to `[084] Sub [ ]`
-- Current status: `travel-k-beauty-pouch-guide` KO/EN completed
-- Topic map status updated: `[084] Sub [v]`
-- Next writing target updated to `[085] Sub [ ]`
-- Current status: `makeup-tips-for-better-photos` KO/EN completed
-- Topic map status updated: `[085] Sub [v]`
-- Next writing target updated to `[086] Hub [ ]`
-### 2026-04-10 Latest Update
-
-- Current status: `skincare-by-skin-concern` KO/EN completed
-- Topic map status updated: `[086] Hub [v]`
-- Hub card added: `data/hubPosts.ts` updated for KO/EN
-- Next writing target updated to `[087] Sub [ ]`
-- Current status: `beginner-mens-skincare-routine-guide` KO/EN completed
-- Topic map status updated: `[089] Sub [v]`
-- Current status: `how-to-choose-the-right-sunscreen` KO/EN completed
-- Topic map status updated: `[090] Sub [v]`
-- Current status: `makeup-tips-for-acne-prone-skin` KO/EN completed
-- Topic map status updated: `[087] Sub [v]`
-- Next writing target updated to `[088] Sub [ ]`
-- Current status: `best-primer-for-large-pores` KO/EN completed
-- Topic map status updated: `[088] Sub [v]`
-- Current status: `beginner-mens-skincare-routine-guide` KO/EN completed
-- Topic map status updated: `[089] Sub [v]`
-- Current status: `how-to-choose-the-right-sunscreen` KO/EN completed
-- Topic map status updated: `[090] Sub [v]`
-- Next writing target updated to `[091] Hub [ ]`
-### 2026-04-11 Latest Update
-
-- Current status: `wide-leg-pants-k-style-outfit-ideas` KO/EN completed
-- Topic map status updated: `[093] Sub [v]`
-- Current status: `crop-knit-and-mini-skirt-outfit-guide` KO/EN completed
-- Topic map status updated: `[094] Sub [v]`
-- Fashion cluster integration: `k-fashion-wardrobe-essentials` and `oversized-blazer-outfit-guide` related panels updated to include the new sub-guides
-- Next writing target updated to `[095] Sub [ ]`
-- Current status: `k-fashion-wardrobe-essentials` KO/EN completed
-- Topic map status updated: `[091] Hub [v]`
-- Hub card added: `data/hubPosts.ts` updated for KO/EN
-- Next writing target updated to `[092] Sub [ ]`
-- Current status: `oversized-blazer-outfit-guide` KO/EN completed
-- Topic map status updated: `[092] Sub [v]`
-- Next writing target updated to `[093] Sub [ ]`
-- Current status: `k-style-layered-necklace-guide` KO/EN completed
-- Topic map status updated: `[095] Sub [v]`
-- Current status: `k-fashion-style-types` KO/EN completed
-- Topic map status updated: `[096] Hub [v]`
-- Hub card added: `data/hubPosts.ts` updated for KO/EN
-- Next writing target updated to `[097] Sub [ ]`
-- Current status: `y2k-k-fashion-outfit-guide` KO/EN completed
-- Topic map status updated: `[097] Sub [v]`
-- Current status: `girl-crush-style-outfit-guide` KO/EN completed
-- Topic map status updated: `[098] Sub [v]`
-- Next writing target updated to `[099] Sub [ ]`
-### 2026-04-24 Latest Update
-
-- Current status: `high-teen-school-look-guide` KO/EN completed
-- Topic map status updated: `[099] Sub [v]`
-- Hub card added: `data/hubPosts.ts` updated for KO/EN
-- Current status: `fairycore-outfit-guide` KO/EN completed
-- Topic map status updated: `[100] Sub [v]`
-- Hub card added: `data/hubPosts.ts` updated for KO/EN
-- Next writing target updated to `[101] Sub [ ]`
