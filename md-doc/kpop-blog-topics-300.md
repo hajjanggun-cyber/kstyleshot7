@@ -2,8 +2,8 @@
 > Encoding note: When editing `md-doc/kpop-blog-topics-300.md`, always save as UTF-8 without BOM. Never add BOM (`EF BB BF`). When creating or overwriting this file, use UTF-8 without BOM only.
 ## 300 SEO-First Topic Map — Korean & English Pairs
 
-Updated At: 2026-04-30 KST
-Updated By: Codex GPT-5.5 xhigh
+Updated At: 2026-05-01 KST
+Updated By: Codex GPT-5
 
 이 문서는 `K-Style Hub` 전체 카테고리의 허브 구조, SEO 제목, 메인 키워드, 보조 키워드를 한 번에 관리하기 위한 기준 문서다.
 글 작성 규칙은 `md-doc/post-codex-command.md`를 따른다. 주제 완료 상태, 현재 작업 상태, AdSense 감사/보강 진행 로그는 이 파일을 단일 원본으로 관리한다.
@@ -709,7 +709,7 @@ Role 표기:
 - Keyword: KO `페어리코어 코디` | EN `fairycore outfit guide`
 - Subkeywords: KO `시폰 블라우스`, `파스텔 코디`, `레이스 스타일` | EN `chiffon blouse styling`, `pastel outfits`, `lace details`
 
-### [101] Sub [ ]
+### [101] Sub [v]
 - KO: 테크웨어 스타일 코디 가이드
 - EN: Techwear Style Outfit Guide
 - Keyword: KO `테크웨어 스타일 코디` | EN `techwear style outfit guide`
@@ -717,7 +717,7 @@ Role 표기:
 
 ### Seasonal Styling Cluster
 
-### [102] Hub [ ]
+### [102] Hub [v]
 - KO: 계절별 K패션 코디 추천 — 봄, 여름, 가을, 겨울 룩 정리
 - EN: Seasonal K-Fashion Outfit Ideas — Spring to Winter Looks
 - Keyword: KO `계절별 K패션 코디` | EN `seasonal k-fashion outfit ideas`
@@ -3791,6 +3791,530 @@ GPT-5.5 xhigh 재검토(수정자: Codex GPT-5.5 xhigh, 수정일: 2026-04-30 KS
    - `content/hub/ko/how-to-choose-the-right-sunscreen.mdx`
    - `content/hub/ko/k-style-layered-necklace-guide.mdx`
 3. 장소 글은 실제 동선/시간대/촬영 거리 기준을, 패션·뷰티 글은 소재/체형/성분/사용량/실패 신호 기준을 추가한다.
+
+
+### 2026-05-01: KO 잔여 최하위 5개 본문 품질 보강 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-01 KST
+
+목표:
+
+- 이미지 작업을 제외하고 AdSense "가치가 별로 없는 콘텐츠" 대응용 텍스트 품질 보강만 진행했다.
+- 직전 로컬 재계산 기준 KO 순수 본문 3,500자 미만 최하위권 5개를 모두 3,500자 이상으로 보강했다.
+- 장소형 글에는 동선, 시간대, 촬영 거리, 혼잡/날씨 대체 기준을 추가했다.
+- 패션/액세서리 글에는 소재, 체형, 실루엣, 착용 상황, 실패 신호 기준을 추가했다.
+- 뷰티 글에는 성분명, 제형, 사용량, 수정 타이밍, 실패 신호 기준을 추가했다.
+- 새 이미지 마크업은 추가하지 않았다. 기존에 있던 이미지 마크업은 유지했다.
+
+이번 보강 대상:
+
+- `content/hub/ko/gyeongbokgung-nearby-hanok-photo-spots.mdx`
+- `content/hub/ko/k-fashion-style-types.mdx`
+- `content/hub/ko/lip-makeup-guide.mdx`
+- `content/hub/ko/k-fashion-wardrobe-essentials.mdx`
+- `content/hub/ko/k-style-layered-necklace-guide.mdx`
+
+순수 본문 글자 수 변화:
+
+- `gyeongbokgung-nearby-hanok-photo-spots`
+  - 기존: 2,301자
+  - 수정 후: 3,975자
+- `k-fashion-style-types`
+  - 기존: 2,368자
+  - 수정 후: 3,851자
+- `lip-makeup-guide`
+  - 기존: 2,394자
+  - 수정 후: 3,617자
+- `k-fashion-wardrobe-essentials`
+  - 기존: 2,419자
+  - 수정 후: 3,531자
+- `k-style-layered-necklace-guide`
+  - 기존: 2,431자
+  - 수정 후: 3,591자
+
+검증:
+
+- 5개 글 모두 KO 순수 본문 3,500자 이상 통과
+- H2 질문형 0개
+- `편이` 표현은 각 글 2회 이하
+- 금지 마무리 표현 검색 결과 없음:
+  - `결국`
+  - `따라서`
+  - `정리하자면`
+  - `핵심은`
+  - `마지막으로`
+  - `요약하면`
+- 내부 `/ko/hub/...` dead link 없음
+- 이미지 작업 제외 요청에 따라 새 이미지 삽입/alt 작업 없음
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
+현재 다음 KO 3,500자 미만 최하위 후보(2026-05-01 로컬 엄격 계산 기준):
+
+- `how-to-choose-the-right-sunscreen`: 2,438자
+- `best-primer-for-large-pores`: 2,468자
+- `eye-makeup-tips`: 2,521자
+- `makeup-tips-for-better-photos`: 2,535자
+- `best-layered-hair-length-for-easy-styling`: 2,538자
+
+다음 권장 작업:
+
+1. 사용자 직접 작업: 대표 이미지/시각 자료 삽입을 계속 진행한다.
+2. Codex 다음 작업: 위 KO 최하위 5개를 3,500자 이상으로 보강한다.
+3. 다음 라운드부터는 전체 KO 공개 글의 순수 본문 계산 기준을 한 번 더 통일해 잔여 개수를 재감사한다.
+
+
+### 2026-05-01: KO 뷰티/헤어 최하위 5개 본문 품질 보강 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-01 KST
+
+목표:
+
+- 이미지 작업을 제외하고 AdSense "가치가 별로 없는 콘텐츠" 대응용 텍스트 품질 보강만 진행했다.
+- 직전 로컬 엄격 계산 기준 KO 순수 본문 3,500자 미만 최하위권 뷰티/헤어 5개를 모두 3,500자 이상으로 보강했다.
+- 선크림 글에는 SPF/PA, UVA/UVB, 유기/무기 필터, 사용량, 덧바름, 백탁/눈 시림/밀림 실패 신호를 추가했다.
+- 프라이머 글에는 모공 지도, 실리콘/파우더 성분, 부위별 사용량, 베이스/파우더 궁합, 속건조 실패 신호를 추가했다.
+- 눈매/사진 메이크업 글에는 제형 성분, 조명/플래시, 아이라인/애교살/속눈썹 균형, 촬영 직전 수정 순서를 추가했다.
+- 레이어드컷 글에는 길이 구간, 모발량, 자연 건조 습관, 묶임, 드라이 시간, 상담 문장 기준을 추가했다.
+- 새 이미지 마크업은 추가하지 않았다. 기존 이미지 상태는 그대로 유지했다.
+
+이번 보강 대상:
+
+- `content/hub/ko/how-to-choose-the-right-sunscreen.mdx`
+- `content/hub/ko/best-primer-for-large-pores.mdx`
+- `content/hub/ko/eye-makeup-tips.mdx`
+- `content/hub/ko/makeup-tips-for-better-photos.mdx`
+- `content/hub/ko/best-layered-hair-length-for-easy-styling.mdx`
+
+순수 본문 글자 수 변화:
+
+- `how-to-choose-the-right-sunscreen`
+  - 기존: 2,438자
+  - 수정 후: 3,919자
+- `best-primer-for-large-pores`
+  - 기존: 2,468자
+  - 수정 후: 3,551자
+- `eye-makeup-tips`
+  - 기존: 2,521자
+  - 수정 후: 3,919자
+- `makeup-tips-for-better-photos`
+  - 기존: 2,535자
+  - 수정 후: 4,170자
+- `best-layered-hair-length-for-easy-styling`
+  - 기존: 2,538자
+  - 수정 후: 4,229자
+
+검증:
+
+- 5개 글 모두 KO 순수 본문 3,500자 이상 통과
+- H2 질문형 0개
+- `편이` 표현 0개
+- `~경우가 많다` 표현 4회 이하
+- 금지 마무리 표현 검색 결과 없음:
+  - `결국`
+  - `따라서`
+  - `정리하자면`
+  - `핵심은`
+  - `마지막으로`
+  - `요약하면`
+  - `결론적으로`
+- 내부 `/ko/hub/...` dead link 없음
+- 이미지 작업 제외 요청에 따라 새 이미지 삽입/alt 작업 없음
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
+현재 다음 KO 3,500자 미만 최하위 후보(2026-05-01 로컬 엄격 계산 기준):
+
+- `olive-young-skincare-shopping-guide`: 2,551자
+- `han-river-night-photo-spots`: 2,599자
+- `beginner-mens-skincare-routine-guide`: 2,601자
+- `see-through-bangs-vs-curtain-bangs`: 2,620자
+- `makeup-tips-for-acne-prone-skin`: 2,625자
+
+다음 권장 작업:
+
+1. 사용자 직접 작업: 대표 이미지/시각 자료 삽입을 계속 진행한다.
+2. Codex 다음 작업: 위 KO 최하위 5개를 3,500자 이상으로 보강한다.
+3. 장소형 글은 실제 동선/시간대/촬영 거리 기준을, 뷰티/헤어 글은 성분/모발 상태/사용량/실패 신호 기준을 추가한다.
+
+
+### 2026-05-01: KO 혼합 최하위 5개 본문 품질 보강 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-01 KST
+
+목표:
+
+- 이미지 작업을 제외하고 AdSense "가치가 별로 없는 콘텐츠" 대응용 텍스트 품질 보강만 진행했다.
+- 직전 로컬 엄격 계산 기준 KO 순수 본문 3,500자 미만 최하위권 혼합 5개를 모두 3,500자 이상으로 보강했다.
+- 올리브영 스킨케어 글에는 입문 장바구니, 성분 역할, 피부 타입별 매장 동선, 사용량과 실패 신호를 추가했다.
+- 한강 야경 글에는 반포/여의도 역할 차이, 블루아워, 스마트폰 노출, 혼잡도, 계절/날씨, 반사선 판단 기준을 추가했다.
+- 남자 피부관리 글에는 아침 사용량, 면도 뒤 진정, 성분 추가 순서, 실패 신호, 구매 판단 기준을 추가했다.
+- 시스루뱅/커튼뱅 글에는 앞머리 밀도, 손질 시간, 실패 신호, 미용실 상담 문장 기준을 추가했다.
+- 여드름성 피부 메이크업 글에는 얇은 베이스, 스팟 컨실러 대기 시간, 파우더 성분, 수정 신호, 색조 균형 기준을 추가했다.
+- 새 이미지 마크업은 추가하지 않았다. 기존 이미지 상태는 그대로 유지했다.
+
+이번 보강 대상:
+
+- `content/hub/ko/olive-young-skincare-shopping-guide.mdx`
+- `content/hub/ko/han-river-night-photo-spots.mdx`
+- `content/hub/ko/beginner-mens-skincare-routine-guide.mdx`
+- `content/hub/ko/see-through-bangs-vs-curtain-bangs.mdx`
+- `content/hub/ko/makeup-tips-for-acne-prone-skin.mdx`
+
+순수 본문 글자 수 변화:
+
+- `olive-young-skincare-shopping-guide`
+  - 기존: 2,551자
+  - 수정 후: 3,595자
+- `han-river-night-photo-spots`
+  - 기존: 2,599자
+  - 수정 후: 3,541자
+- `beginner-mens-skincare-routine-guide`
+  - 기존: 2,601자
+  - 수정 후: 3,539자
+- `see-through-bangs-vs-curtain-bangs`
+  - 기존: 2,620자
+  - 수정 후: 3,518자
+- `makeup-tips-for-acne-prone-skin`
+  - 기존: 2,625자
+  - 수정 후: 3,529자
+
+검증:
+
+- 5개 글 모두 KO 순수 본문 3,500자 이상 통과
+- H2 질문형 0개
+- `편이` 표현 0개
+- `~경우가 많다` 표현 2회 이하
+- 금지 마무리 표현 검색 결과 없음:
+  - `결국`
+  - `따라서`
+  - `정리하자면`
+  - `핵심은`
+  - `마지막으로`
+  - `요약하면`
+  - `결론적으로`
+- 내부 `/ko/hub/...` dead link 없음
+- 이미지 작업 제외 요청에 따라 새 이미지 삽입/alt 작업 없음
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
+현재 다음 KO 3,500자 미만 최하위 후보(2026-05-01 로컬 엄격 계산 기준):
+
+- `who-looks-best-with-a-hush-cut`: 2,638자
+- `oversized-blazer-outfit-guide`: 2,704자
+- `korean-haircut-ideas`: 2,711자
+- `how-to-keep-bangs-in-place-all-day`: 2,718자
+- `travel-k-beauty-pouch-guide`: 2,735자
+
+다음 권장 작업:
+
+1. 사용자 직접 작업: 대표 이미지/시각 자료 삽입을 계속 진행한다.
+2. Codex 다음 작업: 위 KO 최하위 5개를 3,500자 이상으로 보강한다.
+3. 헤어 글은 얼굴형/모발량/손질 시간/실패 신호를, 패션/여행 뷰티 글은 상황별 아이템 수량/소재/동선/구매 기준을 추가한다.
+
+
+### 2026-05-01: KO 헤어/패션/여행 뷰티 최하위 5개 본문 품질 보강 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-01 KST
+
+목표:
+
+- 이미지 작업을 제외하고 AdSense "가치가 별로 없는 콘텐츠" 대응용 텍스트 품질 보강만 진행했다.
+- 직전 로컬 엄격 계산 기준 KO 순수 본문 3,500자 미만 최하위권 5개를 모두 3,500자 이상으로 보강했다.
+- 허쉬컷 얼굴형 글에는 광대 층 시작점, 숱/반곱슬 변수, 손질 시간, 묶임, 안경 착용 시 실패 신호를 추가했다.
+- 오버핏 블레이저 글에는 어깨선 2~4cm, 밑단 위치, 이너 두께, 소재/계절, 하의 3개와의 실전 점검 기준을 추가했다.
+- 한국 헤어컷 허브 글에는 정면/측면 셀프 체크, 길이 구간, 상담 문장, 4~6주 유지 기준을 추가했다.
+- 앞머리 손질 글에는 3단계 아침 루틴, 드라이 바람 방향, 찬 바람 식히기, 파우더 성분, 오후 수정 휴대품 기준을 추가했다.
+- 여행용 K-뷰티 파우치 글에는 2박 3일/1주일 일정 구분, 100ml 기내 반입 기준 확인, 소분 용기 누수 점검, 촬영 일정용 색조 구성 기준을 추가했다.
+- 새 이미지 마크업은 추가하지 않았다. 기존 이미지 상태는 그대로 유지했다.
+
+이번 보강 대상:
+
+- `content/hub/ko/who-looks-best-with-a-hush-cut.mdx`
+- `content/hub/ko/oversized-blazer-outfit-guide.mdx`
+- `content/hub/ko/korean-haircut-ideas.mdx`
+- `content/hub/ko/how-to-keep-bangs-in-place-all-day.mdx`
+- `content/hub/ko/travel-k-beauty-pouch-guide.mdx`
+
+순수 본문 글자 수 변화:
+
+- `who-looks-best-with-a-hush-cut`
+  - 기존: 2,638자
+  - 수정 후: 3,519자
+- `oversized-blazer-outfit-guide`
+  - 기존: 2,704자
+  - 수정 후: 3,543자
+- `korean-haircut-ideas`
+  - 기존: 2,711자
+  - 수정 후: 3,541자
+- `how-to-keep-bangs-in-place-all-day`
+  - 기존: 2,718자
+  - 수정 후: 3,503자
+- `travel-k-beauty-pouch-guide`
+  - 기존: 2,735자
+  - 수정 후: 3,576자
+
+검증:
+
+- 5개 글 모두 KO 순수 본문 3,500자 이상 통과
+- H2 질문형 0개
+- `편이` 표현 0개
+- `~경우가 많다` 표현 0개
+- 금지 마무리 표현 검색 결과 없음:
+  - `결국`
+  - `따라서`
+  - `정리하자면`
+  - `핵심은`
+  - `중요한 것은`
+  - `마지막으로`
+  - `요약하면`
+  - `결론적으로`
+- 내부 `/ko/hub/...` dead link 없음
+- 이미지 작업 제외 요청에 따라 새 이미지 삽입/alt 작업 없음
+- `md-doc/post-codex-command.md`에도 사용자 요청에 따른 완료 표시를 추가함
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
+현재 다음 KO 3,500자 미만 최하위 후보(2026-05-01 로컬 엄격 계산 기준):
+
+- `virtual-gyeongbokgung-background-guide`: 2,750자
+- `gentle-skincare-routine-guide`: 2,753자
+- `garosu-gil-evening-walk-guide`: 2,764자
+- `myeongdong-neon-street-guide`: 2,767자
+- `personal-color-hair-dye-guide`: 2,771자
+
+다음 권장 작업:
+
+1. 사용자 직접 작업: 대표 이미지/시각 자료 삽입을 계속 진행한다.
+2. Codex 다음 작업: 위 KO 최하위 5개를 3,500자 이상으로 보강한다.
+3. 장소형 글은 동선/시간대/촬영 조건을, 뷰티 글은 성분/사용량/실패 신호를 중심으로 추가한다.
+
+
+### 2026-05-01: KO 가상 배경/스킨케어/장소/염색 최하위 5개 본문 품질 보강 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-01 KST
+
+목표:
+
+- 이미지 작업을 제외하고 AdSense "가치가 별로 없는 콘텐츠" 대응용 텍스트 품질 보강만 진행했다.
+- 직전 로컬 엄격 계산 기준 KO 순수 본문 3,500자 미만 최하위권 5개를 모두 3,500자 이상으로 보강했다.
+- 가상 경복궁 배경 글에는 4:5/3:4 비율, 2~3색 팔레트, 10~20도 어깨 각도, 손/그림자/배경 과밀 실패 신호를 추가했다.
+- 순한 스킨케어 루틴 글에는 3일 감량 기준, 판테놀/알란토인/센텔라아시아티카/마데카소사이드/베타글루칸/세라마이드 성분 역할, 사용량, 3~5일 테스트 기준을 추가했다.
+- 가로수길 저녁 산책 글에는 40~60분 동선, 10분 골목 분기, 15분 분위기 구간, 1x/2x 촬영 기준, 3~5m 인물 거리 기준을 추가했다.
+- 명동 네온 거리 글에는 해 진 뒤 20~50분 촬영 시간, 60분 동선, 스마트폰 1x/2x/3~5장 기준, 노출 보정과 실패 신호를 추가했다.
+- 퍼스널 컬러 염색 글에는 자연모 3~4레벨, 5~7레벨 염색 범위, 계절별 퇴색/관리 주기, 보색 샴푸 1~2회 기준, 2주/4주 사진 점검 기준을 추가했다.
+- 새 이미지 마크업은 추가하지 않았다. 기존 이미지 상태는 그대로 유지했다.
+
+이번 보강 대상:
+
+- `content/hub/ko/virtual-gyeongbokgung-background-guide.mdx`
+- `content/hub/ko/gentle-skincare-routine-guide.mdx`
+- `content/hub/ko/garosu-gil-evening-walk-guide.mdx`
+- `content/hub/ko/myeongdong-neon-street-guide.mdx`
+- `content/hub/ko/personal-color-hair-dye-guide.mdx`
+
+순수 본문 글자 수 변화:
+
+- `virtual-gyeongbokgung-background-guide`
+  - 기존: 2,750자
+  - 수정 후: 3,595자
+- `gentle-skincare-routine-guide`
+  - 기존: 2,753자
+  - 수정 후: 3,642자
+- `garosu-gil-evening-walk-guide`
+  - 기존: 2,764자
+  - 수정 후: 3,523자
+- `myeongdong-neon-street-guide`
+  - 기존: 2,767자
+  - 수정 후: 3,535자
+- `personal-color-hair-dye-guide`
+  - 기존: 2,771자
+  - 수정 후: 3,621자
+
+검증:
+
+- 5개 글 모두 KO 순수 본문 3,500자 이상 통과
+- H2 질문형은 절반 미만 기준 통과
+- `편이` 표현 0개
+- `~경우가 많다` 표현 0개
+- 금지 마무리 표현 검색 결과 없음:
+  - `결국`
+  - `따라서`
+  - `정리하자면`
+  - `핵심은`
+  - `중요한 것은`
+  - `마지막으로`
+  - `요약하면`
+  - `이런 이유로`
+  - `결론적으로`
+- 내부 `/ko/hub/...` dead link 없음
+- 이미지 작업 제외 요청에 따라 새 이미지 삽입/alt 작업 없음
+- `md-doc/post-codex-command.md`에도 사용자 요청에 따른 완료 표시를 추가함
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
+현재 다음 KO 3,500자 미만 최하위 후보(2026-05-01 로컬 엄격 계산 기준):
+
+- `hair-colors-that-brighten-your-face`: 2,789자
+- `crop-knit-and-mini-skirt-outfit-guide`: 2,804자
+- `garosu-gil-shopping-walk-guide`: 2,807자
+- `itaewon-gyeongnidan-walk-guide`: 2,865자
+- `bukchon-vs-seochon-walking-guide`: 2,875자
+- `best-brown-hair-colors-without-bleach`: 2,875자
+- `best-hair-essence-for-bleached-hair`: 2,875자
+- `ikseon-dong-hanok-alley-photo-guide`: 2,891자
+
+다음 권장 작업:
+
+1. 사용자 직접 작업: 대표 이미지/시각 자료 삽입을 계속 진행한다.
+2. Codex 다음 작업: 위 후보 중 최하위 KO 5개를 3,500자 이상으로 보강한다.
+3. 염색/헤어 글은 모발 레벨, 퇴색 주기, 관리 성분을, 패션/장소 글은 소재·실루엣·동선·시간대·촬영 실패 신호를 중심으로 추가한다.
+
+
+### 2026-05-01: [101] Techwear Style Outfit Guide KO/EN 작성 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-01 KST
+
+작성 대상:
+
+- `content/hub/ko/techwear-style-outfit-guide.mdx`
+- `content/hub/en/techwear-style-outfit-guide.mdx`
+
+완료 처리:
+
+- `[101] Sub [ ]`를 `[101] Sub [v]`로 변경했다.
+- 다음 작성 대상은 `[102] Hub [ ]`로 넘어간다.
+- 상위 허브 `k-fashion-style-types` KO/EN related panel에 Y2K, 걸크러시, 하이틴, 페어리코어, 테크웨어 하위 글 링크를 정리했다.
+
+본문 설계:
+
+- KO 글은 테크웨어 스타일 코디, 블랙 기능성 룩, 유틸리티 팬츠, 스트랩 디테일을 중심으로 작성했다.
+- EN 글은 techwear style outfit guide, dark utility looks, cargo styling, strap details를 중심으로 작성했다.
+- KO/EN은 번역문으로 맞추지 않고 각 언어 검색 의도에 맞춰 별도 구성했다.
+- 하위 글 본문 안에 상위 허브 역링크를 포함했다.
+- KO/EN related panel은 상위 허브 1개와 비교용 하위 글 1개로 구성했다.
+- 하단 CTA 텍스트 링크를 각각 `/ko`, `/en`으로 유지했다.
+
+글자 수 및 frontmatter 검증:
+
+- KO title: `테크웨어 스타일 코디 가이드, 블랙 기능성 룩을 데일리하게` -> 32자
+- KO description: 121자
+- KO 순수 본문: 3,564자
+- EN title: `Techwear Style Outfit Guide for Dark Utility Looks` -> 50자
+- EN description: 142자
+- EN 순수 본문: 1,231 words
+- KO/EN `slug`, 파일명, `hreflangSlug`, `publishedAt` 일치 확인
+
+품질 검증:
+
+- 신규 KO/EN 글 모두 내부 최소 하한선 통과
+- 신규 KO/EN 글에서 금지 마무리 표현 검색 결과 없음
+- KO `편이` 표현 0개
+- KO `~경우가 많다` 표현 0개
+- H2 질문형 절반 이상 반복 없음
+- 내부 `/ko/hub/...`, `/en/hub/...` dead link 없음
+- 새 이미지 마크업 삽입 없음
+
+필요 이미지/시각 자료 brief:
+
+- 위치 후보 1: 첫 H2 이후, 전신 테크웨어 데일리룩 예시
+  - 장면: 매트한 블랙 상의, 포켓이 납작한 유틸리티 팬츠, 낮은 트레일 스니커즈를 입은 도시 배경 전신 컷
+  - alt 초안 KO: `블랙 기능성 룩과 유틸리티 팬츠를 활용한 테크웨어 스타일 코디`
+  - alt 초안 EN: `techwear style outfit with dark utility pants and matte black layers`
+- 위치 후보 2: 유틸리티 팬츠 섹션 이후, 포켓 위치 비교 자료
+  - 장면: 허벅지 위쪽 포켓과 낮은 포켓이 비율을 다르게 보이게 하는 2분할 참고 이미지
+  - alt 초안 KO: `유틸리티 팬츠 포켓 위치에 따른 테크웨어 코디 비율 차이`
+  - alt 초안 EN: `cargo pocket height comparison for a techwear outfit`
+- 위치 후보 3: 아우터와 가방 섹션 이후, 레이어 높이 참고 컷
+  - 장면: 짧은 아우터, 크로스백, 카고 팬츠의 밑단 높이가 겹치지 않게 정리된 착장
+  - alt 초안 KO: `크로스백과 짧은 아우터로 정리한 데일리 테크웨어 레이어링`
+  - alt 초안 EN: `daily techwear layering with a short jacket and crossbody bag`
+- 재사용 금지: 기존 저장소 이미지, 이전 포스팅 이미지, 허브 글 이미지를 재사용하지 않는다.
+
+최종 검증:
+
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
+
+### 2026-05-01: [102] Seasonal K-Fashion Outfit Ideas KO/EN 허브 작성 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-01 KST
+
+작성 대상:
+
+- `content/hub/ko/seasonal-k-fashion-outfit-ideas.mdx`
+- `content/hub/en/seasonal-k-fashion-outfit-ideas.mdx`
+
+완료 처리:
+
+- `[102] Hub [ ]`를 `[102] Hub [v]`로 변경했다.
+- 다음 작성 대상은 `[103] Sub [ ]`로 넘어간다.
+- `[103]~[106]` 계절별 하위 글은 아직 파일이 없으므로 dead link 방지를 위해 이번 허브 related panel에는 실제 존재하는 패션 글만 연결했다.
+
+본문 설계:
+
+- KO 글은 계절별 K패션 코디, 봄 코디, 여름 코디, 가을 니트, 겨울 레이어드를 기온·소재·실내외 온도 차이 기준으로 정리했다.
+- EN 글은 seasonal K-fashion outfit ideas, spring korean outfits, summer looks, winter layering을 온도·fabric weight·indoor comfort 기준으로 별도 작성했다.
+- KO/EN은 번역문으로 맞추지 않고 각 언어 검색 의도에 맞춰 별도 구성했다.
+- related panel은 실제 존재하는 `/ko/hub/...`, `/en/hub/...` 글만 연결했다.
+- 하단 CTA 텍스트 링크를 각각 `/ko`, `/en`으로 유지했다.
+
+글자 수 및 frontmatter 검증:
+
+- KO title: `계절별 K패션 코디 추천, 봄 여름 가을 겨울 룩 기준` -> 30자
+- KO description: 127자
+- KO 순수 본문: 3,521자
+- EN title: `Seasonal K-Fashion Outfit Ideas for Spring to Winter` -> 52자
+- EN description: 154자
+- EN 순수 본문: 1,444 words
+- KO/EN `slug`, 파일명, `hreflangSlug`, `publishedAt` 일치 확인
+
+품질 검증:
+
+- 신규 KO/EN 글 모두 내부 최소 하한선 통과
+- 신규 KO/EN 글에서 금지 마무리 표현 검색 결과 없음
+- KO `편이` 표현 0개
+- KO `~경우가 많다` 표현 0개
+- EN `often` / `usually` 표현 0개
+- H2 질문형 절반 이상 반복 없음
+- 내부 `/ko/hub/...`, `/en/hub/...` dead link 없음
+- 새 이미지 마크업 삽입 없음
+
+필요 이미지/시각 자료 brief:
+
+- 위치 후보 1: 첫 H2 이후, 계절별 기준표 이미지
+  - 장면: 10도 이하, 11~17도, 18~23도, 24도 이상으로 나눈 소재·레이어 기준표
+  - alt 초안 KO: `기온 구간별 계절별 K패션 코디 기준표`
+  - alt 초안 EN: `seasonal K-fashion outfit guide by temperature range`
+- 위치 후보 2: 봄/여름 섹션 사이, 봄과 여름 전환 착장 비교
+  - 장면: 얇은 셔츠 레이어와 통풍 좋은 여름 상의를 비교하는 2분할 스타일 컷
+  - alt 초안 KO: `봄 코디와 여름 코디의 소재와 레이어 차이`
+  - alt 초안 EN: `spring and summer K-fashion outfit fabric comparison`
+- 위치 후보 3: 겨울 레이어드 섹션 이후, 얇은 레이어 순서 자료
+  - 장면: 이너, 니트, 아우터, 목도리 순서로 겹친 겨울 레이어드 구조 이미지
+  - alt 초안 KO: `겨울 레이어드 코디의 이너 니트 아우터 순서`
+  - alt 초안 EN: `winter layering outfit order with inner knit and outerwear`
+- 재사용 금지: 기존 저장소 이미지, 이전 포스팅 이미지, 허브/하위 글 이미지를 재사용하지 않는다.
+
+최종 검증:
+
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
 
 
 ---

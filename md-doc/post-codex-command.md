@@ -1,8 +1,8 @@
 
 
 
-Updated At: 2026-04-30 KST
-Updated By: Codex GPT-5.5 xhigh
+Updated At: 2026-05-01 KST
+Updated By: Codex GPT-5
 
 # K-Style Hub Unified Writing Command
 
@@ -325,7 +325,7 @@ Google은 AI 사용 자체를 금지하지 않는다.
 
 현재 바로 써야 할 다음 글:
 
-1. `[101] Sub [ ]`
+1. `[103] Sub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -1076,6 +1076,22 @@ description: [actual text] -> [N]자
 
 현재 작업 상태, 완료 로그, AdSense 감사/보강 진행 상황은 `md-doc/kpop-blog-topics-300.md`에서만 관리한다.
 이 문서에는 과거 완료 로그를 누적하지 않는다.
+
+### 18-1. 사용자 요청 완료 표시
+
+2026-05-01 KST 기준, 아래 KO 글들은 AdSense "가치가 별로 없는 콘텐츠" 대응 본문 보강을 완료했다.
+상세 누적 로그와 다음 후보 목록은 단일 원본인 `md-doc/kpop-blog-topics-300.md`에 기록한다.
+
+- `content/hub/ko/who-looks-best-with-a-hush-cut.mdx` — KO 순수 본문 3,519자
+- `content/hub/ko/oversized-blazer-outfit-guide.mdx` — KO 순수 본문 3,543자
+- `content/hub/ko/korean-haircut-ideas.mdx` — KO 순수 본문 3,541자
+- `content/hub/ko/how-to-keep-bangs-in-place-all-day.mdx` — KO 순수 본문 3,503자
+- `content/hub/ko/travel-k-beauty-pouch-guide.mdx` — KO 순수 본문 3,576자
+- `content/hub/ko/virtual-gyeongbokgung-background-guide.mdx` — KO 순수 본문 3,595자
+- `content/hub/ko/gentle-skincare-routine-guide.mdx` — KO 순수 본문 3,642자
+- `content/hub/ko/garosu-gil-evening-walk-guide.mdx` — KO 순수 본문 3,523자
+- `content/hub/ko/myeongdong-neon-street-guide.mdx` — KO 순수 본문 3,535자
+- `content/hub/ko/personal-color-hair-dye-guide.mdx` — KO 순수 본문 3,621자
 
 작업 시작 전 확인:
 - `md-doc/kpop-blog-topics-300.md`의 topic `[ ]` / `[v]` 상태
