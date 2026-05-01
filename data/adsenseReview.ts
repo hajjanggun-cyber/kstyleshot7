@@ -39,6 +39,7 @@ export const ADSENSE_REVIEW_HUB_SLUGS = [
   "olive-young-must-buys-guide",
   "skincare-by-skin-concern",
   "high-teen-school-look-guide",
+  "seasonal-k-fashion-outfit-ideas",
 ] as const;
 
 const ADSENSE_REVIEW_HUB_SLUG_SET = new Set<string>(ADSENSE_REVIEW_HUB_SLUGS);

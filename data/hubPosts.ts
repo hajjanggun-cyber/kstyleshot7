@@ -601,6 +601,19 @@ export const hubPosts: HubPost[] = [
     watermark: "페어리코어",
     cta: "읽기",
   },
+  {
+    slug: "seasonal-k-fashion-outfit-ideas",
+    cardType: "half-hero",
+    category: "K-스타일 & 패션",
+    categoryStyle: "white-on-pink",
+    title: "계절별 K패션\n코디 가이드",
+    subtitle: "봄, 여름, 가을, 겨울 룩을 기온과 소재, 레이어 기준으로 정리한 계절 코디 허브",
+    bg: "linear-gradient(135deg, #3f3f46 0%, #7c8f6e 36%, #d6a85d 68%, #f3e8cf 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "계절 코디",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -1165,6 +1178,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "FAIRYCORE",
+    cta: "Read Now",
+  },
+  {
+    slug: "seasonal-k-fashion-outfit-ideas",
+    cardType: "half-hero",
+    category: "K-Fashion",
+    categoryStyle: "white-on-pink",
+    title: "Seasonal K-Fashion\nOutfit Ideas",
+    subtitle: "A seasonal styling hub for spring, summer, fall, and winter looks by temperature and fabric weight",
+    bg: "linear-gradient(135deg, #3f3f46 0%, #7c8f6e 36%, #d6a85d 68%, #f3e8cf 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "SEASONAL",
     cta: "Read Now",
   },
 ];
