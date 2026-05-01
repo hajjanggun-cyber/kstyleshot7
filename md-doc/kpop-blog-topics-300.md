@@ -4317,6 +4317,94 @@ GPT-5.5 xhigh 재검토(수정자: Codex GPT-5.5 xhigh, 수정일: 2026-04-30 KS
 - 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
 
 
+### 2026-05-01: KO 헤어/패션/가로수길/이태원 최하위 5개 본문 품질 보강 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-01 KST
+
+작업 범위:
+
+- 이미지 작업을 제외하고 AdSense "가치가 별로 없는 콘텐츠" 대응용 텍스트 품질 보강만 진행했다.
+- 직전 로컬 엄격 계산 기준 KO 순수 본문 3,500자 미만 최하위권 5개를 모두 3,500자 이상으로 보강했다.
+- 헤어/염색 글은 모발 레벨, 퇴색 주기, 페이스라인 색 변화, 보색/열 손상 관리 기준을 추가했다.
+- 패션 글은 체형, 겉옷 길이, 색 조합, 일정별 신발 선택 기준을 추가했다.
+- 가로수길/이태원 글은 30분·40분·60분·70분 동선, 골목 선택, 날씨, 신발/짐, 구매·촬영 목적별 판단 기준을 추가했다.
+- 새 이미지 마크업은 추가하지 않았다. 기존 이미지 상태는 그대로 유지했다.
+
+이번 보강 대상:
+
+- `content/hub/ko/hair-colors-that-brighten-your-face.mdx`
+- `content/hub/ko/crop-knit-and-mini-skirt-outfit-guide.mdx`
+- `content/hub/ko/garosu-gil-shopping-walk-guide.mdx`
+- `content/hub/ko/itaewon-gyeongnidan-walk-guide.mdx`
+- `content/hub/ko/best-brown-hair-colors-without-bleach.mdx`
+
+순수 본문 글자 수 변화:
+
+- `hair-colors-that-brighten-your-face`
+  - 기존: 2,789자
+  - 수정 후: 4,527자
+- `crop-knit-and-mini-skirt-outfit-guide`
+  - 기존: 2,804자
+  - 수정 후: 4,651자
+- `garosu-gil-shopping-walk-guide`
+  - 기존: 2,807자
+  - 수정 후: 4,687자
+- `itaewon-gyeongnidan-walk-guide`
+  - 기존: 2,865자
+  - 수정 후: 4,734자
+- `best-brown-hair-colors-without-bleach`
+  - 기존: 2,875자
+  - 수정 후: 4,647자
+
+검증:
+
+- 5개 글 모두 KO 순수 본문 3,500자 이상 통과
+- H2 질문형 0개
+- H2 대시 시작 0개
+- `편이` 표현 0개
+- `~경우가 많다` 표현 0개
+- 유사 상투 표현 `경우...많`, `편입니다` 검색 결과 없음
+- 금지 마무리 표현 검색 결과 없음:
+  - `결국`
+  - `따라서`
+  - `정리하자면`
+  - `핵심은`
+  - `중요한 것은`
+  - `마지막으로`
+  - `요약하면`
+  - `이런 이유로`
+  - `이 차이 때문에`
+  - `그래서 이 방식이`
+- 내부 `/ko/hub/...` 링크 유지 확인
+- 이미지 작업 제외 요청에 따라 새 이미지 삽입/alt 작업 없음
+- `md-doc/post-codex-command.md`에도 사용자 요청에 따른 완료 표시를 추가함
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
+현재 KO 3,500자 미만 글:
+
+- 없음
+
+현재 KO 순수 본문 최하위 후보(2026-05-01 로컬 엄격 계산 기준):
+
+- `best-hair-essence-for-bleached-hair`: 3,787자
+- `wide-leg-pants-k-style-outfit-ideas`: 3,828자
+- `bukchon-vs-seochon-walking-guide`: 3,833자
+- `how-to-add-root-volume-at-home`: 3,839자
+- `ikseon-dong-hanok-alley-photo-guide`: 3,867자
+- `girl-crush-style-outfit-guide`: 3,877자
+- `garosu-gil-hub`: 3,882자
+- `humid-weather-hair-care-guide`: 3,904자
+
+다음 권장 작업:
+
+1. 사용자 직접 작업: 대표 이미지/시각 자료 삽입을 계속 진행한다.
+2. Codex 다음 작업: KO 3,500자 미만 글은 없어졌으므로, 3,800자대 최하위 후보 5개를 4,000자 이상으로 보강하거나 이미지/시각 자료 brief를 글별로 정리한다.
+3. AdSense 재심사 전에는 대표 글의 실제 이미지, 비교표, 단계별 시각 자료를 추가해 텍스트 보강만 된 상태를 줄인다.
+
+
 ---
 
 ## 14. Final Check

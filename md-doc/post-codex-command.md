@@ -1092,6 +1092,11 @@ description: [actual text] -> [N]자
 - `content/hub/ko/garosu-gil-evening-walk-guide.mdx` — KO 순수 본문 3,523자
 - `content/hub/ko/myeongdong-neon-street-guide.mdx` — KO 순수 본문 3,535자
 - `content/hub/ko/personal-color-hair-dye-guide.mdx` — KO 순수 본문 3,621자
+- `content/hub/ko/hair-colors-that-brighten-your-face.mdx` — KO 순수 본문 4,527자
+- `content/hub/ko/crop-knit-and-mini-skirt-outfit-guide.mdx` — KO 순수 본문 4,651자
+- `content/hub/ko/garosu-gil-shopping-walk-guide.mdx` — KO 순수 본문 4,687자
+- `content/hub/ko/itaewon-gyeongnidan-walk-guide.mdx` — KO 순수 본문 4,734자
+- `content/hub/ko/best-brown-hair-colors-without-bleach.mdx` — KO 순수 본문 4,647자
 
 작업 시작 전 확인:
 - `md-doc/kpop-blog-topics-300.md`의 topic `[ ]` / `[v]` 상태
