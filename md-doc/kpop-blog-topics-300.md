@@ -4405,6 +4405,120 @@ GPT-5.5 xhigh 재검토(수정자: Codex GPT-5.5 xhigh, 수정일: 2026-04-30 KS
 3. AdSense 재심사 전에는 대표 글의 실제 이미지, 비교표, 단계별 시각 자료를 추가해 텍스트 보강만 된 상태를 줄인다.
 
 
+### 2026-05-02: AdSense 대표 40개 중 이미지 0개 글 시각 자료 brief 1차 정리
+
+수정자: Codex GPT-5
+수정일: 2026-05-02 KST
+
+작업 목적:
+
+- 대표 40개 slug 중 KO/EN 모두 본문 markdown 이미지가 0개인 핵심 4개 slug의 시각 자료 투입 계획을 정리한다.
+- 사용자가 이미지를 직접 넣기로 했으므로, Codex는 이미지 파일을 생성하거나 MDX에 이미지 마크업을 삽입하지 않는다.
+- 아래 brief는 이미지 삽입 전 작업 지시서로 사용한다.
+- 이미지는 기존 저장소 이미지, 이전 포스팅 이미지, 다른 허브 이미지 재사용 없이 새로 준비한다.
+- 이미지 안에는 긴 한글/영문 문장을 넣지 않는다. 텍스트가 필요하면 아주 짧은 라벨만 사용하거나, 본문 caption 없이 alt로 설명한다.
+
+우선 대상:
+
+- `content/hub/ko/hair-styling-tips.mdx`
+- `content/hub/en/hair-styling-tips.mdx`
+- `content/hub/ko/high-teen-school-look-guide.mdx`
+- `content/hub/en/high-teen-school-look-guide.mdx`
+- `content/hub/ko/olive-young-must-buys-guide.mdx`
+- `content/hub/en/olive-young-must-buys-guide.mdx`
+- `content/hub/ko/skincare-by-skin-concern.mdx`
+- `content/hub/en/skincare-by-skin-concern.mdx`
+
+#### 1. `hair-styling-tips` KO/EN
+
+권장 이미지 수: KO 2개, EN 2개
+
+위치 후보 1: 첫 H2 체크리스트 뒤
+
+- 장면: 정수리 뿌리 방향, 앞머리 갈라짐, 습도 부스스함, 고데기 컬 풀림을 4분할로 보여 주는 헤어 문제 진단 이미지
+- KO 파일명: `/images/hub/hair-styling-tips/hair-styling-root-bangs-frizz-check-kr.webp`
+- EN 파일명: `/images/hub/hair-styling-tips/hair-styling-root-bangs-frizz-check-en.webp`
+- KO alt: `뿌리 볼륨 앞머리 갈라짐 곱슬 부스스함을 나눠 보는 헤어 스타일링 방법 체크`
+- EN alt: `hair styling tips check for root volume bangs frizz and curl hold`
+
+위치 후보 2: 고데기 스타일 H2 앞 또는 뒤
+
+- 장면: 드라이 전 뿌리 말리기, 열 넣기, 식히기, 마무리 제품 소량 사용을 순서대로 보여 주는 단계형 이미지
+- KO 파일명: `/images/hub/hair-styling-tips/hair-styling-heat-cooling-order-kr.webp`
+- EN 파일명: `/images/hub/hair-styling-tips/hair-styling-heat-cooling-order-en.webp`
+- KO alt: `드라이 열 고정과 식히는 순서를 보여 주는 헤어 스타일링 단계`
+- EN alt: `hair styling heat and cooling order for longer lasting hold`
+
+#### 2. `skincare-by-skin-concern` KO/EN
+
+권장 이미지 수: KO 2개, EN 2개
+
+위치 후보 1: 첫 H2 체크리스트 뒤
+
+- 장면: 여드름, 모공, 민감성, 면도 후 자극, 선크림 실패를 얼굴 부위별로 나눠 보여 주는 피부 고민 맵
+- KO 파일명: `/images/hub/skincare-by-skin-concern/skincare-concern-face-map-kr.webp`
+- EN 파일명: `/images/hub/skincare-by-skin-concern/skincare-concern-face-map-en.webp`
+- KO alt: `여드름 모공 민감성 선크림 고민을 나눠 보는 피부 고민별 스킨케어 맵`
+- EN alt: `skincare by skin concern map for acne pores sensitivity and sunscreen issues`
+
+위치 후보 2: 여드름/모공 섹션 사이
+
+- 장면: 세안, 진정 수분층, 보습, 선크림을 기본 루틴으로 두고 고민별 활성 성분을 추가하는 구조도
+- KO 파일명: `/images/hub/skincare-by-skin-concern/skincare-routine-base-and-treatment-kr.webp`
+- EN 파일명: `/images/hub/skincare-by-skin-concern/skincare-routine-base-and-treatment-en.webp`
+- KO alt: `세안 진정 보습 선크림 위에 고민별 성분을 더하는 스킨케어 루틴 구조`
+- EN alt: `basic skincare routine structure with treatment steps by skin concern`
+
+#### 3. `olive-young-must-buys-guide` KO/EN
+
+권장 이미지 수: KO 2개, EN 2개
+
+위치 후보 1: 첫 H2 체크리스트 뒤
+
+- 장면: 올리브영 쇼핑 바구니를 스킨케어, 선크림, 쿠션, 립, 여행용 소분 제품으로 나눠 정리한 플랫레이
+- KO 파일명: `/images/hub/olive-young-must-buys/olive-young-shopping-basket-check-kr.webp`
+- EN 파일명: `/images/hub/olive-young-must-buys/olive-young-shopping-basket-check-en.webp`
+- KO alt: `스킨케어 선크림 쿠션 립 여행용 제품으로 나눈 올리브영 추천템 쇼핑 바구니`
+- EN alt: `Olive Young must buys basket with skincare sunscreen cushion lip and travel items`
+
+위치 후보 2: 여행용 K-뷰티 섹션 뒤
+
+- 장면: 30ml 클렌저, 50ml 보습제, 선크림, 쿠션, 컨실러, 립밤만 남긴 여행용 K-뷰티 파우치 구성
+- KO 파일명: `/images/hub/olive-young-must-buys/travel-k-beauty-pouch-essentials-kr.webp`
+- EN 파일명: `/images/hub/olive-young-must-buys/travel-k-beauty-pouch-essentials-en.webp`
+- KO alt: `클렌저 보습제 선크림 쿠션 컨실러 립밤으로 줄인 여행용 K뷰티 파우치`
+- EN alt: `travel K-beauty pouch essentials with cleanser moisturizer sunscreen cushion concealer and lip balm`
+
+#### 4. `high-teen-school-look-guide` KO/EN
+
+권장 이미지 수: KO 2개, EN 2개
+
+위치 후보 1: 첫 H2 체크리스트 뒤
+
+- 장면: 플리츠 스커트, 셔츠, 가디건, 로퍼, 양말 높이를 한 화면에 정리한 하이틴 교복룩 코디 구성 이미지
+- KO 파일명: `/images/hub/high-teen-school-look/high-teen-school-look-items-kr.webp`
+- EN 파일명: `/images/hub/high-teen-school-look/high-teen-school-look-items-en.webp`
+- KO alt: `플리츠 스커트 셔츠 가디건 로퍼 양말로 구성한 하이틴 교복룩 코디`
+- EN alt: `high teen school look outfit with pleated skirt shirt cardigan loafers and socks`
+
+위치 후보 2: 양말/신발 섹션 앞 또는 뒤
+
+- 장면: 발목 양말, 미들 삭스, 니삭스와 로퍼·메리제인·스니커즈 조합을 비교하는 3분할 이미지
+- KO 파일명: `/images/hub/high-teen-school-look/high-teen-socks-shoes-comparison-kr.webp`
+- EN 파일명: `/images/hub/high-teen-school-look/high-teen-socks-shoes-comparison-en.webp`
+- KO alt: `하이틴 교복룩에서 양말 높이와 신발 조합을 비교한 이미지`
+- EN alt: `sock height and shoe comparison for a high teen school look`
+
+삽입 후 필수 검증:
+
+- 각 파일에서 body markdown 이미지가 2개 이상인지 확인한다.
+- 이미지 경로가 실제 파일과 일치하는지 확인한다.
+- alt가 비어 있지 않고, 같은 글 안에서 중복되지 않는지 확인한다.
+- KO 글은 KO alt, EN 글은 EN alt를 사용한다.
+- `npm run build`로 MDX 렌더링 오류가 없는지 확인한다.
+- 배포 후 대표 8개 URL의 live HTML에서 이미지가 200으로 로드되는지 확인한다.
+
+
 ---
 
 ## 14. Final Check
