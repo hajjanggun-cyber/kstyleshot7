@@ -723,13 +723,13 @@ Role 표기:
 - Keyword: KO `계절별 K패션 코디` | EN `seasonal k-fashion outfit ideas`
 - Subkeywords: KO `봄 코디`, `여름 코디`, `겨울 레이어드` | EN `spring korean outfits`, `summer looks`, `winter layering`
 
-### [103] Sub [ ]
+### [103] Sub [v]
 - KO: 봄 데일리 코디 가이드
 - EN: Clean Spring Daily Outfit Ideas
 - Keyword: KO `봄 데일리 코디` | EN `clean spring daily outfit ideas`
 - Subkeywords: KO `라이트 아우터`, `셔츠 코디`, `봄 출근룩` | EN `light outerwear`, `shirt styling`, `spring work outfits`
 
-### [104] Sub [ ]
+### [104] Sub [v]
 - KO: 여름 페스티벌 룩 코디 가이드
 - EN: Summer Festival Outfit Guide
 - Keyword: KO `여름 페스티벌 룩 코디` | EN `summer festival outfit guide`
@@ -4520,6 +4520,90 @@ GPT-5.5 xhigh 재검토(수정자: Codex GPT-5.5 xhigh, 수정일: 2026-04-30 KS
 
 
 ---
+
+### 2026-05-02: [103] Clean Spring Daily Outfit Ideas / [104] Summer Festival Outfit Guide KO/EN 작성 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-02 KST
+
+작성 대상:
+
+- `content/hub/ko/clean-spring-daily-outfit-ideas.mdx`
+- `content/hub/en/clean-spring-daily-outfit-ideas.mdx`
+- `content/hub/ko/summer-festival-outfit-guide.mdx`
+- `content/hub/en/summer-festival-outfit-guide.mdx`
+
+완료 처리:
+
+- `[103] Sub [ ]`를 `[103] Sub [v]`로 변경했다.
+- `[104] Sub [ ]`를 `[104] Sub [v]`로 변경했다.
+- 102 부모 허브 related panel에 실제 생성된 103/104 하위 글을 KO/EN 각각 연결했다.
+- 다음 작성 대상은 `[105] Sub [ ]`로 넘어간다.
+
+본문 설계:
+
+- 103 KO 글은 봄 데일리 코디, 라이트 아우터, 셔츠 코디, 봄 출근룩을 일교차와 실내 온도 기준으로 작성했다.
+- 103 EN 글은 clean spring daily outfit ideas, light outerwear, shirt styling, spring work outfits를 commute, wrinkle, shoe balance 기준으로 별도 구성했다.
+- 104 KO 글은 여름 페스티벌 룩 코디, 크롭탑 코디, 여름 스트릿룩, 통기성 소재를 오래 서 있는 일정과 이동 기준으로 작성했다.
+- 104 EN 글은 summer festival outfit guide, crop top outfits, summer streetwear, breathable fabrics를 storage, friction, day-to-night layer 기준으로 별도 구성했다.
+- KO/EN은 번역문으로 맞추지 않고 각 언어 검색 의도에 맞춰 별도 구성했다.
+- 하위 글 본문 안에 상위 허브 역링크를 포함했다.
+- 하단 CTA 텍스트 링크를 각각 `/ko`, `/en`으로 유지했다.
+
+글자 수 및 frontmatter 검증:
+
+- 103 KO title: `봄 데일리 코디 가이드, 라이트 아우터와 셔츠 출근룩 기준` -> 32자
+- 103 KO description: 85자
+- 103 KO 순수 본문: 5,031자
+- 103 EN title: `Clean Spring Daily Outfit Ideas with Light Outerwear` -> 52자
+- 103 EN description: 144자
+- 103 EN 순수 본문: 1,925 words
+- 104 KO title: `여름 페스티벌 룩 코디 가이드, 크롭탑과 통기성 소재 기준` -> 32자
+- 104 KO description: 88자
+- 104 KO 순수 본문: 4,745자
+- 104 EN title: `Summer Festival Outfit Guide for Breathable Street Looks` -> 56자
+- 104 EN description: 147자
+- 104 EN 순수 본문: 1,791 words
+- KO/EN `slug`, 파일명, `hreflangSlug`, `publishedAt` 일치 확인
+
+품질 검증:
+
+- 신규 KO/EN 4개 글 모두 내부 최소 하한선 통과
+- 신규 KO/EN 4개 글에서 금지 마무리 표현 검색 결과 없음
+- KO `편이` 표현 0개
+- KO `~경우가 많다` 표현 0개
+- EN `often` / `usually` 표현 0개
+- H2 질문형 절반 이상 반복 없음
+- H2 대시 시작 없음
+- 내부 `/ko/hub/...`, `/en/hub/...` dead link 없음
+- 새 이미지 마크업 삽입 없음
+
+필요 이미지/시각 자료 brief:
+
+- 103 위치 후보 1: 첫 H2 이후, 8~20도 일교차 봄 레이어링 보드
+  - 장면: 라이트 아우터, 셔츠, 슬랙스, 로퍼를 한눈에 비교하는 데일리 착장 구성
+  - alt 초안 KO: `라이트 아우터 셔츠 슬랙스 로퍼로 구성한 봄 데일리 코디 기준`
+  - alt 초안 EN: `clean spring daily outfit with light outerwear shirt trousers and loafers`
+- 103 위치 후보 2: 봄 출근룩 또는 신발 섹션 이후, 구김과 발목 노출 비교 이미지
+  - 장면: 앉았을 때 셔츠 구김, 바지 밑단, 양말과 로퍼 균형을 비교하는 2분할 컷
+  - alt 초안 KO: `봄 출근룩에서 셔츠 구김과 발목 노출을 비교한 이미지`
+  - alt 초안 EN: `spring work outfit comparison for shirt wrinkles and ankle balance`
+- 104 위치 후보 1: 첫 H2 이후, 여름 페스티벌 룩 플랫레이
+  - 장면: 크롭탑, 와이드 팬츠, 크로스백, 스니커즈를 통기성과 이동 기준으로 정리한 구성
+  - alt 초안 KO: `크롭탑 와이드 팬츠 크로스백 스니커즈로 구성한 여름 페스티벌 룩`
+  - alt 초안 EN: `summer festival outfit with crop top wide pants crossbody bag and sneakers`
+- 104 위치 후보 2: 통기성 소재 또는 신발 섹션 이후, 땀 자국과 마찰 비교 자료
+  - 장면: 린넨 혼방, 얇은 코튼, 나일론, 메시 신발과 작은 가방을 비교하는 자료형 이미지
+  - alt 초안 KO: `통기성 소재와 신발 가방 기준을 비교한 여름 페스티벌 코디 자료`
+  - alt 초안 EN: `summer festival outfit fabric shoe and bag comparison for outdoor comfort`
+- 재사용 금지: 기존 저장소 이미지, 이전 포스팅 이미지, 허브/하위 글 이미지를 재사용하지 않는다.
+
+최종 검증:
+
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
 
 ## 14. Final Check
 
