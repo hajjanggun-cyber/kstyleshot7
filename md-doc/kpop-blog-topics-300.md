@@ -2,7 +2,7 @@
 > Encoding note: When editing `md-doc/kpop-blog-topics-300.md`, always save as UTF-8 without BOM. Never add BOM (`EF BB BF`). When creating or overwriting this file, use UTF-8 without BOM only.
 ## 300 SEO-First Topic Map — Korean & English Pairs
 
-Updated At: 2026-05-01 KST
+Updated At: 2026-05-02 KST
 Updated By: Codex GPT-5
 
 이 문서는 `K-Style Hub` 전체 카테고리의 허브 구조, SEO 제목, 메인 키워드, 보조 키워드를 한 번에 관리하기 위한 기준 문서다.
@@ -735,7 +735,7 @@ Role 표기:
 - Keyword: KO `여름 페스티벌 룩 코디` | EN `summer festival outfit guide`
 - Subkeywords: KO `크롭탑 코디`, `여름 스트릿룩`, `통기성 소재` | EN `crop top outfits`, `summer streetwear`, `breathable fabrics`
 
-### [105] Sub [ ]
+### [105] Sub [v]
 - KO: 가을 니트 코디와 컬러 조합
 - EN: Fall Knit Outfit and Color Guide
 - Keyword: KO `가을 니트 코디` | EN `fall knit outfit and color guide`
@@ -2013,8 +2013,8 @@ Role 표기:
 
 ## 12. Current Work Status Source
 
-Updated At: 2026-04-30 KST
-Updated By: Codex GPT-5.5 xhigh
+Updated At: 2026-05-02 KST
+Updated By: Codex GPT-5
 
 - 이 파일은 주제 300개 상태, 현재 작업 상태, AdSense 감사/보강 진행 로그의 단일 원본이다.
 - 글 작성 규칙과 품질 게이트는 `md-doc/post-codex-command.md`를 따른다.
@@ -4603,6 +4603,76 @@ GPT-5.5 xhigh 재검토(수정자: Codex GPT-5.5 xhigh, 수정일: 2026-04-30 KS
 - `git diff --check` 통과
 - `npm run build` 성공
 - 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+
+
+---
+
+### 2026-05-02: [105] Fall Knit Outfit and Color Guide KO/EN 작성 완료
+
+수정자: Codex GPT-5
+수정일: 2026-05-02 KST
+
+작성 대상:
+
+- `content/hub/ko/fall-knit-outfit-and-color-guide.mdx`
+- `content/hub/en/fall-knit-outfit-and-color-guide.mdx`
+
+완료 처리:
+
+- `[105] Sub [ ]`를 `[105] Sub [v]`로 변경했다.
+- 102 부모 허브 related panel에 실제 생성된 105 하위 글을 KO/EN 각각 연결했다.
+- 104 여름 페스티벌 글의 related panel에서 다음 계절 링크를 105 가을 니트 글로 연결했다.
+- 다음 작성 대상은 `[106] Sub [ ]`로 넘어간다.
+
+본문 설계:
+
+- 105 KO 글은 가을 니트 코디, 브라운 톤 코디, 가을 데이트룩, 니트 레이어드를 온도, 소재, 목선, 하의와 신발 균형 기준으로 작성했다.
+- 105 EN 글은 fall knit outfit and color guide, brown tone outfits, fall date looks, layered knit styling을 neckline, gauge, color weight, trouser and shoe balance 기준으로 별도 구성했다.
+- KO/EN은 번역문으로 맞추지 않고 각 언어 검색 의도에 맞춰 별도 구성했다.
+- 하위 글 본문 안에 상위 허브 역링크를 포함했다.
+- 하단 CTA 텍스트 링크를 각각 `/ko`, `/en`으로 유지했다.
+- 본문 중간 mid-CTA는 AdSense 재검토 문맥에서 판매성 링크처럼 보이지 않도록 생략했다. 패션 정보형 글이라 장소형/방문형/촬영형 필수 mid-CTA 대상이 아니며, related panel과 하단 CTA만 유지했다.
+
+글자 수 및 frontmatter 검증:
+
+- 105 KO title: `가을 니트 코디 가이드, 브라운 톤과 레이어드 기준` -> 28자
+- 105 KO description: 127자
+- 105 KO 순수 본문: 4,458자
+- 105 EN title: `Fall Knit Outfit and Color Guide for Layered Looks` -> 50자
+- 105 EN description: 147자
+- 105 EN 순수 본문: 1,609 words
+- KO/EN `slug`, 파일명, `hreflangSlug`, `publishedAt` 일치 확인
+
+품질 검증:
+
+- 신규 KO/EN 2개 글 모두 내부 최소 하한선 통과
+- 신규 KO/EN 2개 글에서 금지 마무리 표현 검색 결과 없음
+- KO `편이` 표현 0개
+- KO `~경우가 많다` 표현 0개
+- EN `often` / `usually` 표현 0개
+- H2 질문형 절반 이상 반복 없음
+- H2 대시 시작 없음
+- 내부 `/ko/hub/...`, `/en/hub/...` dead link 없음
+- 새 이미지 마크업 삽입 없음
+
+필요 이미지/시각 자료 brief:
+
+- 105 위치 후보 1: 첫 H2 이후, 가을 니트 두께와 온도 구간 비교 보드
+  - 장면: 반팔 니트, 니트 베스트, 얇은 카디건, 긴팔 니트를 18~23도와 11~17도 기준으로 나눈 코디 구성
+  - alt 초안 KO: `온도 구간별 가을 니트 코디 두께와 레이어드 비교`
+  - alt 초안 EN: `fall knit outfit weight and layering comparison by temperature range`
+- 105 위치 후보 2: 브라운 톤 코디 섹션 이후, 브라운·아이보리·차콜·데님 색 조합 비교 이미지
+  - 장면: 브라운 니트에 아이보리 하의, 차콜 팬츠, 워시드 데님을 붙인 3분할 스타일 보드
+  - alt 초안 KO: `브라운 니트에 아이보리 차콜 데님 하의를 비교한 가을 코디`
+  - alt 초안 EN: `brown knit outfit comparison with ivory charcoal and denim bottoms`
+- 재사용 금지: 기존 저장소 이미지, 이전 포스팅 이미지, 허브/하위 글 이미지를 재사용하지 않는다.
+
+최종 검증:
+
+- `git diff --check` 통과
+- `npm run build` 성공
+- 잔여 경고: Next.js 16에서 `middleware` file convention deprecated 경고만 표시됨
+- 배포 후 신규 2개 URL과 연결을 수정한 102/104 URL의 live HTML에서 링크가 정상인지 확인한다.
 
 
 ## 14. Final Check
