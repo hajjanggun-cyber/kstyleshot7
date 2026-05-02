@@ -1,7 +1,7 @@
 
 
 
-Updated At: 2026-05-01 KST
+Updated At: 2026-05-02 KST
 Updated By: Codex GPT-5
 
 # K-Style Hub Unified Writing Command
@@ -9,11 +9,16 @@ Updated By: Codex GPT-5
 이 문서는 K-Style Hub 프로젝트의 포스팅 단일 운영 문서다.
 허브 글 작성, 하위 글 작성, 기존 글 수정, 이미지 alt 보강, 내부 링크 점검, 키워드 분리, frontmatter 설계, 품질 검수까지 모두 이 문서를 기준으로 실행한다.
 
-삭제 예정 문서:
-- `md-doc/now-posting-작업중.md`
-- `md-doc/now-sujung.md`
+## 0-C. Codex Context Primer
 
-위 두 문서의 실무 규칙은 이미 이 문서에 통합됐다.
+긴 컨텍스트에서 혼동을 줄이기 위해 포스팅 작업 전 아래만 먼저 고정한다.
+
+- 이 문서는 "현재도 지켜야 하는 규칙"만 담는 운영 문서다.
+- 현재 작성 대상, 완료 상태, 누적 진행 로그는 `md-doc/kpop-blog-topics-300.md`가 단일 원본이다.
+- AdSense "가치가 별로 없는 콘텐츠" 거절 이력이 있으므로 새 글을 많이 추가하는 것보다, 각 글이 독립적인 고유 정보와 검증 가능한 선택 기준을 갖는지가 우선이다.
+- KO 3,500자 / EN 900 words는 내부 최소 하한선일 뿐 승인 보장 기준이 아니다.
+- 글 작성 뒤에는 Codex가 반드시 자체 2차 검수한다: frontmatter, 키워드, 본문 깊이, 내부 링크, related panel, 품질 게이트, 문자 수, 빌드 또는 문법 검증.
+- 오래된 작업 로그나 과거 후보 목록이 현재 topic 상태와 충돌하면, `kpop-blog-topics-300.md`의 주제 표기(`[ ]` / `[v]`)와 최신 로그를 우선한다.
 
 ---
 
@@ -21,14 +26,15 @@ Updated By: Codex GPT-5
 
 포스팅 작업을 시작할 때는 아래 순서만 먼저 본다.
 
-1. `## 0. Start Here`
-2. `## 0-B. Google 공식 참고 문서`
-3. `## 0-A. Critical Constraints`
-4. `## 0-1. Next Writing Targets`
-5. `## 0-2. Completion Update Rules`
-6. `## 5. Frontmatter 규칙`
-7. `## 7. Google SEO 규칙`
-8. `## 15. 품질 게이트`
+1. `## 0-C. Codex Context Primer`
+2. `## 0. Start Here`
+3. `## 0-B. Google 공식 참고 문서`
+4. `## 0-A. Critical Constraints`
+5. `## 0-1. Next Writing Targets`
+6. `## 0-2. Completion Update Rules`
+7. `## 5. Frontmatter 규칙`
+8. `## 7. Google SEO 규칙`
+9. `## 15. 품질 게이트`
 
 작업 중 판단이 흔들리면:
 - 다음에 무엇을 써야 하는지: `## 0-1. Next Writing Targets`
@@ -155,20 +161,14 @@ Updated By: Codex GPT-5
 ### [C7] Image Insertion and Reuse Ban
 
 [DO]
-- 글 작성 단계에서는 이미지 없이 본문, SEO, 내부 링크, alt 초안까지만 처리한다
-- 본문 이미지 삽입은 항상 사용자가 마지막 단계에서 직접 처리한다
-- Codex는 이미지가 필요한 글에 대해 "필요 이미지/시각 자료 brief"를 남긴다
-- brief에는 이미지 위치 후보, 장면/표/비교 자료 종류, alt 초안, 재사용 금지 여부를 포함한다
+- 글 작성 단계에서는 본문 이미지 마크업을 넣지 않는다
+- 본문 이미지 삽입은 사용자가 이미지를 준비한 뒤 별도 작업으로 처리한다
+- 이미지 변환, 경로, 삽입 위치, alt, 원본 처리, 중복 검증은 `md-doc/image-webp-alt-prompt.md`를 따른다
 
 [NOT]
 - Codex가 본문 이미지 마크업을 넣는 행위 절대 금지
-- 프로젝트 최상위 폴더와 모든 하위 폴더를 포함한 저장소 전체에서 기존에 존재하는 어떤 사진 파일도 글 작성용으로 사용하는 것 절대 금지
-- 이전 포스팅에서 사용한 사진을 새 포스팅에 재사용하는 것 절대 금지
-- 허브 글과 하위 글 사이에서 동일 사진을 재사용하는 것 절대 금지
-- 같은 포스팅 안에 동일한 사진 파일을 두 번 이상 넣는 것 절대 금지
-
-예외:
-- 사용자가 현재 글의 이미지 삽입을 위해 직접 추가한 파일은 위 금지 대상에서 제외한다
+- 이미지가 준비되지 않았는데 깨진 `/images/...` 경로를 남기는 것 금지
+- 이미지 세부 규칙을 이 문서에 중복 관리하는 것 금지
 
 ### [C8] Content Depth — 내부 최소 품질 하한선
 
@@ -325,7 +325,7 @@ Google은 AI 사용 자체를 금지하지 않는다.
 
 현재 바로 써야 할 다음 글:
 
-1. `[103] Sub [ ]`
+1. `[107] Hub [ ]`
 
 작성 순서 원칙:
 - 허브를 먼저 쓴다
@@ -342,9 +342,7 @@ Google은 AI 사용 자체를 금지하지 않는다.
 1. 생성된 KO/EN 파일 확인
 2. frontmatter 확인
 3. 내부 링크와 related panel 확인
-4. 이미지 상태 확인
-   - Codex 글 작성 단계: 필요한 이미지/시각 자료 brief가 남았는지 확인
-   - 사용자가 이미지 삽입 완료 후: 이미지 경로와 alt 확인
+4. 이미지 삽입 요청이 별도로 있으면 `md-doc/image-webp-alt-prompt.md` 기준으로 처리했는지 확인
 5. `## 15. 품질 게이트` 점검
 6. `md-doc/kpop-blog-topics-300.md` 상태 업데이트
 7. `md-doc/kpop-blog-topics-300.md`의 현재 작업 상태와 진행 로그 업데이트
@@ -456,12 +454,7 @@ Related panel 규칙:
   - 다음 하위 글: `다음 글`
   - 추가 하위 글: `같이 보기`
 
-하단 CTA 규칙:
-- KO 이미지: `/visuals/blog/blog-bottom-banner-kr.webp`
-- EN 이미지: `/visuals/blog/blog-bottom-banner-en.webp`
-- KO 링크: `/ko`
-- EN 링크: `/en`
-- 본문 끝 배너는 항상 유지한다
+하단 CTA 규칙은 `## 13. CTA 규칙`을 따른다.
 
 Quick Summary와 Related panel에는 본문 이미지를 넣지 않는다.
 
@@ -734,8 +727,8 @@ Quick Summary 분산 원칙:
 2. `description`
 3. 첫 문단
 4. H2 1~2개
-5. 이미지 alt
-6. 관련 글 패널 문구
+5. 관련 글 패널 문구
+6. 이미지 수정 요청이 있으면 `md-doc/image-webp-alt-prompt.md` 기준 확인
 
 기본 원칙:
 - 본문을 갈아엎지 않는다
@@ -749,7 +742,7 @@ Quick Summary 분산 원칙:
 - 제목은 더 검색 친화적으로
 - 첫 문단은 키워드 더 선명하게
 - H2는 1~2개만 검색형으로
-- alt는 짧고 구체적으로
+- 이미지 수정 요청은 이미지 전용 문서 기준으로 별도 처리
 
 ## 9. 허브와 하위 글 분리 규칙
 
@@ -790,74 +783,14 @@ Quick Summary 분산 원칙:
 - Cross-language link 금지
 - 같은 허브 강조 링크는 Quick Summary 아래의 dedicated panel로 정리한다
 
-허브 완료 후 반드시:
-- 허브 related panel 누락 점검
-- 하위 글 역링크 점검
-- 각 하위 글 related panel 누락 점검
-- 키워드 중복 점검
-
 ---
 
-## 11. 이미지 및 alt 규칙
+## 11. 이미지 삽입 위임 규칙
 
-### 11-1. 본문 이미지 문법
-
-- 허브 글과 해당 하위 글 묶음이 모두 완성되기 전에는 본문 이미지 마크업을 먼저 넣지 않는다
-- 글 작성 단계에서 Codex가 본문 이미지를 넣는 행위는 절대 금지한다
-- 이미지 삽입 작업은 항상 사용자만 직접 한다
-- Codex는 글 작성, 수정, SEO, 내부 링크, alt 초안까지만 담당하고 본문 이미지 마크업은 절대 추가하지 않는다
-- Codex는 이미지 삽입이 필요한 글의 끝이나 작업 로그에 "필요 이미지/시각 자료 brief"를 남긴다
-- brief는 실제 이미지 경로를 만들지 않고, 필요한 장면·비교표·단계표·alt 초안만 적는다
-- 프로젝트 최상위 폴더와 모든 하위 폴더를 포함한 저장소 전체의 기존 사진 파일은 글 작성 과정에서 어떤 형태로도 사용하지 않는다
-- 단, 사용자가 현재 글의 이미지 삽입을 위해 직접 추가한 파일은 예외로 보고 사용자가 직접 삽입할 수 있다
-- 이미지 삽입은 허브와 하위 글의 본문, 내부 링크, related panel 정리가 끝난 뒤 마지막 단계에서만 사용자가 처리한다
-- 이미지를 넣는 시점에는 각 H2 바로 아래 첫 줄에만 `![alt](/images/...webp)`를 반영한다
-- 실제 `.webp` 파일이 준비되기 전에는 깨진 `/images/...` 경로를 본문에 남기지 않는다
-- raw HTML `<img>` 금지
-
-### 11-2. 이미지 경로
-
-- 저장 위치: `public/images/hub/[hub-slug]/`
-- MDX 경로: `/images/hub/[hub-slug]/[file]-kr.webp` 또는 `-en.webp`
-- 최종 경로는 항상 `.webp`
-- KO 파일 이미지는 `-kr.webp`, EN 파일 이미지는 `-en.webp`로 끝난다
-- 사용자가 원본 확장자를 생략해도 실제 원본을 확인한 뒤 게시본은 항상 `.webp`로 만든다
-- 원본이 `.png`, `.jpg`, `.jpeg`여도 본문 삽입 전 `.webp`로 변환한다
-- 글당 이미지 수는 보통 3~7개를 기준으로 한다
-- 이전 포스팅에서 사용한 사진을 새 포스팅에 다시 쓰는 것은 절대 금지한다
-- 같은 허브 글과 하위 글 사이에서도 동일 사진 재사용을 절대 금지한다
-- 같은 포스팅 안에 동일한 사진 파일을 두 번 이상 넣는 것도 절대 금지한다
-
-### 11-3. alt 규칙
-
-- alt는 비워두지 않는다
-- 장면 설명 우선
-- 검색 의도 키워드 1개만 자연스럽게 포함 가능
-- 짧고 구체적으로 쓴다
-- 시적인 표현 금지
-- 추상적 감상 금지
-- 키워드 나열 금지
-- 반복 패턴 금지
-- 파일명은 사용자가 채워도 되지만 alt는 Codex가 기본적으로 작성한다
-
-좋은 alt:
-- 실제 장면이 바로 떠오른다
-- 짧다
-- 키워드 1개가 자연스럽다
-
-나쁜 alt:
-- 추상적이다
-- 문학적이다
-- 검색어 덩어리처럼 보인다
-
-### 11-4. alt 수정 순서
-
-1. 허브와 하위 글 묶음이 모두 완성됐는지 먼저 확인
-2. 실제 `.webp` 경로 확인
-3. KO/EN 언어 맞춰 alt 작성
-4. 각 H2 바로 아래에만 이미지 마크업 반영
-5. 문맥과 과하게 충돌하지 않는지 점검
-6. `md-doc/image-webp-alt-prompt.md` 최신 규칙과 충돌 없는지 점검
+- 글 작성 단계에서 Codex는 본문 이미지 마크업을 넣지 않는다.
+- 사용자가 이미지를 준비한 뒤 별도로 삽입을 요청하면 `md-doc/image-webp-alt-prompt.md`를 따른다.
+- 이 문서에서는 이미지 변환, 파일명, alt, 원본 삭제, 중복 검증의 세부 규칙을 중복 관리하지 않는다.
+- 포스팅 품질 판단에서는 이미지가 AdSense 사용자 경험 신호에 도움이 될 수 있음을 고려하되, 실제 삽입 절차는 이미지 전용 문서를 우선한다.
 
 ---
 
@@ -936,8 +869,8 @@ Mid-CTA 검토 규칙 (본문 중간 전환 링크):
 - 포스팅 완료 후 `md-doc/kpop-blog-topics-300.md`에서 해당 주제의 완료 표시를 갱신한다
 - KO/EN 짝 글이 모두 완료된 뒤에만 `md-doc/kpop-blog-topics-300.md`를 완료 처리한다
 - 완료 표시는 `### [번호] Sub [ ]` 또는 `### [번호] Hub` 상태를 실제 완료 형식에 맞게 `### [번호] Sub [v]`, `### [번호] Hub [v]`로 바꿔 반영한다
-- Codex 글 작성 완료 체크는 글 파일 생성, frontmatter, 내부 링크, related panel, 품질 게이트, 이미지/시각 자료 brief, KO/EN 짝 파일 확인 뒤 반영한다
-- 사용자가 이미지 삽입까지 완료한 최종 게시 체크는 이미지 경로, alt, 중복 이미지, 깨진 경로까지 확인한 뒤 반영한다
+- Codex 글 작성 완료 체크는 글 파일 생성, frontmatter, 내부 링크, related panel, 품질 게이트, KO/EN 짝 파일 확인 뒤 반영한다
+- 사용자가 이미지 삽입까지 요청한 경우에는 `md-doc/image-webp-alt-prompt.md` 기준 검증까지 끝낸 뒤 반영한다
 - 허브 1개가 끝나면 내부 링크, related panel, 키워드 중복 점검을 수행한다
 
 우선순위:
@@ -993,11 +926,8 @@ AdSense 콘텐츠 품질 체크 (제출 전 필수):
 - H2 문장이 검색자 문장처럼 자연스럽게 읽히는가
 
 이미지:
-- body image alt 비어 있지 않은가
-- alt가 짧고 구체적인가
-- `.webp` 경로인가
-- Codex 작성 단계라면 실제 이미지 마크업 대신 필요한 이미지/시각 자료 brief를 남겼는가
-- 사용자가 이미지를 삽입한 뒤에는 깨진 경로, 중복 이미지, 재사용 이미지가 없는가
+- 글 작성 작업에서 본문 이미지 마크업을 임의로 추가하지 않았는가
+- 이미지 삽입 요청이 별도로 있었다면 `md-doc/image-webp-alt-prompt.md` 기준 검증을 완료했는가
 
 링크:
 - 하위 글이면 허브 역링크가 본문에 있는가
@@ -1032,81 +962,33 @@ description: [actual text] -> [N]자
 
 추정 금지.
 
-## 17. 현재 허브 키워드 맵
+## 17. 허브 키워드 맵 위치
 
-### 완료 또는 진행 중 허브
-
-| 허브 | 허브 메인 키워드(KO) | 허브 메인 키워드(EN) | 상태 |
-|------|----------------------|----------------------|------|
-| 경복궁 | 경복궁 가볼만한곳 | Gyeongbokgung Palace tour guide | 완료 |
-| 명동 | 명동 서울 여행 코스 | Myeongdong Seoul travel guide | 완료 |
-| 남산 N서울타워 | 남산 N서울타워 서울 야경 랜드마크 | N Seoul Tower landmark guide | 완료 |
-| 홍대 | 홍대 서울 동네 가이드 | Hongdae Seoul neighborhood guide | 완료 |
-| 인사동 | 인사동 서울 전통거리 | Insadong Seoul cultural street | 허브 완료 |
-| 가로수길 | 가로수길 놀거리 | best things to do in garosu-gil | 허브 완료 |
-
-### 하위 글 키워드 예시
-
-남산 허브:
-- 허브: `남산 N서울타워 서울 야경 랜드마크`
-- 하위: `남산 N서울타워 야경 명소`
-- 하위: `남산 케이블카 스냅 사진`
-
-홍대 허브:
-- 허브: `홍대 서울 동네 가이드`
-- 하위: `홍대 거리 포토존 추천`
-- 하위: `홍대 감성 카페 포토존`
-- 하위: `홍대 성수 스트릿 패션 차이`
-
-명동 허브:
-- 허브: `명동 서울 여행 코스`
-- 하위: `명동 네온사인 야간 사진`
-- 하위: `명동 K뷰티 쇼핑 동선 가이드`
-- 하위: `명동 홍대 길거리 음식 비교`
-
-뷰티 허브:
-- 허브: `한국 스킨케어 루틴 완벽 가이드`
-- 하위: `글라스 스킨 만드는 한국 스킨케어 루틴`
-- 하위: `쿠션 파운데이션 고르는 방법`
-- 하위: `한국 마스크팩 고르는 방법`
+허브/하위 글 키워드 맵, 완료 상태, 다음 작성 대상은 `md-doc/kpop-blog-topics-300.md`를 단일 원본으로 본다.
+이 문서에는 키워드 예시나 완료 허브 목록을 중복 관리하지 않는다.
 
 ---
 
 ## 18. 작업 상태 단일 원본
 
-현재 작업 상태, 완료 로그, AdSense 감사/보강 진행 상황은 `md-doc/kpop-blog-topics-300.md`에서만 관리한다.
-이 문서에는 과거 완료 로그를 누적하지 않는다.
+현재 작업 상태와 다음 작성 대상은 `md-doc/kpop-blog-topics-300.md`에서 관리한다.
+완료된 클러스터와 과거 AdSense 감사/보강 로그는 `md-doc/kpop-blog-topics-complete.md`에 보관한다.
 
-### 18-1. 사용자 요청 완료 표시
+### 18-1. 작업 상태 확인 원칙
 
-2026-05-01 KST 기준, 아래 KO 글들은 AdSense "가치가 별로 없는 콘텐츠" 대응 본문 보강을 완료했다.
-상세 누적 로그와 다음 후보 목록은 단일 원본인 `md-doc/kpop-blog-topics-300.md`에 기록한다.
+이 문서에는 완료 글 목록을 두지 않는다. 남은 후보와 현재 다음 작성 대상은 `md-doc/kpop-blog-topics-300.md`에서 확인하고, 과거 완료 글과 누적 AdSense 감사 로그는 `md-doc/kpop-blog-topics-complete.md`에서 확인한다.
 
-- `content/hub/ko/who-looks-best-with-a-hush-cut.mdx` — KO 순수 본문 3,519자
-- `content/hub/ko/oversized-blazer-outfit-guide.mdx` — KO 순수 본문 3,543자
-- `content/hub/ko/korean-haircut-ideas.mdx` — KO 순수 본문 3,541자
-- `content/hub/ko/how-to-keep-bangs-in-place-all-day.mdx` — KO 순수 본문 3,503자
-- `content/hub/ko/travel-k-beauty-pouch-guide.mdx` — KO 순수 본문 3,576자
-- `content/hub/ko/virtual-gyeongbokgung-background-guide.mdx` — KO 순수 본문 3,595자
-- `content/hub/ko/gentle-skincare-routine-guide.mdx` — KO 순수 본문 3,642자
-- `content/hub/ko/garosu-gil-evening-walk-guide.mdx` — KO 순수 본문 3,523자
-- `content/hub/ko/myeongdong-neon-street-guide.mdx` — KO 순수 본문 3,535자
-- `content/hub/ko/personal-color-hair-dye-guide.mdx` — KO 순수 본문 3,621자
-- `content/hub/ko/hair-colors-that-brighten-your-face.mdx` — KO 순수 본문 4,527자
-- `content/hub/ko/crop-knit-and-mini-skirt-outfit-guide.mdx` — KO 순수 본문 4,651자
-- `content/hub/ko/garosu-gil-shopping-walk-guide.mdx` — KO 순수 본문 4,687자
-- `content/hub/ko/itaewon-gyeongnidan-walk-guide.mdx` — KO 순수 본문 4,734자
-- `content/hub/ko/best-brown-hair-colors-without-bleach.mdx` — KO 순수 본문 4,647자
+AdSense "가치가 별로 없는 콘텐츠" 대응에서는 완료 표시보다 실제 품질 신호가 우선이다. 공개 글로 남기는 문서는 길이 하한, 고유 정보, 반복 패턴 제거, 내부 링크, 작성 기준과의 일관성을 함께 충족해야 한다.
 
 작업 시작 전 확인:
 - `md-doc/kpop-blog-topics-300.md`의 topic `[ ]` / `[v]` 상태
 - `## 12. Current Work Status Source`
-- `## 13. AdSense Low Value Content Audit & Progress Log`
+- `## 13. AdSense Low Value Content Active Summary`
 
 작업 완료 후 갱신:
 - 완료한 topic의 `[ ]` / `[v]` 상태
-- 같은 파일의 AdSense/진행 로그
-- 필요 이미지/시각 자료 brief
+- 같은 파일의 active progress note
+- 이미지 삽입 요청이 있었다면 `md-doc/image-webp-alt-prompt.md` 기준 검증 결과
 
 ---
 
@@ -1125,15 +1007,3 @@ description: [actual text] -> [N]자
 9. `md-doc/kpop-blog-topics-300.md`의 상태 표기는 반드시 원문 형식 그대로 유지하고, 상태값만 `[ ]`에서 `[v]`로 수정한다
 
 ---
-
-## 20. 수정 작업용 한 줄 프롬프트
-
-기존 글 수정 시에는 아래 기준으로 본다.
-
-- 메인 키워드는 유지
-- title은 더 검색 친화적으로 미세 조정
-- description은 클릭 이유 중심으로 재작성
-- 첫 문단에 메인 키워드와 보조 키워드 1~2개 반영
-- H2는 1~2개만 더 검색형으로 조정
-- alt는 짧고 구체적으로 보정
-- 본문 나머지 구조와 논지는 유지

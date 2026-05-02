@@ -50,7 +50,11 @@
       "Read(//c/Users/수성길메인/Desktop/11  11 실전코딩/kpop-style/kstryletry/**)",
       "Bash(wc -w content/hub/en/*.mdx)",
       "Read(//c/Users/수성길메인/Desktop/11 11 실전코딩/kpop-style/kstryletry/**)",
-      "Read(//c/Users/수성길메인/Desktop/11 11 실전코딩/kpop-style/kstryletry/content/**)"
+      "Read(//c/Users/수성길메인/Desktop/11 11 실전코딩/kpop-style/kstryletry/content/**)",
+      "Bash(awk '{sum+=$1; count++} END {print \"Avg words:\", sum/count, \"Total words:\", sum, \"Files:\", count}')",
+      "Bash(python -c ':*)",
+      "Bash(python scripts/rewrite_hubposts.py)",
+      "Bash(python scripts/remove_banners.py)"
     ]
   }
 }
