@@ -41,6 +41,7 @@ export const ADSENSE_REVIEW_HUB_SLUGS = [
   "high-teen-school-look-guide",
   "seasonal-k-fashion-outfit-ideas",
   "seoul-street-fashion-trends",
+  "hongdae-street-fashion-outfit-tips",
 ] as const;
 
 const ADSENSE_REVIEW_HUB_SLUG_SET = new Set<string>(ADSENSE_REVIEW_HUB_SLUGS);

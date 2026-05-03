@@ -627,6 +627,19 @@ export const hubPosts: HubPost[] = [
     watermark: "스트릿 패션",
     cta: "읽기",
   },
+  {
+    slug: "hongdae-street-fashion-outfit-tips",
+    cardType: "half-hero",
+    category: "K-스타일 & 패션",
+    categoryStyle: "white-on-pink",
+    title: "홍대 스트릿 패션\n코디 포인트",
+    subtitle: "오버핏, 그래픽 티셔츠, 신발 부피를 홍대 거리 밀도에 맞추는 실전 코디 기준",
+    bg: "linear-gradient(135deg, #1d1d27 0%, #71534f 38%, #dd6b44 68%, #f4d4a3 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "홍대 코디",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -1217,6 +1230,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "STREET",
+    cta: "Read Now",
+  },
+  {
+    slug: "hongdae-street-fashion-outfit-tips",
+    cardType: "half-hero",
+    category: "K-Fashion",
+    categoryStyle: "white-on-pink",
+    title: "Hongdae Street\nOutfit Tips",
+    subtitle: "How to balance oversized layers, graphic tees, shoes, and bags inside real Hongdae routes",
+    bg: "linear-gradient(135deg, #1d1d27 0%, #71534f 38%, #dd6b44 68%, #f4d4a3 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "HONGDAE",
     cta: "Read Now",
   },
 ];
