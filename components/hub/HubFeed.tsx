@@ -224,25 +224,6 @@ export function HubFeed({
   return (
     <div className="hf-root">
       <header className="hf-header">
-        <Link className="hf-header-home" href={`/${lang}`} aria-label={isKo ? "홈으로 이동" : "Go to home page"}>
-          <span className="hf-header-icon" aria-hidden>
-            <span className="hf-header-icon-core">
-              <svg viewBox="0 0 24 24" fill="none" role="img" aria-hidden="true">
-                <path
-                  d="M6 17.5V6.5h2.4v4.35L13.3 6.5h3.05l-5 4.35 5.35 6.65h-3.1L9.9 12.9l-1.5 1.3v3.3H6Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-          </span>
-          <span className="hf-header-copy">
-            <span className="hf-header-kicker">HOME</span>
-            <span className="hf-header-title">KStyleShot</span>
-            <span className="hf-header-subtitle">
-              {isKo ? "홈으로 돌아가기" : "Back to home"}
-            </span>
-          </span>
-        </Link>
         <div className="hf-lang-toggle">
           <Link className={`hf-lang-btn${isKo ? " hf-lang-btn--active" : ""}`} href="/ko/hub">
             KO
@@ -379,22 +360,6 @@ export function HubFeed({
         </div>
       </section>
 
-      <div className="hf-nav">
-        <nav className="hf-nav-pill">
-          <Link className="hf-nav-item hf-nav-item--active" href={`/${lang}/hub`}>
-            <span className="hf-nav-icon" aria-hidden>
-              ◇
-            </span>
-            <span className="hf-nav-label">{isKo ? "가이드" : "Guides"}</span>
-          </Link>
-          <Link className="hf-nav-item" href={`/${lang}`}>
-            <span className="hf-nav-icon" aria-hidden>
-              ⌂
-            </span>
-            <span className="hf-nav-label">{isKo ? "홈" : "Home"}</span>
-          </Link>
-        </nav>
-      </div>
     </div>
   );
 }
