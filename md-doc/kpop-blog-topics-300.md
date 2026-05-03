@@ -14,8 +14,8 @@ Updated By: Codex GPT-5
 
 긴 컨텍스트에서 Codex가 먼저 잡아야 할 현재 상태다.
 
-- 현재 다음 작성 대상: `[107] Hub [ ]` 서울 스트릿 패션 트렌드 허브.
-- 방금 완료된 흐름: `[102]~[106]` 계절별 K패션 허브와 봄/여름/가을/겨울 하위 글 완료.
+- 현재 다음 작성 대상: `[108] Sub [ ]` 홍대 스트릿 패션 코디 포인트.
+- 방금 완료된 흐름: `[107]` 서울 스트릿 패션 트렌드 허브 KO/EN 완료.
 - 이 파일의 주제 표기(`[ ]` / `[v]`)가 현재 작성 상태의 1차 원본이다.
 - 상세 작성 규칙, 품질 게이트, 글 작성 후 자체 검수 절차는 `md-doc/post-codex-command.md`를 따른다.
 - AdSense 거절 맥락: 사이트는 "가치가 별로 없는 콘텐츠"로 거절된 이력이 있으므로 단순 증량보다 고유 정보, 구체 기준, 반복 패턴 제거, 내부 링크 정합성이 우선이다.
@@ -65,7 +65,7 @@ This active file keeps only unfinished or still-in-progress clusters so Codex ca
 
 ### Seoul Street Fashion Cluster
 
-### [107] Hub [ ]
+### [107] Hub [v]
 - KO: 서울 스트릿 패션 트렌드 가이드 — 홍대와 성수 코디 차이
 - EN: Seoul Street Fashion Trends — Hongdae vs Seongsu Outfits
 - Keyword: KO `서울 스트릿 패션` | EN `seoul street fashion trends`
@@ -1338,7 +1338,7 @@ Updated By: Codex GPT-5
 - Completed clusters are archived in md-doc/kpop-blog-topics-complete.md.
 - 글 작성 규칙과 품질 게이트는 md-doc/post-codex-command.md를 따른다.
 - 이미지 삽입, alt, webp 변환, 원본 처리, 중복 검증은 md-doc/image-webp-alt-prompt.md를 따른다.
-- 현재 다음 작성 대상은 [107] Hub [ ] 서울 스트릿 패션 트렌드 허브다.
+- 현재 다음 작성 대상은 [108] Sub [ ] 홍대 스트릿 패션 코디 포인트다.
 - 완료 상태는 이 파일에 남아 있는 주제 목록의 [ ] / [v] 표기를 원본으로 본다.
 - 미완료 클러스터 안에 이미 완료된 개별 topic이 있으면, 클러스터 전체가 끝날 때까지 active 파일에 남긴다.
 - 작업 완료 후에는 해당 topic 상태와 아래 active progress note를 함께 갱신한다.
@@ -1361,7 +1361,8 @@ Current operating summary:
 Active progress note:
 
 - [102]~[106] 계절별 K패션 허브와 봄/여름/가을/겨울 하위 글 완료.
-- 다음 작성 대상은 [107] Hub [ ]다.
+- [107] 서울 스트릿 패션 트렌드 허브 KO/EN 완료.
+- 다음 작성 대상은 [108] Sub [ ]다.
 - 다음 작업 완료 시 이 active progress note와 ## 0. Active Context Snapshot의 현재 대상 문구를 함께 갱신한다.
 
 ---

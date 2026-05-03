@@ -614,6 +614,19 @@ export const hubPosts: HubPost[] = [
     watermark: "계절 코디",
     cta: "읽기",
   },
+  {
+    slug: "seoul-street-fashion-trends",
+    cardType: "half-hero",
+    category: "K-스타일 & 패션",
+    categoryStyle: "white-on-pink",
+    title: "서울 스트릿 패션\n트렌드 가이드",
+    subtitle: "홍대와 성수 거리에서 코디가 다르게 읽히는 이유와 실루엣 선택 기준",
+    bg: "linear-gradient(135deg, #15151f 0%, #425466 34%, #c75b3f 66%, #efe3c2 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "스트릿 패션",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -1191,6 +1204,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "SEASONAL",
+    cta: "Read Now",
+  },
+  {
+    slug: "seoul-street-fashion-trends",
+    cardType: "half-hero",
+    category: "K-Fashion",
+    categoryStyle: "white-on-pink",
+    title: "Seoul Street\nFashion Trends",
+    subtitle: "A guide to how Hongdae and Seongsu make outfits read differently on real streets",
+    bg: "linear-gradient(135deg, #15151f 0%, #425466 34%, #c75b3f 66%, #efe3c2 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "STREET",
     cta: "Read Now",
   },
 ];
