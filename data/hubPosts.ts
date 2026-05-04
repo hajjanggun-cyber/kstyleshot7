@@ -640,6 +640,19 @@ export const hubPosts: HubPost[] = [
     watermark: "홍대 코디",
     cta: "읽기",
   },
+  {
+    slug: "seongsu-street-fashion-outfit-tips",
+    cardType: "half-hero",
+    category: "K-스타일 & 패션",
+    categoryStyle: "white-on-pink",
+    title: "성수 스트릿 패션\n코디 포인트",
+    subtitle: "미니멀 스트릿룩, 톤온톤 색, 소재 질감을 성수 거리 여백에 맞추는 코디 기준",
+    bg: "linear-gradient(135deg, #20242a 0%, #5d655b 34%, #b8a078 68%, #efe6d1 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "성수 코디",
+    cta: "읽기",
+  },
 ];
 
 export const hubPostsEn: HubPost[] = [
@@ -1243,6 +1256,19 @@ export const hubPostsEn: HubPost[] = [
     titleColor: "#ffffff",
     subtitleColor: "rgba(255,255,255,0.82)",
     watermark: "HONGDAE",
+    cta: "Read Now",
+  },
+  {
+    slug: "seongsu-street-fashion-outfit-tips",
+    cardType: "half-hero",
+    category: "K-Fashion",
+    categoryStyle: "white-on-pink",
+    title: "Seongsu Street\nOutfit Tips",
+    subtitle: "How to build minimal streetwear with tone-on-tone color, fabric surface, bags, and shoes",
+    bg: "linear-gradient(135deg, #20242a 0%, #5d655b 34%, #b8a078 68%, #efe6d1 100%)",
+    titleColor: "#ffffff",
+    subtitleColor: "rgba(255,255,255,0.82)",
+    watermark: "SEONGSU",
     cta: "Read Now",
   },
 ];
