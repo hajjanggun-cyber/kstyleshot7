@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
-import { HubArticle } from "@/components/hub/HubArticle";
 import { HubMdxPage } from "@/components/hub/HubMdxPage";
-import { hubArticles } from "@/data/hubArticles";
+import { isAdsenseReviewHubSlug } from "@/data/adsenseReview";
 import { routing } from "@/i18n/routing";
 import { getAllArticles, getAllSlugs, getFirstImageSrc, getMdxArticle } from "@/lib/mdx";
 import { SITE_NAME, buildLocaleAlternatesAbsolute, getSiteUrl } from "@/lib/seo";
@@ -16,6 +15,10 @@ export function generateStaticParams() {
   const params: { lang: string; slug: string }[] = [];
   for (const locale of routing.locales) {
     for (const slug of getAllSlugs(locale)) {
+      if (!isAdsenseReviewHubSlug(slug)) {
+        continue;
+      }
+
       params.push({ lang: locale, slug });
     }
   }
@@ -24,6 +27,18 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { lang, slug } = await params;
+
+  if (!isAdsenseReviewHubSlug(slug)) {
+    return {
+      robots: {
+        index: false,
+        follow: false,
+      },
+      alternates: {
+        canonical: `${getSiteUrl()}/${lang}/hub`,
+      },
+    };
+  }
 
   const mdx = getMdxArticle(lang, slug);
   if (mdx) {
@@ -62,16 +77,15 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     };
   }
 
-  const legacy = hubArticles[slug];
-  if (legacy) {
-    return { title: legacy.title };
-  }
-
   return {};
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { lang, slug } = await params;
+
+  if (!isAdsenseReviewHubSlug(slug)) {
+    permanentRedirect(`/${lang}/hub`);
+  }
 
   const mdx = getMdxArticle(lang, slug);
   if (mdx) {
@@ -82,7 +96,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     const breadcrumbHomeLabel = lang === "ko" ? "홈" : "Home";
     const breadcrumbHubLabel = lang === "ko" ? "허브" : "Hub";
     const relatedArticles = getAllArticles(lang)
-      .filter((a) => a.category === fm.category && a.slug !== slug)
+      .filter((a) => isAdsenseReviewHubSlug(a.slug) && a.category === fm.category && a.slug !== slug)
       .slice(0, 3)
       .map((a) => `${getSiteUrl()}/${lang}/hub/${a.slug}`);
 
@@ -147,8 +161,5 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     );
   }
 
-  const legacy = hubArticles[slug];
-  if (!legacy) notFound();
-
-  return <HubArticle article={legacy} />;
+  notFound();
 }

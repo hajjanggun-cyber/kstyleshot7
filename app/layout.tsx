@@ -15,7 +15,9 @@ const googleVerification =
 const naverVerification =
   process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION ?? process.env.NAVER_SITE_VERIFICATION;
 const adsenseClient = normalizeAdsenseClient(
-  process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT ?? process.env.GOOGLE_ADSENSE_CLIENT
+  process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT ??
+    process.env.GOOGLE_ADSENSE_CLIENT ??
+    "pub-2524681039359256"
 );
 
 function normalizeAdsenseClient(raw: string | undefined): string | null {
@@ -115,11 +117,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang={lang} suppressHydrationWarning>
       <head>
         {adsenseClient ? (
-          <script
-            async
-            crossOrigin="anonymous"
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
-          />
+          <>
+            <meta name="google-adsense-account" content={adsenseClient} />
+            <script
+              async
+              crossOrigin="anonymous"
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            />
+          </>
         ) : null}
       </head>
       <body>
