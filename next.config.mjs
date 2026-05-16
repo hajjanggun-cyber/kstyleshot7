@@ -2,6 +2,92 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
+const adsenseExcludedHubSlugs = [
+  "beginner-mens-skincare-routine-guide",
+  "best-blush-placement-by-face-shape",
+  "best-brown-hair-colors-without-bleach",
+  "best-hair-essence-for-bleached-hair",
+  "best-layered-hair-length-for-easy-styling",
+  "best-lip-colors-for-cool-tones",
+  "best-lip-colors-for-warm-tones",
+  "best-primer-for-large-pores",
+  "bukchon-vs-seochon-walking-guide",
+  "cafe-hopping",
+  "clean-spring-daily-outfit-ideas",
+  "crop-knit-and-mini-skirt-outfit-guide",
+  "eye-makeup-tips",
+  "fairycore-outfit-guide",
+  "fall-knit-outfit-and-color-guide",
+  "garosu-gil-evening-walk-guide",
+  "garosu-gil-shopping-walk-guide",
+  "gentle-skincare-routine-guide",
+  "gen-z-hallyu",
+  "girl-crush-style-outfit-guide",
+  "glass-skin-guide",
+  "gyeongbokgung-nearby-hanok-photo-spots",
+  "hair-color-ideas-by-skin-tone",
+  "hair-colors-that-brighten-your-face",
+  "han-river-night-photo-spots",
+  "hongdae-vs-seongsu-street-fashion",
+  "how-to-add-root-volume-at-home",
+  "how-to-ask-for-a-hairstyle-in-korea",
+  "how-to-choose-the-right-sunscreen",
+  "how-to-do-gradient-lips",
+  "how-to-keep-bangs-in-place-all-day",
+  "how-to-maintain-ash-brown-hair",
+  "how-to-make-lash-curl-last-longer",
+  "humid-weather-hair-care-guide",
+  "ikseon-dong-hanok-alley-photo-guide",
+  "insadong-photo-spots",
+  "insadong-tea-house-walking-guide",
+  "itaewon-gyeongnidan-walk-guide",
+  "k-fashion-style-types",
+  "k-fashion-wardrobe-essentials",
+  "korean-haircut-ideas",
+  "k-style-layered-necklace-guide",
+  "lip-makeup-guide",
+  "makeup-tips-for-acne-prone-skin",
+  "makeup-tips-for-better-photos",
+  "monolid-eye-makeup-guide",
+  "munja-do-art",
+  "myeongdong-hongdae-street-food-guide",
+  "myeongdong-k-beauty-shopping-map",
+  "myeongdong-neon-street-guide",
+  "naksan-park-night-view-guide",
+  "namsan-cable-car-photo-tips",
+  "natural-aegyo-sal-makeup-guide",
+  "olive-young-skincare-shopping-guide",
+  "oversized-blazer-outfit-guide",
+  "personal-color-hair-dye-guide",
+  "retro-pop",
+  "see-through-bangs-vs-curtain-bangs",
+  "seochon-date-route-photo-spots",
+  "seongsu-industrial-alley-walk-guide",
+  "seongsu-street-fashion-outfit-tips",
+  "seoul-nights",
+  "seoul-photo-spot-recommendations",
+  "smudge-proof-eyeliner-guide",
+  "stage-skin",
+  "summer-festival-outfit-guide",
+  "techwear-style-outfit-guide",
+  "travel-k-beauty-pouch-guide",
+  "virtual-gyeongbokgung-background-guide",
+  "who-looks-best-with-a-hush-cut",
+  "wide-leg-pants-k-style-outfit-ideas",
+  "winter-layering-outfit-rules",
+  "y2k-k-fashion-outfit-guide",
+];
+
+function adsenseExcludedHubRedirects() {
+  return ["en", "ko"].flatMap((locale) =>
+    adsenseExcludedHubSlugs.map((slug) => ({
+      source: `/${locale}/hub/${slug}`,
+      destination: `/${locale}/hub`,
+      statusCode: 308,
+    }))
+  );
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -19,6 +105,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      ...adsenseExcludedHubRedirects(),
       // /hub/[slug] (no locale) → /ko/hub/[slug]
       {
         source: "/hub/:slug*",
