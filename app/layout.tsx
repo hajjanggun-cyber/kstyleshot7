@@ -14,11 +14,19 @@ const googleVerification =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? process.env.GOOGLE_SITE_VERIFICATION;
 const naverVerification =
   process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION ?? process.env.NAVER_SITE_VERIFICATION;
-const adsenseClient = normalizeAdsenseClient(
-  process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT ??
-    process.env.GOOGLE_ADSENSE_CLIENT ??
-    "pub-2524681039359256"
+const adsenseClient = resolveAdsenseClient(
+  process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT,
+  process.env.GOOGLE_ADSENSE_CLIENT,
+  "pub-2524681039359256"
 );
+
+function resolveAdsenseClient(...candidates: Array<string | undefined>): string | null {
+  for (const candidate of candidates) {
+    const normalized = normalizeAdsenseClient(candidate);
+    if (normalized) return normalized;
+  }
+  return null;
+}
 
 function normalizeAdsenseClient(raw: string | undefined): string | null {
   if (!raw) return null;
