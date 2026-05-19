@@ -14,8 +14,8 @@ Updated By: Codex GPT-5
 
 긴 컨텍스트에서 Codex가 먼저 잡아야 할 현재 상태다.
 
-- 현재 다음 작성 대상: `[110] Sub [ ]` 서울 편집숍 쇼핑 가이드.
-- 방금 완료된 흐름: `[109]` 성수 스트릿 패션 코디 포인트 KO/EN 완료.
+- 현재 다음 작성 대상: `[112] Hub [ ]` 체형별 코디 추천.
+- 방금 완료된 흐름: `[111]` 한국에서 옷 사는 쇼핑 루트 KO/EN 완료.
 - 이 파일의 주제 표기(`[ ]` / `[v]`)가 현재 작성 상태의 1차 원본이다.
 - 상세 작성 규칙, 품질 게이트, 글 작성 후 자체 검수 절차는 `md-doc/post-codex-command.md`를 따른다.
 - AdSense 거절 맥락: 사이트는 "가치가 별로 없는 콘텐츠"로 거절된 이력이 있으므로 단순 증량보다 고유 정보, 구체 기준, 반복 패턴 제거, 내부 링크 정합성이 우선이다.
@@ -83,13 +83,13 @@ This active file keeps only unfinished or still-in-progress clusters so Codex ca
 - Keyword: KO `성수 스트릿 패션 코디` | EN `seongsu street fashion outfit tips`
 - Subkeywords: KO `미니멀 스트릿룩`, `톤온톤 코디`, `성수 감성` | EN `minimal streetwear`, `tone-on-tone styling`, `seongsu aesthetic`
 
-### [110] Sub [ ]
+### [110] Sub [v]
 - KO: 서울 편집숍 쇼핑 가이드
 - EN: Seoul Select Shop Guide
 - Keyword: KO `서울 편집숍 쇼핑` | EN `seoul select shop guide`
 - Subkeywords: KO `성수 편집숍`, `신사 편집숍`, `서울 디자이너 숍` | EN `seongsu select shops`, `sinsa fashion stores`, `seoul designer shops`
 
-### [111] Sub [ ]
+### [111] Sub [v]
 - KO: 한국에서 옷 잘 사는 쇼핑 루트
 - EN: Where to Shop Clothes in Korea
 - Keyword: KO `한국에서 옷 잘 사는 법` | EN `where to shop clothes in korea`
@@ -1338,7 +1338,7 @@ Updated By: Codex GPT-5
 - Completed clusters are archived in md-doc/kpop-blog-topics-complete.md.
 - 글 작성 규칙과 품질 게이트는 md-doc/post-codex-command.md를 따른다.
 - 이미지 삽입, alt, webp 변환, 원본 처리, 중복 검증은 md-doc/image-webp-alt-prompt.md를 따른다.
-- 현재 다음 작성 대상은 [110] Sub [ ] 서울 편집숍 쇼핑 가이드다.
+- 현재 다음 작성 대상은 [112] Hub [ ] 체형별 코디 추천이다.
 - 완료 상태는 이 파일에 남아 있는 주제 목록의 [ ] / [v] 표기를 원본으로 본다.
 - 미완료 클러스터 안에 이미 완료된 개별 topic이 있으면, 클러스터 전체가 끝날 때까지 active 파일에 남긴다.
 - 작업 완료 후에는 해당 topic 상태와 아래 active progress note를 함께 갱신한다.
@@ -1364,7 +1364,9 @@ Active progress note:
 - [107] 서울 스트릿 패션 트렌드 허브 KO/EN 완료.
 - [108] 홍대 스트릿 패션 코디 포인트 KO/EN 완료.
 - [109] 성수 스트릿 패션 코디 포인트 KO/EN 완료.
-- 다음 작성 대상은 [110] Sub [ ]다.
+- [110] 서울 편집숍 쇼핑 가이드 KO/EN 완료.
+- [111] 한국에서 옷 사는 쇼핑 루트 KO/EN 완료.
+- 다음 작성 대상은 [112] Hub [ ]다.
 - 다음 작업 완료 시 이 active progress note와 ## 0. Active Context Snapshot의 현재 대상 문구를 함께 갱신한다.
 
 ---
