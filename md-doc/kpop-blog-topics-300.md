@@ -14,8 +14,8 @@ Updated By: Codex GPT-5
 
 긴 컨텍스트에서 Codex가 먼저 잡아야 할 현재 상태다.
 
-- 현재 다음 작성 대상: `[112] Hub [ ]` 체형별 코디 추천.
-- 방금 완료된 흐름: `[111]` 한국에서 옷 사는 쇼핑 루트 KO/EN 완료.
+- 현재 다음 작성 대상: `[114] Sub [ ]` 어깨 넓어 보이지 않는 재킷 고르기.
+- 방금 완료된 흐름: `[113]` 키 작아 보이지 않는 롱스커트 코디 KO/EN 완료.
 - 이 파일의 주제 표기(`[ ]` / `[v]`)가 현재 작성 상태의 1차 원본이다.
 - 상세 작성 규칙, 품질 게이트, 글 작성 후 자체 검수 절차는 `md-doc/post-codex-command.md`를 따른다.
 - AdSense 거절 맥락: 사이트는 "가치가 별로 없는 콘텐츠"로 거절된 이력이 있으므로 단순 증량보다 고유 정보, 구체 기준, 반복 패턴 제거, 내부 링크 정합성이 우선이다.
@@ -97,13 +97,13 @@ This active file keeps only unfinished or still-in-progress clusters so Codex ca
 
 ### Fit and Body Type Cluster
 
-### [112] Hub [ ]
+### [112] Hub [v]
 - KO: 체형별 코디 추천 — K스타일로 비율 좋아 보이게
 - EN: K-Style Outfit Ideas by Body Type — Better Proportion Tips
 - Keyword: KO `체형별 코디 추천` | EN `outfit ideas by body type`
 - Subkeywords: KO `체형 보완 코디`, `실루엣 선택`, `핏 찾기` | EN `body-shape styling`, `silhouette choices`, `finding the right fit`
 
-### [113] Sub [ ]
+### [113] Sub [v]
 - KO: 키 작아 보이지 않는 롱스커트 코디
 - EN: Long Skirt Outfit Tips for Petite Frames
 - Keyword: KO `키 작아 보이지 않는 롱스커트 코디` | EN `long skirt outfit tips for petite frames`
@@ -1338,7 +1338,7 @@ Updated By: Codex GPT-5
 - Completed clusters are archived in md-doc/kpop-blog-topics-complete.md.
 - 글 작성 규칙과 품질 게이트는 md-doc/post-codex-command.md를 따른다.
 - 이미지 삽입, alt, webp 변환, 원본 처리, 중복 검증은 md-doc/image-webp-alt-prompt.md를 따른다.
-- 현재 다음 작성 대상은 [112] Hub [ ] 체형별 코디 추천이다.
+- 현재 다음 작성 대상은 [114] Sub [ ] 어깨 넓어 보이지 않는 재킷 고르기이다.
 - 완료 상태는 이 파일에 남아 있는 주제 목록의 [ ] / [v] 표기를 원본으로 본다.
 - 미완료 클러스터 안에 이미 완료된 개별 topic이 있으면, 클러스터 전체가 끝날 때까지 active 파일에 남긴다.
 - 작업 완료 후에는 해당 topic 상태와 아래 active progress note를 함께 갱신한다.
@@ -1366,7 +1366,9 @@ Active progress note:
 - [109] 성수 스트릿 패션 코디 포인트 KO/EN 완료.
 - [110] 서울 편집숍 쇼핑 가이드 KO/EN 완료.
 - [111] 한국에서 옷 사는 쇼핑 루트 KO/EN 완료.
-- 다음 작성 대상은 [112] Hub [ ]다.
+- [112] 체형별 코디 추천 허브 KO/EN 완료.
+- [113] 키 작아 보이지 않는 롱스커트 코디 KO/EN 완료.
+- 다음 작성 대상은 [114] Sub [ ]다.
 - 다음 작업 완료 시 이 active progress note와 ## 0. Active Context Snapshot의 현재 대상 문구를 함께 갱신한다.
 
 ---
