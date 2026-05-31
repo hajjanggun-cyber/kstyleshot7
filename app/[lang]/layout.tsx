@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { CookieConsent } from "@/components/common/CookieConsent";
-import { DisclaimerBox } from "@/components/common/DisclaimerBox";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { SiteHeader } from "@/components/common/SiteHeader";
 import { routing } from "@/i18n/routing";
@@ -36,7 +35,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   setRequestLocale(lang);
   const messages = (await getMessages()) as Record<string, unknown>;
-  const layoutMessages = pickMessages(messages, ["header", "disclaimer", "cookieConsent"]);
+  const layoutMessages = pickMessages(messages, ["header", "cookieConsent"]);
 
   return (
     <NextIntlClientProvider locale={lang} messages={layoutMessages}>
@@ -45,9 +44,6 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       <div className="page-shell">
         <SiteHeader lang={lang} />
         <main className="app-main stack">{children}</main>
-        <div className="app-main">
-          <DisclaimerBox />
-        </div>
         <SiteFooter />
         <CookieConsent />
       </div>

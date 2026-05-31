@@ -3,6 +3,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import { DisclaimerBox } from "@/components/common/DisclaimerBox";
+
 export const metadata: Metadata = {
   robots: {
     index: false,
@@ -28,11 +30,14 @@ function pickMessages(messages: Record<string, unknown>, keys: string[]) {
 export default async function CreateLayout({ children, params }: CreateLayoutProps) {
   const { lang } = await params;
   const messages = (await getMessages()) as Record<string, unknown>;
-  const createMessages = pickMessages(messages, ["create", "flow"]);
+  const createMessages = pickMessages(messages, ["create", "disclaimer", "flow"]);
 
   return (
     <NextIntlClientProvider locale={lang} messages={createMessages}>
       {children}
+      <div className="app-main">
+        <DisclaimerBox />
+      </div>
     </NextIntlClientProvider>
   );
 }

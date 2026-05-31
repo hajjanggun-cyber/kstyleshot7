@@ -64,7 +64,7 @@ export async function generateMetadata({
   };
 }
 
-/* Hub section uses its own full-screen layout — no global SiteHeader */
+/* Hub section uses its own full-screen layout and local navigation. */
 export default async function HubLayout({ children, params }: HubLayoutProps) {
   const { lang } = await params;
   const safeLang = lang === "en" ? "en" : "ko";
