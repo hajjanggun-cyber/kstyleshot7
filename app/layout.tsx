@@ -9,7 +9,7 @@ import { SITE_NAME, getSiteUrl, toAbsoluteAssetUrl } from "@/lib/seo";
 const siteUrl = getSiteUrl();
 const defaultTitle = "K-StyleShot | Seoul, K-Beauty, and K-Fashion Guides";
 const defaultDescription =
-  "Kstyleshot publishes practical K-style guides for Seoul photo spots, K-beauty routines, Korean fashion choices, and optional AI portrait styling.";
+  "Kstyleshot publishes practical K-style guides for Seoul photo spots, K-beauty routines, and Korean fashion choices.";
 const googleVerification =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? process.env.GOOGLE_SITE_VERIFICATION;
 const naverVerification =

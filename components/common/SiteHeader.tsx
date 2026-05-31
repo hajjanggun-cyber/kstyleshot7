@@ -32,7 +32,9 @@ export function SiteHeader({ lang }: SiteHeaderProps) {
         <nav className="site-nav" aria-label={t("ariaLabel")}>
           <Link href={`/${lang}`}>{t("home")}</Link>
           <Link href={`/${lang}/hub`}>{t("lookbook")}</Link>
-          <Link href={`/${lang}/create/upload`}>{t("create")}</Link>
+          <Link href={`/${lang}/about`}>
+            {lang === "ko" ? "소개" : "About"}
+          </Link>
         </nav>
         <Link className="mobile-hub-btn" href={`/${lang}/hub`}>
           {lang === "ko" ? "가이드 허브" : "Guide Hub"}

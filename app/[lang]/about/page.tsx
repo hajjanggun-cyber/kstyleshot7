@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
   return {
     title: isKo ? "소개 | K-StyleShot" : "About | K-StyleShot",
     description: isKo
-      ? "K-StyleShot은 서울 여행, K-뷰티, K-패션을 에디토리얼 기준으로 정리하는 라이프스타일 가이드와 AI 포트레이트 서비스를 함께 제공합니다."
-      : "K-StyleShot is a lifestyle guide and AI portrait service covering Seoul travel, K-beauty, and K-fashion with practical editorial standards.",
+      ? "K-StyleShot은 서울 여행, K-뷰티, K-패션을 에디토리얼 기준으로 정리하는 실용 라이프스타일 가이드입니다."
+      : "K-StyleShot is a practical lifestyle guide covering Seoul travel, K-beauty, and K-fashion with editorial standards.",
     alternates: { canonical, languages },
   };
 }
@@ -34,13 +34,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
             <h2>K-StyleShot이란</h2>
             <p>
               K-StyleShot은 K-뷰티, 서울 여행, K-패션에 관심 있는 사람들을 위한 라이프스타일
-              가이드 미디어이자 AI 포트레이트 서비스입니다. 공개 정보, 현장성 있는 선택 기준,
-              스타일링 실무 관점, 사용자 제보를 함께 검토해 서울 포토존 가이드, K-뷰티 루틴,
-              스타일 팁을 작성합니다.
-            </p>
-            <p>
-              저희 서비스의 AI 포트레이트 기능은 본인 사진에 K-스타일 헤어, 의상, 서울 배경을
-              합성해 케이팝 스타일의 프로필 이미지를 만들어드립니다.
+              가이드 미디어입니다. 공개 정보, 현장성 있는 선택 기준, 스타일링 실무 관점,
+              사용자 제보를 함께 검토해 서울 포토존 가이드, K-뷰티 루틴, 스타일 팁을
+              작성합니다.
             </p>
           </section>
 
@@ -95,15 +91,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
           </section>
 
           <section>
-            <h2>서비스 운영</h2>
+            <h2>운영 및 문의</h2>
             <p>
-              K-StyleShot 서비스(AI 포트레이트)는 <strong>kstyleshot.com</strong>을 통해
-              운영됩니다. 서비스 이용 관련 문의, 환불, 기술 지원은{" "}
+              K-StyleShot은 <strong>kstyleshot.com</strong>에서 운영됩니다. 콘텐츠 오류,
+              업데이트 요청, 협업 제안은{" "}
               <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로 보내주세요.
-            </p>
-            <p>
-              본 사이트는 공식 케이팝 아티스트와 무관한 독립 팬 도구입니다. 아티스트 이름,
-              이미지, 음악은 각 권리자에게 귀속됩니다.
             </p>
           </section>
         </>
@@ -115,13 +107,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
           <section>
             <h2>What is K-StyleShot?</h2>
             <p>
-              K-StyleShot is a lifestyle guide and AI portrait service for people interested in
-              K-beauty, Seoul travel, and K-fashion. Our guides combine public information,
-              practical editorial checks, styling context, and reader feedback.
-            </p>
-            <p>
-              Our AI portrait feature lets you composite K-style hair, outfits, and Seoul
-              backdrops onto your own photo, creating a K-pop-inspired profile image.
+              K-StyleShot is a lifestyle guide for people interested in K-beauty, Seoul travel,
+              and K-fashion. Our guides combine public information, practical editorial checks,
+              styling context, and reader feedback.
             </p>
           </section>
 
@@ -177,16 +165,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
           </section>
 
           <section>
-            <h2>The Service</h2>
+            <h2>Operations and Contact</h2>
             <p>
-              The K-StyleShot AI portrait service is operated through{" "}
-              <strong>kstyleshot.com</strong>. For service inquiries, refunds, or technical
-              support, email{" "}
+              K-StyleShot is operated through <strong>kstyleshot.com</strong>. For content
+              corrections, update requests, or collaboration inquiries, email{" "}
               <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>.
-            </p>
-            <p>
-              This site is an independent fan tool unaffiliated with any official K-pop artists.
-              Artist names, images, and music belong to their respective rights holders.
             </p>
           </section>
         </>

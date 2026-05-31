@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { EditorialStandards } from "@/components/landing/EditorialStandards";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { HubPreview } from "@/components/landing/HubPreview";
-import { PricingSection } from "@/components/landing/PricingSection";
 import { buildLocaleAlternates, getOgLocale, getSiteUrl, toAbsoluteAssetUrl } from "@/lib/seo";
 
 type LandingPageProps = {
@@ -85,7 +84,6 @@ export default async function LandingPage({ params }: LandingPageProps) {
       <HeroSection />
       <HubPreview />
       <EditorialStandards />
-      <PricingSection />
     </div>
   );
 }

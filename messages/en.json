@@ -367,19 +367,19 @@
   "legal": {
     "terms": {
       "title": "Terms",
-      "description": "Add the production legal copy here. Keep the no-affiliation and no exact likeness terms explicit."
+      "description": "Read the terms for using K-StyleShot guides, content, and contact channels."
     },
     "privacy": {
       "title": "Privacy",
-      "description": "Document temporary image processing, token storage, and delete behavior."
+      "description": "Learn how contact emails, analytics, and optional service data are handled."
     },
     "refund": {
       "title": "Refund Policy",
-      "description": "Keep the automatic refund rules aligned with the real backend flow."
+      "description": "Review refund standards for optional paid features."
     },
     "cookie": {
       "title": "Cookie Policy",
-      "description": "Document the minimal session and analytics policy here."
+      "description": "Learn how essential cookies, analytics tools, and ad-readiness scripts are used."
     }
   },
   "cookieConsent": {

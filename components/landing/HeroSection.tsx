@@ -15,7 +15,6 @@ export function HeroSection() {
           "K-StyleShot은 포토존 동선, 뷰티 루틴, 한국 패션 코디를 검색자가 바로 판단할 수 있는 정보 중심으로 정리합니다.",
         primary: "가이드 허브 보기",
         secondary: "제작 기준",
-        service: "AI 프로필 도구는 하단에서 확인할 수 있습니다.",
         points: ["서울 포토존과 방문 동선", "K-뷰티 성분과 사용 순서", "K-패션 계절별 코디 기준"]
       }
     : {
@@ -25,7 +24,6 @@ export function HeroSection() {
           "K-StyleShot organizes Seoul photo routes, Korean beauty routines, and K-fashion choices around decisions readers can actually use.",
         primary: "Open Guide Hub",
         secondary: "Editorial Standards",
-        service: "The AI portrait tool is available further down the page.",
         points: ["Seoul photo spots and routes", "K-beauty ingredients and order", "K-fashion outfits by season"]
       };
 
@@ -57,7 +55,6 @@ export function HeroSection() {
               <li key={point}>{point}</li>
             ))}
           </ul>
-          <p className="lp-hero-service-note">{copy.service}</p>
         </div>
       </div>
 

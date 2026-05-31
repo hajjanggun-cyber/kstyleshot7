@@ -27,7 +27,9 @@ export function SiteFooter() {
             {lang === "ko" ? "환불정책" : "Refund Policy"}
           </Link>
         </nav>
-        <p className="site-footer-copy">© 2026 Kstyleshot. Unofficial fan tool.</p>
+        <p className="site-footer-copy">
+          © 2026 Kstyleshot. Seoul, K-beauty, and K-fashion editorial guides.
+        </p>
       </div>
     </footer>
   );

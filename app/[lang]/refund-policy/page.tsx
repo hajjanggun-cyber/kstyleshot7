@@ -7,9 +7,14 @@ type RefundPolicyPageProps = {
 
 export async function generateMetadata({ params }: RefundPolicyPageProps): Promise<Metadata> {
   const { lang } = await params;
+  const isKo = lang === "ko";
   const canonical = toAbsoluteUrl(`/${lang}/refund-policy`);
   const languages = buildLocaleAlternatesAbsolute((l) => `/${l}/refund-policy`);
   return {
+    title: isKo ? "환불 정책 | K-StyleShot" : "Refund Policy | K-StyleShot",
+    description: isKo
+      ? "K-StyleShot의 선택형 유료 기능에 적용되는 환불 기준과 문의 절차를 안내합니다."
+      : "Refund standards and contact process for optional paid K-StyleShot features.",
     alternates: { canonical, languages },
   };
 }
@@ -20,102 +25,101 @@ export default async function RefundPolicyPage({ params }: RefundPolicyPageProps
 
   return (
     <div className="legal-page">
-      <h1>{isKo ? "환불 규정" : "Refund Policy"}</h1>
-      <p className="legal-updated">{isKo ? "최종 업데이트: 2026년 3월" : "Last updated: March 2026"}</p>
+      <h1>{isKo ? "환불 정책" : "Refund Policy"}</h1>
+      <p className="legal-updated">
+        {isKo ? "최종 업데이트: 2026년 5월 31일" : "Last updated: May 31, 2026"}
+      </p>
 
       {isKo ? (
         <>
           <section>
-            <h2>1. 기본 원칙</h2>
-            <p>K-StyleShot은 AI 생성 서비스의 특성상 <strong>원칙적으로 환불이 불가</strong>합니다. 단, 아래 명시된 예외 사항에 해당하는 경우에 한해 환불이 처리됩니다.</p>
-          </section>
-
-          <section>
-            <h2>2. 자동 환불 조건 (무조건 환불)</h2>
-            <p>다음의 경우 시스템이 자동으로 전액 환불을 처리합니다:</p>
-            <ul>
-              <li>AI 헤어 합성 생성에 기술적 오류로 완전히 실패한 경우</li>
-              <li>최종 의상·배경 합성 이미지 생성에 기술적 오류로 완전히 실패한 경우</li>
-              <li>결제 후 세션이 정상적으로 생성되지 않아 서비스 이용이 불가한 경우</li>
-            </ul>
-            <p>자동 환불은 Polar(polar.sh)를 통해 처리되며, 영업일 기준 3~5일 내 원결제 수단으로 반환됩니다.</p>
-          </section>
-
-          <section>
-            <h2>3. 환불 불가 조건</h2>
-            <ul>
-              <li>결제 시 입력한 이메일 주소가 잘못되어 결과물을 수신하지 못한 경우</li>
-              <li>AI 결과물의 품질이 기대와 다른 경우 (주관적 불만족)</li>
-              <li>사용자가 업로드한 사진 품질 문제로 인한 합성 품질 저하</li>
-              <li>세션을 이미 일부 또는 전부 사용한 경우</li>
-              <li>단순 변심</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>4. 이메일 수신 관련 안내</h2>
-            <p>결과 이미지는 <strong>결제 시 입력하신 이메일 주소로 자동 발송</strong>됩니다. 잘못된 이메일 주소 입력으로 인한 미수신은 환불 사유에 해당하지 않습니다. 결제 전 이메일 주소를 반드시 확인해 주세요.</p>
-          </section>
-
-          <section>
-            <h2>5. 환불 처리 방법</h2>
+            <h2>1. 적용 범위</h2>
             <p>
-              환불은 결제에 사용한 Polar 계정을 통해 처리됩니다. 자동 환불 외 환불 요청은{" "}
-              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로 문의하시기 바랍니다.
+              K-StyleShot의 대부분 콘텐츠는 무료로 제공되는 가이드입니다. 본 환불 정책은
+              사이트에서 별도로 제공될 수 있는 선택형 유료 이미지 기능 또는 실험 기능을 이용한
+              경우에만 적용됩니다.
             </p>
           </section>
 
           <section>
-            <h2>6. 결제 수단</h2>
-            <p>본 서비스의 결제는 Polar(polar.sh)를 통해 처리됩니다. 결제 관련 분쟁은 Polar의 정책을 우선 적용합니다.</p>
+            <h2>2. 환불 가능한 경우</h2>
+            <ul>
+              <li>결제는 완료되었으나 세션이 생성되지 않아 기능을 전혀 이용할 수 없는 경우</li>
+              <li>기술적 오류로 처리 또는 결과 생성이 완전히 실패한 경우</li>
+              <li>중복 결제가 확인되어 실제 이용 횟수보다 결제가 더 많이 처리된 경우</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>3. 환불이 어려운 경우</h2>
+            <ul>
+              <li>기능이 정상 처리된 뒤 결과물의 취향이나 주관적 품질이 기대와 다른 경우</li>
+              <li>사용자가 잘못 입력한 이메일 주소나 잘못 업로드한 파일로 문제가 발생한 경우</li>
+              <li>정상적으로 제공된 디지털 결과물을 다운로드하거나 확인한 뒤 단순 변심한 경우</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>4. 처리 방법</h2>
+            <p>
+              환불 검토가 필요한 경우 결제 이메일, 주문 ID, 오류 상황을 함께 적어{" "}
+              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로 보내주세요.
+              확인 후 원 결제 수단 또는 결제 처리업체의 절차에 따라 처리합니다.
+            </p>
+          </section>
+
+          <section>
+            <h2>5. 처리 기간</h2>
+            <p>
+              환불 승인 후 실제 입금 시점은 결제 처리업체와 카드사 또는 결제 수단 정책에 따라
+              달라질 수 있습니다. 일반적으로 영업일 기준 며칠이 소요될 수 있습니다.
+            </p>
           </section>
         </>
       ) : (
         <>
           <section>
-            <h2>1. General Policy</h2>
-            <p>Due to the nature of AI generation services, K-StyleShot maintains a <strong>no-refund policy</strong> in principle. Refunds are only issued in the specific cases outlined below.</p>
-          </section>
-
-          <section>
-            <h2>2. Automatic Refund Conditions</h2>
-            <p>The system will automatically process a full refund in the following cases:</p>
-            <ul>
-              <li>Complete technical failure to generate AI hair style results</li>
-              <li>Complete technical failure to generate the final outfit and background composite image</li>
-              <li>Failure to create a session after payment, making the service inaccessible</li>
-            </ul>
-            <p>Automatic refunds are processed through Polar (polar.sh) and will be returned to the original payment method within 3–5 business days.</p>
-          </section>
-
-          <section>
-            <h2>3. Non-Refundable Conditions</h2>
-            <ul>
-              <li>Non-receipt of results due to an incorrect email address entered at checkout</li>
-              <li>Dissatisfaction with AI result quality (subjective preference)</li>
-              <li>Poor composite quality caused by low-quality user-uploaded photos</li>
-              <li>Session already partially or fully used</li>
-              <li>Change of mind</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>4. Email Delivery Notice</h2>
-            <p>Result images are <strong>automatically sent to the email address provided at checkout</strong>. Failure to receive results due to an incorrect email address is not eligible for a refund. Please verify your email address before completing payment.</p>
-          </section>
-
-          <section>
-            <h2>5. Refund Process</h2>
+            <h2>1. Scope</h2>
             <p>
-              Refunds are processed through the Polar account used for payment. For refund requests beyond
-              automatic refunds, please email{" "}
-              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>.
+              Most K-StyleShot content is provided as free editorial guides. This Refund Policy
+              applies only if you use an optional paid image feature or experimental paid feature
+              offered separately on the site.
             </p>
           </section>
 
           <section>
-            <h2>6. Payment Processor</h2>
-            <p>All payments are processed through Polar (polar.sh). Payment-related disputes are subject to Polar's policies.</p>
+            <h2>2. Eligible Refund Cases</h2>
+            <ul>
+              <li>Payment was completed, but no usable session was created.</li>
+              <li>A technical error caused processing or result generation to fail completely.</li>
+              <li>A duplicate payment was confirmed for the same intended use.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>3. Non-Refundable Cases</h2>
+            <ul>
+              <li>The feature processed normally, but the result does not match subjective preference.</li>
+              <li>The issue was caused by an incorrect email address or an incorrect file uploaded by the user.</li>
+              <li>A digital result was provided and accessed, and the request is based on change of mind.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>4. How to Request Review</h2>
+            <p>
+              For refund review, email your payment email, order ID, and a description of the error
+              to <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>. Approved
+              refunds are processed through the original payment method or payment provider process.
+            </p>
+          </section>
+
+          <section>
+            <h2>5. Processing Time</h2>
+            <p>
+              After approval, the actual arrival of funds depends on the payment provider, card
+              issuer, or payment method. It may take several business days.
+            </p>
           </section>
         </>
       )}

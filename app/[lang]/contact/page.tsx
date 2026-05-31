@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
   return {
     title: isKo ? "문의하기 | K-StyleShot" : "Contact | K-StyleShot",
     description: isKo
-      ? "K-StyleShot 서비스 문의, 콘텐츠 오류 제보, 협업 제안은 이 페이지를 통해 연락해주세요."
-      : "Contact K-StyleShot for service support, content corrections, or collaboration inquiries.",
+      ? "K-StyleShot 콘텐츠 오류 제보, 업데이트 요청, 협업 제안은 이 페이지를 통해 연락해주세요."
+      : "Contact K-StyleShot for content corrections, update requests, or collaboration inquiries.",
     alternates: { canonical, languages },
   };
 }
@@ -31,24 +31,10 @@ export default async function ContactPage({ params }: ContactPageProps) {
           <p className="legal-updated">운영 채널 및 응답 안내</p>
 
           <section>
-            <h2>서비스 문의 (결제·환불·기술 지원)</h2>
-            <p>
-              AI 포트레이트 서비스 이용, 결제 오류, 환불 요청 등 서비스 관련 문의는{" "}
-              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로 보내주세요.
-            </p>
-            <ul>
-              <li>결제 완료 후 결과를 받지 못한 경우</li>
-              <li>환불 요청 (환불 정책 내 조건 해당 시 자동 처리됩니다)</li>
-              <li>기술적 오류 및 서비스 이용 불가 상황</li>
-            </ul>
-            <p>일반적으로 영업일 기준 1~2일 내에 답변드립니다.</p>
-          </section>
-
-          <section>
             <h2>콘텐츠 오류 제보 및 업데이트 요청</h2>
             <p>
-              블로그 가이드(서울 명소, K-뷰티, K-패션)에서 오류를 발견하거나, 폐점·변경된
-              정보를 알고 계신 경우{" "}
+              서울 명소, K-뷰티, K-패션 가이드에서 오류를 발견하거나 폐점·운영시간 변경·가격
+              변경 같은 정보를 알고 계신 경우{" "}
               <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로
               알려주세요.
             </p>
@@ -72,44 +58,11 @@ export default async function ContactPage({ params }: ContactPageProps) {
               연락해주세요. 영업일 기준 1~2일 내에 답변드립니다.
             </p>
           </section>
-
-          <section>
-            <h2>자주 묻는 질문</h2>
-            <ul>
-              <li>
-                <strong>결과 이미지는 어디서 받나요?</strong> — 결제 시 입력한 이메일로
-                자동 발송됩니다. 스팸함도 확인해보세요.
-              </li>
-              <li>
-                <strong>어떤 사진이 잘 나오나요?</strong> — 정면을 향한 밝은 조명의 단독
-                사진이 가장 잘 합성됩니다.
-              </li>
-              <li>
-                <strong>재사용(재촬영)이 가능한가요?</strong> — 1회 결제 시 1회 세션이
-                제공됩니다. 추가 이용 시 재결제가 필요합니다.
-              </li>
-            </ul>
-          </section>
         </>
       ) : (
         <>
           <h1>Contact Us</h1>
           <p className="legal-updated">Support channels and response times</p>
-
-          <section>
-            <h2>Service Support (Payments, Refunds, Technical Issues)</h2>
-            <p>
-              For AI portrait service inquiries — payment errors, refund requests, or technical
-              issues — email{" "}
-              <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>.
-            </p>
-            <ul>
-              <li>Did not receive results after payment</li>
-              <li>Refund requests (eligible cases are processed automatically per our Refund Policy)</li>
-              <li>Technical errors or service unavailability</li>
-            </ul>
-            <p>We typically respond within 1–2 business days.</p>
-          </section>
 
           <section>
             <h2>Content Corrections & Update Requests</h2>
@@ -138,24 +91,6 @@ export default async function ContactPage({ params }: ContactPageProps) {
               <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>. We typically
               respond within 1–2 business days.
             </p>
-          </section>
-
-          <section>
-            <h2>Frequently Asked Questions</h2>
-            <ul>
-              <li>
-                <strong>Where do I receive my result image?</strong> — It&apos;s automatically
-                sent to the email you entered at checkout. Check your spam folder too.
-              </li>
-              <li>
-                <strong>What kind of photo works best?</strong> — A front-facing, well-lit solo
-                photo produces the best results.
-              </li>
-              <li>
-                <strong>Can I use the service again?</strong> — Each payment covers one session.
-                A new payment is required for additional sessions.
-              </li>
-            </ul>
           </section>
         </>
       )}
