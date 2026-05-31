@@ -14,6 +14,15 @@ type LocaleLayoutProps = {
   params: Promise<{ lang: string }>;
 };
 
+function pickMessages(messages: Record<string, unknown>, keys: string[]) {
+  return keys.reduce<Record<string, unknown>>((picked, key) => {
+    if (messages[key] !== undefined) {
+      picked[key] = messages[key];
+    }
+    return picked;
+  }, {});
+}
+
 export function generateStaticParams() {
   return routing.locales.map((lang) => ({ lang }));
 }
@@ -26,10 +35,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   }
 
   setRequestLocale(lang);
-  const messages = await getMessages();
+  const messages = (await getMessages()) as Record<string, unknown>;
+  const layoutMessages = pickMessages(messages, ["header", "disclaimer", "cookieConsent"]);
 
   return (
-    <NextIntlClientProvider locale={lang} messages={messages}>
+    <NextIntlClientProvider locale={lang} messages={layoutMessages}>
       {/* Sets correct lang attribute on <html> for SEO — root layout can't access [lang] param */}
       <script dangerouslySetInnerHTML={{ __html: `document.documentElement.lang="${lang}"` }} />
       <div className="page-shell">
