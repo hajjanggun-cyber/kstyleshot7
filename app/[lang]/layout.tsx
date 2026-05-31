@@ -13,10 +13,12 @@ type LocaleLayoutProps = {
   params: Promise<{ lang: string }>;
 };
 
-function pickMessages(messages: Record<string, unknown>, keys: string[]) {
+function pickObject(value: unknown, keys: string[]) {
+  if (!value || typeof value !== "object") return undefined;
+  const source = value as Record<string, unknown>;
   return keys.reduce<Record<string, unknown>>((picked, key) => {
-    if (messages[key] !== undefined) {
-      picked[key] = messages[key];
+    if (source[key] !== undefined) {
+      picked[key] = source[key];
     }
     return picked;
   }, {});
@@ -35,7 +37,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   setRequestLocale(lang);
   const messages = (await getMessages()) as Record<string, unknown>;
-  const layoutMessages = pickMessages(messages, ["header", "cookieConsent"]);
+  const layoutMessages = {
+    header: pickObject(messages.header, ["ariaLabel", "home", "lookbook"]),
+    cookieConsent: messages.cookieConsent,
+  };
 
   return (
     <NextIntlClientProvider locale={lang} messages={layoutMessages}>

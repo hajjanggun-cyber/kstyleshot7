@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useTranslations } from "next-intl";
 
 export function SiteFooter() {
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "ko";
-  const t = useTranslations("header");
 
   return (
     <footer className="site-footer">
@@ -19,7 +17,9 @@ export function SiteFooter() {
           <Link href={`/${lang}/contact`}>
             {lang === "ko" ? "문의하기" : "Contact"}
           </Link>
-          <Link href={`/${lang}/terms`}>{t("terms")}</Link>
+          <Link href={`/${lang}/terms`}>
+            {lang === "ko" ? "약관" : "Terms"}
+          </Link>
           <Link href={`/${lang}/privacy`}>
             {lang === "ko" ? "개인정보처리방침" : "Privacy Policy"}
           </Link>
