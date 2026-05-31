@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 import { HubMdxPage } from "@/components/hub/HubMdxPage";
 import { isAdsenseReviewHubSlug } from "@/data/adsenseReview";
+import { getArticleSourceInfo } from "@/data/articleSources";
 import { routing } from "@/i18n/routing";
 import { getAllArticles, getAllSlugs, getFirstImageSrc, getMdxArticle } from "@/lib/mdx";
-import { SITE_NAME, buildLocaleAlternatesAbsolute, getSiteUrl } from "@/lib/seo";
+import { SITE_NAME, buildLocaleAlternatesAbsolute, getSiteUrl, toAbsoluteAssetUrl } from "@/lib/seo";
 
 type ArticlePageProps = {
   params: Promise<{ lang: string; slug: string }>;
 };
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   const params: { lang: string; slug: string }[] = [];
@@ -29,24 +32,21 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   const { lang, slug } = await params;
 
   if (!isAdsenseReviewHubSlug(slug)) {
-    return {
-      robots: {
-        index: false,
-        follow: false,
-      },
-      alternates: {
-        canonical: `${getSiteUrl()}/${lang}/hub`,
-      },
-    };
+    notFound();
   }
 
   const mdx = getMdxArticle(lang, slug);
   if (mdx) {
     const { frontmatter: fm } = mdx;
+    const sourceInfo = getArticleSourceInfo(fm.slug);
     const canonical = `${getSiteUrl()}/${lang}/hub/${slug}`;
     const authors = fm.authorName ? [fm.authorName] : undefined;
     const firstImageSrc = getFirstImageSrc(mdx.content);
-    const articleImage = fm.ogImage ?? (firstImageSrc ? `${getSiteUrl()}${firstImageSrc}` : undefined);
+    const articleImage = fm.ogImage
+      ? toAbsoluteAssetUrl(fm.ogImage)
+      : firstImageSrc
+        ? toAbsoluteAssetUrl(firstImageSrc)
+        : undefined;
 
     return {
       title: fm.title,
@@ -65,6 +65,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
         locale: lang === "ko" ? "ko_KR" : "en_US",
         type: "article",
         publishedTime: fm.publishedAt,
+        modifiedTime: sourceInfo?.checkedAt ?? fm.publishedAt,
         authors,
         images: articleImage ? [{ url: articleImage }] : undefined,
       },
@@ -84,15 +85,20 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const { lang, slug } = await params;
 
   if (!isAdsenseReviewHubSlug(slug)) {
-    permanentRedirect(`/${lang}/hub`);
+    notFound();
   }
 
   const mdx = getMdxArticle(lang, slug);
   if (mdx) {
     const { frontmatter: fm } = mdx;
+    const sourceInfo = getArticleSourceInfo(fm.slug);
     const canonical = `${getSiteUrl()}/${lang}/hub/${slug}`;
     const firstImageSrc = getFirstImageSrc(mdx.content);
-    const articleImage = fm.ogImage ?? (firstImageSrc ? `${getSiteUrl()}${firstImageSrc}` : undefined);
+    const articleImage = fm.ogImage
+      ? toAbsoluteAssetUrl(fm.ogImage)
+      : firstImageSrc
+        ? toAbsoluteAssetUrl(firstImageSrc)
+        : undefined;
     const breadcrumbHomeLabel = lang === "ko" ? "홈" : "Home";
     const breadcrumbHubLabel = lang === "ko" ? "허브" : "Hub";
     const relatedArticles = getAllArticles(lang)
@@ -108,6 +114,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           headline: fm.title,
           description: fm.description,
           datePublished: fm.publishedAt,
+          dateModified: sourceInfo?.checkedAt ?? fm.publishedAt,
           url: canonical,
           inLanguage: lang === "ko" ? "ko-KR" : "en-US",
           image: articleImage ? [articleImage] : undefined,
@@ -122,6 +129,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             name: SITE_NAME,
             url: getSiteUrl(),
           },
+          reviewedBy: sourceInfo
+            ? {
+                "@type": "Organization",
+                name: SITE_NAME,
+                url: getSiteUrl(),
+              }
+            : undefined,
+          citation: sourceInfo?.sources.map((source) => source.url),
           ...(relatedArticles.length > 0 && { relatedLink: relatedArticles }),
         },
         {

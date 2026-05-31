@@ -5,6 +5,7 @@ import fs from "fs/promises";
 import path from "path";
 import sharp from "sharp";
 
+import { ArticleSourceBox } from "@/components/hub/ArticleSourceBox";
 import type { ArticleFrontmatter } from "@/lib/mdx";
 
 const imageSizeCache = new Map<string, { width: number; height: number }>();
@@ -169,6 +170,7 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
       </section>
 
       <article className="ha-body">
+        <ArticleSourceBox slug={frontmatter.slug} lang={lang} />
         <MDXRemote source={content} components={mdxComponents} />
       </article>
 

@@ -7,9 +7,9 @@ import "@/app/globals.css";
 import { SITE_NAME, getSiteUrl, toAbsoluteAssetUrl } from "@/lib/seo";
 
 const siteUrl = getSiteUrl();
-const defaultTitle = "Kstyleshot | K-Style Portrait & Styling Guide";
+const defaultTitle = "K-StyleShot | Seoul, K-Beauty, and K-Fashion Guides";
 const defaultDescription =
-  "Kstyleshot helps you create cleaner K-style portrait results with practical guidance on hair, outfit, and backdrop.";
+  "Kstyleshot publishes practical K-style guides for Seoul photo spots, K-beauty routines, Korean fashion choices, and optional AI portrait styling.";
 const googleVerification =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? process.env.GOOGLE_SITE_VERIFICATION;
 const naverVerification =
@@ -50,10 +50,10 @@ export const metadata: Metadata = {
   description: defaultDescription,
   applicationName: SITE_NAME,
   keywords: [
-    "k-style portrait",
-    "korean style photo",
-    "hair style guide",
-    "photo styling",
+    "K-style guide",
+    "Seoul photo spots",
+    "K-beauty guide",
+    "K-fashion guide",
     "kstyleshot"
   ],
   robots: {

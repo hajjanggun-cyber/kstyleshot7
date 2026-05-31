@@ -3,21 +3,24 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
+import { isAdsenseReviewHubSlug } from "@/data/adsenseReview";
 import { hubPosts, hubPostsEn } from "@/data/hubPosts";
 
 export function HubPreview() {
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "ko";
   const isKo = lang === "ko";
-  const posts = (isKo ? hubPosts : hubPostsEn).filter((p) => p.cardType === "hero").slice(0, 3);
+  const posts = (isKo ? hubPosts : hubPostsEn)
+    .filter((p) => isAdsenseReviewHubSlug(p.slug))
+    .slice(0, 6);
 
   return (
     <section className="lp-hub">
       <div className="lp-hub-head">
         <div>
-          <p className="lp-hub-label">K-Culture Hub</p>
+          <p className="lp-hub-label">Guide Library</p>
           <h2 className="lp-hub-title">
-            {isKo ? "서울을 더 깊게 읽다" : "Read Seoul Deeper"}
+            {isKo ? "먼저 읽을 핵심 가이드" : "Start with the Core Guides"}
           </h2>
         </div>
         <Link className="lp-hub-more" href={`/${lang}/hub`}>
