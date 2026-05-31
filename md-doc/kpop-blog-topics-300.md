@@ -14,8 +14,8 @@ Updated By: Codex GPT-5
 
 긴 컨텍스트에서 Codex가 먼저 잡아야 할 현재 상태다.
 
-- 현재 다음 작성 대상: `[115] Sub [ ]` 하체 커버 팬츠 코디 가이드.
-- 방금 완료된 흐름: `[114]` 어깨 넓어 보이지 않는 재킷 고르기 KO/EN 완료.
+- 현재 다음 작성 대상: `[116] Sub [ ]` 상체가 마른 체형을 위한 레이어드 코디.
+- 방금 완료된 흐름: `[115]` 하체 커버 팬츠 코디 가이드 KO/EN 완료.
 - 이 파일의 주제 표기(`[ ]` / `[v]`)가 현재 작성 상태의 1차 원본이다.
 - 상세 작성 규칙, 품질 게이트, 글 작성 후 자체 검수 절차는 `md-doc/post-codex-command.md`를 따른다.
 - AdSense 거절 맥락: 사이트는 "가치가 별로 없는 콘텐츠"로 거절된 이력이 있으므로 단순 증량보다 고유 정보, 구체 기준, 반복 패턴 제거, 내부 링크 정합성이 우선이다.
@@ -115,7 +115,7 @@ This active file keeps only unfinished or still-in-progress clusters so Codex ca
 - Keyword: KO `어깨 넓어 보이지 않는 재킷` | EN `how to choose jackets for broad shoulders`
 - Subkeywords: KO `재킷 라인`, `드롭 숄더`, `체형 커버 코디` | EN `jacket structure`, `drop shoulder fit`, `body-balance styling`
 
-### [115] Sub [ ]
+### [115] Sub [v]
 - KO: 하체 커버 팬츠 코디 가이드
 - EN: Best Pants for Lower-Body Coverage
 - Keyword: KO `하체 커버 팬츠 코디` | EN `best pants for lower-body coverage`
@@ -1338,7 +1338,7 @@ Updated By: Codex GPT-5
 - Completed clusters are archived in md-doc/kpop-blog-topics-complete.md.
 - 글 작성 규칙과 품질 게이트는 md-doc/post-codex-command.md를 따른다.
 - 이미지 삽입, alt, webp 변환, 원본 처리, 중복 검증은 md-doc/image-webp-alt-prompt.md를 따른다.
-- 현재 다음 작성 대상은 [115] Sub [ ] 하체 커버 팬츠 코디 가이드이다.
+- 현재 다음 작성 대상은 [116] Sub [ ] 상체가 마른 체형을 위한 레이어드 코디이다.
 - 완료 상태는 이 파일에 남아 있는 주제 목록의 [ ] / [v] 표기를 원본으로 본다.
 - 미완료 클러스터 안에 이미 완료된 개별 topic이 있으면, 클러스터 전체가 끝날 때까지 active 파일에 남긴다.
 - 작업 완료 후에는 해당 topic 상태와 아래 active progress note를 함께 갱신한다.
@@ -1369,7 +1369,8 @@ Active progress note:
 - [112] 체형별 코디 추천 허브 KO/EN 완료.
 - [113] 키 작아 보이지 않는 롱스커트 코디 KO/EN 완료.
 - [114] 어깨 넓어 보이지 않는 재킷 고르기 KO/EN 완료.
-- 다음 작성 대상은 [115] Sub [ ]다.
+- [115] 하체 커버 팬츠 코디 가이드 KO/EN 완료.
+- 다음 작성 대상은 [116] Sub [ ]다.
 - 다음 작업 완료 시 이 active progress note와 ## 0. Active Context Snapshot의 현재 대상 문구를 함께 갱신한다.
 
 ---
