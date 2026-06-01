@@ -6,6 +6,7 @@ import path from "path";
 import sharp from "sharp";
 
 import { ArticleSourceBox } from "@/components/hub/ArticleSourceBox";
+import { isAdsenseReviewHubSlug } from "@/data/adsenseReview";
 import type { ArticleFrontmatter } from "@/lib/mdx";
 
 const imageSizeCache = new Map<string, { width: number; height: number }>();
@@ -43,6 +44,36 @@ type HubMdxPageProps = {
   lang: string;
 };
 
+function HubMainButton({ lang }: { lang: string }) {
+  return (
+    <Link
+      className="ha-nav-hub"
+      href={`/${lang}/hub`}
+      aria-label={lang === "ko" ? "메인 허브로 이동" : "Go to main hub"}
+    >
+      <span className="ha-nav-hub-text">Hub</span>
+      <span className="ha-nav-hub-icon" aria-hidden>
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M6 14L14 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          <path
+            d="M7 6H14V13"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </Link>
+  );
+}
+
+function getInternalHubSlug(href: string | undefined, lang: string): string | null {
+  if (!href) return null;
+  const match = href.match(new RegExp(`^/${lang}/hub/([^/#?]+)`));
+  return match?.[1] ?? null;
+}
+
 export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps) {
   const firstImageSrc = content.match(/!\[[^\]]*]\((\/images\/[^)\s]+)\)/)?.[1] ?? null;
   const mdxComponents = {
@@ -62,11 +93,23 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
       <strong className="ha-bullet-label" {...props} />
     ),
     hr: () => <hr className="ha-divider" />,
-    a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-      <Link className="ha-inline-link" href={href ?? "#"} {...props}>
-        {children}
-      </Link>
-    ),
+    a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+      const hubSlug = getInternalHubSlug(href, lang);
+      if (hubSlug && !isAdsenseReviewHubSlug(hubSlug)) {
+        const className = props.className ?? "ha-inline-link";
+        if (className.includes("card")) {
+          return <div className={className}>{children}</div>;
+        }
+
+        return <span className={className}>{children}</span>;
+      }
+
+      return (
+        <Link className="ha-inline-link" href={href ?? "#"} {...props}>
+          {children}
+        </Link>
+      );
+    },
     img: async ({ src, alt }: { src?: string; alt?: string }) => {
       if (!src) return null;
       const { width, height } = await getImageDimensions(src);
@@ -95,11 +138,6 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
         <Link className="ha-nav-back" href={`/${lang}/hub`} aria-label="Back">
           ←
         </Link>
-        <div className="ha-nav-links" aria-label={lang === "ko" ? "글 주요 메뉴" : "Article primary navigation"}>
-          <Link href={`/${lang}`}>{lang === "ko" ? "홈" : "Home"}</Link>
-          <Link href={`/${lang}/hub`}>{lang === "ko" ? "가이드" : "Guides"}</Link>
-          <Link href={`/${lang}/about`}>{lang === "ko" ? "소개" : "About"}</Link>
-        </div>
         <div className="ha-lang-toggle">
           <Link
             className={`ha-lang-btn${lang === "ko" ? " ha-lang-btn--active" : ""}`}
@@ -115,6 +153,7 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
             EN
           </Link>
         </div>
+        <HubMainButton lang={lang} />
       </nav>
 
       <header className="ha-hero" style={{ background: frontmatter.headerGradient }}>
@@ -154,7 +193,7 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
         <MDXRemote source={content} components={mdxComponents} />
       </article>
 
-      {frontmatter.nextSlug && frontmatter.nextTitle ? (
+      {frontmatter.nextSlug && frontmatter.nextTitle && isAdsenseReviewHubSlug(frontmatter.nextSlug) ? (
         <div className="ha-next-wrap">
           <Link className="ha-next-card" href={`/${lang}/hub/${frontmatter.nextSlug}`}>
             <div className="ha-next-shine" aria-hidden />
@@ -168,6 +207,23 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           </Link>
         </div>
       ) : null}
+
+      {/* 하단 배너 — AdSense 승인 후 아래 주석 해제
+      {frontmatter.slug?.endsWith("-hub") ? (
+        <div className="ha-bottom-banner">
+          <a
+            href={`/${lang}`}
+            aria-label={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
+          >
+            <img
+              src={lang === "ko" ? "/visuals/blog/blog-bottom-banner-kr.webp" : "/visuals/blog/blog-bottom-banner-en.webp"}
+              alt={lang === "ko" ? "K-스타일 포트레이트 만들기" : "Create your K-style portrait"}
+              loading="lazy"
+            />
+          </a>
+        </div>
+      ) : null}
+      */}
     </div>
   );
 }
