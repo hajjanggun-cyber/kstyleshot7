@@ -1,3 +1,150 @@
+# 2026-06-02 Search Console 제출용 URL 목록
+
+작성일: 2026-06-02 KST
+
+## sitemap 제출 주소
+
+```text
+https://www.kstyleshot.com/sitemap.xml
+```
+
+## 대표 12개 KO URL
+
+```text
+https://www.kstyleshot.com/ko/hub/gyeongbokgung-hub / 색인완료
+https://www.kstyleshot.com/ko/hub/gyeongbokgung-photo-guide / 색인완료 
+https://www.kstyleshot.com/ko/hub/gyeongbokgung-light-timing-guide / 색인완료
+https://www.kstyleshot.com/ko/hub/bukchon-hanok-photo-spots /색인완료 
+https://www.kstyleshot.com/ko/hub/bukchon-hanbok-photo-route /색인완료 
+https://www.kstyleshot.com/ko/hub/ssamziegil-insadong-photo-guide / 색인완료 
+https://www.kstyleshot.com/ko/hub/han-river-park-hub /색인완료 
+https://www.kstyleshot.com/ko/hub/yeouido-han-river-picnic-guide /색인완료 
+https://www.kstyleshot.com/ko/hub/banpo-han-river-night-view-guide /색인완료 
+https://www.kstyleshot.com/ko/hub/seokchon-lake-photo-spot-guide / 색인완료 
+https://www.kstyleshot.com/ko/hub/euljiro-retro-photo-spot-guide /여기부터 
+https://www.kstyleshot.com/ko/hub/seongsu-cafe-photo-spots
+```
+
+## 대표 12개 EN URL
+
+```text
+https://www.kstyleshot.com/en/hub/gyeongbokgung-hub
+https://www.kstyleshot.com/en/hub/gyeongbokgung-photo-guide
+https://www.kstyleshot.com/en/hub/gyeongbokgung-light-timing-guide
+https://www.kstyleshot.com/en/hub/bukchon-hanok-photo-spots
+https://www.kstyleshot.com/en/hub/bukchon-hanbok-photo-route
+https://www.kstyleshot.com/en/hub/ssamziegil-insadong-photo-guide
+https://www.kstyleshot.com/en/hub/han-river-park-hub
+https://www.kstyleshot.com/en/hub/yeouido-han-river-picnic-guide
+https://www.kstyleshot.com/en/hub/banpo-han-river-night-view-guide
+https://www.kstyleshot.com/en/hub/seokchon-lake-photo-spot-guide
+https://www.kstyleshot.com/en/hub/euljiro-retro-photo-spot-guide
+https://www.kstyleshot.com/en/hub/seongsu-cafe-photo-spots
+```
+
+-----
+
+# 2026-06-02 대표 12개 글 이미지 포함 여부 점검
+
+작성일: 2026-06-02 KST
+
+## 결론
+
+- 대표 12개 글은 KO/EN 모두 본문 이미지가 포함되어 있다.
+- 실제 이미지 파일 누락도 확인되지 않았다.
+- 이미지가 없는 대표 글은 없다.
+
+## 이미지 포함 글
+
+| slug | KO 이미지 | EN 이미지 | 파일 누락 |
+|---|---:|---:|---|
+| `gyeongbokgung-hub` | 6개 | 6개 | 없음 |
+| `gyeongbokgung-photo-guide` | 5개 | 5개 | 없음 |
+| `gyeongbokgung-light-timing-guide` | 6개 | 6개 | 없음 |
+| `bukchon-hanok-photo-spots` | 5개 | 5개 | 없음 |
+| `bukchon-hanbok-photo-route` | 4개 | 4개 | 없음 |
+| `ssamziegil-insadong-photo-guide` | 6개 | 6개 | 없음 |
+| `han-river-park-hub` | 5개 | 5개 | 없음 |
+| `yeouido-han-river-picnic-guide` | 5개 | 5개 | 없음 |
+| `banpo-han-river-night-view-guide` | 5개 | 5개 | 없음 |
+| `seokchon-lake-photo-spot-guide` | 5개 | 5개 | 없음 |
+| `euljiro-retro-photo-spot-guide` | 4개 | 4개 | 없음 |
+| `seongsu-cafe-photo-spots` | 5개 | 5개 | 없음 |
+
+## 이미지 미포함 글
+
+- 없음.
+
+## 확인 방법
+
+- 대표 12개 KO/EN MDX에서 본문 이미지 마크업 `![alt](/images/...)` 개수를 확인했다.
+- 각 이미지 경로가 `public/images/...` 아래 실제 파일로 존재하는지 확인했다.
+
+-----
+
+# 2026-06-02 작업 정리 및 해야 할 일
+
+작성일: 2026-06-02 KST
+
+## 오늘 한 작업
+
+1. 기존 AdSense 심사 준비 변경사항 배포 상태를 확인했다.
+   - 로컬 `main`과 `origin/main`이 기존 커밋 `2af82d1 Prepare AdSense review content cleanup`로 일치하는 것을 확인했다.
+   - `git push origin main` 결과 기존 변경분은 이미 원격에 올라가 있었다.
+
+2. 운영 URL을 확인했다.
+   - `https://www.kstyleshot.com/sitemap.xml` 200 응답 확인.
+   - `https://www.kstyleshot.com/ads.txt` 200 응답 확인.
+   - `https://www.kstyleshot.com/ko/hub` 200 응답 확인.
+   - `https://www.kstyleshot.com/en/hub` 200 응답 확인.
+   - 숨김 예시 글 `/ko/hub/best-blush-placement-by-face-shape`, `/en/hub/best-blush-placement-by-face-shape`는 각각 `/ko/hub`, `/en/hub`로 308 redirect 확인.
+   - `ads.txt` 내용은 `google.com, pub-2524681039359256, DIRECT, f08c47fec0942fa0`로 확인했다.
+
+3. 대표 12개 글의 내부 링크 구조를 정리했다.
+   - 대표 12개 KO/EN 글 원문에서 심사 대상 밖 slug로 가는 내부 링크와 related card URL을 제거했다.
+   - 렌더러에서 비활성화되던 링크도 MDX 원문 기준으로 정리해, 심사 모드에서 혼동될 여지를 줄였다.
+
+4. 우선 보강 대상 4개 글을 보강했다.
+   - `gyeongbokgung-hub`
+   - `gyeongbokgung-photo-guide`
+   - `han-river-park-hub`
+   - `seongsu-cafe-photo-spots`
+   - KO/EN 본문에 공식 공지 확인, 한복 반납/출구 시간, 한강 복귀 동선, 성수동 혼잡 시 대체 각도 같은 검증 가능한 판단 기준을 추가했다.
+
+5. 검증과 배포를 완료했다.
+   - 숨김 slug 원문 링크 스캔: 매치 없음.
+   - 주요 반복 표현 스캔: 매치 없음.
+   - `npm.cmd run build` 성공.
+   - 남은 경고는 기존과 동일한 Next.js `middleware` 파일 convention deprecated 경고뿐이다.
+   - 커밋 `2c91611 Strengthen AdSense review hub content` 생성 후 `origin/main`에 푸시했다.
+   - 운영 페이지에서 새 보강 문구 반영을 확인했다.
+
+## 해야 할 일
+
+1. Google Search Console에서 sitemap을 다시 제출하거나 재읽기 요청한다.
+   - 대상: `https://www.kstyleshot.com/sitemap.xml`
+
+2. 이미 색인된 숨김 글 URL을 정리한다.
+   - URL 제거 요청을 하거나, 재크롤링 후 redirect 상태가 반영되는지 확인한다.
+   - 대표 12개 외 글은 직접 접근 시 허브 목록으로 redirect되는 상태다.
+
+3. 대표 12개 글을 색인 요청 대상으로 둔다.
+   - KO/EN 각 12개, 총 24개 URL.
+   - sitemap에 남은 대표 글만 우선 색인 요청한다.
+
+4. AdSense 재심사 전 최종 UI 체크를 한다.
+   - About, Contact, Privacy, Terms, Refund, Cookie 페이지 접근 확인.
+   - AdSense script와 `ads.txt` 정상 여부 확인.
+   - sitemap에 대표 글만 남았는지 확인.
+   - 대표 글에서 숨긴 글로 가는 링크가 없는지 확인.
+   - 모바일에서 `/ko/hub`, `/en/hub`, 대표 글 상세 페이지가 깨지지 않는지 확인.
+
+5. 승인 후 재노출 계획은 별도로 진행한다.
+   - 현재 숨긴 글은 삭제된 것이 아니라 MDX 파일 보관 + 공개 경로 차단 상태다.
+   - 승인 후 필요한 slug를 `data/adsenseReview.ts`에 다시 추가하고, 내부 링크를 복구한 뒤 빌드/배포하면 된다.
+
+-----
+
 # 내일 할 일 - AdSense 심사 준비 다음 순서
 
 작성일: 2026-06-01 KST  
@@ -42,19 +189,6 @@ imsi.md 최상단의 "내일 할 일 - AdSense 심사 준비 다음 순서" 기�
 ## 메모
 
 사이트맵과 `ads.txt`는 별도로 수동 업로드하는 대상이 아니다. 코드 변경을 배포하면 sitemap은 새 구조로 생성된다. `ads.txt`는 publisher ID가 바뀐 것이 아니면 그대로 두고, 배포 후 정상 응답만 확인하면 된다.
-
-## 2026-06-02 진행 기록
-
-- `origin/main`과 로컬 HEAD가 `2af82d1 Prepare AdSense review content cleanup`로 일치했고, 기존 배포분은 `git push origin main` 기준 `Everything up-to-date`였다.
-- 운영 URL 확인 결과 `sitemap.xml`, `ads.txt`, `/ko/hub`, `/en/hub`가 200 응답했고, 숨김 예시 글 `/ko/hub/best-blush-placement-by-face-shape`, `/en/hub/best-blush-placement-by-face-shape`는 각각 `/ko/hub`, `/en/hub`로 308 redirect됐다.
-- `ads.txt` 응답은 `google.com, pub-2524681039359256, DIRECT, f08c47fec0942fa0`로 확인했다.
-- Search Console은 계정 UI 작업이 필요하므로 직접 처리하지 못했다. 다음 수동 작업은 sitemap 재제출/재읽기 요청, 숨김 URL 제거 또는 재크롤링 상태 확인, 대표 12개 URL 색인 요청이다.
-- 대표 12개 KO/EN 글 원문에서 심사 대상 밖 slug로 가는 내부 링크와 related card 원문 URL을 제거했다. 렌더러에서 비활성화되던 링크도 원문 기준으로 정리했다.
-- 우선 보강 대상 `gyeongbokgung-hub`, `gyeongbokgung-photo-guide`, `han-river-park-hub`, `seongsu-cafe-photo-spots`의 KO/EN 본문에 공식 공지 확인, 출구/반납 시간, 한강 복귀 동선, 성수동 혼잡 시 대체 각도 같은 검증 가능한 판단 기준을 추가했다.
-- 숨김 slug 원문 링크 스캔과 주요 반복 표현 스캔은 매치 없음으로 확인했다.
-- `npm.cmd run build` 성공. 남은 경고는 기존과 동일한 Next.js `middleware` 파일 convention deprecated 경고뿐이다.
-
------
 
 # AdSense 대표 12개 글 정리 2차 완료 기록
 
