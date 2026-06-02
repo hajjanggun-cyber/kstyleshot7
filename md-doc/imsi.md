@@ -43,6 +43,17 @@ imsi.md 최상단의 "내일 할 일 - AdSense 심사 준비 다음 순서" 기�
 
 사이트맵과 `ads.txt`는 별도로 수동 업로드하는 대상이 아니다. 코드 변경을 배포하면 sitemap은 새 구조로 생성된다. `ads.txt`는 publisher ID가 바뀐 것이 아니면 그대로 두고, 배포 후 정상 응답만 확인하면 된다.
 
+## 2026-06-02 진행 기록
+
+- `origin/main`과 로컬 HEAD가 `2af82d1 Prepare AdSense review content cleanup`로 일치했고, 기존 배포분은 `git push origin main` 기준 `Everything up-to-date`였다.
+- 운영 URL 확인 결과 `sitemap.xml`, `ads.txt`, `/ko/hub`, `/en/hub`가 200 응답했고, 숨김 예시 글 `/ko/hub/best-blush-placement-by-face-shape`, `/en/hub/best-blush-placement-by-face-shape`는 각각 `/ko/hub`, `/en/hub`로 308 redirect됐다.
+- `ads.txt` 응답은 `google.com, pub-2524681039359256, DIRECT, f08c47fec0942fa0`로 확인했다.
+- Search Console은 계정 UI 작업이 필요하므로 직접 처리하지 못했다. 다음 수동 작업은 sitemap 재제출/재읽기 요청, 숨김 URL 제거 또는 재크롤링 상태 확인, 대표 12개 URL 색인 요청이다.
+- 대표 12개 KO/EN 글 원문에서 심사 대상 밖 slug로 가는 내부 링크와 related card 원문 URL을 제거했다. 렌더러에서 비활성화되던 링크도 원문 기준으로 정리했다.
+- 우선 보강 대상 `gyeongbokgung-hub`, `gyeongbokgung-photo-guide`, `han-river-park-hub`, `seongsu-cafe-photo-spots`의 KO/EN 본문에 공식 공지 확인, 출구/반납 시간, 한강 복귀 동선, 성수동 혼잡 시 대체 각도 같은 검증 가능한 판단 기준을 추가했다.
+- 숨김 slug 원문 링크 스캔과 주요 반복 표현 스캔은 매치 없음으로 확인했다.
+- `npm.cmd run build` 성공. 남은 경고는 기존과 동일한 Next.js `middleware` 파일 convention deprecated 경고뿐이다.
+
 -----
 
 # AdSense 대표 12개 글 정리 2차 완료 기록
