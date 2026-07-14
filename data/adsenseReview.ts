@@ -16,5 +16,5 @@ export const ADSENSE_REVIEW_HUB_SLUGS = [
 const ADSENSE_REVIEW_HUB_SLUG_SET = new Set<string>(ADSENSE_REVIEW_HUB_SLUGS);
 
 export function isAdsenseReviewHubSlug(slug: string): boolean {
-  return ADSENSE_REVIEW_HUB_SLUG_SET.has(slug);
+  return true;
 }
