@@ -1,5 +1,4 @@
 import { HubFeed } from "@/components/hub/HubFeed";
-import { isAdsenseReviewHubSlug } from "@/data/adsenseReview";
 import {
   hubPosts,
   hubPostsEn,
@@ -14,9 +13,7 @@ type HubPageProps = {
 export default async function HubPage({ params }: HubPageProps) {
   const { lang } = await params;
   const isKo = lang === "ko";
-  const allPosts = isKo ? hubPosts : hubPostsEn;
-  const reviewPosts = allPosts.filter((post) => isAdsenseReviewHubSlug(post.slug));
-  const posts = reviewPosts.length > 0 ? reviewPosts : allPosts;
+  const posts = isKo ? hubPosts : hubPostsEn;
   const allChips = isKo ? FILTER_CHIPS_KO : FILTER_CHIPS_EN;
   const activeCategories = new Set(posts.map((post) => post.category));
   const chips = allChips.filter((chip, index) => index === 0 || activeCategories.has(chip));

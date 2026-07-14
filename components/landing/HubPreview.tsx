@@ -3,16 +3,13 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-import { isAdsenseReviewHubSlug } from "@/data/adsenseReview";
 import { hubPosts, hubPostsEn } from "@/data/hubPosts";
 
 export function HubPreview() {
   const params = useParams<{ lang: string }>();
   const lang = params.lang ?? "ko";
   const isKo = lang === "ko";
-  const posts = (isKo ? hubPosts : hubPostsEn)
-    .filter((p) => isAdsenseReviewHubSlug(p.slug))
-    .slice(0, 6);
+  const posts = (isKo ? hubPosts : hubPostsEn).slice(0, 6);
 
   return (
     <section className="lp-hub">

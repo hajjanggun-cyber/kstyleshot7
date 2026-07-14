@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 
-import { isAdsenseReviewHubSlug } from "@/data/adsenseReview";
 import { getAllSlugs, getMdxArticle } from "@/lib/mdx";
 import { buildLocaleAlternatesAbsolute, toAbsoluteUrl } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
@@ -53,10 +52,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const locale of routing.locales) {
     const slugs = getAllSlugs(locale);
     for (const slug of slugs) {
-      if (!isAdsenseReviewHubSlug(slug)) {
-        continue;
-      }
-
       const article = getMdxArticle(locale, slug);
       const lastModified = article?.frontmatter.publishedAt
         ? new Date(article.frontmatter.publishedAt)
