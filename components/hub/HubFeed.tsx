@@ -223,25 +223,6 @@ export function HubFeed({
 
   return (
     <div className="hf-root">
-      <header className="hf-header">
-        <nav className="hf-top-links" aria-label={isKo ? "허브 주요 메뉴" : "Hub primary navigation"}>
-          <Link href={`/${lang}`}>{isKo ? "홈" : "Home"}</Link>
-          <Link aria-current="page" href={`/${lang}/hub`}>
-            {isKo ? "가이드" : "Guides"}
-          </Link>
-          <Link href={`/${lang}/about`}>{isKo ? "소개" : "About"}</Link>
-        </nav>
-        <div className="hf-lang-toggle">
-          <Link className={`hf-lang-btn${isKo ? " hf-lang-btn--active" : ""}`} href="/ko/hub">
-            KO
-          </Link>
-          <span className="hf-lang-divider">|</span>
-          <Link className={`hf-lang-btn${!isKo ? " hf-lang-btn--active" : ""}`} href="/en/hub">
-            EN
-          </Link>
-        </div>
-      </header>
-
       <section className="hf-featured" aria-label={isKo ? "추천 대표 가이드" : "Featured core guides"}>
         <div className="hf-featured-head">
           <div>

@@ -23,7 +23,7 @@ export default async function CookiePolicyPage({ params }: CookiePolicyPageProps
       {isKo ? (
         <>
           <h1>쿠키 정책</h1>
-          <p className="legal-updated">최종 업데이트: 2026년 5월 31일</p>
+          <p className="legal-updated">최종 업데이트: 2026년 9월 27일</p>
 
           <section>
             <h2>1. 쿠키 사용 목적</h2>
@@ -54,12 +54,15 @@ export default async function CookiePolicyPage({ params }: CookiePolicyPageProps
           </section>
 
           <section>
-            <h2>3. 광고 및 제3자 쿠키</h2>
+            <h2>3. 광고 및 제3자 쿠키 (Google AdSense)</h2>
             <p>
-              사이트는 Google AdSense 심사 및 광고 게재 준비를 위해 Google 광고 스크립트를
-              포함할 수 있습니다. 광고가 활성화되면 Google 또는 광고 파트너가 광고 측정,
-              빈도 제한, 부정 트래픽 방지 목적으로 쿠키를 사용할 수 있습니다.
+              사이트는 Google AdSense를 통한 광고 게재 및 서비스 유지를 위해 제3자 광고 쿠키를 사용합니다.
             </p>
+            <ul>
+              <li>Google 및 파트너사는 사용자의 과거 방문 기록을 바탕으로 쿠키를 사용하여 광고를 게재합니다.</li>
+              <li>사용자는 <strong><a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google 광고 설정</a></strong> 페이지에서 맞춤형 광고를 직접 관리하거나 비활성화할 수 있습니다.</li>
+              <li>또한 제3자 공급업체의 맞춤형 쿠키 사용은 <strong><a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a></strong>에서 선택 해제할 수 있습니다.</li>
+            </ul>
           </section>
 
           <section>
@@ -81,7 +84,7 @@ export default async function CookiePolicyPage({ params }: CookiePolicyPageProps
       ) : (
         <>
           <h1>Cookie Policy</h1>
-          <p className="legal-updated">Last updated: May 31, 2026</p>
+          <p className="legal-updated">Last updated: September 27, 2026</p>
 
           <section>
             <h2>1. Why We Use Cookies</h2>
@@ -113,12 +116,15 @@ export default async function CookiePolicyPage({ params }: CookiePolicyPageProps
           </section>
 
           <section>
-            <h2>3. Ads and Third-Party Cookies</h2>
+            <h2>3. Ads and Third-Party Cookies (Google AdSense)</h2>
             <p>
-              The site may include Google advertising scripts for AdSense review and ad serving
-              readiness. If ads are enabled, Google or its advertising partners may use cookies for
-              ad measurement, frequency capping, and invalid traffic protection.
+              The site uses third-party cookies for advertising via Google AdSense.
             </p>
+            <ul>
+              <li>Google and third-party vendors use cookies to serve ads based on your prior visits to this and other websites.</li>
+              <li>You can manage or opt out of personalized advertising at any time by visiting <strong><a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google Ads Settings</a></strong>.</li>
+              <li>Alternatively, you can opt out of third-party personalized advertising cookies via <strong><a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a></strong>.</li>
+            </ul>
           </section>
 
           <section>

@@ -134,26 +134,21 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
 
   return (
     <div className="ha-root">
-      <nav className="ha-nav">
-        <Link className="ha-nav-back" href={`/${lang}/hub`} aria-label="Back">
-          ←
-        </Link>
-        <div className="ha-lang-toggle">
-          <Link
-            className={`ha-lang-btn${lang === "ko" ? " ha-lang-btn--active" : ""}`}
-            href={`/ko/hub/${frontmatter.hreflangSlug}`}
-          >
-            KO
+      <nav className="ha-nav" aria-label="Breadcrumb navigation">
+        <div className="ha-breadcrumb" style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px" }}>
+          <Link href={`/${lang}`} style={{ color: "rgba(241, 237, 232, 0.7)", textDecoration: "none" }}>
+            {lang === "ko" ? "홈" : "Home"}
           </Link>
-          <span className="ha-lang-divider">|</span>
-          <Link
-            className={`ha-lang-btn${lang === "en" ? " ha-lang-btn--active" : ""}`}
-            href={`/en/hub/${frontmatter.hreflangSlug}`}
-          >
-            EN
+          <span style={{ color: "rgba(241, 237, 232, 0.3)" }}>/</span>
+          <Link href={`/${lang}/hub`} style={{ color: "rgba(241, 237, 232, 0.7)", textDecoration: "none" }}>
+            {lang === "ko" ? "가이드 허브" : "Guide Hub"}
           </Link>
+          <span style={{ color: "rgba(241, 237, 232, 0.3)" }}>/</span>
+          <span style={{ color: "#f4258c", fontWeight: 600 }}>{frontmatter.category}</span>
         </div>
-        <HubMainButton lang={lang} />
+        <Link className="ha-nav-back" href={`/${lang}/hub`} aria-label="Back to hub">
+          ← {lang === "ko" ? "목록으로" : "Back to Hub"}
+        </Link>
       </nav>
 
       <header className="ha-hero" style={{ background: frontmatter.headerGradient }}>

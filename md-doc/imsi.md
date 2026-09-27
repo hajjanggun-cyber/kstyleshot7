@@ -21,21 +21,21 @@ https://www.kstyleshot.com/ko/hub/han-river-park-hub /색인완료
 https://www.kstyleshot.com/ko/hub/yeouido-han-river-picnic-guide /색인완료 
 https://www.kstyleshot.com/ko/hub/banpo-han-river-night-view-guide /색인완료 
 https://www.kstyleshot.com/ko/hub/seokchon-lake-photo-spot-guide / 색인완료 
-https://www.kstyleshot.com/ko/hub/euljiro-retro-photo-spot-guide /여기부터 
-https://www.kstyleshot.com/ko/hub/seongsu-cafe-photo-spots
+https://www.kstyleshot.com/ko/hub/euljiro-retro-photo-spot-guide /색인완료 
+https://www.kstyleshot.com/ko/hub/seongsu-cafe-photo-spots / 색인완료 
 ```
 
 ## 대표 12개 EN URL
 
 ```text
-https://www.kstyleshot.com/en/hub/gyeongbokgung-hub
-https://www.kstyleshot.com/en/hub/gyeongbokgung-photo-guide
-https://www.kstyleshot.com/en/hub/gyeongbokgung-light-timing-guide
-https://www.kstyleshot.com/en/hub/bukchon-hanok-photo-spots
-https://www.kstyleshot.com/en/hub/bukchon-hanbok-photo-route
-https://www.kstyleshot.com/en/hub/ssamziegil-insadong-photo-guide
-https://www.kstyleshot.com/en/hub/han-river-park-hub
-https://www.kstyleshot.com/en/hub/yeouido-han-river-picnic-guide
+https://www.kstyleshot.com/en/hub/gyeongbokgung-hub / 색인완료 
+https://www.kstyleshot.com/en/hub/gyeongbokgung-photo-guide / 색인완료 
+https://www.kstyleshot.com/en/hub/gyeongbokgung-light-timing-guide / 색인완료
+https://www.kstyleshot.com/en/hub/bukchon-hanok-photo-spots / 색인완료 
+https://www.kstyleshot.com/en/hub/bukchon-hanbok-photo-route / 색인완료
+https://www.kstyleshot.com/en/hub/ssamziegil-insadong-photo-guide / 색인완료 
+https://www.kstyleshot.com/en/hub/han-river-park-hub / 색인완료 
+https://www.kstyleshot.com/en/hub/yeouido-han-river-picnic-guide / 여기부터 해야 
 https://www.kstyleshot.com/en/hub/banpo-han-river-night-view-guide
 https://www.kstyleshot.com/en/hub/seokchon-lake-photo-spot-guide
 https://www.kstyleshot.com/en/hub/euljiro-retro-photo-spot-guide

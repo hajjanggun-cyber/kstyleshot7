@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: PrivacyPageProps): Promise<Me
   return {
     title: isKo ? "개인정보 처리방침 | K-StyleShot" : "Privacy Policy | K-StyleShot",
     description: isKo
-      ? "K-StyleShot의 문의 이메일, 분석 도구, 선택형 기능 이용 시 처리되는 개인정보 기준을 안내합니다."
-      : "How K-StyleShot handles contact emails, analytics, and optional feature data.",
+      ? "K-StyleShot의 문의 이메일, 분석 도구, 광고 쿠키 정책 및 개인정보 처리 기준을 안내합니다."
+      : "How K-StyleShot handles contact emails, analytics, advertising cookies, and personal data.",
     alternates: { canonical, languages },
   };
 }
@@ -27,7 +27,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
     <div className="legal-page">
       <h1>{isKo ? "개인정보 처리방침" : "Privacy Policy"}</h1>
       <p className="legal-updated">
-        {isKo ? "최종 업데이트: 2026년 5월 31일" : "Last updated: May 31, 2026"}
+        {isKo ? "최종 업데이트: 2026년 9월 27일" : "Last updated: September 27, 2026"}
       </p>
 
       {isKo ? (
@@ -81,7 +81,29 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           </section>
 
           <section>
-            <h2>5. 보관 및 삭제</h2>
+            <h2>5. Google AdSense 및 광고 쿠키 정책 (필수 고지)</h2>
+            <p>
+              K-StyleShot은 사이트 운영 및 콘텐츠 유지를 위해 Google AdSense 광고를 게재할 수 있습니다.
+              이에 따른 제3자 광고 쿠키 정책은 다음과 같습니다.
+            </p>
+            <ul>
+              <li>
+                Google을 포함한 제3자 공급업체는 사용자가 당사 웹사이트 또는 다른 웹사이트를 과거에 방문한 기록을 바탕으로 쿠키를 사용하여 광고를 게재합니다.
+              </li>
+              <li>
+                Google의 광고 쿠키 사용을 통해 Google과 그 파트너는 사용자의 당사 사이트 및 인터넷의 다른 사이트 방문 기록을 바탕으로 관련성 높은 맞춤형 광고를 제공할 수 있습니다.
+              </li>
+              <li>
+                사용자는 <strong><a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google 광고 설정(Ads Settings)</a></strong>을 방문하여 개인화 맞춤 광고를 언제든지 차단(Opt-out)할 수 있습니다.
+              </li>
+              <li>
+                또는 제3자 공급업체의 맞춤형 광고 쿠키 사용을 거부하려면 <strong><a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a></strong>를 방문하여 설정을 변경할 수 있습니다.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>6. 보관 및 삭제</h2>
             <ul>
               <li>문의 이메일은 응답과 기록 확인을 위해 필요한 기간 동안 보관됩니다.</li>
               <li>서버 로그와 분석 데이터는 각 제공자의 보관 정책에 따라 처리됩니다.</li>
@@ -91,7 +113,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           </section>
 
           <section>
-            <h2>6. 사용자의 권리</h2>
+            <h2>7. 사용자의 권리</h2>
             <p>
               사용자는 본인의 개인정보 열람, 정정, 삭제, 처리 제한을 요청할 수 있습니다. 요청은{" "}
               <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>으로 보내주세요.
@@ -99,7 +121,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           </section>
 
           <section>
-            <h2>7. 방침 변경</h2>
+            <h2>8. 방침 변경</h2>
             <p>
               개인정보 처리방침이 변경될 경우 이 페이지에 반영합니다. 중요한 변경은 사이트 내
               공지 또는 이메일로 안내할 수 있습니다.
@@ -159,7 +181,28 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           </section>
 
           <section>
-            <h2>5. Retention and Deletion</h2>
+            <h2>5. Google AdSense & Advertising Cookies Policy (Mandatory Disclosure)</h2>
+            <p>
+              K-StyleShot may display advertisements provided by Google AdSense. In compliance with Google policies:
+            </p>
+            <ul>
+              <li>
+                Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to this website or other websites.
+              </li>
+              <li>
+                Google&apos;s use of advertising cookies enables it and its partners to serve ads to users based on their visits to our site and/or other sites on the Internet.
+              </li>
+              <li>
+                Users may opt out of personalized advertising by visiting <strong><a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google Ads Settings</a></strong>.
+              </li>
+              <li>
+                Alternatively, users can opt out of a third-party vendor&apos;s use of cookies for personalized advertising by visiting <strong><a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a></strong>.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>6. Retention and Deletion</h2>
             <ul>
               <li>Contact emails are kept as needed to respond and maintain records.</li>
               <li>Server logs and analytics data follow each provider&apos;s retention settings.</li>
@@ -169,7 +212,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           </section>
 
           <section>
-            <h2>6. Your Rights</h2>
+            <h2>7. Your Rights</h2>
             <p>
               You may request access, correction, deletion, or restriction of your personal data by
               emailing <a href="mailto:hajjanggun77@gmail.com">hajjanggun77@gmail.com</a>.
@@ -177,7 +220,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           </section>
 
           <section>
-            <h2>7. Changes</h2>
+            <h2>8. Changes</h2>
             <p>
               Changes to this Privacy Policy will be reflected on this page. Important changes may
               also be announced on the site or by email.

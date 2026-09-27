@@ -11,14 +11,11 @@ type SiteHeaderProps = {
 export function SiteHeader({ lang }: SiteHeaderProps) {
   const t = useTranslations("header");
   const pathname = usePathname();
-  const isHubRoute = pathname === `/${lang}/hub` || pathname.startsWith(`/${lang}/hub/`);
 
   function switchLang(next: string) {
     // Replace the leading /lang segment with /next
     return pathname.replace(/^\/[^/]+/, `/${next}`);
   }
-
-  if (isHubRoute) return null;
 
   return (
     <header className="site-header">
@@ -34,6 +31,9 @@ export function SiteHeader({ lang }: SiteHeaderProps) {
           <Link href={`/${lang}/hub`}>{t("lookbook")}</Link>
           <Link href={`/${lang}/about`}>
             {lang === "ko" ? "소개" : "About"}
+          </Link>
+          <Link href={`/${lang}/contact`}>
+            {lang === "ko" ? "문의" : "Contact"}
           </Link>
         </nav>
         <Link className="mobile-hub-btn" href={`/${lang}/hub`}>
