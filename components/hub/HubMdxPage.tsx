@@ -186,6 +186,22 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
       <article className="ha-body">
         <ArticleSourceBox slug={frontmatter.slug} lang={lang} />
         <MDXRemote source={content} components={mdxComponents} />
+        
+        <div className="ha-author-bio" style={{ marginTop: "40px", padding: "24px", background: "rgba(255,255,255,0.05)", borderRadius: "12px", display: "flex", gap: "20px", alignItems: "center", border: "1px solid rgba(255,255,255,0.1)" }}>
+          <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "linear-gradient(135deg, #f4258c 0%, #ff8a00 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", fontWeight: "bold", color: "#fff", flexShrink: 0 }}>
+            {frontmatter.authorName ? frontmatter.authorName.charAt(0) : "E"}
+          </div>
+          <div>
+            <h4 style={{ margin: "0 0 6px 0", fontSize: "18px", fontWeight: "600", color: "#fff" }}>
+              {frontmatter.authorName ?? (lang === "ko" ? "K-StyleShot 에디토리얼팀" : "Editorial Team")}
+            </h4>
+            <p style={{ margin: "0", fontSize: "14px", color: "rgba(255,255,255,0.7)", lineHeight: "1.5" }}>
+              {frontmatter.authorRole ?? (lang === "ko" 
+                ? "서울 현지 실사 및 공공 데이터를 바탕으로 가장 정확하고 신뢰할 수 있는 여행/라이프스타일 가이드를 작성합니다." 
+                : "We craft highly verified and practical on-site guides based on local inspections and official public data.")}
+            </p>
+          </div>
+        </div>
       </article>
 
       {frontmatter.nextSlug && frontmatter.nextTitle && isAdsenseReviewHubSlug(frontmatter.nextSlug) ? (

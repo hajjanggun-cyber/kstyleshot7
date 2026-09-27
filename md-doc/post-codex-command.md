@@ -1,8 +1,10 @@
 
 
 
-Updated At: 2026-05-02 KST
-Updated By: Codex GPT-5
+
+Updated At: 2026-09-27 KST
+Updated By: Antigravity AI
+Update Log: 카테고리 3대장 통일 규칙 신설, E-E-A-T 저자 프로필 규칙 추가
 
 # K-Style Hub Unified Writing Command
 
@@ -386,14 +388,14 @@ Google은 AI 사용 자체를 금지하지 않는다.
   - `app/[lang]/hub/[slug]/page.tsx`
   - `components/hub/HubMdxPage.tsx`
 
-카테고리 값 규칙:
-- category 값은 반드시 `md-doc/kpop-blog-topics-300.md`의 해당 항목 카테고리 값을 따른다
+카테고리 값 규칙 (AdSense 최적화를 위해 3대 카테고리로 엄격히 통일):
+- category 값은 반드시 통일된 3대 핵심 카테고리 중 하나를 사용한다. (임의 생성/파편화 금지)
 - KO/EN 카테고리명은 각 언어에 맞는 페어 값을 그대로 사용한다
 
-예:
-- KO: `한국 명소 & 포토존` / EN: `Seoul Locations`
-- KO: `K-뷰티 & 헤어` / EN: `K-Beauty & Hair`
-- KO: `가상 스타일 체험` / EN: `Virtual Style Experience`
+허용 카테고리 (Strict):
+- KO: 서울 명소 & 포토존 / EN: Seoul Locations
+- KO: K-뷰티 & 헤어 / EN: K-Beauty & Hair
+- KO: K-스타일 패션 / EN: K-Style Fashion`
 
 파일 경로:
 - KO: `content/hub/ko/[slug].mdx`
