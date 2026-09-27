@@ -48,8 +48,22 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     title: fm.title,
     description: fm.description,
     robots: isReviewSlug
-      ? { index: true, follow: true }
-      : { index: false, follow: true },
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+          },
+        }
+      : {
+          index: false,
+          follow: true,
+          googleBot: {
+            index: false,
+            follow: true,
+          },
+        },
     alternates: {
       canonical,
       languages: buildLocaleAlternatesAbsolute(
