@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { getAllSlugs, getMdxArticle } from "@/lib/mdx";
 import { buildLocaleAlternatesAbsolute, toAbsoluteUrl } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
+import { isAdsenseReviewHubSlug } from "@/data/adsenseReview";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
@@ -50,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Hub MDX articles — one entry per locale URL (KO + EN each indexed separately)
   for (const locale of routing.locales) {
-    const slugs = getAllSlugs(locale);
+    const slugs = getAllSlugs(locale).filter(isAdsenseReviewHubSlug);
     for (const slug of slugs) {
       const article = getMdxArticle(locale, slug);
       const lastModified = article?.frontmatter.publishedAt
