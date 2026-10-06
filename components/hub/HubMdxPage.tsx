@@ -158,13 +158,13 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
         <h1 className="ha-hero-title">{frontmatter.title}</h1>
         <div className="ha-hero-meta">
           <span className="ha-hero-author">
-            {frontmatter.authorName ?? (lang === "ko" ? "K-StyleShot 에디토리얼팀" : "K-StyleShot Editorial Team")}
+            {frontmatter.authorName ?? "Hajjanggun"}
           </span>
           {frontmatter.publishedAt ? (
             <>
               <span className="ha-hero-meta-sep" aria-hidden>·</span>
               <time className="ha-hero-date" dateTime={frontmatter.publishedAt}>
-                {new Date(frontmatter.publishedAt).toLocaleDateString(
+                {lang === "ko" ? "최종 수정일: " : "Last Updated: "}{new Date(frontmatter.publishedAt).toLocaleDateString(
                   lang === "ko" ? "ko-KR" : "en-US",
                   { year: "numeric", month: "long", day: "numeric" }
                 )}
@@ -193,12 +193,10 @@ export async function HubMdxPage({ frontmatter, content, lang }: HubMdxPageProps
           </div>
           <div>
             <h4 style={{ margin: "0 0 6px 0", fontSize: "18px", fontWeight: "600", color: "#fff" }}>
-              {frontmatter.authorName ?? (lang === "ko" ? "K-StyleShot 에디토리얼팀" : "Editorial Team")}
+              {frontmatter.authorName ?? "Hajjanggun"}
             </h4>
             <p style={{ margin: "0", fontSize: "14px", color: "rgba(255,255,255,0.7)", lineHeight: "1.5" }}>
-              {frontmatter.authorRole ?? (lang === "ko" 
-                ? "서울 현지 실사 및 공공 데이터를 바탕으로 가장 정확하고 신뢰할 수 있는 여행/라이프스타일 가이드를 작성합니다." 
-                : "We craft highly verified and practical on-site guides based on local inspections and official public data.")}
+              {frontmatter.authorRole ?? (lang === "ko" ? "K-StyleShot은 서울의 가볼 만한 곳과 K-뷰티, K-패션 정보를 정리해 소개하는 1인 운영 사이트입니다. 오류를 발견하시면 연락처로 알려 주세요." : "K-StyleShot is a one-person site that curates places to visit in Seoul, K-Beauty, and K-Fashion info. If you find any errors, please contact us.")}
             </p>
           </div>
         </div>
