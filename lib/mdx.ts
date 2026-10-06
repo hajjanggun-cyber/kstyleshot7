@@ -1,4 +1,4 @@
-import fs from "fs";
+﻿import fs from "fs";
 import path from "path";
 
 import matter from "gray-matter";
@@ -9,6 +9,7 @@ export type ArticleFrontmatter = {
   category: string;
   title: string;
   description: string;
+  updatedAt?: string;
   publishedAt: string;
   readTime: string;
   headerGradient: string;
@@ -59,3 +60,4 @@ export function getFirstImageSrc(content: string): string | null {
   const match = content.match(/!\[[^\]]*]\((\/images\/[^)\s]+)\)/);
   return match?.[1] ?? null;
 }
+
